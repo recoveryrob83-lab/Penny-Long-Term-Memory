@@ -10,7 +10,7 @@ Life OS is in Phase 2 of the migration.
 
 The core architectural decision is to separate durable memory from operational records.
 
-A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core connectors, read the startup files, checked Calendar/Todoist for today's itinerary, labeled job-search emails in Gmail, and verified that Google Drive remained responsive after explicit connector invocation.
+A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core connectors, read the startup files, checked Calendar/Todoist for today's itinerary, labeled job-search emails in Gmail, verified that Google Drive remained responsive after explicit connector invocation, and created `memory/CAPTAINS_LOG.md` for short operational session entries.
 
 ## Startup Workflow
 
@@ -34,6 +34,21 @@ Recommended troubleshooting order:
 1. Explicitly name or tag the connector Rob wants to use.
 2. Try a small harmless read, such as profile, recent docs, today's calendar, or current Todoist tasks.
 3. If that fails, use the fresh-chat GitHub boot process.
+
+## Captain's Log
+
+Created:
+
+- `memory/CAPTAINS_LOG.md`
+
+Purpose:
+
+- Short operational journal for major Life OS sessions.
+- Records what was done, what was learned, decisions made, and next useful action.
+- Not a transcript and not a personal diary.
+- Keep sensitive details out of this file.
+
+Use it when Rob asks what happened in a recent session, what Life OS learned, or when a meaningful batch should be logged.
 
 ## Architecture
 
@@ -86,6 +101,7 @@ GitHub should reference records rather than duplicate sensitive personal informa
 Created:
 
 - `memory/STARTUP_BOOT.md`
+- `memory/CAPTAINS_LOG.md`
 - `projects/home-base-logistics/`
 - `projects/stability-routines/`
 - `projects/project-slot-07/`
@@ -105,6 +121,7 @@ Operational tests completed:
 - Calendar/Todoist daily itinerary read.
 - Gmail job-search label applied to matching job-related emails.
 - Connector wake-up hypothesis recorded as a field note.
+- Captain's Log created and seeded.
 
 Some direct-label changes were blocked by connector safety checks. Future edits should prefer neutral labels and abstract routing language.
 
@@ -122,6 +139,7 @@ Calendar owns time.
 Todoist owns actions.
 Gmail owns communications.
 SMS/phone messages may hold time-sensitive logistics outside connector visibility.
+Captain's Log records meaningful operational sessions.
 
 Avoid duplication whenever possible.
 Prefer durable references over copied data.
