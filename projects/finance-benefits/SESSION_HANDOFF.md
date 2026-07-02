@@ -4,6 +4,15 @@ Updated: 2026-07-02
 Project: Finance / Benefits / Ledger
 Purpose: Project-specific handoff for new Finance Benefits HQ Penny chats.
 
+## Metadata
+
+- Project Owner: Rob
+- Primary Chat: Finance Benefits HQ
+- Current Phase: Scaffolded
+- Primary Systems: GitHub, Google Drive, Gmail, Todoist, Calendar
+- Sensitivity Level: High
+- GitHub Rule: Do not store sensitive financial data, account numbers, government IDs, credentials, full birthdates, or private benefit identifiers in GitHub.
+
 ## Boot Instructions
 
 When Rob opens a new Finance Benefits HQ chat:
@@ -23,6 +32,22 @@ Scaffolded. Needs project-specific handoff content when available.
 - Track financial/benefits paperwork, deadlines, budget routines, and ledger workflows.
 - Keep sensitive data in user-controlled files or Drive working records, not GitHub.
 
+## Completed Work
+
+Pending project-specific update.
+
+## Active Open Loops
+
+Pending project-specific update.
+
+## Key Contacts / Organizations
+
+Pending project-specific update.
+
+## Working Documents / Links
+
+Pending project-specific update.
+
 ## Source Systems
 
 - GitHub: abstract project state and open loops.
@@ -36,8 +61,15 @@ Scaffolded. Needs project-specific handoff content when available.
 - Avoid direct connector handling of sensitive financial identifiers.
 - Prefer abstract notes and user-mediated file handoff for sensitive tables.
 - Verify connector writes.
+- Treat connectors as convenience automation, not core infrastructure.
 
-## Active Open Loops
+## Privacy Guardrails
+
+- GitHub stores only abstract status and open loops.
+- Real financial data belongs in secure storage, Drive working files, or user-mediated files as appropriate.
+- Credentials, account numbers, government identifiers, and benefit identifiers do not belong in GitHub.
+
+## Decision Log
 
 Pending project-specific update.
 
