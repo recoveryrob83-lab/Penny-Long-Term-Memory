@@ -4,6 +4,15 @@ Updated: 2026-07-02
 Project: Housing / Home Base Logistics
 Purpose: Project-specific handoff for new Housing Logistics HQ Penny chats.
 
+## Metadata
+
+- Project Owner: Rob
+- Primary Chat: Housing Logistics HQ
+- Current Phase: Scaffolded
+- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail/SMS summaries from Rob, Booking.com, AccuWeather
+- Sensitivity Level: High
+- GitHub Rule: Keep exact street addresses, private residence details, and sensitive personal data out of GitHub unless Rob explicitly approves a specific abstract entry.
+
 ## Boot Instructions
 
 When Rob opens a new Housing Logistics HQ chat:
@@ -23,6 +32,22 @@ Scaffolded. Needs project-specific handoff content when available.
 - Track housing, home-base, emergency logistics, lodging, transportation-adjacent planning, and related open loops.
 - Keep detailed private location information outside GitHub.
 
+## Completed Work
+
+Pending project-specific update.
+
+## Active Open Loops
+
+Pending project-specific update.
+
+## Key Contacts / Organizations
+
+Pending project-specific update.
+
+## Working Documents / Links
+
+Pending project-specific update.
+
 ## Source Systems
 
 - GitHub: abstract housing logistics state and open loops.
@@ -37,8 +62,15 @@ Scaffolded. Needs project-specific handoff content when available.
 - Keep location and residence details abstract in GitHub.
 - Prefer user-mediated file handoff for sensitive housing records.
 - Verify connector writes.
+- Treat connectors as convenience automation, not core infrastructure.
 
-## Active Open Loops
+## Privacy Guardrails
+
+- GitHub can store general housing category, abstract status, non-sensitive tasks, and open loops.
+- Exact locations and private household details should stay in Drive, user-mediated files, or direct user context.
+- Use neutral project labels when needed.
+
+## Decision Log
 
 Pending project-specific update.
 
