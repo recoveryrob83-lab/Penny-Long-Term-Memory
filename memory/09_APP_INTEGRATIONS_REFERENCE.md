@@ -37,6 +37,21 @@ Recommended order:
 
 Status: field-tested observation, not guaranteed connector behavior.
 
+## Connector Safety Failure Pattern
+
+During real-world connector workflows, repeated blocked or failed operations may correlate with a connector becoming unavailable in the current chat.
+
+The mechanism is unknown. Do not assume causation.
+
+Treat safety-triggering payloads as operationally risky because they can interrupt automation.
+
+When a payload appears to trigger safety checks or repeated failures:
+- Stop retrying the same payload.
+- Simplify, abstract, or split the content.
+- Use neutral operational language instead of unnecessary sensitive details.
+- Verify connector availability with a tiny harmless read before continuing.
+- If the connector remains inconsistent, use the fresh-chat GitHub boot process.
+
 ## Important Distinction
 
 Apps visible on Rob's apps page may be installed/authorized or available to the broader ChatGPT app system.
@@ -121,6 +136,7 @@ Known limitations:
 - Link integrity matters more than perfect folder placement.
 - Long-running chats may experience connector invocation degradation.
 - Explicit `@Google Drive` invocation may help wake or route the connector before a fresh chat is needed.
+- Repeated blocked or failed operations may correlate with connector unavailability in the current chat. Mechanism unknown; treat safety-triggering payloads as operationally risky.
 
 Use for:
 - Working documents.
