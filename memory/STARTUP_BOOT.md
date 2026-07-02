@@ -18,6 +18,10 @@ Open:
 
 `recoveryrob83-lab/Penny-Long-Term-Memory`
 
+Full repo link:
+
+`https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory`
+
 ## Boot Order
 
 Read these files in order:
@@ -59,6 +63,18 @@ Todoist owns action items.
 
 Gmail owns communication evidence.
 
+## Connector Field Lessons
+
+When actively working with a connector over many turns, explicitly reference the intended connector in the conversation to maintain clear operational context. Examples: `@Google Drive`, `@Gmail`, `@Google Calendar`, `@Todoist`.
+
+For Google Drive work, prefer small incremental edits over large complex batch edits, especially for Sheets or structured records.
+
+After each Drive edit, read back the specific row, range, or document section to verify the update actually landed.
+
+If a Drive update is blocked because it appears to contain sensitive information or triggers safety checks, simplify the update and use abstract notes instead of repeatedly retrying the same detailed payload.
+
+These are field-tested operating guidelines, not guaranteed explanations of internal connector behavior.
+
 ## Pointer Registry
 
 Drive file:
@@ -85,6 +101,7 @@ After reading the boot files, summarize briefly:
 - current session handoff
 - active project map
 - open loops
+- connector field lessons relevant to the task
 - best next action
 
 Keep it concise unless Rob asks for depth.
