@@ -4,6 +4,15 @@ Updated: 2026-07-02
 Project: Health / Medical
 Purpose: Project-specific handoff for new Health Medical HQ Penny chats.
 
+## Metadata
+
+- Project Owner: Rob
+- Primary Chat: Health Medical HQ
+- Current Phase: Scaffolded
+- Primary Systems: GitHub, Calendar, Todoist, Google Drive, Gmail
+- Sensitivity Level: High
+- GitHub Rule: Keep medical logistics abstract. Do not store sensitive medical records, full birthdates, government IDs, or private clinical details in GitHub.
+
 ## Boot Instructions
 
 When Rob opens a new Health Medical HQ chat:
@@ -23,6 +32,22 @@ Scaffolded. Needs project-specific handoff content when available.
 - Track medical appointments, health logistics, reminders, and non-sensitive health project state.
 - Keep detailed health records in user-controlled files or Drive, not GitHub.
 
+## Completed Work
+
+Pending project-specific update.
+
+## Active Open Loops
+
+Pending project-specific update.
+
+## Key Contacts / Organizations
+
+Pending project-specific update.
+
+## Working Documents / Links
+
+Pending project-specific update.
+
 ## Source Systems
 
 - GitHub: abstract health logistics state and open loops.
@@ -36,8 +61,15 @@ Scaffolded. Needs project-specific handoff content when available.
 - Keep medical detail minimal and abstract in GitHub.
 - Prefer user-mediated file handoff for sensitive documents.
 - Verify connector writes.
+- Treat connectors as convenience automation, not core infrastructure.
 
-## Active Open Loops
+## Privacy Guardrails
+
+- GitHub can store appointment categories, non-sensitive tasks, and abstract status.
+- Medical records, clinical details, full identifiers, and private health facts belong in secure/user-controlled storage.
+- Use safe summaries unless Rob explicitly supplies and approves a specific operational note.
+
+## Decision Log
 
 Pending project-specific update.
 
