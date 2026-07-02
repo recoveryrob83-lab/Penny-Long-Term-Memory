@@ -43,6 +43,22 @@ Do not assume implementation succeeded until Implementation Penny reports verifi
 
 If strategy becomes necessary during implementation, Implementation Penny should stop and report the blocker instead of improvising.
 
+## Project Chat Split
+
+Project-specific Penny chats may do focused project work during the day.
+
+Examples:
+- Caregiver Project HQ.
+- Job Search HQ.
+- Recovery / Literature.
+- Philosophy / Source work.
+
+Project chats should primarily touch their own project records and only the connectors needed for that project.
+
+Life Logistics HQ is the cross-project coordinator and should handle nightly housekeeping, GitHub state updates, Pointer Registry changes, and cross-project operational review.
+
+This split reduces connector load, keeps chats searchable, and prevents one chat from repeatedly invoking every connector for every domain.
+
 ## Packet Rules
 
 Use small bounded packets.
@@ -80,6 +96,8 @@ Before beginning multi-document or production edits, verify that connector invoc
 
 If connector invocation fails or becomes unstable, do not fight the environment. Report the blocker and bootstrap a fresh Implementation Penny session if needed.
 
+When actively working with a connector over many turns, explicitly reference the intended connector in the conversation to maintain clear operational context. Treat this as a field-tested workflow cue, not a guaranteed internal mechanism.
+
 ## Google Drive Editing Rule
 
 Existing production Drive documents should never be edited blindly.
@@ -94,6 +112,16 @@ Use this workflow:
    - New content exists.
    - Existing content remains intact.
    - No unrelated section was modified.
+
+Prefer small, incremental Drive edits over large complex batch edits.
+
+For Sheets or structured records, update one small area at a time when possible and verify the target row, range, or record after each update.
+
+If a complex Drive edit fails, retry as several tiny edits rather than repeatedly resubmitting the same large payload.
+
+If a Drive update is blocked because it appears to contain sensitive information or triggers safety checks, simplify the update and use abstract notes instead of personal details when possible.
+
+Do not claim that repeated safety triggers shut off a connector. Record only the observed behavior: simplify, abstract, verify, and avoid repeated retries of the same sensitive payload.
 
 ## GitHub Editing Rule
 
@@ -162,6 +190,8 @@ Update Weekly Plan when weekly priorities or dated commitments change.
 Update App Integrations Reference when connector routing or integration lessons change.
 
 Avoid log churn when no canonical state changed.
+
+Life Logistics HQ should prefer nightly batch housekeeping instead of updating every record immediately after every project action, unless the lesson or state change is too important to risk forgetting.
 
 ## Current Practical Rule
 
