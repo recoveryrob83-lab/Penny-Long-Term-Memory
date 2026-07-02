@@ -1,55 +1,55 @@
 # Open Loops
 
 Updated: 2026-07-02
-Source: Google Drive `08_OPEN_LOOPS.md`
-Purpose: Track unfinished tasks, waiting items, and practical follow-ups so they do not live only in chat memory.
+Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Operating Rule
 
-Use this file as the canonical list of unfinished Life OS work. Keep entries short, dated, and action-oriented.
+Use this file as the high-level list of unfinished Life OS work.
 
-When a loop is resolved, move it to Done / Recently Closed with the closed date.
+Keep entries short, dated, and action-oriented.
+
+Use the Life OS Pointer Registry for detailed lookup.
+
+Do not duplicate source-system details here.
 
 ## Priority Open Loops
 
-| Status | Project | Task | Next Action | Due Date | Contact / Link | Notes |
+| Status | Project | Registry Ref | Task | Next Action | Due / Timing | Notes |
 |---|---|---|---|---|---|---|
-| Open | Caregiver Income | Figure out whether Rob can be paid for caregiving support for Marqueto | Research Illinois caregiver payment pathways and requirements |  |  | Major current project |
-| Open | Cleanup | Continue collecting cleanup quotes for Marqueto's mom's house in Alton, Illinois | Call or find additional local cleanup/dumpster options |  | The Junkluggers: 314-764-6855; Affordable Dumpster Rentals: 636-202-0730 | Affordable Dumpster Rentals quoted $409 for 10-yard dumpster |
-| Open | Job Search | Prepare for Wendy's interview | Review interview basics and logistics before appointment | 2026-07-06 2:00 PM CDT | Wendy's, Fairview Heights, Illinois | Interview scheduled |
-| Open | Finance | Begin real checkbook tracking | Enter real transactions only when Rob has data ready |  | Checkbook Register: https://docs.google.com/spreadsheets/d/1WzL5KVJBGBx-3bXLBSv8E3M9M1fx_uvzfhRTB31Evwk/edit | Register is built, clean, and formulas are ready |
-| Open | Life OS | Keep GitHub memory current | Update GitHub Session Handoff after meaningful work batches |  | GitHub repo: recoveryrob83-lab/Penny-Long-Term-Memory | GitHub mirror started 2026-07-02 |
-| Open | Life OS | Continue Drive-to-GitHub mirror | Convert remaining Drive memory into durable Markdown files |  | Drive source files listed in Boot Log | Initial normalized mirror created; exact historical log import may still need cleanup |
+| Open | Work Search | REF-001 | Prepare for next work-search event | Review basics and logistics using source systems | Scheduled externally | Details live in Calendar/Gmail/Drive |
+| Open | Site Cleanup | REF-002 | Continue provider option gathering | Collect and compare options | As needed | Details live in Drive / phone notes |
+| Open | Ledger & Programs | REF-003 | Begin real tracker use | Enter real data when available | When data exists | Tracker is ready in Drive |
+| Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
+| Open | Support Pathway | REF-005 | Continue pathway research | Keep detailed notes in Drive | Ongoing | Use verified sources for current rules |
+| Open | Daily Anchors | REF-006 | Maintain routine | Keep actions in Todoist/Calendar as needed | Ongoing | GitHub stores only high-level state |
+| Open | Startup Boot | REF-004 | Make new Penny boot reliable | Use `memory/STARTUP_BOOT.md` in fresh chats | Ongoing | Read-only boot unless Rob asks for edits |
 
 ## Waiting On
 
-| Status | Project | Waiting For | Next Check | Notes |
-|---|---|---|---|---|
-| Waiting | Cleanup | 618-414-3438 callback or voicemail availability | Try again later if still relevant | Number went straight to voicemail with no voicemail set up |
-| Waiting | Cleanup | 800-584-5865 no longer useful | None unless new info appears | Rob reported they do not operate in the area |
-| Waiting | Job Search | Dairy Queen response | Check if/when Rob wants to follow up | Rob already submitted available times |
-| Waiting | Job Search | McDonald's interview-time availability | Check if/when Rob wants to follow up | Employer is supposed to get back to Rob |
+| Status | Project | Registry Ref | Waiting For | Next Check | Notes |
+|---|---|---|---|---|---|
+| Waiting | Work Search | REF-001 | Responses from source systems | Check when Rob wants follow-up | Details outside GitHub |
+| Waiting | Site Cleanup | REF-002 | Provider follow-ups | Check when relevant | Details outside GitHub |
 
 ## Done / Recently Closed
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
-| 2026-07-02 | Life OS | Confirmed GitHub access | Repo `recoveryrob83-lab/Penny-Long-Term-Memory` accessible with admin/maintain/pull/push/triage permissions |
-| 2026-07-02 | Life OS | Started GitHub memory mirror | Created README, Start Here, Session Handoff, Boot Log, Operational Rules, Active Projects, and Open Loops in GitHub |
-| 2026-07-02 | Life OS | Confirmed fresh-chat connector recovery pattern | Fresh Penny could create/read Drive docs and access GitHub after previous session instability |
-| 2026-07-01 | Finance | Created Checkbook Register | Headers, formatting, frozen header row, and Balance formulas added |
-| 2026-07-01 | Finance | Tested checkbook demo transactions | Demo income $15 and demo expense $10 verified running balance, then deleted |
-| 2026-07-01 | Life OS | Created Session Handoff | File created and linked in Penny Boot Log |
-| 2026-07-01 | Life OS | Updated Penny Boot Log | Added checkbook details and session handoff protocol |
+| 2026-07-02 | Life OS | Created Life OS Pointer Registry | Drive folder and Google Sheet created |
+| 2026-07-02 | Life OS | Upgraded Pointer Registry | Added source, GitHub, and next-action fields through REF-009 |
+| 2026-07-02 | Life OS | Added Startup Boot | Created `memory/STARTUP_BOOT.md` |
+| 2026-07-02 | Life OS | Added neutral project scaffolds | Added Home Base Logistics, Stability Routines, and Project Slot 07 |
+| 2026-07-02 | Life OS | Confirmed GitHub access | Repo accessible and writable |
+| 2026-07-02 | Life OS | Started GitHub memory mirror | Core memory files and project scaffolds created |
+| 2026-07-02 | Life OS | Confirmed fresh-chat connector recovery pattern | Fresh chat plus boot files is the preferred recovery path |
 
 ## Parking Lot
 
-| Project | Idea / Possible Future File | Notes |
-|---|---|---|
-| Finance | Budget | Build later after checkbook is stable |
-| Finance | Bills | Track recurring bills and due dates |
-| Finance | Benefits | Track SNAP, Medicaid, caregiver income, and related paperwork |
-| Finance | Monthly Dashboard | Summarize income, spending, and open financial tasks |
-| Health | Health tracker | Add later when Rob is ready |
-| Wellness | Wellness project | Add later when Rob is ready |
-| Life OS | Exact historical log import | If needed, import full raw text of Drive Boot Log and Session Handoff into archive files |
+| Project | Registry Ref | Idea / Possible Future File | Notes |
+|---|---|---|---|
+| Ledger & Programs | REF-003 | Budget / Bills / Dashboard | Build later when useful |
+| Home Base Logistics | REF-007 | Practical admin tracker | Define only when needed |
+| Stability Routines | REF-008 | Routine tracker | Define only when needed |
+| Project Slot 07 | REF-009 | Abstract bucket | Use only when a direct label is unhelpful |
+| Life OS | REF-004 | Historical log import | Preserve only if useful |
