@@ -4,6 +4,15 @@ Updated: 2026-07-02
 Project: Cleanup / Junk Collection / Home Support Logistics
 Purpose: Project-specific handoff for new Cleanup Project HQ Penny chats.
 
+## Metadata
+
+- Project Owner: Rob
+- Primary Chat: Cleanup Project HQ
+- Current Phase: Active / Logistics
+- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail/SMS summaries from Rob, AccuWeather, web/current research
+- Sensitivity Level: Moderate
+- GitHub Rule: Keep addresses and private household details abstract.
+
 ## Boot Instructions
 
 When Rob opens a new Cleanup Project HQ chat:
@@ -23,6 +32,22 @@ Scaffolded. Needs project-specific handoff content when available.
 - Track cleanup providers, junk collection quotes, dumpster options, scheduling, calls, and weather-sensitive logistics.
 - Support Marqueto-related cleanup work without overloading Life Logistics HQ.
 
+## Completed Work
+
+Pending project-specific update.
+
+## Active Open Loops
+
+Pending project-specific update.
+
+## Key Contacts / Organizations
+
+Pending project-specific update.
+
+## Working Documents / Links
+
+Pending project-specific update.
+
 ## Source Systems
 
 - GitHub: durable abstract cleanup project state.
@@ -38,8 +63,15 @@ Scaffolded. Needs project-specific handoff content when available.
 - Use neutral operational notes.
 - Verify connector writes.
 - Use manual file handoff if Sheets/Drive data trips connector safety.
+- Treat connectors as convenience automation, not core infrastructure.
 
-## Active Open Loops
+## Privacy Guardrails
+
+- Keep exact addresses and private household details out of GitHub.
+- Store detailed records in Drive or user-mediated files.
+- GitHub may store provider names, public business numbers, general area, abstract status, and open loops.
+
+## Decision Log
 
 Pending project-specific update.
 
