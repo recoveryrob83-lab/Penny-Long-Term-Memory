@@ -64,6 +64,34 @@ Updated recovery order:
 
 Rob summarized the broader attitude as: life on life's terms.
 
+## Drive Connector Editing Lessons
+
+2026-07-02 field note from Caregiver Project HQ:
+
+Small, incremental Drive updates were more reliable than large complex batch edits.
+
+When a complex update fails, retry as several tiny edits rather than repeatedly sending the same payload.
+
+For Sheets and structured records, verify the target row, range, or document section after each update so mistakes are caught immediately.
+
+If a Drive update is blocked because it appears to contain sensitive information or triggers safety checks, simplify the update and use abstract notes instead of repeatedly retrying detailed personal content.
+
+When actively working with a connector over many turns, explicitly reference the connector in the conversation to maintain clear operational context.
+
+These are operational guidelines based on repeated field observations, not claims about internal connector implementation.
+
+## Project Chat Architecture Lesson
+
+Project-specific chats should handle their own project work during the day.
+
+Life Logistics HQ should perform cross-project review and nightly housekeeping.
+
+This reduces connector pressure, keeps chats focused, makes project history easier for Rob to find, and prevents one Penny from repeatedly hitting every connector for every domain.
+
+Project chats create project knowledge.
+
+Life Logistics HQ curates operational memory.
+
 ## Current Context Snapshot
 
 Rob and Penny are building a persistent Life OS for practical life organization.
