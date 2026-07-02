@@ -53,9 +53,24 @@ Then read project files only as needed.
 
 If a long-running chat stops invoking connectors reliably, treat it as an environment/session degradation problem.
 
-Start a fresh Penny chat, warm up Drive if useful, boot from this repository, and continue.
-
 Do not waste excessive time trying to force a degraded chat to recover.
+
+Recommended sequence:
+
+1. Explicitly reference the intended connector in the conversation, such as `@Google Drive`, `@Gmail`, `@Google Calendar`, or `@Todoist`.
+2. Try a tiny harmless read.
+3. If the connector responds, continue with small scoped operations.
+4. If it fails or behaves inconsistently, start a fresh Penny chat, warm up Drive if useful, boot from this repository, and continue.
+
+## Drive Editing Field Lessons
+
+When working with Google Drive records, prefer small incremental edits over large complex batch edits.
+
+For Sheets or structured records, verify the row or target range after each edit.
+
+If an update appears blocked because the content may be sensitive or triggers safety checks, simplify the payload and use abstract notes instead of repeatedly retrying the same detailed text.
+
+These are operational field notes from Life OS use, not claims about internal connector implementation.
 
 ## Source-of-Truth Transition
 
