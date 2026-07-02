@@ -4,6 +4,15 @@ Updated: 2026-07-02
 Project: Wellness
 Purpose: Project-specific handoff for new Wellness HQ Penny chats.
 
+## Metadata
+
+- Project Owner: Rob
+- Primary Chat: Wellness HQ
+- Current Phase: Scaffolded
+- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Spotify, Insight Timer
+- Sensitivity Level: Moderate
+- GitHub Rule: Keep sensitive personal health, recovery, or emotional details out of GitHub unless abstracted.
+
 ## Boot Instructions
 
 When Rob opens a new Wellness HQ chat:
@@ -23,6 +32,22 @@ Scaffolded. Needs project-specific handoff content when available.
 - Track wellness routines, meditation, music, exercise-adjacent ideas, and quality-of-life supports.
 - Keep detailed personal reflections in Drive or project chat unless Rob asks for an abstract GitHub note.
 
+## Completed Work
+
+Pending project-specific update.
+
+## Active Open Loops
+
+Pending project-specific update.
+
+## Key Contacts / Organizations
+
+Pending project-specific update.
+
+## Working Documents / Links
+
+Pending project-specific update.
+
 ## Source Systems
 
 - GitHub: abstract wellness project state and open loops.
@@ -36,8 +61,15 @@ Scaffolded. Needs project-specific handoff content when available.
 - Keep sensitive details abstract.
 - Verify connector writes.
 - Use manual file handoff if connector safety issues appear.
+- Treat connectors as convenience automation, not core infrastructure.
 
-## Active Open Loops
+## Privacy Guardrails
+
+- GitHub can store wellness routines, abstract state, and non-sensitive open loops.
+- Detailed personal reflections and sensitive health/recovery context belong in Drive or project chat.
+- Use abstract summaries when recording durable state.
+
+## Decision Log
 
 Pending project-specific update.
 
