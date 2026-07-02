@@ -1,0 +1,289 @@
+# App Integrations Reference
+
+Updated: 2026-07-02
+Project: Life OS / Life Logistics HQ
+Purpose: Quick reference for what connected apps Penny can see and when each should be used.
+Source: Google Drive `10_APP_INTEGRATIONS_REFERENCE.md`
+
+## Operating Rule
+
+Do not use integrations just because they exist.
+
+Use the right tool for the job:
+
+- GitHub = durable memory, Markdown files, audit trail, commits, diffs, rollback.
+- Google Drive = working documents, project files, trackers, Sheets, generated artifacts.
+- Todoist = action queue and recurring reminders.
+- Calendar = timed appointments and availability.
+- Gmail = communications and email evidence.
+- Contacts = finding saved people/contact details.
+- Indeed = job search and company/job insights.
+- AccuWeather = weather-sensitive planning.
+- Booking.com = lodging/travel logistics.
+- Dropbox = backup/archive/file recovery when needed.
+
+For sensitive actions, read first and change only when Rob clearly asks.
+
+## Important Distinction
+
+Apps visible on Rob's apps page may be installed/authorized or available to the broader ChatGPT app system.
+
+Penny can only call a tool when it is exposed in the current chat's tool layer.
+
+If Rob asks to use one of these apps and Penny has not loaded its tool schema yet, first use tool discovery for that app, then proceed only if the needed action is available.
+
+## Core Life OS Stack
+
+- GitHub.
+- Google Drive.
+- Todoist.
+- Google Calendar.
+- Gmail.
+- Google Contacts.
+- Indeed.
+- AccuWeather.
+- Dropbox.
+
+## Situation-Specific / Future-Use Apps
+
+- Booking.com: lodging, attractions, rental cars.
+- CALL-E: delegated phone calls when Rob wants an AI call made or a business contacted.
+- Canva: visual assets, social posts, presentation/design work.
+- DealPilot: coupons/deals for online shopping.
+- Dupe: finding cheaper lookalikes for products.
+- Insight Timer: meditations, sleep tracks, spiritual talks, breathwork.
+- Meetup: local/social/community events.
+- Simple World Clock: current time/time zones.
+- Spotify: music and podcast recommendations.
+- Tarot: spiritual/divination-style reflection, if Rob wants that framing.
+- Tubi: free movie/show recommendations or trivia.
+- Uber: ride fare estimates in the United States.
+
+These apps should not be treated as part of the daily operating system unless they serve an active project.
+
+## GitHub
+
+Primary role:
+Durable long-term memory and audit trail.
+
+Can do:
+- Read repository files.
+- Create Markdown files.
+- Update files with commits.
+- Preserve history.
+- Search files.
+- Use issues/PRs if a more formal workflow becomes useful.
+
+Use for:
+- Boot files.
+- Session handoffs.
+- Operating rules.
+- Active projects.
+- Open loops.
+- Strategy/implementation workflow files.
+- Long-term personal-assistant memory.
+
+Current Life OS relevance:
+GitHub is being promoted as the preferred source of truth for durable memory as of 2026-07-02.
+
+## Google Drive
+
+Primary role:
+Operational workspace.
+
+Can do:
+- Search Drive files.
+- List folders.
+- Create Google Docs, Sheets, and Slides.
+- Edit Docs and Sheets.
+- Fetch/read Docs, Sheets, Slides, and some files.
+- Export files.
+- Get file metadata.
+- Create folders.
+- Move/rename files when connector safety checks allow it.
+
+Known limitations:
+- Raw Markdown creation is not clean through the connector.
+- Some folder moves/copies can be blocked by safety checks.
+- Link integrity matters more than perfect folder placement.
+- Long-running chats may experience connector invocation degradation.
+
+Use for:
+- Working documents.
+- Checkbook Register.
+- Finance trackers.
+- Job-search artifacts.
+- PDFs/generated files.
+- Google Docs and Sheets that Rob will open/edit directly.
+
+## Todoist
+
+Primary role:
+Action/reminder engine.
+
+Use for:
+- Daily recovery anchors.
+- Weekly Life OS reviews.
+- Project pushes.
+- Calls and deadlines.
+- Small actionable next steps.
+
+Do not use for:
+- Storing full context.
+- Replacing GitHub/Drive project files.
+
+## Google Calendar
+
+Primary role:
+Time-based commitments.
+
+Use for:
+- Interviews.
+- Appointments.
+- Meetings.
+- Phone calls with exact scheduled times.
+- Focus blocks.
+
+Rule:
+Calendar is for events that happen at a time. Todoist is for actions. GitHub/Drive are for context.
+
+## Gmail
+
+Primary role:
+Email communications and email-based evidence.
+
+Use for:
+- Job search emails.
+- Application confirmations.
+- Benefits/caregiver correspondence.
+- Drafting emails for Rob to review.
+- Organizing important communications.
+
+Rule:
+Draft unless Rob explicitly asks to send now.
+
+## Google Contacts
+
+Primary role:
+Find saved contact details.
+
+Use for:
+- Finding email addresses or phone numbers before emailing, inviting, or calling.
+
+## Indeed
+
+Primary role:
+Job search and employment research.
+
+Use for:
+- Finding jobs near Rob.
+- Remote or entry-level searches.
+- Interview/company research.
+- Salary or company culture checks.
+
+Current Life OS relevance:
+- Job Search project.
+- Wendy's interview preparation if company/job research is useful.
+- Future marketing, social media, customer service, or entry-level job searches.
+
+## AccuWeather
+
+Primary role:
+Weather-sensitive planning.
+
+Use for:
+- Planning errands, calls, appointments, bus trips, cleanup days, yard work, or recovery meetings.
+- Checking weather before Marqueto house cleanup logistics.
+- Transportation planning.
+
+## Booking.com
+
+Primary role:
+Travel/lodging logistics.
+
+Use for:
+- Emergency lodging search.
+- Future travel planning.
+- Finding stays near appointments, interviews, recovery events, or family needs.
+- Rental car checks if transportation planning ever requires it.
+
+Current Life OS relevance:
+Situational only. Not active unless housing/travel/transportation needs arise.
+
+## Dropbox
+
+Primary role:
+Backup/archive and legacy file access.
+
+Use for:
+- Old Life OS archive.
+- Backup/reference copies.
+- Recovering files if Dropbox was used earlier.
+
+Rule:
+Dropbox is not the main Life OS workspace. GitHub and Google Drive now carry primary memory/workspace roles.
+
+## Situation-Specific Use Cases
+
+### Caregiver Income Project
+
+Best tools:
+- Web/current research if public policy facts are needed.
+- GitHub for durable findings and project state.
+- Google Drive for working project documents.
+- Todoist for next actions and calls.
+- Gmail for correspondence.
+- Calendar for scheduled calls/appointments.
+- Contacts if Marqueto/contact records are saved.
+
+### Cleanup Project
+
+Best tools:
+- Web/current research for local cleanup providers.
+- AccuWeather for cleanup/weather planning.
+- Todoist for calls.
+- Drive for quotes and call logs.
+- GitHub for durable state/open loops.
+- Calendar if a pickup/estimate is scheduled.
+
+### Job Search
+
+Best tools:
+- Indeed for job searches and company research.
+- Gmail for job emails.
+- Drive for resumes, cover letters, and application tracker.
+- Todoist for application/interview tasks.
+- Calendar for interviews.
+- GitHub for durable job-search project status.
+
+### Finance & Benefits
+
+Best tools:
+- Drive/Sheets for trackers.
+- Gmail for benefit notices or financial emails if Rob asks.
+- Todoist for deadlines and paperwork tasks.
+- Calendar for appointments.
+- GitHub for durable finance/benefits project state.
+
+### Recovery Logistics
+
+Best tools:
+- Todoist for daily/weekly anchors.
+- Calendar for scheduled meetings or calls.
+- Drive for recovery working files.
+- GitHub for durable recovery logistics state.
+- AccuWeather for transportation/weather planning.
+
+### Housing / Emergency Logistics
+
+Best tools:
+- Booking.com for lodging if needed.
+- AccuWeather for travel/weather.
+- Calendar for appointments.
+- Todoist for immediate actions.
+- Drive for housing notes.
+- GitHub for durable state.
+
+## Future Penny Startup Note
+
+When booting Life OS, read this file after Boot Log, Session Handoff, Active Projects, and Open Loops if the user asks about available tools, integrations, or which app to use.
