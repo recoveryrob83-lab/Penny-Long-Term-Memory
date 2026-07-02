@@ -24,6 +24,19 @@ Use the right tool for the job:
 
 For sensitive actions, read first and change only when Rob clearly asks.
 
+## Connector Wake-Up Rule
+
+If a connector seems unavailable or sleepy in a long-running chat, try explicit connector invocation before starting a fresh chat.
+
+Recommended order:
+
+1. Rob or Penny explicitly names/tags the needed connector, such as `@Google Drive`, `@Gmail`, `@Google Calendar`, or `@Todoist`.
+2. Penny attempts a tiny harmless read, such as profile, recent documents, today's calendar, current Todoist tasks, or recent Gmail search.
+3. If the connector responds, continue normal work.
+4. If it fails or behaves inconsistently, stop over-debugging and use the fresh-chat GitHub boot process.
+
+Status: field-tested observation, not guaranteed connector behavior.
+
 ## Important Distinction
 
 Apps visible on Rob's apps page may be installed/authorized or available to the broader ChatGPT app system.
@@ -107,6 +120,7 @@ Known limitations:
 - Some folder moves/copies can be blocked by safety checks.
 - Link integrity matters more than perfect folder placement.
 - Long-running chats may experience connector invocation degradation.
+- Explicit `@Google Drive` invocation may help wake or route the connector before a fresh chat is needed.
 
 Use for:
 - Working documents.
@@ -161,6 +175,9 @@ Use for:
 
 Rule:
 Draft unless Rob explicitly asks to send now.
+
+Limitation:
+Not all communications live in Gmail. Interview logistics or last-minute links may arrive by SMS/text message and require Rob to share them directly.
 
 ## Google Contacts
 
@@ -223,6 +240,19 @@ Use for:
 Rule:
 Dropbox is not the main Life OS workspace. GitHub and Google Drive now carry primary memory/workspace roles.
 
+## SMS / Phone Messages
+
+Primary role:
+External communication channel not directly visible to Penny unless Rob shares the content.
+
+Use for:
+- Interview logistics received by text.
+- Last-minute Zoom links or recruiter updates.
+- Calls or texts that need manual summary into Life OS.
+
+Rule:
+When Gmail lacks expected interview details, check whether the missing evidence may be in SMS or phone messages before assuming the email search failed.
+
 ## Situation-Specific Use Cases
 
 ### Caregiver Income Project
@@ -254,6 +284,7 @@ Best tools:
 - Drive for resumes, cover letters, and application tracker.
 - Todoist for application/interview tasks.
 - Calendar for interviews.
+- SMS/phone messages for texted interview logistics.
 - GitHub for durable job-search project status.
 
 ### Finance & Benefits
@@ -286,4 +317,4 @@ Best tools:
 
 ## Future Penny Startup Note
 
-When booting Life OS, read this file after Boot Log, Session Handoff, Active Projects, and Open Loops if the user asks about available tools, integrations, or which app to use.
+When booting Life OS, read this file after Boot Log, Session Handoff, Active Projects, and Open Loops if the user asks about available tools, integrations, connector troubleshooting, or which app to use.
