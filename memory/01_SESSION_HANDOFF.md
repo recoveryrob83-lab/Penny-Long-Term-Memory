@@ -12,6 +12,8 @@ The core architectural decision is to separate durable memory from operational r
 
 A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core connectors, read the startup files, checked Calendar/Todoist for today's itinerary, labeled job-search emails in Gmail, verified that Google Drive remained responsive after explicit connector invocation, and created `memory/CAPTAINS_LOG.md` for short operational session entries.
 
+Project-specific chats are now being split out for focused work, including Caregiver Project HQ and Job Search HQ. Project chats should do project work in their own Drive/Gmail/Calendar/Todoist context. Life Logistics HQ should do cross-project housekeeping and nightly batch updates.
+
 ## Startup Workflow
 
 Preferred new-chat startup:
@@ -34,6 +36,18 @@ Recommended troubleshooting order:
 1. Explicitly name or tag the connector Rob wants to use.
 2. Try a small harmless read, such as profile, recent docs, today's calendar, or current Todoist tasks.
 3. If that fails, use the fresh-chat GitHub boot process.
+
+## Drive Editing Field Lessons
+
+Caregiver Project HQ reported useful Drive workflow lessons that should guide future implementation work:
+
+- Small, incremental Drive updates have been more reliable than large complex batch edits.
+- When a complex Drive update fails, retry as several tiny edits rather than repeatedly sending the same large payload.
+- Verify the target row, range, or document section after each Drive update.
+- If a Drive update is blocked because it appears to contain sensitive information or triggers safety checks, simplify the update and use abstract notes instead of personal details when possible.
+- When actively working with a connector over many turns, explicitly reference that connector in the conversation to maintain clear operational context.
+
+These lessons should be treated as operational guidelines, not claims about internal connector mechanics.
 
 ## Captain's Log
 
@@ -121,13 +135,14 @@ Operational tests completed:
 - Calendar/Todoist daily itinerary read.
 - Gmail job-search label applied to matching job-related emails.
 - Connector wake-up hypothesis recorded as a field note.
+- Drive editing lessons recorded from Caregiver Project HQ.
 - Captain's Log created and seeded.
 
 Some direct-label changes were blocked by connector safety checks. Future edits should prefer neutral labels and abstract routing language.
 
 ## Best Next Action
 
-Use Life Logistics HQ for real daily living: interview support, job search, recovery anchors, cleanup logistics, and practical next actions.
+Use Life Logistics HQ for real daily living and nightly housekeeping: project chat updates, job search, recovery anchors, caregiver pathway, cleanup logistics, and practical next actions.
 
 Do not over-architect unless a real use-case reveals a gap.
 
@@ -140,6 +155,9 @@ Todoist owns actions.
 Gmail owns communications.
 SMS/phone messages may hold time-sensitive logistics outside connector visibility.
 Captain's Log records meaningful operational sessions.
+
+Project chats create project knowledge.
+Life Logistics HQ curates cross-project operational memory.
 
 Avoid duplication whenever possible.
 Prefer durable references over copied data.
