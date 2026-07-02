@@ -10,6 +10,8 @@ Life OS is in Phase 2 of the migration.
 
 The core architectural decision is to separate durable memory from operational records.
 
+A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core connectors, read the startup files, checked Calendar/Todoist for today's itinerary, labeled job-search emails in Gmail, and verified that Google Drive remained responsive after explicit connector invocation.
+
 ## Startup Workflow
 
 Preferred new-chat startup:
@@ -20,6 +22,18 @@ Preferred new-chat startup:
 4. Penny opens `recoveryrob83-lab/Penny-Long-Term-Memory`.
 5. Penny reads `memory/STARTUP_BOOT.md` and follows its boot order.
 6. Penny reads only during startup unless Rob explicitly asks for edits.
+
+## Connector Wake-Up Field Note
+
+Rob observed that explicitly invoking an app by name, such as `@Google Drive`, may help wake or route a connector before a full fresh-chat reset is needed.
+
+This is a field note, not a proven guarantee.
+
+Recommended troubleshooting order:
+
+1. Explicitly name or tag the connector Rob wants to use.
+2. Try a small harmless read, such as profile, recent docs, today's calendar, or current Todoist tasks.
+3. If that fails, use the fresh-chat GitHub boot process.
 
 ## Architecture
 
@@ -48,6 +62,10 @@ Google Calendar
 
 Gmail
 - Communication evidence.
+
+SMS / phone messages
+- May contain time-sensitive logistics that are not visible to Penny unless Rob shares them.
+- Example: interview Zoom links may arrive by text rather than Gmail.
 
 ## Pointer Registry
 
@@ -80,11 +98,21 @@ Updated:
 - `memory/05_OPEN_LOOPS.md`
 - `MIGRATION_PLAN.md`
 
+Operational tests completed:
+
+- Core connector check: Drive, Calendar, Contacts, Todoist, Gmail.
+- GitHub startup boot in a fresh chat.
+- Calendar/Todoist daily itinerary read.
+- Gmail job-search label applied to matching job-related emails.
+- Connector wake-up hypothesis recorded as a field note.
+
 Some direct-label changes were blocked by connector safety checks. Future edits should prefer neutral labels and abstract routing language.
 
 ## Best Next Action
 
-Use the new startup workflow in the next fresh chat to test that Penny can warm up Drive, open GitHub, read the startup files, and summarize context without writing.
+Use Life Logistics HQ for real daily living: interview support, job search, recovery anchors, cleanup logistics, and practical next actions.
+
+Do not over-architect unless a real use-case reveals a gap.
 
 ## Guiding Principle
 
@@ -93,6 +121,7 @@ Drive is the filing cabinet.
 Calendar owns time.
 Todoist owns actions.
 Gmail owns communications.
+SMS/phone messages may hold time-sensitive logistics outside connector visibility.
 
 Avoid duplication whenever possible.
 Prefer durable references over copied data.
