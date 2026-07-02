@@ -30,25 +30,39 @@ Google Drive remains useful and active for operational artifacts:
 When a new Penny chat begins for Life OS work:
 
 1. Open GitHub repo `recoveryrob83-lab/Penny-Long-Term-Memory`.
-2. Read `memory/00_START_HERE.md`.
-3. Read `memory/01_SESSION_HANDOFF.md`.
-4. Read `memory/02_BOOT_LOG.md`.
-5. Read `memory/03_OPERATIONAL_RULES.md`.
-6. Read Active Projects and Open Loops as needed.
-7. Use project-specific files and connectors only as required by Rob's task.
+2. Read `memory/STARTUP_BOOT.md`.
+3. Read `memory/00_START_HERE.md`.
+4. Read `memory/01_SESSION_HANDOFF.md`.
+5. Read `memory/02_BOOT_LOG.md`.
+6. Read `memory/03_OPERATIONAL_RULES.md`.
+7. Read Active Projects and Open Loops as needed.
+8. Use project-specific files and connectors only as required by Rob's task.
 
-## Connector Recovery Lesson
+## Connector Recovery Lessons
 
 A long-running chat may stop invoking connectors reliably. This should not be assumed to be a state problem, implementation problem, or user error.
 
-Preferred workflow:
+Original preferred recovery workflow:
 
 1. Stop over-debugging the degraded session.
 2. Start a fresh Penny session.
 3. Boot from GitHub memory.
 4. Continue from the current handoff.
 
-Rob summarized the attitude as: life on life's terms.
+2026-07-02 field note:
+
+Rob discovered that explicitly invoking a connector by name, such as `@Google Drive`, may help wake or route a connector before requiring a full fresh-chat reset.
+
+This is not yet proven as a guaranteed fix, but it should be tried before abandoning a session.
+
+Updated recovery order:
+
+1. Explicitly name or tag the connector.
+2. Try a small harmless read.
+3. If the connector responds, continue normal work.
+4. If it fails, use the fresh-chat GitHub boot workflow.
+
+Rob summarized the broader attitude as: life on life's terms.
 
 ## Current Context Snapshot
 
@@ -82,6 +96,7 @@ Job search facts:
 - Application number: 50364011.
 - Wendy's interview scheduled for July 6, 2026 at 2:00 PM CDT in Fairview Heights, Illinois.
 - Gmail label for job emails: Job Search.
+- Top Tier Events interview scheduled July 2, 2026 at noon CDT; Zoom/details may arrive by SMS rather than Gmail.
 
 Recovery routine includes:
 - Step work.
@@ -102,7 +117,8 @@ Recovery routine includes:
 - Prepare for Wendy's interview.
 - Use Checkbook Register for real transactions when data is ready.
 - Keep recovery routine active.
-- Continue migration from Drive-memory to GitHub-memory.
+- Continue migration from Drive-memory to GitHub-memory only when useful.
+- Use Life OS for real daily operations and record lessons as they appear.
 
 ## Drive Source Files Imported / Mirrored
 
