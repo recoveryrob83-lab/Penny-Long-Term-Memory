@@ -27,6 +27,29 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Project Session Handoff Scaffolding
+
+### Summary
+
+Scaffolded project-specific `SESSION_HANDOFF.md` files so specialist Penny chats can be restarted or replaced without relying on the global Life Logistics handoff alone.
+
+### Completed Work
+
+- Created project session handoff scaffolds for caregiver income, job search, cleanup, finance benefits, recovery logistics, Life OS infrastructure, health medical, housing logistics, and wellness.
+- Updated `projects/README.md` to document the project handoff pattern.
+- Updated `memory/STARTUP_BOOT.md` with project-specific session handoff routing.
+
+### Decisions / Lessons
+
+- New specialist chats should boot globally first, then read the project handoff named by Rob's initiation message.
+- Project handoffs are continuity anchors for specialist chats.
+- Global Life Logistics HQ remains the cross-project coordinator and nightly housekeeper.
+- Project handoffs should remain abstract and safe in GitHub, with detailed working records kept in Drive or user-mediated files.
+
+### Next Useful Action
+
+Create and populate the Caregiver Income project session handoff using Rob's pasted handoff from the prior Caregiver Project HQ chat.
+
 ## 2026-07-02 — Connector Safety Failure Pattern
 
 ### Summary
