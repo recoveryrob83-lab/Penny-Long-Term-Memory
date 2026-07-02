@@ -27,6 +27,29 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Caregiver Project Handoff Populated
+
+### Summary
+
+Implemented the standard project session handoff structure and populated the Caregiver Income project handoff using Rob's prior Caregiver Project HQ handoff.
+
+### Completed Work
+
+- Standardized project handoff structure across existing project `SESSION_HANDOFF.md` files.
+- Updated `projects/README.md` with the standard session handoff structure.
+- Populated `projects/caregiver-income/SESSION_HANDOFF.md` with caregiver pathway, cleanup provider status, working Drive links, call script, profile template notes, connector lessons, manual file handoff workaround, database architecture discussion, active open loops, and decision log.
+
+### Decisions / Lessons
+
+- Project handoffs should include metadata, current status, completed work, open loops, key contacts, working documents, source systems, connector/safety notes, privacy guardrails, decision log, immediate next actions, and notes for the next Penny.
+- Caregiver Project HQ should treat connectors as convenience automation, not core infrastructure.
+- Sensitive third-party identifiers should remain outside GitHub.
+- Manual file handoff is the preferred fallback for sensitive-adjacent Sheets/CSV/profile work when Drive or Dropbox connector safety blocks reads or edits.
+
+### Next Useful Action
+
+Start a fresh Caregiver Project HQ chat and have it boot from the global startup files plus `projects/caregiver-income/SESSION_HANDOFF.md`.
+
 ## 2026-07-02 — Project Session Handoff Scaffolding
 
 ### Summary
