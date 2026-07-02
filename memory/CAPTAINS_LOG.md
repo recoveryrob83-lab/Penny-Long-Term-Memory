@@ -38,6 +38,31 @@ Keep entries short unless Rob asks for depth.
 
 ---
 
+## 2026-07-02 — Recovery Journal and Work-Structure Discernment
+
+### Summary
+
+Read the new Recovery Logistics literature journal entry in Drive and routed its operational takeaways into Life OS without moving sensitive detail into GitHub.
+
+### Completed Work
+
+- Read `NA Literature Study Journal` in Google Drive.
+- Noted the daily-reading insight that reliability is becoming a practical recovery anchor and that recovery is moving from shared identification into dependable action.
+- Noted the Chapter Five insight that literature study is now exposing practical decision points around honesty, responsibility, work structure, and recovery protection.
+- Updated the Life OS Pointer Registry so REF-001 and REF-006 point to the journal as the source record for this decision point.
+- Updated Open Loops for work-search discernment and recovery reliability.
+
+### Decisions / Lessons
+
+- Keep long-form recovery reflection in Drive.
+- Keep GitHub abstract, action-oriented, and free of sensitive journal detail.
+- Treat the current work-search question as values-versus-avoidance discernment rather than reducing it to laziness.
+- Use sponsor and trusted supports to clarify which work structures support recovery and which patterns may still reflect avoidance or old survival strategies.
+
+### Next Useful Action
+
+Use the journal insight during work-search and recovery planning: clarify values-based work decisions versus avoidance while continuing daily reliability anchors.
+
 ## 2026-07-02 — Recovery Logistics Project Expansion and Connector Observation
 
 ### Summary
