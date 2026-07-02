@@ -123,6 +123,20 @@ If a Drive update is blocked because it appears to contain sensitive information
 
 Do not claim that repeated safety triggers shut off a connector. Record only the observed behavior: simplify, abstract, verify, and avoid repeated retries of the same sensitive payload.
 
+## Connector Safety Failure Pattern
+
+During real-world connector workflows, repeated blocked or failed operations may correlate with a connector becoming unavailable in the current chat.
+
+The mechanism is unknown. Avoid assuming causation.
+
+Treat safety-triggering payloads as operationally risky because they can interrupt automation.
+
+When this pattern appears:
+1. Stop retrying the same blocked or failed payload.
+2. Simplify, abstract, or split the content.
+3. Verify connector availability with a tiny harmless read.
+4. If the connector behaves inconsistently, stop over-debugging and use the fresh-chat GitHub boot workflow.
+
 ## GitHub Editing Rule
 
 GitHub memory files should be edited as Markdown text.
