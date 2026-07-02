@@ -12,6 +12,8 @@ That Drive read is a connector warm-up step only.
 
 After Drive responds, Rob may ask Penny to check this GitHub repository for startup instructions.
 
+If Rob starts a specialist project chat, the initiation message should name the project, such as Caregiver Project HQ, Job Search HQ, Cleanup Project HQ, Recovery Logistics, or Life OS Infrastructure.
+
 ## Repository
 
 Open:
@@ -22,7 +24,7 @@ Full repo link:
 
 `https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory`
 
-## Boot Order
+## Global Boot Order
 
 Read these files in order:
 
@@ -38,6 +40,24 @@ Read these files in order:
 
 Then read project files only as needed.
 
+## Project-Specific Session Handoff Routing
+
+If Rob names a project in the startup message, read the matching project handoff after the global boot files.
+
+Project routing map:
+
+- Caregiver Project HQ / Caregiver Income / Support Pathway: `projects/caregiver-income/SESSION_HANDOFF.md`
+- Job Search HQ / Work Search: `projects/job-search/SESSION_HANDOFF.md`
+- Cleanup Project HQ / Junk Collection / Home Support Logistics: `projects/cleanup/SESSION_HANDOFF.md`
+- Finance Benefits HQ / Ledger / Benefits: `projects/finance-benefits/SESSION_HANDOFF.md`
+- Recovery Logistics / Literature / Daily Anchors: `projects/recovery-logistics/SESSION_HANDOFF.md`
+- Life OS Infrastructure / Connector Operations: `projects/life-os-infrastructure/SESSION_HANDOFF.md`
+- Health Medical HQ: `projects/health-medical/SESSION_HANDOFF.md`
+- Housing Logistics HQ / Home Base Logistics: `projects/housing-logistics/SESSION_HANDOFF.md`
+- Wellness HQ: `projects/wellness/SESSION_HANDOFF.md`
+
+If the project name is ambiguous, read `projects/README.md` and ask one concise clarification only if needed.
+
 ## Startup Behavior
 
 During startup:
@@ -47,6 +67,7 @@ During startup:
 - Do not migrate files during boot.
 - Do not duplicate detailed records into GitHub.
 - Build working context from the repo files.
+- For specialist chats, summarize the global context briefly and then focus on the project handoff.
 - Ask only if the next action is genuinely ambiguous.
 
 ## System Architecture
@@ -62,6 +83,10 @@ Calendar owns timed commitments.
 Todoist owns action items.
 
 Gmail owns communication evidence.
+
+Project chats create project knowledge.
+
+Life Logistics HQ curates cross-project operational memory.
 
 ## Connector Field Lessons
 
@@ -101,6 +126,7 @@ After reading the boot files, summarize briefly:
 - current session handoff
 - active project map
 - open loops
+- project-specific handoff, if a project chat was named
 - connector field lessons relevant to the task
 - best next action
 
