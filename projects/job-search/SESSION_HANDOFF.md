@@ -4,6 +4,15 @@ Updated: 2026-07-02
 Project: Job Search / Work Search
 Purpose: Project-specific handoff for new Job Search HQ Penny chats.
 
+## Metadata
+
+- Project Owner: Rob
+- Primary Chat: Job Search HQ
+- Current Phase: Active
+- Primary Systems: GitHub, Google Drive, Gmail, Calendar, Todoist, Indeed/current job tools, SMS/phone summaries from Rob
+- Sensitivity Level: Moderate
+- GitHub Rule: Keep recovery-sensitive reasoning and private personal details abstract. Store working documents in Drive.
+
 ## Boot Instructions
 
 When Rob opens a new Job Search HQ chat:
@@ -24,6 +33,22 @@ Scaffolded. Needs project-specific handoff content when available.
 - Evaluate work opportunities against recovery stability, financial need, transportation, schedule, and long-term sustainability.
 - Keep Gmail, Calendar, Todoist, Drive, and GitHub aligned without over-updating during the day.
 
+## Completed Work
+
+Pending project-specific update.
+
+## Active Open Loops
+
+Pending project-specific update.
+
+## Key Contacts / Organizations
+
+Pending project-specific update.
+
+## Working Documents / Links
+
+Pending project-specific update.
+
 ## Source Systems
 
 - GitHub: durable abstract job-search project state.
@@ -39,8 +64,15 @@ Scaffolded. Needs project-specific handoff content when available.
 - Avoid duplicating sensitive personal detail into GitHub.
 - Verify connector writes.
 - Use small Drive edits and manual file handoff when needed.
+- Treat connectors as convenience automation, not core infrastructure.
 
-## Active Open Loops
+## Privacy Guardrails
+
+- Do not store sensitive recovery details or private personal identifiers in GitHub.
+- Keep detailed interview notes, resumes, and cover-letter drafts in Drive.
+- Use abstract status notes for GitHub.
+
+## Decision Log
 
 Pending project-specific update.
 
