@@ -17,12 +17,12 @@ Do not duplicate source-system details here.
 
 | Status | Project | Registry Ref | Task | Next Action | Due / Timing | Notes |
 |---|---|---|---|---|---|---|
-| Open | Work Search | REF-001 | Prepare for next work-search event | Review basics and logistics using source systems | Scheduled externally | Details live in Calendar/Gmail/Drive |
+| Open | Work Search | REF-001 | Clarify work-structure decision point | Discuss values-based work choices vs avoidance with sponsor / trusted supports | Current week | Source: Drive journal; keep details outside GitHub |
 | Open | Site Cleanup | REF-002 | Continue provider option gathering | Collect and compare options | As needed | Details live in Drive / phone notes |
 | Open | Ledger & Programs | REF-003 | Begin real tracker use | Enter real data when available | When data exists | Tracker is ready in Drive |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
 | Open | Support Pathway | REF-005 | Continue pathway research | Keep detailed notes in Drive | Ongoing | Use verified sources for current rules |
-| Open | Daily Anchors | REF-006 | Maintain routine | Keep actions in Todoist/Calendar as needed | Ongoing | GitHub stores only high-level state |
+| Open | Daily Anchors | REF-006 | Maintain reliability anchors | Continue meetings, sponsor contact, service, literature, and journal review | Ongoing | Source: Drive journal; reliability is the current practical anchor |
 | Open | Startup Boot | REF-004 | Make new Penny boot reliable | Use `memory/STARTUP_BOOT.md` in fresh chats | Ongoing | Read-only boot unless Rob asks for edits |
 
 ## Waiting On
@@ -36,6 +36,7 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-02 | Recovery Logistics | Read new literature journal entry and routed takeaways | Pointer Registry updated for REF-001 and REF-006 |
 | 2026-07-02 | Life OS | Created Life OS Pointer Registry | Drive folder and Google Sheet created |
 | 2026-07-02 | Life OS | Upgraded Pointer Registry | Added source, GitHub, and next-action fields through REF-009 |
 | 2026-07-02 | Life OS | Added Startup Boot | Created `memory/STARTUP_BOOT.md` |
