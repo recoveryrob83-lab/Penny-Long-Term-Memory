@@ -38,6 +38,30 @@ Keep entries short unless Rob asks for depth.
 
 ---
 
+## 2026-07-02 — Recovery Logistics Project Expansion and Connector Observation
+
+### Summary
+
+Life Logistics HQ booted from GitHub and confirmed the current Life OS connector posture during the Recovery Logistics project expansion phase.
+
+### Completed Work
+
+- Read the requested startup files in boot order.
+- Verified GitHub repository access and write capability.
+- Verified Google Drive access by locating the Life OS Pointer Registry.
+- Verified Google Calendar, Gmail, Google Contacts, and Todoist access with small read-only checks.
+- Confirmed the active architecture remains stable: GitHub as durable memory map, Drive as working records cabinet, Calendar for timed commitments, Todoist for actions, and Gmail for communication evidence.
+
+### Decisions / Lessons
+
+- No architecture changes were made.
+- Connector checks were successful in this session.
+- Keep Recovery Logistics details in the appropriate operational systems and keep GitHub entries abstract.
+
+### Next Useful Action
+
+Wait for Rob's next Life Logistics HQ instruction and use the verified connectors only as needed.
+
 ## 2026-07-02 — Life Logistics HQ Boot and First Operational Use
 
 ### Summary
