@@ -27,6 +27,35 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Nightly Housekeeping Pass
+
+### Summary
+
+Completed the first nightly housekeeping pass after a high-activity Life OS build day. Reconciled GitHub, Drive, Todoist, Calendar, and Gmail at a high level.
+
+### Completed Work
+
+- Read current GitHub session handoff, active projects, open loops, and Captain's Log.
+- Verified Drive `Life Organization` folder visibility and confirmed the new `Main Assistant` folder exists.
+- Confirmed Main Assistant Drive folder is currently empty and ready for daily operations artifacts.
+- Checked Todoist near-term tasks at a high level.
+- Checked Calendar near-term events at a high level.
+- Checked Gmail label counts without opening messages.
+- Updated `memory/05_OPEN_LOOPS.md` with Main Assistant, RPR, project handoff, and nightly housekeeping status.
+- Updated `memory/01_SESSION_HANDOFF.md` with the post-build Life OS state.
+
+### Decisions / Lessons
+
+- Main Assistant is now the daily operations desk.
+- Life Logistics HQ remains the cross-project curator and nightly housekeeper.
+- Specialist project chats hold deeper project continuity through their own handoff files.
+- RPR is primarily for sensitive-adjacent or brittle structured files. Low-risk connector workflows that behave reliably can still use connectors.
+- Safety blocks can still appear during GitHub updates if payloads include too much sensitive-adjacent detail; abstracting the payload allowed the open-loops update to succeed.
+
+### Tomorrow / Next Useful Action
+
+Use Main Assistant for daily operations. Keep larger work in specialist chats. Assign registry references for newer projects only when useful rather than forcing it tonight.
+
 ## 2026-07-02 — Main Assistant Project Created
 
 ### Summary
