@@ -6,6 +6,7 @@ Each active project should eventually have its own folder with a `README.md`, `s
 
 ## Current Project Folders
 
+- `main-assistant/`
 - `job-search/`
 - `caregiver-income/`
 - `cleanup/`
@@ -24,6 +25,7 @@ Use these files as project-specific continuity anchors when a specialized Penny 
 
 When Rob starts a new specialist chat, the initiation message should name the project, such as:
 
+- Main Assistant.
 - Caregiver Project HQ.
 - Job Search HQ.
 - Cleanup Project HQ.
