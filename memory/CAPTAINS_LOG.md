@@ -14,6 +14,23 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Business Advisory Final Closure
+
+### Summary
+
+Closed ADV-20260703-004 after Main Assistant consumed it.
+
+### Completed Work
+
+- Moved ADV-20260703-004 to acknowledged in the Advisory Index.
+- Updated Business advisory board to acknowledged.
+- Updated Department Event Inbox status to Closed.
+- Marked Life Logistics HQ and Main Assistant as read/ingested.
+
+### Decision / Lesson
+
+The correction loop worked: Life Logistics caught that one target was still pending, reopened the advisory, waited for Main Assistant, then closed it properly.
+
 ## 2026-07-03 — Business Advisory Status Corrected
 
 ### Summary
@@ -30,20 +47,6 @@ Corrected ADV-20260703-004 after Rob caught that Main Assistant had not consumed
 ### Decision / Lesson
 
 Do not acknowledge multi-target advisories until every target department has reported read. Department Event Inbox now supports Partial status for advisories where some targets have ingested but others are still pending.
-
-### Next Action
-
-Route ADV-20260703-004 to Main Assistant. After Main Assistant reports read, acknowledge the advisory.
-
-## 2026-07-03 — Business Logistics Advisory Acknowledged
-
-### Summary
-
-Read, ingested, and acknowledged ADV-20260703-004 from Chief Business HQ. Business HQ is active on Penny Platform viability research and requested frequent logistics visibility while the project is forming.
-
-### Correction
-
-This acknowledgement was premature. See `2026-07-03 — Business Advisory Status Corrected` above. The advisory is open pending Main Assistant read.
 
 ## 2026-07-03 — Advisory Watcher v0.1 Procedure Added
 
@@ -75,47 +78,5 @@ Create the scheduled ChatGPT task only if Rob explicitly asks for it. Optional: 
 ### Summary
 
 Read and acknowledged ADV-20260703-006 from Chief Engineering Penny. Engineering HQ is online, Drive scaffolding exists, and Engineering identified the need for an event/advisory inbox layer.
-
-### Completed Work
-
-- Read `coordination/boards/engineering.md`.
-- Created `coordination/DEPARTMENT_EVENT_INBOX.md`.
-- Added ADV-20260703-006 to the Department Event Inbox as read and ingested by Life Logistics HQ.
-- Updated global session handoff.
-- Moved ADV-20260703-006 from Open to Acknowledged in the Advisory Index.
-- Updated the Engineering advisory board outcome.
-
-### Decision / Lesson
-
-Todoist remains for Rob-facing action items. Department Event Inbox is for system synchronization state between Penny departments.
-
-### Note
-
-Startup Boot update was attempted but blocked by connector safety during this pass. The Department Event Inbox is currently discoverable through the global session handoff and can be added to Startup Boot later with a smaller patch.
-
-## 2026-07-03 — Chief Engineering Penny Activated
-
-### Summary
-
-Created `projects/engineering/` as Chief Engineering Penny / Engineering HQ.
-
-### Completed Work
-
-- Created Engineering department identity.
-- Created Engineering session handoff.
-- Created Engineering README, status, and open loops files.
-- Updated active project map, startup routing, global handoff, and project index.
-
-### Decisions / Lessons
-
-- Chief Engineering Penny owns technical architecture, repository strategy, software planning, APIs, connectors, data models, automation design, testing, feasibility, and implementation planning.
-- Chief Business HQ defines what should be built and why.
-- Chief Engineering Penny defines how to build it and in what order.
-- Dedicated software repositories should hold code when created; Life OS memory stays abstract.
-- Secrets, tokens, credentials, and API keys should never go into Life OS memory files.
-
-### Next Useful Action
-
-Boot a fresh Chief Engineering Penny chat when Rob is ready for engineering-specific architecture or implementation planning.
 
 (Older detailed entries are retained in repository history.)
