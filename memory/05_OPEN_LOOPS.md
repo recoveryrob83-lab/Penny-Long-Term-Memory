@@ -23,6 +23,7 @@ Do not duplicate source-system details here.
 | Open | Site Cleanup | REF-002 | Continue provider option gathering | Continue follow-ups in project chat | As needed | Details live in Drive/project handoff |
 | Open | Chief of Finance Penny | REF-003 | Begin real checkbook use | Inspect Drive Checkbook Register structure before real transaction work | When data exists | Keep detailed finance records in Drive or RPR, not GitHub |
 | Open | Chief of Finance Penny | REF-003 | Build budget / bills workflow | Add budget, bills, or reminders when real inputs are known | When useful | Former Ledger & Programs bucket now active as Chief of Finance Penny |
+| Open | Chief Business HQ | To assign | Begin business operations | Use Chief Business HQ for product strategy, branding, market research, offer design, monetization, or customer discovery | When useful | Business defines what; Engineering defines how |
 | Open | Chief Wellness HQ | To assign | Begin wellness operations | Use Chief Wellness HQ for primary care, vision, sleep, food, movement, preventive care, or routine support when Rob is ready | When useful | Keep sensitive details outside GitHub |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
 | Open | Support Pathway | REF-005 | Continue pathway research | Use Caregiver Project HQ and current program sources | Ongoing | Detailed notes belong in Drive/project handoff |
@@ -40,6 +41,7 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-03 | Chief Business HQ | Activated business department | Created `projects/business-development/` as Chief Business HQ / Chief Business Development Penny. |
 | 2026-07-03 | Chief Wellness HQ | Activated wellness department | Upgraded `projects/wellness/` into Chief Wellness HQ / Chief Wellness Penny. |
 | 2026-07-03 | Chief of Finance Penny | Activated finance backend | Upgraded `projects/finance-benefits/` into Chief of Finance Penny and located Drive working records. |
 | 2026-07-03 | Life Logistics HQ | Re-synced Chief of Staff identity | This chat now boots from `projects/life-logistics-hq/` instead of Main Assistant. |
@@ -65,6 +67,7 @@ Do not duplicate source-system details here.
 |---|---|---|---|
 | Life Logistics HQ | To assign | `status.md` | Retry later if useful; file creation was blocked by connector safety checks. |
 | Chief of Finance Penny | REF-003 | Budget / Bills / Dashboard | Build later when useful. |
+| Chief Business HQ | To assign | Business strategy working records | Build in Drive or RPR only when useful. |
 | Chief Wellness HQ | To assign | Wellness working records | Build in Drive or RPR only when useful. |
 | Home Base Logistics | REF-007 | Practical admin tracker | Define only when needed. |
 | Stability Routines | REF-008 | Routine tracker | Fold into Chief Wellness HQ unless a separate bucket becomes useful later. |
