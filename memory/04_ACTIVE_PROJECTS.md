@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Purpose: High-level Life OS project map.
 
 ## Operating Rule
@@ -17,6 +17,7 @@ GitHub is the map. Drive is the filing cabinet.
 
 | Status | Project | GitHub Path | Registry Ref | Phase | Next Action |
 |---|---|---|---|---|---|
+| Active | Life Logistics HQ | `projects/life-logistics-hq/` | To assign | Active | Use as Chief of Staff / cross-project coordination desk |
 | Active | Main Assistant | `projects/main-assistant/` | To assign | Active | Use as daily operations desk |
 | Active | Work Search | `projects/job-search/` | REF-001 | Active | Prepare and continue targeted applications |
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options |
@@ -30,6 +31,8 @@ GitHub is the map. Drive is the filing cabinet.
 | Pending | Project Slot 07 | `projects/project-slot-07/` | To assign | Reserved | Use only for abstract routing |
 
 ## Notes
+
+Life Logistics HQ is the Chief of Staff / cross-project coordination desk. It maintains system clarity, GitHub state, project routing, housekeeping, and advisory structure.
 
 Main Assistant is the front desk for everyday assistant work and should route large project work to specialist chats.
 
