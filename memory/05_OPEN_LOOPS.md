@@ -17,25 +17,32 @@ Do not duplicate source-system details here.
 
 | Status | Project | Registry Ref | Task | Next Action | Due / Timing | Notes |
 |---|---|---|---|---|---|---|
+| Open | Main Assistant | To assign | Use daily operations desk | Start fresh Main Assistant chat from project handoff | Next daily use | Front desk for one-off tasks and everyday admin |
 | Open | Work Search | REF-001 | Clarify work-structure decision point | Discuss values-based work choices vs avoidance with sponsor / trusted supports | Current week | Source: Drive journal; keep details outside GitHub |
-| Open | Site Cleanup | REF-002 | Continue provider option gathering | Collect and compare options | As needed | Details live in Drive / phone notes |
-| Open | Ledger & Programs | REF-003 | Begin real tracker use | Enter real data when available | When data exists | Tracker is ready in Drive |
+| Open | Work Search | REF-001 | Prepare for upcoming interviews | Keep interview prep organized in Job Search HQ | Upcoming | Calendar/Todoist own timed commitments |
+| Open | Site Cleanup | REF-002 | Continue provider option gathering | Continue follow-ups in project chat | As needed | Details live in Drive/project handoff |
+| Open | Ledger & Programs | REF-003 | Begin real tracker use | Enter real data when available | When data exists | Connector workflow appears usable; use RPR only if reliability changes |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
-| Open | Support Pathway | REF-005 | Continue pathway research | Keep detailed notes in Drive | Ongoing | Use verified sources for current rules |
+| Open | Support Pathway | REF-005 | Continue pathway research | Use Caregiver Project HQ and current program sources | Ongoing | Detailed notes belong in Drive/project handoff |
 | Open | Daily Anchors | REF-006 | Maintain reliability anchors | Continue meetings, sponsor contact, service, literature, and journal review | Ongoing | Source: Drive journal; reliability is the current practical anchor |
-| Open | Startup Boot | REF-004 | Make new Penny boot reliable | Use `memory/STARTUP_BOOT.md` in fresh chats | Ongoing | Read-only boot unless Rob asks for edits |
+| Open | Startup Boot | REF-004 | Make new Penny boot reliable | Use `memory/STARTUP_BOOT.md` plus project `SESSION_HANDOFF.md` in fresh chats | Ongoing | Read-only boot unless Rob asks for edits |
 
 ## Waiting On
 
 | Status | Project | Registry Ref | Waiting For | Next Check | Notes |
 |---|---|---|---|---|---|
+| Waiting | Site Cleanup / Support Pathway | REF-002 / REF-005 | External follow-ups and project inputs | Check when relevant | Details outside GitHub |
 | Waiting | Work Search | REF-001 | Responses from source systems | Check when Rob wants follow-up | Details outside GitHub |
-| Waiting | Site Cleanup | REF-002 | Provider follow-ups | Check when relevant | Details outside GitHub |
 
 ## Done / Recently Closed
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-02 | Life OS | Nightly housekeeping pass completed | Reconciled GitHub, Drive, Todoist, Calendar, and Gmail at high level |
+| 2026-07-02 | Main Assistant | Created Main Assistant project | GitHub project folder and Drive folder created; startup routing added |
+| 2026-07-02 | Life OS | Adopted RPR procedure | Reliability-first user-mediated file workflow for brittle/sensitive structured records |
+| 2026-07-02 | Caregiver Project | Populated caregiver project session handoff | Detailed project continuity moved into project handoff |
+| 2026-07-02 | Life OS | Scaffolded project session handoffs | Added continuity anchors for specialist Penny chats |
 | 2026-07-02 | Recovery Logistics | Read new literature journal entry and routed takeaways | Pointer Registry updated for REF-001 and REF-006 |
 | 2026-07-02 | Life OS | Created Life OS Pointer Registry | Drive folder and Google Sheet created |
 | 2026-07-02 | Life OS | Upgraded Pointer Registry | Added source, GitHub, and next-action fields through REF-009 |
