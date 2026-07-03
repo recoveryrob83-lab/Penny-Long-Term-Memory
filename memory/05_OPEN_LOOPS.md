@@ -17,7 +17,6 @@ Do not duplicate source-system details here.
 
 | Status | Project | Registry Ref | Task | Next Action | Due / Timing | Notes |
 |---|---|---|---|---|---|---|
-| Open | Life Logistics HQ | To assign | Use Chief of Staff desk | Re-sync this chat to `projects/life-logistics-hq/SESSION_HANDOFF.md` and identity file | Now / next boot | Separates system coordination from Main Assistant daily operations |
 | Open | Main Assistant | To assign | Use daily operations desk | Start fresh Main Assistant chat from project handoff | Next daily use | Front desk for one-off tasks and everyday admin |
 | Open | Work Search | REF-001 | Clarify work-structure decision point | Discuss values-based work choices vs avoidance with sponsor / trusted supports | Current week | Source: Drive journal; keep details outside GitHub |
 | Open | Work Search | REF-001 | Prepare for upcoming interviews | Keep interview prep organized in Job Search HQ | Upcoming | Calendar/Todoist own timed commitments |
@@ -39,27 +38,30 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
-| 2026-07-03 | Life Logistics HQ | Created dedicated project folder | Created role files and routing; status file blocked by connector safety check |
-| 2026-07-02 | Life OS | Nightly housekeeping pass completed | Reconciled GitHub, Drive, Todoist, Calendar, and Gmail at high level |
-| 2026-07-02 | Main Assistant | Created Main Assistant project | GitHub project folder and Drive folder created; startup routing added |
-| 2026-07-02 | Life OS | Adopted RPR procedure | Reliability-first user-mediated file workflow for brittle/sensitive structured records |
-| 2026-07-02 | Caregiver Project | Populated caregiver project session handoff | Detailed project continuity moved into project handoff |
-| 2026-07-02 | Life OS | Scaffolded project session handoffs | Added continuity anchors for specialist Penny chats |
-| 2026-07-02 | Recovery Logistics | Read new literature journal entry and routed takeaways | Pointer Registry updated for REF-001 and REF-006 |
-| 2026-07-02 | Life OS | Created Life OS Pointer Registry | Drive folder and Google Sheet created |
-| 2026-07-02 | Life OS | Upgraded Pointer Registry | Added source, GitHub, and next-action fields through REF-009 |
-| 2026-07-02 | Life OS | Added Startup Boot | Created `memory/STARTUP_BOOT.md` |
-| 2026-07-02 | Life OS | Added neutral project scaffolds | Added Home Base Logistics, Stability Routines, and Project Slot 07 |
-| 2026-07-02 | Life OS | Confirmed GitHub access | Repo accessible and writable |
-| 2026-07-02 | Life OS | Started GitHub memory mirror | Core memory files and project scaffolds created |
-| 2026-07-02 | Life OS | Confirmed fresh-chat connector recovery pattern | Fresh chat plus boot files is the preferred recovery path |
+| 2026-07-03 | Life Logistics HQ | Re-synced Chief of Staff identity | This chat now boots from `projects/life-logistics-hq/` instead of Main Assistant. |
+| 2026-07-03 | Life Logistics HQ | Created dedicated project folder | Created role files and routing; status file blocked by connector safety check. |
+| 2026-07-03 | Advisory System | Acknowledged Daily Meditation advisory | Morning Meditation recognized as Recovery workbench. |
+| 2026-07-02 | Life OS | Nightly housekeeping pass completed | Reconciled GitHub, Drive, Todoist, Calendar, and Gmail at high level. |
+| 2026-07-02 | Main Assistant | Created Main Assistant project | GitHub project folder and Drive folder created; startup routing added. |
+| 2026-07-02 | Life OS | Adopted RPR procedure | Reliability-first user-mediated file workflow for brittle/sensitive structured records. |
+| 2026-07-02 | Caregiver Project | Populated caregiver project session handoff | Detailed project continuity moved into project handoff. |
+| 2026-07-02 | Life OS | Scaffolded project session handoffs | Added continuity anchors for specialist Penny chats. |
+| 2026-07-02 | Recovery Logistics | Read new literature journal entry and routed takeaways | Pointer Registry updated for REF-001 and REF-006. |
+| 2026-07-02 | Life OS | Created Life OS Pointer Registry | Drive folder and Google Sheet created. |
+| 2026-07-02 | Life OS | Upgraded Pointer Registry | Added source, GitHub, and next-action fields through REF-009. |
+| 2026-07-02 | Life OS | Added Startup Boot | Created `memory/STARTUP_BOOT.md`. |
+| 2026-07-02 | Life OS | Added neutral project scaffolds | Added Home Base Logistics, Stability Routines, and Project Slot 07. |
+| 2026-07-02 | Life OS | Confirmed GitHub access | Repo accessible and writable. |
+| 2026-07-02 | Life OS | Started GitHub memory mirror | Core memory files and project scaffolds created. |
+| 2026-07-02 | Life OS | Confirmed fresh-chat connector recovery pattern | Fresh chat plus boot files is the preferred recovery path. |
 
 ## Parking Lot
 
 | Project | Registry Ref | Idea / Possible Future File | Notes |
 |---|---|---|---|
-| Ledger & Programs | REF-003 | Budget / Bills / Dashboard | Build later when useful |
-| Home Base Logistics | REF-007 | Practical admin tracker | Define only when needed |
-| Stability Routines | REF-008 | Routine tracker | Define routines when needed |
-| Project Slot 07 | REF-009 | Abstract bucket | Use only when a direct label is unhelpful |
-| Life OS | REF-004 | Historical log import | Preserve only if useful |
+| Life Logistics HQ | To assign | `status.md` | Retry later if useful; file creation was blocked by connector safety checks. |
+| Ledger & Programs | REF-003 | Budget / Bills / Dashboard | Build later when useful. |
+| Home Base Logistics | REF-007 | Practical admin tracker | Define only when needed. |
+| Stability Routines | REF-008 | Routine tracker | Define routines when needed. |
+| Project Slot 07 | REF-009 | Abstract bucket | Use only when a direct label is unhelpful. |
+| Life OS | REF-004 | Historical log import | Preserve only if useful. |
