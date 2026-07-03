@@ -21,7 +21,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Main Assistant | `projects/main-assistant/` | To assign | Active | Use as daily operations desk |
 | Active | Work Search | `projects/job-search/` | REF-001 | Active | Prepare and continue targeted applications |
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options |
-| Active | Ledger & Programs | `projects/finance-benefits/` | REF-003 | Active | Use Drive tracker when real data is ready |
+| Active | Chief of Finance Penny | `projects/finance-benefits/` | REF-003 | Active | Use Drive Checkbook Register as primary ledger when Rob is ready |
 | Active | Life OS Registry | `projects/life-os-infrastructure/` | REF-004 | Active | Use registry IDs as foreign keys |
 | Active | Support Pathway | `projects/caregiver-income/` | To assign | Active | Continue research in Drive |
 | Active | Daily Anchors | `projects/recovery-logistics/` | To assign | Active | Maintain routine and commitments |
@@ -35,6 +35,8 @@ GitHub is the map. Drive is the filing cabinet.
 Life Logistics HQ is the Chief of Staff / cross-project coordination desk. It maintains system clarity, GitHub state, project routing, housekeeping, and advisory structure.
 
 Main Assistant is the front desk for everyday assistant work and should route large project work to specialist chats.
+
+Chief of Finance Penny owns finance, benefits, ledger, bills, budget, income tracking, and financial paperwork workflows. Working finance records belong in Drive or RPR, not GitHub.
 
 Philosophy HQ is the department head for philosophy continuity, Scriptorium coordination, and future book-compilation work. It should not replace the Primary Philosophy chat or Scriptorium workbench.
 
