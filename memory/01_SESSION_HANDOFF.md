@@ -23,25 +23,13 @@ A fresh Life Logistics HQ chat should boot from GitHub, summarize system state c
 
 ## Recent Major Updates
 
-### Life Logistics HQ
+### Chief Engineering Penny
 
-Life Logistics HQ is Rob's Chief of Staff Penny for system coordination, GitHub memory curation, project routing, housekeeping, advisory routing, scheduled-task architecture notes, department setup, and role clarity.
+`projects/engineering/` has been created as Chief Engineering Penny / Engineering HQ.
 
-### Main Assistant
+Chief Engineering handles technical architecture, repository strategy, software planning, APIs, connectors, data models, automation design, testing, technical feasibility, and implementation planning.
 
-Main Assistant is Rob's daily operations desk for one-off tasks, calendar events, contacts, itinerary checks, Gmail/Drive lookups, shopping/travel-style logistics, and general daily administration.
-
-Large ongoing work belongs in specialist project chats.
-
-### Chief of Finance Penny
-
-`projects/finance-benefits/` has been upgraded into Chief of Finance Penny / CFO Penny.
-
-Chief of Finance handles finance, benefits, checkbook/ledger, bills, budget, income tracking, and financial paperwork workflows.
-
-Pointer Registry REF-003 now points to Chief of Finance Penny / Checkbook Register.
-
-Important finance guardrail: GitHub stores only abstract project state and pointers. Detailed finance records belong in Drive or RPR.
+Important engineering guardrail: Chief Business HQ defines what should be built and why. Chief Engineering Penny defines how to build it and in what order.
 
 ### Chief Business HQ
 
@@ -51,11 +39,15 @@ Chief Business handles business ideas, product strategy, branding, market resear
 
 Chief Business HQ is active on Penny product viability and business-development research. A Drive working cabinet exists under Life Organization > Chief Business HQ.
 
-Important business guardrail: Business defines what should be built. Engineering defines how to build it once Chief Engineering Penny is activated.
-
-### Advisory Status
-
 ADV-20260703-003 from Chief Business HQ has been acknowledged after Life Logistics HQ, Main Assistant, and Chief of Finance Penny reported read to Rob.
+
+### Chief of Finance Penny
+
+`projects/finance-benefits/` has been upgraded into Chief of Finance Penny / CFO Penny.
+
+Chief of Finance handles finance, benefits, checkbook/ledger, bills, budget, income tracking, and financial paperwork workflows.
+
+Pointer Registry REF-003 now points to Chief of Finance Penny / Checkbook Register.
 
 ### Chief Wellness HQ
 
@@ -63,7 +55,15 @@ ADV-20260703-003 from Chief Business HQ has been acknowledged after Life Logisti
 
 Chief Wellness handles wellness routines, health-adjacent logistics, appointment preparation, sleep, food, movement, stability supports, and non-clinical wellness planning.
 
-Important wellness guardrail: GitHub stores only abstract project state and pointers. Detailed wellness records belong in Drive, Calendar, Gmail, Todoist, project chat, or RPR.
+### Life Logistics HQ
+
+Life Logistics HQ is Rob's Chief of Staff Penny for system coordination, GitHub memory curation, project routing, housekeeping, advisory routing, scheduled-task architecture notes, department setup, and role clarity.
+
+### Main Assistant
+
+Main Assistant is Rob's daily operations desk for one-off tasks, calendar events, contacts, itinerary checks, Gmail/Drive lookups, shopping/travel-style logistics, and general daily administration.
+
+Large ongoing work belongs in specialist project chats.
 
 ## Startup Workflow
 
@@ -86,6 +86,7 @@ Preferred new-chat startup:
 - Cleanup Project HQ: cleanup providers, quotes, and scheduling.
 - Chief of Finance Penny: finance, benefits, ledger, budget, bills, and financial paperwork.
 - Chief Business HQ: business ideas, product strategy, branding, market research, offer design, monetization, and customer discovery.
+- Chief Engineering Penny: technical architecture, software planning, repositories, automations, APIs, data models, testing, and implementation planning.
 - Chief Wellness HQ: practical wellness, health-adjacent logistics, appointments, routines, and stability supports.
 - Recovery Logistics: daily anchors, meetings, literature logistics, and non-sensitive recovery routines.
 - Philosophy HQ: framework continuity, Scriptorium coordination, and future book-compilation support.
@@ -94,6 +95,7 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
+- Created Chief Engineering Penny / Engineering HQ under `projects/engineering/`.
 - Created and synchronized Life Logistics HQ as its own Chief of Staff project.
 - Created advisory-board system and acknowledged Recovery advisory about Daily Meditation workbench.
 - Created scheduled-task note architecture and Todoist follow-up for scheduler experimentation.
