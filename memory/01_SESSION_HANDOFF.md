@@ -6,7 +6,7 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, and a department event inbox.
+Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, and an Advisory Watcher v0.1 procedure.
 
 The core architecture remains:
 
@@ -19,8 +19,23 @@ The core architecture remains:
 - Life Logistics HQ curates cross-project operational memory.
 - Main Assistant handles daily operations.
 - The Department Event Inbox tracks abstract department sync/read/ingestion state.
+- Advisory Watcher v0.1 may report routing needs to Rob, but does not own source-of-truth state.
 
 ## Recent Major Updates
+
+### Advisory Watcher v0.1
+
+ADV-20260703-007 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
+
+The watcher procedure lives in:
+
+- `coordination/DEPARTMENT_EVENT_INBOX.md`
+- `projects/life-os-infrastructure/SESSION_HANDOFF.md`
+- `memory/03_OPERATIONAL_RULES.md`
+
+Purpose: use one scheduled ChatGPT task as a low-code/no-code notification layer that checks the Advisory Index and Department Event Inbox, then reports routing needs to Rob with copy-paste-ready target messages.
+
+The watcher should not modify GitHub unless Rob later explicitly approves that behavior.
 
 ### Department Event Inbox
 
@@ -106,6 +121,7 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
+- Added Advisory Watcher v0.1 procedure after reading ADV-20260703-007.
 - Created Department Event Inbox under `coordination/DEPARTMENT_EVENT_INBOX.md`.
 - Read and ingested ADV-20260703-006 from Chief Engineering Penny.
 - Created Chief Engineering Penny / Engineering HQ under `projects/engineering/`.
@@ -130,6 +146,7 @@ Todoist owns Rob-facing actions.
 Gmail owns communications.
 Captain's Log records meaningful operational sessions.
 Department Event Inbox tracks system synchronization state.
+Advisory Watcher v0.1 reports routing needs only.
 
 Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
