@@ -12,9 +12,11 @@ The core architectural decision is to separate durable memory from operational r
 
 A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core connectors, read the startup files, checked Calendar/Todoist for today's itinerary, labeled job-search emails in Gmail, verified that Google Drive remained responsive after explicit connector invocation, and created `memory/CAPTAINS_LOG.md` for short operational session entries.
 
-Project-specific chats are now being split out for focused work, including Caregiver Project HQ and Job Search HQ. Project chats should do project work in their own Drive/Gmail/Calendar/Todoist context. Life Logistics HQ should do cross-project housekeeping and nightly batch updates.
+Project-specific chats are now split out for focused work. Project chats should do project work in their own Drive/Gmail/Calendar/Todoist context. Life Logistics HQ should do cross-project housekeeping and nightly batch updates.
 
-RPR, meaning Rob -> Penny -> Rob, is now the preferred method for structured files that are likely to trigger connector safety or require reliable editing. Use connectors for discovery, lookup, scheduling, communication, and metadata, but do not rely on connector writes as the sole maintenance path for critical structured records.
+Main Assistant was created as Rob's default everyday assistant chat for one-off tasks, calendar events, contacts, itinerary checks, Gmail/Drive lookups, shopping/travel-style logistics, and general daily administration. Large ongoing work should be routed to specialist project chats.
+
+RPR, meaning Rob -> Penny -> Rob, is now the preferred method for structured files that are likely to trigger connector safety or require reliable editing. Use connectors for discovery, lookup, scheduling, communication, and metadata, but do not rely on connector writes as the sole maintenance path for critical structured records. RPR is primarily for sensitive-adjacent or brittle structured files; normal connector work remains acceptable for lower-risk workflows that behave reliably.
 
 ## Startup Workflow
 
@@ -25,7 +27,8 @@ Preferred new-chat startup:
 3. Rob asks Penny to check GitHub startup instructions.
 4. Penny opens `recoveryrob83-lab/Penny-Long-Term-Memory`.
 5. Penny reads `memory/STARTUP_BOOT.md` and follows its boot order.
-6. Penny reads only during startup unless Rob explicitly asks for edits.
+6. If Rob names a project chat, Penny reads the matching project `SESSION_HANDOFF.md`.
+7. Penny reads only during startup unless Rob explicitly asks for edits.
 
 ## Connector Wake-Up Field Note
 
@@ -58,6 +61,8 @@ Use user-mediated file transfer for any structured file that is likely to trigge
 Prefer RPR over connector writes whenever reliability is more important than automation.
 
 Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+Use judgment: not every structured file requires RPR. If a connector workflow is low-risk and working reliably, it may remain appropriate.
 
 ## Captain's Log
 
@@ -106,6 +111,16 @@ SMS / phone messages
 - May contain time-sensitive logistics that are not visible to Penny unless Rob shares them.
 - Example: interview Zoom links may arrive by text rather than Gmail.
 
+## Project Chat Map
+
+- Main Assistant: daily operations and one-off tasks.
+- Caregiver Project HQ: support pathway and related cleanup logistics.
+- Job Search HQ: applications, interviews, resumes, and work-fit decisions.
+- Cleanup Project HQ: cleanup providers, quotes, and scheduling when separated from caregiver work.
+- Recovery Logistics: daily anchors, meetings, literature logistics, and non-sensitive recovery routines.
+- Finance Benefits HQ: finance/benefit tasks and trackers.
+- Life OS Infrastructure: boot files, handoffs, connector lessons, and system design.
+
 ## Pointer Registry
 
 Created in Drive:
@@ -116,7 +131,7 @@ Created in Drive:
 
 The registry is the master lookup table connecting GitHub state with detailed operational records stored in Drive and other connected systems.
 
-Current registry rows run through REF-009.
+Current registry rows run through REF-009. Some newer projects still need registry refs assigned.
 
 GitHub should reference records rather than duplicate sensitive personal information.
 
@@ -126,34 +141,45 @@ Created:
 
 - `memory/STARTUP_BOOT.md`
 - `memory/CAPTAINS_LOG.md`
-- `projects/home-base-logistics/`
-- `projects/stability-routines/`
-- `projects/project-slot-07/`
+- project session handoffs
+- `projects/main-assistant/`
+- Main Assistant Drive folder under Life Organization
 
 Updated:
 
 - `memory/00_START_HERE.md`
 - `memory/01_SESSION_HANDOFF.md`
+- `memory/02_BOOT_LOG.md`
+- `memory/03_OPERATIONAL_RULES.md`
 - `memory/04_ACTIVE_PROJECTS.md`
 - `memory/05_OPEN_LOOPS.md`
-- `MIGRATION_PLAN.md`
+- `memory/09_APP_INTEGRATIONS_REFERENCE.md`
+- `projects/README.md`
+- `projects/caregiver-income/SESSION_HANDOFF.md`
+- Main Assistant project files
 
 Operational tests completed:
 
 - Core connector check: Drive, Calendar, Contacts, Todoist, Gmail.
 - GitHub startup boot in a fresh chat.
 - Calendar/Todoist daily itinerary read.
-- Gmail job-search label applied to matching job-related emails.
+- Gmail label/count checks.
 - Connector wake-up hypothesis recorded as a field note.
 - Drive editing lessons recorded from Caregiver Project HQ.
 - RPR procedure recorded as the reliability-first structured file workflow.
-- Captain's Log created and seeded.
+- Project-specific session handoff architecture created.
+- Main Assistant created as daily operations desk.
+- Nightly housekeeping pass completed across GitHub, Drive, Todoist, Calendar, and Gmail at a high level.
 
-Some direct-label changes were blocked by connector safety checks. Future edits should prefer neutral labels and abstract routing language.
+Some direct connector changes were blocked by safety checks. Future edits should prefer neutral labels and abstract routing language.
 
 ## Best Next Action
 
-Use Life Logistics HQ for real daily living and nightly housekeeping: project chat updates, job search, recovery anchors, caregiver pathway, cleanup logistics, and practical next actions.
+Use Main Assistant for everyday operations.
+
+Use specialist chats for large projects.
+
+Use Life Logistics HQ for nightly housekeeping, cross-project review, GitHub memory curation, and system improvements.
 
 Do not over-architect unless a real use-case reveals a gap.
 
@@ -169,8 +195,9 @@ Captain's Log records meaningful operational sessions.
 
 Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
+Main Assistant handles daily operations.
 
 Avoid duplication whenever possible.
 Prefer durable references over copied data.
 
-Use RPR when reliable structured-file editing matters more than connector automation.
+Use RPR when reliable structured-file editing matters more than connector automation, especially for sensitive-adjacent records.
