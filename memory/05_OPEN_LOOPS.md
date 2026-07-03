@@ -21,7 +21,8 @@ Do not duplicate source-system details here.
 | Open | Work Search | REF-001 | Clarify work-structure decision point | Discuss values-based work choices vs avoidance with sponsor / trusted supports | Current week | Source: Drive journal; keep details outside GitHub |
 | Open | Work Search | REF-001 | Prepare for upcoming interviews | Keep interview prep organized in Job Search HQ | Upcoming | Calendar/Todoist own timed commitments |
 | Open | Site Cleanup | REF-002 | Continue provider option gathering | Continue follow-ups in project chat | As needed | Details live in Drive/project handoff |
-| Open | Ledger & Programs | REF-003 | Begin real tracker use | Enter real data when available | When data exists | Connector workflow appears usable; use RPR only if reliability changes |
+| Open | Chief of Finance Penny | REF-003 | Begin real checkbook use | Inspect Drive Checkbook Register structure before real transaction work | When data exists | Keep detailed finance records in Drive or RPR, not GitHub |
+| Open | Chief of Finance Penny | REF-003 | Build budget / bills workflow | Add budget, bills, or reminders when real inputs are known | When useful | Former Ledger & Programs bucket now active as Chief of Finance Penny |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
 | Open | Support Pathway | REF-005 | Continue pathway research | Use Caregiver Project HQ and current program sources | Ongoing | Detailed notes belong in Drive/project handoff |
 | Open | Daily Anchors | REF-006 | Maintain reliability anchors | Continue meetings, sponsor contact, service, literature, and journal review | Ongoing | Source: Drive journal; reliability is the current practical anchor |
@@ -38,6 +39,7 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-03 | Chief of Finance Penny | Activated finance backend | Upgraded `projects/finance-benefits/` into Chief of Finance Penny and located Drive working records. |
 | 2026-07-03 | Life Logistics HQ | Re-synced Chief of Staff identity | This chat now boots from `projects/life-logistics-hq/` instead of Main Assistant. |
 | 2026-07-03 | Life Logistics HQ | Created dedicated project folder | Created role files and routing; status file blocked by connector safety check. |
 | 2026-07-03 | Advisory System | Acknowledged Daily Meditation advisory | Morning Meditation recognized as Recovery workbench. |
@@ -60,7 +62,7 @@ Do not duplicate source-system details here.
 | Project | Registry Ref | Idea / Possible Future File | Notes |
 |---|---|---|---|
 | Life Logistics HQ | To assign | `status.md` | Retry later if useful; file creation was blocked by connector safety checks. |
-| Ledger & Programs | REF-003 | Budget / Bills / Dashboard | Build later when useful. |
+| Chief of Finance Penny | REF-003 | Budget / Bills / Dashboard | Build later when useful. |
 | Home Base Logistics | REF-007 | Practical admin tracker | Define only when needed. |
 | Stability Routines | REF-008 | Routine tracker | Define routines when needed. |
 | Project Slot 07 | REF-009 | Abstract bucket | Use only when a direct label is unhelpful. |
