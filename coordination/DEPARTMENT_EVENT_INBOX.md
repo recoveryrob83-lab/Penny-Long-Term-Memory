@@ -52,6 +52,7 @@ Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md an
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
+| ADV-20260703-004 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Main Assistant | High | Ingested | Frequent logistics updates needed for Penny platform research | `coordination/boards/business.md` | Life Logistics HQ ingested advisory; Main Assistant should route one-off business admin/support back to Business HQ when asked. |
 | ADV-20260703-007 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Scheduled advisory watcher and inbox procedure | `coordination/boards/engineering.md` | Life Logistics HQ read and ingested the advisory; watcher procedure added here. |
 | ADV-20260703-006 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Engineering HQ online, Drive scaffold created, and event inbox need identified | `coordination/boards/engineering.md` | Life Logistics HQ read the advisory and created this event inbox as the first implementation. |
 
@@ -59,6 +60,8 @@ Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md an
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260703-004 | Life Logistics HQ | Read | Ingested | Life Logistics HQ will monitor Business HQ routing, structure, and cross-department cleanliness during active Penny Platform research. |
+| ADV-20260703-004 | Main Assistant | Routed by Rob | Expected | Main Assistant should know Penny Platform research is active and route one-off business admin, lookup, scheduling, or communication support to Chief Business HQ unless Rob says otherwise. |
 | ADV-20260703-007 | Life Logistics HQ | Read | Ingested | Advisory watcher v0.1 procedure added to this file. |
 | ADV-20260703-006 | Life Logistics HQ | Read | Ingested | Engineering advisory read and Life OS memory updated. |
 
