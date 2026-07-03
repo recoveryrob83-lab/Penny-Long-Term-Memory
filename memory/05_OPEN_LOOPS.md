@@ -1,6 +1,6 @@
 # Open Loops
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Operating Rule
@@ -17,6 +17,7 @@ Do not duplicate source-system details here.
 
 | Status | Project | Registry Ref | Task | Next Action | Due / Timing | Notes |
 |---|---|---|---|---|---|---|
+| Open | Life Logistics HQ | To assign | Use Chief of Staff desk | Re-sync this chat to `projects/life-logistics-hq/SESSION_HANDOFF.md` and identity file | Now / next boot | Separates system coordination from Main Assistant daily operations |
 | Open | Main Assistant | To assign | Use daily operations desk | Start fresh Main Assistant chat from project handoff | Next daily use | Front desk for one-off tasks and everyday admin |
 | Open | Work Search | REF-001 | Clarify work-structure decision point | Discuss values-based work choices vs avoidance with sponsor / trusted supports | Current week | Source: Drive journal; keep details outside GitHub |
 | Open | Work Search | REF-001 | Prepare for upcoming interviews | Keep interview prep organized in Job Search HQ | Upcoming | Calendar/Todoist own timed commitments |
@@ -38,6 +39,7 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-03 | Life Logistics HQ | Created dedicated project folder | Created role files and routing; status file blocked by connector safety check |
 | 2026-07-02 | Life OS | Nightly housekeeping pass completed | Reconciled GitHub, Drive, Todoist, Calendar, and Gmail at high level |
 | 2026-07-02 | Main Assistant | Created Main Assistant project | GitHub project folder and Drive folder created; startup routing added |
 | 2026-07-02 | Life OS | Adopted RPR procedure | Reliability-first user-mediated file workflow for brittle/sensitive structured records |
@@ -58,6 +60,6 @@ Do not duplicate source-system details here.
 |---|---|---|---|
 | Ledger & Programs | REF-003 | Budget / Bills / Dashboard | Build later when useful |
 | Home Base Logistics | REF-007 | Practical admin tracker | Define only when needed |
-| Stability Routines | REF-008 | Routine tracker | Define only when needed |
+| Stability Routines | REF-008 | Routine tracker | Define routines when needed |
 | Project Slot 07 | REF-009 | Abstract bucket | Use only when a direct label is unhelpful |
 | Life OS | REF-004 | Historical log import | Preserve only if useful |
