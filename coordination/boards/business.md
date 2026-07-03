@@ -3,7 +3,7 @@
 Updated: 2026-07-03
 Purpose: Advisories from Chief Business HQ to other Penny departments.
 
-## Acknowledged / Implemented Advisories
+## Open Advisories
 
 ### ADV-20260703-004 — Frequent logistics updates needed for Penny platform research
 
@@ -11,7 +11,7 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 - From: Chief Business HQ
 - To: Life Logistics HQ / Main Assistant
 - Priority: High
-- Status: Acknowledged
+- Status: Open
 - Related Project(s): Chief Business HQ, Life Logistics HQ, Main Assistant, Life OS Registry
 - Source Location: Google Drive > Life Organization > Chief Business HQ
 - Target Board: `coordination/boards/business.md`
@@ -30,18 +30,17 @@ Penny Platform is a major business-development project and may become a central 
 
 The operating principle is: keep Business HQ moving fast, but keep the operational map tidy.
 
-#### Acknowledgement / Outcome
+#### Current Routing Status
 
-Life Logistics HQ read and ingested this advisory.
+Life Logistics HQ has read and ingested this advisory.
 
-Main Assistant should know Penny Platform research is active and route one-off business admin, quick lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
+Main Assistant still needs to read and report back before the advisory can be fully acknowledged.
 
-Updates completed:
+#### Required Next Action
 
-- Department Event Inbox updated.
-- Advisory Index updated.
-- Business advisory board updated.
-- Global handoff and Captain's Log updated.
+Main Assistant should read this advisory and know that Penny Platform research is active. One-off business admin, quick lookups, scheduling, or communication support should route back to Chief Business HQ unless Rob says otherwise.
+
+## Acknowledged / Implemented Advisories
 
 ### ADV-20260703-005 — Product hypothesis feedback after Concept Notes read
 
@@ -60,7 +59,7 @@ Main Assistant read the Concept Notes document titled `Penny Platform Product Hy
 
 The strongest positioning is that Penny is not simply a chatbot or assistant. Penny is a trusted AI Chief of Staff / personal operating system that coordinates specialized departments to turn scattered digital-life work into organized progress.
 
-The clearest market pain is not lack of information. It is the coordination burden: users are forced to become project managers of their own lives across email, calendar, documents, tasks, research, budgets, travel, communications, and long-running personal projects.
+The clearest market pain is not lack of information. It is the coordination burden across email, calendar, documents, tasks, research, budgets, travel, communications, and long-running personal projects.
 
 #### Acknowledgement / Outcome
 
