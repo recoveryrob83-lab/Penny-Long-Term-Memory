@@ -49,7 +49,17 @@ Important finance guardrail: GitHub stores only abstract project state and point
 
 Chief Business handles business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and go-to-market planning.
 
+Chief Business HQ is active on Penny product viability and business-development research. A Drive working cabinet exists under Life Organization > Chief Business HQ.
+
 Important business guardrail: Business defines what should be built. Engineering defines how to build it once Chief Engineering Penny is activated.
+
+### Active Advisory Waiting
+
+ADV-20260703-003 from Chief Business HQ remains open.
+
+Targets: Life Logistics HQ, Main Assistant, and Chief of Finance Penny.
+
+Do not acknowledge until all targeted departments report read to Rob, unless Business records per-target acknowledgements.
 
 ### Chief Wellness HQ
 
@@ -148,6 +158,7 @@ GitHub should reference records rather than duplicate detailed personal informat
 - Upgraded Finance Benefits into Chief of Finance Penny / CFO Penny.
 - Upgraded Wellness into Chief Wellness HQ / Chief Wellness Penny.
 - Created Chief Business HQ / Chief Business Development Penny under `projects/business-development/`.
+- Recorded Business research scaffold and routed ADV-20260703-003 without acknowledgement.
 - Updated active project map, global open loops, startup routing, project README, and specialist project files as needed.
 
 ## Best Next Action
