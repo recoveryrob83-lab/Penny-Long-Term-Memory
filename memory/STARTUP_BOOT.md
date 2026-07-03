@@ -100,6 +100,21 @@ If a Drive update is blocked because it appears to contain sensitive information
 
 These are field-tested operating guidelines, not guaranteed explanations of internal connector behavior.
 
+## RPR Procedure: Rob -> Penny -> Rob
+
+Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+RPR basic flow:
+
+1. Rob provides or uploads the file directly in chat, or Penny creates a downloadable file.
+2. Penny reads/edits/generates the structured file in the chat workspace.
+3. Penny gives Rob the revised file for download.
+4. Rob manually uploads or stores the file in Drive, Dropbox, local storage, or another chosen location.
+
 ## Pointer Registry
 
 Drive file:
@@ -128,6 +143,7 @@ After reading the boot files, summarize briefly:
 - open loops
 - project-specific handoff, if a project chat was named
 - connector field lessons relevant to the task
+- RPR procedure relevance for structured files
 - best next action
 
 Keep it concise unless Rob asks for depth.
