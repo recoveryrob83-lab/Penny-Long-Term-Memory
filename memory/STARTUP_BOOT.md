@@ -12,7 +12,7 @@ That Drive read is a connector warm-up step only.
 
 After Drive responds, Rob may ask Penny to check this GitHub repository for startup instructions.
 
-If Rob starts a specialist project chat, the initiation message should name the project, such as Life Logistics HQ, Main Assistant, Caregiver Project HQ, Job Search HQ, Cleanup Project HQ, Recovery Logistics, Philosophy HQ, or Life OS Infrastructure.
+If Rob starts a specialist project chat, the initiation message should name the project, such as Life Logistics HQ, Main Assistant, Caregiver Project HQ, Job Search HQ, Cleanup Project HQ, Chief of Finance Penny, Recovery Logistics, Philosophy HQ, or Life OS Infrastructure.
 
 ## Repository
 
@@ -105,7 +105,7 @@ Project routing map:
 - Caregiver Project HQ / Caregiver Income / Support Pathway: `projects/caregiver-income/SESSION_HANDOFF.md`
 - Job Search HQ / Work Search: `projects/job-search/SESSION_HANDOFF.md`
 - Cleanup Project HQ / Junk Collection / Home Support Logistics: `projects/cleanup/SESSION_HANDOFF.md`
-- Finance Benefits HQ / Ledger / Benefits: `projects/finance-benefits/SESSION_HANDOFF.md`
+- Chief of Finance Penny / Finance Benefits HQ / Ledger / Benefits: `projects/finance-benefits/SESSION_HANDOFF.md`
 - Recovery Logistics / Literature / Daily Anchors: `projects/recovery-logistics/SESSION_HANDOFF.md`
 - Philosophy HQ / Framework Continuity: `projects/philosophy/SESSION_HANDOFF.md`
 - Life OS Infrastructure / Connector Operations: `projects/life-os-infrastructure/SESSION_HANDOFF.md`
