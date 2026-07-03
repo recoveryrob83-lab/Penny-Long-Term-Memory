@@ -12,6 +12,7 @@ Each active project should eventually have its own folder with a `README.md`, `s
 - `cleanup/`
 - `finance-benefits/`
 - `recovery-logistics/`
+- `philosophy/`
 - `life-os-infrastructure/`
 - `health-medical/`
 - `housing-logistics/`
@@ -31,6 +32,7 @@ When Rob starts a new specialist chat, the initiation message should name the pr
 - Cleanup Project HQ.
 - Finance Benefits HQ.
 - Recovery Logistics.
+- Philosophy HQ.
 - Life OS Infrastructure.
 - Health Medical HQ.
 - Housing Logistics HQ.
