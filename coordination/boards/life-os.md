@@ -9,7 +9,7 @@ Purpose: Advisories from Life OS Infrastructure to other Penny departments.
 - From: Life OS Infrastructure
 - To: Main Assistant / All Departments
 - Priority: Medium
-- Status: Open
+- Status: Acknowledged
 - Related Project(s): Life OS Infrastructure, Main Assistant, all project chats
 - Source Location: `coordination/README.md`, `coordination/ADVISORY_INDEX.md`, `coordination/template.md`
 - Target Board: `coordination/boards/life-os.md`
@@ -28,4 +28,4 @@ Main Assistant should check `coordination/ADVISORY_INDEX.md` during morning and 
 
 ### Acknowledgement / Outcome
 
-Pending acknowledgement by Main Assistant and future department chats.
+Acknowledged by Main Assistant on 2026-07-02. Main Assistant will include Advisory Reports in full morning and nightly reports and will use `coordination/ADVISORY_INDEX.md` as the advisory dashboard.
