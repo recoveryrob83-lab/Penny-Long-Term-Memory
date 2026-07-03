@@ -4,7 +4,7 @@ Updated: 2026-07-03
 
 ## Current Phase
 
-Active / Chat Live
+Active / Chat Live / Research Scaffold Created
 
 ## Summary
 
@@ -14,6 +14,8 @@ The actual Chief Business HQ chat has been created and is running.
 
 The department supports business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and planning.
 
+A Drive working cabinet now exists for the business research phase under Life Organization > Chief Business HQ.
+
 ## Current Operating Rule
 
 Keep GitHub abstract and non-sensitive.
@@ -22,7 +24,7 @@ Use Drive for working records, Todoist for actions, Calendar for meetings and de
 
 ## Current Focus
 
-Ready for first active business workflow when Rob chooses one.
+Chief Business HQ is active on Penny product viability and business-development research.
 
 Likely first targets:
 
@@ -38,8 +40,12 @@ Likely first targets:
 
 - Main Assistant handles one-off scheduling and daily execution.
 - Chief Engineering Penny handles technical implementation when activated.
-- Chief of Finance Penny handles money, budget, bills, pricing support, and paperwork overlap.
+- Chief of Finance Penny should expect future overlap around pricing, budget, development cost estimates, and business paperwork, but no finance action is needed yet.
 - Life Logistics HQ handles cross-project coordination and GitHub housekeeping.
+
+## Advisory Status
+
+ADV-20260703-003 is open and awaiting targeted department reads/acknowledgements.
 
 ## Boundary
 
