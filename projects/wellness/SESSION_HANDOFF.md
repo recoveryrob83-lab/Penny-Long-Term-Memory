@@ -10,6 +10,7 @@ Purpose: Project-specific handoff for Wellness HQ chats.
 - Primary Chat: Chief Wellness HQ / Wellness HQ
 - Current Phase: Active / Department Setup Complete
 - Primary Systems: GitHub, Drive folder Wellness Admin, Todoist, Calendar, Gmail as needed, Contacts as needed, RPR/user-mediated files
+- Coordination Systems: `coordination/boards/wellness.md`, `coordination/ADVISORY_INDEX.md`, `coordination/DEPARTMENT_EVENT_INBOX.md`
 - Sensitivity Level: Moderate
 - GitHub Rule: Keep GitHub abstract.
 
@@ -29,12 +30,13 @@ When Rob opens or refreshes Chief Wellness HQ:
 2. Read this project handoff.
 3. Read `projects/wellness/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/wellness/README.md`, `status.md`, and `open_loops.md` if present.
-5. Use Todoist, Calendar, Drive, Gmail, Contacts, or RPR only as needed for the specific wellness task.
-6. Keep GitHub abstract.
-7. Route daily one-off execution to Main Assistant when appropriate.
-8. Route cost or paperwork overlap to Chief of Finance Penny when appropriate.
-9. Route recovery-specific matters to Recovery Logistics when appropriate.
-10. Route cross-project housekeeping to Life Logistics HQ.
+5. Read `coordination/DEPARTMENT_EVENT_INBOX.md` only when Rob routes an event to Wellness HQ, when Wellness creates an advisory, or when current work requires synchronization status.
+6. Use Todoist, Calendar, Drive, Gmail, Contacts, or RPR only as needed for the specific wellness task.
+7. Keep GitHub abstract.
+8. Route daily one-off execution to Main Assistant when appropriate.
+9. Route cost or paperwork overlap to Chief of Finance Penny when appropriate.
+10. Route recovery-specific matters to Recovery Logistics when appropriate.
+11. Route cross-project housekeeping to Life Logistics HQ.
 
 ## Current Project Status
 
@@ -54,12 +56,26 @@ Life Logistics HQ remains the Chief of Staff / cross-project coordination desk.
 - Coordinate with Finance, Recovery, Main Assistant, and Life Logistics HQ when wellness overlaps their scope.
 - Keep GitHub as an abstract project map and put detailed working records in the proper source system.
 
+## Advisory / Event Procedure
+
+When Chief Wellness HQ creates an advisory for another department:
+
+1. Create or update the advisory on `coordination/boards/wellness.md`.
+2. Update `coordination/ADVISORY_INDEX.md` as the central dashboard.
+3. Create or update the matching entry in `coordination/DEPARTMENT_EVENT_INBOX.md` so synchronization state is tracked.
+4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
+
+The Department Event Inbox is the system synchronization register. Todoist is Rob's personal task system.
+
+Advisory Watcher v0.1 may read the Advisory Index and Department Event Inbox in the future to report routing needs. It is a reporting layer only and not the source of truth.
+
 ## Completed Work
 
 - 2026-07-03: Upgraded Wellness scaffold into Chief Wellness HQ / Chief Wellness Penny.
 - 2026-07-03: Created department identity, README, status, and open-loop structure.
 - 2026-07-03: Added Wellness setup to Life OS routing and project map where needed.
 - 2026-07-03: Acknowledged advisory ADV-20260703-002 and updated references to Wellness Admin.
+- 2026-07-03: Added Wellness advisory board and updated Wellness documentation for the Department Event Inbox advisory workflow.
 
 ## Active Open Loops
 
@@ -67,24 +83,27 @@ Life Logistics HQ remains the Chief of Staff / cross-project coordination desk.
 - Clarify first wellness execution target when ready.
 - Keep upcoming appointment-scheduling tasks in Todoist/Main Assistant unless they become larger Wellness HQ workflows.
 - Coordinate with Chief of Finance Penny for cost or paperwork overlap if needed.
+- Use advisory board + Advisory Index + Department Event Inbox for future cross-department advisories.
 
 ## Working Documents / Links
 
 - GitHub project folder: `projects/wellness/`
+- Advisory board: `coordination/boards/wellness.md`
 - Drive working folder: Wellness Admin
-- Todoist owns wellness-related action reminders.
+- Todoist owns Rob-facing wellness action reminders.
 - Calendar owns scheduled appointments and timed commitments.
 - Drive or RPR should hold detailed working records or generated documents.
 
 ## Source Systems
 
-- GitHub: abstract Wellness HQ state, handoff, open loops, status, and role clarity.
+- GitHub: abstract Wellness HQ state, handoff, open loops, status, role clarity, and advisory routing.
 - Drive folder Wellness Admin: working records and generated artifacts.
-- Todoist: tasks, reminders, habits, and follow-ups.
+- Todoist: Rob-facing tasks, reminders, habits, and follow-ups.
 - Calendar: appointments and timed commitments.
 - Gmail: communication evidence when needed.
 - Contacts: lookup when needed.
 - RPR/user-mediated files: reliable path for structured records.
+- Department Event Inbox: department synchronization/read/ingestion register.
 
 ## Connector / Safety Notes
 
@@ -108,6 +127,7 @@ Operational details belong in the proper working system.
 - Recovery Logistics handles recovery-specific routines and program work.
 - Life Logistics HQ keeps the cross-project map tidy.
 - Wellness Admin is the working Drive folder name.
+- Chief Wellness HQ uses the advisory board, Advisory Index, and Department Event Inbox for future cross-department advisories.
 
 ## Immediate Next Actions
 
@@ -118,4 +138,4 @@ Operational details belong in the proper working system.
 
 ## Notes for Next Penny
 
-This chat is Chief Wellness HQ when booted directly. It should not absorb Main Assistant, Finance, Recovery, or Life Logistics work. It should coordinate wellness in a practical way and keep GitHub abstract.
+This chat is Chief Wellness HQ when booted directly. It should not absorb Main Assistant, Finance, Recovery, or Life Logistics work. It should coordinate wellness in a practical way, keep GitHub abstract, and use the Department Event Inbox for department synchronization state when creating or consuming advisories.
