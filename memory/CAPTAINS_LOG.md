@@ -27,6 +27,31 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Advisory Reporting Role Fix
+
+### Summary
+
+Patched the advisory-board system after Job Search HQ treated advisory reporting as a routine department responsibility. Clarified that routine advisory reporting belongs to Main Assistant only.
+
+### Completed Work
+
+- Updated `coordination/README.md` with explicit role policy.
+- Updated `coordination/ADVISORY_INDEX.md` with Main Assistant reporting guidance and specialist department guidance.
+- Updated `memory/STARTUP_BOOT.md` so specialist chats do not turn advisory checks into routine reports.
+- Updated `projects/job-search/SESSION_HANDOFF.md` with Job Search-specific advisory handling rules.
+
+### Decisions / Lessons
+
+- Life Logistics HQ is the postmaster and curator for advisory infrastructure.
+- Main Assistant is the dispatcher and may include advisory status in full morning/nightly operations reports.
+- Specialist departments are consumers, not routine advisory reporters.
+- Specialist departments read advisories only when Rob routes them, Main Assistant routes a specific advisory, or recreated-chat recovery makes the index relevant.
+- After reading a routed advisory, a specialist department should return to normal project work and should not add advisory sections to future routine reports.
+
+### Next Useful Action
+
+Tell Job Search HQ to reload `projects/job-search/SESSION_HANDOFF.md` or read the corrected Advisory Handling section, then stop including advisory-board status in normal Job Search reports unless Rob explicitly asks.
+
 ## 2026-07-02 — Advisory Board System Created
 
 ### Summary
