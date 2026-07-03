@@ -57,6 +57,7 @@ Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md an
 | ADV-20260703-007 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ / Routed Departments | High | Partial | Scheduled advisory watcher and inbox procedure | `coordination/boards/engineering.md` | Life Logistics HQ read and ingested the advisory; procedure is being routed to specialist departments for local documentation updates. |
 | ADV-20260703-006 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Engineering HQ online, Drive scaffold created, and event inbox need identified | `coordination/boards/engineering.md` | Life Logistics HQ read the advisory and created this event inbox as the first implementation. |
 | ADV-20260703-002 | 2026-07-03 | Chief Wellness HQ | Life Logistics HQ | Medium | Closed | Wellness Admin reference update | `coordination/boards/wellness.md` | Advisory board exists; Life Logistics HQ handled folder reference update. |
+| ADV-20260703-001 | 2026-07-03 | Recovery HQ | Recovery Logistics / Main Assistant / All Departments | Medium | Acknowledged | Daily Meditation workbench creation | `coordination/boards/recovery.md` | Recovery board and Advisory Index show acknowledged; Morning Meditation is a Recovery workbench, not a separate department. |
 
 ## Department Read Tracking
 
@@ -67,9 +68,11 @@ Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md an
 | ADV-20260703-007 | Life Logistics HQ | Read | Ingested | Advisory watcher v0.1 procedure added to this file. |
 | ADV-20260703-007 | Chief Wellness HQ | Read | Ingested | Chief Wellness HQ updated handoff, identity, README, status, and open loops for the advisory board + Advisory Index + Department Event Inbox workflow. |
 | ADV-20260703-007 | Caregiver Project HQ | Read | Ingested | Caregiver Project HQ updated README, department identity, and advisory board for Advisory Index + Department Event Inbox workflow. |
+| ADV-20260703-007 | Recovery HQ | Read | Ingested | Recovery HQ updated handoff, department identity, and README for Advisory Index + Department Event Inbox workflow. |
 | ADV-20260703-006 | Life Logistics HQ | Read | Ingested | Engineering advisory read and Life OS memory updated. |
 | ADV-20260703-002 | Life Logistics HQ | Read | Ingested | Life Logistics HQ handled Wellness Admin reference update. |
 | ADV-20260703-002 | Chief Wellness HQ | Read | Ingested | Chief Wellness HQ created Wellness board and updated local advisory workflow references. |
+| ADV-20260703-001 | Recovery HQ | Read | Ingested | Recovery HQ created, acknowledged, and locally ingested Morning Meditation as a Recovery workbench. |
 
 ## Notes
 
