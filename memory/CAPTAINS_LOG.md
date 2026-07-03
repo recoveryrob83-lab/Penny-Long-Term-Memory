@@ -27,6 +27,34 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — RPR Procedure Adopted
+
+### Summary
+
+Adopted RPR, meaning Rob -> Penny -> Rob, as the reliability-first procedure for structured files that may trigger connector safety or require dependable editing.
+
+### Completed Work
+
+- Updated `memory/STARTUP_BOOT.md` with the RPR procedure.
+- Updated `memory/03_OPERATIONAL_RULES.md` with detailed RPR operating rules.
+- Updated `memory/02_BOOT_LOG.md` with the RPR field lesson.
+- Updated `memory/09_APP_INTEGRATIONS_REFERENCE.md` with RPR guidance for connectors and project use cases.
+- Updated `memory/01_SESSION_HANDOFF.md` with RPR as the preferred structured-file fallback.
+- Updated `projects/README.md` with the project-level RPR rule.
+- Updated `projects/caregiver-income/SESSION_HANDOFF.md` to formalize RPR for caregiver structured records.
+
+### Decisions / Lessons
+
+- Use user-mediated file transfer for any structured file likely to trigger connector safety or requiring reliable editing.
+- Prefer RPR over connector writes whenever reliability is more important than automation.
+- Use connectors for discovery, lookup, scheduling, communication, and metadata.
+- Do not use connectors as the sole path for maintaining critical structured records.
+- RPR is appropriate for CSV/XLSX trackers, SQLite files, JSON exports, profile/reference sheets, and sensitive-adjacent structured records.
+
+### Next Useful Action
+
+Future specialist Pennys should choose RPR whenever direct connector writes would be brittle, safety-prone, or too important to risk.
+
 ## 2026-07-02 — Caregiver Project Handoff Populated
 
 ### Summary
