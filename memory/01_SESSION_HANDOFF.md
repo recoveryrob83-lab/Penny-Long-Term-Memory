@@ -6,28 +6,39 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with separate durable memory, working records, action systems, and specialist project chats.
+Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, and a department event inbox.
 
 The core architecture remains:
 
 - GitHub is the durable memory map.
 - Google Drive is the working records cabinet.
-- Todoist owns action items.
+- Todoist owns Rob-facing action items.
 - Calendar owns timed commitments.
 - Gmail owns communication evidence.
 - Project chats create project knowledge.
 - Life Logistics HQ curates cross-project operational memory.
 - Main Assistant handles daily operations.
-
-A fresh Life Logistics HQ chat should boot from GitHub, summarize system state concisely, and avoid dragging long prior chat context forward unless Rob asks.
+- The Department Event Inbox tracks abstract department sync/read/ingestion state.
 
 ## Recent Major Updates
+
+### Department Event Inbox
+
+`coordination/DEPARTMENT_EVENT_INBOX.md` has been created.
+
+It tracks advisory and department synchronization events so Rob is not the only notification layer between specialist chats.
+
+Todoist remains for Rob-facing tasks. The Department Event Inbox is for system synchronization state.
 
 ### Chief Engineering Penny
 
 `projects/engineering/` has been created as Chief Engineering Penny / Engineering HQ.
 
 Chief Engineering handles technical architecture, repository strategy, software planning, APIs, connectors, data models, automation design, testing, technical feasibility, and implementation planning.
+
+Engineering has created Drive scaffolding under Life Organization > Chief Engineering Penny.
+
+ADV-20260703-006 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
 
 Important engineering guardrail: Chief Business HQ defines what should be built and why. Chief Engineering Penny defines how to build it and in what order.
 
@@ -95,6 +106,8 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
+- Created Department Event Inbox under `coordination/DEPARTMENT_EVENT_INBOX.md`.
+- Read and ingested ADV-20260703-006 from Chief Engineering Penny.
 - Created Chief Engineering Penny / Engineering HQ under `projects/engineering/`.
 - Created and synchronized Life Logistics HQ as its own Chief of Staff project.
 - Created advisory-board system and acknowledged Recovery advisory about Daily Meditation workbench.
@@ -113,9 +126,10 @@ Use Life Logistics HQ for cross-project coordination and use specialist chats fo
 GitHub is the map.
 Drive is the filing cabinet.
 Calendar owns time.
-Todoist owns actions.
+Todoist owns Rob-facing actions.
 Gmail owns communications.
 Captain's Log records meaningful operational sessions.
+Department Event Inbox tracks system synchronization state.
 
 Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
