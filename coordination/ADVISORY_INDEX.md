@@ -23,6 +23,7 @@ Specialist departments should only read or report advisories when Rob routes the
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-003 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Chief of Finance Penny / Main Assistant | Medium | Open | Business research scaffold created | `coordination/boards/business.md` |
 
 ## Acknowledged / Implemented Advisories
 
