@@ -53,13 +53,9 @@ Chief Business HQ is active on Penny product viability and business-development 
 
 Important business guardrail: Business defines what should be built. Engineering defines how to build it once Chief Engineering Penny is activated.
 
-### Active Advisory Waiting
+### Advisory Status
 
-ADV-20260703-003 from Chief Business HQ remains open.
-
-Targets: Life Logistics HQ, Main Assistant, and Chief of Finance Penny.
-
-Do not acknowledge until all targeted departments report read to Rob, unless Business records per-target acknowledgements.
+ADV-20260703-003 from Chief Business HQ has been acknowledged after Life Logistics HQ, Main Assistant, and Chief of Finance Penny reported read to Rob.
 
 ### Chief Wellness HQ
 
@@ -68,19 +64,6 @@ Do not acknowledge until all targeted departments report read to Rob, unless Bus
 Chief Wellness handles wellness routines, health-adjacent logistics, appointment preparation, sleep, food, movement, stability supports, and non-clinical wellness planning.
 
 Important wellness guardrail: GitHub stores only abstract project state and pointers. Detailed wellness records belong in Drive, Calendar, Gmail, Todoist, project chat, or RPR.
-
-### Scheduled Tasks
-
-Scheduled tasks were investigated and parked for later testing.
-
-Known findings:
-
-- Scheduled tasks appear to run outside the originating department chat.
-- A Main Assistant test created a new chat and unexpectedly renamed the originating chat.
-- Scheduled tasks currently do not allow other plugins/connectors, so they cannot directly use GitHub or Google Drive.
-- Active task cap may limit use; future workflows may need bundled tasks.
-- A Todoist project `Penny Logistics Tasks` exists with a task to continue experimentation.
-- GitHub scheduled-task architecture exists under `scheduled-tasks/`, but connector limits mean it is currently more of an architectural note layer than an automation backbone.
 
 ## Startup Workflow
 
@@ -93,28 +76,6 @@ Preferred new-chat startup:
 5. Penny reads `memory/STARTUP_BOOT.md` and follows its boot order.
 6. If Rob names a project chat, Penny reads the matching project `SESSION_HANDOFF.md` and `DEPARTMENT_IDENTITY.md`.
 7. Penny reads only during startup unless Rob explicitly asks for edits.
-
-## Connector Wake-Up Field Note
-
-Rob observed that explicitly invoking an app by name may help wake or route a connector before a full fresh-chat reset is needed.
-
-This is a field note, not a proven guarantee.
-
-Recommended troubleshooting order:
-
-1. Explicitly name or tag the connector Rob wants to use.
-2. Try a small harmless read.
-3. If that fails, use the fresh-chat GitHub boot process.
-
-## RPR Procedure: Rob -> Penny -> Rob
-
-Use user-mediated file transfer for structured files when reliability matters more than automation.
-
-Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
-
-## Captain's Log
-
-Use `memory/CAPTAINS_LOG.md` for concise operational journal entries about major Life OS sessions, discoveries, decisions, and completed batches.
 
 ## Project Chat Map
 
@@ -131,25 +92,6 @@ Use `memory/CAPTAINS_LOG.md` for concise operational journal entries about major
 - Life OS Infrastructure: boot files, handoffs, connector lessons, and system design.
 - Health Medical HQ and Housing Logistics HQ remain available as specialist departments when needed.
 
-## Pointer Registry
-
-Drive file:
-
-- Life OS Registry / Life OS Pointer Registry
-
-The registry is the master lookup table connecting GitHub state with detailed operational records stored in Drive and other connected systems.
-
-Current notable refs:
-
-- REF-001: Work Search
-- REF-002: Site Cleanup
-- REF-003: Chief of Finance Penny / Checkbook Register
-- REF-004: Life OS Registry
-- REF-005: Support Pathway
-- REF-006: Daily Anchors
-
-GitHub should reference records rather than duplicate detailed personal information.
-
 ## Recent Work Completed
 
 - Created and synchronized Life Logistics HQ as its own Chief of Staff project.
@@ -158,8 +100,7 @@ GitHub should reference records rather than duplicate detailed personal informat
 - Upgraded Finance Benefits into Chief of Finance Penny / CFO Penny.
 - Upgraded Wellness into Chief Wellness HQ / Chief Wellness Penny.
 - Created Chief Business HQ / Chief Business Development Penny under `projects/business-development/`.
-- Recorded Business research scaffold and routed ADV-20260703-003 without acknowledgement.
-- Updated active project map, global open loops, startup routing, project README, and specialist project files as needed.
+- Recorded Business research scaffold and acknowledged ADV-20260703-003 after all target departments reported read.
 
 ## Best Next Action
 
