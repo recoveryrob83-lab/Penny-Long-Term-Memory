@@ -14,6 +14,31 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Chief Wellness HQ Activated
+
+### Summary
+
+Upgraded `projects/wellness/` from a scaffolded Wellness/Stability Routines folder into Chief Wellness HQ / Chief Wellness Penny.
+
+### Completed Work
+
+- Updated Wellness department identity.
+- Updated Wellness session handoff.
+- Created Wellness README, status, and open loops files.
+- Updated active project map, global open loops, global handoff, and project index.
+
+### Decisions / Lessons
+
+- Chief Wellness HQ owns practical wellness coordination, health-adjacent logistics, appointments, routines, and stability supports.
+- Main Assistant remains the daily execution desk.
+- Chief of Finance Penny owns benefits, bills, costs, budget, and paperwork overlaps.
+- Recovery Logistics owns recovery-specific routines and program work.
+- GitHub should keep Wellness abstract; detailed wellness records belong in operational systems or RPR.
+
+### Next Useful Action
+
+Boot a fresh Chief Wellness HQ chat when Rob is ready for wellness-specific work.
+
 ## 2026-07-03 — Fresh Life Logistics Reset Prepared
 
 ### Summary
