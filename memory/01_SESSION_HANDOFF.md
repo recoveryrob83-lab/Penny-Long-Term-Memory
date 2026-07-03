@@ -14,6 +14,8 @@ A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core c
 
 Project-specific chats are now being split out for focused work, including Caregiver Project HQ and Job Search HQ. Project chats should do project work in their own Drive/Gmail/Calendar/Todoist context. Life Logistics HQ should do cross-project housekeeping and nightly batch updates.
 
+RPR, meaning Rob -> Penny -> Rob, is now the preferred method for structured files that are likely to trigger connector safety or require reliable editing. Use connectors for discovery, lookup, scheduling, communication, and metadata, but do not rely on connector writes as the sole maintenance path for critical structured records.
+
 ## Startup Workflow
 
 Preferred new-chat startup:
@@ -48,6 +50,14 @@ Caregiver Project HQ reported useful Drive workflow lessons that should guide fu
 - When actively working with a connector over many turns, explicitly reference that connector in the conversation to maintain clear operational context.
 
 These lessons should be treated as operational guidelines, not claims about internal connector mechanics.
+
+## RPR Procedure: Rob -> Penny -> Rob
+
+Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
 
 ## Captain's Log
 
@@ -136,6 +146,7 @@ Operational tests completed:
 - Gmail job-search label applied to matching job-related emails.
 - Connector wake-up hypothesis recorded as a field note.
 - Drive editing lessons recorded from Caregiver Project HQ.
+- RPR procedure recorded as the reliability-first structured file workflow.
 - Captain's Log created and seeded.
 
 Some direct-label changes were blocked by connector safety checks. Future edits should prefer neutral labels and abstract routing language.
@@ -161,3 +172,5 @@ Life Logistics HQ curates cross-project operational memory.
 
 Avoid duplication whenever possible.
 Prefer durable references over copied data.
+
+Use RPR when reliable structured-file editing matters more than connector automation.
