@@ -12,6 +12,7 @@ Purpose: Project-specific handoff for new Caregiver Project HQ Penny chats.
 - Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, user-mediated files, web/current research
 - Sensitivity Level: High
 - GitHub Rule: Store intent, not secrets. Keep third-party personal data, sensitive identifiers, insurance details, government IDs, banking, passwords, medical identifiers, private family notes, and profile-level details out of GitHub.
+- RPR Rule: Prefer Rob -> Penny -> Rob file transfer for structured records when reliability is more important than automation.
 
 ## Boot Instructions
 
@@ -22,7 +23,7 @@ When Rob opens a new Caregiver Project HQ chat:
 3. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
 4. Use Drive/Gmail/Calendar/Todoist only as needed for caregiver income work.
 5. Keep detailed personal or profile data out of GitHub unless Rob explicitly approves an abstract note.
-6. Prefer manual file handoff for Sheets/CSV/profile-style data if Drive or Dropbox connector safety blocks reads or edits.
+6. Prefer RPR/manual file handoff for Sheets/CSV/profile-style data if Drive or Dropbox connector safety blocks reads or edits, or if reliable editing matters more than automation.
 
 ## Overall Project Context
 
@@ -381,17 +382,31 @@ Conclusion:
 - Dropbox read/extraction can still be blocked by sensitive-looking content.
 - Fake sensitive fields are not safe test data because the safety layer appears to care about the category/field label, not just whether the value is real.
 
-## Manual File Handoff Workaround
+## RPR Procedure: Rob -> Penny -> Rob
 
-Use this method when Drive/Sheets/Dropbox connectors cannot safely read or edit profile-style data:
+Use RPR for any structured file that is likely to trigger connector safety or requires reliable editing.
 
-1. Penny creates or edits a CSV/XLSX locally in chat and gives Rob a downloadable file.
-2. Rob manually uploads it to Drive/Dropbox or stores it locally.
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+RPR basic flow:
+
+1. Penny creates or edits a CSV/XLSX/SQLite/JSON file locally in chat and gives Rob a downloadable file, or Rob uploads the file directly into the chat.
+2. Rob manually uploads the file to Drive/Dropbox or stores it locally.
 3. If updates are needed, Rob downloads the file and uploads it directly into the chat for Penny to work on.
 4. Penny updates the file in-chat and gives Rob the revised file.
-5. Rob manually re-uploads it to Drive/Dropbox.
+5. Rob manually re-uploads it to Drive/Dropbox/local storage.
+
+Use RPR for caregiver profile data, structured provider trackers, sensitive-adjacent reference files, or any critical record where connector inconsistency would be costly.
 
 This is less automated but more predictable and avoids repeatedly tripping connector safety.
+
+## Manual File Handoff Workaround
+
+This is now formalized as the RPR Procedure above.
+
+Use manual file handoff/RPR when Drive/Sheets/Dropbox connectors cannot safely read or edit profile-style data.
 
 ## Database Architecture Discussion
 
@@ -458,7 +473,7 @@ Documents are for humans. Databases are for facts. GitHub is for the map. Secret
 - Created the Support Profile Template in Drive using abstract naming.
 - Added starter privacy guardrails to the profile template.
 - Tested Drive and Dropbox connector safety patterns.
-- Established manual file handoff as an operational workaround.
+- Established manual file handoff/RPR as an operational workaround.
 - Discussed possible future local database architecture.
 
 ## Active Open Loops
@@ -489,12 +504,13 @@ See Current Provider Status above.
 ## Source Systems
 
 - GitHub: abstract durable project state, session handoff, project open loops, schema/architecture if database work begins.
-- Google Drive: working documents, provider tracker, Support Profile Template, downloadable/uploadable files, notes, human-readable records.
+- Google Drive: working documents, provider tracker, Support Profile Template, notes, human-readable records, and storage for files Rob manually uploads.
 - Todoist: next actions and reminders.
 - Calendar: scheduled calls, appointments, deadlines.
 - Gmail: correspondence evidence.
 - Contacts: saved contact lookups if needed.
 - Dropbox/local files: fallback storage and manual file-handoff testing.
+- RPR/user-mediated files: reliable path for critical structured records.
 - Web/current research: policy/program facts and provider research.
 
 ## Privacy Guardrails
@@ -505,7 +521,7 @@ See Current Provider Status above.
 - Do not store policy numbers, government IDs, banking, passwords, medical identifiers, or private family notes in GitHub.
 - Fake sensitive data can still trigger safety checks. Avoid fake passwords, fake policy numbers, fake SSNs, fake banking fields, and medical-ID style fields in connector tests.
 - Use safe exports for Penny: sanitized CSVs or summaries when possible.
-- Real operational data can live locally, in a database, in secure storage, or in Drive as Rob/Marqueto decide.
+- Real operational data can live locally, in a database, in secure storage, in Drive as Rob/Marqueto decide, or in RPR-managed files Rob uploads manually.
 
 ## Decision Log
 
@@ -513,7 +529,7 @@ See Current Provider Status above.
 - Do not use IDHS/DRS HSP as the first path unless disability/program facts change.
 - Use Support Profile Template as safer abstract naming than Care Recipient Profile.
 - Treat connectors as convenience automation, not core infrastructure.
-- Use manual file handoff for sensitive-adjacent profile/CSV/Sheet work when connector safety blocks reads or edits.
+- Use RPR/manual file handoff for sensitive-adjacent profile/CSV/Sheet work when connector safety blocks reads or edits, or whenever reliable editing matters more than automation.
 - Consider SQLite as the first database prototype if Life OS needs structured records beyond human-readable documents.
 - Store schema and fake seed data in GitHub only; keep real data local/private.
 
@@ -525,9 +541,9 @@ See Current Provider Status above.
 4. Follow up with Dumpster Duo.
 5. Call back ReClaim and Kelseys.
 6. Wait for or follow up with Caring Transitions.
-7. Decide whether to manually populate Support Profile Template or use a user-mediated CSV/XLSX workflow.
+7. Decide whether to manually populate Support Profile Template or use an RPR/user-mediated CSV/XLSX workflow.
 8. Decide whether to start a local SQLite prototype for caregiver data.
 
 ## Notes for Next Penny
 
-This file is the project-specific continuity anchor. Read it after global boot. Keep GitHub safe and abstract. Use Drive or user-mediated files for working documents. Do not retry connector payloads that trip safety. If Drive/Dropbox cannot safely read or edit structured profile data, use manual file handoff.
+This file is the project-specific continuity anchor. Read it after global boot. Keep GitHub safe and abstract. Use Drive or user-mediated files for working documents. Do not retry connector payloads that trip safety. If Drive/Dropbox cannot safely read or edit structured profile data, use RPR/manual file handoff.
