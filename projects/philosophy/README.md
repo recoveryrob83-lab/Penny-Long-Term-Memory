@@ -1,6 +1,6 @@
 # Philosophy HQ
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Purpose: Durable project folder for Rob's philosophy department.
 
 ## Role
@@ -26,6 +26,16 @@ It maintains durable project continuity, coordinates major writing work, and rec
 - `open_loops.md`
 - `notes.md`
 - `sources.md`
+
+## Advisory / Synchronization Rule
+
+When Philosophy HQ creates a cross-department advisory, use:
+
+- `coordination/boards/philosophy.md` for advisory detail.
+- `coordination/ADVISORY_INDEX.md` for dashboard state.
+- `coordination/DEPARTMENT_EVENT_INBOX.md` for read and ingestion state.
+
+Todoist is Rob's personal task system, not the department synchronization register.
 
 ## Rule
 
