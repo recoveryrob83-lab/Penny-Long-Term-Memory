@@ -25,17 +25,7 @@ A fresh Life Logistics HQ chat should boot from GitHub, summarize system state c
 
 ### Life Logistics HQ
 
-Life Logistics HQ has its own project folder and department identity.
-
-Use it as Rob's Chief of Staff Penny for:
-
-- system coordination
-- GitHub memory curation
-- project routing
-- housekeeping
-- advisory routing
-- scheduled-task architecture notes
-- department setup and role clarity
+Life Logistics HQ is Rob's Chief of Staff Penny for system coordination, GitHub memory curation, project routing, housekeeping, advisory routing, scheduled-task architecture notes, department setup, and role clarity.
 
 ### Main Assistant
 
@@ -47,37 +37,25 @@ Large ongoing work belongs in specialist project chats.
 
 `projects/finance-benefits/` has been upgraded into Chief of Finance Penny / CFO Penny.
 
-Chief of Finance handles:
-
-- finance
-- benefits
-- checkbook / ledger
-- bills
-- budget
-- income tracking
-- financial paperwork workflows
-
-Drive working records:
-
-- Checkbook folder
-- Checkbook Register spreadsheet
+Chief of Finance handles finance, benefits, checkbook/ledger, bills, budget, income tracking, and financial paperwork workflows.
 
 Pointer Registry REF-003 now points to Chief of Finance Penny / Checkbook Register.
 
 Important finance guardrail: GitHub stores only abstract project state and pointers. Detailed finance records belong in Drive or RPR.
 
+### Chief Business HQ
+
+`projects/business-development/` has been created as Chief Business HQ / Chief Business Development Penny.
+
+Chief Business handles business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and go-to-market planning.
+
+Important business guardrail: Business defines what should be built. Engineering defines how to build it once Chief Engineering Penny is activated.
+
 ### Chief Wellness HQ
 
 `projects/wellness/` has been upgraded into Chief Wellness HQ / Chief Wellness Penny.
 
-Chief Wellness handles:
-
-- wellness routines
-- health-adjacent logistics
-- primary care / vision / preventive-care follow-through
-- appointment preparation
-- sleep, food, movement, and stability supports
-- non-clinical wellness planning
+Chief Wellness handles wellness routines, health-adjacent logistics, appointment preparation, sleep, food, movement, stability supports, and non-clinical wellness planning.
 
 Important wellness guardrail: GitHub stores only abstract project state and pointers. Detailed wellness records belong in Drive, Calendar, Gmail, Todoist, project chat, or RPR.
 
@@ -108,7 +86,7 @@ Preferred new-chat startup:
 
 ## Connector Wake-Up Field Note
 
-Rob observed that explicitly invoking an app by name, such as `@Google Drive`, may help wake or route a connector before a full fresh-chat reset is needed.
+Rob observed that explicitly invoking an app by name may help wake or route a connector before a full fresh-chat reset is needed.
 
 This is a field note, not a proven guarantee.
 
@@ -117,16 +95,6 @@ Recommended troubleshooting order:
 1. Explicitly name or tag the connector Rob wants to use.
 2. Try a small harmless read.
 3. If that fails, use the fresh-chat GitHub boot process.
-
-## Drive Editing Field Lessons
-
-- Small, incremental Drive updates have been more reliable than large complex batch edits.
-- When a complex Drive update fails, retry as several tiny edits rather than repeatedly sending the same large payload.
-- Verify the target row, range, or document section after each Drive update.
-- If a Drive update is blocked, simplify the update and use abstract notes when possible.
-- When actively working with a connector over many turns, explicitly reference that connector in the conversation to maintain clear operational context.
-
-These lessons should be treated as operational guidelines, not claims about internal connector mechanics.
 
 ## RPR Procedure: Rob -> Penny -> Rob
 
@@ -138,8 +106,6 @@ Use connectors for discovery, lookup, scheduling, communication, and metadata, b
 
 Use `memory/CAPTAINS_LOG.md` for concise operational journal entries about major Life OS sessions, discoveries, decisions, and completed batches.
 
-Do not treat it as a transcript or diary.
-
 ## Project Chat Map
 
 - Life Logistics HQ: Chief of Staff / cross-project coordination and GitHub memory curation.
@@ -148,6 +114,7 @@ Do not treat it as a transcript or diary.
 - Job Search HQ: applications, interviews, resumes, and work-fit decisions.
 - Cleanup Project HQ: cleanup providers, quotes, and scheduling.
 - Chief of Finance Penny: finance, benefits, ledger, budget, bills, and financial paperwork.
+- Chief Business HQ: business ideas, product strategy, branding, market research, offer design, monetization, and customer discovery.
 - Chief Wellness HQ: practical wellness, health-adjacent logistics, appointments, routines, and stability supports.
 - Recovery Logistics: daily anchors, meetings, literature logistics, and non-sensitive recovery routines.
 - Philosophy HQ: framework continuity, Scriptorium coordination, and future book-compilation support.
@@ -179,9 +146,8 @@ GitHub should reference records rather than duplicate detailed personal informat
 - Created advisory-board system and acknowledged Recovery advisory about Daily Meditation workbench.
 - Created scheduled-task note architecture and Todoist follow-up for scheduler experimentation.
 - Upgraded Finance Benefits into Chief of Finance Penny / CFO Penny.
-- Located Finance Drive Checkbook folder and Checkbook Register.
-- Updated Pointer Registry REF-003 for Chief of Finance Penny.
 - Upgraded Wellness into Chief Wellness HQ / Chief Wellness Penny.
+- Created Chief Business HQ / Chief Business Development Penny under `projects/business-development/`.
 - Updated active project map, global open loops, startup routing, project README, and specialist project files as needed.
 
 ## Best Next Action
