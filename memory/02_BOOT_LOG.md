@@ -80,6 +80,18 @@ When actively working with a connector over many turns, explicitly reference the
 
 These are operational guidelines based on repeated field observations, not claims about internal connector implementation.
 
+## RPR Procedure: Rob -> Penny -> Rob
+
+2026-07-02 field lesson:
+
+Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+This gives Life OS a practical fallback when Sheets, CSVs, Dropbox files, or profile-style records become too brittle for direct connector maintenance.
+
 ## Project Chat Architecture Lesson
 
 Project-specific chats should handle their own project work during the day.
