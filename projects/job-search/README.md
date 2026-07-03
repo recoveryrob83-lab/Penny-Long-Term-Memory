@@ -1,7 +1,7 @@
 # Job Search
 
 Status: Active
-Updated: 2026-07-02
+Updated: 2026-07-03
 
 ## Purpose
 
@@ -18,9 +18,17 @@ Track applications, interviews, job leads, resumes, cover letters, and employmen
 
 - Gmail: job-search emails and confirmations.
 - Google Calendar: interviews and timed commitments.
-- Todoist: interview prep and application tasks.
+- Todoist: Rob-facing interview prep and application tasks.
 - Drive: resumes, cover letters, and working documents.
-- GitHub: durable project status and migration notes.
+- GitHub: durable project status, abstract project memory, and cross-department routing records.
+
+## Cross-Department Routing
+
+Job Search HQ is a specialist department and does not perform routine system-wide routing reports.
+
+If Job Search HQ creates a cross-department notice, record it on the Job Search board, update the central advisory dashboard, and update the Department Event Inbox so read and ingestion state can be tracked.
+
+Do not use Todoist for department synchronization unless Rob explicitly requests it.
 
 ## Migration Note
 
