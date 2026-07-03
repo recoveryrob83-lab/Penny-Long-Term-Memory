@@ -1,22 +1,83 @@
 # Session Handoff
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is in Phase 2 of the migration.
+Life OS is operational with separate durable memory, working records, action systems, and specialist project chats.
 
-The core architectural decision is to separate durable memory from operational records.
+The core architecture remains:
 
-A fresh Life Logistics HQ chat successfully booted from GitHub, confirmed core connectors, read the startup files, checked Calendar/Todoist for today's itinerary, labeled job-search emails in Gmail, verified that Google Drive remained responsive after explicit connector invocation, and created `memory/CAPTAINS_LOG.md` for short operational session entries.
+- GitHub is the durable memory map.
+- Google Drive is the working records cabinet.
+- Todoist owns action items.
+- Calendar owns timed commitments.
+- Gmail owns communication evidence.
+- Project chats create project knowledge.
+- Life Logistics HQ curates cross-project operational memory.
+- Main Assistant handles daily operations.
 
-Project-specific chats are now split out for focused work. Project chats should do project work in their own Drive/Gmail/Calendar/Todoist context. Life Logistics HQ should do cross-project housekeeping and nightly batch updates.
+A fresh Life Logistics HQ chat should boot from GitHub, summarize system state concisely, and avoid dragging long prior chat context forward unless Rob asks.
 
-Main Assistant was created as Rob's default everyday assistant chat for one-off tasks, calendar events, contacts, itinerary checks, Gmail/Drive lookups, shopping/travel-style logistics, and general daily administration. Large ongoing work should be routed to specialist project chats.
+## Recent Major Updates
 
-RPR, meaning Rob -> Penny -> Rob, is now the preferred method for structured files that are likely to trigger connector safety or require reliable editing. Use connectors for discovery, lookup, scheduling, communication, and metadata, but do not rely on connector writes as the sole maintenance path for critical structured records. RPR is primarily for sensitive-adjacent or brittle structured files; normal connector work remains acceptable for lower-risk workflows that behave reliably.
+### Life Logistics HQ
+
+Life Logistics HQ has its own project folder and department identity.
+
+Use it as Rob's Chief of Staff Penny for:
+
+- system coordination
+- GitHub memory curation
+- project routing
+- housekeeping
+- advisory routing
+- scheduled-task architecture notes
+- department setup and role clarity
+
+### Main Assistant
+
+Main Assistant is Rob's daily operations desk for one-off tasks, calendar events, contacts, itinerary checks, Gmail/Drive lookups, shopping/travel-style logistics, and general daily administration.
+
+Large ongoing work belongs in specialist project chats.
+
+### Chief of Finance Penny
+
+`projects/finance-benefits/` has been upgraded into Chief of Finance Penny / CFO Penny.
+
+Chief of Finance handles:
+
+- finance
+- benefits
+- checkbook / ledger
+- bills
+- budget
+- income tracking
+- financial paperwork workflows
+
+Drive working records:
+
+- Checkbook folder
+- Checkbook Register spreadsheet
+
+Pointer Registry REF-003 now points to Chief of Finance Penny / Checkbook Register.
+
+Important finance guardrail: GitHub stores only abstract project state and pointers. Do not store detailed transactions, account numbers, credentials, government IDs, tax documents, private benefit identifiers, or banking details in GitHub.
+
+### Scheduled Tasks
+
+Scheduled tasks were investigated and parked for later testing.
+
+Known findings:
+
+- Scheduled tasks appear to run outside the originating department chat.
+- A Main Assistant test created a new chat and unexpectedly renamed the originating chat.
+- Scheduled tasks currently do not allow other plugins/connectors, so they cannot directly use GitHub or Google Drive.
+- Active task cap may limit use; future workflows may need bundled tasks.
+- A Todoist project `Penny Logistics Tasks` exists with a task to continue experimentation.
+- GitHub scheduled-task architecture exists under `scheduled-tasks/`, but connector limits mean it is currently more of an architectural note layer than an automation backbone.
 
 ## Startup Workflow
 
@@ -27,7 +88,7 @@ Preferred new-chat startup:
 3. Rob asks Penny to check GitHub startup instructions.
 4. Penny opens `recoveryrob83-lab/Penny-Long-Term-Memory`.
 5. Penny reads `memory/STARTUP_BOOT.md` and follows its boot order.
-6. If Rob names a project chat, Penny reads the matching project `SESSION_HANDOFF.md`.
+6. If Rob names a project chat, Penny reads the matching project `SESSION_HANDOFF.md` and `DEPARTMENT_IDENTITY.md`.
 7. Penny reads only during startup unless Rob explicitly asks for edits.
 
 ## Connector Wake-Up Field Note
@@ -43,8 +104,6 @@ Recommended troubleshooting order:
 3. If that fails, use the fresh-chat GitHub boot process.
 
 ## Drive Editing Field Lessons
-
-Caregiver Project HQ reported useful Drive workflow lessons that should guide future implementation work:
 
 - Small, incremental Drive updates have been more reliable than large complex batch edits.
 - When a complex Drive update fails, retry as several tiny edits rather than repeatedly sending the same large payload.
@@ -66,122 +125,59 @@ Use judgment: not every structured file requires RPR. If a connector workflow is
 
 ## Captain's Log
 
-Created:
+Use `memory/CAPTAINS_LOG.md` for concise operational journal entries about major Life OS sessions, discoveries, decisions, and completed batches.
 
-- `memory/CAPTAINS_LOG.md`
-
-Purpose:
-
-- Short operational journal for major Life OS sessions.
-- Records what was done, what was learned, decisions made, and next useful action.
-- Not a transcript and not a personal diary.
-- Keep sensitive details out of this file.
-
-Use it when Rob asks what happened in a recent session, what Life OS learned, or when a meaningful batch should be logged.
-
-## Architecture
-
-GitHub
-- Durable memory map.
-- Session boot files.
-- Project state.
-- Open loops.
-- Architecture documentation.
-- Audit trail.
-- Abstract references only.
-
-Google Drive
-- Working documents.
-- Detailed project records.
-- Google Docs.
-- Google Sheets.
-- PDFs.
-- Operational artifacts.
-
-Todoist
-- Action queue.
-
-Google Calendar
-- Timed commitments.
-
-Gmail
-- Communication evidence.
-
-SMS / phone messages
-- May contain time-sensitive logistics that are not visible to Penny unless Rob shares them.
-- Example: interview Zoom links may arrive by text rather than Gmail.
+Do not treat it as a transcript or diary.
 
 ## Project Chat Map
 
+- Life Logistics HQ: Chief of Staff / cross-project coordination and GitHub memory curation.
 - Main Assistant: daily operations and one-off tasks.
-- Caregiver Project HQ: support pathway and related cleanup logistics.
+- Caregiver Project HQ: support pathway and related caregiver logistics.
 - Job Search HQ: applications, interviews, resumes, and work-fit decisions.
-- Cleanup Project HQ: cleanup providers, quotes, and scheduling when separated from caregiver work.
+- Cleanup Project HQ: cleanup providers, quotes, and scheduling.
+- Chief of Finance Penny: finance, benefits, ledger, budget, bills, and financial paperwork.
 - Recovery Logistics: daily anchors, meetings, literature logistics, and non-sensitive recovery routines.
-- Finance Benefits HQ: finance/benefit tasks and trackers.
+- Philosophy HQ: framework continuity, Scriptorium coordination, and future book-compilation support.
 - Life OS Infrastructure: boot files, handoffs, connector lessons, and system design.
+- Health Medical HQ, Housing Logistics HQ, and Wellness HQ remain available as specialist departments when needed.
 
 ## Pointer Registry
 
-Created in Drive:
+Drive file:
 
-- Folder: Life OS Registry
-- Sheet: Life OS Pointer Registry
-- Tab: Registry
+- Life OS Registry / Life OS Pointer Registry
 
 The registry is the master lookup table connecting GitHub state with detailed operational records stored in Drive and other connected systems.
 
-Current registry rows run through REF-009. Some newer projects still need registry refs assigned.
+Current notable refs:
+
+- REF-001: Work Search
+- REF-002: Site Cleanup
+- REF-003: Chief of Finance Penny / Checkbook Register
+- REF-004: Life OS Registry
+- REF-005: Support Pathway
+- REF-006: Daily Anchors
 
 GitHub should reference records rather than duplicate sensitive personal information.
 
 ## Recent Work Completed
 
-Created:
-
-- `memory/STARTUP_BOOT.md`
-- `memory/CAPTAINS_LOG.md`
-- project session handoffs
-- `projects/main-assistant/`
-- Main Assistant Drive folder under Life Organization
-
-Updated:
-
-- `memory/00_START_HERE.md`
-- `memory/01_SESSION_HANDOFF.md`
-- `memory/02_BOOT_LOG.md`
-- `memory/03_OPERATIONAL_RULES.md`
-- `memory/04_ACTIVE_PROJECTS.md`
-- `memory/05_OPEN_LOOPS.md`
-- `memory/09_APP_INTEGRATIONS_REFERENCE.md`
-- `projects/README.md`
-- `projects/caregiver-income/SESSION_HANDOFF.md`
-- Main Assistant project files
-
-Operational tests completed:
-
-- Core connector check: Drive, Calendar, Contacts, Todoist, Gmail.
-- GitHub startup boot in a fresh chat.
-- Calendar/Todoist daily itinerary read.
-- Gmail label/count checks.
-- Connector wake-up hypothesis recorded as a field note.
-- Drive editing lessons recorded from Caregiver Project HQ.
-- RPR procedure recorded as the reliability-first structured file workflow.
-- Project-specific session handoff architecture created.
-- Main Assistant created as daily operations desk.
-- Nightly housekeeping pass completed across GitHub, Drive, Todoist, Calendar, and Gmail at a high level.
-
-Some direct connector changes were blocked by safety checks. Future edits should prefer neutral labels and abstract routing language.
+- Created and synchronized Life Logistics HQ as its own Chief of Staff project.
+- Created advisory-board system and acknowledged Recovery advisory about Daily Meditation workbench.
+- Created scheduled-task note architecture and Todoist follow-up for scheduler experimentation.
+- Upgraded Finance Benefits into Chief of Finance Penny / CFO Penny.
+- Located Finance Drive Checkbook folder and Checkbook Register.
+- Updated Pointer Registry REF-003 for Chief of Finance Penny.
+- Updated active project map, global open loops, startup routing, project README, and finance project files.
+- Created Chief of Finance Penny init packet for a new specialist chat.
+- Refreshed Life Logistics handoff because the current chat became slow and should be restarted.
 
 ## Best Next Action
 
-Use Main Assistant for everyday operations.
+Start a fresh Life Logistics HQ chat using the current init packet.
 
-Use specialist chats for large projects.
-
-Use Life Logistics HQ for nightly housekeeping, cross-project review, GitHub memory curation, and system improvements.
-
-Do not over-architect unless a real use-case reveals a gap.
+After boot, use that fresh chat for cross-project coordination and use specialist chats for focused project work.
 
 ## Guiding Principle
 
@@ -190,7 +186,6 @@ Drive is the filing cabinet.
 Calendar owns time.
 Todoist owns actions.
 Gmail owns communications.
-SMS/phone messages may hold time-sensitive logistics outside connector visibility.
 Captain's Log records meaningful operational sessions.
 
 Project chats create project knowledge.
