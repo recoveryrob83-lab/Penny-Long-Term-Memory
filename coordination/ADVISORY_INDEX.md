@@ -1,6 +1,6 @@
 # Advisory Index
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Purpose: Fast dashboard for cross-project Penny advisories.
 
 ## Operating Rule
@@ -23,6 +23,7 @@ Specialist departments should only read or report advisories when Rob routes the
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-001 | 2026-07-03 | Recovery HQ | Recovery Logistics / Main Assistant / All Departments | Medium | Open | Daily Meditation workbench creation | `coordination/boards/recovery.md` |
 
 ## Acknowledged / Implemented Advisories
 
