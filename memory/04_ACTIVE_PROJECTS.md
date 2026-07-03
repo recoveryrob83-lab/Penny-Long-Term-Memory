@@ -23,6 +23,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options |
 | Active | Chief of Finance Penny | `projects/finance-benefits/` | REF-003 | Active | Use Drive Checkbook Register as primary ledger when Rob is ready |
 | Active | Chief Business HQ | `projects/business-development/` | To assign | Active | Use for business ideas, product strategy, branding, market research, offers, and monetization |
+| Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Use for technical architecture, repository strategy, automations, APIs, data models, testing, and implementation planning |
 | Active | Life OS Registry | `projects/life-os-infrastructure/` | REF-004 | Active | Use registry IDs as foreign keys |
 | Active | Support Pathway | `projects/caregiver-income/` | REF-005 | Active | Continue research in Drive |
 | Active | Daily Anchors | `projects/recovery-logistics/` | REF-006 | Active | Maintain routine and commitments |
@@ -39,7 +40,9 @@ Main Assistant is the front desk for everyday assistant work and should route la
 
 Chief of Finance Penny owns finance, benefits, ledger, bills, budget, income tracking, and financial paperwork workflows. Working finance records belong in Drive or RPR, not GitHub.
 
-Chief Business HQ owns business development, product strategy, branding, market research, offer design, customer discovery, monetization, and go-to-market planning. Engineering owns technical implementation once activated.
+Chief Business HQ owns business development, product strategy, branding, market research, offer design, customer discovery, monetization, and go-to-market planning.
+
+Chief Engineering Penny owns technical architecture, repository strategy, automations, APIs, data models, testing, and implementation planning. Business defines what; Engineering defines how.
 
 Chief Wellness HQ owns practical wellness coordination, including health-adjacent logistics, appointments, preventive care routines, sleep, food, movement, and stability supports. Sensitive wellness details belong in Drive, Calendar, Gmail, Todoist, project chat, or RPR rather than GitHub.
 
