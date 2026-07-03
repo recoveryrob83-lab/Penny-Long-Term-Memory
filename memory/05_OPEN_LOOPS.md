@@ -23,7 +23,8 @@ Do not duplicate source-system details here.
 | Open | Site Cleanup | REF-002 | Continue provider option gathering | Continue follow-ups in project chat | As needed | Details live in Drive/project handoff |
 | Open | Chief of Finance Penny | REF-003 | Begin real checkbook use | Inspect Drive Checkbook Register structure before real transaction work | When data exists | Keep detailed finance records in Drive or RPR, not GitHub |
 | Open | Chief of Finance Penny | REF-003 | Build budget / bills workflow | Add budget, bills, or reminders when real inputs are known | When useful | Former Ledger & Programs bucket now active as Chief of Finance Penny |
-| Open | Chief Business HQ | To assign | Begin business operations | Use Chief Business HQ for product strategy, branding, market research, offer design, monetization, or customer discovery | When useful | Business defines what; Engineering defines how |
+| Open | Chief Business HQ | To assign | Business research scaffold active | Continue product viability and business-development research in Business HQ | Ongoing | Working cabinet exists in Drive |
+| Open | Chief Business HQ | To assign | ADV-20260703-003 target reads | Wait for Life Logistics HQ, Main Assistant, and Chief of Finance Penny to report read before acknowledgement | Current | Do not acknowledge yet |
 | Open | Chief Wellness HQ | To assign | Begin wellness operations | Use Chief Wellness HQ for primary care, vision, sleep, food, movement, preventive care, or routine support when Rob is ready | When useful | Keep sensitive details outside GitHub |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
 | Open | Support Pathway | REF-005 | Continue pathway research | Use Caregiver Project HQ and current program sources | Ongoing | Detailed notes belong in Drive/project handoff |
@@ -34,6 +35,7 @@ Do not duplicate source-system details here.
 
 | Status | Project | Registry Ref | Waiting For | Next Check | Notes |
 |---|---|---|---|---|---|
+| Waiting | Business advisory | To assign | Life Logistics HQ, Main Assistant, and Chief of Finance Penny reads | After target departments report read to Rob | ADV-20260703-003 remains open |
 | Waiting | Site Cleanup / Support Pathway | REF-002 / REF-005 | External follow-ups and project inputs | Check when relevant | Details outside GitHub |
 | Waiting | Work Search | REF-001 | Responses from source systems | Check when Rob wants follow-up | Details outside GitHub |
 
