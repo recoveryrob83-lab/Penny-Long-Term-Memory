@@ -14,6 +14,23 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Business Advisory Acknowledged
+
+### Summary
+
+ADV-20260703-003 from Chief Business HQ was acknowledged after Life Logistics HQ, Main Assistant, and Chief of Finance Penny all reported read to Rob.
+
+### Completed Work
+
+- Moved ADV-20260703-003 from Open to Acknowledged in the Advisory Index.
+- Updated the Business advisory board outcome.
+- Updated Business status and open loops.
+- Updated the global session handoff.
+
+### Note
+
+Global open loops still contained the old waiting entry during this pass, but connector safety blocked the full rewrite. Current source of truth for advisory status is the Advisory Index and Business board.
+
 ## 2026-07-03 — Business Advisory Routed, Pending Reads
 
 ### Summary
