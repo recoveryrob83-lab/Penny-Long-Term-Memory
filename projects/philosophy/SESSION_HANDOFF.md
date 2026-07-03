@@ -1,6 +1,6 @@
 # Philosophy HQ Session Handoff
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Project: Philosophy HQ / Framework Continuity
 Purpose: Project-specific handoff for new Philosophy HQ Penny chats.
 
@@ -13,6 +13,7 @@ Purpose: Project-specific handoff for new Philosophy HQ Penny chats.
 - Sensitivity Level: Moderate
 - GitHub Rule: Keep GitHub abstract. Store stable project state, routing, and framework continuity, not full drafts or long discussion records.
 - Advisory Rule: Philosophy HQ is a specialist department. It should not include advisory-board summaries in normal reports unless Rob explicitly asks.
+- Department Event Rule: When Philosophy HQ creates or consumes a cross-department advisory, use the Advisory Index for dashboard state and `coordination/DEPARTMENT_EVENT_INBOX.md` for read/ingestion tracking. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
 ## Department Identity
 
@@ -30,8 +31,9 @@ When Rob opens a new Philosophy HQ chat:
 2. Read this project handoff.
 3. Read `projects/philosophy/DEPARTMENT_IDENTITY.md`.
 4. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
-5. Use Drive, GitHub, and other connectors only as needed for Philosophy HQ work.
-6. Do not replace the Primary Philosophy chat or the Scriptorium workbench.
+5. If Rob routes an advisory or synchronization event, also read the specific advisory board item, `coordination/ADVISORY_INDEX.md` as needed, and `coordination/DEPARTMENT_EVENT_INBOX.md`.
+6. Use Drive, GitHub, and other connectors only as needed for Philosophy HQ work.
+7. Do not replace the Primary Philosophy chat or the Scriptorium workbench.
 
 ## Current Project Status
 
@@ -53,6 +55,7 @@ Philosophy HQ is expected to be quiet most of the time. It becomes active when d
 - Coordinate with Primary Philosophy when exploration produces durable concepts.
 - Support future compilation of major writing projects, including Rob's higher-power and philosophy/framework books.
 - Post advisories only when another department needs to know about stable philosophy developments.
+- Track Philosophy-created or Philosophy-consumed advisory synchronization through the Department Event Inbox when applicable.
 
 ## Workbench Map
 
@@ -66,6 +69,7 @@ Philosophy HQ is expected to be quiet most of the time. It becomes active when d
 
 - Created Philosophy HQ project scaffold in GitHub.
 - Created Philosophy HQ department identity.
+- 2026-07-03: Ingested Life OS advisory workflow update. Philosophy HQ now treats `coordination/DEPARTMENT_EVENT_INBOX.md` as the synchronization/read/ingestion register and Todoist as Rob-facing only.
 
 ## Active Open Loops
 
@@ -80,10 +84,11 @@ Pending.
 
 ## Source Systems
 
-- GitHub: durable project state, handoff, identity, advisories, and abstract continuity.
+- GitHub: durable project state, handoff, identity, advisories, event inbox state, and abstract continuity.
 - Scriptorium repository: archive and indexing workbench for philosophy records.
 - Google Drive: working drafts, documents, exports, and artifacts when appropriate.
 - User-mediated files: reliable handoff path for large or structured records when connectors are brittle.
+- Todoist: Rob-facing action items only, not department synchronization state.
 
 ## Advisory Handling
 
@@ -92,6 +97,15 @@ Philosophy HQ is a specialist department.
 Do not perform routine advisory reporting.
 
 Read advisories only when Rob or Main Assistant routes a specific advisory to Philosophy HQ, or when recreated-chat recovery makes the advisory index relevant.
+
+When Philosophy HQ consumes a routed advisory, update local context and project files if needed. If Rob authorizes bookkeeping or the advisory workflow requires it, record read/ingested status in `coordination/DEPARTMENT_EVENT_INBOX.md`.
+
+When Philosophy HQ creates an advisory for another department:
+
+1. Create or update the advisory on `coordination/boards/philosophy.md`.
+2. Update `coordination/ADVISORY_INDEX.md` as the central dashboard.
+3. Create or update the matching event in `coordination/DEPARTMENT_EVENT_INBOX.md` so target department read/ingestion state can be tracked.
+4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
 Post advisories only when a stable philosophy development should affect another department.
 
@@ -115,13 +129,16 @@ Post advisories only when a stable philosophy development should affect another 
 - Scriptorium is the archive/indexing workbench, not the department head.
 - Primary Philosophy remains the main exploration workbench.
 - Philosophy HQ will likely become more active during book-compilation phases.
+- 2026-07-03: Philosophy HQ adopted the Department Event Inbox advisory synchronization workflow.
 
 ## Immediate Next Actions
 
-1. Have Philosophy HQ re-read this handoff and its department identity.
-2. Decide the first Scriptorium status summary to import into Philosophy HQ.
-3. Later, collect curated summaries from the Primary Philosophy chat and major branches.
+1. Decide the first Scriptorium status summary to import into Philosophy HQ.
+2. Later, collect curated summaries from the Primary Philosophy chat and major branches.
+3. Use the Department Event Inbox for advisory read/ingestion tracking when Philosophy HQ creates or consumes cross-department advisories.
 
 ## Notes for Next Penny
 
 Philosophy HQ should be calm, durable, and structural. Do not pull every philosophy idea into GitHub. Preserve stable concepts, route cross-department implications, and support future book-building work when Rob asks.
+
+For advisory workflow: the Advisory Index is the dashboard, department boards hold advisory detail, and the Department Event Inbox tracks synchronization/read/ingestion state. Todoist is Rob's personal task system, not the department sync register.
