@@ -58,6 +58,12 @@ Read `coordination/ADVISORY_INDEX.md` when:
 
 Read a specific board only when the index shows a relevant open advisory or Rob directs it.
 
+Routine advisory reporting belongs to Main Assistant, not specialist departments.
+
+Specialist departments should not include advisory summaries in normal reports, boot summaries, morning reports, or project updates unless Rob explicitly asks.
+
+When a specialist department is routed to an advisory, it should read the relevant advisory, summarize what matters for its project, update its local context if needed, acknowledge/implement if appropriate, and then return to normal project work.
+
 ## Project-Specific Session Handoff Routing
 
 If Rob names a project in the startup message, read the matching project handoff after the global boot files.
@@ -87,7 +93,8 @@ During startup:
 - Do not duplicate detailed records into GitHub.
 - Build working context from the repo files.
 - For specialist chats, summarize the global context briefly and then focus on the project handoff.
-- Include relevant advisory status if `coordination/ADVISORY_INDEX.md` was read.
+- Include relevant advisory status only if `coordination/ADVISORY_INDEX.md` was read for a specific reason.
+- Do not turn advisory checking into a routine specialist-department reporting duty.
 - Ask only if the next action is genuinely ambiguous.
 
 ## System Architecture
@@ -164,7 +171,7 @@ After reading the boot files, summarize briefly:
 - active project map
 - open loops
 - project-specific handoff, if a project chat was named
-- advisory index status, if checked
+- advisory index status, only if checked for a specific reason
 - connector field lessons relevant to the task
 - RPR procedure relevance for structured files
 - best next action
