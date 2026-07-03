@@ -66,6 +66,7 @@ Project routing map:
 - Cleanup Project HQ / Site Cleanup: `projects/cleanup/SESSION_HANDOFF.md`
 - Chief of Finance Penny / Finance Benefits HQ: `projects/finance-benefits/SESSION_HANDOFF.md`
 - Chief Business HQ / Business Development: `projects/business-development/SESSION_HANDOFF.md`
+- Chief Engineering Penny / Engineering HQ: `projects/engineering/SESSION_HANDOFF.md`
 - Chief Wellness HQ / Wellness HQ: `projects/wellness/SESSION_HANDOFF.md`
 - Recovery Logistics / Daily Anchors: `projects/recovery-logistics/SESSION_HANDOFF.md`
 - Philosophy HQ / Framework Continuity: `projects/philosophy/SESSION_HANDOFF.md`
