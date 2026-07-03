@@ -57,6 +57,25 @@ Project handoffs should use this structure when possible:
 
 Use this structure as a guide, not a prison. Add project-specific sections when they materially help the next Penny.
 
+## RPR Procedure for Project Files
+
+RPR means Rob -> Penny -> Rob.
+
+Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+Good RPR candidates:
+
+- CSV/XLSX trackers.
+- SQLite files.
+- JSON exports.
+- Profile/reference files.
+- Sensitive-adjacent structured records.
+- Critical project records where connector inconsistency would be costly.
+
 ## Project File Pattern
 
 Recommended structure:
