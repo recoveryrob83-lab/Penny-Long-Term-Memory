@@ -1,18 +1,19 @@
 # Caregiver Income Session Handoff
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Project: Caregiver Income / Support Pathway / Marqueto Family Support
-Purpose: Project-specific handoff for new Caregiver Project HQ Penny chats.
+Purpose: Project-specific handoff for Caregiver Project HQ Penny chats.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Caregiver Project HQ
 - Current Phase: Active / Research and Logistics
-- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, user-mediated files, web/current research
+- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, RPR/user-mediated files, web/current research
 - Sensitivity Level: High
 - GitHub Rule: Store intent, not secrets. Keep third-party personal data, sensitive identifiers, insurance details, government IDs, banking, passwords, medical identifiers, private family notes, and profile-level details out of GitHub.
 - RPR Rule: Prefer Rob -> Penny -> Rob file transfer for structured records when reliability is more important than automation.
+- Advisory Rule: Department advisories live on the department board first, then the Advisory Index and Department Event Inbox are updated when cross-department synchronization is needed.
 
 ## Boot Instructions
 
@@ -20,17 +21,24 @@ When Rob opens a new Caregiver Project HQ chat:
 
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
 2. Read this project handoff.
-3. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
-4. Use Drive/Gmail/Calendar/Todoist only as needed for caregiver income work.
-5. Keep detailed personal or profile data out of GitHub unless Rob explicitly approves an abstract note.
-6. Prefer RPR/manual file handoff for Sheets/CSV/profile-style data if Drive or Dropbox connector safety blocks reads or edits, or if reliable editing matters more than automation.
+3. Read `projects/caregiver-income/DEPARTMENT_IDENTITY.md`.
+4. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
+5. Use Drive/Gmail/Calendar/Todoist only as needed for caregiver income or related home-support work.
+6. Keep detailed personal or profile data out of GitHub unless Rob explicitly approves an abstract note.
+7. Prefer RPR/manual file handoff for Sheets/CSV/XLSX/SQLite/JSON/profile-style data if connector safety blocks reads/edits, or if reliable editing matters more than automation.
+
+## Department Identity
+
+Caregiver Project HQ / Support Pathway coordinates caregiver/support-payment pathway research and related home-support logistics while protecting sensitive third-party information.
+
+This is a specialist department. It does not run Rob's daily itinerary, morning reports, routine advisory-board reporting, job search, philosophy, recovery literature, finance dashboards, or Life OS architecture unless Rob explicitly routes that work here.
 
 ## Overall Project Context
 
 This project focuses on support work connected to Marqueto's mom. The work has two main lanes:
 
 1. Caregiver income / support pathway research.
-2. House cleanup / junk removal logistics.
+2. House cleanup / junk removal logistics when connected to the caregiver project.
 
 ## Lane 1: Caregiver Income / Support Pathway
 
@@ -107,6 +115,20 @@ Tabs created:
 - Contacts
 - Vehicle Insurance
 - Privacy Guardrails
+
+### RPR-Managed Profile Files
+
+RPR is now the preferred path for real profile-style structured records.
+
+Current RPR pattern:
+
+1. Penny creates or updates a CSV/XLSX/SQLite/JSON file locally in chat.
+2. Rob downloads it.
+3. Rob manually uploads it to Drive/local storage.
+4. Future edits happen by Rob downloading/uploading the current file into chat.
+5. Penny updates and returns a revised downloadable file.
+
+Use RPR for caregiver profile data, structured provider trackers, sensitive-adjacent reference files, or any critical record where connector inconsistency would be costly.
 
 ## Current Provider Status
 
@@ -217,7 +239,7 @@ Architecture idea:
 - Do not populate most fields yet.
 - Keep sensitive data out unless truly needed.
 - Marqueto may be added as an editor/contributor so she can fill in her mom's information directly.
-- Penny can later check the sheet for edits and help update the master HQ.
+- Penny can later help update the master HQ using RPR/user-mediated files.
 
 ### Support Profile Template Tabs and Headers
 
@@ -260,37 +282,11 @@ Architecture idea:
 - Handling Rule
 - Notes
 
-### Starter Privacy Rules
-
-1. Basic preferences and non-sensitive notes
-   - Store Here?: Yes
-   - Sensitivity: Low
-   - Handling Rule: Safe for normal project notes.
-   - Notes: Examples: communication preference, general reminders.
-
-2. Phone numbers and provider contacts
-   - Store Here?: Yes with care
-   - Sensitivity: Moderate
-   - Handling Rule: Use only for operational need.
-   - Notes: Avoid unnecessary duplication.
-
-3. Policy numbers and government identifiers
-   - Store Here?: Avoid
-   - Sensitivity: High
-   - Handling Rule: Do not store unless explicitly needed and approved.
-   - Notes: Consider secure storage outside normal project notes.
-
-4. Banking, cards, passwords
-   - Store Here?: No
-   - Sensitivity: High
-   - Handling Rule: Do not store in Life OS.
-   - Notes: Use a secure vault if needed.
-
-No real profile data was entered in the template during the prior session.
+No real profile data was entered in the original Google Sheet template during the prior session.
 
 ## Sensitive Information Handling
 
-During the prior caregiver session, Rob provided insurance-related information for Marqueto's mom. Do not place sensitive identifiers into summaries, GitHub, logs, or general Life OS files.
+Do not place sensitive identifiers into summaries, GitHub, logs, or general Life OS files.
 
 Handling rules:
 
@@ -309,104 +305,40 @@ Useful safe phrasing:
 
 ## Connector / Safety Notes
 
-### Google Drive Observations
+Observed Drive/Dropbox failure modes:
 
-Observed failure modes:
+1. Safety blocks can happen with profile-style or sensitive-field language.
+2. Large batch updates can fail where smaller edits succeed.
+3. A connector may become unavailable or unreliable within a chat after repeated blocked/failed operations.
 
-1. Safety block
-   - Example: trying to create a spreadsheet with a more direct care-recipient/profile title.
-   - Workaround: use abstract file names and avoid sensitive field language when possible.
+Operational conclusion:
 
-2. Payload / JSON issue
-   - Some large batch updates failed.
-   - Smaller, incremental updates worked better.
-   - Operational lesson: do not optimize for fewer tool calls; optimize for recoverability.
-
-3. Connector unavailable
-   - Eventually, Google Drive became disabled/unavailable in the chat.
-   - Switching from Android app to browser did not revive Drive inside the same conversation.
-   - Best practice once this happens: stop trying Drive in that chat and continue locally or move to a fresh chat.
-
-Rob's working theory:
-
-- Repeated safety trips may correlate with the connector becoming disabled for the chat.
-- This is not proven, but it is operationally useful to treat safety-triggering payloads as a risk to automation continuity.
-
-Recommended wording:
-
-> During real-world connector workflows, repeated blocked or failed operations may correlate with a connector becoming unavailable in the current chat. The mechanism is unknown. Avoid assuming causation, but treat safety-triggering payloads as operationally risky because they can interrupt automation.
-
-### Web Search About Connector Safety
-
-A web search for `ChatGPT connector disabled due to safety triggers` found no solid public source confirming that repeated safety blocks disable connectors.
-
-Public reporting and security research do confirm that connectors are heavily guarded because they can access private data and are vulnerable to risks like prompt injection and data leakage.
-
-Practical conclusion:
-
-- Rob's theory is plausible as an operational hypothesis, but not publicly confirmed.
-- ChatGPT connectors are useful but too brittle to be the only automation layer.
+- Do not retry connector payloads that trip safety.
+- Use abstract wording for Drive/GitHub records.
 - Treat connectors as convenience automation, not core infrastructure.
+- Use RPR when reliability matters more than automation.
 
-### Dropbox Test
+## Advisory Workflow
 
-Test 1:
+Caregiver Project HQ is both an advisory consumer and an advisory producer.
 
-- Asked to create a dummy CSV in Dropbox with fake profile data, including fake password and fake policy number.
-- Dropbox connector was available, but the write was blocked by safety checks.
-- Likely trigger: sensitive field types such as Password and Policy Number, even though fake.
+When Caregiver Project HQ receives a routed advisory:
 
-Test 2:
+1. Read the advisory source and any relevant global/project files.
+2. Update local working context.
+3. Patch Caregiver documentation if the procedure changes this department's operations.
+4. Update the Department Event Inbox read/ingestion row when appropriate.
 
-- Assistant generated a local CSV file directly for Rob to download and manually upload to Dropbox.
-- File name: dummy_support_profile_test.csv
-- Rob manually uploaded it to Dropbox.
+When Caregiver Project HQ creates an advisory intended for another department:
 
-Dropbox search result:
+1. Create the advisory on `coordination/boards/caregiver.md`.
+2. Update `coordination/ADVISORY_INDEX.md` as appropriate.
+3. Create or update the corresponding entry in `coordination/DEPARTMENT_EVENT_INBOX.md` so synchronization state is tracked.
+4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
-- Dropbox search successfully found the manually uploaded file.
-- Path: /Life_OS/dummy_support_profile_test.csv
-- File type: CSV
-- Size: 501 bytes
-- Last modified: 2026-07-02T23:00:22Z
+Treat the Department Event Inbox as the system synchronization register. Treat Todoist as Rob's personal task system.
 
-Dropbox fetch/read attempt:
-
-- Reading the file contents was blocked by safety checks.
-- Likely because the CSV contained fake sensitive fields like fake password and fake policy number.
-
-Conclusion:
-
-- Dropbox search works.
-- Dropbox can see manually uploaded files.
-- Dropbox read/extraction can still be blocked by sensitive-looking content.
-- Fake sensitive fields are not safe test data because the safety layer appears to care about the category/field label, not just whether the value is real.
-
-## RPR Procedure: Rob -> Penny -> Rob
-
-Use RPR for any structured file that is likely to trigger connector safety or requires reliable editing.
-
-Prefer RPR over connector writes whenever reliability is more important than automation.
-
-Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
-
-RPR basic flow:
-
-1. Penny creates or edits a CSV/XLSX/SQLite/JSON file locally in chat and gives Rob a downloadable file, or Rob uploads the file directly into the chat.
-2. Rob manually uploads the file to Drive/Dropbox or stores it locally.
-3. If updates are needed, Rob downloads the file and uploads it directly into the chat for Penny to work on.
-4. Penny updates the file in-chat and gives Rob the revised file.
-5. Rob manually re-uploads it to Drive/Dropbox/local storage.
-
-Use RPR for caregiver profile data, structured provider trackers, sensitive-adjacent reference files, or any critical record where connector inconsistency would be costly.
-
-This is less automated but more predictable and avoids repeatedly tripping connector safety.
-
-## Manual File Handoff Workaround
-
-This is now formalized as the RPR Procedure above.
-
-Use manual file handoff/RPR when Drive/Sheets/Dropbox connectors cannot safely read or edit profile-style data.
+Advisory Watcher v0.1 may monitor the Advisory Index and Department Event Inbox in the future. The watcher is a reporting layer only and is not the source of truth.
 
 ## Database Architecture Discussion
 
@@ -415,14 +347,6 @@ Conclusion reached:
 - Google Sheets and Docs are documents pretending to be databases.
 - Caregiver/project data needs structured records.
 - A proper database may be needed for Life OS.
-
-Architectural insight:
-
-- GitHub = Scriptorium / blueprint / schema / migrations / operating rules
-- Drive/Dropbox = attachment cabinet / documents / scans / photos / safe exports
-- Database = Records Vault / structured facts
-- Password manager or secure vault = secrets
-- Penny = planner, schema designer, query writer, report generator, reasoning/operator layer
 
 Suggested database direction:
 
@@ -474,6 +398,9 @@ Documents are for humans. Databases are for facts. GitHub is for the map. Secret
 - Added starter privacy guardrails to the profile template.
 - Tested Drive and Dropbox connector safety patterns.
 - Established manual file handoff/RPR as an operational workaround.
+- Created RPR-managed CSV/XLSX support profile files for Rob to upload manually.
+- Updated Caregiver README, department identity, advisory board, and this handoff for the Advisory Index + Department Event Inbox workflow.
+- Marked Caregiver Project HQ read/ingestion status for ADV-20260703-007 in the Department Event Inbox.
 - Discussed possible future local database architecture.
 
 ## Active Open Loops
@@ -484,10 +411,10 @@ Documents are for humans. Databases are for facts. GitHub is for the map. Secret
 4. Call back ReClaim.
 5. Call back Kelseys Clutter and Debris Removal.
 6. Wait for or follow up on Caring Transitions callback.
-7. Create or populate a real support profile manually or in a fresh chat if Drive works.
+7. Continue using RPR/user-mediated CSV/XLSX workflow for real support profile data.
 8. Add Marqueto as contributor/editor manually if appropriate.
 9. Decide whether to prototype a local SQLite Life OS database, starting with caregiver project.
-10. Keep connector lessons synced into global Life OS only in abstract form.
+10. Keep connector lessons and advisory workflow updates synced into global Life OS only in abstract form.
 
 ## Key Contacts / Organizations
 
@@ -503,9 +430,11 @@ See Current Provider Status above.
 
 ## Source Systems
 
-- GitHub: abstract durable project state, session handoff, project open loops, schema/architecture if database work begins.
+- GitHub: abstract durable project state, session handoff, project open loops, schema/architecture if database work begins, and caregiver advisory board.
 - Google Drive: working documents, provider tracker, Support Profile Template, notes, human-readable records, and storage for files Rob manually uploads.
-- Todoist: next actions and reminders.
+- Todoist: Rob-facing next actions and reminders.
+- Department Event Inbox: department synchronization/read/ingestion state.
+- Advisory Index: central advisory dashboard state.
 - Calendar: scheduled calls, appointments, deadlines.
 - Gmail: correspondence evidence.
 - Contacts: saved contact lookups if needed.
@@ -530,6 +459,8 @@ See Current Provider Status above.
 - Use Support Profile Template as safer abstract naming than Care Recipient Profile.
 - Treat connectors as convenience automation, not core infrastructure.
 - Use RPR/manual file handoff for sensitive-adjacent profile/CSV/Sheet work when connector safety blocks reads or edits, or whenever reliable editing matters more than automation.
+- Create and route future Caregiver advisories through `coordination/boards/caregiver.md`, `coordination/ADVISORY_INDEX.md`, and `coordination/DEPARTMENT_EVENT_INBOX.md`.
+- Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 - Consider SQLite as the first database prototype if Life OS needs structured records beyond human-readable documents.
 - Store schema and fake seed data in GitHub only; keep real data local/private.
 
@@ -541,9 +472,9 @@ See Current Provider Status above.
 4. Follow up with Dumpster Duo.
 5. Call back ReClaim and Kelseys.
 6. Wait for or follow up with Caring Transitions.
-7. Decide whether to manually populate Support Profile Template or use an RPR/user-mediated CSV/XLSX workflow.
+7. Continue RPR/user-mediated CSV/XLSX support profile workflow.
 8. Decide whether to start a local SQLite prototype for caregiver data.
 
 ## Notes for Next Penny
 
-This file is the project-specific continuity anchor. Read it after global boot. Keep GitHub safe and abstract. Use Drive or user-mediated files for working documents. Do not retry connector payloads that trip safety. If Drive/Dropbox cannot safely read or edit structured profile data, use RPR/manual file handoff.
+This file is the project-specific continuity anchor. Read it after global boot and department identity. Keep GitHub safe and abstract. Use Drive metadata/search or user-mediated files for working documents. Do not retry connector payloads that trip safety. If Drive/Dropbox cannot safely read or edit structured profile data, use RPR/manual file handoff. For cross-department advisories, use the Caregiver board, Advisory Index, and Department Event Inbox rather than Todoist.
