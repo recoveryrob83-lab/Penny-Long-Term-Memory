@@ -2,7 +2,7 @@
 
 Purpose: Durable project folders for Penny's Life OS work with Rob.
 
-Each active project should eventually have its own folder with a `README.md`, `status.md`, `open_loops.md`, `SESSION_HANDOFF.md`, and any project-specific notes or research.
+Each active project should eventually have its own folder with a `README.md`, `status.md`, `open_loops.md`, `SESSION_HANDOFF.md`, `DEPARTMENT_IDENTITY.md`, and any project-specific notes or research.
 
 ## Current Project Folders
 
@@ -36,26 +36,51 @@ When Rob starts a new specialist chat, the initiation message should name the pr
 - Housing Logistics HQ.
 - Wellness HQ.
 
-The new Penny should read the global boot files first, then read the matching project `SESSION_HANDOFF.md`.
+The new Penny should read the global boot files first, then read the matching project `SESSION_HANDOFF.md` and `DEPARTMENT_IDENTITY.md` if present.
+
+## Department Identity Files
+
+Each project may include `DEPARTMENT_IDENTITY.md`.
+
+Purpose:
+
+- Tell a young or recreated Penny exactly which department it is.
+- Define mission, responsibilities, boundaries, source systems, and reporting relationships.
+- Prevent specialist departments from absorbing duties that belong to Main Assistant or Life Logistics HQ.
+- Provide a quick identity refresh before deeper project handoff reading.
+
+Recommended sections:
+
+1. Department Name
+2. Mission
+3. Primary Responsibilities
+4. Not My Job
+5. Reports / Coordination
+6. Advisory Role
+7. Authoritative Memory
+8. First Response After Sync
+
+Use department identity files as concise role cards. Use `SESSION_HANDOFF.md` for full project continuity.
 
 ## Standard Session Handoff Structure
 
 Project handoffs should use this structure when possible:
 
 1. Metadata
-2. Boot Instructions
-3. Overall Project Context / Current Project Status
-4. Objectives
-5. Completed Work
-6. Active Open Loops
-7. Key Contacts / Organizations
-8. Working Documents / Links
-9. Source Systems
-10. Connector / Safety Notes
-11. Privacy Guardrails
-12. Decision Log
-13. Immediate Next Actions
-14. Notes for Next Penny
+2. Department Identity, or pointer to `DEPARTMENT_IDENTITY.md`
+3. Boot Instructions
+4. Overall Project Context / Current Project Status
+5. Objectives
+6. Completed Work
+7. Active Open Loops
+8. Key Contacts / Organizations
+9. Working Documents / Links
+10. Source Systems
+11. Connector / Safety Notes
+12. Privacy Guardrails
+13. Decision Log
+14. Immediate Next Actions
+15. Notes for Next Penny
 
 Use this structure as a guide, not a prison. Add project-specific sections when they materially help the next Penny.
 
@@ -88,6 +113,7 @@ projects/<project-name>/
   status.md
   open_loops.md
   SESSION_HANDOFF.md
+  DEPARTMENT_IDENTITY.md
   notes.md
   sources.md
 ```
