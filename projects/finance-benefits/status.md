@@ -14,6 +14,10 @@ The working financial record is in Google Drive, not GitHub.
 
 - Folder: Checkbook
 - File: Checkbook Register
+- Spreadsheet tab: Register
+- Header row: frozen
+- Primary columns: Date, Description, Category, Transaction Type, Account, Payment Method, Money Out, Money In, Balance, Cleared, Notes
+- Balance formulas: present in the Balance column and must be preserved
 
 ## Current Focus
 
