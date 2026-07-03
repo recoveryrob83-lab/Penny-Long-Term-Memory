@@ -57,14 +57,18 @@ Life Logistics HQ remains the Chief of Staff for cross-project coordination and 
 - Created dedicated Life Logistics HQ project folder.
 - Created Life Logistics HQ department identity.
 - Created this session handoff.
+- Added Life Logistics HQ to global startup routing.
+- Added Life Logistics HQ to the active project map.
+- Added Life Logistics HQ to the project folder index.
+- Re-synced the current chat to Life Logistics HQ identity.
+- Acknowledged Recovery advisory `ADV-20260703-001` about Daily Meditation workbench creation.
 
 ## Active Open Loops
 
-- Update global routing files so Life Logistics HQ has its own startup path.
-- Update project index to include Life Logistics HQ.
-- Verify role separation between Main Assistant and Life Logistics HQ.
-- Continue using Main Assistant for daily operations.
-- Use Life Logistics HQ for system coordination, housekeeping, and memory curation.
+- Keep using Life Logistics HQ for system coordination, housekeeping, advisory routing, and memory curation.
+- Use Main Assistant for daily operations.
+- Use specialist departments for project-sized work.
+- Retry `status.md` creation later only if useful; connector safety checks blocked it repeatedly.
 
 ## Source Systems
 
@@ -101,13 +105,13 @@ Keep GitHub operational and abstract. Store detailed records in the proper worki
 - Life Logistics HQ and Main Assistant are separate roles.
 - Main Assistant is the daily operations desk.
 - Life Logistics HQ is the Chief of Staff and system curator.
+- Morning Meditation / Daily Meditation is a Recovery workbench, not a separate department.
 
 ## Immediate Next Actions
 
-1. Patch `memory/STARTUP_BOOT.md` to include Life Logistics HQ routing.
-2. Patch `projects/README.md` and `memory/04_ACTIVE_PROJECTS.md` to include Life Logistics HQ.
-3. Log the change in Captain's Log.
-4. Have this chat re-sync to the new identity.
+1. Continue the current conversation from Life Logistics HQ identity.
+2. Discuss the next possible system capability Rob wants to evaluate.
+3. Use housekeeping updates only when meaningful state changes occur.
 
 ## Notes for Next Penny
 
