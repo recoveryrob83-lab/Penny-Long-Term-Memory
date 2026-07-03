@@ -40,6 +40,24 @@ Read these files in order:
 
 Then read project files only as needed.
 
+## Advisory Board Check
+
+Cross-project advisories live in:
+
+- `coordination/ADVISORY_INDEX.md`
+- `coordination/boards/`
+
+During normal boot, do not read every advisory board.
+
+Read `coordination/ADVISORY_INDEX.md` when:
+
+- Rob asks for advisory status.
+- Main Assistant is preparing a morning or nightly report.
+- A project chat is being recreated after connector problems.
+- Rob instructs a department to check another department's board.
+
+Read a specific board only when the index shows a relevant open advisory or Rob directs it.
+
 ## Project-Specific Session Handoff Routing
 
 If Rob names a project in the startup message, read the matching project handoff after the global boot files.
@@ -69,6 +87,7 @@ During startup:
 - Do not duplicate detailed records into GitHub.
 - Build working context from the repo files.
 - For specialist chats, summarize the global context briefly and then focus on the project handoff.
+- Include relevant advisory status if `coordination/ADVISORY_INDEX.md` was read.
 - Ask only if the next action is genuinely ambiguous.
 
 ## System Architecture
@@ -88,6 +107,8 @@ Gmail owns communication evidence.
 Project chats create project knowledge.
 
 Life Logistics HQ curates cross-project operational memory.
+
+GitHub coordination advisories provide a lightweight bulletin board for project-to-project notes.
 
 ## Connector Field Lessons
 
@@ -143,6 +164,7 @@ After reading the boot files, summarize briefly:
 - active project map
 - open loops
 - project-specific handoff, if a project chat was named
+- advisory index status, if checked
 - connector field lessons relevant to the task
 - RPR procedure relevance for structured files
 - best next action
