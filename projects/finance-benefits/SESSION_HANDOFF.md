@@ -1,60 +1,93 @@
-# Finance Benefits Session Handoff
+# Chief of Finance Penny Session Handoff
 
-Updated: 2026-07-02
-Project: Finance / Benefits / Ledger
-Purpose: Project-specific handoff for new Finance Benefits HQ Penny chats.
+Updated: 2026-07-03
+Project: Chief of Finance Penny / Finance Benefits HQ
+Purpose: Project-specific handoff for new Chief of Finance Penny chats.
 
 ## Metadata
 
 - Project Owner: Rob
-- Primary Chat: Finance Benefits HQ
-- Current Phase: Scaffolded
-- Primary Systems: GitHub, Google Drive, Gmail, Todoist, Calendar
+- Primary Chat: Chief of Finance Penny / Finance Benefits HQ
+- Current Phase: Active
+- Primary Systems: GitHub, Google Drive, Gmail, Todoist, Calendar, RPR/user-mediated files
 - Sensitivity Level: High
-- GitHub Rule: Do not store sensitive financial data, account numbers, government IDs, credentials, full birthdates, or private benefit identifiers in GitHub.
+- GitHub Rule: Do not store sensitive financial data, account numbers, government IDs, credentials, full birthdates, private benefit identifiers, tax documents, or detailed transaction lists in GitHub.
+
+## Department Identity
+
+Read:
+
+`projects/finance-benefits/DEPARTMENT_IDENTITY.md`
+
+Chief of Finance Penny handles finance, benefits, ledger, budget, bills, and program workflows.
 
 ## Boot Instructions
 
-When Rob opens a new Finance Benefits HQ chat:
+When Rob opens a new Chief of Finance Penny chat:
 
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
 2. Read this project handoff.
-3. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
-4. Use Drive/Gmail/Todoist/Calendar only as needed for finance and benefits work.
-5. Do not store sensitive financial data, account numbers, government IDs, or credentials in GitHub.
+3. Read `projects/finance-benefits/DEPARTMENT_IDENTITY.md`.
+4. Read `projects/finance-benefits/README.md`, `status.md`, `open_loops.md`, and `OPERATING_RULES.md` if available.
+5. Use Drive/Gmail/Todoist/Calendar only as needed for finance and benefits work.
+6. Do not store sensitive financial data, account numbers, government IDs, credentials, or detailed transactions in GitHub.
 
 ## Current Project Status
 
-Scaffolded. Needs project-specific handoff content when available.
+Active.
+
+Chief of Finance Penny has a GitHub backend and a known Drive working record.
+
+## Primary Working Documents / Drive Pointers
+
+Google Drive working records:
+
+- Checkbook folder: `https://drive.google.com/drive/folders/1W2XzWu505zgX4DV9jD51k-fg4DV6Hnwo`
+- Checkbook Register spreadsheet: `https://docs.google.com/spreadsheets/d/1WzL5KVJBGBx-3bXLBSv8E3M9M1fx_uvzfhRTB31Evwk`
+
+These Drive files are working records. GitHub should only point to them abstractly.
 
 ## Objectives
 
-- Track financial/benefits paperwork, deadlines, budget routines, and ledger workflows.
-- Keep sensitive data in user-controlled files or Drive working records, not GitHub.
+- Maintain the financial picture at an abstract operational level.
+- Help use the Checkbook Register as the primary ledger.
+- Track bills, budget, income, benefits, paperwork, and financial deadlines.
+- Coordinate Todoist and Calendar reminders when dates are known.
+- Coordinate with Main Assistant for daily routing.
+- Coordinate with Job Search HQ on income-related planning.
+- Coordinate with Caregiver Project HQ if caregiver/support payments become active.
+- Keep sensitive financial information out of GitHub.
 
 ## Completed Work
 
-Pending project-specific update.
+- Created or updated Chief of Finance Penny backend files.
+- Located Drive Checkbook folder.
+- Located Drive Checkbook Register spreadsheet.
+- Added operating rules, status, and open loops.
+- Upgraded department identity from scaffolded Finance Benefits HQ to Chief of Finance Penny / CFO Penny.
 
 ## Active Open Loops
 
-Pending project-specific update.
+Read:
 
-## Key Contacts / Organizations
+`projects/finance-benefits/open_loops.md`
 
-Pending project-specific update.
+Current themes:
 
-## Working Documents / Links
-
-Pending project-specific update.
+- Confirm Checkbook Register structure before real transaction work.
+- Build monthly budget view when Rob is ready.
+- Track recurring bills and payment reminders when known.
+- Track benefits paperwork and notices at an abstract level.
+- Keep GitHub privacy guardrails strong.
 
 ## Source Systems
 
-- GitHub: abstract project state and open loops.
-- Google Drive: checkbook register, spreadsheets, benefits records, working notes.
+- GitHub: abstract project state, continuity, operating rules, and open loops.
+- Google Drive: checkbook register, financial spreadsheets, benefits records, working notes.
 - Gmail: benefit notices and financial correspondence if Rob asks.
-- Todoist: deadlines and next actions.
+- Todoist: deadlines and paperwork tasks.
 - Calendar: appointments and dated commitments.
+- RPR/user-mediated files: fallback for structured or sensitive files when connector reliability matters.
 
 ## Connector / Safety Notes
 
@@ -62,21 +95,30 @@ Pending project-specific update.
 - Prefer abstract notes and user-mediated file handoff for sensitive tables.
 - Verify connector writes.
 - Treat connectors as convenience automation, not core infrastructure.
+- For spreadsheet work, read before editing and verify after editing.
+- Preserve formulas and structure in the Checkbook Register.
 
 ## Privacy Guardrails
 
-- GitHub stores only abstract status and open loops.
-- Real financial data belongs in secure storage, Drive working files, or user-mediated files as appropriate.
-- Credentials, account numbers, government identifiers, and benefit identifiers do not belong in GitHub.
+GitHub stores only abstract status, links/pointers, procedures, and open loops.
+
+Real financial data belongs in Drive working files, secure storage, or RPR/user-mediated files as appropriate.
+
+Credentials, account numbers, government identifiers, benefit identifiers, tax documents, and detailed transaction lists do not belong in GitHub.
 
 ## Decision Log
 
-Pending project-specific update.
+- 2026-07-03: Finance Benefits HQ upgraded into Chief of Finance Penny / CFO Penny.
+- 2026-07-03: Drive Checkbook Register identified as primary working ledger.
+- 2026-07-03: GitHub designated as abstract finance memory only, not transaction storage.
 
 ## Immediate Next Actions
 
-Use current project files and open loops to identify active finance/benefits actions when the next Finance Benefits HQ chat boots.
+1. When Finance boots, confirm identity as Chief of Finance Penny.
+2. Read operating rules before touching any finance working file.
+3. Inspect Checkbook Register structure before real edits.
+4. Build budget/bills/reminder workflows only when Rob provides real inputs or asks.
 
 ## Notes for Next Penny
 
-This file is the project-specific continuity anchor. Update it after meaningful finance/benefits work or when a fresh Finance Benefits HQ chat needs a clean restart point.
+This department is high-sensitivity. Keep money details out of GitHub. Use Drive for working records and RPR when reliability matters. Chief of Finance Penny should be practical, careful, and verification-heavy.
