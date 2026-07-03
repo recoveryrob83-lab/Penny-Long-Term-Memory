@@ -1,11 +1,36 @@
 # Recovery Logistics Advisory Board
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Purpose: Advisories to or from Recovery Logistics / Literature / Daily Anchors.
 
 ## Open Advisories
 
-No Recovery-specific advisories posted yet.
+## ADV-20260703-001 — Daily Meditation workbench creation
+
+- Date: 2026-07-03
+- From: Recovery HQ
+- To: Recovery Logistics / Main Assistant / All Departments
+- Priority: Medium
+- Status: Open
+- Related Project(s): Recovery Logistics, Morning Meditation, Main Assistant
+- Source Location: Recovery HQ chat
+- Target Board: `coordination/boards/recovery.md`
+
+### Summary
+
+Rob is creating a new Recovery workbench chat for daily morning meditation reading and processing. The workbench will handle exploration and reflection on morning recovery meditation material, while Recovery HQ / Recovery Logistics should consume durable takeaways for context when routed.
+
+### Why It Matters
+
+This clarifies the recovery architecture: the Morning Meditation workbench explores daily readings, while Recovery HQ maintains abstract continuity, logistics, and durable organizational memory.
+
+### Suggested Action
+
+Recovery Logistics should recognize Morning Meditation as a specialist recovery workbench and consume summaries or routed insights when Rob provides them. Main Assistant may route morning routine context to Recovery HQ when needed.
+
+### Acknowledgement / Outcome
+
+Open. Awaiting consumption by the relevant department context.
 
 ## Notes
 
