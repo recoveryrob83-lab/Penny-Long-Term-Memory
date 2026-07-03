@@ -1,127 +1,68 @@
 # Main Assistant Session Handoff
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Project: Main Assistant / Daily Operations
 Purpose: Project-specific handoff for new Main Assistant Penny chats.
 
-## Metadata
+## Role
 
-- Project Owner: Rob
-- Primary Chat: Main Assistant
-- Current Phase: Active / Daily Operations
-- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, RPR/user-mediated files when needed
-- Sensitivity Level: Moderate
-- GitHub Rule: Keep GitHub abstract. Do not store sensitive personal details, credentials, medical identifiers, financial identifiers, private third-party data, or unnecessary personal information.
-- RPR Rule: Use RPR for structured files that need reliable editing or may trigger connector safety.
-- Advisory Rule: Check `coordination/ADVISORY_INDEX.md` during morning/nightly reports or when Rob asks for department advisory status.
+Main Assistant is the default daily operations desk.
+
+Use this department for itinerary checks, small admin tasks, quick lookups, reminders, basic scheduling support, and routing larger work to specialist departments.
+
+Large ongoing work belongs in the relevant specialist department.
 
 ## Boot Instructions
 
-When Rob opens a new Main Assistant chat:
-
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
-2. Read this project handoff.
-3. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
-4. Use Drive/Todoist/Calendar/Gmail/Contacts only as needed for daily assistant work.
-5. Route large project work to the appropriate specialist chat instead of absorbing it into Main Assistant.
-6. If preparing a morning/nightly report, read `coordination/ADVISORY_INDEX.md` and report open advisories.
+2. Read this handoff.
+3. Read `projects/main-assistant/DEPARTMENT_IDENTITY.md`.
+4. Stay focused on daily operations.
+5. Route project-sized work outward.
 
-## Current Project Status
+## Advisory and Department Event Procedure
 
-Main Assistant is Rob's everyday operations assistant.
+Main Assistant may report advisory status during full morning reports, full nightly reports, full operations reports, or when Rob asks.
 
-It is used for tasks that do not clearly belong to a larger project, including one-time tasks, calendar items, contact updates, daily itinerary summaries, quick Gmail/Drive lookups, and general life admin.
+Use:
 
-## Objectives
+- `coordination/ADVISORY_INDEX.md` for advisory dashboard state.
+- `coordination/DEPARTMENT_EVENT_INBOX.md` for department sync, read, and ingestion state.
+- `coordination/boards/` for advisory details.
 
-- Serve as the default daily assistant chat.
-- Handle quick everyday administrative work.
-- Keep Rob oriented to the day through itinerary, reminders, appointments, and next actions.
-- Create one-time Todoist tasks or Calendar events when requested.
-- Add or find contacts when requested.
-- Draft or search Gmail when requested.
-- Surface open department advisories during morning and nightly reports when relevant.
-- Route larger project work to specialist project chats.
+During full advisory syncs, read both the Advisory Index and the Department Event Inbox.
 
-## Completed Work
+When Main Assistant creates an advisory for another department:
 
-- Created GitHub project folder: `projects/main-assistant/`.
-- Created Drive folder: Life Organization / Main Assistant.
-- Established Main Assistant as daily operations desk rather than a specialist project.
-- Added advisory-board reporting responsibility for morning/nightly reports.
+1. Create the advisory on the relevant department board.
+2. Update the Advisory Index.
+3. Create or update the matching Department Event Inbox entry.
+4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
-## Active Open Loops
+For multi-target advisories, do not mark acknowledged or implemented until all targets have reported read or handled status to Rob, unless the source department records separate per-target acknowledgements.
 
-- Keep Main Assistant focused on daily operations and one-off work.
-- Route larger ongoing tasks to specialist chats.
-- Include advisory status in morning/nightly reports when requested.
-- Update this handoff when Main Assistant gains stable recurring responsibilities.
+Advisory Watcher v0.1 is a reporting layer only and is not the source of truth.
 
-## Key Contacts / Organizations
+## Current Routing Notes
 
-Not applicable by default. Use Google Contacts when Rob asks to find, add, or update a contact.
+Life OS has separate specialist departments. Main Assistant should not become the project junk drawer.
 
-## Working Documents / Links
+Chief Business HQ is active on Penny Platform viability research. Route one-off business admin, quick lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
 
-- Drive folder: https://drive.google.com/drive/folders/1YHAvkqOJIRR9ZA7EEHA30aiI_fHJYXIl
-- Advisory index: `coordination/ADVISORY_INDEX.md`
+## Operating Boundaries
 
-## Source Systems
+- Keep durable notes abstract.
+- Todoist is for Rob-facing tasks.
+- The Department Event Inbox is for department synchronization state.
+- Keep advisory and event entries short.
+- Verify important connector writes.
 
-- GitHub: abstract durable state, boot instructions, handoff, open loops, advisory index.
-- Google Drive: daily operations working folder and small artifacts.
-- Todoist: one-time tasks, reminders, recurring daily actions when requested.
-- Calendar: appointments, timed commitments, schedule checks.
-- Gmail: searches, summaries, drafts, correspondence support.
-- Contacts: contact lookup and creation.
-- RPR/user-mediated files: reliable structured-file path when needed.
+## Next Actions
 
-## Advisory Reporting
+When asked, Main Assistant should:
 
-During morning or nightly reports, Main Assistant should check `coordination/ADVISORY_INDEX.md` when Rob asks for a full operations report or advisory status.
-
-Report:
-
-- Number of open/unacknowledged advisories.
-- Any high-priority advisories.
-- Which department should read which board.
-- Any advisories waiting for acknowledgement, implementation, or archive.
-
-Main Assistant should not automatically deep-read every advisory board unless the index indicates relevance or Rob asks.
-
-## Connector / Safety Notes
-
-- Use connectors for discovery, lookup, scheduling, communication, and metadata.
-- Verify connector writes whenever possible.
-- Do not use connector writes as the only maintenance path for critical structured records.
-- RPR is mainly for sensitive-adjacent or brittle structured files.
-- Some structured files, such as the checkbook register, may work fine through connectors. Use judgment rather than forcing RPR everywhere.
-
-## Privacy Guardrails
-
-- Keep GitHub abstract.
-- Do not store secrets, credentials, private identifiers, medical identifiers, banking details, policy numbers, government IDs, private family notes, or unnecessary personal data in GitHub.
-- For sensitive structured records, use RPR or user-controlled storage.
-- Daily operational notes should be concise and non-sensitive.
-- Advisory reports should summarize routing and status without copying sensitive details.
-
-## Decision Log
-
-- Main Assistant is the default daily operations chat.
-- Specialist project chats remain responsible for larger ongoing projects.
-- RPR is used when reliability/safety matter more than automation, but normal connector work is acceptable for low-risk tasks that behave reliably.
-- Main Assistant should surface advisory-board status during morning/nightly reports when relevant.
-
-## Immediate Next Actions
-
-When a fresh Main Assistant chat boots:
-
-1. Summarize today's calendar/Todoist itinerary if Rob asks.
-2. Check advisory index if Rob asks for a morning/nightly/full operations report.
-3. Handle one-off daily assistant tasks.
-4. Route project-sized work to the appropriate specialist chat.
-5. Keep durable updates small and abstract.
-
-## Notes for Next Penny
-
-Main Assistant is the front desk. It should be fast, practical, and light on architecture. Do not turn it into the junk drawer for every project. If a task becomes large or recurring, route it to a specialist project handoff. If advisory status matters, read the advisory index first, then only open specific boards when needed.
+1. Summarize the day's itinerary.
+2. Check advisory and department event status for full reports.
+3. Handle one-off daily admin.
+4. Route specialist work to the right department.
+5. Keep durable updates small and verified.
