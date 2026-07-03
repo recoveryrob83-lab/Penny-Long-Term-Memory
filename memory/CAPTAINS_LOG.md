@@ -1,6 +1,6 @@
 # Captain's Log
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Short operational journal for major Life OS work sessions, discoveries, decisions, and completed batches.
 
@@ -26,6 +26,34 @@ Detailed records belong in Drive, Gmail, Calendar, Todoist, SMS/phone summaries 
 Use reverse chronological entries.
 
 ---
+
+## 2026-07-03 — Life Logistics HQ Role Split
+
+### Summary
+
+Created and synchronized a dedicated Life Logistics HQ project so the Chief of Staff / system-curator role no longer drifts into Main Assistant identity during startup refreshes.
+
+### Completed Work
+
+- Created `projects/life-logistics-hq/`.
+- Created Life Logistics HQ `README.md`, `SESSION_HANDOFF.md`, `DEPARTMENT_IDENTITY.md`, `open_loops.md`, `notes.md`, and `sources.md`.
+- Added Life Logistics HQ to `memory/STARTUP_BOOT.md` project routing.
+- Added Life Logistics HQ to `projects/README.md` and `memory/04_ACTIVE_PROJECTS.md`.
+- Updated `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-hq/open_loops.md` to close setup loops.
+- Refreshed `projects/life-logistics-hq/SESSION_HANDOFF.md` after setup completion.
+- Acknowledged advisory `ADV-20260703-001` about the Daily Meditation workbench.
+
+### Decisions / Lessons
+
+- Life Logistics HQ is the Chief of Staff / cross-project coordination desk.
+- Main Assistant is the daily operations desk.
+- Specialist departments own project-sized work.
+- Morning Meditation / Daily Meditation is a Recovery workbench, not a separate department.
+- `status.md` creation for Life Logistics HQ was repeatedly blocked by connector safety checks; leave it parked unless it becomes useful.
+
+### Next Useful Action
+
+Continue from Life Logistics HQ identity and evaluate the next system capability Rob wants to discuss.
 
 ## 2026-07-02 — Department Identity Rollout
 
@@ -303,7 +331,6 @@ Job Search HQ boot completed and employment systems reconciled.
 ### Next Useful Action
 
 Reflect the Top Tier closure during the next scheduled housekeeping batch in Drive and other operational records if still present.
-
 
 ---
 
