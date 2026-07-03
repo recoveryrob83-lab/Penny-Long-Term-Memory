@@ -5,13 +5,17 @@ Purpose: Advisories to or from Recovery Logistics / Literature / Daily Anchors.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged Advisories
+
 ## ADV-20260703-001 — Daily Meditation workbench creation
 
 - Date: 2026-07-03
 - From: Recovery HQ
 - To: Recovery Logistics / Main Assistant / All Departments
 - Priority: Medium
-- Status: Open
+- Status: Acknowledged
 - Related Project(s): Recovery Logistics, Morning Meditation, Main Assistant
 - Source Location: Recovery HQ chat
 - Target Board: `coordination/boards/recovery.md`
@@ -30,7 +34,7 @@ Recovery Logistics should recognize Morning Meditation as a specialist recovery 
 
 ### Acknowledgement / Outcome
 
-Open. Awaiting consumption by the relevant department context.
+Acknowledged by Life Logistics HQ during morning startup refresh on 2026-07-03. Morning Meditation should be treated as a Recovery workbench, not a separate department.
 
 ## Notes
 
