@@ -23,6 +23,7 @@ Specialist departments should only read or report advisories when Rob routes the
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-005 | 2026-07-03 | Main Assistant | Chief Business HQ | Medium | Open | Product hypothesis feedback after Concept Notes read | `coordination/boards/business.md` |
 | ADV-20260703-004 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Main Assistant | High | Open | Frequent logistics updates needed for Penny platform research | `coordination/boards/business.md` |
 
 ## Acknowledged / Implemented Advisories
