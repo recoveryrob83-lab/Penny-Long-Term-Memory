@@ -14,6 +14,24 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Life Logistics Advisory Workflow Sync
+
+### Summary
+
+Life Logistics HQ read the latest advisory workflow infrastructure and updated its own department handoff to reflect the Department Event Inbox and Advisory Watcher v0.1 procedure.
+
+### Completed Work
+
+- Read `coordination/DEPARTMENT_EVENT_INBOX.md`.
+- Read `memory/03_OPERATIONAL_RULES.md`.
+- Read `projects/life-logistics-hq/SESSION_HANDOFF.md`.
+- Read `memory/01_SESSION_HANDOFF.md`.
+- Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` with current advisory workflow, Department Event Inbox usage, and Advisory Watcher v0.1 caveats.
+
+### Decision / Lesson
+
+Life Logistics HQ now treats the Department Event Inbox as the system synchronization register and Todoist as Rob-facing task/action tracking. When Life Logistics creates advisories for another department, it should update the department board, Advisory Index, and Department Event Inbox.
+
 ## 2026-07-03 — Business Advisory Final Closure
 
 ### Summary
