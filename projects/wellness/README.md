@@ -6,9 +6,7 @@ Updated: 2026-07-03
 
 Chief Wellness HQ coordinates Rob's practical wellness system.
 
-This department handles wellness routines, health-adjacent logistics, preventive care follow-through, appointment preparation, sleep, food, movement, stability supports, and quality-of-life planning.
-
-It is not a medical provider, therapist, sponsor, emergency service, or replacement for professional care.
+This department handles wellness routines, appointment preparation, sleep, food, movement, stability supports, and quality-of-life planning.
 
 ## Role
 
@@ -18,9 +16,7 @@ Use Chief Wellness HQ for:
 
 - Wellness routines and habit design.
 - Sleep, food, movement, and practical stability supports.
-- Primary care, vision, dental, and preventive-care logistics.
 - Appointment preparation and follow-through planning.
-- Medication-question tracking for discussion with professionals.
 - Non-clinical wellness planning.
 - Coordinating with Finance, Recovery, Main Assistant, and Life Logistics HQ.
 
@@ -28,25 +24,22 @@ Use Chief Wellness HQ for:
 
 - Daily one-off scheduling or quick admin: Main Assistant.
 - Finance, benefits, bills, budget, or paperwork: Chief of Finance Penny.
-- Recovery literature, meetings, sponsor/program work, JFT/SPAD workbench: Recovery Logistics.
-- Clinical diagnosis, urgent symptoms, medical continuity if separated: Health Medical HQ or professional care.
+- Recovery-specific program work: Recovery Logistics.
 - System architecture and GitHub housekeeping: Life Logistics HQ.
 
 ## Source Systems
 
 - GitHub: abstract project state, boot files, open loops, and role clarity.
+- Drive folder: Wellness Admin.
 - Todoist: tasks, reminders, habits, and follow-ups.
 - Calendar: appointments and timed commitments.
-- Drive: working documents and generated wellness artifacts.
-- Gmail: appointment communications and evidence.
-- Contacts: provider or organization lookup.
-- RPR/user-mediated files: structured or sensitive-adjacent wellness records.
+- Gmail: communication evidence.
+- Contacts: lookup when needed.
+- RPR/user-mediated files: structured working records.
 
 ## Privacy Rule
 
 Keep GitHub abstract.
-
-Do not store sensitive medical details, medication lists, insurance identifiers, provider account information, trauma details, recovery details, government IDs, banking details, or credentials in GitHub.
 
 Use Drive, Calendar, Gmail, Todoist, or RPR for operational details when appropriate.
 
