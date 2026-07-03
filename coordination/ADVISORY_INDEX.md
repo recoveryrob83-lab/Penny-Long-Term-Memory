@@ -13,12 +13,12 @@ Do not duplicate full advisory content here. Keep rows short and point to the so
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
-| ADV-20260702-001 | 2026-07-02 | Life OS Infrastructure | Main Assistant / All Departments | Medium | Open | Advisory board system created | `coordination/boards/life-os.md` |
 
 ## Acknowledged / Implemented Advisories
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260702-001 | 2026-07-02 | Life OS Infrastructure | Main Assistant / All Departments | Medium | Acknowledged | Advisory board system created | `coordination/boards/life-os.md` |
 
 ## Archived Advisories
 
