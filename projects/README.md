@@ -11,7 +11,7 @@ Each active project should eventually have its own folder with a `README.md`, `s
 - `job-search/`
 - `caregiver-income/`
 - `cleanup/`
-- `finance-benefits/`
+- `finance-benefits/` — Chief of Finance Penny / CFO Penny
 - `recovery-logistics/`
 - `philosophy/`
 - `life-os-infrastructure/`
@@ -32,7 +32,7 @@ When Rob starts a new specialist or coordination chat, the initiation message sh
 - Caregiver Project HQ.
 - Job Search HQ.
 - Cleanup Project HQ.
-- Finance Benefits HQ.
+- Chief of Finance Penny / Finance Benefits HQ.
 - Recovery Logistics.
 - Philosophy HQ.
 - Life OS Infrastructure.
