@@ -51,6 +51,8 @@ Read the Advisory Index when Rob asks for advisory status, Life Logistics HQ is 
 
 Routine advisory reporting belongs to Main Assistant, not every specialist department. Specialist departments should not include advisory summaries in routine reports unless Rob explicitly asks.
 
+For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
+
 ## Project-Specific Session Handoff Routing
 
 If Rob names a project in the startup message, read the matching project handoff after the global boot files.
