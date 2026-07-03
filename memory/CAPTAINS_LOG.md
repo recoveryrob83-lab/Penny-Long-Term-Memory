@@ -27,6 +27,29 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Department Identity Rollout
+
+### Summary
+
+Added explicit department identity files so young or recreated Penny departments can quickly learn who they are, what they own, what they do not own, and how they coordinate with Main Assistant and Life Logistics HQ.
+
+### Completed Work
+
+- Updated `projects/README.md` to add `DEPARTMENT_IDENTITY.md` to the standard project file pattern.
+- Updated `memory/STARTUP_BOOT.md` so project chats read `DEPARTMENT_IDENTITY.md` after the project `SESSION_HANDOFF.md` when present.
+- Created department identity files for Main Assistant, Job Search, Caregiver, Cleanup, Finance Benefits, Recovery Logistics, Life OS Infrastructure, Health Medical, Housing Logistics, and Wellness.
+
+### Decisions / Lessons
+
+- `DEPARTMENT_IDENTITY.md` is the concise role card.
+- `SESSION_HANDOFF.md` remains the fuller continuity document.
+- Department identity files should include mission, primary responsibilities, not-my-job boundaries, advisory role, coordination relationships, authoritative memory, and a first response after sync.
+- This should reduce young-Penny role confusion and prevent specialist departments from absorbing Main Assistant or Life Logistics HQ duties.
+
+### Next Useful Action
+
+Manually synchronize existing department chats by telling each department who it is and asking it to read its own `SESSION_HANDOFF.md` plus `DEPARTMENT_IDENTITY.md`.
+
 ## 2026-07-02 — Advisory Reporting Role Fix
 
 ### Summary
