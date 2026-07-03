@@ -17,6 +17,7 @@ GitHub is the map. Drive is the filing cabinet.
 
 | Status | Project | GitHub Path | Registry Ref | Phase | Next Action |
 |---|---|---|---|---|---|
+| Active | Main Assistant | `projects/main-assistant/` | To assign | Active | Use as daily operations desk |
 | Active | Work Search | `projects/job-search/` | REF-001 | Active | Prepare and continue targeted applications |
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options |
 | Active | Ledger & Programs | `projects/finance-benefits/` | REF-003 | Active | Use Drive tracker when real data is ready |
@@ -28,6 +29,8 @@ GitHub is the map. Drive is the filing cabinet.
 | Pending | Project Slot 07 | `projects/project-slot-07/` | To assign | Reserved | Use only for abstract routing |
 
 ## Notes
+
+Main Assistant is the front desk for everyday assistant work and should route large project work to specialist chats.
 
 Detailed facts, source links, call notes, event details, and working records belong in Drive, Calendar, Gmail, Todoist, or the Pointer Registry.
 
