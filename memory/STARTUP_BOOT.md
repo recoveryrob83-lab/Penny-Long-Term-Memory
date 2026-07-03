@@ -83,6 +83,26 @@ Project routing map:
 
 If the project name is ambiguous, read `projects/README.md` and ask one concise clarification only if needed.
 
+## Department Identity
+
+Many project folders include:
+
+`DEPARTMENT_IDENTITY.md`
+
+After reading a project `SESSION_HANDOFF.md`, read the project's `DEPARTMENT_IDENTITY.md` if it exists.
+
+The department identity file tells a young or recreated Penny:
+
+- which department it is
+- what its mission is
+- what its primary responsibilities are
+- what is not its job
+- how it coordinates with Main Assistant and Life Logistics HQ
+- how it should handle advisories
+- which file is its authoritative memory
+
+A department identity file is the role card. The session handoff is the fuller continuity document.
+
 ## Startup Behavior
 
 During startup:
@@ -92,7 +112,7 @@ During startup:
 - Do not migrate files during boot.
 - Do not duplicate detailed records into GitHub.
 - Build working context from the repo files.
-- For specialist chats, summarize the global context briefly and then focus on the project handoff.
+- For specialist chats, summarize the global context briefly and then focus on the project handoff and department identity.
 - Include relevant advisory status only if `coordination/ADVISORY_INDEX.md` was read for a specific reason.
 - Do not turn advisory checking into a routine specialist-department reporting duty.
 - Ask only if the next action is genuinely ambiguous.
@@ -116,6 +136,8 @@ Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
 
 GitHub coordination advisories provide a lightweight bulletin board for project-to-project notes.
+
+Department identity files provide role clarity for young or recreated Penny departments.
 
 ## Connector Field Lessons
 
@@ -171,6 +193,7 @@ After reading the boot files, summarize briefly:
 - active project map
 - open loops
 - project-specific handoff, if a project chat was named
+- department identity, if present
 - advisory index status, only if checked for a specific reason
 - connector field lessons relevant to the task
 - RPR procedure relevance for structured files
