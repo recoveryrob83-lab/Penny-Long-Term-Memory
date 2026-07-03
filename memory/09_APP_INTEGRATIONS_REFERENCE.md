@@ -52,6 +52,22 @@ When a payload appears to trigger safety checks or repeated failures:
 - Verify connector availability with a tiny harmless read before continuing.
 - If the connector remains inconsistent, use the fresh-chat GitHub boot process.
 
+## RPR Procedure: Rob -> Penny -> Rob
+
+Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+Examples of RPR-friendly files:
+- CSV/XLSX trackers.
+- SQLite files.
+- JSON exports.
+- Profile/reference sheets.
+- Sensitive-adjacent structured records.
+- Critical project records where connector inconsistency would be costly.
+
 ## Important Distinction
 
 Apps visible on Rob's apps page may be installed/authorized or available to the broader ChatGPT app system.
@@ -137,6 +153,7 @@ Known limitations:
 - Long-running chats may experience connector invocation degradation.
 - Explicit `@Google Drive` invocation may help wake or route the connector before a fresh chat is needed.
 - Repeated blocked or failed operations may correlate with connector unavailability in the current chat. Mechanism unknown; treat safety-triggering payloads as operationally risky.
+- RPR should be preferred over direct connector writes for critical structured records when reliability matters more than automation.
 
 Use for:
 - Working documents.
@@ -252,9 +269,12 @@ Use for:
 - Old Life OS archive.
 - Backup/reference copies.
 - Recovering files if Dropbox was used earlier.
+- Discovery or metadata checks for manually uploaded files.
 
 Rule:
 Dropbox is not the main Life OS workspace. GitHub and Google Drive now carry primary memory/workspace roles.
+
+Do not rely on Dropbox connector reads/writes as the only path for maintaining critical structured records. Use RPR when reliability matters.
 
 ## SMS / Phone Messages
 
@@ -281,6 +301,7 @@ Best tools:
 - Gmail for correspondence.
 - Calendar for scheduled calls/appointments.
 - Contacts if Marqueto/contact records are saved.
+- RPR for structured records that need reliable editing or may trigger connector safety.
 
 ### Cleanup Project
 
@@ -291,6 +312,7 @@ Best tools:
 - Drive for quotes and call logs.
 - GitHub for durable state/open loops.
 - Calendar if a pickup/estimate is scheduled.
+- RPR for critical structured trackers if connector reliability becomes a problem.
 
 ### Job Search
 
@@ -302,6 +324,7 @@ Best tools:
 - Calendar for interviews.
 - SMS/phone messages for texted interview logistics.
 - GitHub for durable job-search project status.
+- RPR for critical application trackers if connector reliability becomes a problem.
 
 ### Finance & Benefits
 
@@ -311,6 +334,7 @@ Best tools:
 - Todoist for deadlines and paperwork tasks.
 - Calendar for appointments.
 - GitHub for durable finance/benefits project state.
+- RPR for structured records where reliability and privacy are more important than automation.
 
 ### Recovery Logistics
 
@@ -330,6 +354,7 @@ Best tools:
 - Todoist for immediate actions.
 - Drive for housing notes.
 - GitHub for durable state.
+- RPR for critical structured records if connector reliability becomes a problem.
 
 ## Future Penny Startup Note
 
