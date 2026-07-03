@@ -14,7 +14,11 @@ Chief Wellness HQ has been activated as the specialist department for practical 
 
 Keep GitHub abstract and non-sensitive.
 
-Use Todoist for reminders and habits, Calendar for appointments, Drive for working records, Gmail for communication evidence, Contacts for lookup, and RPR for structured records.
+Use Todoist for Rob-facing reminders and habits, Calendar for appointments, Drive for working records, Gmail for communication evidence, Contacts for lookup, and RPR for structured records.
+
+Use `coordination/boards/wellness.md`, `coordination/ADVISORY_INDEX.md`, and `coordination/DEPARTMENT_EVENT_INBOX.md` for department advisory synchronization.
+
+Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
 ## Working Folder
 
