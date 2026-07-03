@@ -14,6 +14,24 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Business Logistics Advisory Acknowledged
+
+### Summary
+
+Read, ingested, and acknowledged ADV-20260703-004 from Chief Business HQ. Business HQ is active on Penny Platform viability research and requested frequent logistics visibility while the project is forming.
+
+### Completed Work
+
+- Read `coordination/boards/business.md`.
+- Added ADV-20260703-004 to `coordination/DEPARTMENT_EVENT_INBOX.md`.
+- Moved ADV-20260703-004 from Open to Acknowledged in the Advisory Index.
+- Updated the Business advisory board outcome.
+- Updated the global session handoff.
+
+### Decision / Lesson
+
+Life Logistics HQ should keep the operational map tidy while Business HQ moves quickly. Main Assistant should route one-off business admin, lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
+
 ## 2026-07-03 — Advisory Watcher v0.1 Procedure Added
 
 ### Summary
@@ -295,7 +313,7 @@ Prior work established department identity files, advisory boards, Main Assistan
 - Life Logistics HQ curates cross-project memory.
 - Specialist departments should not add advisory summaries to routine reports unless directed.
 - RPR remains the fallback for brittle structured-file work.
-- Prefer small connector edits and verify after writes.
+- Prefer small connector edits and verify writes.
 
 ---
 
