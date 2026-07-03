@@ -7,6 +7,7 @@ Purpose: Fast dashboard for cross-project Penny advisories.
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-006 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Open | Engineering HQ online, Drive scaffold created, and event inbox need identified | `coordination/boards/engineering.md` |
 | ADV-20260703-004 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Main Assistant | High | Open | Frequent logistics updates needed for Penny platform research | `coordination/boards/business.md` |
 
 ## Acknowledged / Implemented Advisories
