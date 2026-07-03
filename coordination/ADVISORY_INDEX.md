@@ -23,12 +23,12 @@ Specialist departments should only read or report advisories when Rob routes the
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
-| ADV-20260703-001 | 2026-07-03 | Recovery HQ | Recovery Logistics / Main Assistant / All Departments | Medium | Open | Daily Meditation workbench creation | `coordination/boards/recovery.md` |
 
 ## Acknowledged / Implemented Advisories
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-001 | 2026-07-03 | Recovery HQ | Recovery Logistics / Main Assistant / All Departments | Medium | Acknowledged | Daily Meditation workbench creation | `coordination/boards/recovery.md` |
 | ADV-20260702-001 | 2026-07-02 | Life OS Infrastructure | Main Assistant / All Departments | Medium | Acknowledged | Advisory board system created | `coordination/boards/life-os.md` |
 
 ## Archived Advisories
