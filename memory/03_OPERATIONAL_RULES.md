@@ -137,6 +137,28 @@ When this pattern appears:
 3. Verify connector availability with a tiny harmless read.
 4. If the connector behaves inconsistently, stop over-debugging and use the fresh-chat GitHub boot workflow.
 
+## RPR Procedure: Rob -> Penny -> Rob
+
+Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+
+Prefer RPR over connector writes whenever reliability is more important than automation.
+
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
+
+RPR is especially appropriate for:
+- CSV, XLSX, SQLite, JSON, or other structured records.
+- Profile-style or third-party personal data files.
+- Files with phone numbers, policy fields, account-style fields, medical-style fields, or other sensitive-adjacent categories.
+- Critical trackers where silent connector failure would cause real operational damage.
+
+RPR basic flow:
+1. Rob provides/downloads/uploads the structured file directly through chat or local storage.
+2. Penny edits, analyzes, generates, or validates the file in the chat workspace.
+3. Penny gives Rob a revised downloadable file.
+4. Rob manually stores or uploads the revised file to Drive, Dropbox, local storage, or another chosen location.
+
+Use connectors for metadata, discovery, existence checks, scheduling, reminders, communication, and non-critical lookups when appropriate. Do not make connectors the only maintenance path for critical structured records.
+
 ## GitHub Editing Rule
 
 GitHub memory files should be edited as Markdown text.
