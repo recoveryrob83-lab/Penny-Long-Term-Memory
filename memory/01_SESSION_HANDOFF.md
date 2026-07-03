@@ -64,7 +64,22 @@ Drive working records:
 
 Pointer Registry REF-003 now points to Chief of Finance Penny / Checkbook Register.
 
-Important finance guardrail: GitHub stores only abstract project state and pointers. Do not store detailed transactions, account numbers, credentials, government IDs, tax documents, private benefit identifiers, or banking details in GitHub.
+Important finance guardrail: GitHub stores only abstract project state and pointers. Detailed finance records belong in Drive or RPR.
+
+### Chief Wellness HQ
+
+`projects/wellness/` has been upgraded into Chief Wellness HQ / Chief Wellness Penny.
+
+Chief Wellness handles:
+
+- wellness routines
+- health-adjacent logistics
+- primary care / vision / preventive-care follow-through
+- appointment preparation
+- sleep, food, movement, and stability supports
+- non-clinical wellness planning
+
+Important wellness guardrail: GitHub stores only abstract project state and pointers. Detailed wellness records belong in Drive, Calendar, Gmail, Todoist, project chat, or RPR.
 
 ### Scheduled Tasks
 
@@ -100,7 +115,7 @@ This is a field note, not a proven guarantee.
 Recommended troubleshooting order:
 
 1. Explicitly name or tag the connector Rob wants to use.
-2. Try a small harmless read, such as profile, recent docs, today's calendar, or current Todoist tasks.
+2. Try a small harmless read.
 3. If that fails, use the fresh-chat GitHub boot process.
 
 ## Drive Editing Field Lessons
@@ -108,20 +123,16 @@ Recommended troubleshooting order:
 - Small, incremental Drive updates have been more reliable than large complex batch edits.
 - When a complex Drive update fails, retry as several tiny edits rather than repeatedly sending the same large payload.
 - Verify the target row, range, or document section after each Drive update.
-- If a Drive update is blocked because it appears to contain sensitive information or triggers safety checks, simplify the update and use abstract notes instead of personal details when possible.
+- If a Drive update is blocked, simplify the update and use abstract notes when possible.
 - When actively working with a connector over many turns, explicitly reference that connector in the conversation to maintain clear operational context.
 
 These lessons should be treated as operational guidelines, not claims about internal connector mechanics.
 
 ## RPR Procedure: Rob -> Penny -> Rob
 
-Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
-
-Prefer RPR over connector writes whenever reliability is more important than automation.
+Use user-mediated file transfer for structured files when reliability matters more than automation.
 
 Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
-
-Use judgment: not every structured file requires RPR. If a connector workflow is low-risk and working reliably, it may remain appropriate.
 
 ## Captain's Log
 
@@ -137,10 +148,11 @@ Do not treat it as a transcript or diary.
 - Job Search HQ: applications, interviews, resumes, and work-fit decisions.
 - Cleanup Project HQ: cleanup providers, quotes, and scheduling.
 - Chief of Finance Penny: finance, benefits, ledger, budget, bills, and financial paperwork.
+- Chief Wellness HQ: practical wellness, health-adjacent logistics, appointments, routines, and stability supports.
 - Recovery Logistics: daily anchors, meetings, literature logistics, and non-sensitive recovery routines.
 - Philosophy HQ: framework continuity, Scriptorium coordination, and future book-compilation support.
 - Life OS Infrastructure: boot files, handoffs, connector lessons, and system design.
-- Health Medical HQ, Housing Logistics HQ, and Wellness HQ remain available as specialist departments when needed.
+- Health Medical HQ and Housing Logistics HQ remain available as specialist departments when needed.
 
 ## Pointer Registry
 
@@ -159,7 +171,7 @@ Current notable refs:
 - REF-005: Support Pathway
 - REF-006: Daily Anchors
 
-GitHub should reference records rather than duplicate sensitive personal information.
+GitHub should reference records rather than duplicate detailed personal information.
 
 ## Recent Work Completed
 
@@ -169,15 +181,12 @@ GitHub should reference records rather than duplicate sensitive personal informa
 - Upgraded Finance Benefits into Chief of Finance Penny / CFO Penny.
 - Located Finance Drive Checkbook folder and Checkbook Register.
 - Updated Pointer Registry REF-003 for Chief of Finance Penny.
-- Updated active project map, global open loops, startup routing, project README, and finance project files.
-- Created Chief of Finance Penny init packet for a new specialist chat.
-- Refreshed Life Logistics handoff because the current chat became slow and should be restarted.
+- Upgraded Wellness into Chief Wellness HQ / Chief Wellness Penny.
+- Updated active project map, global open loops, startup routing, project README, and specialist project files as needed.
 
 ## Best Next Action
 
-Start a fresh Life Logistics HQ chat using the current init packet.
-
-After boot, use that fresh chat for cross-project coordination and use specialist chats for focused project work.
+Use Life Logistics HQ for cross-project coordination and use specialist chats for focused project work.
 
 ## Guiding Principle
 
@@ -195,4 +204,4 @@ Main Assistant handles daily operations.
 Avoid duplication whenever possible.
 Prefer durable references over copied data.
 
-Use RPR when reliable structured-file editing matters more than connector automation, especially for sensitive-adjacent records.
+Use RPR when reliable structured-file editing matters more than connector automation.
