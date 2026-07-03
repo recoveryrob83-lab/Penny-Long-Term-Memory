@@ -40,6 +40,33 @@ Read these files in order:
 
 Then read project files only as needed.
 
+## Scheduled Task Memo Layer
+
+Scheduled task communication lives in:
+
+- `scheduled-tasks/README.md`
+- `scheduled-tasks/TASK_INDEX.md`
+- `scheduled-tasks/RUN_LOG.md`
+- `scheduled-tasks/ISSUE_LOG.md`
+- `scheduled-tasks/memos/`
+
+Scheduled tasks are independent scheduled prompts. They are not the same as long-lived department chats.
+
+A scheduled task should boot from GitHub, perform a narrow job, then leave a short memo or run-log entry so the correct department can read it later.
+
+During normal boot, do not read every scheduled-task memo.
+
+Read scheduled-task files when:
+
+- Rob asks about scheduled task activity.
+- Life Logistics HQ is doing startup refresh or housekeeping.
+- Main Assistant is preparing a morning report and needs pre-generated itinerary or daily brief notes.
+- A department is told to check scheduled-task notes addressed to it.
+
+Life Logistics HQ may read the scheduled task index, run log, issue log, and relevant memo files during system refresh.
+
+Main Assistant may read `scheduled-tasks/memos/main-assistant.md` when Rob asks for a morning report or daily itinerary.
+
 ## Advisory Board Check
 
 Cross-project advisories live in:
@@ -118,8 +145,9 @@ During startup:
 - Do not duplicate detailed records into GitHub.
 - Build working context from the repo files.
 - For specialist chats, summarize the global context briefly and then focus on the project handoff and department identity.
-- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, and role clarity.
+- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, scheduled-task activity, and role clarity.
 - Include relevant advisory status only if `coordination/ADVISORY_INDEX.md` was read for a specific reason.
+- Include scheduled-task memo status only if scheduled-task files were read for a specific reason.
 - Do not turn advisory checking into a routine specialist-department reporting duty.
 - Ask only if the next action is genuinely ambiguous.
 
@@ -142,6 +170,8 @@ Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
 
 Main Assistant handles daily operations.
+
+Scheduled tasks are independent timed prompts that can leave memos for departments through GitHub.
 
 GitHub coordination advisories provide a lightweight bulletin board for project-to-project notes.
 
@@ -203,6 +233,7 @@ After reading the boot files, summarize briefly:
 - project-specific handoff, if a project chat was named
 - department identity, if present
 - advisory index status, only if checked for a specific reason
+- scheduled-task memo status, only if checked for a specific reason
 - connector field lessons relevant to the task
 - RPR procedure relevance for structured files
 - best next action
