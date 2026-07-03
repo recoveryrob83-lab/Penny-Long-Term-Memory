@@ -32,13 +32,24 @@ Use Chief Business HQ for:
 
 ## Source Systems
 
-- GitHub: abstract project state, boot files, open loops, and role clarity.
+- GitHub: abstract project state, boot files, open loops, advisory board pointers, and role clarity.
 - Drive: working strategy docs, research notes, generated docs, and business artifacts.
-- Todoist: tasks, reminders, follow-ups, and project actions.
+- Todoist: Rob-facing tasks, reminders, follow-ups, and project actions.
 - Calendar: meetings, deadlines, and scheduled work.
 - Gmail: communication evidence.
 - Contacts: people or organization lookup when needed.
 - RPR/user-mediated files: structured working records.
+- Advisory Index: advisory dashboard.
+- Department Event Inbox: department synchronization/read/ingestion register.
+
+## Advisory Workflow
+
+When Chief Business HQ creates an advisory for another department:
+
+1. Update `coordination/boards/business.md`.
+2. Update `coordination/ADVISORY_INDEX.md`.
+3. Update `coordination/DEPARTMENT_EVENT_INBOX.md`.
+4. Do not use Todoist for department synchronization unless Rob explicitly asks.
 
 ## Privacy Rule
 
@@ -55,4 +66,4 @@ Use Drive, Calendar, Gmail, Todoist, or RPR for operational details when appropr
 
 ## Current Status
 
-Active department. Setup completed 2026-07-03.
+Active department. Setup completed 2026-07-03. Penny Platform viability research is active.
