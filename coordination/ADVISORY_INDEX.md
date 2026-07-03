@@ -23,6 +23,7 @@ Specialist departments should only read or report advisories when Rob routes the
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-004 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Main Assistant | High | Open | Frequent logistics updates needed for Penny platform research | `coordination/boards/business.md` |
 
 ## Acknowledged / Implemented Advisories
 
@@ -51,7 +52,7 @@ Include:
 
 ## Specialist Department Guidance
 
-Specialist departments are not responsible for routine advisory reporting.
+Specialist departments are not responsible for routine reporting.
 
 When directed to check an advisory, a specialist department should:
 
