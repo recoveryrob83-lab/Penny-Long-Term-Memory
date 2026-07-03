@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Startup procedure for a fresh Penny chat window.
 
@@ -12,7 +12,7 @@ That Drive read is a connector warm-up step only.
 
 After Drive responds, Rob may ask Penny to check this GitHub repository for startup instructions.
 
-If Rob starts a specialist project chat, the initiation message should name the project, such as Main Assistant, Caregiver Project HQ, Job Search HQ, Cleanup Project HQ, Recovery Logistics, Philosophy HQ, or Life OS Infrastructure.
+If Rob starts a specialist project chat, the initiation message should name the project, such as Life Logistics HQ, Main Assistant, Caregiver Project HQ, Job Search HQ, Cleanup Project HQ, Recovery Logistics, Philosophy HQ, or Life OS Infrastructure.
 
 ## Repository
 
@@ -53,12 +53,15 @@ Read `coordination/ADVISORY_INDEX.md` when:
 
 - Rob asks for advisory status.
 - Main Assistant is preparing a morning or nightly report.
+- Life Logistics HQ is doing startup refresh or housekeeping.
 - A project chat is being recreated after connector problems.
 - Rob instructs a department to check another department's board.
 
 Read a specific board only when the index shows a relevant open advisory or Rob directs it.
 
 Routine advisory reporting belongs to Main Assistant, not specialist departments.
+
+Life Logistics HQ may read advisory status during system refresh or housekeeping and may help route advisories.
 
 Specialist departments should not include advisory summaries in normal reports, boot summaries, morning reports, or project updates unless Rob explicitly asks.
 
@@ -70,6 +73,7 @@ If Rob names a project in the startup message, read the matching project handoff
 
 Project routing map:
 
+- Life Logistics HQ / Chief of Staff Penny: `projects/life-logistics-hq/SESSION_HANDOFF.md`
 - Main Assistant / Daily Operations: `projects/main-assistant/SESSION_HANDOFF.md`
 - Caregiver Project HQ / Caregiver Income / Support Pathway: `projects/caregiver-income/SESSION_HANDOFF.md`
 - Job Search HQ / Work Search: `projects/job-search/SESSION_HANDOFF.md`
@@ -114,6 +118,7 @@ During startup:
 - Do not duplicate detailed records into GitHub.
 - Build working context from the repo files.
 - For specialist chats, summarize the global context briefly and then focus on the project handoff and department identity.
+- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, and role clarity.
 - Include relevant advisory status only if `coordination/ADVISORY_INDEX.md` was read for a specific reason.
 - Do not turn advisory checking into a routine specialist-department reporting duty.
 - Ask only if the next action is genuinely ambiguous.
@@ -135,6 +140,8 @@ Gmail owns communication evidence.
 Project chats create project knowledge.
 
 Life Logistics HQ curates cross-project operational memory.
+
+Main Assistant handles daily operations.
 
 GitHub coordination advisories provide a lightweight bulletin board for project-to-project notes.
 
