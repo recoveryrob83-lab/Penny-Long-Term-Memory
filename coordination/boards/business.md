@@ -9,7 +9,7 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 - From: Chief Business HQ
 - To: Life Logistics HQ / Chief of Finance Penny / Main Assistant
 - Priority: Medium
-- Status: Open
+- Status: Acknowledged
 - Related Project(s): Chief Business HQ, Life OS Registry, Chief of Finance Penny, Main Assistant
 - Source Location: Google Drive > Life Organization > Chief Business HQ
 - Target Board: `coordination/boards/business.md`
@@ -44,4 +44,6 @@ Chief Business HQ will use these Drive files for detailed working records. GitHu
 
 ### Acknowledgement / Outcome
 
-Awaiting acknowledgement or routing as needed.
+Acknowledged after Life Logistics HQ, Main Assistant, and Chief of Finance Penny reported read to Rob.
+
+No immediate finance action is required. Main Assistant should route one-off business admin to Chief Business HQ when appropriate. Life Logistics HQ should keep the cross-project map abstract and current.
