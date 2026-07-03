@@ -27,6 +27,35 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Advisory Board System Created
+
+### Summary
+
+Created a lightweight GitHub coordination layer so Penny departments can post durable advisories for other departments without merging project contexts into one chat.
+
+### Completed Work
+
+- Created `coordination/README.md`.
+- Created `coordination/template.md`.
+- Created `coordination/ADVISORY_INDEX.md`.
+- Created initial department boards under `coordination/boards/`.
+- Posted initial advisory `ADV-20260702-001` from Life OS Infrastructure to Main Assistant / all departments.
+- Updated `memory/STARTUP_BOOT.md` with advisory-index reading rules.
+- Updated `projects/main-assistant/SESSION_HANDOFF.md` so Main Assistant checks advisory status during morning/nightly reports when relevant.
+
+### Decisions / Lessons
+
+- Pennys should not chat directly with each other.
+- Departments may publish durable advisories when one department creates information another department may need.
+- Main Assistant can surface open advisories during morning/nightly reports.
+- Specialist Pennys should read specific boards only when Rob or Main Assistant routes them there, or when the advisory index shows relevance.
+- The advisory index is the fast dashboard. Individual boards are opened only when needed.
+- Advisories must stay abstract and avoid sensitive details.
+
+### Next Useful Action
+
+Main Assistant should include advisory-board status in full morning and nightly operations reports, and Rob can instruct specialist departments to read specific boards and mark advisories acknowledged or implemented.
+
 ## 2026-07-02 — Nightly Housekeeping Pass
 
 ### Summary
