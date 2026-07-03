@@ -27,6 +27,31 @@ Use reverse chronological entries.
 
 ---
 
+## 2026-07-02 — Main Assistant Project Created
+
+### Summary
+
+Created Main Assistant as Rob's daily operations assistant project for everyday tasks that do not belong to larger specialist project chats.
+
+### Completed Work
+
+- Created Google Drive folder: Life Organization / Main Assistant.
+- Created GitHub project folder: `projects/main-assistant/`.
+- Created standard project files: `README.md`, `status.md`, `open_loops.md`, `SESSION_HANDOFF.md`, `notes.md`, and `sources.md`.
+- Updated `memory/STARTUP_BOOT.md` to route Main Assistant startup to `projects/main-assistant/SESSION_HANDOFF.md`.
+- Updated `projects/README.md` to include Main Assistant.
+- Updated `memory/04_ACTIVE_PROJECTS.md` to list Main Assistant as active.
+
+### Decisions / Lessons
+
+- Main Assistant is the daily operations desk for one-off Todoist tasks, Calendar events, contact updates, daily itinerary summaries, quick Gmail/Drive lookups, and small life admin.
+- Large or ongoing project work should be routed to specialist project chats.
+- RPR is mainly for sensitive-adjacent or brittle structured files; connector use remains fine for lower-risk workflows that are already working, such as the checkbook when reliable.
+
+### Next Useful Action
+
+Create a copy-ready Main Assistant boot prompt when Rob asks, then instantiate a fresh Main Assistant chat using the new project handoff.
+
 ## 2026-07-02 — RPR Procedure Adopted
 
 ### Summary
