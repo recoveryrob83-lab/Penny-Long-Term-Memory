@@ -66,6 +66,7 @@ Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md an
 | ADV-20260703-004 | Main Assistant | Read | Ingested | Main Assistant consumed advisory and should route relevant one-off business support to Chief Business HQ unless Rob says otherwise. |
 | ADV-20260703-007 | Life Logistics HQ | Read | Ingested | Advisory watcher v0.1 procedure added to this file. |
 | ADV-20260703-007 | Chief Wellness HQ | Read | Ingested | Chief Wellness HQ updated handoff, identity, README, status, and open loops for the advisory board + Advisory Index + Department Event Inbox workflow. |
+| ADV-20260703-007 | Caregiver Project HQ | Read | Ingested | Caregiver Project HQ updated README, department identity, and advisory board for Advisory Index + Department Event Inbox workflow. |
 | ADV-20260703-006 | Life Logistics HQ | Read | Ingested | Engineering advisory read and Life OS memory updated. |
 | ADV-20260703-002 | Life Logistics HQ | Read | Ingested | Life Logistics HQ handled Wellness Admin reference update. |
 | ADV-20260703-002 | Chief Wellness HQ | Read | Ingested | Chief Wellness HQ created Wellness board and updated local advisory workflow references. |
