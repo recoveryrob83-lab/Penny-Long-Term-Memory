@@ -1,13 +1,13 @@
 # Life OS Operating Rules
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, department events, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -15,13 +15,31 @@ As of the GitHub migration work on 2026-07-02:
 
 - GitHub is being promoted to the preferred durable source for long-term memory, boot files, handoffs, operating rules, active projects, and open loops.
 - Google Drive remains the operational workspace for Docs, Sheets, checkbook tracking, generated files, job-search working documents, and other human-readable artifacts.
-- Todoist is the action queue.
+- Todoist is the Rob-facing action queue.
 - Google Calendar is the timed commitments queue.
 - Gmail is communication evidence.
+- `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
+- `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
 
 Label unverified facts clearly.
+
+## Advisory and Department Event Rules
+
+Advisory boards live under `coordination/boards/`.
+
+The Advisory Index is the official dashboard for advisory state.
+
+The Department Event Inbox is the working notification/register layer for department read and ingestion state.
+
+Todoist should not be used as the source of truth for department synchronization state.
+
+For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
+
+A scheduled ChatGPT task may be used as Advisory Watcher v0.1.
+
+Advisory Watcher v0.1 is a reporting layer only. It should read the Advisory Index and Department Event Inbox, identify open advisories or unread department events, and provide Rob with copy-paste-ready routing messages. It should not modify GitHub unless Rob later explicitly approves that behavior.
 
 ## Strategy / Implementation Split
 
@@ -52,10 +70,12 @@ Examples:
 - Job Search HQ.
 - Recovery / Literature.
 - Philosophy / Source work.
+- Chief Business HQ.
+- Chief Engineering Penny.
 
 Project chats should primarily touch their own project records and only the connectors needed for that project.
 
-Life Logistics HQ is the cross-project coordinator and should handle nightly housekeeping, GitHub state updates, Pointer Registry changes, and cross-project operational review.
+Life Logistics HQ is the cross-project coordinator and should handle nightly housekeeping, GitHub state updates, Pointer Registry changes, advisory routing, event inbox review, and cross-project operational review.
 
 This split reduces connector load, keeps chats searchable, and prevents one chat from repeatedly invoking every connector for every domain.
 
@@ -218,34 +238,3 @@ Update Session Handoff after meaningful Life OS work.
 Update Open Loops when open loops are created, closed, clarified, or changed.
 
 Update Boot Log for durable architecture changes, major workflow lessons, important new root files, or significant technical lessons.
-
-Update Active Projects when project structure or status changes.
-
-Update Weekly Plan when weekly priorities or dated commitments change.
-
-Update App Integrations Reference when connector routing or integration lessons change.
-
-Avoid log churn when no canonical state changed.
-
-Life Logistics HQ should prefer nightly batch housekeeping instead of updating every record immediately after every project action, unless the lesson or state change is too important to risk forgetting.
-
-## Current Practical Rule
-
-Life OS should now be used for real daily living rather than more scaffolding tests.
-
-If a problem appears during actual use, record the lesson and improve the system then.
-
-Do not over-engineer in advance.
-
-## Privacy Rule
-
-This repository and related Life OS files are not secure vaults.
-
-Do not store:
-- Social Security Number.
-- Passwords.
-- Banking credentials.
-- Exact street address unless explicitly approved for a specific task.
-- Full birthdate.
-- Government identification numbers.
-- Sensitive medical records.
