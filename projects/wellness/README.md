@@ -29,13 +29,27 @@ Use Chief Wellness HQ for:
 
 ## Source Systems
 
-- GitHub: abstract project state, boot files, open loops, and role clarity.
+- GitHub: abstract project state, boot files, open loops, role clarity, and advisory routing.
 - Drive folder: Wellness Admin.
-- Todoist: tasks, reminders, habits, and follow-ups.
+- Todoist: Rob-facing tasks, reminders, habits, and follow-ups.
 - Calendar: appointments and timed commitments.
 - Gmail: communication evidence.
 - Contacts: lookup when needed.
 - RPR/user-mediated files: structured working records.
+- Advisory board: `coordination/boards/wellness.md`.
+- Advisory Index: `coordination/ADVISORY_INDEX.md`.
+- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md`.
+
+## Advisory Procedure
+
+When Chief Wellness HQ creates an advisory for another department:
+
+1. Create or update the advisory on `coordination/boards/wellness.md`.
+2. Update `coordination/ADVISORY_INDEX.md`.
+3. Create or update the corresponding entry in `coordination/DEPARTMENT_EVENT_INBOX.md`.
+4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
+
+The Department Event Inbox tracks system synchronization state. Todoist remains Rob's personal task system.
 
 ## Privacy Rule
 
