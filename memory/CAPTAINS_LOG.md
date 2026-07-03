@@ -14,6 +14,29 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Engineering Advisory Ingested and Event Inbox Created
+
+### Summary
+
+Read and acknowledged ADV-20260703-006 from Chief Engineering Penny. Engineering HQ is online, Drive scaffolding exists, and Engineering identified the need for an event/advisory inbox layer.
+
+### Completed Work
+
+- Read `coordination/boards/engineering.md`.
+- Created `coordination/DEPARTMENT_EVENT_INBOX.md`.
+- Added ADV-20260703-006 to the Department Event Inbox as read and ingested by Life Logistics HQ.
+- Updated global session handoff.
+- Moved ADV-20260703-006 from Open to Acknowledged in the Advisory Index.
+- Updated the Engineering advisory board outcome.
+
+### Decision / Lesson
+
+Todoist remains for Rob-facing action items. Department Event Inbox is for system synchronization state between Penny departments.
+
+### Note
+
+Startup Boot update was attempted but blocked by connector safety during this pass. The Department Event Inbox is currently discoverable through the global session handoff and can be added to Startup Boot later with a smaller patch.
+
 ## 2026-07-03 — Chief Engineering Penny Activated
 
 ### Summary
