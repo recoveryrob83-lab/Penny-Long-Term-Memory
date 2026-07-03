@@ -26,6 +26,31 @@ Read these files in order:
 
 Then read project files only as needed.
 
+## Scheduled Task Memo Layer
+
+Scheduled-task notes live in:
+
+- `scheduled-tasks/README.md`
+- `scheduled-tasks/TASK_INDEX.md`
+- `scheduled-tasks/RUN_LOG.md`
+- `scheduled-tasks/ISSUE_LOG.md`
+- `scheduled-tasks/memos/`
+
+Scheduled tasks are not long-lived department chats. They should be treated as experimental timed prompts unless later proven stable.
+
+Read scheduled-task files only when Rob asks about scheduled tasks, Life Logistics HQ is doing system review, Main Assistant needs morning-report notes, or a department is told to check its memo inbox.
+
+## Advisory Board Check
+
+Cross-project advisories live in:
+
+- `coordination/ADVISORY_INDEX.md`
+- `coordination/boards/`
+
+Read the Advisory Index when Rob asks for advisory status, Life Logistics HQ is doing review, Main Assistant is preparing a full operations report, a project chat is being recreated after connector problems, or Rob routes a department to a specific advisory.
+
+Routine advisory reporting belongs to Main Assistant, not every specialist department. Specialist departments should not include advisory summaries in routine reports unless Rob explicitly asks.
+
 ## Project-Specific Session Handoff Routing
 
 If Rob names a project in the startup message, read the matching project handoff after the global boot files.
@@ -61,6 +86,7 @@ During startup:
 - Build working context from the repo files.
 - For specialist chats, summarize global context briefly and then focus on the project handoff and department identity.
 - For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, scheduled-task activity, and role clarity.
+- Include advisory or scheduled-task status only if the relevant files were read for a reason.
 - Ask only if the next action is genuinely ambiguous.
 
 ## System Architecture
@@ -68,6 +94,8 @@ During startup:
 GitHub is the durable memory map.
 
 Google Drive is the working records cabinet.
+
+The Life OS Pointer Registry in Drive is the directory service for resolving detailed records.
 
 Calendar owns timed commitments.
 
@@ -109,6 +137,8 @@ After reading the boot files, summarize briefly:
 - open loops
 - project-specific handoff, if a project chat was named
 - department identity, if present
+- advisory index status, only if checked for a specific reason
+- scheduled-task memo status, only if checked for a specific reason
 - best next action
 
 Keep it concise unless Rob asks for depth.
