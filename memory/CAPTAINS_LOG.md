@@ -14,6 +14,27 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Business Advisory Routed, Pending Reads
+
+### Summary
+
+Read ADV-20260703-003 from Chief Business HQ. The advisory announces that the Business research scaffold and Drive working cabinet exist for Penny product viability and business-development research.
+
+### Completed Work
+
+- Checked `coordination/ADVISORY_INDEX.md`.
+- Read `coordination/boards/business.md`.
+- Updated Business status and open loops.
+- Updated global open loops and session handoff.
+
+### Decision / Guardrail
+
+Do not acknowledge ADV-20260703-003 yet. It targets Life Logistics HQ, Main Assistant, and Chief of Finance Penny. Wait until all targeted departments report read to Rob, unless Business records per-target acknowledgements.
+
+### Next Useful Action
+
+Have Main Assistant and Chief of Finance Penny read the advisory, then acknowledge it when all targets have reported read.
+
 ## 2026-07-03 — Chief Business HQ Chat Live
 
 ### Summary
