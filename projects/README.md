@@ -2,7 +2,7 @@
 
 Purpose: Durable project folders for Penny's Life OS work with Rob.
 
-Each active project should eventually have its own folder with a `README.md`, `status.md`, `open_loops.md`, `SESSION_HANDOFF.md`, `DEPARTMENT_IDENTITY.md`, and any project-specific notes or research.
+Each active project should eventually have its own folder with a README, status, open loops, session handoff, department identity, and any project-specific notes that are safe to keep in GitHub.
 
 ## Current Project Folders
 
@@ -12,18 +12,16 @@ Each active project should eventually have its own folder with a `README.md`, `s
 - `caregiver-income/`
 - `cleanup/`
 - `finance-benefits/` — Chief of Finance Penny / CFO Penny
+- `wellness/` — Chief Wellness HQ / Chief Wellness Penny
 - `recovery-logistics/`
 - `philosophy/`
 - `life-os-infrastructure/`
 - `health-medical/`
 - `housing-logistics/`
-- `wellness/`
 
 ## Project Session Handoffs
 
-Each project folder now has a `SESSION_HANDOFF.md` file.
-
-Use these files as project-specific continuity anchors when a specialized Penny chat needs to be replaced, restarted, or rehydrated after connector problems.
+Each project folder should use its `SESSION_HANDOFF.md` as the project-specific continuity anchor.
 
 When Rob starts a new specialist or coordination chat, the initiation message should name the project, such as:
 
@@ -33,79 +31,39 @@ When Rob starts a new specialist or coordination chat, the initiation message sh
 - Job Search HQ.
 - Cleanup Project HQ.
 - Chief of Finance Penny / Finance Benefits HQ.
+- Chief Wellness HQ / Wellness HQ.
 - Recovery Logistics.
 - Philosophy HQ.
 - Life OS Infrastructure.
 - Health Medical HQ.
 - Housing Logistics HQ.
-- Wellness HQ.
 
 The new Penny should read the global boot files first, then read the matching project `SESSION_HANDOFF.md` and `DEPARTMENT_IDENTITY.md` if present.
 
 ## Department Identity Files
 
-Each project may include `DEPARTMENT_IDENTITY.md`.
+Department identity files are concise role cards.
 
-Purpose:
+They define:
 
-- Tell a young or recreated Penny exactly which department it is.
-- Define mission, responsibilities, boundaries, source systems, and reporting relationships.
-- Prevent specialist departments from absorbing duties that belong to Main Assistant or Life Logistics HQ.
-- Provide a quick identity refresh before deeper project handoff reading.
+- Department name.
+- Mission.
+- Primary responsibilities.
+- What is not the department's job.
+- Reports and coordination.
+- Advisory role.
+- Authoritative memory.
+- First response after sync.
 
-Recommended sections:
-
-1. Department Name
-2. Mission
-3. Primary Responsibilities
-4. Not My Job
-5. Reports / Coordination
-6. Advisory Role
-7. Authoritative Memory
-8. First Response After Sync
-
-Use department identity files as concise role cards. Use `SESSION_HANDOFF.md` for full project continuity.
-
-## Standard Session Handoff Structure
-
-Project handoffs should use this structure when possible:
-
-1. Metadata
-2. Department Identity, or pointer to `DEPARTMENT_IDENTITY.md`
-3. Boot Instructions
-4. Overall Project Context / Current Project Status
-5. Objectives
-6. Completed Work
-7. Active Open Loops
-8. Key Contacts / Organizations
-9. Working Documents / Links
-10. Source Systems
-11. Connector / Safety Notes
-12. Privacy Guardrails
-13. Decision Log
-14. Immediate Next Actions
-15. Notes for Next Penny
-
-Use this structure as a guide, not a prison. Add project-specific sections when they materially help the next Penny.
+Use `SESSION_HANDOFF.md` for full project continuity.
 
 ## RPR Procedure for Project Files
 
 RPR means Rob -> Penny -> Rob.
 
-Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
+Use user-mediated file transfer when reliable structured-file handling matters more than connector automation.
 
-Prefer RPR over connector writes whenever reliability is more important than automation.
-
-Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
-
-Good RPR candidates:
-
-- CSV/XLSX trackers.
-- SQLite files.
-- JSON exports.
-- Profile/reference files.
-- Sensitive-adjacent structured records.
-- Critical project records where connector inconsistency would be costly.
+Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the only maintenance path for critical records.
 
 ## Project File Pattern
 
@@ -128,6 +86,4 @@ Use this area for durable project state. Use Drive for working docs, Sheets, PDF
 
 Project handoffs in GitHub should be operational and abstract.
 
-Do not store secrets, credentials, private identifiers, sensitive medical records, banking details, policy numbers, government IDs, private family notes, or unnecessary personal data in GitHub.
-
-When in doubt, store intent and routing, not the underlying secret.
+When in doubt, store intent and routing, not detailed private records.
