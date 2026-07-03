@@ -6,6 +6,7 @@ Each active project should eventually have its own folder with a `README.md`, `s
 
 ## Current Project Folders
 
+- `life-logistics-hq/`
 - `main-assistant/`
 - `job-search/`
 - `caregiver-income/`
@@ -24,8 +25,9 @@ Each project folder now has a `SESSION_HANDOFF.md` file.
 
 Use these files as project-specific continuity anchors when a specialized Penny chat needs to be replaced, restarted, or rehydrated after connector problems.
 
-When Rob starts a new specialist chat, the initiation message should name the project, such as:
+When Rob starts a new specialist or coordination chat, the initiation message should name the project, such as:
 
+- Life Logistics HQ.
 - Main Assistant.
 - Caregiver Project HQ.
 - Job Search HQ.
