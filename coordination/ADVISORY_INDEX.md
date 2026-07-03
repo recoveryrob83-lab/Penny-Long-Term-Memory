@@ -23,6 +23,7 @@ Specialist departments should only read or report advisories when Rob routes the
 
 | Advisory ID | Date | From | To | Priority | Status | Subject | Board |
 |---|---|---|---|---|---|---|---|
+| ADV-20260703-002 | 2026-07-03 | Chief Wellness HQ | Life Logistics HQ | Medium | Open | Wellness Admin reference update | `coordination/boards/wellness.md` |
 
 ## Acknowledged / Implemented Advisories
 
