@@ -23,6 +23,16 @@ The core architecture remains:
 
 ## Recent Major Updates
 
+### Business Logistics Advisory
+
+ADV-20260703-004 from Chief Business HQ has been read, ingested, and acknowledged.
+
+Business HQ is in active Penny Platform viability research and may generate frequent working artifacts, research notes, Drive records, Todoist actions, GitHub advisories, and future cross-department handoffs.
+
+Life Logistics HQ should keep the operational map tidy while Business HQ moves quickly.
+
+Main Assistant should route one-off business admin, quick lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
+
 ### Advisory Watcher v0.1
 
 ADV-20260703-007 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
@@ -121,6 +131,7 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
+- Read, ingested, and acknowledged ADV-20260703-004 from Chief Business HQ.
 - Added Advisory Watcher v0.1 procedure after reading ADV-20260703-007.
 - Created Department Event Inbox under `coordination/DEPARTMENT_EVENT_INBOX.md`.
 - Read and ingested ADV-20260703-006 from Chief Engineering Penny.
