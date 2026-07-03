@@ -24,6 +24,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Life OS Registry | `projects/life-os-infrastructure/` | REF-004 | Active | Use registry IDs as foreign keys |
 | Active | Support Pathway | `projects/caregiver-income/` | To assign | Active | Continue research in Drive |
 | Active | Daily Anchors | `projects/recovery-logistics/` | To assign | Active | Maintain routine and commitments |
+| Active | Philosophy HQ | `projects/philosophy/` | To assign | Active / Scaffolded | Import curated Scriptorium and Primary Philosophy summaries when ready |
 | Pending | Home Base Logistics | `projects/home-base-logistics/` | To assign | Scaffolded | Define active tasks when needed |
 | Pending | Stability Routines | `projects/stability-routines/` | To assign | Scaffolded | Define routines when needed |
 | Pending | Project Slot 07 | `projects/project-slot-07/` | To assign | Reserved | Use only for abstract routing |
@@ -31,6 +32,8 @@ GitHub is the map. Drive is the filing cabinet.
 ## Notes
 
 Main Assistant is the front desk for everyday assistant work and should route large project work to specialist chats.
+
+Philosophy HQ is the department head for philosophy continuity, Scriptorium coordination, and future book-compilation work. It should not replace the Primary Philosophy chat or Scriptorium workbench.
 
 Detailed facts, source links, call notes, event details, and working records belong in Drive, Calendar, Gmail, Todoist, or the Pointer Registry.
 
