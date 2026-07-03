@@ -12,6 +12,7 @@ Each active project should eventually have its own folder with a README, status,
 - `caregiver-income/`
 - `cleanup/`
 - `finance-benefits/` — Chief of Finance Penny / CFO Penny
+- `business-development/` — Chief Business HQ / Chief Business Development Penny
 - `wellness/` — Chief Wellness HQ / Chief Wellness Penny
 - `recovery-logistics/`
 - `philosophy/`
@@ -31,6 +32,7 @@ When Rob starts a new specialist or coordination chat, the initiation message sh
 - Job Search HQ.
 - Cleanup Project HQ.
 - Chief of Finance Penny / Finance Benefits HQ.
+- Chief Business HQ / Business Development.
 - Chief Wellness HQ / Wellness HQ.
 - Recovery Logistics.
 - Philosophy HQ.
