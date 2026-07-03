@@ -14,6 +14,31 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Advisory Watcher v0.1 Procedure Added
+
+### Summary
+
+Read and acknowledged ADV-20260703-007 from Chief Engineering Penny. Engineering recommended a low-code/no-code scheduled ChatGPT Advisory Watcher to reduce Rob's manual routing burden.
+
+### Completed Work
+
+- Read `coordination/boards/engineering.md`.
+- Added ADV-20260703-007 to `coordination/DEPARTMENT_EVENT_INBOX.md` as read and ingested.
+- Added Advisory Watcher v0.1 procedure and suggested prompt to Department Event Inbox.
+- Updated `projects/life-os-infrastructure/SESSION_HANDOFF.md`.
+- Updated `memory/03_OPERATIONAL_RULES.md`.
+- Updated `memory/01_SESSION_HANDOFF.md`.
+- Moved ADV-20260703-007 from Open to Acknowledged in the Advisory Index.
+- Updated the Engineering advisory board outcome.
+
+### Decision / Lesson
+
+Advisory Watcher v0.1 is a reporting layer only. Advisory Index, Department Event Inbox, and department boards remain the source-of-truth files. The watcher should not modify GitHub unless Rob later explicitly approves that behavior.
+
+### Open Follow-Up
+
+Create the scheduled ChatGPT task only if Rob explicitly asks for it. Optional: patch `memory/STARTUP_BOOT.md` later with a small reference to Department Event Inbox and Advisory Watcher.
+
 ## 2026-07-03 — Engineering Advisory Ingested and Event Inbox Created
 
 ### Summary
