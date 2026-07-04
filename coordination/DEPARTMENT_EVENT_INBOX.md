@@ -26,7 +26,9 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 ## Current Open / Pending Events
 
-None.
+| Event ID | Source | Target(s) | Status | Subject | Notes |
+|---|---|---|---|---|---|
+| ADV-20260704-009 | Chief Engineering Penny | Life Logistics HQ | Open | Role Drift Check for Penny HQs | Logistics should consider standardizing a gentle out-of-scope nudge for department chats. |
 
 ## Recent Closed / Ingested Events
 
@@ -45,6 +47,7 @@ None.
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-009 | Life Logistics HQ | Unread | Pending | Review Engineering board advisory for Role Drift Check standard. |
 | ADV-20260704-008 | Life Logistics HQ | Read | Ingested | Discretionary Purchase Pause Rule routing reinforced. |
 | ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
 | ADV-20260704-006 | Life Logistics HQ | Read | Ingested | Source-of-Truth and Publication Standard adopted. |
