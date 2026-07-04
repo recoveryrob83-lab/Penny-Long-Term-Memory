@@ -6,75 +6,34 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260704-009 — Role Drift Check for Penny HQs
 
 - Date: 2026-07-04
 - From: Chief Engineering Penny
 - To: Life Logistics HQ
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Ingested
 - Related Project(s): Life OS, department role clarity, HQ boot instructions, advisory routing, Main Assistant, Finance, Engineering, Logistics, Wellness
-- Source Location: Active Engineering discussion on role confusion and department drift
 - Target Board: `coordination/boards/engineering.md`
 
 #### Summary
 
-Engineering recommends a Life OS-wide Role Drift Check rule for all Penny HQs.
+Life Logistics HQ adopted Role Drift Check as a gentle department-boundary safeguard.
 
-When Rob begins asking a department to handle work that appears outside that department's assigned domain, that Penny should pause gently before continuing and ask whether the discussion belongs in that HQ.
+#### Outcome
 
-This is intended to prevent cross-department spaghetti, protect role clarity, and catch drift before the wrong HQ creates files, advisories, procedures, or project state.
-
-#### Why It Matters
-
-Recent discussion showed how easy it is for a chat to drift into adjacent domains. Chief Engineering Penny began handling a Finance-style CFO Gate discussion before Rob noticed the topic belonged in another HQ.
-
-The issue is not that the topic was unimportant. The issue is that the wrong department was beginning to own it.
-
-Life OS needs a lightweight pause mechanism to catch this early, especially because Rob may naturally move between finance, wellness, logistics, recovery, job search, and engineering in the same thought stream.
-
-#### Suggested Rule
-
-Proposed standard name:
-
-`Role Drift Check`
-
-Suggested trigger:
-
-When a Penny HQ detects that Rob is asking for work that appears outside the HQ's assigned domain, it should pause before continuing.
-
-Suggested phrasing:
-
-> Rob, are you sure this belongs here? I am [Department Penny], and this sounds like [likely domain or HQ].
-
-Examples:
-
-> Rob, are you sure this belongs here? I am Chief Engineering Penny. This sounds like Finance or Main Assistant work.
-
-> Rob, are you sure this belongs here? I am Life Logistics Penny. This sounds like a wellness or exercise-routine question.
-
-The check should be gentle, not scolding. It should nudge, not block. Rob can still intentionally keep the discussion in the current HQ when there is a good reason.
-
-#### Suggested Action
-
-Life Logistics HQ should consider adding Role Drift Check language to durable operating rules, department boot expectations, or department identity guidance.
-
-Possible implementation locations:
+Updated:
 
 - `memory/03_OPERATIONAL_RULES.md`
-- department identity files
-- department session handoffs
-- Life Logistics coordination standards
+- `projects/life-logistics-hq/SESSION_HANDOFF.md`
+- `coordination/ADVISORY_INDEX.md`
+- `coordination/DEPARTMENT_EVENT_INBOX.md`
 
-Suggested principle:
-
-> Pause at the doorway before moving work into the wrong department.
-
-#### Acknowledgement / Outcome
-
-Pending Life Logistics HQ consumption.
-
-## Acknowledged / Implemented Advisories
+Durable rule: when a Penny HQ detects that Rob is asking for work outside that HQ's assigned domain, it should pause gently and ask whether the discussion belongs in that HQ. The check nudges but does not block.
 
 ### ADV-20260704-006 — Life OS source-of-truth and publication architecture standard candidate
 
@@ -84,12 +43,6 @@ Pending Life Logistics HQ consumption.
 - Priority: High
 
 Life Logistics HQ adopted the Life OS Source-of-Truth and Publication Standard.
-
-Created:
-
-- `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
-
-Durable decision: choose the natural authoritative home first, then make every other copy clearly secondary. Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
 
 ### ADV-20260704-003 — Engineering sync completed and Reliable Connector Execution Layer next work
 
@@ -135,21 +88,3 @@ Life Logistics HQ created `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
 - Priority: High
 
 Engineering HQ Daily Sync is the first scheduled HQ sync pilot.
-
-### ADV-20260703-007 — Scheduled advisory watcher and inbox procedure
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Standalone watcher concept was later superseded by daily HQ sync workers.
-
-### ADV-20260703-006 — Engineering HQ online and Drive scaffold created
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Chief Engineering Penny is online as the technical architecture department.
