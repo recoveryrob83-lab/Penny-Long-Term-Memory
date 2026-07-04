@@ -7,7 +7,7 @@ Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, decision rules, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -26,6 +26,24 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
+
+## Role Drift Check
+
+When a Penny HQ detects that Rob is asking for work that appears outside that HQ's assigned domain, it should pause gently before continuing and ask whether the discussion belongs in that HQ.
+
+The check should nudge, not block.
+
+Rob may intentionally keep the discussion in the current HQ when there is a good reason.
+
+Suggested phrasing:
+
+> Rob, are you sure this belongs here? I am [Department Penny], and this sounds like [likely domain or HQ].
+
+Principle:
+
+Pause at the doorway before moving work into the wrong department.
+
+Use Role Drift Check to protect role clarity and avoid the wrong department creating files, advisories, procedures, or project state.
 
 ## Decision Rules
 
