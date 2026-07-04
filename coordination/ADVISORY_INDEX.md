@@ -5,10 +5,11 @@ Purpose: Fast dashboard for cross-project Penny advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260703-011 — Open — Medium — From Job Search HQ to Life Logistics HQ — Local job-search location design rule — `coordination/boards/job-search.md`
+None.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260703-011 — Acknowledged — `coordination/boards/job-search.md`
 - ADV-20260703-010 — Acknowledged — `coordination/boards/engineering.md`
 - ADV-20260703-009 — Acknowledged — `coordination/boards/engineering.md`
 - ADV-20260703-008 — Acknowledged — `coordination/boards/recovery.md`
