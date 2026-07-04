@@ -1,6 +1,6 @@
 # Open Loops
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Operating Rule
@@ -23,7 +23,8 @@ Do not duplicate source-system details here.
 | Open | Site Cleanup | REF-002 | Continue provider option gathering | Continue follow-ups in project chat | As needed | Details live in Drive/project handoff |
 | Open | Chief of Finance Penny | REF-003 | Begin real checkbook use | Inspect Drive Checkbook Register structure before real transaction work | When data exists | Keep detailed finance records in Drive or RPR, not GitHub |
 | Open | Chief of Finance Penny | REF-003 | Build budget / bills workflow | Add budget, bills, or reminders when real inputs are known | When useful | Former Ledger & Programs bucket now active as Chief of Finance Penny |
-| Open | Chief Business HQ | To assign | Business research scaffold active | Continue product viability and business-development research in Business HQ | Ongoing | Working cabinet exists in Drive |
+| Open | Chief Business HQ | To assign | Business research active | Continue competitor positioning, unit economics, business-model scoring, and validation design in Business HQ | Ongoing | Working records live in Drive/RPR |
+| Open | Chief Business HQ | To assign | Reconcile Business Drive architecture | Decide whether Business uses Chief Business HQ folder, Business Development path, or both with clear distinctions | Before many more artifacts | Avoid folder sprawl |
 | Open | Chief Wellness HQ | To assign | Begin wellness operations | Use Chief Wellness HQ for primary care, vision, sleep, food, movement, preventive care, or routine support when Rob is ready | When useful | Keep sensitive details outside GitHub |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
 | Open | Life OS Infrastructure | REF-004 | Observe Engineering HQ Daily Sync pilot | Confirm whether scheduled sync runs correctly before rolling out more HQ sync workers | Next scheduled run | Engineering HQ Daily Sync is first pilot at 6:00 AM America/Chicago |
@@ -36,6 +37,7 @@ Do not duplicate source-system details here.
 | Status | Project | Registry Ref | Waiting For | Next Check | Notes |
 |---|---|---|---|---|---|
 | Waiting | Scheduled HQ Sync | REF-004 | Engineering HQ Daily Sync pilot result | After next 6:00 AM America/Chicago scheduled run | Verify identity, GitHub access, advisory consumption, and no unwanted writes |
+| Waiting | Business Drive Architecture | To assign | Rob / Life Logistics decision | Before expanding Business Drive folder tree | Decide canonical folder path for business records |
 | Waiting | Site Cleanup / Support Pathway | REF-002 / REF-005 | External follow-ups and project inputs | Check when relevant | Details outside GitHub |
 | Waiting | Work Search | REF-001 | Responses from source systems | Check when Rob wants follow-up | Details outside GitHub |
 
@@ -43,6 +45,7 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-04 | Chief Business HQ | ADV-20260704-001 ingested | Business research, Drive architecture issue, and reboot-state update consumed by Life Logistics HQ. |
 | 2026-07-03 | Life OS Infrastructure | ADV-20260703-009 acknowledged | Daily HQ sync pilot architecture recorded; standalone watcher superseded as preferred slot usage. |
 | 2026-07-03 | Recovery Logistics | ADV-20260703-008 acknowledged | Recovery Meeting Notes Workdesk recognized; both Life Logistics and Main Assistant consumed advisory. |
 | 2026-07-03 | Chief Business HQ | ADV-20260703-004 acknowledged | Business logistics advisory consumed by Life Logistics and Main Assistant. |
