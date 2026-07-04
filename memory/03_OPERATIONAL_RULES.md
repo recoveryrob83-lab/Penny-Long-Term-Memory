@@ -7,7 +7,7 @@ Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, department events, scheduled sync workers, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, department events, scheduled sync workers, design principles, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -20,10 +20,23 @@ As of the GitHub migration work on 2026-07-02:
 - Gmail is communication evidence.
 - `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
+- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
 
 Label unverified facts clearly.
+
+## Design Principles Rule
+
+Life OS design principles live in:
+
+- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
+
+Design principles are stable architecture guardrails, not implementation details.
+
+Current platform-adoption principle: no new platform enters the Life OS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
+
+Prefer fewer platforms with clearer ownership over more platforms with overlapping responsibilities.
 
 ## Advisory and Department Event Rules
 
