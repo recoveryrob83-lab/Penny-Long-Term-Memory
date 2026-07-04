@@ -37,8 +37,8 @@ None.
 | ADV-20260704-003 | Chief Engineering Penny | Chief Engineering Penny | Closed | Engineering sync completed and connector reliability next work | Engineering re-consumed self-addressed advisory; Reliable Connector Execution Layer remains active research track. |
 | ADV-20260704-005 | Chief Engineering Penny | Life Logistics HQ | Closed | Department Notebooks for long-term idea capture | Life Logistics adopted optional Department Notebooks as a standard pattern and created the procedure file. |
 | ADV-20260704-004 | Chief Engineering Penny | Life Logistics HQ | Closed | Department Pending Advisory Boards | Life Logistics adopted Pending Advisory Boards as a standard pattern and created the procedure file. |
-| ADV-20260704-002 | Chief Engineering Penny | Read | Ingested | Reliable Connector Execution Layer research track created. |
-| ADV-20260704-001 | Life Logistics HQ | Read | Ingested | Business Drive architecture resolved. |
+| ADV-20260704-002 | Chief Business HQ | Chief Engineering Penny | Ingested | Drive connector reliability is a major Penny product risk | Engineering created Reliable Connector Execution Layer as first concrete research track. |
+| ADV-20260704-001 | Chief Business HQ | Life Logistics HQ | Closed | Business HQ research, Drive architecture, and reboot-state update needed | Life Logistics ingested; Business Drive architecture resolved as Chief Business HQ > Business Development. |
 
 ## Department Read Tracking
 
