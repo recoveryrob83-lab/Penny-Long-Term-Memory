@@ -5,13 +5,17 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260704-002 — Drive connector reliability is a major Penny product risk
 
 - Date: 2026-07-04
 - From: Chief Business HQ
 - To: Chief Engineering Penny
 - Priority: High
-- Status: Open
+- Status: Acknowledged
 - Board: `coordination/boards/business.md`
 
 #### Summary
@@ -172,15 +176,19 @@ Potential outputs:
 - user-facing degraded-mode UX language
 - product requirement packet for future implementation
 
-#### Recommended Engineering HQ Actions
+#### Acknowledgement / Outcome
 
-1. Read this advisory and ingest the connector reliability risk.
-2. Add this risk to Engineering HQ status/open loops.
-3. Create a technical design note or research task for a reliable connector execution layer.
-4. Coordinate with Business HQ later to translate this into business/product requirements.
-5. Coordinate with Life Logistics HQ if the same lesson should be added to global operating rules or infrastructure design principles.
+Engineering HQ read and ingested this advisory on 2026-07-04.
 
-## Acknowledged / Implemented Advisories
+Updates completed:
+
+- `projects/engineering/SESSION_HANDOFF.md`
+- `projects/engineering/status.md`
+- `projects/engineering/open_loops.md`
+- `coordination/DEPARTMENT_EVENT_INBOX.md`
+- `coordination/ADVISORY_INDEX.md`
+
+Engineering created Reliable Connector Execution Layer as the first concrete engineering research track.
 
 ### ADV-20260704-001 — Business HQ research, Drive architecture, and reboot-state update needed
 
@@ -246,4 +254,3 @@ Business Drive architecture is not settled. Life Logistics / Rob should decide w
 ### ADV-20260703-003 — Business research scaffold created
 
 - Status: Acknowledged
-- Board: `coordination/boards/business.md`
