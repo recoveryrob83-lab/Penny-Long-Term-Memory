@@ -33,7 +33,6 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 - Choose a first target customer persona.
 - Define 3 to 5 painful coordination use cases.
 - Build a validation packet.
-- Reconcile Business Drive folder architecture before creating many more artifacts.
 
 ## Current Working Hypotheses
 
@@ -46,6 +45,13 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 
 ## Drive / Working Records
 
+Canonical Business Drive architecture:
+
+- Life Organization > Chief Business HQ
+- Under that: Business Development
+
+Business working records should live under the Chief Business HQ folder. Business Development is a subfolder beneath Chief Business HQ, not a separate top-level business root.
+
 Earlier Business HQ working cabinet:
 
 - Life Organization > Chief Business HQ
@@ -57,25 +63,17 @@ Key Drive records:
 - Tabs: `Competitors`, `Positioning Matrix`
 - `Business Development Costs`, Sheet ID `1DLVWv5VxjC-FZRaD1f8qilvS4gp64C6sBM8qtnanj-U`
 - Tabs: `Cost Estimates`, `Unit Economics`
+- `Business_Model_Design.xlsx`, File ID `1TzgU-68LeWGlWQNPMuWv52DTVvOo21WG`
 
-New manually placed RPR/Drive path:
+## Drive Architecture Decision
 
-- Life Organization > Business Development > Strategy > `Business_Model_Design.xlsx`
-- Business Development folder ID: `1zmc1R5BGudywRxgFPyvCBlj3FrMK9Abf`
-- Strategy folder ID: `1VKX4Xc6Q3dmyKaRQMhA-pxephsCYzo73`
-- Business_Model_Design.xlsx file ID: `1TzgU-68LeWGlWQNPMuWv52DTVvOo21WG`
+Resolved 2026-07-04 by Rob:
 
-## Drive Architecture Issue
+Business uses the `Chief Business HQ` folder as the department root.
 
-Canonical Business Drive architecture is not settled.
+`Business Development` lives under `Chief Business HQ`.
 
-Life Logistics should decide whether Business HQ should use:
-
-1. the earlier `Chief Business HQ` folder,
-2. the newer `Business Development` structure,
-3. or both with clear distinctions.
-
-Do not create a large new Business folder tree until Life Logistics/Rob decide the canonical Drive architecture.
+Do not treat `Business Development` as a separate top-level business root unless Rob changes the architecture later.
 
 ## Coordination Notes
 
