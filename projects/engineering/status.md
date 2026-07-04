@@ -4,7 +4,7 @@ Updated: 2026-07-04
 
 ## Current Phase
 
-Active / First Engineering Research Track Identified
+Active / First Engineering Research Track Started
 
 ## Summary
 
@@ -29,6 +29,11 @@ The first concrete engineering research track is now:
 - Reliable Connector Execution Layer
 
 This track exists because connector write reliability is a product-level risk for Penny as an execution/coordination platform. Future Penny workflows must not claim writes succeeded until verified, must track intended operations, must support recoverable failure states, and must provide degraded-mode fallback such as RPR/export/manual upload when direct connector writes fail.
+
+Working design note:
+
+- Google Drive: `Reliable Connector Execution Layer - Design Note`
+- URL: https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
 
 Likely design outputs:
 
