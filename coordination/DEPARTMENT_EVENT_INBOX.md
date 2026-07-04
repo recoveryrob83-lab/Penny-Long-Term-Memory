@@ -49,6 +49,7 @@ Daily sync workers should read boot/handoff/advisory context, consume advisories
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
+| ADV-20260703-010 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | Medium | New | Life OS design principle for new platforms | `coordination/boards/engineering.md` | Logistics should decide whether to create/designate a design-principles file and record the platform-adoption principle. |
 | ADV-20260703-009 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Scheduled HQ sync system experiment | `coordination/boards/engineering.md` | Life Logistics HQ ingested advisory; daily HQ sync pilot architecture recorded. |
 | ADV-20260703-008 | 2026-07-03 | Recovery HQ | Life Logistics HQ / Main Assistant | Medium | Closed | Recovery Meeting Notes Workdesk created | `coordination/boards/recovery.md` | Life Logistics HQ and Main Assistant both consumed advisory; acknowledgement complete. |
 | ADV-20260703-004 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Main Assistant | High | Closed | Frequent logistics updates needed for Penny platform research | `coordination/boards/business.md` | Life Logistics HQ and Main Assistant both consumed advisory; acknowledgement complete. |
@@ -61,6 +62,7 @@ Daily sync workers should read boot/handoff/advisory context, consume advisories
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260703-010 | Life Logistics HQ | Unread | Pending | New Engineering advisory about Life OS design principles and future project-management platform deferral. |
 | ADV-20260703-009 | Life Logistics HQ | Read | Ingested | Daily HQ sync pilot architecture recorded; observe Engineering HQ Daily Sync before additional rollout. |
 | ADV-20260703-008 | Life Logistics HQ | Read | Ingested | Recovery Meeting Notes Workdesk recognized as a Recovery workbench/resource update. |
 | ADV-20260703-008 | Main Assistant | Read | Ingested | Main Assistant consumed advisory and should route meeting-note capture or summary work to Recovery Meeting Notes Workdesk unless Rob asks otherwise. |
