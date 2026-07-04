@@ -6,7 +6,7 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, an emerging daily HQ sync procedure, and a durable design-principles file.
+Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, an emerging daily HQ sync procedure, a durable design-principles file, and the first concrete Engineering research track for Penny product reliability.
 
 The core architecture remains:
 
@@ -23,6 +23,41 @@ The core architecture remains:
 - Life OS design principles live in `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
 
 ## Recent Major Updates
+
+### Chief Engineering Penny / Reliable Connector Execution Layer
+
+ADV-20260704-002 from Chief Business HQ was read and ingested by Chief Engineering Penny.
+
+The advisory identified connector write reliability as a major Penny product risk. During Business HQ work, Google Drive reads/searches/metadata remained useful, but repeated write operations eventually hit safety-check blocks. Business HQ used RPR/user-mediated file transfer as the safe fallback.
+
+Engineering has created the first concrete Engineering research track:
+
+- Reliable Connector Execution Layer
+
+Engineering updates completed:
+
+- `projects/engineering/SESSION_HANDOFF.md`
+- `projects/engineering/status.md`
+- `projects/engineering/open_loops.md`
+- `coordination/DEPARTMENT_EVENT_INBOX.md`
+- `coordination/ADVISORY_INDEX.md`
+- `coordination/boards/business.md`
+- `memory/05_OPEN_LOOPS.md`
+
+Drive working note created:
+
+- `Reliable Connector Execution Layer - Design Note`
+- https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
+
+Key design direction: future Penny connector-dependent execution should be observable, verified, recoverable, idempotent, and safe to degrade into RPR/export/manual-upload fallback. Penny should never claim a connector write succeeded until verified.
+
+Next Engineering actions:
+
+- Turn the design note into an implementation packet outline.
+- Draft an operation ledger / write-ahead log schema.
+- Draft connector health-state and retry/backoff policy.
+- Coordinate with Business HQ on product requirements.
+- Coordinate with Finance before cost-bearing backend/API/queue choices.
 
 ### Chief Business HQ Research Update
 
@@ -103,19 +138,17 @@ Todoist remains for Rob-facing tasks. The Department Event Inbox is for system s
 
 ### Chief Engineering Penny
 
-`projects/engineering/` has been created as Chief Engineering Penny / Engineering HQ.
+`projects/engineering/` exists as Chief Engineering Penny / Engineering HQ.
 
 Chief Engineering handles technical architecture, repository strategy, software planning, APIs, connectors, data models, automation design, testing, technical feasibility, and implementation planning.
 
-Engineering has created Drive scaffolding under Life Organization > Chief Engineering Penny.
-
-ADV-20260703-006 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
+Engineering has Drive scaffolding under Life Organization > Chief Engineering Penny.
 
 Important engineering guardrail: Chief Business HQ defines what should be built and why. Chief Engineering Penny defines how to build it and in what order.
 
 ### Chief Business HQ
 
-`projects/business-development/` has been created as Chief Business HQ / Chief Business Development Penny.
+`projects/business-development/` exists as Chief Business HQ / Chief Business Development Penny.
 
 Chief Business handles business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and go-to-market planning.
 
@@ -175,6 +208,7 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
+- Read and ingested ADV-20260704-002 from Chief Business HQ into Engineering; created Reliable Connector Execution Layer design note and research track.
 - Read and ingested ADV-20260704-001 from Chief Business HQ and updated Business HQ reboot context.
 - Read and ingested ADV-20260703-010 from Chief Engineering Penny and created Life OS design principles file.
 - Read and ingested ADV-20260703-009 from Chief Engineering Penny and recorded daily HQ sync pilot architecture.
@@ -194,7 +228,9 @@ Preferred new-chat startup:
 
 ## Best Next Action
 
-Observe Engineering HQ Daily Sync pilot before rolling out more scheduled HQ sync workers. Also decide the canonical Business Drive folder architecture before Business HQ creates many more artifacts.
+For Engineering: turn the Reliable Connector Execution Layer design note into an implementation packet outline and operation-ledger schema.
+
+For Life Logistics: observe Engineering HQ Daily Sync pilot before rolling out more scheduled HQ sync workers. Also decide the canonical Business Drive folder architecture before Business HQ creates many more artifacts.
 
 ## Guiding Principle
 
