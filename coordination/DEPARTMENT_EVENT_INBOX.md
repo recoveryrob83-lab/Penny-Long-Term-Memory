@@ -57,6 +57,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
+| ADV-20260704-002 | 2026-07-04 | Chief Business HQ | Chief Engineering Penny | High | New | Drive connector reliability is a major Penny product risk | `coordination/boards/business.md` | Engineering should evaluate connector reliability layer, write ledger, idempotent writes, retry/backoff, degraded mode, and RPR fallback. |
 | ADV-20260704-001 | 2026-07-04 | Chief Business HQ | Life Logistics HQ | High | Closed | Business HQ research, Drive architecture, and reboot-state update needed | `coordination/boards/business.md` | Life Logistics ingested advisory; Business boot/handoff/status/open-loop records updated. Business Drive architecture remains an open decision. |
 | ADV-20260703-011 | 2026-07-03 | Job Search HQ | Life Logistics HQ | Medium | Closed | Local job-search location design rule | `coordination/boards/job-search.md` | Life Logistics ingested rule; Job Search handoff and README updated for nearby hubs/corridors and real commute-fit evaluation. |
 | ADV-20260703-010 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | Medium | Closed | Life OS design principle for new platforms | `coordination/boards/engineering.md` | Design-principles file created; Kanban/project-management tools deferred until measured pipeline-state pain appears. |
@@ -72,6 +73,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-002 | Chief Engineering Penny | Unread | Pending | Needs technical ingestion and possible reliable connector execution architecture work. |
 | ADV-20260704-001 | Life Logistics HQ | Read | Ingested | Business context updated; Drive architecture decision remains open. |
 | ADV-20260703-011 | Life Logistics HQ | Read | Ingested | Job Search handoff/README updated with commute-aware local search rule. |
 | ADV-20260703-010 | Life Logistics HQ | Read | Ingested | Design-principles file created and platform-adoption principle recorded. |
