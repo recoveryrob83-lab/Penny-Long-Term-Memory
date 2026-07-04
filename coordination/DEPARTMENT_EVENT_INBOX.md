@@ -29,7 +29,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Open | Decision Rules Registry architecture adopted | All departments should ingest central registry and route matching decisions to owning HQs. |
+| ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Open | Decision Rules Registry and Role Drift Check architecture adopted | All departments should ingest central registry, route matching decisions to owning HQs, and use Role Drift Check for out-of-domain work. |
 
 ## Recent Closed / Ingested Events
 
@@ -49,7 +49,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
-| ADV-20260704-010 | All Departments | Unread | Pending | All HQs should ingest Decision Rules Registry architecture. |
+| ADV-20260704-010 | All Departments | Unread | Pending | All HQs should ingest Decision Rules Registry and Role Drift Check architecture. |
 | ADV-20260704-009 | Life Logistics HQ | Read | Ingested | Role Drift Check added to Operating Rules and Life Logistics handoff. |
 | ADV-20260704-008 | Life Logistics HQ | Read | Ingested | Discretionary Purchase Pause Rule routing reinforced. |
 | ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
