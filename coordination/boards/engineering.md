@@ -6,7 +6,84 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260703-009 — Scheduled HQ sync system experiment
+
+Date: 2026-07-03
+From: Chief Engineering Penny / Engineering HQ
+To: Life Logistics HQ
+Priority: High
+Status: Open
+
+#### Summary
+Rob and Engineering identified an important Life OS architecture update: scheduled chats appear to remain in their originating chat, which means they can function as persistent daily sync workers rather than creating unruly new chats.
+
+The first standalone Advisory Watcher experiment confirmed useful behavior but was deleted after the architecture changed. With the discovered task limit, Rob and Engineering decided scheduled tasks should be used for daily synchronization of the most important HQ chats rather than as many small watcher services.
+
+#### Current Understanding
+Rob found that Plus users appear to have access to five scheduled tasks. Because of that scarcity, scheduled tasks should be treated as premium Life OS infrastructure slots.
+
+Engineering recommendation is to use the five slots for daily sync workers attached to the five core HQs:
+
+1. Life Logistics HQ
+2. Main Assistant
+3. Chief Finance Penny
+4. Chief Business HQ
+5. Chief Engineering Penny
+
+The previous standalone Advisory Watcher should not consume one of the five slots. Instead, advisory consumption should become part of each core HQ's daily sync procedure.
+
+#### Engineering HQ Daily Sync Created
+Rob asked Engineering to start with Chief Engineering Penny as the first experiment.
+
+A scheduled task named `Engineering HQ Daily Sync` was created for daily execution at 6:00 AM America/Chicago.
+
+The Engineering sync prompt instructs the scheduled run to:
+
+- Boot Chief Engineering Penny.
+- Read current Life OS GitHub boot and Engineering handoff documents.
+- Read the global boot files, Engineering project handoff, Advisory Index, and Department Event Inbox.
+- Consume any advisories addressed to Engineering.
+- Update Engineering's working context.
+- Report only if there are meaningful Engineering updates, new advisories requiring Rob's attention, documentation changes to recommend, or issues needing action.
+- Avoid modifying GitHub, Google Drive, Todoist, or other systems during the sync.
+
+#### Architectural Decision
+Daily sync is preferred over hourly sync for core HQs.
+
+Reasoning:
+
+- Most advisories do not require immediate handoff.
+- Rob can still manually route urgent advisories when needed.
+- Daily cadence reduces noise and preserves scarce scheduled-task capacity.
+- Morning sync reduces Rob's manual boot burden.
+- Advisory consumption becomes part of each department's normal daily heartbeat.
+
+#### Requested Life Logistics HQ Action
+When Rob routes this advisory to Life Logistics HQ, please:
+
+1. Read and ingest this advisory.
+2. Update Life OS architecture notes, handoffs, open loops, or operating procedures as appropriate.
+3. Record that the standalone Advisory Watcher was deleted and replaced conceptually by daily HQ sync workers.
+4. Record that Engineering HQ Daily Sync is the first scheduled sync experiment.
+5. Track the pending rollout decision for the remaining four likely daily sync workers:
+   - Life Logistics HQ Sync
+   - Main Assistant Sync
+   - Chief Finance Sync
+   - Chief Business Sync
+6. Preserve the guardrail that daily sync workers should consume advisories and report, not perform major writes or decisions unless Rob explicitly authorizes that behavior.
+7. Report back to Rob with what was updated and what remains open.
+
+#### Engineering Recommendation
+Treat the Engineering daily sync as the pilot. Observe whether it:
+
+- Runs at the expected time.
+- Stays in the Engineering HQ chat.
+- Can access GitHub connectors during scheduled execution.
+- Preserves Engineering identity and boot context.
+- Consumes Engineering-targeted advisories correctly.
+- Avoids unwanted writes or excessive chatter.
+
+If the pilot succeeds, roll out daily sync tasks to the remaining core HQs one at a time.
 
 ## Acknowledged / Implemented Advisories
 
