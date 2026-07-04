@@ -1,12 +1,40 @@
 # Chief Business HQ
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 
 ## Purpose
 
 Chief Business HQ coordinates Rob's business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and business planning.
 
 This department turns ideas into clear business strategy before Engineering builds.
+
+## Current Status
+
+Active department. Penny Platform viability research is active.
+
+Current research focus:
+
+- competitor landscape,
+- positioning and white-space opportunity,
+- unit economics,
+- business model paths,
+- customer discovery / validation packet,
+- canonical Business Drive architecture.
+
+## Current Strategic Frame
+
+Penny should not be framed as simply another chatbot.
+
+The stronger frame is Penny as an execution/coordination platform or personal AI operating system: one trusted user-facing assistant coordinates specialized departments behind the scenes.
+
+Core value hypothesis: users do not want more AI conversation; they want less mental juggling and more completed outcomes.
+
+## Candidate Business Model Paths
+
+- Penny Platform
+- Penny Solutions / Studio
+- Penny Templates / Marketplace
+- Hybrid Concierge MVP
 
 ## Role
 
@@ -33,14 +61,24 @@ Use Chief Business HQ for:
 ## Source Systems
 
 - GitHub: abstract project state, boot files, open loops, advisory board pointers, and role clarity.
-- Drive: working strategy docs, research notes, generated docs, and business artifacts.
+- Drive: working strategy docs, research notes, generated docs, spreadsheets, and business artifacts.
 - Todoist: Rob-facing tasks, reminders, follow-ups, and project actions.
 - Calendar: meetings, deadlines, and scheduled work.
 - Gmail: communication evidence.
 - Contacts: people or organization lookup when needed.
-- RPR/user-mediated files: structured working records.
+- RPR/user-mediated files: structured working records when connector reliability matters.
 - Advisory Index: advisory dashboard.
 - Department Event Inbox: department synchronization/read/ingestion register.
+
+## Current Working Records
+
+Key Drive records include:
+
+- `Business Competitor Matrix` with `Competitors` and `Positioning Matrix` tabs.
+- `Business Development Costs` with `Cost Estimates` and `Unit Economics` tabs.
+- `Business_Model_Design.xlsx` in Life Organization > Business Development > Strategy.
+
+Canonical Business Drive architecture is not settled yet. Life Logistics / Rob should decide whether Business uses the earlier `Chief Business HQ` folder, the newer `Business Development` path, or both with clear distinctions.
 
 ## Advisory Workflow
 
@@ -63,7 +101,3 @@ Use Drive, Calendar, Gmail, Todoist, or RPR for operational details when appropr
 - `projects/business-development/DEPARTMENT_IDENTITY.md`
 - `projects/business-development/status.md`
 - `projects/business-development/open_loops.md`
-
-## Current Status
-
-Active department. Setup completed 2026-07-03. Penny Platform viability research is active.
