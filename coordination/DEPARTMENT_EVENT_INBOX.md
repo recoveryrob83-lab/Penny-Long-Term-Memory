@@ -26,14 +26,13 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 ## Current Open / Pending Events
 
-| Event ID | Source | Target(s) | Status | Subject | Notes |
-|---|---|---|---|---|---|
-| ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | New | Discretionary Purchase Pause Rule routing reinforcement | Logistics should reinforce routing discretionary spending decisions to Finance HQ while keeping live financial goals and numbers in Drive. |
+None.
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
+| ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | Closed | Discretionary Purchase Pause Rule routing reinforcement | Life Logistics updated handoff to route discretionary spending decisions to Finance HQ while keeping live financial context out of GitHub. |
 | ADV-20260704-007 | Life Logistics HQ | Chief of Finance Penny | Ingested | Finance advisory routing surface refresh | Finance re-synced to advisory routing files and stopped treating GitHub Issues as advisory surface. |
 | ADV-20260704-006 | Chief Engineering Penny | Life Logistics HQ | Closed | Source-of-truth and publication architecture | Life Logistics adopted Source-of-Truth and Publication Standard. |
 | ADV-20260704-003 | Chief Engineering Penny | Chief Engineering Penny | Closed | Engineering sync completed and connector reliability next work | Engineering re-consumed self-addressed advisory; Reliable Connector Execution Layer remains active research track. |
@@ -45,8 +44,8 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 ## Department Read Tracking
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
-|---|---|---|---|
-| ADV-20260704-008 | Life Logistics HQ | Unread | Pending | Logistics should reinforce Discretionary Purchase Pause Rule routing context. |
+|---|---|---|---|---|
+| ADV-20260704-008 | Life Logistics HQ | Read | Ingested | Discretionary Purchase Pause Rule routing reinforced. |
 | ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
 | ADV-20260704-006 | Life Logistics HQ | Read | Ingested | Source-of-Truth and Publication Standard adopted. |
 | ADV-20260704-003 | Chief Engineering Penny | Read | Ingested | Engineering re-consumed and closed self-addressed continuation advisory. |
