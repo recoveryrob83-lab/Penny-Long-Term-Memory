@@ -7,7 +7,7 @@ Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, pending advisory boards, department events, scheduled sync workers, design principles, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -21,6 +21,7 @@ As of the GitHub migration work on 2026-07-02:
 - `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
+- `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
@@ -68,6 +69,24 @@ Create a pending board only when needed. Do not create empty pending boards acro
 Pending items do not update the Advisory Index, Department Event Inbox, Todoist, or other department boards.
 
 Promote pending items into formal advisories only during deliberate review and only when cross-department routing or a durable shared decision is needed.
+
+## Department Notebook Rules
+
+Department Notebooks are optional local sketchpads for durable idea capture.
+
+Standard procedure lives at:
+
+- `coordination/DEPARTMENT_NOTEBOOKS.md`
+
+A department may create a local notebook at:
+
+- `projects/<department-folder>/NOTEBOOK.md`
+
+Create a notebook only when useful. Do not create empty notebooks across every department by default.
+
+Notebook entries do not update the Advisory Index, Department Event Inbox, Todoist, open loops, or other department boards.
+
+Use notebooks for ideas worth preserving that are not yet tasks, advisories, open loops, handoff state, design principles, or Drive artifacts.
 
 ## Scheduled HQ Sync Rules
 
