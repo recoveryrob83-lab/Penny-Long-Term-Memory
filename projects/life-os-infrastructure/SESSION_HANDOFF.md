@@ -11,7 +11,7 @@ Purpose: Project-specific handoff for Life OS Infrastructure and connector/archi
 - Current Phase: Active / Architecture Maintenance
 - Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, connector tools as needed, ChatGPT scheduled tasks
 - Sensitivity Level: Moderate
-- GitHub Rule: Store architecture, schema, operating rules, and abstract workflow lessons. Do not store secrets or private source data.
+- GitHub Rule: Store architecture, schema, operating rules, design principles, and abstract workflow lessons. Do not store secrets or private source data.
 
 ## Boot Instructions
 
@@ -20,19 +20,32 @@ When Rob opens a new Life OS Infrastructure chat:
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
 2. Read this project handoff.
 3. Read this project's `README.md`, `status.md`, and `open_loops.md` if present.
-4. Use GitHub/Drive/Todoist/Calendar/Gmail only as needed for system architecture and connector workflows.
-5. Keep architecture practical. Do not over-engineer without a real use case.
+4. Read `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` when making architecture or platform-adoption decisions.
+5. Use GitHub/Drive/Todoist/Calendar/Gmail only as needed for system architecture and connector workflows.
+6. Keep architecture practical. Do not over-engineer without a real use case.
 
 ## Current Project Status
 
 Active architecture maintenance.
 
-Life OS now includes advisory boards, a Department Event Inbox for abstract sync/read/ingestion state, and an emerging scheduled HQ sync pattern.
+Life OS now includes advisory boards, a Department Event Inbox for abstract sync/read/ingestion state, an emerging scheduled HQ sync pattern, and a durable design-principles file.
 
 ## Objectives
 
-- Maintain Life OS architecture, boot files, connector lessons, project handoffs, pointer registry workflow, advisory routing, event inbox, scheduled sync architecture, and housekeeping system.
+- Maintain Life OS architecture, boot files, connector lessons, project handoffs, pointer registry workflow, advisory routing, event inbox, scheduled sync architecture, design principles, and housekeeping system.
 - Keep the system useful for daily life rather than turning it into architecture for architecture's sake.
+
+## Design Principles
+
+Durable Life OS design principles live in:
+
+- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
+
+Current key principle: no new platform enters the Life OS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
+
+Kanban/project-management platforms such as Asana, ClickUp, or Trello are deferred, not rejected.
+
+If adopted later, they should own department-level pipeline state only, most likely for Chief Business HQ or Chief Engineering Penny. They should not become a global Life OS layer unless real scaling pain proves the need.
 
 ## Completed Work
 
@@ -41,6 +54,7 @@ Life OS now includes advisory boards, a Department Event Inbox for abstract sync
 - Added Advisory Watcher v0.1 procedure to the Department Event Inbox.
 - Recorded the shift from standalone Advisory Watcher toward daily HQ sync workers.
 - Recorded Engineering HQ Daily Sync as the first scheduled sync pilot.
+- Created `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
 
 ## Active Open Loops
 
@@ -53,7 +67,7 @@ Life OS now includes advisory boards, a Department Event Inbox for abstract sync
   - Main Assistant Sync
   - Chief Finance Sync
   - Chief Business Sync
-- Optional: patch `memory/STARTUP_BOOT.md` later with a small reference to Department Event Inbox and daily HQ sync workers if useful.
+- Optional: patch `memory/STARTUP_BOOT.md` later with a small reference to Department Event Inbox, daily HQ sync workers, and design principles if useful.
 
 ## Scheduled HQ Sync Model
 
@@ -94,6 +108,7 @@ Authority remains:
 
 ## Working Documents / Links
 
+- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
 - `coordination/ADVISORY_INDEX.md`
 - `coordination/DEPARTMENT_EVENT_INBOX.md`
 - `coordination/boards/`
@@ -105,7 +120,7 @@ Authority remains:
 
 ## Source Systems
 
-- GitHub: durable architecture, boot files, operating rules, active projects, open loops, advisory boards, Department Event Inbox, scheduled sync notes, Captain's Log.
+- GitHub: durable architecture, boot files, operating rules, design principles, active projects, open loops, advisory boards, Department Event Inbox, scheduled sync notes, Captain's Log.
 - Google Drive: working documents, pointer registry, operational artifacts.
 - Todoist: Rob-facing tasks and reminders.
 - Calendar/Gmail/Contacts: only when relevant to infrastructure tasks.
@@ -120,7 +135,7 @@ Authority remains:
 
 ## Privacy Guardrails
 
-- GitHub can store architecture, schema, fake seed data, migration plans, and operating rules.
+- GitHub can store architecture, schema, fake seed data, migration plans, operating rules, and design principles.
 - GitHub should not store real personal data, credentials, medical identifiers, financial identifiers, or private family notes.
 - Use `.gitignore` style thinking for local/private data.
 
@@ -130,6 +145,8 @@ Authority remains:
 - Todoist owns Rob-facing actions.
 - Daily HQ sync is preferred over standalone Advisory Watcher if scheduled-task slots are scarce.
 - Daily sync workers should report and consume advisories, not perform major writes or decisions without Rob authorization.
+- New platforms require measured pain, clear ownership, and no clean existing-component solution.
+- Kanban/project-management tools are deferred until real pipeline-state pain appears.
 
 ## Immediate Next Actions
 
