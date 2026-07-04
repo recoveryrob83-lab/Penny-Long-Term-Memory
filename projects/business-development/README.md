@@ -18,8 +18,7 @@ Current research focus:
 - positioning and white-space opportunity,
 - unit economics,
 - business model paths,
-- customer discovery / validation packet,
-- canonical Business Drive architecture.
+- customer discovery / validation packet.
 
 ## Current Strategic Frame
 
@@ -72,13 +71,18 @@ Use Chief Business HQ for:
 
 ## Current Working Records
 
+Canonical Business Drive architecture:
+
+- Life Organization > Chief Business HQ
+- Under that: Business Development
+
+Business working records should live under the Chief Business HQ folder. Business Development is a subfolder beneath Chief Business HQ, not a separate top-level business root.
+
 Key Drive records include:
 
 - `Business Competitor Matrix` with `Competitors` and `Positioning Matrix` tabs.
 - `Business Development Costs` with `Cost Estimates` and `Unit Economics` tabs.
-- `Business_Model_Design.xlsx` in Life Organization > Business Development > Strategy.
-
-Canonical Business Drive architecture is not settled yet. Life Logistics / Rob should decide whether Business uses the earlier `Chief Business HQ` folder, the newer `Business Development` path, or both with clear distinctions.
+- `Business_Model_Design.xlsx` under the Business Development / Strategy working area.
 
 ## Advisory Workflow
 
