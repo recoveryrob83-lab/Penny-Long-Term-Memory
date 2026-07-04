@@ -23,6 +23,21 @@ The core architecture remains:
 
 ## Recent Major Updates
 
+### Recovery Meeting Notes Workdesk
+
+ADV-20260703-008 from Recovery HQ has been read and ingested by Life Logistics HQ.
+
+A Recovery Meeting Notes Workdesk exists for non-sensitive NA/AA meeting notes.
+
+Drive resource:
+
+- Google Drive `Recovery Logistics` folder
+- Document: `Recovery Meeting Notes`
+
+Main Assistant still needs to consume the advisory before it can be fully acknowledged.
+
+Routing note: meeting-note capture or meeting-summary work should route to Recovery Meeting Notes Workdesk unless Rob asks otherwise.
+
 ### Business Logistics Advisory
 
 ADV-20260703-004 from Chief Business HQ has been read, ingested, and acknowledged.
@@ -124,13 +139,14 @@ Preferred new-chat startup:
 - Chief Business HQ: business ideas, product strategy, branding, market research, offer design, monetization, and customer discovery.
 - Chief Engineering Penny: technical architecture, software planning, repositories, automations, APIs, data models, testing, and implementation planning.
 - Chief Wellness HQ: practical wellness, health-adjacent logistics, appointments, routines, and stability supports.
-- Recovery Logistics: daily anchors, meetings, literature logistics, and non-sensitive recovery routines.
+- Recovery Logistics: daily anchors, meetings, literature logistics, meeting-note workbench routing, and non-sensitive recovery routines.
 - Philosophy HQ: framework continuity, Scriptorium coordination, and future book-compilation support.
 - Life OS Infrastructure: boot files, handoffs, connector lessons, and system design.
 - Health Medical HQ and Housing Logistics HQ remain available as specialist departments when needed.
 
 ## Recent Work Completed
 
+- Read and ingested ADV-20260703-008 from Recovery HQ; Main Assistant still pending.
 - Read, ingested, and acknowledged ADV-20260703-004 from Chief Business HQ.
 - Added Advisory Watcher v0.1 procedure after reading ADV-20260703-007.
 - Created Department Event Inbox under `coordination/DEPARTMENT_EVENT_INBOX.md`.
