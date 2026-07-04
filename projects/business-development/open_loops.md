@@ -9,8 +9,7 @@ Updated: 2026-07-04
 | Open | Finish Positioning Matrix | Complete remaining competitor rows | Drive owns detailed matrix |
 | Open | Threat / white-space ranking | Rank competitors by direct threat and Penny white-space opportunity | Use Positioning Matrix after rows are complete |
 | Open | Unit economics | Refine model-routing, cost-control, support burden, and power-user assumptions | Business Development Costs owns detailed modeling |
-| Open | Business model scoring | Fill/refine `Business_Model_Design.xlsx` scoring | File is in Drive Business Development / Strategy path |
-| Open | Business Drive architecture | Decide canonical Business Drive folder structure | Earlier `Chief Business HQ` folder and newer `Business Development` path both exist |
+| Open | Business model scoring | Fill/refine `Business_Model_Design.xlsx` scoring | File is in Business Development / Strategy working area |
 | Open | Business hypotheses | Create a Business Hypotheses document or sheet | Keep detailed working records in Drive/RPR |
 | Open | Customer pain/capability matrix | Build matrix connecting target pain to Penny capabilities | Use after competitor positioning is clearer |
 | Open | First customer persona | Choose one target customer segment before broadening | Avoid “Penny handles your whole life” as first MVP |
@@ -24,6 +23,7 @@ Updated: 2026-07-04
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-04 | Business Drive architecture decided | Canonical path: Life Organization > Chief Business HQ > Business Development. |
 | 2026-07-04 | ADV-20260704-001 ingested | Business research, Drive architecture issue, and reboot-state update consumed by Life Logistics HQ. |
 | 2026-07-04 | Competitor research started | Business Competitor Matrix has Competitors and Positioning Matrix tabs. |
 | 2026-07-04 | Unit Economics tab created | Business Development Costs has Cost Estimates and Unit Economics tabs. |
@@ -40,4 +40,3 @@ Updated: 2026-07-04
 
 - Decide future relationship between Chief Business HQ and Chief Engineering Penny after Engineering is activated.
 - Add registry ref later if Life Logistics HQ assigns one.
-- Consider structured Business Development Drive architecture only after Rob/Logistics decide the canonical folder path.
