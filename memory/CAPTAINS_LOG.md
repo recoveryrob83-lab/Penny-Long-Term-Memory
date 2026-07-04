@@ -14,6 +14,29 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Nightly Housekeeping Pass
+
+### Summary
+
+Ran Life OS nightly housekeeping after the daily HQ sync architecture update.
+
+### Completed Work
+
+- Read Startup Boot, global handoff, operating rules, active projects, open loops, Advisory Index, Department Event Inbox, Captain's Log, and scheduled-task notes.
+- Confirmed Advisory Index has no open advisories.
+- Confirmed Department Event Inbox has no unread Life Logistics items.
+- Updated Open Loops to remove stale completed Business advisory waits.
+- Added Engineering HQ Daily Sync pilot observation as the current infrastructure wait.
+- Updated Operating Rules with scheduled HQ sync guardrails.
+
+### Current Focus
+
+Observe Engineering HQ Daily Sync before rolling out additional daily sync workers.
+
+### Guardrail
+
+Daily HQ sync workers should read, consume, and report. They should not perform writes or decisions unless Rob explicitly authorizes that behavior.
+
 ## 2026-07-03 — Engineering Daily Sync Pilot Advisory
 
 ### Summary
@@ -51,22 +74,6 @@ Closed ADV-20260703-008 after Main Assistant consumed it.
 - Updated Department Event Inbox status to Closed.
 - Marked Life Logistics HQ and Main Assistant as read/ingested.
 
-## 2026-07-03 — Recovery Workbench Advisory Ingested
-
-### Summary
-
-Life Logistics HQ read and ingested ADV-20260703-008 from Recovery HQ.
-
-### Completed Work
-
-- Read Advisory Index, Department Event Inbox, and Recovery board.
-- Marked Life Logistics HQ read/ingested in the Department Event Inbox.
-- Updated global session handoff with the new Recovery workbench/resource routing note.
-
-### Correction
-
-This advisory has since been closed after Main Assistant consumed it. See `2026-07-03 — Recovery Advisory Final Closure` above.
-
 ## 2026-07-03 — Life Logistics Advisory Workflow Sync
 
 ### Summary
@@ -80,10 +87,6 @@ Life Logistics HQ read the latest advisory workflow infrastructure and updated i
 - Read `projects/life-logistics-hq/SESSION_HANDOFF.md`.
 - Read `memory/01_SESSION_HANDOFF.md`.
 - Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` with current advisory workflow, Department Event Inbox usage, and Advisory Watcher v0.1 caveats.
-
-### Decision / Lesson
-
-Life Logistics HQ now treats the Department Event Inbox as the system synchronization register and Todoist as Rob-facing task/action tracking. When Life Logistics creates advisories for another department, it should update the department board, Advisory Index, and Department Event Inbox.
 
 ## 2026-07-03 — Business Advisory Final Closure
 
