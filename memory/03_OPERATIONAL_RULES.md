@@ -7,7 +7,7 @@ Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -22,11 +22,24 @@ As of the GitHub migration work on 2026-07-02:
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
 - `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
+- `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` is the standard for authoritative homes and publication copies.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
 
 Label unverified facts clearly.
+
+## Source-of-Truth and Publication Rule
+
+Standard procedure lives at:
+
+- `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
+
+Core principle: choose the natural authoritative home first. Then make every other copy clearly secondary.
+
+Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
+
+This is not GitHub-for-everything. It is a one-authoritative-home rule.
 
 ## Design Principles Rule
 
@@ -104,82 +117,15 @@ Scheduled HQ sync workers should:
 
 Engineering HQ Daily Sync is the first pilot. Observe results before rolling out additional daily sync workers.
 
-## Strategy / Implementation Split
-
-Strategy Penny handles:
-- Planning.
-- Prioritizing.
-- Decision support.
-- Sequencing.
-- Creating bounded implementation packets.
-
-Implementation Penny handles:
-- Connector execution.
-- Verification.
-- Life OS file updates.
-- Todoist, Calendar, Gmail, Drive, and GitHub actions.
-- Structured reports back to Strategy Penny.
-
-Do not assume implementation succeeded until Implementation Penny reports verified completion.
-
-If strategy becomes necessary during implementation, Implementation Penny should stop and report the blocker instead of improvising.
-
-## Project Chat Split
-
-Project-specific Penny chats may do focused project work during the day.
-
-Examples:
-- Caregiver Project HQ.
-- Job Search HQ.
-- Recovery / Literature.
-- Philosophy / Source work.
-- Chief Business HQ.
-- Chief Engineering Penny.
-
-Project chats should primarily touch their own project records and only the connectors needed for that project.
-
-Life Logistics HQ is the cross-project coordinator and should handle nightly housekeeping, GitHub state updates, Pointer Registry changes, advisory routing, event inbox review, scheduled sync review, and cross-project operational review.
-
-This split reduces connector load, keeps chats searchable, and prevents one chat from repeatedly invoking every connector for every domain.
-
-## Packet Rules
-
-Use small bounded packets.
-
-Prefer one coherent implementation batch at a time.
-
-Avoid sprawling mega-tasks.
-
-Each implementation packet should include:
-- Packet name.
-- Goal.
-- Required startup reads.
-- Source facts / inputs.
-- Constraints / do-not-do rules.
-- Connector actions.
-- Verification requirements.
-- Required log updates.
-- Report-back format.
-
 ## Connector Truthfulness Rules
 
 Never fabricate connector results.
 
-Distinguish clearly between:
-- Connector not available.
-- Connector available but required tool schema not yet discovered.
-- Tool schema discovered but connector invocation unavailable in the current chat state.
-- Tool invoked but permission denied.
-- Tool invoked but operation failed.
-- Tool executed successfully.
-
-Before reporting that a connector capability is unavailable, discover/load the specific tool or function schema required for that packet.
+Distinguish clearly between connector unavailable, schema undiscovered, permission denied, operation failed, and operation succeeded.
 
 Before beginning multi-document or production edits, verify that connector invocation is currently available.
 
 If connector invocation fails or becomes unstable, do not fight the environment. Report the blocker and bootstrap a fresh Implementation Penny session if needed.
-
-When actively working with a connector over many turns, explicitly reference the intended connector in the conversation to maintain clear operational context. Treat this as a field-tested workflow cue, not a guaranteed internal mechanism.
 
 ## GitHub Editing Rule
 
@@ -192,14 +138,6 @@ When updating an existing file:
 4. When possible, verify by fetching the file after the commit.
 
 Prefer short, dated entries for ongoing logs.
-
-## Location and Time Context Rule
-
-If Rob explicitly states his current operating location, trust that over IP/VPN-derived location until Rob updates it.
-
-As of 2026-07-02:
-- Rob is operating from Metro East, Illinois, specifically the Cahokia / Cahokia Heights area.
-- Use America/Chicago as the operating time zone unless Rob says otherwise.
 
 ## Logging and Housekeeping Rule
 
