@@ -24,7 +24,9 @@ Pending boards and notebooks are local capture surfaces, not routed advisory cha
 
 ## Current Open / Pending Events
 
-None.
+| Event ID | Source | Target(s) | Status | Subject | Notes |
+|---|---|---|---|---|---|
+| ADV-20260704-006 | Chief Engineering Penny | Life Logistics HQ | Open | Source-of-truth and publication architecture | Logistics should consume Engineering board advisory and consider a Life OS data/document ownership standard. |
 
 ## Recent Closed / Ingested Events
 
@@ -41,6 +43,7 @@ None.
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-006 | Life Logistics HQ | Unread | Pending | Review Engineering board advisory for source-of-truth and publication architecture. |
 | ADV-20260704-003 | Chief Engineering Penny | Read | Ingested | Engineering re-consumed and closed self-addressed continuation advisory. |
 | ADV-20260704-005 | Life Logistics HQ | Read | Ingested | Department Notebook standard adopted. |
 | ADV-20260704-004 | Life Logistics HQ | Read | Ingested | Pending Advisory Board standard adopted. |
