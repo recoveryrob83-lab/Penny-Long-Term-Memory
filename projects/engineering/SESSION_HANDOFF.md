@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for engineering and software architecture chat
 
 - Project Owner: Rob
 - Primary Chat: Chief Engineering Penny / Engineering HQ
-- Current Phase: Active / First Engineering Research Track Identified
+- Current Phase: Active / First Engineering Research Track Started
 - Primary Systems: GitHub, GitHub software repositories when created, Google Drive, Todoist, Calendar, Gmail as needed, RPR/user-mediated files
 - Sensitivity Level: Moderate
 - GitHub Rule: Keep Life OS GitHub memory abstract. Never store secrets, credentials, tokens, API keys, or sensitive implementation details in memory files.
@@ -57,6 +57,11 @@ The first concrete engineering research track is:
 
 This track should evaluate operation ledgers / write-ahead logs, connector health states, idempotent writes, retry/backoff, degraded-mode UX, RPR/export fallback, queue-first execution, human approval checkpoints, and multi-provider abstraction.
 
+Working design note created in Drive:
+
+- `Reliable Connector Execution Layer - Design Note`
+- https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
+
 ## Advisory / Event Inbox Procedure
 
 When Engineering creates an advisory for another department:
@@ -82,6 +87,7 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
 
 ## Completed Work
 
+- 2026-07-04: Created `Reliable Connector Execution Layer - Design Note` in Drive.
 - 2026-07-04: Ingested ADV-20260704-002 and created the Reliable Connector Execution Layer research track.
 - 2026-07-03: Created Chief Engineering Penny / Engineering HQ project folder and department files.
 - 2026-07-03: Added Engineering setup to Life OS routing and project map where needed.
@@ -91,8 +97,8 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
 
 ## Active Open Loops
 
-- Draft a Reliable Connector Execution Layer technical design note.
-- Define operation ledger / write-ahead log states for intended connector writes.
+- Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
+- Draft operation ledger / write-ahead log schema for intended connector writes.
 - Define idempotency, retry/backoff, connector health, degraded-mode UX, and RPR/export fallback patterns.
 - Coordinate with Chief Business HQ to translate the reliability design into product requirements.
 - Coordinate with Chief of Finance Penny before committing to cost-bearing tools, hosting, queues, APIs, or subscriptions.
@@ -108,7 +114,7 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
   - `Engineering HQ - Technical Baseline`
   - `Engineering HQ - Implementation Packet Template`
   - `Engineering HQ - Tracker`
-  - `Reliable Connector Execution Layer - Design Note` when created/available
+  - `Reliable Connector Execution Layer - Design Note`: https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
 - Software repositories should be separate from Life OS memory when created.
 - Todoist owns Rob-facing engineering action reminders only.
 - Calendar owns engineering meetings and deadlines.
@@ -156,10 +162,10 @@ Secrets and credentials should never be pasted into chat or committed to GitHub.
 
 ## Immediate Next Actions
 
-1. Draft the Reliable Connector Execution Layer design note.
-2. Use Engineering Drive scaffolding for technical baselines, implementation packets, and tracking.
-3. Create detailed technical docs only when useful, preferably in Drive, RPR, or a dedicated software repository.
-4. When Engineering creates cross-department advisories, update the Engineering board, Advisory Index, and Department Event Inbox.
+1. Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
+2. Draft the operation ledger schema.
+3. Draft connector health and retry/backoff policy.
+4. Coordinate with Business HQ on product requirements and Finance on cost-bearing infrastructure.
 5. Update this handoff after meaningful engineering work.
 
 ## Notes for Next Penny
