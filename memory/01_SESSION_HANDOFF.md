@@ -6,7 +6,7 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, and an Advisory Watcher v0.1 procedure.
+Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, and an emerging daily HQ sync procedure.
 
 The core architecture remains:
 
@@ -19,13 +19,32 @@ The core architecture remains:
 - Life Logistics HQ curates cross-project operational memory.
 - Main Assistant handles daily operations.
 - The Department Event Inbox tracks abstract department sync/read/ingestion state.
-- Advisory Watcher v0.1 may report routing needs to Rob, but does not own source-of-truth state.
+- Daily HQ sync workers may report routing needs and consume advisories, but they do not own source-of-truth state.
 
 ## Recent Major Updates
 
+### Daily HQ Sync Pilot
+
+ADV-20260703-009 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
+
+The standalone Advisory Watcher is no longer the preferred scheduled-task model.
+
+Because scheduled-task slots appear scarce, daily HQ sync workers are now the preferred experiment for the core HQs.
+
+Engineering HQ Daily Sync is the first pilot, scheduled for 6:00 AM America/Chicago.
+
+Daily sync workers should read boot/handoff/advisory context, consume advisories addressed to their department, and report meaningful updates. They should not modify GitHub, Drive, Todoist, Calendar, Gmail, or other systems unless Rob explicitly authorizes that behavior.
+
+Pending rollout decision after Engineering pilot:
+
+- Life Logistics HQ Sync
+- Main Assistant Sync
+- Chief Finance Sync
+- Chief Business Sync
+
 ### Recovery Meeting Notes Workdesk
 
-ADV-20260703-008 from Recovery HQ has been read and ingested by Life Logistics HQ.
+ADV-20260703-008 from Recovery HQ has been read, ingested, and acknowledged after Life Logistics HQ and Main Assistant both consumed it.
 
 A Recovery Meeting Notes Workdesk exists for non-sensitive NA/AA meeting notes.
 
@@ -33,8 +52,6 @@ Drive resource:
 
 - Google Drive `Recovery Logistics` folder
 - Document: `Recovery Meeting Notes`
-
-Main Assistant still needs to consume the advisory before it can be fully acknowledged.
 
 Routing note: meeting-note capture or meeting-summary work should route to Recovery Meeting Notes Workdesk unless Rob asks otherwise.
 
@@ -47,20 +64,6 @@ Business HQ is in active Penny Platform viability research and may generate freq
 Life Logistics HQ should keep the operational map tidy while Business HQ moves quickly.
 
 Main Assistant should route one-off business admin, quick lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
-
-### Advisory Watcher v0.1
-
-ADV-20260703-007 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
-
-The watcher procedure lives in:
-
-- `coordination/DEPARTMENT_EVENT_INBOX.md`
-- `projects/life-os-infrastructure/SESSION_HANDOFF.md`
-- `memory/03_OPERATIONAL_RULES.md`
-
-Purpose: use one scheduled ChatGPT task as a low-code/no-code notification layer that checks the Advisory Index and Department Event Inbox, then reports routing needs to Rob with copy-paste-ready target messages.
-
-The watcher should not modify GitHub unless Rob later explicitly approves that behavior.
 
 ### Department Event Inbox
 
@@ -146,9 +149,10 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
-- Read and ingested ADV-20260703-008 from Recovery HQ; Main Assistant still pending.
+- Read and ingested ADV-20260703-009 from Chief Engineering Penny and recorded daily HQ sync pilot architecture.
+- Read and acknowledged ADV-20260703-008 from Recovery HQ after Life Logistics HQ and Main Assistant consumed it.
 - Read, ingested, and acknowledged ADV-20260703-004 from Chief Business HQ.
-- Added Advisory Watcher v0.1 procedure after reading ADV-20260703-007.
+- Added Advisory Watcher v0.1 procedure after reading ADV-20260703-007; later superseded as preferred slot usage by daily HQ sync model.
 - Created Department Event Inbox under `coordination/DEPARTMENT_EVENT_INBOX.md`.
 - Read and ingested ADV-20260703-006 from Chief Engineering Penny.
 - Created Chief Engineering Penny / Engineering HQ under `projects/engineering/`.
@@ -162,7 +166,7 @@ Preferred new-chat startup:
 
 ## Best Next Action
 
-Use Life Logistics HQ for cross-project coordination and use specialist chats for focused project work.
+Observe Engineering HQ Daily Sync pilot before rolling out more scheduled HQ sync workers.
 
 ## Guiding Principle
 
@@ -173,7 +177,7 @@ Todoist owns Rob-facing actions.
 Gmail owns communications.
 Captain's Log records meaningful operational sessions.
 Department Event Inbox tracks system synchronization state.
-Advisory Watcher v0.1 reports routing needs only.
+Daily HQ sync workers report and consume advisory state only unless Rob explicitly authorizes writes.
 
 Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
