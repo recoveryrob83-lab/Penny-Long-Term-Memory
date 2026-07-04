@@ -25,6 +25,7 @@ Do not duplicate source-system details here.
 | Open | Chief of Finance Penny | REF-003 | Build budget / bills workflow | Add budget, bills, or reminders when real inputs are known | When useful | Former Ledger & Programs bucket now active as Chief of Finance Penny |
 | Open | Chief Business HQ | To assign | Business research active | Continue competitor positioning, unit economics, business-model scoring, and validation design in Business HQ | Ongoing | Working records live in Drive/RPR |
 | Open | Chief Business HQ | To assign | Reconcile Business Drive architecture | Decide whether Business uses Chief Business HQ folder, Business Development path, or both with clear distinctions | Before many more artifacts | Avoid folder sprawl |
+| Open | Chief Engineering Penny | To assign | Reliable Connector Execution Layer | Turn design note into operation-ledger schema and implementation packet outline | Current Engineering track | Source: ADV-20260704-002; Drive design note created |
 | Open | Chief Wellness HQ | To assign | Begin wellness operations | Use Chief Wellness HQ for primary care, vision, sleep, food, movement, preventive care, or routine support when Rob is ready | When useful | Keep sensitive details outside GitHub |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
 | Open | Life OS Infrastructure | REF-004 | Observe Engineering HQ Daily Sync pilot | Confirm whether scheduled sync runs correctly before rolling out more HQ sync workers | Next scheduled run | Engineering HQ Daily Sync is first pilot at 6:00 AM America/Chicago |
@@ -45,6 +46,7 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-04 | Chief Engineering Penny | ADV-20260704-002 ingested | Reliable Connector Execution Layer created as first concrete Engineering research track; Drive design note created. |
 | 2026-07-04 | Chief Business HQ | ADV-20260704-001 ingested | Business research, Drive architecture issue, and reboot-state update consumed by Life Logistics HQ. |
 | 2026-07-03 | Life OS Infrastructure | ADV-20260703-009 acknowledged | Daily HQ sync pilot architecture recorded; standalone watcher superseded as preferred slot usage. |
 | 2026-07-03 | Recovery Logistics | ADV-20260703-008 acknowledged | Recovery Meeting Notes Workdesk recognized; both Life Logistics and Main Assistant consumed advisory. |
