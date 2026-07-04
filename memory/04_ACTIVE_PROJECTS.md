@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Purpose: High-level Life OS project map.
 
 ## Operating Rule
@@ -22,9 +22,9 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Work Search | `projects/job-search/` | REF-001 | Active | Prepare and continue targeted applications |
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options |
 | Active | Chief of Finance Penny | `projects/finance-benefits/` | REF-003 | Active | Use Drive Checkbook Register as primary ledger when Rob is ready |
-| Active | Chief Business HQ | `projects/business-development/` | To assign | Active | Use for business ideas, product strategy, branding, market research, offers, and monetization |
-| Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Use for technical architecture, repository strategy, automations, APIs, data models, testing, and implementation planning |
-| Active | Life OS Registry | `projects/life-os-infrastructure/` | REF-004 | Active | Use registry IDs as foreign keys |
+| Active | Chief Business HQ | `projects/business-development/` | To assign | Active | Continue positioning, unit economics, validation design, and Business Drive architecture decision |
+| Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Continue Reliable Connector Execution Layer research track |
+| Active | Life OS Registry | `projects/life-os-infrastructure/` | REF-004 | Active | Use registry IDs as foreign keys and maintain design principles / sync architecture |
 | Active | Support Pathway | `projects/caregiver-income/` | REF-005 | Active | Continue research in Drive |
 | Active | Daily Anchors | `projects/recovery-logistics/` | REF-006 | Active | Maintain routine and commitments |
 | Active | Chief Wellness HQ | `projects/wellness/` | To assign | Active | Use for wellness routines, health-adjacent logistics, appointments, and stability supports |
