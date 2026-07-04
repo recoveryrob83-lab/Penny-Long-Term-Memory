@@ -5,7 +5,9 @@ Purpose: Fast dashboard for cross-project Penny advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+| Advisory ID | Status | Board |
+|---|---|---|
+| ADV-20260703-008 | Open | `coordination/boards/recovery.md` |
 
 ## Acknowledged / Implemented Advisories
 
