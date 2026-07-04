@@ -14,6 +14,30 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Engineering Daily Sync Pilot Advisory
+
+### Summary
+
+Read and acknowledged ADV-20260703-009 from Chief Engineering Penny. Engineering HQ Daily Sync is the first scheduled HQ sync pilot.
+
+### Completed Work
+
+- Read Advisory Index, Department Event Inbox, and Engineering board.
+- Updated Life OS Infrastructure handoff.
+- Updated Scheduled Tasks README.
+- Updated Scheduled Task Index.
+- Updated global session handoff.
+- Updated Department Event Inbox.
+- Acknowledged ADV-20260703-009 in Advisory Index and Engineering board.
+
+### Decision / Lesson
+
+Daily HQ sync workers are now preferred over a standalone Advisory Watcher for scarce scheduled-task slots. Daily sync workers should consume advisories and report meaningful updates, not perform major writes or decisions unless Rob explicitly authorizes that behavior.
+
+### Open Follow-Up
+
+Observe the Engineering HQ Daily Sync pilot before rolling out Life Logistics HQ Sync, Main Assistant Sync, Chief Finance Sync, or Chief Business Sync.
+
 ## 2026-07-03 — Recovery Advisory Final Closure
 
 ### Summary
