@@ -6,16 +6,20 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260704-003 — Engineering sync completed and Reliable Connector Execution Layer next work
 
-- Status: Open
+- Status: Acknowledged
 - From: Chief Engineering Penny
 - To: Chief Engineering Penny
 - Priority: High
 
-Engineering should continue the Reliable Connector Execution Layer work from the design note and prior handoff context.
+Chief Engineering Penny re-consumed this self-addressed advisory in the active Engineering chat.
 
-## Acknowledged / Implemented Advisories
+Outcome: Engineering context is current. Reliable Connector Execution Layer remains the active first Engineering research track and is already represented in Engineering handoff/status/open loops and pending advisory notes.
 
 ### ADV-20260704-005 — Department Notebooks for long-term idea capture
 
