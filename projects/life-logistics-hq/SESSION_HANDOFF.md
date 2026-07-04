@@ -21,17 +21,9 @@ Read:
 
 Life Logistics HQ is Rob's Chief of Staff Penny for the Life OS.
 
-## Current Project Status
-
-Life Logistics HQ is Rob's Chief of Staff Penny for system coordination and durable memory curation.
-
-Main Assistant remains the everyday front desk for daily admin.
-
-Specialist departments own project-sized work.
-
 ## Current System State
 
-Life OS now includes:
+Life OS includes:
 
 - GitHub durable memory map.
 - Google Drive working records cabinet.
@@ -41,11 +33,23 @@ Life OS now includes:
 - Department advisory boards.
 - Pending Advisory Board standard.
 - Department Notebook standard.
+- Source-of-Truth and Publication Standard.
 - Advisory Index.
 - Department Event Inbox.
 - Daily HQ sync pilot model.
 - Life OS design-principles file.
 - Reliable Connector Execution Layer as the first concrete Engineering research track.
+
+## Current Architecture Standards
+
+- Pending Advisory Boards: `coordination/PENDING_ADVISORY_BOARDS.md`
+- Department Notebooks: `coordination/DEPARTMENT_NOTEBOOKS.md`
+- Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
+- Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
+
+Source/publication rule: choose the natural authoritative home first, then make every other copy clearly secondary.
+
+Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
 
 ## Current Drive Architecture Decisions
 
@@ -67,6 +71,7 @@ Business Development should be treated as a subfolder under Chief Business HQ, n
 - Maintain Department Event Inbox state for cross-department read/ingestion tracking.
 - Maintain the Pending Advisory Board standard.
 - Maintain the Department Notebook standard.
+- Maintain the source-of-truth and publication standard.
 - Track scheduled-task architecture findings at an abstract level.
 - Protect role clarity between Main Assistant, Life Logistics HQ, and specialist departments.
 
@@ -79,6 +84,7 @@ Source-of-truth files:
 - `coordination/boards/` contains department advisory details.
 - `coordination/PENDING_ADVISORY_BOARDS.md` contains the standard pending-board workflow.
 - `coordination/DEPARTMENT_NOTEBOOKS.md` contains the standard department-notebook workflow.
+- `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` contains the ownership/publication workflow.
 
 When Life Logistics HQ creates or consumes an advisory:
 
@@ -91,37 +97,13 @@ When Life Logistics HQ creates or consumes an advisory:
 
 Todoist is Rob's personal task system. Department Event Inbox is the system synchronization register.
 
-## Pending Advisory Board Workflow
+## Local Capture Workflows
 
 Pending Advisory Boards are local department staging notebooks, not routed advisory channels.
 
-Standard procedure:
-
-- `coordination/PENDING_ADVISORY_BOARDS.md`
-
-Optional local department board pattern:
-
-- `projects/<department-folder>/PENDING_ADVISORIES.md`
-
-Create local pending boards only when needed. Do not create empty pending boards across all departments by default.
-
-Pending items should not update the Advisory Index, Department Event Inbox, Todoist, or other department boards until deliberately promoted into formal advisories.
-
-## Department Notebook Workflow
-
 Department Notebooks are optional local sketchpads for durable idea capture.
 
-Standard procedure:
-
-- `coordination/DEPARTMENT_NOTEBOOKS.md`
-
-Optional local department notebook pattern:
-
-- `projects/<department-folder>/NOTEBOOK.md`
-
-Create notebooks only when useful. Do not create empty notebooks across all departments by default.
-
-Notebook entries should not update the Advisory Index, Department Event Inbox, Todoist, open loops, or other department boards unless deliberately promoted.
+Create local pending boards or notebooks only when useful. Do not create empty files across all departments by default.
 
 ## Scheduled HQ Sync Model
 
@@ -140,7 +122,7 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 
 ## Source Systems
 
-- GitHub: durable memory map, handoffs, project state, advisory structure, pending advisory standard, department notebook standard, Department Event Inbox, scheduled-task notes, design principles, Captain's Log.
+- GitHub: durable memory map, handoffs, project state, advisory structure, pending advisory standard, department notebook standard, source/publication standard, Department Event Inbox, scheduled-task notes, design principles, Captain's Log.
 - Google Drive: working records and detailed artifacts.
 - Todoist: Rob-facing action queue.
 - Calendar: timed commitments.
@@ -163,14 +145,12 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 - Life Logistics HQ and Main Assistant are separate roles.
 - Main Assistant is the daily operations desk.
 - Life Logistics HQ is the Chief of Staff and system curator.
-- Morning Meditation / Daily Meditation is a Recovery workbench, not a separate department.
-- Scheduled sync workers are experimental read/report workers, not department replacements.
-- Chief of Finance Penny / CFO Penny is the finance department; Drive Checkbook Register is the working ledger.
 - Department Event Inbox owns system synchronization state. Todoist owns Rob-facing actions.
 - Design principles govern whether new platforms enter Life OS.
 - Business Drive architecture: `Life Organization > Chief Business HQ > Business Development`.
 - Pending Advisory Boards are local staging notebooks, not routed advisory channels.
 - Department Notebooks are optional local sketchpads, not routing or source-of-truth systems.
+- Source-of-truth rule: choose the natural authoritative home first; every other copy is secondary.
 
 ## Immediate Next Actions
 
