@@ -5,20 +5,24 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260704-001 — Business HQ research, Drive architecture, and reboot-state update needed
 
 - Date: 2026-07-04
 - From: Chief Business HQ
 - To: Life Logistics HQ
 - Priority: High
-- Status: Open
+- Status: Acknowledged
 - Board: `coordination/boards/business.md`
 
 #### Summary
 
 Chief Business HQ completed a large Penny Platform business-development work session that materially changed project context.
 
-Life Logistics HQ should treat this advisory as open.
+Life Logistics HQ re-consumed this advisory during the 2026-07-04 daily boot and sync.
 
 #### Durable State
 
@@ -42,8 +46,6 @@ Candidate business model paths:
 #### Remaining Open Loop
 
 Business Drive architecture is not settled. Life Logistics / Rob should decide whether to keep the earlier `Chief Business HQ` folder, use the newer `Business Development` path, or maintain both with clear distinctions before Business HQ creates many more artifacts.
-
-## Acknowledged / Implemented Advisories
 
 ### ADV-20260704-002 — Drive connector reliability is a major Penny product risk
 
