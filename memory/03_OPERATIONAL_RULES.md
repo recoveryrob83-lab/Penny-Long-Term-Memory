@@ -11,15 +11,14 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 
 ## Source of Truth Rules
 
-As of the GitHub migration work on 2026-07-02:
-
-- GitHub is being promoted to the preferred durable source for long-term memory, boot files, handoffs, operating rules, active projects, and open loops.
-- Google Drive remains the operational workspace for Docs, Sheets, checkbook tracking, generated files, job-search working documents, and other human-readable artifacts.
+- GitHub is the preferred durable source for long-term memory, boot files, handoffs, operating rules, active projects, and open loops.
+- Google Drive remains the operational workspace for Docs, Sheets, checkbook tracking, generated files, job-search working documents, and human-readable artifacts.
 - Todoist is the Rob-facing action queue.
 - Google Calendar is the timed commitments queue.
 - Gmail is communication evidence.
 - `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
+- `coordination/boards/` contains formal department advisory boards.
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
 - `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
 - `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` is the standard for authoritative homes and publication copies.
@@ -27,7 +26,25 @@ As of the GitHub migration work on 2026-07-02:
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
 
-Label unverified facts clearly.
+## Advisory and Department Event Rules
+
+Formal Life OS advisories must be posted to the proper advisory routing files:
+
+1. The source department board under `coordination/boards/`.
+2. `coordination/ADVISORY_INDEX.md`.
+3. `coordination/DEPARTMENT_EVENT_INBOX.md`.
+
+GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
+
+Do not create, track, route, or close formal Life OS advisories through GitHub Issues.
+
+The Advisory Index is the official dashboard for formal advisory state.
+
+The Department Event Inbox is the working notification/register layer for department read and ingestion state.
+
+Todoist should not be used as the source of truth for department synchronization state.
+
+For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
 
 ## Source-of-Truth and Publication Rule
 
@@ -52,18 +69,6 @@ Design principles are stable architecture guardrails, not implementation details
 Current platform-adoption principle: no new platform enters the Life OS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
 
 Prefer fewer platforms with clearer ownership over more platforms with overlapping responsibilities.
-
-## Advisory and Department Event Rules
-
-Advisory boards live under `coordination/boards/`.
-
-The Advisory Index is the official dashboard for advisory state.
-
-The Department Event Inbox is the working notification/register layer for department read and ingestion state.
-
-Todoist should not be used as the source of truth for department synchronization state.
-
-For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
 
 ## Pending Advisory Board Rules
 
@@ -107,13 +112,7 @@ Daily HQ sync workers are the preferred scheduled-task experiment for core HQs.
 
 The standalone Advisory Watcher is no longer the preferred scheduled-task slot usage; its useful reporting logic is folded into daily HQ sync prompts.
 
-Scheduled HQ sync workers should:
-
-- Boot into the correct department identity.
-- Read current boot, handoff, Advisory Index, and Department Event Inbox context.
-- Consume advisories addressed to that department.
-- Report meaningful updates, routing needs, documentation recommendations, or issues.
-- Avoid modifying GitHub, Google Drive, Todoist, Calendar, Gmail, or other systems unless Rob explicitly authorizes that behavior.
+Scheduled HQ sync workers should boot into the correct department identity, read current boot/handoff/advisory context, consume advisories addressed to that department, report meaningful updates, and avoid modifying systems unless Rob explicitly authorizes that behavior.
 
 Engineering HQ Daily Sync is the first pilot. Observe results before rolling out additional daily sync workers.
 
