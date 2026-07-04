@@ -17,30 +17,39 @@ When Job Search HQ posts an advisory for another department:
 
 ## Open Advisories
 
+None.
+
+## Acknowledged Advisories
+
 ### ADV-20260703-011 — Local job-search location design rule
 
 - Date: 2026-07-03
 - From: Job Search HQ / Work Search
 - To: Life Logistics HQ
 - Priority: Medium
-- Status: Open
+- Status: Acknowledged
 - Subject: Local job searches should use nearby employment hubs and corridors, not only Cahokia/Cahokia Heights
 
 #### Summary
 
-Job Search HQ observed that Indeed and web-style searches anchored too tightly on `Cahokia` or `Cahokia Heights` can miss nearby practical job postings. Some relevant employers label postings under nearby hubs such as Fairview Heights, Belleville, East St. Louis, Sauget, Collinsville, or O'Fallon even when those jobs may still be geographically practical for Rob.
+Job Search HQ observed that city-name searches anchored too tightly on Cahokia or Cahokia Heights can miss practical nearby job postings.
 
-#### Why It Matters
+#### Acknowledgement / Outcome
 
-For work-search logistics, city-name searches are an imperfect proxy for actual commute fit. Job discovery should use nearby employment hubs and commute corridors, then evaluate the real transportation/support fit afterward.
+Life Logistics HQ read and ingested this advisory.
 
-#### Suggested Design Rule
+Updates completed:
 
-Do not rely only on Cahokia/Cahokia Heights as the job-search location. For local job discovery, search nearby employment hubs and corridors, then evaluate actual commute fit, pay, schedule, and recovery-support compatibility.
+- Job Search session handoff updated.
+- Job Search README updated.
+- Department Event Inbox updated.
+- Advisory Index updated.
 
-#### Suggested Life Logistics Action
+#### Durable Rule
 
-Life Logistics HQ should consider recording this as a durable Job Search design rule or coordination note, especially for future search packets, daily-life routing, and any commute-aware job-search workflows.
+For local job discovery, search nearby employment hubs and commute corridors, then evaluate actual commute fit, pay, schedule, and recovery-support compatibility afterward.
+
+Nearby search labels may include Fairview Heights, Belleville, East St. Louis, Sauget, Collinsville, O'Fallon, and other practical Metro East / nearby St. Louis-area options when appropriate.
 
 ## Notes
 
