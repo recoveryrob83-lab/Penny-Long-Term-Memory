@@ -26,7 +26,9 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 ## Current Open / Pending Events
 
-None.
+| Event ID | Source | Target(s) | Status | Subject | Notes |
+|---|---|---|---|---|---|
+| ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | New | Discretionary Purchase Pause Rule routing reinforcement | Logistics should reinforce routing discretionary spending decisions to Finance HQ while keeping live financial goals and numbers in Drive. |
 
 ## Recent Closed / Ingested Events
 
@@ -44,6 +46,7 @@ None.
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|
+| ADV-20260704-008 | Life Logistics HQ | Unread | Pending | Logistics should reinforce Discretionary Purchase Pause Rule routing context. |
 | ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
 | ADV-20260704-006 | Life Logistics HQ | Read | Ingested | Source-of-Truth and Publication Standard adopted. |
 | ADV-20260704-003 | Chief Engineering Penny | Read | Ingested | Engineering re-consumed and closed self-addressed continuation advisory. |
