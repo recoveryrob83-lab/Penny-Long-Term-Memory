@@ -6,6 +6,112 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+### ADV-20260704-004 — Department Pending Advisory Boards
+
+- Date: 2026-07-04
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: High
+- Status: Open
+- Board: `coordination/boards/engineering.md`
+
+#### Summary
+
+Engineering recommends adding a Pending Advisory Board to each specialist department.
+
+The purpose is to capture architectural ideas, operational improvements, design principles, workflow suggestions, and possible future advisories as they naturally arise during conversation without requiring immediate formal advisories.
+
+This creates a staging area between discussion and durable cross-department coordination.
+
+#### Problem Statement
+
+As Life OS has grown, useful engineering, business, and operational ideas emerge during normal discussion faster than durable architecture should change.
+
+Creating a formal advisory immediately for each idea creates:
+
+- Excessive advisory traffic.
+- Frequent context switching.
+- Increased cognitive load for Rob.
+- Pressure to synchronize departments immediately.
+- A tendency to treat advisories like instant messages rather than deliberate coordination records.
+
+This is especially costly because Rob is currently acting as the human router between departments.
+
+#### Proposed Architecture
+
+Each active department should maintain its own Pending Advisory Board.
+
+Examples:
+
+- Engineering Pending Advisory Board.
+- Business Pending Advisory Board.
+- Life Logistics Pending Advisory Board.
+- Finance Pending Advisory Board.
+- Main Assistant Pending Advisory Board.
+
+The board is a staging list, not a published advisory board.
+
+During conversation, Rob may say something like:
+
+`Add this to the Pending Advisory Board.`
+
+The department should record the item without immediately creating a formal advisory, without updating the Department Event Inbox, and without routing the item to other departments.
+
+#### Advisory Promotion
+
+At an appropriate time, such as nightly review or a deliberate advisory sync, Rob may instruct a department to process its Pending Advisory Board.
+
+The department should then:
+
+1. Review pending items.
+2. Merge duplicates where appropriate.
+3. Group related ideas.
+4. Draft one or more formal GitHub advisories only for items that need cross-department routing.
+5. Clear only the pending items that were successfully converted into advisories or intentionally dismissed.
+
+This changes advisories from immediate notifications into deliberate architecture and coordination decisions.
+
+#### Design Principles
+
+This proposal supports existing Life OS principles:
+
+- One tool, one responsibility.
+- Synchronization should be intentional rather than interrupt-driven.
+- Durable memory should capture decisions, not every intermediate thought.
+- Reduce cognitive load whenever possible.
+- Optimize for predictable workflows instead of immediate reactions.
+- Departments should consume advisory state during sync rather than treating every advisory as an instant interruption.
+
+#### Expected Benefits
+
+- Reduces advisory volume.
+- Reduces context switching.
+- Reduces Rob's cognitive load.
+- Improves advisory quality through batching and refinement.
+- Separates idea capture from cross-department coordination.
+- Makes nightly or periodic housekeeping sessions more efficient.
+- Helps Life OS work with ADHD-style capture needs without turning every thought into an interrupt.
+
+#### Requested Life Logistics HQ Action
+
+1. Determine the durable location and naming pattern for each department's Pending Advisory Board.
+2. Decide whether pending boards live in GitHub, Drive, or another existing Life OS surface.
+3. Update operational documentation if adopted.
+4. Recommend a standard format so all departments use the same workflow.
+5. Preserve the distinction between:
+   - Pending Advisory Boards: idea/advisory staging.
+   - Department Advisory Boards: published advisories.
+   - Department Event Inbox: synchronization/read/ingestion state.
+6. Decide whether Pending Advisory Boards should be checked during department sync boot.
+
+#### Engineering Recommendation
+
+Adopt Pending Advisory Boards as a standard Life OS pattern.
+
+Treat them as temporary department notebooks rather than communication channels.
+
+Formal GitHub advisories should represent reviewed, intentional decisions rather than every useful thought generated during conversation.
+
 ### ADV-20260704-003 — Engineering sync completed and Reliable Connector Execution Layer next work
 
 - Date: 2026-07-04
