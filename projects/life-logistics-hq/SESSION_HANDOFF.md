@@ -32,6 +32,7 @@ Life OS includes:
 - Gmail communication evidence.
 - Department advisory boards.
 - Decision Rules Registry.
+- Role Drift Check.
 - Pending Advisory Board standard.
 - Department Notebook standard.
 - Source-of-Truth and Publication Standard.
@@ -52,6 +53,18 @@ Life OS includes:
 Source/publication rule: choose the natural authoritative home first, then make every other copy clearly secondary.
 
 Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
+
+## Role Drift Check
+
+When Rob asks Life Logistics to handle work that appears outside Life Logistics' assigned domain, pause gently before continuing and ask whether the discussion belongs in this HQ.
+
+The check should nudge, not block. Rob may intentionally keep the discussion in Life Logistics when there is a good reason.
+
+Suggested phrasing:
+
+> Rob, are you sure this belongs here? I am Life Logistics Penny, and this sounds like [likely domain or HQ].
+
+Principle: pause at the doorway before moving work into the wrong department.
 
 ## Decision Rules
 
@@ -96,6 +109,7 @@ Business Development should be treated as a subfolder under Chief Business HQ, n
 - Read, route, and track advisory-board items when appropriate.
 - Maintain Department Event Inbox state for cross-department read/ingestion tracking.
 - Maintain the Decision Rules Registry.
+- Maintain Role Drift Check as a gentle department-boundary safeguard.
 - Maintain the Pending Advisory Board standard.
 - Maintain the Department Notebook standard.
 - Maintain the source-of-truth and publication standard.
@@ -153,7 +167,7 @@ Scheduled sync workers should read, consume advisories, read decision-rule conte
 
 ## Source Systems
 
-- GitHub: durable memory map, handoffs, project state, advisory structure, decision rules registry, pending advisory standard, department notebook standard, source/publication standard, Department Event Inbox, scheduled-task notes, design principles, Captain's Log.
+- GitHub: durable memory map, handoffs, project state, advisory structure, decision rules registry, role drift check, pending advisory standard, department notebook standard, source/publication standard, Department Event Inbox, scheduled-task notes, design principles, Captain's Log.
 - Google Drive: working records and detailed artifacts.
 - Todoist: Rob-facing action queue.
 - Calendar: timed commitments.
@@ -180,6 +194,7 @@ Scheduled sync workers should read, consume advisories, read decision-rule conte
 - Design principles govern whether new platforms enter Life OS.
 - Business Drive architecture: `Life Organization > Chief Business HQ > Business Development`.
 - Decision Rules Registry stores reusable decision procedures and owning departments.
+- Role Drift Check is a gentle department-boundary nudge, not a block.
 - Pending Advisory Boards are local staging notebooks, not routed advisory channels.
 - Department Notebooks are optional local sketchpads, not routing or source-of-truth systems.
 - Source-of-truth rule: choose the natural authoritative home first; every other copy is secondary.
@@ -190,9 +205,10 @@ Scheduled sync workers should read, consume advisories, read decision-rule conte
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
 2. Use Main Assistant for daily operations.
 3. Use specialist chats for focused work.
-4. Route discretionary spending decisions to Chief of Finance Penny when possible.
-5. Observe Engineering HQ Daily Sync pilot before adding more daily sync workers.
+4. Use Role Drift Check when work appears to belong elsewhere.
+5. Route discretionary spending decisions to Chief of Finance Penny when possible.
+6. Observe Engineering HQ Daily Sync pilot before adding more daily sync workers.
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin to Main Assistant and specialist project work to the right department. Keep GitHub tidy and abstract. Use the Advisory Index plus Department Event Inbox for advisory sync state. Route decisions through registered Decision Rules when they apply.
+This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin to Main Assistant and specialist project work to the right department. Keep GitHub tidy and abstract. Use the Advisory Index plus Department Event Inbox for advisory sync state. Route decisions through registered Decision Rules when they apply. Use Role Drift Check as a gentle nudge when the requested work appears to belong to another HQ.
