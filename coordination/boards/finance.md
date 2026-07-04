@@ -18,24 +18,29 @@ Keep Finance advisories abstract and non-sensitive.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260704-007 — Finance advisory routing surface refresh
 
 - Date: 2026-07-04
 - From: Life Logistics HQ
 - To: Chief of Finance Penny
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Ingested
 - Board: `coordination/boards/finance.md`
+- Ingested by: Chief of Finance Penny
 
 #### Summary
 
-Finance HQ should re-sync to the formal Life OS advisory routing rule.
+Finance HQ re-synced to the formal Life OS advisory routing rule.
 
 Formal advisories belong in the advisory routing files, not GitHub Issues.
 
-#### Required Finance Ingestion
+#### Finance Ingestion Completed
 
-Chief of Finance Penny should update its working context to reflect:
+Chief of Finance Penny has updated working context to reflect:
 
 1. Finance formal advisory board: `coordination/boards/finance.md`.
 2. Advisory dashboard: `coordination/ADVISORY_INDEX.md`.
@@ -45,8 +50,4 @@ Chief of Finance Penny should update its working context to reflect:
 
 #### Special Note
 
-If any Finance advisory was previously represented only as a GitHub Issue, it should be re-created through the proper advisory routing files before Life Logistics is expected to consume it.
-
-## Acknowledged / Implemented Advisories
-
-None yet.
+Any Finance advisory previously represented only as a GitHub Issue should be re-created through the proper advisory routing files before Life Logistics is expected to consume it.
