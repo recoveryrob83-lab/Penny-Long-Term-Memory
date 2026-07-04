@@ -6,7 +6,7 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, an emerging daily HQ sync procedure, a durable design-principles file, and the first concrete Engineering research track for Penny product reliability.
+Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, Pending Advisory Boards, a Department Event Inbox, an emerging daily HQ sync procedure, a durable design-principles file, and the first concrete Engineering research track for Penny product reliability.
 
 The core architecture remains:
 
@@ -18,6 +18,7 @@ The core architecture remains:
 - Project chats create project knowledge.
 - Life Logistics HQ curates cross-project operational memory.
 - Main Assistant handles daily operations.
+- Pending Advisory Boards stage possible advisories locally without routing.
 - The Department Event Inbox tracks abstract department sync/read/ingestion state.
 - Daily HQ sync workers may report routing needs and consume advisories, but they do not own source-of-truth state.
 - Life OS design principles live in `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
@@ -31,7 +32,26 @@ Business Drive architecture is resolved:
 
 Business Development is a subfolder under Chief Business HQ, not a separate top-level business root.
 
+Pending Advisory Boards are adopted as a standard Life OS pattern:
+
+- Standard procedure: `coordination/PENDING_ADVISORY_BOARDS.md`
+- Optional local board pattern: `projects/<department-folder>/PENDING_ADVISORIES.md`
+
+Pending boards are local staging notebooks, not routed advisory channels. They do not update Advisory Index, Department Event Inbox, Todoist, or other boards until a pending item is deliberately promoted into a formal advisory.
+
 ## Recent Major Updates
+
+### Pending Advisory Boards
+
+ADV-20260704-004 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
+
+Created:
+
+- `coordination/PENDING_ADVISORY_BOARDS.md`
+
+Decision: departments may create local pending boards only when needed. Do not create empty pending boards across all departments by default.
+
+Purpose: capture possible advisories, architecture ideas, workflow improvements, design principles, and cross-department issues without forcing immediate routing or synchronization.
 
 ### Chief Engineering Penny / Reliable Connector Execution Layer
 
@@ -120,6 +140,7 @@ Pending rollout decision after Engineering pilot:
 
 ## Recent Work Completed
 
+- Adopted Pending Advisory Boards as a Life OS standard pattern.
 - Recorded canonical Business Drive architecture: `Life Organization > Chief Business HQ > Business Development`.
 - Read and ingested ADV-20260704-002 from Chief Business HQ into Engineering; created Reliable Connector Execution Layer design note and research track.
 - Read and ingested ADV-20260704-001 from Chief Business HQ and updated Business HQ reboot context.
@@ -148,6 +169,7 @@ Calendar owns time.
 Todoist owns Rob-facing actions.
 Gmail owns communications.
 Captain's Log records meaningful operational sessions.
+Pending Advisory Boards stage ideas locally.
 Department Event Inbox tracks system synchronization state.
 Daily HQ sync workers report and consume advisory state only unless Rob explicitly authorizes writes.
 Design principles govern whether new platforms enter Life OS.
