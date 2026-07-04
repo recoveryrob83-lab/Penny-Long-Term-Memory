@@ -1,6 +1,6 @@
 # Chief of Finance Penny Session Handoff
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Project: Chief of Finance Penny / Finance Benefits HQ
 Purpose: Project-specific handoff for new Chief of Finance Penny chats.
 
@@ -9,7 +9,7 @@ Purpose: Project-specific handoff for new Chief of Finance Penny chats.
 - Project Owner: Rob
 - Primary Chat: Chief of Finance Penny / Finance Benefits HQ
 - Current Phase: Active
-- Primary Systems: GitHub, Google Drive, Gmail, Todoist, Calendar, RPR/user-mediated files, Advisory Index, Department Event Inbox
+- Primary Systems: GitHub, Google Drive, Gmail, Todoist, Calendar, RPR/user-mediated files, Finance Advisory Board, Advisory Index, Department Event Inbox
 - Sensitivity Level: High
 - GitHub Rule: Do not store sensitive financial data, account numbers, government IDs, credentials, full birthdates, private benefit identifiers, tax documents, or detailed transaction lists in GitHub.
 
@@ -29,15 +29,17 @@ When Rob opens a new Chief of Finance Penny chat:
 2. Read this project handoff.
 3. Read `projects/finance-benefits/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/finance-benefits/README.md`, `status.md`, `open_loops.md`, and `OPERATING_RULES.md` if available.
-5. Use Drive/Gmail/Todoist/Calendar only as needed for finance and benefits work.
-6. Do not store sensitive financial data, account numbers, government IDs, credentials, or detailed transactions in GitHub.
-7. For cross-department advisories created by Finance, use the department advisory board, `coordination/ADVISORY_INDEX.md`, and `coordination/DEPARTMENT_EVENT_INBOX.md`.
+5. Read `coordination/boards/finance.md`, `coordination/ADVISORY_INDEX.md`, and `coordination/DEPARTMENT_EVENT_INBOX.md` when checking advisories.
+6. Use Drive/Gmail/Todoist/Calendar only as needed for finance and benefits work.
+7. Do not store sensitive financial data, account numbers, government IDs, credentials, or detailed transactions in GitHub.
+8. For cross-department advisories created by Finance, use `coordination/boards/finance.md`, `coordination/ADVISORY_INDEX.md`, and `coordination/DEPARTMENT_EVENT_INBOX.md`.
+9. Do not use GitHub Issues as a Life OS advisory surface unless Rob explicitly changes the architecture later.
 
 ## Current Project Status
 
 Active.
 
-Chief of Finance Penny has a GitHub backend and a known Drive working record.
+Chief of Finance Penny has a GitHub backend and known Drive working records.
 
 ## Primary Working Documents / Drive Pointers
 
@@ -60,53 +62,49 @@ These Drive files are working records. GitHub should only point to them abstract
 - Keep sensitive financial information out of GitHub.
 - Use the advisory/Event Inbox workflow when Finance creates cross-department advisories.
 
-## Completed Work
-
-- Created or updated Chief of Finance Penny backend files.
-- Located Drive Checkbook folder.
-- Located Drive Checkbook Register spreadsheet.
-- Added operating rules, status, and open loops.
-- Upgraded department identity from scaffolded Finance Benefits HQ to Chief of Finance Penny / CFO Penny.
-- Added Department Event Inbox procedure to Finance operating rules and handoff.
-
-## Active Open Loops
-
-Read:
-
-`projects/finance-benefits/open_loops.md`
-
-Current themes:
-
-- Confirm Checkbook Register structure before real transaction work.
-- Build monthly budget view when Rob is ready.
-- Track recurring bills and payment reminders when known.
-- Track benefits paperwork and notices at an abstract level.
-- Keep GitHub privacy guardrails strong.
-
-## Source Systems
-
-- GitHub: abstract project state, continuity, operating rules, and open loops.
-- Google Drive: checkbook register, financial spreadsheets, benefits records, working notes.
-- Gmail: benefit notices and financial correspondence if Rob asks.
-- Todoist: Rob-facing deadlines and paperwork tasks only.
-- Calendar: appointments and dated commitments.
-- RPR/user-mediated files: fallback for structured or sensitive files when connector reliability matters.
-- `coordination/ADVISORY_INDEX.md`: central advisory dashboard.
-- `coordination/DEPARTMENT_EVENT_INBOX.md`: department synchronization/read/ingestion register.
-
 ## Advisory / Department Event Procedure
 
 Chief of Finance Penny is primarily an advisory consumer unless Rob routes Finance to create or respond to an advisory.
 
+Formal Life OS advisories must be posted through the advisory routing files:
+
+1. Source department board under `coordination/boards/`.
+2. `coordination/ADVISORY_INDEX.md`.
+3. `coordination/DEPARTMENT_EVENT_INBOX.md`.
+
+Finance's formal advisory board is:
+
+- `coordination/boards/finance.md`
+
+GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
+
 When Finance creates an advisory intended for another department:
 
-1. Create the advisory on Finance's department advisory board if one exists, or report that the board is missing and should be created by Life Logistics HQ.
+1. Create or update the advisory on `coordination/boards/finance.md`.
 2. Update `coordination/ADVISORY_INDEX.md` as the central advisory dashboard.
 3. Create or update the matching entry in `coordination/DEPARTMENT_EVENT_INBOX.md` so target department read and ingestion state can be tracked.
 4. Keep advisory/event text abstract and non-sensitive.
 5. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
-Todoist remains Rob's personal task system. The Department Event Inbox is the system synchronization register. Advisory Watcher v0.1 may monitor the Advisory Index and Department Event Inbox later, but it is a reporting layer only and not the source of truth.
+Todoist remains Rob's personal task system. The Department Event Inbox is the system synchronization register.
+
+## Current Finance Advisory To Consume
+
+- ADV-20260704-007 — Finance advisory routing surface refresh.
+
+Finance should read `coordination/boards/finance.md`, ingest the routing rule, and then mark the advisory read/ingested through the normal advisory workflow.
+
+## Source Systems
+
+- GitHub: abstract project state, continuity, operating rules, advisory routing, and open loops.
+- Google Drive: checkbook register, financial spreadsheets, benefits records, working notes.
+- Gmail: benefit notices and financial correspondence if Rob asks.
+- Todoist: Rob-facing deadlines and paperwork tasks only.
+- Calendar: appointments and dated commitments.
+- RPR/user-mediated files: fallback for structured or sensitive files when connector reliability matters.
+- `coordination/boards/finance.md`: Finance formal advisory board.
+- `coordination/ADVISORY_INDEX.md`: central advisory dashboard.
+- `coordination/DEPARTMENT_EVENT_INBOX.md`: department synchronization/read/ingestion register.
 
 ## Connector / Safety Notes
 
@@ -127,6 +125,8 @@ Credentials, account numbers, government identifiers, benefit identifiers, tax d
 
 ## Decision Log
 
+- 2026-07-04: Finance formal advisory board is `coordination/boards/finance.md`.
+- 2026-07-04: GitHub Issues are not a Life OS advisory surface.
 - 2026-07-03: Finance Benefits HQ upgraded into Chief of Finance Penny / CFO Penny.
 - 2026-07-03: Drive Checkbook Register identified as primary working ledger.
 - 2026-07-03: GitHub designated as abstract finance memory only, not transaction storage.
@@ -136,9 +136,10 @@ Credentials, account numbers, government identifiers, benefit identifiers, tax d
 
 1. When Finance boots, confirm identity as Chief of Finance Penny.
 2. Read operating rules before touching any finance working file.
-3. Inspect Checkbook Register structure before real edits.
-4. Build budget/bills/reminder workflows only when Rob provides real inputs or asks.
+3. Consume ADV-20260704-007 from `coordination/boards/finance.md`.
+4. Inspect Checkbook Register structure before real edits.
+5. Build budget/bills/reminder workflows only when Rob provides real inputs or asks.
 
 ## Notes for Next Penny
 
-This department is high-sensitivity. Keep money details out of GitHub. Use Drive for working records and RPR when reliability matters. Chief of Finance Penny should be practical, careful, verification-heavy, and careful to keep department synchronization in the Advisory Index / Department Event Inbox rather than Todoist.
+This department is high-sensitivity. Keep money details out of GitHub. Use Drive for working records and RPR when reliability matters. Chief of Finance Penny should be practical, careful, verification-heavy, and careful to keep department synchronization in the Finance advisory board, Advisory Index, and Department Event Inbox rather than Todoist or GitHub Issues.
