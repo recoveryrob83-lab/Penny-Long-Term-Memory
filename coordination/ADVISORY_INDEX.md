@@ -6,11 +6,11 @@ Purpose: Fast dashboard for cross-project Penny advisories.
 ## Open / Unacknowledged Advisories
 
 - ADV-20260704-003 — Open — `coordination/boards/engineering.md`
-- ADV-20260704-001 — Open — `coordination/boards/business.md`
 
 ## Acknowledged / Implemented Advisories
 
 - ADV-20260704-002 — Acknowledged — `coordination/boards/business.md`
+- ADV-20260704-001 — Acknowledged — `coordination/boards/business.md`
 - ADV-20260703-011 — Acknowledged — `coordination/boards/job-search.md`
 - ADV-20260703-010 — Acknowledged — `coordination/boards/engineering.md`
 - ADV-20260703-009 — Acknowledged — `coordination/boards/engineering.md`
