@@ -26,26 +26,25 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 ## Current Open / Pending Events
 
-| Event ID | Source | Target(s) | Status | Subject | Notes |
-|---|---|---|---|---|---|
-| ADV-20260704-007 | Life Logistics HQ | Chief of Finance Penny | New | Finance advisory routing surface refresh | Finance should re-sync to advisory routing files and stop treating GitHub Issues as advisory surface. |
+None.
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
+| ADV-20260704-007 | Life Logistics HQ | Chief of Finance Penny | Ingested | Finance advisory routing surface refresh | Finance re-synced to advisory routing files and stopped treating GitHub Issues as advisory surface. |
 | ADV-20260704-006 | Chief Engineering Penny | Life Logistics HQ | Closed | Source-of-truth and publication architecture | Life Logistics adopted Source-of-Truth and Publication Standard. |
 | ADV-20260704-003 | Chief Engineering Penny | Chief Engineering Penny | Closed | Engineering sync completed and connector reliability next work | Engineering re-consumed self-addressed advisory; Reliable Connector Execution Layer remains active research track. |
 | ADV-20260704-005 | Chief Engineering Penny | Life Logistics HQ | Closed | Department Notebooks for long-term idea capture | Life Logistics adopted optional Department Notebooks as a standard pattern and created the procedure file. |
 | ADV-20260704-004 | Chief Engineering Penny | Life Logistics HQ | Closed | Department Pending Advisory Boards | Life Logistics adopted Pending Advisory Boards as a standard pattern and created the procedure file. |
-| ADV-20260704-002 | Chief Business HQ | Chief Engineering Penny | Ingested | Drive connector reliability is a major Penny product risk | Engineering created Reliable Connector Execution Layer as first concrete research track. |
-| ADV-20260704-001 | Chief Business HQ | Life Logistics HQ | Closed | Business HQ research, Drive architecture, and reboot-state update needed | Life Logistics ingested; Business Drive architecture resolved as Chief Business HQ > Business Development. |
+| ADV-20260704-002 | Chief Engineering Penny | Read | Ingested | Reliable Connector Execution Layer research track created. |
+| ADV-20260704-001 | Life Logistics HQ | Read | Ingested | Business Drive architecture resolved. |
 
 ## Department Read Tracking
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
-|---|---|---|---|---|
-| ADV-20260704-007 | Chief of Finance Penny | Unread | Pending | Finance should re-sync advisory routing rule and Finance board location. |
+|---|---|---|---|
+| ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
 | ADV-20260704-006 | Life Logistics HQ | Read | Ingested | Source-of-Truth and Publication Standard adopted. |
 | ADV-20260704-003 | Chief Engineering Penny | Read | Ingested | Engineering re-consumed and closed self-addressed continuation advisory. |
 | ADV-20260704-005 | Life Logistics HQ | Read | Ingested | Department Notebook standard adopted. |
