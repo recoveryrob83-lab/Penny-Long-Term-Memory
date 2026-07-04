@@ -9,7 +9,7 @@ Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 - Project Owner: Rob
 - Primary Chat: Life Logistics HQ
 - Current Phase: Active / Cross-Project Coordination
-- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, Advisory Boards, Department Event Inbox, Scheduled Task Notes, RPR/user-mediated files
+- Primary Systems: GitHub, Google Drive, Todoist, Calendar, Gmail, Contacts, Advisory Boards, Pending Advisory Boards, Department Event Inbox, Scheduled Task Notes, RPR/user-mediated files
 - Sensitivity Level: Moderate
 - GitHub Rule: Keep GitHub abstract and organized.
 
@@ -39,6 +39,7 @@ Life OS now includes:
 - Calendar timed commitments.
 - Gmail communication evidence.
 - Department advisory boards.
+- Pending Advisory Board standard.
 - Advisory Index.
 - Department Event Inbox.
 - Daily HQ sync pilot model.
@@ -63,6 +64,7 @@ Business Development should be treated as a subfolder under Chief Business HQ, n
 - Run startup refreshes and nightly housekeeping when Rob asks.
 - Read, route, and track advisory-board items when appropriate.
 - Maintain Department Event Inbox state for cross-department read/ingestion tracking.
+- Maintain the Pending Advisory Board standard.
 - Track scheduled-task architecture findings at an abstract level.
 - Protect role clarity between Main Assistant, Life Logistics HQ, and specialist departments.
 
@@ -73,6 +75,7 @@ Source-of-truth files:
 - `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
 - `coordination/boards/` contains department advisory details.
+- `coordination/PENDING_ADVISORY_BOARDS.md` contains the standard pending-board workflow.
 
 When Life Logistics HQ creates or consumes an advisory:
 
@@ -84,6 +87,22 @@ When Life Logistics HQ creates or consumes an advisory:
 6. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
 Todoist is Rob's personal task system. Department Event Inbox is the system synchronization register.
+
+## Pending Advisory Board Workflow
+
+Pending Advisory Boards are local department staging notebooks, not routed advisory channels.
+
+Standard procedure:
+
+- `coordination/PENDING_ADVISORY_BOARDS.md`
+
+Optional local department board pattern:
+
+- `projects/<department-folder>/PENDING_ADVISORIES.md`
+
+Create local pending boards only when needed. Do not create empty pending boards across all departments by default.
+
+Pending items should not update the Advisory Index, Department Event Inbox, Todoist, or other department boards until deliberately promoted into formal advisories.
 
 ## Scheduled HQ Sync Model
 
@@ -102,7 +121,7 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 
 ## Source Systems
 
-- GitHub: durable memory map, handoffs, project state, advisory structure, Department Event Inbox, scheduled-task notes, design principles, Captain's Log.
+- GitHub: durable memory map, handoffs, project state, advisory structure, pending advisory standard, Department Event Inbox, scheduled-task notes, design principles, Captain's Log.
 - Google Drive: working records and detailed artifacts.
 - Todoist: Rob-facing action queue.
 - Calendar: timed commitments.
@@ -131,6 +150,7 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 - Department Event Inbox owns system synchronization state. Todoist owns Rob-facing actions.
 - Design principles govern whether new platforms enter Life OS.
 - Business Drive architecture: `Life Organization > Chief Business HQ > Business Development`.
+- Pending Advisory Boards are local staging notebooks, not routed advisory channels.
 
 ## Immediate Next Actions
 
