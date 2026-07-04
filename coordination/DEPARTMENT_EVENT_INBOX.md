@@ -53,11 +53,19 @@ Life OS design principles live in:
 
 No new platform enters Life OS until it solves a measured problem that cannot be cleanly solved by an existing component.
 
+## Pending Advisory Board Note
+
+Pending Advisory Board standard lives in:
+
+- `coordination/PENDING_ADVISORY_BOARDS.md`
+
+Pending boards are local department staging notebooks, not routed advisory channels.
+
 ## Event Register
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
-| ADV-20260704-004 | 2026-07-04 | Chief Engineering Penny | Life Logistics HQ | High | New | Department Pending Advisory Boards | `coordination/boards/engineering.md` | Proposed staging boards so departments can capture potential advisories without immediate routing or sync interruption. |
+| ADV-20260704-004 | 2026-07-04 | Chief Engineering Penny | Life Logistics HQ | High | Closed | Department Pending Advisory Boards | `coordination/boards/engineering.md` | Life Logistics adopted Pending Advisory Boards as a standard pattern and created the procedure file. |
 | ADV-20260704-003 | 2026-07-04 | Chief Engineering Penny | Chief Engineering Penny | High | New | Engineering sync completed and connector reliability next work | `coordination/boards/engineering.md` | Self-addressed advisory for next Engineering continuation packet. |
 | ADV-20260704-002 | 2026-07-04 | Chief Business HQ | Chief Engineering Penny | High | Ingested | Drive connector reliability is a major Penny product risk | `coordination/boards/business.md` | Engineering ingested advisory and created Reliable Connector Execution Layer as first concrete research track. |
 | ADV-20260704-001 | 2026-07-04 | Chief Business HQ | Life Logistics HQ | High | Closed | Business HQ research, Drive architecture, and reboot-state update needed | `coordination/boards/business.md` | Life Logistics re-consumed during daily boot; Business Drive architecture resolved as Chief Business HQ > Business Development. |
@@ -75,7 +83,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
-| ADV-20260704-004 | Life Logistics HQ | Unread | Pending | Proposed Pending Advisory Board pattern needs Life Logistics review and standard-location decision. |
+| ADV-20260704-004 | Life Logistics HQ | Read | Ingested | Pending Advisory Board standard adopted. |
 | ADV-20260704-003 | Chief Engineering Penny | Unread | Pending | Self-addressed advisory for next Engineering continuation packet. |
 | ADV-20260704-002 | Chief Engineering Penny | Read | Ingested | Engineering status, handoff, and open loops updated; Reliable Connector Execution Layer research track created. |
 | ADV-20260704-001 | Life Logistics HQ | Read | Ingested | Re-consumed during 2026-07-04 daily boot; Business Drive architecture resolved. |
