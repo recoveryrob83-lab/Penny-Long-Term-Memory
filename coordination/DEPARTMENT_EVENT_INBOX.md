@@ -29,12 +29,13 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| ADV-20260704-011 | Main Assistant | Life Logistics HQ | Open | Department consolidation and archival request | Life Logistics should consume Main Assistant source-board advisory and update project map/routing to consolidate Caregiver and Job Search into Main Assistant, archive Recovery and Philosophy until needed, and preserve project history. |
+| None | - | - | - | - | - |
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
+| ADV-20260704-011 | Main Assistant | Life Logistics HQ | Closed | Department consolidation and archival request | Life Logistics updated active project map; several departments consolidated or marked dormant. Some secondary handoff/open-loop rewrites were blocked by connector safety checks. |
 | ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Closed | Decision Rules Registry and Role Drift Check architecture adopted | All boards reported read and ingested. Departments should use Decision Rules Registry and Role Drift Check going forward. |
 | ADV-20260704-009 | Chief Engineering Penny | Life Logistics HQ | Closed | Role Drift Check for Penny HQs | Life Logistics added Role Drift Check to Operating Rules and handoff as a gentle department-boundary safeguard. |
 | ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | Closed | Discretionary Purchase Pause Rule routing reinforcement | Life Logistics updated handoff to route discretionary spending decisions to Finance HQ while keeping live financial context out of GitHub. |
@@ -50,7 +51,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
-| ADV-20260704-011 | Life Logistics HQ | Unread | Pending | Consume Main Assistant source-board advisory and update durable project map/routing if accepted. |
+| ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
 | ADV-20260704-010 | All Departments | Read | Ingested | All boards reported Decision Rules Registry and Role Drift Check architecture ingested. |
 | ADV-20260704-010 | Life Logistics HQ | Read | Ingested | Decision Rules Registry and Role Drift Check architecture ingested. |
 | ADV-20260704-009 | Life Logistics HQ | Read | Ingested | Role Drift Check added to Operating Rules and Life Logistics handoff. |
