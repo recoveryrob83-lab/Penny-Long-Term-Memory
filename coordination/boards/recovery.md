@@ -5,34 +5,32 @@ Purpose: Advisories to or from Recovery Logistics / Literature / Daily Anchors.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged Advisories
+
 ## ADV-20260703-008 — Recovery Meeting Notes Workdesk created
 
 - Date: 2026-07-03
 - From: Recovery HQ
 - To: Life Logistics HQ / Main Assistant
 - Priority: Medium
-- Status: Open
+- Status: Acknowledged
 - Related Project(s): Recovery Logistics, Recovery Meeting Notes Workdesk, Main Assistant, Life Logistics HQ
 - Source Location: Recovery HQ chat; Google Drive `Recovery Meeting Notes`
 - Target Board: `coordination/boards/recovery.md`
 
 ### Summary
 
-Rob created a new Recovery Meeting Notes Workdesk for non-sensitive NA/AA meeting notes. A new Google Doc named `Recovery Meeting Notes` now exists in the Google Drive `Recovery Logistics` folder and has been scaffolded with a reusable meeting-note template.
-
-### Why It Matters
-
-This adds another specialist recovery workdesk under Recovery HQ. Life Logistics HQ should know the workdesk and Drive resource exist so the project map stays clean, and Main Assistant should route meeting-note capture or meeting-summary work to the Recovery Meeting Notes Workdesk when appropriate.
-
-### Suggested Action
-
-Life Logistics HQ should ingest this as a Recovery workbench/resource update and update project documentation or registry pointers if appropriate. Main Assistant should treat meeting-note capture as Recovery workbench work unless Rob asks otherwise.
+Rob created a new Recovery Meeting Notes Workdesk for non-sensitive NA/AA meeting notes. A new Google Doc named `Recovery Meeting Notes` exists in the Google Drive `Recovery Logistics` folder and has been scaffolded with a reusable meeting-note template.
 
 ### Acknowledgement / Outcome
 
-Open. Awaiting Life Logistics HQ / Main Assistant consumption.
+Life Logistics HQ and Main Assistant have both consumed this advisory.
 
-## Acknowledged Advisories
+Life Logistics HQ ingested the workbench/resource update into global routing context.
+
+Main Assistant should route meeting-note capture or meeting-summary work to the Recovery Meeting Notes Workdesk unless Rob asks otherwise.
 
 ## ADV-20260703-001 — Daily Meditation workbench creation
 
@@ -47,15 +45,7 @@ Open. Awaiting Life Logistics HQ / Main Assistant consumption.
 
 ### Summary
 
-Rob is creating a new Recovery workbench chat for daily morning meditation reading and processing. The workbench will handle exploration and reflection on morning recovery meditation material, while Recovery HQ / Recovery Logistics should consume durable takeaways for context when routed.
-
-### Why It Matters
-
-This clarifies the recovery architecture: the Morning Meditation workbench explores daily readings, while Recovery HQ maintains abstract continuity, logistics, and durable organizational memory.
-
-### Suggested Action
-
-Recovery Logistics should recognize Morning Meditation as a specialist recovery workbench and consume summaries or routed insights when Rob provides them. Main Assistant may route morning routine context to Recovery HQ when needed.
+Rob is creating a new Recovery workbench chat for daily morning meditation reading and processing.
 
 ### Acknowledgement / Outcome
 
