@@ -7,7 +7,7 @@ Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, decision rules, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -19,12 +19,31 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
 - `coordination/boards/` contains formal department advisory boards.
+- `coordination/DECISION_RULES_REGISTRY.md` is the central registry for reusable decision rules.
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
 - `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
 - `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` is the standard for authoritative homes and publication copies.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
+
+## Decision Rules
+
+Decision Rules are reusable decision procedures.
+
+Central registry:
+
+- `coordination/DECISION_RULES_REGISTRY.md`
+
+Department-owned rules may live at:
+
+- `projects/<department-folder>/DECISION_RULES.md`
+
+When a department detects that a decision matches a registered rule, it should route the decision to the owning department before acting when practical.
+
+The owning department should apply the rule and return a structured recommendation using that rule's recommendation scale.
+
+Rob remains the final decision-maker.
 
 ## Advisory and Department Event Rules
 
@@ -112,7 +131,7 @@ Daily HQ sync workers are the preferred scheduled-task experiment for core HQs.
 
 The standalone Advisory Watcher is no longer the preferred scheduled-task slot usage; its useful reporting logic is folded into daily HQ sync prompts.
 
-Scheduled HQ sync workers should boot into the correct department identity, read current boot/handoff/advisory context, consume advisories addressed to that department, report meaningful updates, and avoid modifying systems unless Rob explicitly authorizes that behavior.
+Scheduled HQ sync workers should boot into the correct department identity, read current boot/handoff/advisory/decision-rule context, consume advisories addressed to that department, report meaningful updates, and avoid modifying systems unless Rob explicitly authorizes that behavior.
 
 Engineering HQ Daily Sync is the first pilot. Observe results before rolling out additional daily sync workers.
 
