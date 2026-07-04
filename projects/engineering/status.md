@@ -1,14 +1,14 @@
 # Chief Engineering Penny Status
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 
 ## Current Phase
 
-Active / Department Setup Complete
+Active / First Engineering Research Track Identified
 
 ## Summary
 
-Chief Engineering Penny has been activated as the specialist department for technical architecture and implementation planning.
+Chief Engineering Penny is the specialist department for technical architecture and implementation planning.
 
 The department supports software architecture, repository strategy, APIs, connectors, data models, automation design, testing, technical feasibility, and build sequencing.
 
@@ -22,9 +22,26 @@ Never store secrets, credentials, tokens, API keys, or sensitive implementation 
 
 ## Current Focus
 
-Ready for first active engineering workflow when Rob chooses one.
+Engineering has ingested ADV-20260704-002 from Chief Business HQ.
 
-Likely first targets:
+The first concrete engineering research track is now:
+
+- Reliable Connector Execution Layer
+
+This track exists because connector write reliability is a product-level risk for Penny as an execution/coordination platform. Future Penny workflows must not claim writes succeeded until verified, must track intended operations, must support recoverable failure states, and must provide degraded-mode fallback such as RPR/export/manual upload when direct connector writes fail.
+
+Likely design outputs:
+
+- Operation ledger / write-ahead log proposal.
+- Connector health-state model.
+- Idempotent write strategy.
+- Retry/backoff policy.
+- Degraded-mode user experience language.
+- RPR/export/manual-upload fallback workflow.
+- Queue-first execution model for future backend workers.
+- Product requirement packet for Business HQ review.
+
+Other likely engineering targets remain:
 
 - Penny product technical architecture.
 - Repository planning.
