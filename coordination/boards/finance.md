@@ -18,55 +18,31 @@ Keep Finance advisories abstract and non-sensitive.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260704-008 — Discretionary Purchase Pause Rule routing reinforcement
 
 - Date: 2026-07-04
 - From: Chief of Finance Penny
 - To: Life Logistics HQ
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Ingested
 - Board: `coordination/boards/finance.md`
 
 #### Summary
 
-Finance HQ requests that Life Logistics HQ update its relevant context files so future boots and syncs reinforce the **Discretionary Purchase Pause Rule** as a routing and coordination rule.
+Finance HQ requested that Life Logistics HQ reinforce the Discretionary Purchase Pause Rule as an abstract routing rule.
 
-This advisory should remain abstract and should not store live financial goals, balances, detailed transactions, or protected-fund amounts in GitHub.
+#### Logistics Ingestion Completed
 
-#### Rule to Reinforce
+Life Logistics HQ updated its handoff to reflect:
 
-Name: **Discretionary Purchase Pause Rule**
-
-Before discretionary purchases, review them against current goals and protected funds.
-
-Recommendation scale:
-
-- **Approved**: Fits current goals and budget.
-- **Delay**: May be reasonable later, but not today.
-- **Not Recommended**: Works against higher priorities.
-- **Strongly Recommend Against**: Meaningfully jeopardizes obligations, protected funds, recovery stability, employment access, bills, or another active Finance HQ priority.
-
-#### Requested Logistics HQ Update
-
-Life Logistics HQ should add or reinforce abstract routing language in its appropriate handoff, rules, or open-loop files:
-
-> When Rob is considering discretionary spending, especially impulse purchases or repeat habit purchases, route the decision to Chief of Finance Penny before purchase when possible.
->
-> Finance HQ owns budget review, protected-funds logic, opportunity cost, current financial goals, and purchase recommendations.
->
-> Life Logistics HQ should not store current financial goals, live balances, protected-fund calculations, or detailed purchase records in GitHub. Those belong in Finance HQ's Drive working records.
-
-#### Division of Labor
-
-- **Finance HQ**: budget, checkbook, protected funds, purchase review, opportunity cost, current financial goals, financial discipline, and recommendations.
-- **Life Logistics HQ**: routing, reminders, calendar/itinerary awareness, cross-project coordination, and sending discretionary-spending decisions to Finance HQ.
-- **Rob**: final decision-maker.
-
-#### Desired Outcome
-
-When Life Logistics HQ boots or syncs, it should remember to route discretionary spending decisions to Chief of Finance Penny when possible, while keeping live financial context in Drive.
-
-## Acknowledged / Implemented Advisories
+1. Discretionary spending decisions should route to Chief of Finance Penny before purchase when possible.
+2. Finance HQ owns budget review, protected-funds logic, opportunity cost, current financial goals, and purchase recommendations.
+3. Life Logistics HQ owns routing, reminders, calendar/itinerary awareness, and cross-project coordination.
+4. Life Logistics HQ should not store current financial goals, live balances, protected-fund calculations, or detailed purchase records in GitHub.
 
 ### ADV-20260704-007 — Finance advisory routing surface refresh
 
