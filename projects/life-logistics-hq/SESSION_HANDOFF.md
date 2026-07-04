@@ -21,18 +21,6 @@ Read:
 
 Life Logistics HQ is Rob's Chief of Staff Penny for the Life OS.
 
-## Boot Instructions
-
-When Rob opens or refreshes Life Logistics HQ:
-
-1. Read the global boot files from `memory/STARTUP_BOOT.md`.
-2. Read this project handoff.
-3. Read `projects/life-logistics-hq/DEPARTMENT_IDENTITY.md`.
-4. Read `projects/README.md`, `memory/04_ACTIVE_PROJECTS.md`, `memory/05_OPEN_LOOPS.md`, and `memory/CAPTAINS_LOG.md` when doing system refresh or housekeeping.
-5. Read `coordination/ADVISORY_INDEX.md` and `coordination/DEPARTMENT_EVENT_INBOX.md` when Rob asks for advisory status, morning startup refresh, nightly housekeeping, or cross-department coordination.
-6. Read scheduled-task notes only when Rob asks about scheduled tasks or Life Logistics is doing system-level review.
-7. Do not confuse this role with Main Assistant.
-
 ## Current Project Status
 
 Life Logistics HQ is Rob's Chief of Staff Penny for system coordination and durable memory curation.
@@ -56,6 +44,15 @@ Life OS now includes:
 - Daily HQ sync pilot model.
 - Life OS design-principles file.
 - Reliable Connector Execution Layer as the first concrete Engineering research track.
+
+## Current Drive Architecture Decisions
+
+Business Drive architecture is resolved:
+
+- Life Organization > Chief Business HQ
+- Under that: Business Development
+
+Business Development should be treated as a subfolder under Chief Business HQ, not a separate top-level business root.
 
 ## Objectives
 
@@ -98,25 +95,10 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 
 ## Current Major Open Loops For Life Logistics
 
-- Decide canonical Business Drive architecture before Business HQ creates many more artifacts.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as the first concrete Engineering research track.
 - Continue advisory and event-inbox hygiene.
 - Retry Life Logistics `status.md` creation later only if useful; previous creation attempts were blocked by connector safety checks.
-
-## Completed Work
-
-- Created dedicated Life Logistics HQ project folder.
-- Created Life Logistics HQ department identity.
-- Added Life Logistics HQ to global startup routing, active project map, and project folder index.
-- Acknowledged Recovery advisory `ADV-20260703-001` about Daily Meditation workbench creation.
-- Created scheduled-task communication architecture under `scheduled-tasks/`.
-- Upgraded `projects/finance-benefits/` into Chief of Finance Penny / CFO Penny.
-- Located Finance Drive working records: Checkbook folder and Checkbook Register spreadsheet.
-- Updated Pointer Registry REF-003 to Chief of Finance Penny.
-- Ingested Department Event Inbox workflow.
-- Ingested daily HQ sync model and design-principles workflow.
-- Ingested Business HQ research update and reopened/re-consumed ADV-20260704-001 during 2026-07-04 daily boot.
 
 ## Source Systems
 
@@ -138,12 +120,6 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 - Avoid repeated retries after connector safety blocks.
 - Treat connector failures as observed behavior, not assumed mechanism.
 
-## Privacy Guardrails
-
-Keep GitHub operational and abstract. Store detailed records in the proper working system.
-
-Finance-specific reminder: do not store detailed transactions, account numbers, credentials, government IDs, tax documents, private benefit identifiers, or banking details in GitHub.
-
 ## Decision Log
 
 - Life Logistics HQ and Main Assistant are separate roles.
@@ -154,14 +130,14 @@ Finance-specific reminder: do not store detailed transactions, account numbers, 
 - Chief of Finance Penny / CFO Penny is the finance department; Drive Checkbook Register is the working ledger.
 - Department Event Inbox owns system synchronization state. Todoist owns Rob-facing actions.
 - Design principles govern whether new platforms enter Life OS.
+- Business Drive architecture: `Life Organization > Chief Business HQ > Business Development`.
 
 ## Immediate Next Actions
 
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
 2. Use Main Assistant for daily operations.
 3. Use specialist chats for focused work.
-4. Decide Business Drive architecture when Rob is ready.
-5. Observe Engineering HQ Daily Sync pilot before adding more daily sync workers.
+4. Observe Engineering HQ Daily Sync pilot before adding more daily sync workers.
 
 ## Notes for Next Penny
 
