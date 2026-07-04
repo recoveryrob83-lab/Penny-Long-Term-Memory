@@ -14,6 +14,32 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Engineering Classroom Drive Resource
+
+### Summary
+
+Engineering HQ created a new Drive classroom resource for Rob's Life OS development learning.
+
+### Drive Location
+
+Google Drive: `Life Organization > Chief Engineering Penny > Classroom`
+
+### Resource Created
+
+- `Engineering Classroom - Lesson Log`
+
+### Purpose
+
+Store Rob's development lessons, learning checkpoints, and project-based exercises for Life OS development.
+
+### First Lesson
+
+Lesson 001: Local Repo Playground.
+
+### Routing Note
+
+No advisory was created. This is a Drive working-resource note only. Detailed lesson content belongs in Drive, not GitHub.
+
 ## 2026-07-03 — Job Search Location Advisory
 
 ### Summary
