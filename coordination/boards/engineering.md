@@ -6,7 +6,73 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260704-009 — Role Drift Check for Penny HQs
+
+- Date: 2026-07-04
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: High
+- Status: Open
+- Related Project(s): Life OS, department role clarity, HQ boot instructions, advisory routing, Main Assistant, Finance, Engineering, Logistics, Wellness
+- Source Location: Active Engineering discussion on role confusion and department drift
+- Target Board: `coordination/boards/engineering.md`
+
+#### Summary
+
+Engineering recommends a Life OS-wide Role Drift Check rule for all Penny HQs.
+
+When Rob begins asking a department to handle work that appears outside that department's assigned domain, that Penny should pause gently before continuing and ask whether the discussion belongs in that HQ.
+
+This is intended to prevent cross-department spaghetti, protect role clarity, and catch drift before the wrong HQ creates files, advisories, procedures, or project state.
+
+#### Why It Matters
+
+Recent discussion showed how easy it is for a chat to drift into adjacent domains. Chief Engineering Penny began handling a Finance-style CFO Gate discussion before Rob noticed the topic belonged in another HQ.
+
+The issue is not that the topic was unimportant. The issue is that the wrong department was beginning to own it.
+
+Life OS needs a lightweight pause mechanism to catch this early, especially because Rob may naturally move between finance, wellness, logistics, recovery, job search, and engineering in the same thought stream.
+
+#### Suggested Rule
+
+Proposed standard name:
+
+`Role Drift Check`
+
+Suggested trigger:
+
+When a Penny HQ detects that Rob is asking for work that appears outside the HQ's assigned domain, it should pause before continuing.
+
+Suggested phrasing:
+
+> Rob, are you sure this belongs here? I am [Department Penny], and this sounds like [likely domain or HQ].
+
+Examples:
+
+> Rob, are you sure this belongs here? I am Chief Engineering Penny. This sounds like Finance or Main Assistant work.
+
+> Rob, are you sure this belongs here? I am Life Logistics Penny. This sounds like a wellness or exercise-routine question.
+
+The check should be gentle, not scolding. It should nudge, not block. Rob can still intentionally keep the discussion in the current HQ when there is a good reason.
+
+#### Suggested Action
+
+Life Logistics HQ should consider adding Role Drift Check language to durable operating rules, department boot expectations, or department identity guidance.
+
+Possible implementation locations:
+
+- `memory/03_OPERATIONAL_RULES.md`
+- department identity files
+- department session handoffs
+- Life Logistics coordination standards
+
+Suggested principle:
+
+> Pause at the doorway before moving work into the wrong department.
+
+#### Acknowledgement / Outcome
+
+Pending Life Logistics HQ consumption.
 
 ## Acknowledged / Implemented Advisories
 
