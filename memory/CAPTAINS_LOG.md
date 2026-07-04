@@ -14,20 +14,30 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
-## 2026-07-04 — Department Notebooks Adopted
+## 2026-07-04 — Source-of-Truth and Publication Standard Adopted
 
 ### Summary
 
-Read and acknowledged ADV-20260704-005 from Chief Engineering Penny. Adopted optional Department Notebooks as a Life OS standard pattern.
+Read and acknowledged ADV-20260704-006 from Chief Engineering Penny. Adopted a Life OS source-of-truth and publication architecture standard.
 
 ### Completed Work
 
-- Created `coordination/DEPARTMENT_NOTEBOOKS.md`.
+- Created `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`.
 - Updated Operating Rules.
 - Updated Life Logistics HQ handoff.
 - Updated Advisory Index.
 - Updated Department Event Inbox.
 - Updated Engineering advisory board.
+
+### Decision / Lesson
+
+Choose the natural authoritative home first, then make every other copy clearly secondary. Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
+
+## 2026-07-04 — Department Notebooks Adopted
+
+### Summary
+
+Read and acknowledged ADV-20260704-005 from Chief Engineering Penny. Adopted optional Department Notebooks as a Life OS standard pattern.
 
 ### Decision / Lesson
 
