@@ -29,31 +29,47 @@ When Rob opens a new Job Search HQ chat:
 
 ## Current Project Status
 
-Scaffolded. Needs project-specific handoff content when available.
+Active job-search department for applications, interviews, leads, resumes, cover letters, and work-fit decisions.
 
 ## Objectives
 
 - Track active applications, interviews, follow-ups, resumes, and cover letters.
 - Evaluate work opportunities against recovery stability, financial need, transportation, schedule, and long-term sustainability.
 - Keep Gmail, Calendar, Todoist, Drive, and GitHub aligned without over-updating during the day.
+- Use commute-aware local search rather than city-name-only job discovery.
 - Read and act on advisories only when specifically routed to Job Search HQ.
 - When Job Search HQ creates an outbound advisory, use the advisory board plus Advisory Index plus Department Event Inbox workflow so synchronization state is tracked in GitHub rather than Todoist.
 
+## Job Discovery / Location Rule
+
+Do not rely only on Cahokia or Cahokia Heights as the local job-search location.
+
+For local job discovery, search nearby employment hubs and commute corridors, then evaluate actual fit afterward.
+
+Relevant nearby hubs/corridors may include Fairview Heights, Belleville, East St. Louis, Sauget, Collinsville, O'Fallon, and other practical Metro East / nearby St. Louis-area options when appropriate.
+
+After discovery, evaluate actual commute fit, pay, schedule, and recovery-support compatibility before treating a lead as viable.
+
+City labels on job boards are an imperfect proxy for real commute fit.
+
 ## Completed Work
 
-Pending project-specific update.
+- Job Search HQ created advisory ADV-20260703-011 to record commute-aware local search guidance.
+- Life Logistics HQ consumed ADV-20260703-011 and updated this handoff with the durable location rule.
 
 ## Active Open Loops
 
-Pending project-specific update.
+- Continue targeted applications and interview preparation in Job Search HQ.
+- Use nearby employment hubs/corridors during local job discovery.
+- Keep detailed job lead data, resume versions, cover letters, and interview notes in Drive or source systems.
 
 ## Key Contacts / Organizations
 
-Pending project-specific update.
+Detailed recruiter/employer contact information belongs in Gmail, Calendar, Drive, or source systems unless Rob explicitly asks for an abstract routing note.
 
 ## Working Documents / Links
 
-Pending project-specific update.
+Detailed job-search working records belong in Drive or source systems.
 
 ## Source Systems
 
@@ -105,7 +121,7 @@ Advisory Watcher v0.1 may monitor the Advisory Index and Department Event Inbox 
 
 ## Decision Log
 
-Pending project-specific update.
+- 2026-07-03: Local job discovery should search nearby employment hubs/corridors rather than only Cahokia/Cahokia Heights, then evaluate actual commute and work-fit viability.
 
 ## Immediate Next Actions
 
