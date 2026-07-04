@@ -14,22 +14,32 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Decision Rules Registry Adopted
+
+### Summary
+
+Created the Life OS Decision Rules Registry and first department-owned decision rule.
+
+### Completed Work
+
+- Created `coordination/DECISION_RULES_REGISTRY.md`.
+- Created `projects/finance-benefits/DECISION_RULES.md`.
+- Added DR-FIN-20260704-001 — Discretionary Purchase Pause Rule.
+- Updated Operating Rules.
+- Updated Life Logistics HQ handoff.
+- Updated Finance handoff.
+- Created all-departments advisory ADV-20260704-010.
+- Updated Advisory Index and Department Event Inbox.
+
+### Decision / Lesson
+
+Important decisions should route to the owning department and be evaluated through a reusable rule before action when practical. Rob remains the final decision-maker.
+
 ## 2026-07-04 — Discretionary Purchase Routing Reinforced
 
 ### Summary
 
 Read and acknowledged ADV-20260704-008 from Chief of Finance Penny. Reinforced the Discretionary Purchase Pause Rule as a Life Logistics routing rule.
-
-### Completed Work
-
-- Updated Life Logistics HQ handoff.
-- Updated Advisory Index.
-- Updated Department Event Inbox.
-- Updated Finance advisory board.
-
-### Decision / Lesson
-
-Life Logistics routes discretionary spending decisions to Chief of Finance Penny when possible. Finance owns budget review, protected-funds logic, opportunity cost, financial goals, and purchase recommendations. Live financial details stay out of GitHub.
 
 ## 2026-07-04 — Finance Advisory Routing Corrected
 
