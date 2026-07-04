@@ -1,13 +1,45 @@
 # Scheduled Tasks
 
 Updated: 2026-07-03
-Purpose: Communication layer for scheduled ChatGPT tasks that run outside the long-lived Penny department chats.
+Purpose: Architecture notes for ChatGPT scheduled tasks used by Life OS.
 
 ## Role
 
-Scheduled tasks are not the same as department chats.
+Scheduled tasks are experimental Life OS sync workers.
 
-A scheduled task should boot from GitHub, perform a narrow job, then leave a memo here so the relevant Penny department can see what happened later.
+The current preferred model is daily HQ sync for core departments, not many small standalone watcher services.
+
+## Current Understanding
+
+Scheduled-task slots appear scarce, so they should be treated as premium Life OS infrastructure.
+
+The standalone Advisory Watcher concept has been retired as preferred slot usage. Its useful behavior is folded into daily HQ sync prompts.
+
+## Core Daily Sync Candidates
+
+Likely core sync slots:
+
+1. Life Logistics HQ Sync
+2. Main Assistant Sync
+3. Chief Finance Sync
+4. Chief Business Sync
+5. Chief Engineering Sync
+
+## Active Pilot
+
+`Engineering HQ Daily Sync` is the first pilot.
+
+Cadence: daily at 6:00 AM America/Chicago.
+
+Purpose: test whether a scheduled sync can preserve department identity, read GitHub boot/handoff/advisory context, consume Engineering-targeted advisories, and report useful updates without unwanted writes.
+
+## Operating Rule
+
+Scheduled sync workers should prefer read-only analysis and reporting.
+
+They should not modify GitHub, Google Drive, Todoist, Calendar, Gmail, or other systems unless Rob explicitly authorizes that behavior.
+
+They should report only when there are meaningful updates, advisories requiring routing, documentation changes to recommend, or issues needing action.
 
 ## Core Files
 
@@ -15,15 +47,7 @@ A scheduled task should boot from GitHub, perform a narrow job, then leave a mem
 - `RUN_LOG.md`: short record of successful task runs.
 - `ISSUE_LOG.md`: short record of failed, partial, blocked, or confusing runs.
 - `templates/`: standard memo formats.
-- `memos/`: department-specific inboxes.
-
-## Operating Rule
-
-Scheduled tasks should prefer read-only analysis at first.
-
-If a task produces a useful output, it should write a short memo to the right department inbox when write access is available.
-
-If writing fails, the task should report the output directly in its own task response and note the failure.
+- `memos/`: department-specific inboxes, if memo writing proves useful.
 
 ## Memo Rule
 
@@ -37,6 +61,4 @@ Store task result, source pointers, routing, and next action only.
 
 During boot or sync, a department may check its own memo inbox if Rob asks or if its handoff says scheduled task memos are relevant.
 
-Main Assistant may check `scheduled-tasks/memos/main-assistant.md` for pre-generated daily brief or itinerary items.
-
-Life Logistics HQ may check the index, run log, issue log, and any relevant memo inbox during system refresh or housekeeping.
+Life Logistics HQ may check the index, run log, issue log, and relevant memo inboxes during system refresh or housekeeping.
