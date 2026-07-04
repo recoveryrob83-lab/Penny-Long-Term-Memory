@@ -30,12 +30,12 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
 | ADV-20260704-011 | Main Assistant | Life Logistics HQ | Open | Department consolidation and archival request | Life Logistics should consume Main Assistant source-board advisory and update project map/routing to consolidate Caregiver and Job Search into Main Assistant, archive Recovery and Philosophy until needed, and preserve project history. |
-| ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Open | Decision Rules Registry and Role Drift Check architecture adopted | Life Logistics has ingested; remaining active departments should ingest central registry, route matching decisions to owning HQs, and use Role Drift Check for out-of-domain work. |
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
+| ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Closed | Decision Rules Registry and Role Drift Check architecture adopted | All boards reported read and ingested. Departments should use Decision Rules Registry and Role Drift Check going forward. |
 | ADV-20260704-009 | Chief Engineering Penny | Life Logistics HQ | Closed | Role Drift Check for Penny HQs | Life Logistics added Role Drift Check to Operating Rules and handoff as a gentle department-boundary safeguard. |
 | ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | Closed | Discretionary Purchase Pause Rule routing reinforcement | Life Logistics updated handoff to route discretionary spending decisions to Finance HQ while keeping live financial context out of GitHub. |
 | ADV-20260704-007 | Life Logistics HQ | Chief of Finance Penny | Ingested | Finance advisory routing surface refresh | Finance re-synced to advisory routing files and stopped treating GitHub Issues as advisory surface. |
@@ -51,7 +51,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
 | ADV-20260704-011 | Life Logistics HQ | Unread | Pending | Consume Main Assistant source-board advisory and update durable project map/routing if accepted. |
-| ADV-20260704-010 | All Departments | Partial | Pending | Life Logistics ingested; remaining active HQs should ingest Decision Rules Registry and Role Drift Check architecture. |
+| ADV-20260704-010 | All Departments | Read | Ingested | All boards reported Decision Rules Registry and Role Drift Check architecture ingested. |
 | ADV-20260704-010 | Life Logistics HQ | Read | Ingested | Decision Rules Registry and Role Drift Check architecture ingested. |
 | ADV-20260704-009 | Life Logistics HQ | Read | Ingested | Role Drift Check added to Operating Rules and Life Logistics handoff. |
 | ADV-20260704-008 | Life Logistics HQ | Read | Ingested | Discretionary Purchase Pause Rule routing reinforced. |
