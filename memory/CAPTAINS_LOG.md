@@ -14,6 +14,25 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Business Drive Architecture Decided
+
+### Summary
+
+Rob decided the canonical Business Drive architecture.
+
+### Decision
+
+Business uses:
+
+`Life Organization > Chief Business HQ > Business Development`
+
+Business Development is a subfolder under Chief Business HQ, not a separate top-level business root.
+
+### Completed Work
+
+- Updated Business README, status, handoff, and open loops.
+- Updated global session handoff, active projects, open loops, Department Event Inbox, Business board, and Life Logistics handoff.
+
 ## 2026-07-04 — Life Logistics Daily Boot Sync
 
 ### Summary
@@ -30,7 +49,7 @@ Ran Life Logistics HQ daily boot and sync from GitHub.
 
 ### Current Focus
 
-Business Drive architecture remains the main Life Logistics decision point. Engineering Reliable Connector Execution Layer remains the main Engineering research track.
+Engineering Reliable Connector Execution Layer remains the main Engineering research track.
 
 ## 2026-07-04 — Business Research Advisory Ingested
 
@@ -54,40 +73,10 @@ Read and acknowledged ADV-20260704-001 from Chief Business HQ. Business HQ compl
 
 Business HQ reboot context now reflects competitor research, positioning, unit economics, candidate business-model paths, and connector/RPR lessons.
 
-### Open Follow-Up
-
-Decide canonical Business Drive architecture before Business HQ creates many more artifacts.
-
 ## 2026-07-03 — Engineering Classroom Drive Resource
 
 ### Summary
 
 Engineering HQ created a new Drive classroom resource for Rob's Life OS development learning.
-
-### Drive Location
-
-Google Drive: `Life Organization > Chief Engineering Penny > Classroom`
-
-### Resource Created
-
-- `Engineering Classroom - Lesson Log`
-
-### Purpose
-
-Store Rob's development lessons, learning checkpoints, and project-based exercises for Life OS development.
-
-### First Lesson
-
-Lesson 001: Local Repo Playground.
-
-### Routing Note
-
-No advisory was created. This is a Drive working-resource note only. Detailed lesson content belongs in Drive, not GitHub.
-
-## 2026-07-03 — Job Search Location Advisory
-
-### Summary
-
-Read and acknowledged ADV-20260703-011 from Job Search HQ. Added commute-aware local search guidance to Job Search project files.
 
 (Older detailed entries are retained in repository history.)
