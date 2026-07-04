@@ -34,7 +34,7 @@ Business HQ working records include:
 
 - `Business Competitor Matrix` with `Competitors` and `Positioning Matrix` tabs.
 - `Business Development Costs` with `Cost Estimates` and `Unit Economics` tabs.
-- `Business_Model_Design.xlsx` under Life Organization > Business Development > Strategy.
+- `Business_Model_Design.xlsx` under the Business Development / Strategy working area.
 
 Candidate business model paths:
 
@@ -43,9 +43,13 @@ Candidate business model paths:
 - Penny Templates / Marketplace
 - Hybrid Concierge MVP
 
-#### Remaining Open Loop
+#### Drive Architecture Decision
 
-Business Drive architecture is not settled. Life Logistics / Rob should decide whether to keep the earlier `Chief Business HQ` folder, use the newer `Business Development` path, or maintain both with clear distinctions before Business HQ creates many more artifacts.
+Resolved 2026-07-04 by Rob:
+
+Canonical path is `Life Organization > Chief Business HQ > Business Development`.
+
+Business Development is a subfolder under Chief Business HQ, not a separate top-level business root.
 
 ### ADV-20260704-002 — Drive connector reliability is a major Penny product risk
 
