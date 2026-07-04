@@ -17,15 +17,18 @@ Keep entries short and non-sensitive.
 
 - Advisory dashboard: `coordination/ADVISORY_INDEX.md`
 - Advisory details: `coordination/boards/`
+- Finance advisory board: `coordination/boards/finance.md`
 - Pending advisory standard: `coordination/PENDING_ADVISORY_BOARDS.md`
 - Department notebook standard: `coordination/DEPARTMENT_NOTEBOOKS.md`
 - Source/publication standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
 
-Pending boards and notebooks are local capture surfaces, not routed advisory channels.
+GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
 
 ## Current Open / Pending Events
 
-None.
+| Event ID | Source | Target(s) | Status | Subject | Notes |
+|---|---|---|---|---|---|
+| ADV-20260704-007 | Life Logistics HQ | Chief of Finance Penny | New | Finance advisory routing surface refresh | Finance should re-sync to advisory routing files and stop treating GitHub Issues as advisory surface. |
 
 ## Recent Closed / Ingested Events
 
@@ -42,6 +45,7 @@ None.
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-007 | Chief of Finance Penny | Unread | Pending | Finance should re-sync advisory routing rule and Finance board location. |
 | ADV-20260704-006 | Life Logistics HQ | Read | Ingested | Source-of-Truth and Publication Standard adopted. |
 | ADV-20260704-003 | Chief Engineering Penny | Read | Ingested | Engineering re-consumed and closed self-addressed continuation advisory. |
 | ADV-20260704-005 | Life Logistics HQ | Read | Ingested | Department Notebook standard adopted. |
