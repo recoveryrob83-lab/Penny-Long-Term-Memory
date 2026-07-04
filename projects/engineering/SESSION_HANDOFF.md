@@ -1,6 +1,6 @@
 # Chief Engineering Penny Session Handoff
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Project-specific handoff for engineering and software architecture chats.
 
@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for engineering and software architecture chat
 
 - Project Owner: Rob
 - Primary Chat: Chief Engineering Penny / Engineering HQ
-- Current Phase: Active / Department Setup Complete
+- Current Phase: Active / First Engineering Research Track Identified
 - Primary Systems: GitHub, GitHub software repositories when created, Google Drive, Todoist, Calendar, Gmail as needed, RPR/user-mediated files
 - Sensitivity Level: Moderate
 - GitHub Rule: Keep Life OS GitHub memory abstract. Never store secrets, credentials, tokens, API keys, or sensitive implementation details in memory files.
@@ -49,6 +49,14 @@ Chief Engineering Penny defines how to build it safely, coherently, and in the r
 
 Engineering has consumed the Life OS advisory workflow update. The Department Event Inbox now owns department synchronization/read/ingestion state. Todoist remains for Rob-facing action items.
 
+Engineering has ingested ADV-20260704-002 from Chief Business HQ. Connector write reliability is now treated as a first-class Penny product architecture risk.
+
+The first concrete engineering research track is:
+
+- Reliable Connector Execution Layer
+
+This track should evaluate operation ledgers / write-ahead logs, connector health states, idempotent writes, retry/backoff, degraded-mode UX, RPR/export fallback, queue-first execution, human approval checkpoints, and multi-provider abstraction.
+
 ## Advisory / Event Inbox Procedure
 
 When Engineering creates an advisory for another department:
@@ -74,6 +82,7 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
 
 ## Completed Work
 
+- 2026-07-04: Ingested ADV-20260704-002 and created the Reliable Connector Execution Layer research track.
 - 2026-07-03: Created Chief Engineering Penny / Engineering HQ project folder and department files.
 - 2026-07-03: Added Engineering setup to Life OS routing and project map where needed.
 - 2026-07-03: Created Engineering Drive working folder and initial scaffolding files.
@@ -82,9 +91,11 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
 
 ## Active Open Loops
 
-- Clarify first engineering target when ready: Penny product technical architecture, repo planning, data model, API plan, automation design, connector plan, or testing strategy.
-- Wait for Chief Business HQ to define product requirements before committing to implementation architecture.
-- Coordinate with Chief of Finance Penny before committing to cost-bearing tools, hosting, APIs, or subscriptions.
+- Draft a Reliable Connector Execution Layer technical design note.
+- Define operation ledger / write-ahead log states for intended connector writes.
+- Define idempotency, retry/backoff, connector health, degraded-mode UX, and RPR/export fallback patterns.
+- Coordinate with Chief Business HQ to translate the reliability design into product requirements.
+- Coordinate with Chief of Finance Penny before committing to cost-bearing tools, hosting, queues, APIs, or subscriptions.
 - Help refine Advisory Watcher / event-inbox architecture if Rob routes that work back to Engineering.
 
 ## Working Documents / Links
@@ -97,6 +108,7 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
   - `Engineering HQ - Technical Baseline`
   - `Engineering HQ - Implementation Packet Template`
   - `Engineering HQ - Tracker`
+  - `Reliable Connector Execution Layer - Design Note` when created/available
 - Software repositories should be separate from Life OS memory when created.
 - Todoist owns Rob-facing engineering action reminders only.
 - Calendar owns engineering meetings and deadlines.
@@ -119,6 +131,7 @@ Advisory Watcher v0.1 may later monitor the Advisory Index and Department Event 
 - Never place secrets, credentials, tokens, or API keys in GitHub memory.
 - Use RPR when reliability matters.
 - Do not repeatedly retry writes that trigger safety blocks.
+- For future product design, connector writes need observable operation states and durable recovery paths.
 
 ## Privacy / Security Guardrails
 
@@ -139,10 +152,11 @@ Secrets and credentials should never be pasted into chat or committed to GitHub.
 - Department Event Inbox owns system synchronization state.
 - Todoist owns Rob-facing action items.
 - Advisory Watcher v0.1 is a reporting layer only unless Rob later approves write behavior.
+- Reliable Connector Execution Layer is the first concrete Engineering research track after ADV-20260704-002.
 
 ## Immediate Next Actions
 
-1. Use this department when Rob wants engineering-specific architecture or implementation planning.
+1. Draft the Reliable Connector Execution Layer design note.
 2. Use Engineering Drive scaffolding for technical baselines, implementation packets, and tracking.
 3. Create detailed technical docs only when useful, preferably in Drive, RPR, or a dedicated software repository.
 4. When Engineering creates cross-department advisories, update the Engineering board, Advisory Index, and Department Event Inbox.
@@ -150,4 +164,6 @@ Secrets and credentials should never be pasted into chat or committed to GitHub.
 
 ## Notes for Next Penny
 
-This chat is Chief Engineering Penny when booted directly. It should not absorb Business, Finance, Main Assistant, or Life Logistics work. It should turn product requirements into build-ready technical plans and use the new advisory/event-inbox procedure for cross-department synchronization.
+This chat is Chief Engineering Penny when booted directly. It should not absorb Business, Finance, Main Assistant, or Life Logistics work. It should turn product requirements into build-ready technical plans and use the advisory/event-inbox procedure for cross-department synchronization.
+
+The current first engineering workstream is Reliable Connector Execution Layer: make Penny connector-dependent execution observable, verified, recoverable, idempotent, and user-safe.
