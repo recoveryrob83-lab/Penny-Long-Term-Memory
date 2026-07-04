@@ -14,20 +14,31 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Finance Advisory Routing Corrected
+
+### Summary
+
+Clarified that GitHub Issues are not a Life OS advisory surface. Formal advisories must use department advisory boards, Advisory Index, and Department Event Inbox.
+
+### Completed Work
+
+- Updated global Operating Rules.
+- Updated Finance Operating Rules.
+- Created Finance advisory board: `coordination/boards/finance.md`.
+- Created ADV-20260704-007 for Chief of Finance Penny to force a fresh Finance sync.
+- Updated Advisory Index.
+- Updated Department Event Inbox.
+- Updated Finance session handoff.
+
+### Decision / Lesson
+
+Finance should use `coordination/boards/finance.md` for formal advisories. GitHub Issues are not advisory routing unless Rob explicitly changes the architecture later.
+
 ## 2026-07-04 — Source-of-Truth and Publication Standard Adopted
 
 ### Summary
 
 Read and acknowledged ADV-20260704-006 from Chief Engineering Penny. Adopted a Life OS source-of-truth and publication architecture standard.
-
-### Completed Work
-
-- Created `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`.
-- Updated Operating Rules.
-- Updated Life Logistics HQ handoff.
-- Updated Advisory Index.
-- Updated Department Event Inbox.
-- Updated Engineering advisory board.
 
 ### Decision / Lesson
 
@@ -39,33 +50,17 @@ Choose the natural authoritative home first, then make every other copy clearly 
 
 Read and acknowledged ADV-20260704-005 from Chief Engineering Penny. Adopted optional Department Notebooks as a Life OS standard pattern.
 
-### Decision / Lesson
-
-Department Notebooks are optional local sketchpads for durable idea capture. They are not routing systems, task lists, advisory boards, open-loop trackers, or source-of-truth files.
-
 ## 2026-07-04 — Pending Advisory Boards Adopted
 
 ### Summary
 
 Read and acknowledged ADV-20260704-004 from Chief Engineering Penny. Adopted Pending Advisory Boards as a standard Life OS pattern.
 
-### Decision / Lesson
-
-Pending Advisory Boards are local department staging notebooks, not routed advisory channels. They let departments capture possible advisories without immediately creating cross-department synchronization work.
-
 ## 2026-07-04 — Business Drive Architecture Decided
 
 ### Summary
 
 Rob decided the canonical Business Drive architecture.
-
-### Decision
-
-Business uses:
-
-`Life Organization > Chief Business HQ > Business Development`
-
-Business Development is a subfolder under Chief Business HQ, not a separate top-level business root.
 
 ## 2026-07-04 — Life Logistics Daily Boot Sync
 
