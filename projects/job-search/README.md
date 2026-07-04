@@ -13,6 +13,15 @@ Track applications, interviews, job leads, resumes, cover letters, and employmen
 - Continue targeted applications.
 - Prefer better-fit leads over crowded hiring events.
 - Use tailored resumes and cover letters where appropriate.
+- Search nearby employment hubs/corridors, not only Rob's exact city label.
+
+## Local Search / Commute Rule
+
+Do not rely only on Cahokia or Cahokia Heights as the job-search location.
+
+For local job discovery, search nearby employment hubs and commute corridors, then evaluate actual commute fit, pay, schedule, and recovery-support compatibility afterward.
+
+Nearby practical search labels may include Fairview Heights, Belleville, East St. Louis, Sauget, Collinsville, O'Fallon, and other relevant Metro East / nearby St. Louis-area options when appropriate.
 
 ## Tool Routing
 
@@ -32,4 +41,4 @@ Do not use Todoist for department synchronization unless Rob explicitly requests
 
 ## Migration Note
 
-Detailed job lead data currently remains in memory files and source systems. This folder is scaffolded for future migration.
+Detailed job lead data currently remains in Drive and source systems. This folder is scaffolded for future migration.
