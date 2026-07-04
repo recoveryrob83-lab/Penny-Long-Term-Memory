@@ -1,6 +1,6 @@
 # Main Assistant Session Handoff
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Project: Main Assistant / Daily Operations
 Purpose: Project-specific handoff for new Main Assistant Penny chats.
 
@@ -34,10 +34,11 @@ During full advisory syncs, read both the Advisory Index and the Department Even
 
 When Main Assistant creates an advisory for another department:
 
-1. Create the advisory on the relevant department board.
-2. Update the Advisory Index.
-3. Create or update the matching Department Event Inbox entry.
-4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
+1. Create the full advisory on Main Assistant's source board: `coordination/boards/main-assistant.md`.
+2. Update `coordination/ADVISORY_INDEX.md` as the routing dashboard pointing to the source board.
+3. Create or update the matching `coordination/DEPARTMENT_EVENT_INBOX.md` entry for read/ingestion tracking.
+4. Do not post the full advisory on the target department's board unless Main Assistant is also the target or Rob explicitly changes the routing procedure.
+5. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
 For multi-target advisories, do not mark acknowledged or implemented until all targets have reported read or handled status to Rob, unless the source department records separate per-target acknowledgements.
 
