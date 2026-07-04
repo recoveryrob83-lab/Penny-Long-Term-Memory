@@ -1,13 +1,13 @@
 # Life OS Operating Rules
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, department events, scheduled sync workers, design principles, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, pending advisory boards, department events, scheduled sync workers, design principles, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -20,6 +20,7 @@ As of the GitHub migration work on 2026-07-02:
 - Gmail is communication evidence.
 - `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
+- `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
@@ -49,6 +50,24 @@ The Department Event Inbox is the working notification/register layer for depart
 Todoist should not be used as the source of truth for department synchronization state.
 
 For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
+
+## Pending Advisory Board Rules
+
+Pending Advisory Boards are local department staging notebooks, not routed advisory channels.
+
+Standard procedure lives at:
+
+- `coordination/PENDING_ADVISORY_BOARDS.md`
+
+A department may create a local pending board at:
+
+- `projects/<department-folder>/PENDING_ADVISORIES.md`
+
+Create a pending board only when needed. Do not create empty pending boards across every department by default.
+
+Pending items do not update the Advisory Index, Department Event Inbox, Todoist, or other department boards.
+
+Promote pending items into formal advisories only during deliberate review and only when cross-department routing or a durable shared decision is needed.
 
 ## Scheduled HQ Sync Rules
 
