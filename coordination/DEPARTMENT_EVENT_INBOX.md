@@ -65,6 +65,7 @@ Pending boards are local department staging notebooks, not routed advisory chann
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
+| ADV-20260704-005 | 2026-07-04 | Chief Engineering Penny | Life Logistics HQ | High | New | Department Notebooks for long-term idea capture | `coordination/boards/engineering.md` | Proposed optional department notebooks for durable non-advisory idea capture and long-term memory support. |
 | ADV-20260704-004 | 2026-07-04 | Chief Engineering Penny | Life Logistics HQ | High | Closed | Department Pending Advisory Boards | `coordination/boards/engineering.md` | Life Logistics adopted Pending Advisory Boards as a standard pattern and created the procedure file. |
 | ADV-20260704-003 | 2026-07-04 | Chief Engineering Penny | Chief Engineering Penny | High | New | Engineering sync completed and connector reliability next work | `coordination/boards/engineering.md` | Self-addressed advisory for next Engineering continuation packet. |
 | ADV-20260704-002 | 2026-07-04 | Chief Business HQ | Chief Engineering Penny | High | Ingested | Drive connector reliability is a major Penny product risk | `coordination/boards/business.md` | Engineering ingested advisory and created Reliable Connector Execution Layer as first concrete research track. |
@@ -83,6 +84,7 @@ Pending boards are local department staging notebooks, not routed advisory chann
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-005 | Life Logistics HQ | Unread | Pending | Proposed Department Notebook standard needs Life Logistics review and location/format decision. |
 | ADV-20260704-004 | Life Logistics HQ | Read | Ingested | Pending Advisory Board standard adopted. |
 | ADV-20260704-003 | Chief Engineering Penny | Unread | Pending | Self-addressed advisory for next Engineering continuation packet. |
 | ADV-20260704-002 | Chief Engineering Penny | Read | Ingested | Engineering status, handoff, and open loops updated; Reliable Connector Execution Layer research track created. |
