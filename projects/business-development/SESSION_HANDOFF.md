@@ -98,6 +98,7 @@ Daily HQ sync workers may eventually consume advisories as part of department rh
 
 ## Completed Work
 
+- 2026-07-04: Rob decided canonical Business Drive architecture: `Life Organization > Chief Business HQ > Business Development`.
 - 2026-07-04: Began Penny Platform competitor research.
 - 2026-07-04: Built first-pass competitor landscape in Drive.
 - 2026-07-04: Added `Positioning Matrix` tab to `Business Competitor Matrix`.
@@ -118,7 +119,6 @@ Daily HQ sync workers may eventually consume advisories as part of department rh
 - Rank competitors by direct threat and Penny white-space opportunity.
 - Fill or refine `Business_Model_Design.xlsx` scoring.
 - Refine unit economics and model-routing assumptions.
-- Decide canonical Business Drive folder architecture before Business HQ creates many more artifacts.
 - Create a Business Hypotheses document or sheet.
 - Build customer pain/capability matrix.
 - Choose first target customer persona before broadening.
@@ -131,30 +131,25 @@ Daily HQ sync workers may eventually consume advisories as part of department rh
 ## Working Documents / Links
 
 - GitHub project folder: `projects/business-development/`
-- Earlier Drive working cabinet: Life Organization > Chief Business HQ
+- Canonical Drive root: Life Organization > Chief Business HQ
+- Canonical business-development path: Life Organization > Chief Business HQ > Business Development
 - Earlier Business HQ Drive folder ID: `14KX6L-nacIsa5xYVmGKAqhclb0O2iJpR`
 - Business Competitor Matrix: Google Sheet ID `1svMTOzCeb4E_MfE0mjLUBG00qvt6sjY2LBcTG3bOb_I`
 - Business Competitor Matrix tabs: `Competitors`, `Positioning Matrix`
 - Business Development Costs: Google Sheet ID `1DLVWv5VxjC-FZRaD1f8qilvS4gp64C6sBM8qtnanj-U`
 - Business Development Costs tabs: `Cost Estimates`, `Unit Economics`
-- New Drive path used for business model file: Life Organization > Business Development > Strategy > `Business_Model_Design.xlsx`
-- Business Development folder ID: `1zmc1R5BGudywRxgFPyvCBlj3FrMK9Abf`
-- Strategy folder ID: `1VKX4Xc6Q3dmyKaRQMhA-pxephsCYzo73`
 - Business_Model_Design.xlsx file ID: `1TzgU-68LeWGlWQNPMuWv52DTVvOo21WG`
 - Drive or RPR should hold detailed working records, research notes, generated docs, or business artifacts.
 
-## Drive Architecture Issue
+## Drive Architecture Decision
 
-There are currently two Business-related Drive concepts that need Life Logistics reconciliation before Business HQ creates many more artifacts:
+Resolved 2026-07-04 by Rob:
 
-1. Earlier `Chief Business HQ` folder under Life Organization.
-2. New `Business Development / Strategy` path used for `Business_Model_Design.xlsx`.
+Business uses `Life Organization > Chief Business HQ` as the department root.
 
-Do not assume the canonical Business Drive architecture is settled.
+`Business Development` lives under `Chief Business HQ`.
 
-Potential future architecture under `Business Development` could include numbered folders such as Inbox, Strategy, Market Research, Customer Discovery, Product, Financial Modeling, Branding & Marketing, Sales, Operations, Legal, Investors, Partnerships, Templates, and Archive.
-
-Life Logistics should decide whether to keep the earlier Chief Business HQ folder, migrate/rename toward Business Development, or maintain both with clear distinctions.
+Do not treat `Business Development` as a separate top-level business root unless Rob changes the architecture later.
 
 ## Source Systems
 
@@ -198,6 +193,7 @@ Operational details belong in the proper working system.
 - Penny should be positioned around reduced coordination burden and completed outcomes, not more AI conversation.
 - Unit economics and reliability are central business risks.
 - Penny Solutions / Studio may be a practical revenue/customer-discovery bridge toward the scalable Penny Platform.
+- Canonical Business Drive path: `Life Organization > Chief Business HQ > Business Development`.
 
 ## Immediate Next Actions
 
@@ -205,8 +201,7 @@ Operational details belong in the proper working system.
 2. Rank competitors by direct threat and Penny white-space opportunity.
 3. Fill/refine Business Model Design scoring.
 4. Refine unit economics and cost-control assumptions.
-5. Reconcile Business Drive folder architecture with Life Logistics HQ.
-6. Create a validation packet after choosing a first target customer/persona and 3 to 5 coordination pain use cases.
+5. Create a validation packet after choosing a first target customer/persona and 3 to 5 coordination pain use cases.
 
 ## Notes for Next Penny
 
