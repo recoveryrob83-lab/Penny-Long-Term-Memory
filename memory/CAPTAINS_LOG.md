@@ -14,33 +14,38 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Department Consolidation Adopted
+
+### Summary
+
+Read and acknowledged ADV-20260704-011 from Main Assistant. Rob reduced active Penny department load by consolidating some lightweight domains into Main Assistant and marking some departments dormant until needed.
+
+### Completed Work
+
+- Updated `memory/04_ACTIVE_PROJECTS.md`.
+- Updated Main Assistant advisory board.
+- Updated Advisory Index.
+- Updated Department Event Inbox.
+
+### Decision / Lesson
+
+Active core departments are now Life Logistics HQ, Main Assistant / Daily Operations, Chief of Finance Penny, Chief Business HQ, Chief Engineering Penny, Chief Wellness HQ, and Life OS Infrastructure as needed. Project history remains preserved.
+
+### Connector Note
+
+Attempts to update `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-hq/SESSION_HANDOFF.md` were blocked by connector safety checks. The canonical project map update succeeded.
+
 ## 2026-07-04 — Role Drift Check Adopted
 
 ### Summary
 
 Read and acknowledged ADV-20260704-009 from Chief Engineering Penny. Adopted Role Drift Check as a gentle Life OS department-boundary safeguard.
 
-### Completed Work
-
-- Updated global Operating Rules.
-- Updated Life Logistics HQ handoff.
-- Updated Advisory Index.
-- Updated Department Event Inbox.
-- Updated Engineering advisory board.
-
-### Decision / Lesson
-
-When a Penny HQ detects that Rob is asking for work outside that HQ's assigned domain, it should gently pause and ask whether the discussion belongs in that HQ. The check nudges but does not block.
-
 ## 2026-07-04 — Decision Rules Registry Adopted
 
 ### Summary
 
 Created the Life OS Decision Rules Registry and first department-owned decision rule.
-
-### Decision / Lesson
-
-Important decisions should route to the owning department and be evaluated through a reusable rule before action when practical. Rob remains the final decision-maker.
 
 ## 2026-07-04 — Discretionary Purchase Routing Reinforced
 
