@@ -14,6 +14,24 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Job Search Location Advisory
+
+### Summary
+
+Read and acknowledged ADV-20260703-011 from Job Search HQ. Added commute-aware local search guidance to Job Search project files.
+
+### Completed Work
+
+- Read Advisory Index, Department Event Inbox, and Job Search board.
+- Updated Job Search session handoff.
+- Updated Job Search README.
+- Updated Department Event Inbox.
+- Updated Advisory Index and Job Search board.
+
+### Decision / Lesson
+
+Local job discovery should search nearby employment hubs and commute corridors, not only Rob's exact city label. Job leads should then be evaluated for actual commute fit, pay, schedule, and recovery-support compatibility.
+
 ## 2026-07-03 — Life OS Design Principles Created
 
 ### Summary
