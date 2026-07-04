@@ -1,6 +1,6 @@
 # Department Event Inbox
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Purpose: Lightweight Life OS register for advisory and synchronization events between Penny departments.
 
 ## Operating Rule
@@ -57,6 +57,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
+| ADV-20260704-001 | 2026-07-04 | Chief Business HQ | Life Logistics HQ | High | New | Business HQ research, Drive architecture, and reboot-state update needed | `coordination/boards/business.md` | Logistics should ingest full advisory and update Business HQ boot/handoff/status/open-loop records. |
 | ADV-20260703-011 | 2026-07-03 | Job Search HQ | Life Logistics HQ | Medium | Closed | Local job-search location design rule | `coordination/boards/job-search.md` | Life Logistics ingested rule; Job Search handoff and README updated for nearby hubs/corridors and real commute-fit evaluation. |
 | ADV-20260703-010 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | Medium | Closed | Life OS design principle for new platforms | `coordination/boards/engineering.md` | Design-principles file created; Kanban/project-management tools deferred until measured pipeline-state pain appears. |
 | ADV-20260703-009 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Scheduled HQ sync system experiment | `coordination/boards/engineering.md` | Life Logistics HQ ingested advisory; daily HQ sync pilot architecture recorded. |
@@ -71,6 +72,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-001 | Life Logistics HQ | Unread | Pending | Needs ingestion into Business HQ boot/handoff/status/open-loop files and Drive architecture pointers. |
 | ADV-20260703-011 | Life Logistics HQ | Read | Ingested | Job Search handoff/README updated with commute-aware local search rule. |
 | ADV-20260703-010 | Life Logistics HQ | Read | Ingested | Design-principles file created and platform-adoption principle recorded. |
 | ADV-20260703-009 | Life Logistics HQ | Read | Ingested | Daily HQ sync pilot architecture recorded; observe Engineering HQ Daily Sync before additional rollout. |
