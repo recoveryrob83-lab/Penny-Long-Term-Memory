@@ -14,6 +14,24 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Life Logistics Daily Boot Sync
+
+### Summary
+
+Ran Life Logistics HQ daily boot and sync from GitHub.
+
+### Completed Work
+
+- Read global boot files, session handoff, operating rules, active projects, open loops, Life Logistics handoff/identity, Advisory Index, Department Event Inbox, Captain's Log, and scheduled-task notes.
+- Updated Life Logistics HQ handoff to current daily sync / design-principles / Reliable Connector Execution Layer context.
+- Updated Active Projects next actions for Business and Engineering.
+- Re-consumed ADV-20260704-001 and returned it to acknowledged/closed state.
+- Left ADV-20260704-003 open for Chief Engineering Penny because it is self-addressed to Engineering.
+
+### Current Focus
+
+Business Drive architecture remains the main Life Logistics decision point. Engineering Reliable Connector Execution Layer remains the main Engineering research track.
+
 ## 2026-07-04 — Business Research Advisory Ingested
 
 ### Summary
@@ -71,23 +89,5 @@ No advisory was created. This is a Drive working-resource note only. Detailed le
 ### Summary
 
 Read and acknowledged ADV-20260703-011 from Job Search HQ. Added commute-aware local search guidance to Job Search project files.
-
-### Completed Work
-
-- Read Advisory Index, Department Event Inbox, and Job Search board.
-- Updated Job Search session handoff.
-- Updated Job Search README.
-- Updated Department Event Inbox.
-- Updated Advisory Index and Job Search board.
-
-### Decision / Lesson
-
-Local job discovery should search nearby employment hubs and commute corridors, not only Rob's exact city label. Job leads should then be evaluated for actual commute fit, pay, schedule, and recovery-support compatibility.
-
-## 2026-07-03 — Life OS Design Principles Created
-
-### Summary
-
-Read and acknowledged ADV-20260703-010 from Chief Engineering Penny. Created the durable Life OS design-principles file.
 
 (Older detailed entries are retained in repository history.)
