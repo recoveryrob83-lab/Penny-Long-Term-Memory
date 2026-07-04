@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-03
+Updated: 2026-07-04
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -23,6 +23,29 @@ The core architecture remains:
 - Life OS design principles live in `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
 
 ## Recent Major Updates
+
+### Chief Business HQ Research Update
+
+ADV-20260704-001 from Chief Business HQ was read and ingested by Life Logistics HQ.
+
+Business HQ completed a major Penny Platform business-development work session.
+
+Current business frame: Penny is not primarily a chatbot. Penny is an execution/coordination platform or personal AI operating system that reduces coordination burden, cognitive load, and mental juggling while increasing completed outcomes.
+
+Business HQ has begun competitor research and created/updated Drive working records:
+
+- `Business Competitor Matrix`, with `Competitors` and `Positioning Matrix` tabs.
+- `Business Development Costs`, with `Cost Estimates` and `Unit Economics` tabs.
+- `Business_Model_Design.xlsx` in Life Organization > Business Development > Strategy.
+
+Candidate business model paths:
+
+- Penny Platform
+- Penny Solutions / Studio
+- Penny Templates / Marketplace
+- Hybrid Concierge MVP
+
+Current unresolved logistics issue: Business Drive architecture is not canonical yet. Earlier `Chief Business HQ` and newer `Business Development / Strategy` Drive paths both exist. Life Logistics / Rob should decide whether to keep one, migrate/rename, or maintain both with clear distinctions before Business HQ creates many more artifacts.
 
 ### Life OS Design Principles
 
@@ -70,16 +93,6 @@ Drive resource:
 
 Routing note: meeting-note capture or meeting-summary work should route to Recovery Meeting Notes Workdesk unless Rob asks otherwise.
 
-### Business Logistics Advisory
-
-ADV-20260703-004 from Chief Business HQ has been read, ingested, and acknowledged.
-
-Business HQ is in active Penny Platform viability research and may generate frequent working artifacts, research notes, Drive records, Todoist actions, GitHub advisories, and future cross-department handoffs.
-
-Life Logistics HQ should keep the operational map tidy while Business HQ moves quickly.
-
-Main Assistant should route one-off business admin, quick lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
-
 ### Department Event Inbox
 
 `coordination/DEPARTMENT_EVENT_INBOX.md` has been created.
@@ -106,9 +119,7 @@ Important engineering guardrail: Chief Business HQ defines what should be built 
 
 Chief Business handles business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and go-to-market planning.
 
-Chief Business HQ is active on Penny product viability and business-development research. A Drive working cabinet exists under Life Organization > Chief Business HQ.
-
-ADV-20260703-003 from Chief Business HQ has been acknowledged after Life Logistics HQ, Main Assistant, and Chief of Finance Penny reported read to Rob.
+Chief Business HQ is active on Penny Platform viability, competitor research, positioning, unit economics, and business-model design.
 
 ### Chief of Finance Penny
 
@@ -164,6 +175,7 @@ Preferred new-chat startup:
 
 ## Recent Work Completed
 
+- Read and ingested ADV-20260704-001 from Chief Business HQ and updated Business HQ reboot context.
 - Read and ingested ADV-20260703-010 from Chief Engineering Penny and created Life OS design principles file.
 - Read and ingested ADV-20260703-009 from Chief Engineering Penny and recorded daily HQ sync pilot architecture.
 - Read and acknowledged ADV-20260703-008 from Recovery HQ after Life Logistics HQ and Main Assistant consumed it.
@@ -182,7 +194,7 @@ Preferred new-chat startup:
 
 ## Best Next Action
 
-Observe Engineering HQ Daily Sync pilot before rolling out more scheduled HQ sync workers.
+Observe Engineering HQ Daily Sync pilot before rolling out more scheduled HQ sync workers. Also decide the canonical Business Drive folder architecture before Business HQ creates many more artifacts.
 
 ## Guiding Principle
 
