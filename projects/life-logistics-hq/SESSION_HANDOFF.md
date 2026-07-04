@@ -51,6 +51,18 @@ Source/publication rule: choose the natural authoritative home first, then make 
 
 Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
 
+## Current Routing Rules
+
+Discretionary Purchase Pause Rule:
+
+When Rob is considering discretionary spending, especially impulse purchases or repeat habit purchases, route the decision to Chief of Finance Penny before purchase when possible.
+
+Chief of Finance Penny owns budget review, protected-funds logic, opportunity cost, current financial goals, and purchase recommendations.
+
+Life Logistics HQ owns routing, reminders, calendar/itinerary awareness, cross-project coordination, and sending discretionary-spending decisions to Finance HQ.
+
+Life Logistics HQ should not store current financial goals, live balances, protected-fund calculations, or detailed purchase records in GitHub. Those belong in Finance HQ's Drive working records.
+
 ## Current Drive Architecture Decisions
 
 Business Drive architecture is resolved:
@@ -72,6 +84,7 @@ Business Development should be treated as a subfolder under Chief Business HQ, n
 - Maintain the Pending Advisory Board standard.
 - Maintain the Department Notebook standard.
 - Maintain the source-of-truth and publication standard.
+- Route discretionary spending decisions to Chief of Finance Penny when possible.
 - Track scheduled-task architecture findings at an abstract level.
 - Protect role clarity between Main Assistant, Life Logistics HQ, and specialist departments.
 
@@ -151,14 +164,16 @@ Scheduled sync workers should read, consume advisories, and report. They should 
 - Pending Advisory Boards are local staging notebooks, not routed advisory channels.
 - Department Notebooks are optional local sketchpads, not routing or source-of-truth systems.
 - Source-of-truth rule: choose the natural authoritative home first; every other copy is secondary.
+- Discretionary purchase routing belongs to Chief of Finance Penny for budget/protected-funds review; Life Logistics routes and does not store live money details.
 
 ## Immediate Next Actions
 
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
 2. Use Main Assistant for daily operations.
 3. Use specialist chats for focused work.
-4. Observe Engineering HQ Daily Sync pilot before adding more daily sync workers.
+4. Route discretionary spending decisions to Chief of Finance Penny when possible.
+5. Observe Engineering HQ Daily Sync pilot before adding more daily sync workers.
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin to Main Assistant and specialist project work to the right department. Keep GitHub tidy and abstract. Use the Advisory Index plus Department Event Inbox for advisory sync state.
+This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin to Main Assistant and specialist project work to the right department. Keep GitHub tidy and abstract. Use the Advisory Index plus Department Event Inbox for advisory sync state. Route discretionary spending questions to Chief of Finance Penny instead of storing live financial context in GitHub.
