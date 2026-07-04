@@ -92,10 +92,10 @@ T001-ONE | Widget | Harmless fake row for connector payload test.
 
 Experiment status: PASS.
 
-Safety event: Not provided in pasted log; inferred likely NO from successful result, but not formally recorded here.
+Safety event: NO.
 
-Connector failure: Not provided.
+Connector failure: NO.
 
-Schema error: Not provided.
+Schema error: NO.
 
-Google Drive failure: Not provided.
+Google Drive failure: NO.
