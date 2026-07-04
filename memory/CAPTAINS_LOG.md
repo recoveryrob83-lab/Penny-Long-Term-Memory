@@ -14,35 +14,34 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Discretionary Purchase Routing Reinforced
+
+### Summary
+
+Read and acknowledged ADV-20260704-008 from Chief of Finance Penny. Reinforced the Discretionary Purchase Pause Rule as a Life Logistics routing rule.
+
+### Completed Work
+
+- Updated Life Logistics HQ handoff.
+- Updated Advisory Index.
+- Updated Department Event Inbox.
+- Updated Finance advisory board.
+
+### Decision / Lesson
+
+Life Logistics routes discretionary spending decisions to Chief of Finance Penny when possible. Finance owns budget review, protected-funds logic, opportunity cost, financial goals, and purchase recommendations. Live financial details stay out of GitHub.
+
 ## 2026-07-04 — Finance Advisory Routing Corrected
 
 ### Summary
 
 Clarified that GitHub Issues are not a Life OS advisory surface. Formal advisories must use department advisory boards, Advisory Index, and Department Event Inbox.
 
-### Completed Work
-
-- Updated global Operating Rules.
-- Updated Finance Operating Rules.
-- Created Finance advisory board: `coordination/boards/finance.md`.
-- Created ADV-20260704-007 for Chief of Finance Penny to force a fresh Finance sync.
-- Updated Advisory Index.
-- Updated Department Event Inbox.
-- Updated Finance session handoff.
-
-### Decision / Lesson
-
-Finance should use `coordination/boards/finance.md` for formal advisories. GitHub Issues are not advisory routing unless Rob explicitly changes the architecture later.
-
 ## 2026-07-04 — Source-of-Truth and Publication Standard Adopted
 
 ### Summary
 
 Read and acknowledged ADV-20260704-006 from Chief Engineering Penny. Adopted a Life OS source-of-truth and publication architecture standard.
-
-### Decision / Lesson
-
-Choose the natural authoritative home first, then make every other copy clearly secondary. Short form: source in GitHub, publish to Drive, with exceptions when another system is the natural authoritative home.
 
 ## 2026-07-04 — Department Notebooks Adopted
 
