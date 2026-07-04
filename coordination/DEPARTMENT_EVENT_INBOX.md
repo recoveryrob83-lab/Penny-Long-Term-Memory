@@ -35,25 +35,21 @@ Source of truth remains:
 - `coordination/DEPARTMENT_EVENT_INBOX.md` for department read and ingestion state.
 - Department advisory boards for advisory details.
 
-The watcher should:
+Note: standalone Advisory Watcher is no longer the preferred scheduled-task slot usage. Its reporting logic is folded into daily HQ sync workers.
 
-1. Check `coordination/ADVISORY_INDEX.md` and `coordination/DEPARTMENT_EVENT_INBOX.md` on a recurring cadence.
-2. Identify open advisories or unread department inbox items.
-3. Generate a concise report for Rob only when routing is needed.
-4. Include copy-paste-ready routing messages Rob can paste into target HQ chats.
-5. Avoid modifying GitHub unless Rob later explicitly approves that behavior.
+## Daily HQ Sync Note
 
-Suggested watcher prompt:
+Daily HQ sync workers are the current preferred scheduled-task experiment for core HQs.
 
-```text
-Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md and coordination/DEPARTMENT_EVENT_INBOX.md. If there are open advisories or unread department event items, report only the items needing routing. For each item, include the target department, advisory/event ID, board/path, priority, and a copy-paste-ready message Rob can paste into the target HQ chat. Do not modify GitHub. If nothing needs routing, say that no advisory routing is needed.
-```
+Engineering HQ Daily Sync is the first pilot, scheduled for 6:00 AM America/Chicago.
+
+Daily sync workers should read boot/handoff/advisory context, consume advisories addressed to their department, and report meaningful updates. They should not modify systems unless Rob explicitly authorizes that behavior.
 
 ## Event Register
 
 | Event ID | Date | Source | Target(s) | Priority | Status | Subject | Source Pointer | Notes |
 |---|---|---|---|---|---|---|---|---|
-| ADV-20260703-009 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | New | Scheduled HQ sync system experiment | `coordination/boards/engineering.md` | Engineering created first daily sync task at 6:00 AM for pilot; Logistics should ingest and update architecture notes. |
+| ADV-20260703-009 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Scheduled HQ sync system experiment | `coordination/boards/engineering.md` | Life Logistics HQ ingested advisory; daily HQ sync pilot architecture recorded. |
 | ADV-20260703-008 | 2026-07-03 | Recovery HQ | Life Logistics HQ / Main Assistant | Medium | Closed | Recovery Meeting Notes Workdesk created | `coordination/boards/recovery.md` | Life Logistics HQ and Main Assistant both consumed advisory; acknowledgement complete. |
 | ADV-20260703-004 | 2026-07-03 | Chief Business HQ | Life Logistics HQ / Main Assistant | High | Closed | Frequent logistics updates needed for Penny platform research | `coordination/boards/business.md` | Life Logistics HQ and Main Assistant both consumed advisory; acknowledgement complete. |
 | ADV-20260703-007 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ / Routed Departments | High | Closed | Scheduled advisory watcher and inbox procedure | `coordination/boards/engineering.md` | Procedure rollout completed across active HQs. No further routing needed. |
@@ -65,7 +61,7 @@ Check the Life OS GitHub advisory system. Read coordination/ADVISORY_INDEX.md an
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
-| ADV-20260703-009 | Life Logistics HQ | Unread | Pending | New Engineering advisory about scheduled HQ sync system. |
+| ADV-20260703-009 | Life Logistics HQ | Read | Ingested | Daily HQ sync pilot architecture recorded; observe Engineering HQ Daily Sync before additional rollout. |
 | ADV-20260703-008 | Life Logistics HQ | Read | Ingested | Recovery Meeting Notes Workdesk recognized as a Recovery workbench/resource update. |
 | ADV-20260703-008 | Main Assistant | Read | Ingested | Main Assistant consumed advisory and should route meeting-note capture or summary work to Recovery Meeting Notes Workdesk unless Rob asks otherwise. |
 | ADV-20260703-004 | Life Logistics HQ | Read | Ingested | Life Logistics HQ will monitor Business HQ routing, structure, and cross-department cleanliness during active Penny Platform research. |
