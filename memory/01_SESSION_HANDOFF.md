@@ -6,7 +6,7 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, and an emerging daily HQ sync procedure.
+Life OS is operational with separate durable memory, working records, action systems, specialist project chats, advisories, a Department Event Inbox, an emerging daily HQ sync procedure, and a durable design-principles file.
 
 The core architecture remains:
 
@@ -20,8 +20,23 @@ The core architecture remains:
 - Main Assistant handles daily operations.
 - The Department Event Inbox tracks abstract department sync/read/ingestion state.
 - Daily HQ sync workers may report routing needs and consume advisories, but they do not own source-of-truth state.
+- Life OS design principles live in `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
 
 ## Recent Major Updates
+
+### Life OS Design Principles
+
+ADV-20260703-010 from Chief Engineering Penny was read and ingested by Life Logistics HQ.
+
+Created:
+
+- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
+
+Key principle: no new platform enters the Life OS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
+
+Kanban/project-management platforms such as Asana, ClickUp, Trello, or similar tools are deferred, not rejected.
+
+Future re-evaluation trigger: real pipeline-state pain, especially in Chief Business HQ or Chief Engineering Penny.
 
 ### Daily HQ Sync Pilot
 
@@ -144,11 +159,12 @@ Preferred new-chat startup:
 - Chief Wellness HQ: practical wellness, health-adjacent logistics, appointments, routines, and stability supports.
 - Recovery Logistics: daily anchors, meetings, literature logistics, meeting-note workbench routing, and non-sensitive recovery routines.
 - Philosophy HQ: framework continuity, Scriptorium coordination, and future book-compilation support.
-- Life OS Infrastructure: boot files, handoffs, connector lessons, and system design.
+- Life OS Infrastructure: boot files, handoffs, connector lessons, design principles, and system design.
 - Health Medical HQ and Housing Logistics HQ remain available as specialist departments when needed.
 
 ## Recent Work Completed
 
+- Read and ingested ADV-20260703-010 from Chief Engineering Penny and created Life OS design principles file.
 - Read and ingested ADV-20260703-009 from Chief Engineering Penny and recorded daily HQ sync pilot architecture.
 - Read and acknowledged ADV-20260703-008 from Recovery HQ after Life Logistics HQ and Main Assistant consumed it.
 - Read, ingested, and acknowledged ADV-20260703-004 from Chief Business HQ.
@@ -178,6 +194,7 @@ Gmail owns communications.
 Captain's Log records meaningful operational sessions.
 Department Event Inbox tracks system synchronization state.
 Daily HQ sync workers report and consume advisory state only unless Rob explicitly authorizes writes.
+Design principles govern whether new platforms enter Life OS.
 
 Project chats create project knowledge.
 Life Logistics HQ curates cross-project operational memory.
