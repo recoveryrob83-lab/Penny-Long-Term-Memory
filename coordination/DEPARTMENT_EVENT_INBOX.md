@@ -59,7 +59,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 |---|---|---|---|---|---|---|---|---|
 | ADV-20260704-003 | 2026-07-04 | Chief Engineering Penny | Chief Engineering Penny | High | New | Engineering sync completed and connector reliability next work | `coordination/boards/engineering.md` | Self-addressed advisory for next Engineering continuation packet. |
 | ADV-20260704-002 | 2026-07-04 | Chief Business HQ | Chief Engineering Penny | High | Ingested | Drive connector reliability is a major Penny product risk | `coordination/boards/business.md` | Engineering ingested advisory and created Reliable Connector Execution Layer as first concrete research track. |
-| ADV-20260704-001 | 2026-07-04 | Chief Business HQ | Life Logistics HQ | High | New | Business HQ research, Drive architecture, and reboot-state update needed | `coordination/boards/business.md` | Reopened at Rob's request. |
+| ADV-20260704-001 | 2026-07-04 | Chief Business HQ | Life Logistics HQ | High | Closed | Business HQ research, Drive architecture, and reboot-state update needed | `coordination/boards/business.md` | Life Logistics re-consumed during daily boot; Business Drive architecture remains an open decision. |
 | ADV-20260703-011 | 2026-07-03 | Job Search HQ | Life Logistics HQ | Medium | Closed | Local job-search location design rule | `coordination/boards/job-search.md` | Life Logistics ingested rule; Job Search handoff and README updated with commute-aware local search rule. |
 | ADV-20260703-010 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | Medium | Closed | Life OS design principle for new platforms | `coordination/boards/engineering.md` | Design-principles file created; Kanban/project-management tools deferred until measured pipeline-state pain appears. |
 | ADV-20260703-009 | 2026-07-03 | Chief Engineering Penny | Life Logistics HQ | High | Ingested | Scheduled HQ sync system experiment | `coordination/boards/engineering.md` | Life Logistics HQ ingested advisory; daily HQ sync pilot architecture recorded. |
@@ -76,7 +76,7 @@ No new platform enters Life OS until it solves a measured problem that cannot be
 |---|---|---|---|---|
 | ADV-20260704-003 | Chief Engineering Penny | Unread | Pending | Self-addressed advisory for next Engineering continuation packet. |
 | ADV-20260704-002 | Chief Engineering Penny | Read | Ingested | Engineering status, handoff, and open loops updated; Reliable Connector Execution Layer research track created. |
-| ADV-20260704-001 | Life Logistics HQ | Unread | Pending | Reopened at Rob's request. |
+| ADV-20260704-001 | Life Logistics HQ | Read | Ingested | Re-consumed during 2026-07-04 daily boot; Life Logistics and global project map updated. |
 | ADV-20260703-011 | Life Logistics HQ | Read | Ingested | Job Search handoff/README updated with commute-aware local search rule. |
 | ADV-20260703-010 | Life Logistics HQ | Read | Ingested | Design-principles file created and platform-adoption principle recorded. |
 | ADV-20260703-009 | Life Logistics HQ | Read | Ingested | Daily HQ sync pilot architecture recorded; observe Engineering HQ Daily Sync before additional rollout. |
