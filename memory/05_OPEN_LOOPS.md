@@ -24,9 +24,9 @@ Do not duplicate source-system details here.
 | Open | Chief of Finance Penny | REF-003 | Begin real checkbook use | Inspect Drive Checkbook Register structure before real transaction work | When data exists | Keep detailed finance records in Drive or RPR, not GitHub |
 | Open | Chief of Finance Penny | REF-003 | Build budget / bills workflow | Add budget, bills, or reminders when real inputs are known | When useful | Former Ledger & Programs bucket now active as Chief of Finance Penny |
 | Open | Chief Business HQ | To assign | Business research scaffold active | Continue product viability and business-development research in Business HQ | Ongoing | Working cabinet exists in Drive |
-| Open | Chief Business HQ | To assign | ADV-20260703-003 target reads | Wait for Life Logistics HQ, Main Assistant, and Chief of Finance Penny to report read before acknowledgement | Current | Do not acknowledge yet |
 | Open | Chief Wellness HQ | To assign | Begin wellness operations | Use Chief Wellness HQ for primary care, vision, sleep, food, movement, preventive care, or routine support when Rob is ready | When useful | Keep sensitive details outside GitHub |
 | Open | Life OS Registry | REF-004 | Use registry as foreign-key layer | Add new refs as projects mature | Ongoing | Drive sheet is the directory service |
+| Open | Life OS Infrastructure | REF-004 | Observe Engineering HQ Daily Sync pilot | Confirm whether scheduled sync runs correctly before rolling out more HQ sync workers | Next scheduled run | Engineering HQ Daily Sync is first pilot at 6:00 AM America/Chicago |
 | Open | Support Pathway | REF-005 | Continue pathway research | Use Caregiver Project HQ and current program sources | Ongoing | Detailed notes belong in Drive/project handoff |
 | Open | Daily Anchors | REF-006 | Maintain reliability anchors | Continue meetings, sponsor contact, service, literature, and journal review | Ongoing | Source: Drive journal; reliability is the current practical anchor |
 | Open | Startup Boot | REF-004 | Make new Penny boot reliable | Use `memory/STARTUP_BOOT.md` plus project `SESSION_HANDOFF.md` in fresh chats | Ongoing | Read-only boot unless Rob asks for edits |
@@ -35,7 +35,7 @@ Do not duplicate source-system details here.
 
 | Status | Project | Registry Ref | Waiting For | Next Check | Notes |
 |---|---|---|---|---|---|
-| Waiting | Business advisory | To assign | Life Logistics HQ, Main Assistant, and Chief of Finance Penny reads | After target departments report read to Rob | ADV-20260703-003 remains open |
+| Waiting | Scheduled HQ Sync | REF-004 | Engineering HQ Daily Sync pilot result | After next 6:00 AM America/Chicago scheduled run | Verify identity, GitHub access, advisory consumption, and no unwanted writes |
 | Waiting | Site Cleanup / Support Pathway | REF-002 / REF-005 | External follow-ups and project inputs | Check when relevant | Details outside GitHub |
 | Waiting | Work Search | REF-001 | Responses from source systems | Check when Rob wants follow-up | Details outside GitHub |
 
@@ -43,6 +43,11 @@ Do not duplicate source-system details here.
 
 | Closed Date | Project | Item | Notes |
 |---|---|---|---|
+| 2026-07-03 | Life OS Infrastructure | ADV-20260703-009 acknowledged | Daily HQ sync pilot architecture recorded; standalone watcher superseded as preferred slot usage. |
+| 2026-07-03 | Recovery Logistics | ADV-20260703-008 acknowledged | Recovery Meeting Notes Workdesk recognized; both Life Logistics and Main Assistant consumed advisory. |
+| 2026-07-03 | Chief Business HQ | ADV-20260703-004 acknowledged | Business logistics advisory consumed by Life Logistics and Main Assistant. |
+| 2026-07-03 | Chief Business HQ | ADV-20260703-003 acknowledged | All target departments reported read; scaffold advisory closed. |
+| 2026-07-03 | Chief Engineering Penny | Activated engineering department | Created `projects/engineering/` as Chief Engineering Penny / Engineering HQ. |
 | 2026-07-03 | Chief Business HQ | Activated business department | Created `projects/business-development/` as Chief Business HQ / Chief Business Development Penny. |
 | 2026-07-03 | Chief Wellness HQ | Activated wellness department | Upgraded `projects/wellness/` into Chief Wellness HQ / Chief Wellness Penny. |
 | 2026-07-03 | Chief of Finance Penny | Activated finance backend | Upgraded `projects/finance-benefits/` into Chief of Finance Penny and located Drive working records. |
