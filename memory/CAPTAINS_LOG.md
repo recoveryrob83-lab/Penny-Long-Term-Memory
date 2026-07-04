@@ -14,6 +14,19 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-03 — Recovery Advisory Final Closure
+
+### Summary
+
+Closed ADV-20260703-008 after Main Assistant consumed it.
+
+### Completed Work
+
+- Moved ADV-20260703-008 to acknowledged in the Advisory Index.
+- Updated Recovery advisory board to acknowledged.
+- Updated Department Event Inbox status to Closed.
+- Marked Life Logistics HQ and Main Assistant as read/ingested.
+
 ## 2026-07-03 — Recovery Workbench Advisory Ingested
 
 ### Summary
@@ -26,9 +39,9 @@ Life Logistics HQ read and ingested ADV-20260703-008 from Recovery HQ.
 - Marked Life Logistics HQ read/ingested in the Department Event Inbox.
 - Updated global session handoff with the new Recovery workbench/resource routing note.
 
-### Current Status
+### Correction
 
-ADV-20260703-008 remains open until Main Assistant consumes it.
+This advisory has since been closed after Main Assistant consumed it. See `2026-07-03 — Recovery Advisory Final Closure` above.
 
 ## 2026-07-03 — Life Logistics Advisory Workflow Sync
 
