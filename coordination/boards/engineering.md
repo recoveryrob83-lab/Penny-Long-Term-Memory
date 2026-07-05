@@ -6,7 +6,58 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260704-013 — Tighten advisory posting board rules
+
+- Date: 2026-07-04
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: High
+- Status: Open
+- Related Project(s): Life OS, advisory routing, department boards, Department Event Inbox, Advisory Index, Operating Rules
+- Source Location: Engineering discussion after ADV-20260704-012 acknowledgement
+- Target Board: `coordination/boards/engineering.md`
+
+#### Summary
+
+Engineering observed ambiguity in the advisory posting rules around whether an advisory should be posted to the source department's board or the target department's board.
+
+Current operating rules say formal advisories must be posted to the source department board under `coordination/boards/`, while the advisory template includes a `Target Board` field that can be misread as the target department's board.
+
+Life Logistics should tighten the global advisory posting rules during the next sync/boot cycle.
+
+#### Why It Matters
+
+If departments post advisories inconsistently, the Advisory Index and Department Event Inbox may point to unexpected boards, departments may check the wrong board, and future HQs may generate routing gobbledegook.
+
+This is especially risky now that multiple boards exist, including Engineering, Finance, Main Assistant, Life OS, and Business.
+
+#### Suggested Rule
+
+Recommended durable rule:
+
+> Advisories live on the source department's board. The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+
+Recommended template clarification:
+
+- Posted Board: `coordination/boards/<source-department>.md`
+- Target Department: `<receiving department>`
+
+Avoid ambiguous use of `Target Board` unless it is explicitly defined.
+
+#### Suggested Action
+
+Life Logistics HQ should update the relevant global rules and templates as appropriate, likely including:
+
+- `coordination/README.md`
+- `coordination/template.md`
+- `memory/03_OPERATIONAL_RULES.md`
+- any department boot or handoff instructions that describe advisory posting
+
+Engineering is not making those global rule edits tonight. This advisory is being posted so Logistics can handle the standards tightening during morning sync/boot.
+
+#### Acknowledgement / Outcome
+
+Pending Life Logistics HQ consumption.
 
 ## Acknowledged / Implemented Advisories
 
