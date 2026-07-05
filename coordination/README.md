@@ -1,6 +1,6 @@
 # Coordination
 
-Updated: 2026-07-02
+Updated: 2026-07-05
 Purpose: Cross-project advisory board system for Penny departments.
 
 ## Operating Idea
@@ -31,8 +31,22 @@ Specialist departments should read advisory boards only when:
 ## Files
 
 - `ADVISORY_INDEX.md`: fast dashboard of open/advisory status.
+- `DEPARTMENT_EVENT_INBOX.md`: department read/ingestion register.
 - `boards/`: department advisory boards.
 - `template.md`: standard advisory format.
+
+## Advisory Posting Rule
+
+Advisories live on the source department's board.
+
+The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+
+Use:
+
+- Posted Board: `coordination/boards/<source-department>.md`
+- Target Department: `<receiving department>`
+
+Do not use ambiguous `Target Board` language unless a file explicitly defines what it means.
 
 ## Read Pattern
 
