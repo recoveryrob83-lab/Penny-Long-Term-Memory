@@ -29,7 +29,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| None | - | - | - | - | - |
+| ADV-20260704-012 | Life Logistics HQ | Chief Engineering Penny | Open | Connector safety-trigger avoidance rules needed | Engineering should consume advisory and propose global GitHub/Drive connector safety-trigger avoidance rules. |
 
 ## Recent Closed / Ingested Events
 
@@ -51,9 +51,9 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-012 | Chief Engineering Penny | Unread | Pending | Consume connector safety-trigger advisory and propose durable avoidance/fallback rules. |
 | ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
 | ADV-20260704-010 | All Departments | Read | Ingested | All boards reported Decision Rules Registry and Role Drift Check architecture ingested. |
-| ADV-20260704-010 | Life Logistics HQ | Read | Ingested | Decision Rules Registry and Role Drift Check architecture ingested. |
 | ADV-20260704-009 | Life Logistics HQ | Read | Ingested | Role Drift Check added to Operating Rules and Life Logistics handoff. |
 | ADV-20260704-008 | Life Logistics HQ | Read | Ingested | Discretionary Purchase Pause Rule routing reinforced. |
 | ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
