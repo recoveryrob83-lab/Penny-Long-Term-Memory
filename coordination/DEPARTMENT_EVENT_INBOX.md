@@ -27,7 +27,9 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 ## Current Open / Pending Events
 
-None.
+| Event ID | Source | Target(s) | Status | Subject | Notes |
+|---|---|---|---|---|---|
+| ADV-20260704-013 | Chief Engineering Penny | Life Logistics HQ | Open | Tighten advisory posting board rules | Logistics should clarify source-board versus target-department routing during morning sync/boot. |
 
 ## Recent Closed / Ingested Events
 
@@ -50,6 +52,7 @@ None.
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260704-013 | Life Logistics HQ | Unread | Pending | Review advisory posting-board ambiguity and tighten global rules. |
 | ADV-20260704-012 | Chief Engineering Penny | Read | Ingested | Engineering will fold connector safety-trigger avoidance into Reliable Connector Execution Layer rules. |
 | ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
 | ADV-20260704-010 | All Departments | Read | Ingested | All boards reported Decision Rules Registry and Role Drift Check architecture ingested. |
