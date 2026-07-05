@@ -14,18 +14,30 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-04 — Nightly Batch Audit
+
+### Summary
+
+Ran nightly Life OS GitHub hygiene pass after a major advisory and architecture day.
+
+### Findings
+
+- Advisory Index showed no open advisories.
+- Department Event Inbox showed no current open/pending events.
+- Active Project Map reflected department consolidation and dormant/archive states.
+- Decision Rules Registry and Finance Decision Rules were present and coherent.
+- Global Operating Rules contained Role Drift Check, Decision Rules, and formal advisory routing rules.
+- Finance Advisory Board had the clearest advisory-posting language.
+
+### Loose-Language Notes
+
+Engineering, Business, and Life OS advisory boards are clean on open state but could eventually receive the same explicit advisory-posting operating rule used by Finance. An attempted Engineering board tightening rewrite was blocked by connector safety checks, so no further board rewrites were attempted during this batch.
+
 ## 2026-07-04 — Department Consolidation Adopted
 
 ### Summary
 
 Read and acknowledged ADV-20260704-011 from Main Assistant. Rob reduced active Penny department load by consolidating some lightweight domains into Main Assistant and marking some departments dormant until needed.
-
-### Completed Work
-
-- Updated `memory/04_ACTIVE_PROJECTS.md`.
-- Updated Main Assistant advisory board.
-- Updated Advisory Index.
-- Updated Department Event Inbox.
 
 ### Decision / Lesson
 
@@ -76,11 +88,5 @@ Read and acknowledged ADV-20260704-005 from Chief Engineering Penny. Adopted opt
 ### Summary
 
 Read and acknowledged ADV-20260704-004 from Chief Engineering Penny. Adopted Pending Advisory Boards as a standard Life OS pattern.
-
-## 2026-07-04 — Business Drive Architecture Decided
-
-### Summary
-
-Rob decided the canonical Business Drive architecture.
 
 (Older detailed entries are retained in repository history.)
