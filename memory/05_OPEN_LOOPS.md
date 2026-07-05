@@ -1,38 +1,40 @@
 # Open Loops
 
-Updated: 2026-07-04
+Updated: 2026-07-05
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Priority Open Loops
 
-- Main Assistant: use as daily operations desk.
-- Work Search: continue interview prep and targeted applications.
-- Site Cleanup: continue provider option gathering.
-- Chief of Finance Penny: begin checkbook/budget workflows when real data exists.
-- Chief Business HQ: continue competitor positioning, unit economics, business-model scoring, and validation design. Working records live in Drive/RPR under `Life Organization > Chief Business HQ > Business Development`.
-- Chief Engineering Penny: continue Reliable Connector Execution Layer research track.
+- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains.
+- Site Cleanup: continue provider option gathering when Rob wants follow-up.
+- Chief of Finance Penny: begin checkbook, budget, bills, and benefits workflows when Rob is ready.
+- Chief Business HQ: continue positioning, unit economics, validation design, and business-model scoring.
+- Chief Engineering Penny: continue Reliable Connector Execution Layer and connector safety-trigger rule work.
 - Chief Wellness HQ: begin wellness operations when useful.
-- Life OS Registry: use registry IDs as foreign keys.
-- Life OS Infrastructure: observe Engineering HQ Daily Sync pilot before rolling out more sync workers.
-- Support Pathway: continue pathway research in the specialist project.
-- Daily Anchors: maintain reliability anchors.
-- Startup Boot: keep new Penny boot reliable.
+- Life OS Infrastructure: maintain design principles, decision rules, advisory routing, and sync architecture as needed.
+- Startup Boot: keep Penny boot reliable.
+
+## Consolidated / Dormant Domains
+
+- Work Search: consolidated into Main Assistant for current lightweight logistics and reminders.
+- Support Pathway: consolidated into Main Assistant for current lightweight research and logistics.
+- Daily Anchors / Recovery Logistics: dormant until Rob reactivates it; routine calendar/Todoist items may route through Main Assistant.
+- Philosophy HQ: dormant until Rob reactivates it; chat/workbench activity continues outside active HQ overhead.
 
 ## Waiting On
 
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
-- Site Cleanup / Support Pathway: external follow-ups and project inputs.
-- Work Search: responses from source systems when Rob wants follow-up.
+- Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
+- Work Search: source-system responses when Rob wants follow-up.
 
 ## Done / Recently Closed
 
-- 2026-07-04: Chief Business HQ — Business Drive architecture decided. Canonical path: `Life Organization > Chief Business HQ > Business Development`.
-- 2026-07-04: Chief Engineering Penny — ADV-20260704-002 ingested; Reliable Connector Execution Layer created as first concrete Engineering research track.
-- 2026-07-04: Chief Business HQ — ADV-20260704-001 ingested; Business research and reboot-state update consumed by Life Logistics HQ.
-- 2026-07-03: Life OS Infrastructure — ADV-20260703-009 acknowledged; daily HQ sync pilot architecture recorded.
-- 2026-07-03: Recovery Logistics — ADV-20260703-008 acknowledged; Recovery Meeting Notes Workdesk recognized.
-- 2026-07-03: Chief Business HQ — ADV-20260703-004 and ADV-20260703-003 acknowledged.
-- 2026-07-03: Chief Engineering Penny, Chief Business HQ, Chief Wellness HQ, Chief of Finance Penny, and Life Logistics HQ activated or upgraded as specialist departments.
+- 2026-07-05: ADV-20260704-013 consumed; advisory posting language clarified as source-board plus target-department routing.
+- 2026-07-04: ADV-20260704-012 consumed by Engineering; connector safety-trigger avoidance folded into Reliable Connector Execution Layer work.
+- 2026-07-04: ADV-20260704-011 consumed; project map simplified and several departments consolidated or marked dormant.
+- 2026-07-04: ADV-20260704-010 closed after all departments reported Decision Rules Registry and Role Drift Check ingestion.
+- 2026-07-04: Chief Business HQ — Business Drive architecture decided.
+- 2026-07-04: Chief Engineering Penny — Reliable Connector Execution Layer created as first concrete Engineering research track.
 - 2026-07-02: Core Life OS GitHub memory mirror, Startup Boot, Pointer Registry, RPR procedure, and project scaffolds created.
 
 ## Parking Lot
