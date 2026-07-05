@@ -27,14 +27,13 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 ## Current Open / Pending Events
 
-| Event ID | Source | Target(s) | Status | Subject | Notes |
-|---|---|---|---|---|---|
-| ADV-20260704-012 | Life Logistics HQ | Chief Engineering Penny | Open | Connector safety-trigger avoidance rules needed | Engineering should consume advisory and propose global GitHub/Drive connector safety-trigger avoidance rules. |
+None.
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
+| ADV-20260704-012 | Life Logistics HQ | Chief Engineering Penny | Closed | Connector safety-trigger avoidance rules needed | Engineering consumed advisory; connector safety-trigger avoidance will be folded into Reliable Connector Execution Layer rules. |
 | ADV-20260704-011 | Main Assistant | Life Logistics HQ | Closed | Department consolidation and archival request | Life Logistics updated active project map; several departments consolidated or marked dormant. Some secondary handoff/open-loop rewrites were blocked by connector safety checks. |
 | ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Closed | Decision Rules Registry and Role Drift Check architecture adopted | All boards reported read and ingested. Departments should use Decision Rules Registry and Role Drift Check going forward. |
 | ADV-20260704-009 | Chief Engineering Penny | Life Logistics HQ | Closed | Role Drift Check for Penny HQs | Life Logistics added Role Drift Check to Operating Rules and handoff as a gentle department-boundary safeguard. |
@@ -51,7 +50,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
-| ADV-20260704-012 | Chief Engineering Penny | Unread | Pending | Consume connector safety-trigger advisory and propose durable avoidance/fallback rules. |
+| ADV-20260704-012 | Chief Engineering Penny | Read | Ingested | Engineering will fold connector safety-trigger avoidance into Reliable Connector Execution Layer rules. |
 | ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
 | ADV-20260704-010 | All Departments | Read | Ingested | All boards reported Decision Rules Registry and Role Drift Check architecture ingested. |
 | ADV-20260704-009 | Life Logistics HQ | Read | Ingested | Role Drift Check added to Operating Rules and Life Logistics handoff. |
