@@ -2,6 +2,10 @@
 
 Use this format when a Penny department posts an advisory for another department.
 
+Advisories live on the source department's board.
+
+The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+
 ```markdown
 ## ADV-YYYYMMDD-### — Short Subject
 
@@ -12,7 +16,8 @@ Use this format when a Penny department posts an advisory for another department
 - Status: Open / Acknowledged / Implemented / Archived
 - Related Project(s):
 - Source Location:
-- Target Board:
+- Posted Board: `coordination/boards/<source-department>.md`
+- Target Department:
 
 ### Summary
 
