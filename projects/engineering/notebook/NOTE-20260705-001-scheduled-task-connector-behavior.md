@@ -143,3 +143,31 @@ Characterize scheduled-task execution environment:
 ## Provisional Design Rule
 
 > Scheduled tasks may be viable as connector-capable cron workers, but each worker must be stateless, read-only by default, and bootstrapped from durable memory until connector and execution-context behavior are better characterized.
+
+## 2026-07-05 Update — Cron Worker Pilot Findings
+
+Rob reported that a smaller assistant-created scheduled GitHub test succeeded.
+
+Test result:
+- A scheduled task invoked `@GitHub`.
+- It fetched the exact notebook file requested.
+- It returned only the note title / first heading line.
+- It opened a new chat for that run.
+
+This changes the GitHub scheduled-task result from pending to PASS for narrow read-only exact-file retrieval.
+
+Updated interpretation:
+- Scheduled tasks can function as connector-capable cron-style read workers for at least Gmail and GitHub.
+- Execution context is still not reliable: some runs stay in the same chat, while another opened a new chat.
+- Life OS should not depend on chat identity. The active HQ is whichever chat most recently completes a valid boot from durable GitHub memory.
+- Scheduled workers should be read-only by default for now.
+
+Near-term recommended use:
+- Life Logistics morning sync runs first and reports advisory/event/open-loop state.
+- Engineering morning sync reports Engineering handoff, open loops, notebook updates, and connector research status.
+- Main Assistant morning report covers itinerary and lightweight daily logistics, including consolidated caregiver/support-pathway work.
+- Finance, Business, Wellness, and dormant specialist HQs remain manual or event-driven unless later scheduled.
+
+Operational principle:
+
+> Automate awareness before authority.
