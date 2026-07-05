@@ -6,7 +6,67 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260704-012 — Connector safety-trigger avoidance rules needed
+
+- Date: 2026-07-04
+- From: Life Logistics HQ
+- To: Chief Engineering Penny
+- Priority: High
+- Status: Open
+- Related Project(s): Life OS, GitHub connector reliability, Google Drive connector reliability, Reliable Connector Execution Layer, operating rules
+- Source Location: Life Logistics nightly batch and connector safety-trigger observations
+- Target Board: `coordination/boards/engineering.md`
+
+#### Summary
+
+Life Logistics observed repeated connector safety-check blocks during nightly GitHub maintenance and earlier Drive work. The blocked operations were benign Life OS maintenance tasks, but several involved broad rewrites of central files or board files.
+
+Engineering should investigate and propose global operating rules for avoiding connector safety triggers across GitHub and Google Drive.
+
+#### Observed Pattern
+
+Recent blocked or brittle operations included:
+
+- rewriting `memory/05_OPEN_LOOPS.md`,
+- rewriting `projects/life-logistics-hq/SESSION_HANDOFF.md`,
+- rewriting `coordination/boards/engineering.md` to add advisory posting language,
+- earlier Drive write/create/update attempts during Business HQ work.
+
+Successful operations tended to be smaller, more localized, or new-file creations.
+
+#### Candidate Rules To Evaluate
+
+Engineering should evaluate whether Life OS should adopt global rules such as:
+
+1. Prefer small localized edits over broad full-file rewrites.
+2. Prefer append-only logs or small dated entries for large central files.
+3. Avoid repeatedly retrying a connector write after one or two safety blocks.
+4. When a hub file blocks, record the desired update in Captain's Log or a smaller sidecar note rather than forcing the hub rewrite.
+5. Create new targeted files when safer than rewriting a large central document.
+6. Treat connector safety blocks as engineering observations, not user failure.
+7. Keep sensitive or emotionally intense content out of connector write payloads when possible.
+8. Use RPR/user-mediated files when reliable structured-file editing matters more than connector automation.
+
+#### Requested Engineering Output
+
+Chief Engineering Penny should consume this advisory and propose a durable rule set for:
+
+- GitHub safety-trigger avoidance,
+- Google Drive safety-trigger avoidance,
+- fallback behavior after connector blocks,
+- when to use RPR/user-mediated file transfer,
+- how to log partial completion without overstating success.
+
+Suggested durable homes may include:
+
+- `memory/03_OPERATIONAL_RULES.md`,
+- `projects/engineering/DECISION_RULES.md` or another Engineering-owned rule file,
+- Reliable Connector Execution Layer notes,
+- a new global connector-safety standard if Engineering recommends one.
+
+#### Acknowledgement / Outcome
+
+Pending Chief Engineering Penny consumption.
 
 ## Acknowledged / Implemented Advisories
 
@@ -52,39 +112,3 @@ Life Logistics HQ adopted the Life OS Source-of-Truth and Publication Standard.
 - Priority: High
 
 Engineering re-consumed this self-addressed advisory. Reliable Connector Execution Layer remains the active Engineering research track.
-
-### ADV-20260704-005 — Department Notebooks for long-term idea capture
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Life Logistics HQ adopted optional Department Notebooks as a Life OS standard pattern.
-
-### ADV-20260704-004 — Department Pending Advisory Boards
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Life Logistics HQ adopted Pending Advisory Boards as a Life OS standard pattern.
-
-### ADV-20260703-010 — Life OS design principle for new platforms
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: Medium
-
-Life Logistics HQ created `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
-
-### ADV-20260703-009 — Scheduled HQ sync system experiment
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Engineering HQ Daily Sync is the first scheduled HQ sync pilot.
