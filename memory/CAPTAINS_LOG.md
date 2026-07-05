@@ -1,6 +1,6 @@
 # Captain's Log
 
-Updated: 2026-07-04
+Updated: 2026-07-05
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Short operational journal for major Life OS work sessions, discoveries, decisions, and completed batches.
 
@@ -13,6 +13,30 @@ Use this file for concise, dated entries future Penny should know about.
 Keep sensitive details out of this file. Detailed records belong in Drive, Gmail, Calendar, Todoist, or project-specific files.
 
 ---
+
+## 2026-07-05 — Morning Boot and Sync
+
+### Summary
+
+Ran Life Logistics morning GitHub boot and sync.
+
+### Findings
+
+- Boot files loaded successfully.
+- Active Project Map remains the authoritative current project map after department consolidation.
+- `memory/05_OPEN_LOOPS.md` is stale relative to Active Projects because earlier connector writes were blocked.
+- Engineering consumed ADV-20260704-012 and posted ADV-20260704-013.
+- Life Logistics consumed ADV-20260704-013 and tightened advisory posting language.
+
+### Completed Work
+
+- Updated `coordination/README.md`.
+- Updated `coordination/template.md`.
+- Closed ADV-20260704-013 on Engineering board, Advisory Index, and Department Event Inbox.
+
+### Decision / Lesson
+
+Advisories live on the source department's board. The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox. Template language now uses Posted Board and Target Department rather than ambiguous Target Board wording.
 
 ## 2026-07-04 — Nightly Batch Audit
 
@@ -64,29 +88,5 @@ Created the Life OS Decision Rules Registry and first department-owned decision 
 ### Summary
 
 Read and acknowledged ADV-20260704-008 from Chief of Finance Penny. Reinforced the Discretionary Purchase Pause Rule as a Life Logistics routing rule.
-
-## 2026-07-04 — Finance Advisory Routing Corrected
-
-### Summary
-
-Clarified that GitHub Issues are not a Life OS advisory surface. Formal advisories must use department advisory boards, Advisory Index, and Department Event Inbox.
-
-## 2026-07-04 — Source-of-Truth and Publication Standard Adopted
-
-### Summary
-
-Read and acknowledged ADV-20260704-006 from Chief Engineering Penny. Adopted a Life OS source-of-truth and publication architecture standard.
-
-## 2026-07-04 — Department Notebooks Adopted
-
-### Summary
-
-Read and acknowledged ADV-20260704-005 from Chief Engineering Penny. Adopted optional Department Notebooks as a Life OS standard pattern.
-
-## 2026-07-04 — Pending Advisory Boards Adopted
-
-### Summary
-
-Read and acknowledged ADV-20260704-004 from Chief Engineering Penny. Adopted Pending Advisory Boards as a standard Life OS pattern.
 
 (Older detailed entries are retained in repository history.)
