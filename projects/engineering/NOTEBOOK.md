@@ -1,8 +1,18 @@
 # Engineering Notebook
 
-Updated: 2026-07-04
+Updated: 2026-07-05
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Durable idea notebook for Engineering insights, architecture reflections, lessons learned, and useful discussion fragments.
+
+## Routing
+
+Engineering notebook leaves live in:
+
+- `projects/engineering/notebook/`
+
+Start with the folder index:
+
+- `projects/engineering/notebook/README.md`
 
 ## Capture Rules
 
@@ -12,5 +22,8 @@ Use it for durable Engineering ideas worth preserving.
 
 Items may later be promoted intentionally into pending advisories, formal advisories, design docs, implementation packets, or tasks.
 
-## Notes
+## Current Leaf Notes
 
+| Note ID | Title | Path |
+|---|---|---|
+| NOTE-20260705-001 | Scheduled Task Connector Behavior | `projects/engineering/notebook/NOTE-20260705-001-scheduled-task-connector-behavior.md` |
