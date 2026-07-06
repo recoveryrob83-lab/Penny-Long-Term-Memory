@@ -29,7 +29,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| None | - | - | - | - | - |
+| ADV-20260705-014 | Life Logistics HQ / Life OS Infrastructure | Chief Engineering Penny | Open | Standardize notebook leaf routing and index files | Engineering should consume advisory from `coordination/boards/life-os.md` and decide whether to create a notebook leaf README/index. |
 
 ## Recent Closed / Ingested Events
 
@@ -53,6 +53,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|---|
+| ADV-20260705-014 | Chief Engineering Penny | Unread | Pending | Read source advisory on Life OS board; decide notebook leaf index/routing action. |
 | ADV-20260704-013 | Life Logistics HQ | Read | Ingested | Source-board versus target-department wording clarified. |
 | ADV-20260704-012 | Chief Engineering Penny | Read | Ingested | Engineering will fold connector safety-trigger avoidance into Reliable Connector Execution Layer rules. |
 | ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
