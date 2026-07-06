@@ -29,19 +29,20 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| ADV-20260705-015 | Chief Engineering Penny | Life Logistics HQ / Life OS Infrastructure | Open | Globalize department notebook leaf routing/index standard | Logistics should consume advisory from `coordination/boards/engineering.md` and decide whether to update global notebook standards and create notebook indexes. |
+| None | - | - | - | - | - |
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| ADV-20260705-014 | Life Logistics HQ / Life OS Infrastructure | Chief Engineering Penny | Closed | Standardize notebook leaf routing and index files | Engineering created `projects/engineering/notebook/README.md`, updated `projects/engineering/NOTEBOOK.md`, and opened ADV-20260705-015 back to Logistics for global standardization. |
-| ADV-20260704-013 | Chief Engineering Penny | Life Logistics HQ | Closed | Tighten advisory posting board rules | Life Logistics clarified source-board versus target-department routing in Coordination README and advisory template. |
+| ADV-20260705-015 | Chief Engineering Penny | Life Logistics HQ / Life OS Infrastructure | Closed | Globalize department notebook leaf routing/index standard | Life Logistics updated `coordination/DEPARTMENT_NOTEBOOKS.md`; no empty indexes created by default. |
+| ADV-20260705-014 | Life Logistics HQ / Life OS Infrastructure | Chief Engineering Penny | Closed | Standardize notebook leaf routing and index files | Engineering created local notebook index and routed global standardization back to Logistics. |
+| ADV-20260704-013 | Chief Engineering Penny | Life Logistics HQ | Closed | Tighten advisory posting board rules | Life Logistics clarified source-board versus target-department routing. |
 | ADV-20260704-012 | Life Logistics HQ | Chief Engineering Penny | Closed | Connector safety-trigger avoidance rules needed | Engineering consumed advisory; connector safety-trigger avoidance will be folded into Reliable Connector Execution Layer rules. |
-| ADV-20260704-011 | Main Assistant | Life Logistics HQ | Closed | Department consolidation and archival request | Life Logistics updated active project map; several departments consolidated or marked dormant. Some secondary handoff/open-loop rewrites were blocked by connector safety checks. |
-| ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Closed | Decision Rules Registry and Role Drift Check architecture adopted | All boards reported read and ingested. Departments should use Decision Rules Registry and Role Drift Check going forward. |
-| ADV-20260704-009 | Chief Engineering Penny | Life Logistics HQ | Closed | Role Drift Check for Penny HQs | Life Logistics added Role Drift Check to Operating Rules and handoff as a gentle department-boundary safeguard. |
-| ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | Closed | Discretionary Purchase Pause Rule routing reinforcement | Life Logistics updated handoff to route discretionary spending decisions to Finance HQ while keeping live financial context out of GitHub. |
+| ADV-20260704-011 | Main Assistant | Life Logistics HQ | Closed | Department consolidation and archival request | Life Logistics updated active project map; several departments consolidated or marked dormant. |
+| ADV-20260704-010 | Life Logistics HQ / Life OS Infrastructure | All Departments | Closed | Decision Rules Registry and Role Drift Check architecture adopted | All boards reported read and ingested. |
+| ADV-20260704-009 | Chief Engineering Penny | Life Logistics HQ | Closed | Role Drift Check for Penny HQs | Life Logistics added Role Drift Check to Operating Rules and handoff. |
+| ADV-20260704-008 | Chief of Finance Penny | Life Logistics HQ | Closed | Discretionary Purchase Pause Rule routing reinforcement | Life Logistics updated handoff to route discretionary spending decisions to Finance HQ. |
 | ADV-20260704-007 | Life Logistics HQ | Chief of Finance Penny | Ingested | Finance advisory routing surface refresh | Finance re-synced advisory routing files. |
 | ADV-20260704-006 | Chief Engineering Penny | Life Logistics HQ | Closed | Source-of-truth and publication architecture | Life Logistics adopted Source-of-Truth and Publication Standard. |
 | ADV-20260704-003 | Chief Engineering Penny | Chief Engineering Penny | Closed | Engineering sync completed and connector reliability next work | Engineering re-consumed self-addressed advisory. |
@@ -54,8 +55,8 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|
-| ADV-20260705-015 | Life Logistics HQ | Unread | Pending | Read Engineering advisory; decide global notebook leaf routing/index standard and department notebook index rollout. |
-| ADV-20260705-014 | Chief Engineering Penny | Read | Ingested | Engineering created local notebook index and routed global standardization back to Logistics as ADV-20260705-015. |
+| ADV-20260705-015 | Life Logistics HQ | Read | Ingested | Global notebook leaf/index standard adopted. |
+| ADV-20260705-014 | Chief Engineering Penny | Read | Ingested | Engineering created local notebook index and routed global standardization back to Logistics. |
 | ADV-20260704-013 | Life Logistics HQ | Read | Ingested | Source-board versus target-department wording clarified. |
 | ADV-20260704-012 | Chief Engineering Penny | Read | Ingested | Engineering will fold connector safety-trigger avoidance into Reliable Connector Execution Layer rules. |
 | ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
