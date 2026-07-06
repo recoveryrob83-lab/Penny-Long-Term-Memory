@@ -1,6 +1,6 @@
 # Department Notebooks
 
-Updated: 2026-07-04
+Updated: 2026-07-05
 Purpose: Standard Life OS workflow for durable department-level idea capture that is not advisory, task, or operating-state material.
 
 ## Status
@@ -27,25 +27,27 @@ Department Notebooks are not:
 
 A notebook entry is not routed, read, ingested, acknowledged, or closed.
 
-## Standard Location
+## Standard Locations
 
-A department may maintain a local notebook at:
+A department may maintain a local notebook hub at:
 
 `projects/<department-folder>/NOTEBOOK.md`
 
-Examples:
+A department may also maintain notebook leaves at:
 
-- `projects/engineering/NOTEBOOK.md`
-- `projects/business-development/NOTEBOOK.md`
-- `projects/main-assistant/NOTEBOOK.md`
-- `projects/life-logistics-hq/NOTEBOOK.md`
-- `projects/finance-benefits/NOTEBOOK.md`
+`projects/<department-folder>/notebook/NOTE-YYYYMMDD-###-short-slug.md`
 
-Create the file only when useful. Do not create empty notebooks across all departments by default.
+If a department uses notebook leaves, it should maintain a folder index at:
 
-## Standard Format
+`projects/<department-folder>/notebook/README.md`
 
-Use this structure:
+The folder index is a routing/discovery aid for notebook leaves. It is not an advisory board, task list, open-loop tracker, or source-of-truth file.
+
+Do not create empty notebook hubs or leaf indexes across every department by default. Create them when useful or when a department begins using notebook leaves.
+
+## Hub Format
+
+Use this structure for `NOTEBOOK.md`:
 
 ```markdown
 # <Department> Notebook
@@ -59,6 +61,12 @@ Purpose: Durable idea notebook for this department.
 This is not an advisory board, task list, open-loop tracker, or source of operational truth.
 
 Use it for durable ideas worth preserving.
+
+## Notebook Leaves
+
+Leaf notes, if used, live in `projects/<department-folder>/notebook/`.
+
+Start with `projects/<department-folder>/notebook/README.md` before reading leaf notes.
 
 ## Notes
 
@@ -74,6 +82,59 @@ Use it for durable ideas worth preserving.
 <content>
 
 #### Possible Future Use
+
+<optional>
+```
+
+## Leaf Index Format
+
+Use this structure for `projects/<department-folder>/notebook/README.md`:
+
+```markdown
+# <Department> Notebook Leaves
+
+Updated: YYYY-MM-DD
+Project: <Department Name>
+Purpose: Routing index for notebook leaf notes.
+
+## Capture Rules
+
+Notebook leaves are durable idea notes.
+
+They are not advisories, tasks, open loops, source-of-truth files, or Department Event Inbox items.
+
+## Naming Convention
+
+`NOTE-YYYYMMDD-###-short-slug.md`
+
+## Leaf Index
+
+| Note ID | Title | Status | Topic / Tags | Path |
+|---|---|---|---|---|
+| NOTE-YYYYMMDD-001 | Example title | Active / Revisited / Promoted / Archived | example | `projects/<department-folder>/notebook/NOTE-YYYYMMDD-001-example.md` |
+```
+
+## Leaf Note Format
+
+Use this structure for individual notebook leaves:
+
+```markdown
+# NOTE-YYYYMMDD-### — <Title>
+
+Date: YYYY-MM-DD
+Department: <Department Name>
+Status: Active observation / Revisited / Promoted / Archived
+Topic: <short topic>
+
+## Summary
+
+<one to three sentences>
+
+## Note
+
+<main content>
+
+## Possible Future Use
 
 <optional>
 ```
@@ -110,6 +171,14 @@ Department Notebooks are checked only when:
 - a notebook item may inform a specific current decision.
 
 Do not turn notebook review into a default daily interruption.
+
+## Scheduled Worker Guidance
+
+When a scheduled sync worker is explicitly asked to review notebook material, it should read the department's notebook index or hub first.
+
+If notebook leaves exist, read `projects/<department-folder>/notebook/README.md` before opening individual leaf notes.
+
+Scheduled workers should remain read-only by default unless Rob explicitly authorizes writes.
 
 ## Design Principle
 
