@@ -1,6 +1,6 @@
 # Department Event Inbox
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Purpose: Lightweight Life OS register for advisory and synchronization events between Penny departments.
 
 ## Operating Rule
@@ -29,7 +29,7 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| None | - | - | - | - | - |
+| ADV-20260706-016 | Main Assistant | Chief Engineering Penny / Life Logistics HQ | Open | External Drive-worker workflow observation | Targets should read Main Assistant source-board advisory and evaluate connector-reliability / operating-standard implications. |
 
 ## Recent Closed / Ingested Events
 
@@ -55,6 +55,8 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|
+| ADV-20260706-016 | Chief Engineering Penny | Unread | Pending | Review source-board advisory. |
+| ADV-20260706-016 | Life Logistics HQ | Unread | Pending | Review source-board advisory. |
 | ADV-20260705-015 | Life Logistics HQ | Read | Ingested | Global notebook leaf/index standard adopted. |
 | ADV-20260705-014 | Chief Engineering Penny | Read | Ingested | Engineering created local notebook index and routed global standardization back to Logistics. |
 | ADV-20260704-013 | Life Logistics HQ | Read | Ingested | Source-board versus target-department wording clarified. |
