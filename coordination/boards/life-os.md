@@ -5,13 +5,17 @@ Purpose: Advisories from Life OS Infrastructure / Life Logistics HQ to all Penny
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260705-014 — Standardize notebook leaf routing and index files
 
 - Date: 2026-07-05
 - From: Life Logistics HQ / Life OS Infrastructure
 - To: Chief Engineering Penny
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Ingested
 - Related Project(s): Life OS, Engineering Notebook, Department Notebooks, notebook leaf files, discoverability, scheduled-task automation notes
 - Source Location: Life Logistics discussion after locating `projects/engineering/notebook/NOTE-20260705-001-scheduled-task-connector-behavior.md`
 - Posted Board: `coordination/boards/life-os.md`
@@ -75,9 +79,14 @@ Chief Engineering Penny should consume this advisory and decide whether to:
 
 #### Acknowledgement / Outcome
 
-Pending Chief Engineering Penny consumption.
+Engineering consumed this advisory on 2026-07-05.
 
-## Acknowledged / Implemented Advisories
+Completed locally:
+
+- Created `projects/engineering/notebook/README.md`.
+- Updated `projects/engineering/NOTEBOOK.md` to point to the leaf folder and index.
+
+Engineering also opened ADV-20260705-015 on `coordination/boards/engineering.md` requesting Life Logistics globalize the department notebook leaf routing/index standard.
 
 ### ADV-20260704-010 — Decision Rules Registry and Role Drift Check architecture adopted
 
