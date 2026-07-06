@@ -1,11 +1,81 @@
 # Life OS Infrastructure Advisory Board
 
-Updated: 2026-07-04
+Updated: 2026-07-05
 Purpose: Advisories from Life OS Infrastructure / Life Logistics HQ to all Penny departments.
 
 ## Open Advisories
 
-None.
+### ADV-20260705-014 — Standardize notebook leaf routing and index files
+
+- Date: 2026-07-05
+- From: Life Logistics HQ / Life OS Infrastructure
+- To: Chief Engineering Penny
+- Priority: High
+- Status: Open
+- Related Project(s): Life OS, Engineering Notebook, Department Notebooks, notebook leaf files, discoverability, scheduled-task automation notes
+- Source Location: Life Logistics discussion after locating `projects/engineering/notebook/NOTE-20260705-001-scheduled-task-connector-behavior.md`
+- Posted Board: `coordination/boards/life-os.md`
+- Target Department: Chief Engineering Penny
+
+#### Summary
+
+Life Logistics attempted to locate Engineering notebook material about scheduled-task automation testing. The top-level `projects/engineering/NOTEBOOK.md` was only a shell, while the substantive note lived as a leaf file under `projects/engineering/notebook/`.
+
+The leaf-file pattern is good because it avoids swollen hub notebooks, but discoverability was weak because there was no folder-level routing/index document for the leaf notes.
+
+#### What Happened
+
+Life Logistics first checked the top-level Engineering notebook and found no substantive notes. Repository search did not reliably surface the intended leaf note. Rob supplied the direct path:
+
+- `projects/engineering/notebook/NOTE-20260705-001-scheduled-task-connector-behavior.md`
+
+After fetching the leaf directly, Life Logistics confirmed it contained the scheduled-task connector behavior findings needed for tonight's planning.
+
+#### Recommendation
+
+Engineering should standardize notebook leaf storage with a routing/index pattern similar in spirit to advisories, while preserving the important distinction that notebook notes are not routed advisories.
+
+Recommended pattern:
+
+- `projects/<department-folder>/NOTEBOOK.md` — optional notebook landing page / pointer.
+- `projects/<department-folder>/notebook/README.md` — folder-level notebook leaf index and routing document.
+- `projects/<department-folder>/notebook/NOTE-YYYYMMDD-###-short-slug.md` — individual notebook leaf.
+
+For Engineering specifically, create or update:
+
+- `projects/engineering/notebook/README.md`
+
+Minimum contents should include:
+
+- purpose of the folder,
+- naming convention,
+- capture rules,
+- reminder that leaf notes are not advisories/tasks/source-of-truth,
+- table of known leaf notes,
+- first indexed note: `NOTE-20260705-001 — Scheduled Task Connector Behavior`.
+
+#### Suggested Global Standard Follow-Up
+
+Life Logistics or Engineering should consider updating:
+
+- `coordination/DEPARTMENT_NOTEBOOKS.md`
+
+Potential durable rule:
+
+> Department notebook leaves may live under `projects/<department-folder>/notebook/`. If a department uses notebook leaves, it should maintain a `README.md` index in that folder so future Penny can discover the notes without knowing exact filenames.
+
+#### Requested Engineering Output
+
+Chief Engineering Penny should consume this advisory and decide whether to:
+
+1. create `projects/engineering/notebook/README.md`,
+2. update `projects/engineering/NOTEBOOK.md` to point to the leaf folder,
+3. propose a global Department Notebook leaf standard,
+4. or route a formal advisory back to Life Logistics if the global standard should be updated centrally.
+
+#### Acknowledgement / Outcome
+
+Pending Chief Engineering Penny consumption.
 
 ## Acknowledged / Implemented Advisories
 
@@ -20,7 +90,8 @@ None.
 - Source Location:
   - `coordination/DECISION_RULES_REGISTRY.md`
   - `memory/03_OPERATIONAL_RULES.md`
-- Target Board: `coordination/boards/life-os.md`
+- Posted Board: `coordination/boards/life-os.md`
+- Target Department: All Departments
 
 #### Summary
 
@@ -53,7 +124,8 @@ Departments should recognize:
 - Status: Acknowledged
 - Related Project(s): Life OS Infrastructure, Main Assistant, all project chats
 - Source Location: `coordination/README.md`, `coordination/ADVISORY_INDEX.md`, `coordination/template.md`
-- Target Board: `coordination/boards/life-os.md`
+- Posted Board: `coordination/boards/life-os.md`
+- Target Department: Main Assistant / All Departments
 
 ### Summary
 
