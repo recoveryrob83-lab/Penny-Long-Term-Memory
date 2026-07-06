@@ -1,11 +1,66 @@
 # Main Assistant Advisory Board
 
-Updated: 2026-07-04
+Updated: 2026-07-06
 Purpose: Advisories to or from Main Assistant / Daily Operations.
 
 ## Open Advisories
 
-None.
+### ADV-20260706-016 — Gemini Drive worker succeeded where direct connector writes may be risky
+
+- Date: 2026-07-06
+- From: Main Assistant
+- To: Chief Engineering Penny; Life Logistics HQ
+- Priority: High
+- Status: Open
+- Related Project(s): Life OS, Google Drive workflows, connector reliability, Reliable Connector Execution Layer, Gemini worker evaluation
+- Source Location: Main Assistant chat
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department(s): Chief Engineering Penny; Life Logistics HQ
+
+#### Summary
+
+Rob tested a workflow where Gemini created a Google Drive spreadsheet template that contained structured life-administration intake fields. This is the type of Drive artifact that may be cumbersome or risky for direct ChatGPT Drive connector writes because prior structured-document workflows have triggered connector safety blocks.
+
+Gemini created the sheet quickly and with little friction. Rob reported that it completed the file faster than Main Assistant likely could have through direct Drive connector operations.
+
+The observed limitation was placement: Gemini could create the sheet, but could not move it into the correct Drive folder. Rob moved the sheet manually.
+
+#### Why It Matters
+
+This suggests Gemini may be useful as a Drive-native worker for certain Google Docs or Sheets creation tasks, while Penny remains responsible for planning, prompt crafting, routing, audit, GitHub memory, and process coordination.
+
+Possible Life OS division of labor:
+
+- Penny: plan the artifact, craft the Gemini prompt, keep GitHub records abstract, and audit the outcome.
+- Gemini: create or edit selected Drive-native artifacts.
+- Rob: manually move the file when Gemini cannot place it correctly.
+
+#### Suggested Engineering Review
+
+Chief Engineering Penny should evaluate whether Gemini handoff belongs in the Reliable Connector Execution Layer as a fallback or companion workflow for Drive artifact creation.
+
+Engineering questions:
+
+- When should Penny route a Drive artifact build to Gemini instead of direct connector write attempts?
+- What file types fit this pattern best?
+- What verification steps should Penny use after Rob reports Gemini completed the file?
+- How should folder-placement limitations be logged and handled?
+
+#### Suggested Logistics Review
+
+Life Logistics HQ should decide whether this needs a durable operating note or standard procedure for Gemini-as-Drive-worker handoffs.
+
+Suggested standard pattern:
+
+- Use Penny to craft the Gemini prompt.
+- Keep durable GitHub notes abstract.
+- Keep detailed working records in Drive.
+- Have Rob manually move the created file when needed.
+- Record only the artifact purpose and pointer/reference in durable memory.
+
+#### Acknowledgement / Outcome
+
+Pending Engineering and Life Logistics consumption.
 
 ## Acknowledged / Implemented Advisories
 
