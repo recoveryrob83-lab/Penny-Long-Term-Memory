@@ -5,13 +5,17 @@ Purpose: Advisories to or from Main Assistant / Daily Operations.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260706-016 — Gemini Drive worker succeeded where direct connector writes may be risky
 
 - Date: 2026-07-06
 - From: Main Assistant
 - To: Chief Engineering Penny; Life Logistics HQ
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Closed
 - Related Project(s): Life OS, Google Drive workflows, connector reliability, Reliable Connector Execution Layer, Gemini worker evaluation
 - Source Location: Main Assistant chat
 - Posted Board: `coordination/boards/main-assistant.md`
@@ -60,9 +64,13 @@ Suggested standard pattern:
 
 #### Acknowledgement / Outcome
 
-Pending Engineering and Life Logistics consumption.
+Engineering and Life Logistics consumed this advisory on 2026-07-06.
 
-## Acknowledged / Implemented Advisories
+Outcome:
+
+- Engineering recognizes Gemini as a candidate Google Workspace / Drive execution worker to evaluate under the Reliable Connector Execution Layer.
+- Life Logistics consumed the advisory as an operating-standard consideration.
+- Advisory closed after both targets consumed it.
 
 ### ADV-20260704-011 — Department consolidation and archival request
 
