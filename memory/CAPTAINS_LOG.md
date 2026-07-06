@@ -14,6 +14,30 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-05 — Nightly Sync and Notebook Standard Cleanup
+
+### Summary
+
+Ran Life Logistics nightly GitHub sync after advisory routing cleanup, notebook-leaf standardization, and scheduled-task connector testing notes.
+
+### Findings
+
+- Advisory Index shows no open advisories.
+- Department Event Inbox shows no current open/pending events.
+- Engineering, Finance, Business, and Main Assistant boards show no open advisories.
+- Department Notebook standard now supports notebook hubs, leaf-note folders, and `notebook/README.md` leaf indexes.
+- Scheduled-task connector testing has early PASS evidence for Gmail and narrow GitHub read-only retrieval, but execution context varies.
+
+### Completed Work
+
+- Logged scheduled connector test passes in `scheduled-tasks/RUN_LOG.md`.
+- Logged scheduled-task execution-context caveat in `scheduled-tasks/ISSUE_LOG.md`.
+- Closed notebook-leaf advisories ADV-20260705-014 and ADV-20260705-015 before nightly sync.
+
+### Decision / Lesson
+
+Use notebook leaf files for durable idea capture when a hub would become too large, but maintain a `notebook/README.md` index whenever leaf notes exist. Scheduled workers should read the notebook index before leaf notes when notebook review is requested.
+
 ## 2026-07-05 — Morning Boot and Sync
 
 ### Summary
@@ -70,23 +94,5 @@ Active core departments are now Life Logistics HQ, Main Assistant / Daily Operat
 ### Connector Note
 
 Attempts to update `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-hq/SESSION_HANDOFF.md` were blocked by connector safety checks. The canonical project map update succeeded.
-
-## 2026-07-04 — Role Drift Check Adopted
-
-### Summary
-
-Read and acknowledged ADV-20260704-009 from Chief Engineering Penny. Adopted Role Drift Check as a gentle Life OS department-boundary safeguard.
-
-## 2026-07-04 — Decision Rules Registry Adopted
-
-### Summary
-
-Created the Life OS Decision Rules Registry and first department-owned decision rule.
-
-## 2026-07-04 — Discretionary Purchase Routing Reinforced
-
-### Summary
-
-Read and acknowledged ADV-20260704-008 from Chief of Finance Penny. Reinforced the Discretionary Purchase Pause Rule as a Life Logistics routing rule.
 
 (Older detailed entries are retained in repository history.)
