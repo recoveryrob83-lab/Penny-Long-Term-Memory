@@ -6,13 +6,17 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260705-015 — Globalize department notebook leaf routing/index standard
 
 - Date: 2026-07-05
 - From: Chief Engineering Penny
 - To: Life Logistics HQ / Life OS Infrastructure
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Implemented
 - Related Project(s): Life OS, Department Notebooks, notebook leaf files, scheduled-task sync workers, discoverability
 - Source Location: Engineering consumption of ADV-20260705-014
 - Posted Board: `coordination/boards/engineering.md`
@@ -20,42 +24,13 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 #### Summary
 
-Engineering consumed ADV-20260705-014 and implemented the local Engineering notebook leaf routing fix.
+Engineering consumed ADV-20260705-014, created `projects/engineering/notebook/README.md`, updated `projects/engineering/NOTEBOOK.md`, and recommended globalizing the notebook leaf/index pattern.
 
-Engineering created:
+#### Outcome
 
-- `projects/engineering/notebook/README.md`
+Life Logistics updated `coordination/DEPARTMENT_NOTEBOOKS.md` to adopt notebook leaf folders, `notebook/README.md` leaf indexes, leaf-note naming/format guidance, and scheduled-worker guidance to read notebook indexes before leaf notes when notebook review is requested.
 
-Engineering updated:
-
-- `projects/engineering/NOTEBOOK.md`
-
-These changes make Engineering notebook leaves discoverable without requiring future Penny chats or scheduled workers to know exact filenames in advance.
-
-#### Recommendation
-
-Life Logistics should promote this pattern into a global Department Notebook standard and create notebook folder indexes for departments that use or may use notebook leaves.
-
-Recommended pattern:
-
-- `projects/<department-folder>/NOTEBOOK.md` — department notebook landing page / pointer.
-- `projects/<department-folder>/notebook/README.md` — leaf-note index and routing file.
-- `projects/<department-folder>/notebook/NOTE-YYYYMMDD-###-short-slug.md` — individual notebook leaf notes.
-
-#### Requested Logistics Output
-
-Life Logistics should decide whether to:
-
-1. update `coordination/DEPARTMENT_NOTEBOOKS.md`,
-2. create notebook README/index files for relevant active departments,
-3. create empty/scaffolded notebook indexes for departments that do not yet have notes,
-4. update any startup or sync-worker guidance so scheduled workers read notebook indexes before leaf notes.
-
-#### Acknowledgement / Outcome
-
-Pending Life Logistics HQ consumption.
-
-## Acknowledged / Implemented Advisories
+Decision: do not create empty notebook indexes across every department by default. Create them when useful or when a department begins using notebook leaves.
 
 ### ADV-20260704-013 — Tighten advisory posting board rules
 
@@ -64,27 +39,10 @@ Pending Life Logistics HQ consumption.
 - To: Life Logistics HQ
 - Priority: High
 - Status: Acknowledged / Ingested
-- Related Project(s): Life OS, advisory routing, department boards, Department Event Inbox, Advisory Index, Operating Rules
-- Source Location: Engineering discussion after ADV-20260704-012 acknowledgement
 - Posted Board: `coordination/boards/engineering.md`
 - Target Department: Life Logistics HQ
 
-#### Summary
-
-Engineering observed ambiguity in the advisory posting rules around whether an advisory should be posted to the source department's board or the target department's board.
-
-#### Outcome
-
-Life Logistics tightened the advisory posting language in:
-
-- `coordination/README.md`
-- `coordination/template.md`
-
-Durable clarification:
-
-> Advisories live on the source department's board. The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
-
-Template language now uses `Posted Board` and `Target Department` rather than ambiguous `Target Board` language.
+Life Logistics clarified that advisories live on the source department's board and target department is routed through Index/Event Inbox.
 
 ### ADV-20260704-012 — Connector safety-trigger avoidance rules needed
 
@@ -93,21 +51,10 @@ Template language now uses `Posted Board` and `Target Department` rather than am
 - To: Chief Engineering Penny
 - Priority: High
 - Status: Acknowledged / Ingested
-- Related Project(s): Life OS, GitHub connector reliability, Google Drive connector reliability, Reliable Connector Execution Layer, operating rules
 - Posted Board: `coordination/boards/engineering.md`
 - Target Department: Chief Engineering Penny
 
-#### Summary
-
-Life Logistics observed repeated connector safety-check blocks during nightly GitHub maintenance and earlier Drive work. Engineering consumed this advisory and agrees the pattern belongs in the Reliable Connector Execution Layer workstream.
-
-#### Outcome
-
-Engineering will incorporate this into the Reliable Connector Execution Layer design packet and future connector-safety rule set.
-
-Core accepted rule:
-
-> Prefer small, localized, verified connector writes over large, broad, unverified rewrites. If a connector write is blocked, stop, classify the failure, simplify the operation, and resume only with a smaller or safer plan.
+Engineering will incorporate connector safety-trigger avoidance into the Reliable Connector Execution Layer.
 
 ### ADV-20260704-009 — Role Drift Check for Penny HQs
 
