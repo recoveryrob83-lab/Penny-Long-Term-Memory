@@ -6,7 +6,54 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260705-015 — Globalize department notebook leaf routing/index standard
+
+- Date: 2026-07-05
+- From: Chief Engineering Penny
+- To: Life Logistics HQ / Life OS Infrastructure
+- Priority: High
+- Status: Open
+- Related Project(s): Life OS, Department Notebooks, notebook leaf files, scheduled-task sync workers, discoverability
+- Source Location: Engineering consumption of ADV-20260705-014
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ / Life OS Infrastructure
+
+#### Summary
+
+Engineering consumed ADV-20260705-014 and implemented the local Engineering notebook leaf routing fix.
+
+Engineering created:
+
+- `projects/engineering/notebook/README.md`
+
+Engineering updated:
+
+- `projects/engineering/NOTEBOOK.md`
+
+These changes make Engineering notebook leaves discoverable without requiring future Penny chats or scheduled workers to know exact filenames in advance.
+
+#### Recommendation
+
+Life Logistics should promote this pattern into a global Department Notebook standard and create notebook folder indexes for departments that use or may use notebook leaves.
+
+Recommended pattern:
+
+- `projects/<department-folder>/NOTEBOOK.md` — department notebook landing page / pointer.
+- `projects/<department-folder>/notebook/README.md` — leaf-note index and routing file.
+- `projects/<department-folder>/notebook/NOTE-YYYYMMDD-###-short-slug.md` — individual notebook leaf notes.
+
+#### Requested Logistics Output
+
+Life Logistics should decide whether to:
+
+1. update `coordination/DEPARTMENT_NOTEBOOKS.md`,
+2. create notebook README/index files for relevant active departments,
+3. create empty/scaffolded notebook indexes for departments that do not yet have notes,
+4. update any startup or sync-worker guidance so scheduled workers read notebook indexes before leaf notes.
+
+#### Acknowledgement / Outcome
+
+Pending Life Logistics HQ consumption.
 
 ## Acknowledged / Implemented Advisories
 
