@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Purpose: Fast dashboard for cross-project Penny advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260706-016 — Open — `coordination/boards/main-assistant.md`
 
 ## Acknowledged / Implemented Advisories
 
