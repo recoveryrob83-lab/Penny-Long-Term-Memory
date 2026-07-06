@@ -5,7 +5,7 @@ Purpose: Fast dashboard for cross-project Penny advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260706-017 — Open — `coordination/boards/engineering.md`
 
 ## Acknowledged / Implemented Advisories
 
