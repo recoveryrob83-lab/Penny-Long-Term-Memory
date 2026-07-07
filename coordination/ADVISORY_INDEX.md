@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-06
+Updated: 2026-07-07
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260707-021 — Open — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant business project setup needed
 
 ## Acknowledged / Implemented Advisories
 
