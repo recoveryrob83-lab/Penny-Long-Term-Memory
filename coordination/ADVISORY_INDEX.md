@@ -5,12 +5,12 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260707-022 — Open — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness needed for Virtual Assistant income stream.
 - ADV-20260707-023 — Open — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Finance state refresh for Virtual Assistant income stream.
 - ADV-20260707-024 — Open — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Business HQ state maintenance needed for VA Business project.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260707-022 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness needed for Virtual Assistant income stream.
 - ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as a Business HQ sub-project.
 
 See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-020.
