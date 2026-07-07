@@ -1,6 +1,6 @@
 # Chief Wellness HQ Status
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 
 ## Current Phase
 
@@ -16,7 +16,9 @@ Keep GitHub abstract and non-sensitive.
 
 Use Todoist for Rob-facing reminders and habits, Calendar for appointments, Drive for working records, Gmail for communication evidence, Contacts for lookup, and RPR for structured records.
 
-Use `coordination/boards/wellness.md`, `coordination/ADVISORY_INDEX.md`, and `coordination/DEPARTMENT_EVENT_INBOX.md` for department advisory synchronization.
+Use `coordination/boards/wellness.md` and `coordination/ADVISORY_INDEX.md` for department advisory routing.
+
+Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing unless Rob explicitly reactivates it.
 
 Use `coordination/DECISION_RULES_REGISTRY.md` when a wellness-adjacent decision may match a registered decision rule.
 
@@ -32,9 +34,9 @@ Drive working folder name: Wellness Admin.
 
 Ready for first active wellness workflow when Rob chooses one.
 
-## Current Advisory / Event State
+## Current Advisory State
 
-As of 2026-07-05 morning sync, the Advisory Index and Department Event Inbox show no open or pending events.
+As of 2026-07-06 full boot and sync, the Advisory Index shows no open advisories.
 
 ## Coordination Notes
 
