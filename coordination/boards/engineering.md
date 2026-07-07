@@ -6,13 +6,17 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260706-018 — Simplify the Life OS Advisory Routing System
 
 - Date: 2026-07-06
 - From: Chief Engineering Penny
 - To: Life Logistics HQ
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Implemented
 - Related Project(s): Life OS, advisory routing, connector reliability, scheduled workers, operating standards
 - Source Location: Engineering HQ chat / Rob handoff
 - Posted Board: `coordination/boards/engineering.md`
@@ -20,76 +24,29 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 #### Summary
 
-Engineering recommends reviewing the current advisory routing architecture to determine whether both routing files are still necessary.
+Engineering recommended reviewing the current advisory routing architecture because the prior system required duplicate writes to source board, Advisory Index, and Department Event Inbox.
 
-Current testing indicates that the existing routing process requires duplicate writes, increasing connector complexity and exposure to safety-trigger failures.
+#### Outcome
 
-#### Current Architecture
+Life Logistics accepted the recommendation and simplified advisory routing.
 
-A completed advisory currently requires updates to:
+New active routing architecture:
 
-- Source Department Advisory Board
-- Advisory Index
-- Department Event Inbox
+- Source department board: canonical advisory text.
+- Advisory Index: sole active routing dashboard.
 
-The first write, the source department board, has generally been reliable.
+Department Event Inbox is now frozen as a historical synchronization/read/ingestion register and should not be updated for normal advisory routing unless Rob explicitly reactivates it.
 
-The Advisory Index has become reliable when updated using very small writes.
+Updated files include:
 
-The Department Event Inbox has repeatedly demonstrated higher write fragility and has become the weakest link in the advisory publication pipeline.
+- `memory/03_OPERATIONAL_RULES.md`
+- `memory/STARTUP_BOOT.md`
+- `coordination/README.md`
+- `coordination/template.md`
+- `coordination/ADVISORY_INDEX.md`
+- `coordination/DEPARTMENT_EVENT_INBOX.md`
 
-#### Engineering Recommendation
-
-Review whether the Department Event Inbox should remain an active routing file.
-
-Possible replacement architecture:
-
-- Source Department Board: canonical advisory text.
-- Advisory Index: canonical routing dashboard.
-
-The Advisory Index would answer:
-
-- Which advisories are open?
-- Where are they located?
-- Who is the target department?
-
-The target department would then read the advisory directly from the source board.
-
-This eliminates one complete write operation for every advisory.
-
-#### Benefits
-
-- Fewer connector writes.
-- Reduced safety-trigger exposure.
-- Reduced synchronization complexity.
-- Less stale routing information.
-- Simpler scheduled worker implementation.
-- Easier long-term maintenance.
-- Cleaner architecture.
-
-#### Engineering Notes
-
-This recommendation is based on recent connector reliability testing.
-
-Engineering is intentionally making no sweeping architectural changes.
-
-Engineering recommends that Life Logistics evaluate the current routing model and determine whether the Department Event Inbox continues to provide sufficient value to justify its maintenance cost.
-
-If retained, Engineering recommends clearly documenting why a second routing ledger remains necessary.
-
-If not retained, Engineering recommends promoting the Advisory Index to the sole active routing dashboard while keeping department advisory boards as the canonical source of advisory content.
-
-#### Requested Logistics Output
-
-Life Logistics should evaluate this during the next synchronization cycle and publish an updated advisory routing standard if appropriate.
-
-No immediate implementation is requested pending Logistics review.
-
-#### Acknowledgement / Outcome
-
-Pending Life Logistics review.
-
-## Acknowledged / Implemented Advisories
+Decision: use fewer connector writes and reduce advisory routing fragility.
 
 ### ADV-20260706-017 — Adopt connector reliability operating pattern from Gemini/Drive tests
 
