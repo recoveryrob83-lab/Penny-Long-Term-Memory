@@ -46,12 +46,12 @@ def read_boot_file(repo_root: Path, relative_path: str) -> str:
 def find_references(
     text: str,
     possible_targets: list[str],
-    current_file: str
+    current_file: str,
 ) -> list[str]:
     # This list will hold every known boot file that appears inside the current file's text.
     references: list[str] = []
 
-    for target: str in possible_targets:
+    for target in possible_targets:
         # Ignore references to the file itself.
         # We are looking for cross-file dependencies.
         if target == current_file:
@@ -71,7 +71,7 @@ def build_dependency_graph(repo_root: Path) -> DependencyGraph:
     #   value = list of boot files referenced by that file
     graph: DependencyGraph = {}
 
-    for relative_path: str in BOOT_FILES:
+    for relative_path in BOOT_FILES:
         # Read the contents of this boot file.
         text: str = read_boot_file(repo_root, relative_path)
 
@@ -79,7 +79,7 @@ def build_dependency_graph(repo_root: Path) -> DependencyGraph:
         references: list[str] = find_references(
             text,
             BOOT_FILES,
-            relative_path
+            relative_path,
         )
 
         # Store the relationship:
@@ -102,7 +102,6 @@ def find_cycle(graph: DependencyGraph) -> list[str] | None:
         # then we looped back to something we are currently walking.
         if file_name in current_path:
             cycle_start_index: int = current_path.index(file_name)
-
             cycle: list[str] = current_path[cycle_start_index:] + [file_name]
 
             return cycle
@@ -116,7 +115,7 @@ def find_cycle(graph: DependencyGraph) -> list[str] | None:
         current_path.append(file_name)
 
         # Follow every outgoing dependency from this file.
-        for reference: str in graph[file_name]:
+        for reference in graph[file_name]:
             cycle: list[str] | None = walk(reference)
 
             if cycle:
@@ -131,4 +130,62 @@ def find_cycle(graph: DependencyGraph) -> list[str] | None:
 
         return None
 
-    # Try starting a graph
+    # Try starting a graph walk from every file.
+    for file_name in graph:
+        cycle: list[str] | None = walk(file_name)
+
+        if cycle:
+            return cycle
+
+    return None
+
+
+def print_dependency_graph(graph: DependencyGraph) -> None:
+    print("Dependency Graph")
+    print("----------------")
+    print()
+
+    for file_name, references in graph.items():
+        print(file_name)
+
+        if references:
+            for reference in references:
+                print(f"    -> {reference}")
+        else:
+            print("    -> None")
+
+        print()
+
+
+def print_cycle_report(cycle: list[str] | None) -> None:
+    print("Cycle Check")
+    print("-----------")
+    print()
+
+    if cycle:
+        edge_count: int = len(cycle) - 1
+
+        print("[CYCLE DETECTED]")
+        print(f"Cycle length: {edge_count} edges")
+        print()
+
+        print(cycle[0])
+
+        for file_name in cycle[1:]:
+            print(f"  -> {file_name}")
+    else:
+        print("[OK] No cycles detected")
+
+
+def main() -> None:
+    repo_root: Path = get_repo_root()
+    graph: DependencyGraph = build_dependency_graph(repo_root)
+
+    print_dependency_graph(graph)
+
+    cycle: list[str] | None = find_cycle(graph)
+    print_cycle_report(cycle)
+
+
+if __name__ == "__main__":
+    main()
