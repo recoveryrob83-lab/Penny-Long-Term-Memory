@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-03
+Updated: 2026-07-06
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Startup procedure for a fresh Penny chat window.
 
@@ -40,35 +40,35 @@ Scheduled tasks are not long-lived department chats. They should be treated as e
 
 Read scheduled-task files only when Rob asks about scheduled tasks, Life Logistics HQ is doing system review, Main Assistant needs morning-report notes, or a department is told to check its memo inbox.
 
-## Advisory Board and Department Event Check
+## Advisory Routing Check
 
-Cross-project advisories and synchronization state live in:
+Cross-project advisories live in:
 
 - `coordination/ADVISORY_INDEX.md`
-- `coordination/DEPARTMENT_EVENT_INBOX.md`
 - `coordination/boards/`
 
-The Advisory Index is the official advisory dashboard.
+The Advisory Index is the sole active advisory routing dashboard.
 
-The Department Event Inbox is the system synchronization / read / ingestion register.
+Department advisory boards contain canonical advisory text.
+
+`coordination/DEPARTMENT_EVENT_INBOX.md` is frozen as a historical synchronization/read/ingestion register. Do not update it for normal advisory routing unless Rob explicitly reactivates it.
 
 Todoist is Rob's personal task system and should not be used for department synchronization reminders unless Rob explicitly requests that.
 
 Read the Advisory Index when Rob asks for advisory status, Life Logistics HQ is doing review, Main Assistant is preparing a full operations report, a project chat is being recreated after connector problems, or Rob routes a department to a specific advisory.
 
-Read the Department Event Inbox when Rob asks for department sync status, when creating or routing an advisory, during Life Logistics HQ system review, or during a Main Assistant full advisory sync.
+Read a specific source department board only when the Advisory Index points to a relevant open advisory or Rob names the board/advisory.
 
 Routine advisory reporting belongs to Main Assistant, not every specialist department. Specialist departments should not include advisory summaries in routine reports unless Rob explicitly asks.
 
 When a department creates an advisory intended for another department, it should:
 
-1. Create the advisory on the appropriate department advisory board.
-2. Update `coordination/ADVISORY_INDEX.md` as appropriate.
-3. Create or update the matching entry in `coordination/DEPARTMENT_EVENT_INBOX.md` so read and ingestion state can be tracked.
+1. Create the advisory on the appropriate source department advisory board.
+2. Update `coordination/ADVISORY_INDEX.md` with the advisory ID, status, board path, and target department.
 
-For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
+For normal advisory routing, do not update Department Event Inbox.
 
-Advisory Watcher v0.1 may monitor the Advisory Index and Department Event Inbox in the future, but it is a reporting layer only and is not the source of truth.
+For multi-target advisories, use the Advisory Index and source-board advisory text to track target departments. Do not mark acknowledged or implemented until all required target departments have reported handled status to Rob, unless the source department records separate per-target acknowledgements.
 
 ## Project-Specific Session Handoff Routing
 
@@ -105,8 +105,8 @@ During startup:
 - Do not write to Drive or GitHub during boot.
 - Build working context from the repo files.
 - For specialist chats, summarize global context briefly and then focus on the project handoff and department identity.
-- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, event inbox status, scheduled-task activity, and role clarity.
-- Include advisory, department event, or scheduled-task status only if the relevant files were read for a reason.
+- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, scheduled-task activity, and role clarity.
+- Include advisory or scheduled-task status only if the relevant files were read for a reason.
 - Ask only if the next action is genuinely ambiguous.
 
 ## System Architecture
@@ -125,45 +125,8 @@ Gmail owns communication evidence.
 
 `coordination/ADVISORY_INDEX.md` owns advisory dashboard state.
 
-`coordination/DEPARTMENT_EVENT_INBOX.md` owns department synchronization / read / ingestion state.
+`coordination/DEPARTMENT_EVENT_INBOX.md` is historical/frozen unless explicitly reactivated.
 
 Project chats create project knowledge.
 
 Life Logistics HQ curates cross-project operational memory.
-
-Main Assistant handles daily operations.
-
-## Connector Field Lessons
-
-When actively working with a connector over many turns, explicitly reference the intended connector in the conversation.
-
-Prefer small incremental edits and verify important writes.
-
-If a write is blocked, simplify the update and use abstract notes.
-
-## RPR Procedure: Rob -> Penny -> Rob
-
-Use user-mediated file transfer for structured files when reliability matters more than automation.
-
-## Pointer Registry
-
-Use registry IDs as foreign keys between GitHub and operational records.
-
-GitHub should hold abstract project state and references only.
-
-## First Response After Boot
-
-After reading the boot files, summarize briefly:
-
-- current architecture
-- current session handoff
-- active project map
-- open loops
-- project-specific handoff, if a project chat was named
-- department identity, if present
-- advisory index status, only if checked for a specific reason
-- department event inbox status, only if checked for a specific reason
-- scheduled-task memo status, only if checked for a specific reason
-- best next action
-
-Keep it concise unless Rob asks for depth.
