@@ -1,6 +1,6 @@
 # Coordination
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Purpose: Cross-project advisory board system for Penny departments.
 
 ## Operating Idea
@@ -9,7 +9,7 @@ Penny departments do not chat with each other directly.
 
 They publish durable advisories in GitHub when one department produces information another department may need.
 
-Rob or Main Assistant can then instruct the receiving department to read the relevant board and mark advisories as acknowledged, implemented, or archived.
+Rob or Main Assistant can then instruct the receiving department to read the relevant source board and mark advisories as acknowledged, implemented, or archived.
 
 ## Role Policy
 
@@ -30,16 +30,16 @@ Specialist departments should read advisory boards only when:
 
 ## Files
 
-- `ADVISORY_INDEX.md`: fast dashboard of open/advisory status.
-- `DEPARTMENT_EVENT_INBOX.md`: department read/ingestion register.
-- `boards/`: department advisory boards.
+- `ADVISORY_INDEX.md`: sole active routing dashboard for open advisories.
+- `boards/`: canonical department advisory boards and advisory text.
 - `template.md`: standard advisory format.
+- `DEPARTMENT_EVENT_INBOX.md`: frozen historical read/ingestion register. Do not update for routine advisory routing unless Rob explicitly reactivates it.
 
 ## Advisory Posting Rule
 
 Advisories live on the source department's board.
 
-The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+The target department is named inside the advisory and routed through the Advisory Index.
 
 Use:
 
@@ -59,11 +59,18 @@ Read `coordination/ADVISORY_INDEX.md` only when:
 - A project chat is being recreated and needs to know whether another department left relevant notes.
 - Rob instructs a department to check another department's board.
 
-Read a specific board only when the index shows a relevant open or unread advisory.
+Read a specific board only when the index shows a relevant open advisory.
 
 ## Write Rule
 
 Post an advisory only when something materially affects another department's work.
+
+A normal advisory write now requires:
+
+1. Add the advisory to the source department board.
+2. Add or update the advisory row in `coordination/ADVISORY_INDEX.md`.
+
+Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing.
 
 Do not post routine updates, greetings, brainstorming fragments, or low-value chatter.
 
