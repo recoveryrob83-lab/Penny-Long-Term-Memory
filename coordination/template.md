@@ -4,37 +4,29 @@ Use this format when a Penny department posts an advisory for another department
 
 Advisories live on the source department's board.
 
-The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+The target department is named inside the advisory and routed through the Advisory Index.
 
-```markdown
-## ADV-YYYYMMDD-### — Short Subject
+Department Event Inbox is frozen as historical unless Rob explicitly reactivates it.
 
-- Date:
-- From:
-- To:
+## Required Fields
+
+- ADV ID and short subject
+- Date
+- From
+- To
 - Priority: Low / Medium / High
 - Status: Open / Acknowledged / Implemented / Archived
-- Related Project(s):
-- Source Location:
+- Related Project(s)
+- Source Location
 - Posted Board: `coordination/boards/<source-department>.md`
-- Target Department:
+- Target Department
 
-### Summary
+## Recommended Sections
 
-One to three sentences describing the relevant finding, decision, risk, or handoff.
-
-### Why It Matters
-
-Explain why the receiving department may need this.
-
-### Suggested Action
-
-What the receiving department should consider doing next.
-
-### Acknowledgement / Outcome
-
-Record who read it and what happened, if anything.
-```
+- Summary
+- Why It Matters
+- Suggested Action
+- Acknowledgement / Outcome
 
 ## Status Meanings
 
@@ -42,3 +34,12 @@ Record who read it and what happened, if anything.
 - Acknowledged: Target department has read it and summarized relevance.
 - Implemented: Target department has acted on it or incorporated it.
 - Archived: No further action needed.
+
+## Routing Rule
+
+For normal advisory routing, update only:
+
+1. The source department advisory board.
+2. `coordination/ADVISORY_INDEX.md`.
+
+Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing.
