@@ -1,6 +1,6 @@
 # Captain's Log
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Short operational journal for major Life OS work sessions, discoveries, decisions, and completed batches.
 
@@ -13,6 +13,32 @@ Use this file for concise, dated entries future Penny should know about.
 Keep sensitive details out of this file. Detailed records belong in Drive, Gmail, Calendar, Todoist, or project-specific files.
 
 ---
+
+## 2026-07-06 — Nightly Sync and Connector Pattern Adoption
+
+### Summary
+
+Ran Life Logistics nightly GitHub sync after Main Assistant and Engineering connector-reliability advisories.
+
+### Findings
+
+- ADV-20260706-016 was already closed after Engineering and Life Logistics consumed the Gemini Drive-worker workflow observation.
+- Engineering board contained ADV-20260706-017, recommending a connector reliability operating pattern based on Gemini/Drive/GitHub tests.
+- Rob passed a separate Engineering advisory recommending review of whether Department Event Inbox should remain part of active advisory routing.
+
+### Completed Work
+
+- Created `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` from ADV-20260706-017.
+- Closed ADV-20260706-017 on Engineering board, Advisory Index, and Department Event Inbox.
+- Created ADV-20260706-018 on Engineering board for advisory-routing simplification review.
+- Updated Advisory Index and Department Event Inbox to show ADV-20260706-018 as the only open advisory.
+- Updated Session Handoff and Open Loops with the current state.
+
+### Decision / Lesson
+
+Gemini may be used as an optional Drive artifact-generation fallback or companion when direct Drive connector writes are risky, but Gemini is not a default Life OS dependency and is not a complete in-place Drive record maintainer.
+
+ADV-20260706-018 remains open for Life Logistics review before any advisory-routing architecture change.
 
 ## 2026-07-05 — Nightly Sync and Notebook Standard Cleanup
 
@@ -61,38 +87,5 @@ Ran Life Logistics morning GitHub boot and sync.
 ### Decision / Lesson
 
 Advisories live on the source department's board. The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox. Template language now uses Posted Board and Target Department rather than ambiguous Target Board wording.
-
-## 2026-07-04 — Nightly Batch Audit
-
-### Summary
-
-Ran nightly Life OS GitHub hygiene pass after a major advisory and architecture day.
-
-### Findings
-
-- Advisory Index showed no open advisories.
-- Department Event Inbox showed no current open/pending events.
-- Active Project Map reflected department consolidation and dormant/archive states.
-- Decision Rules Registry and Finance Decision Rules were present and coherent.
-- Global Operating Rules contained Role Drift Check, Decision Rules, and formal advisory routing rules.
-- Finance Advisory Board had the clearest advisory-posting language.
-
-### Loose-Language Notes
-
-Engineering, Business, and Life OS advisory boards are clean on open state but could eventually receive the same explicit advisory-posting operating rule used by Finance. An attempted Engineering board tightening rewrite was blocked by connector safety checks, so no further board rewrites were attempted during this batch.
-
-## 2026-07-04 — Department Consolidation Adopted
-
-### Summary
-
-Read and acknowledged ADV-20260704-011 from Main Assistant. Rob reduced active Penny department load by consolidating some lightweight domains into Main Assistant and marking some departments dormant until needed.
-
-### Decision / Lesson
-
-Active core departments are now Life Logistics HQ, Main Assistant / Daily Operations, Chief of Finance Penny, Chief Business HQ, Chief Engineering Penny, Chief Wellness HQ, and Life OS Infrastructure as needed. Project history remains preserved.
-
-### Connector Note
-
-Attempts to update `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-hq/SESSION_HANDOFF.md` were blocked by connector safety checks. The canonical project map update succeeded.
 
 (Older detailed entries are retained in repository history.)
