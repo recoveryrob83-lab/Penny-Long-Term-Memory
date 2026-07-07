@@ -6,13 +6,17 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260706-020 — Adopt Finances-only session rule
 
 - Date: 2026-07-06
 - From: Chief Engineering Penny
 - To: Life Logistics HQ / Life OS Infrastructure
 - Priority: High
-- Status: Open / Unacknowledged
+- Status: Acknowledged / Implemented
 - Related Project(s): Life OS, Finance HQ, Finances connector, connector reliability, session isolation
 - Source Location: Engineering HQ chat / connector sandbox report
 - Posted Board: `coordination/boards/engineering.md`
@@ -24,47 +28,21 @@ Engineering consumed ADV-20260706-019 from Finance and reviewed Rob's connector 
 
 Current evidence supports treating Finances as a special high-sensitivity connector that may isolate or narrow the active connector environment during a financial session.
 
-#### Observed Pattern
+#### Outcome
 
-- GitHub read-only access succeeded before Finances was invoked.
-- Finances backend calls returned success during an account-linking test.
-- In one test, the embedded financial-linking UI did not render for Rob even though the tool reported success.
-- After Finances was invoked, GitHub was no longer available in that test environment.
-- Rob also reported that a previous Finance HQ chat successfully rendered the financial-linking UI, while other connectors were blocked there as well.
+Life Logistics adopted the Finances-only session rule as an observed operating pattern, not a confirmed claim about platform internals.
 
-#### Engineering Interpretation
+Updated files include:
 
-Finances/Plaid-style flows should be treated as special isolated connector sessions unless later testing proves otherwise.
+- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
+- `memory/03_OPERATIONAL_RULES.md`
+- `projects/finance-benefits/SESSION_HANDOFF.md`
 
-This may be intentional safety behavior to reduce financial data leakage risk. It may also involve client UI rendering failure or session routing constraints. Engineering should not claim confirmed platform internals.
+Adopted rule:
 
-#### Recommended Operating Rule
+Finances connector work should occur in a dedicated Finance-only chat/session. Do not mix Finances/Plaid-style operations with GitHub, Drive, Gmail, Instacart, or other connector workflows in the same active session. After Finances is invoked, do not assume other connectors remain available.
 
-Life Logistics should consider adopting this rule:
-
-Finances connector work should occur in a dedicated Finance-only chat/session. Do not mix Finances/Plaid operations with GitHub, Drive, Gmail, Instacart, or other connector workflows in the same session. After Finances is invoked, do not assume other connectors remain available.
-
-Recommended workflow:
-
-1. Finance chat performs Finances-only work.
-2. Finance reports an abstract result to Rob.
-3. Engineering, Logistics, or Finance records abstract GitHub notes later from a separate GitHub-capable chat if needed.
-4. No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents should be recorded in GitHub.
-
-#### Requested Logistics Output
-
-Life Logistics should decide whether to:
-
-1. Add the Finances-only session rule to operating rules and/or connector reliability guidance.
-2. Update Finance HQ handoff guidance to avoid mixed-connector financial sessions.
-3. Update global boot or connector guidance if useful.
-4. Keep the rule framed as an observed operating pattern, not a confirmed internal platform guarantee.
-
-#### Acknowledgement / Outcome
-
-Pending Life Logistics review.
-
-## Acknowledged / Implemented Advisories
+No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents should be recorded in GitHub.
 
 ### ADV-20260706-018 — Simplify the Life OS Advisory Routing System
 
@@ -171,30 +149,3 @@ Life Logistics clarified that advisories live on the source department's board a
 - Target Department: Chief Engineering Penny
 
 Engineering will incorporate connector safety-trigger avoidance into the Reliable Connector Execution Layer.
-
-### ADV-20260704-009 — Role Drift Check for Penny HQs
-
-- Status: Acknowledged / Ingested
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Life Logistics HQ adopted Role Drift Check as a gentle department-boundary safeguard.
-
-### ADV-20260704-006 — Life OS source-of-truth and publication architecture standard candidate
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Life Logistics HQ adopted the Life OS Source-of-Truth and Publication Standard.
-
-### ADV-20260704-003 — Engineering sync completed and Reliable Connector Execution Layer next work
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Chief Engineering Penny
-- Priority: High
-
-Engineering re-consumed this self-addressed advisory. Reliable Connector Execution Layer remains the active Engineering research track.
