@@ -7,11 +7,11 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 | Advisory ID | Source Board | Target Department | Priority | Status | Summary |
 |---|---|---|---|---|---|
-| ADV-20260706-019 | `coordination/boards/finance.md` | Chief Engineering Penny / Engineering HQ | High | Open / Unacknowledged | Investigate reported connector instability after a Finance chat attempted to load the Finances/Plaid account-linking flow. |
+| ADV-20260706-020 | `coordination/boards/engineering.md` | Life Logistics HQ / Life OS Infrastructure | High | Open / Unacknowledged | Adopt a Finances-only session rule for financial connector work. |
 
 ## Acknowledged / Implemented Advisories
 
-See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-018.
+See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-019.
 
 ## Routing Rule
 
