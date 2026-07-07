@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-06
+Updated: 2026-07-07
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -27,6 +27,14 @@ Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-pr
 - Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
+
+## Current Weekly Priority Reminder
+
+During Life Logistics boot, morning sync, or weekly review, remind Rob:
+
+Current approved focus is Finance plus Main Assistant first.
+
+Engineering remains active as the background architecture/reliability track.
 
 ## Consolidated / Dormant Departments
 
@@ -86,6 +94,7 @@ Use RPR when reliable structured-file editing matters more than connector automa
 ## Current Major Open Loops For Life Logistics
 
 - Keep simplified advisory routing clean under the source-board plus Advisory Index model.
+- Remind Rob during Life Logistics boot that this week's approved priority is Finance plus Main Assistant first, with Engineering reliability as the background architecture track.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
@@ -95,11 +104,15 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
 2. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
-3. Use active specialist chats for Finance, Business, Engineering, Wellness, and project-sized work.
-4. Use Role Drift Check when work appears to belong elsewhere.
-5. Route discretionary spending decisions to Chief of Finance Penny when possible.
-6. Prefer small verified GitHub edits.
+3. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits workflows when Rob is ready.
+4. Keep Engineering reliability work visible as background architecture.
+5. Use active specialist chats for Business, Engineering, Wellness, and project-sized work.
+6. Use Role Drift Check when work appears to belong elsewhere.
+7. Route discretionary spending decisions to Chief of Finance Penny when possible.
+8. Prefer small verified GitHub edits.
 
 ## Notes for Next Penny
 
 This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
+
+Boot reminder: tell Rob the approved weekly priority is Finance plus Main Assistant first; Engineering reliability remains the background architecture track.
