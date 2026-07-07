@@ -32,8 +32,8 @@ Preserve project history. Do not delete department files.
 - Active Projects is the authoritative current project map: `memory/04_ACTIVE_PROJECTS.md`.
 - Open Loops tracks current unfinished work: `memory/05_OPEN_LOOPS.md`.
 - Advisory dashboard: `coordination/ADVISORY_INDEX.md`.
-- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md`.
 - Advisory details: `coordination/boards/`.
+- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only.
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`.
 - Pending Advisory Boards standard: `coordination/PENDING_ADVISORY_BOARDS.md`.
 - Department Notebooks standard: `coordination/DEPARTMENT_NOTEBOOKS.md`.
@@ -45,7 +45,11 @@ Preserve project history. Do not delete department files.
 
 Advisories live on the source department's board.
 
-The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+The target department is named inside the advisory and routed through the Advisory Index.
+
+The Advisory Index is the sole active routing dashboard. It should show open advisory ID, source board path, and target department.
+
+Do not update Department Event Inbox for normal advisory routing unless Rob explicitly reactivates it.
 
 Template language uses `Posted Board` and `Target Department` rather than ambiguous `Target Board` language.
 
@@ -78,11 +82,13 @@ Additional connector reliability pattern:
 
 ## Current Open Advisory State
 
-As of the 2026-07-06 nightly sync, ADV-20260706-018 is the only open advisory. It asks Life Logistics to evaluate whether the Department Event Inbox should remain an active routing file or whether the Advisory Index should become the sole active routing dashboard.
+As of the 2026-07-06 advisory routing simplification, there are no open advisories.
+
+ADV-20260706-018 was implemented by freezing Department Event Inbox as an active routing file and promoting Advisory Index to the sole active routing dashboard.
 
 ## Best Next Actions
 
-- For Life Logistics: evaluate ADV-20260706-018 and decide whether to simplify advisory routing.
+- For Life Logistics: keep advisory routing clean under the simplified source-board plus Advisory Index model.
 - For Engineering: continue connector safety-trigger rule design inside Reliable Connector Execution Layer.
 - For Business: continue positioning, unit economics, business-model scoring, customer persona/use-case definition, and validation packet work.
 - For Main Assistant: absorb lightweight daily logistics from consolidated departments.
