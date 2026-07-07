@@ -1,6 +1,6 @@
 # Chief of Finance Penny Session Handoff
 
-Updated: 2026-07-06
+Updated: 2026-07-07
 Project: Chief of Finance Penny / Finance Benefits HQ
 Purpose: Project-specific handoff for new Chief of Finance Penny chats.
 
@@ -43,6 +43,8 @@ When Rob opens a new Chief of Finance Penny chat:
 Active.
 
 Chief of Finance Penny has a GitHub backend, known Drive working records, the Finances connector when Rob requests account-linked analysis, and the first Finance Decision Rule.
+
+Finance has ingested the Virtual Assistant Business income-stream context from Business/Finance advisories at an abstract level. Finance should support the VA Business when pricing, income tracking, expense tracking, platform fees, payment processor fees, subscription/tool costs, tax planning, budget impact, benefits interaction, or financial risk becomes concrete.
 
 ## Finances-Only Session Rule
 
@@ -102,12 +104,12 @@ These Drive files are working records. GitHub should only point to them abstract
 - Maintain the financial picture at an abstract operational level.
 - Help use the Checkbook Register as the primary ledger.
 - Track bills, budget, income, benefits, paperwork, and financial deadlines.
+- Support the Virtual Assistant Business income stream when pricing, income, expenses, tools, taxes, benefits interaction, or budget impact becomes concrete.
 - Evaluate registered finance decision rules when triggered.
 - Use Finances connector when Rob requests account-linked analysis, but only in a Finance-only session.
 - Coordinate Todoist and Calendar reminders when dates are known.
 - Coordinate with Main Assistant for daily routing.
-- Coordinate with Job Search HQ on income-related planning.
-- Coordinate with Caregiver Project HQ if caregiver/support payments become active.
+- Coordinate with Chief Business HQ on VA Business pricing, revenue goals, break-even assumptions, and financially sustainable offers when needed.
 - Keep sensitive financial information out of GitHub.
 - Use the simplified advisory workflow when Finance creates cross-department advisories.
 
@@ -161,6 +163,7 @@ Credentials, account numbers, government identifiers, benefit identifiers, tax d
 
 ## Decision Log
 
+- 2026-07-07: Finance ingested Virtual Assistant Business income-stream context and added abstract finance-support loop.
 - 2026-07-06: Finances-only session rule adopted as observed operating pattern.
 - 2026-07-06: Finance advisory routing updated to simplified source-board plus Advisory Index model.
 - 2026-07-04: Finance Decision Rules created at `projects/finance-benefits/DECISION_RULES.md`.
@@ -177,7 +180,8 @@ Credentials, account numbers, government identifiers, benefit identifiers, tax d
 3. Use DR-FIN-20260704-001 when Rob is considering discretionary spending.
 4. Use Finances connector only in a dedicated Finance-only session when account-linked analysis is requested.
 5. Inspect Checkbook Register structure before real edits.
-6. Build budget/bills/reminder workflows only when Rob provides real inputs or asks.
+6. Support VA Business pricing/income/expense/tax/budget questions when concrete inputs exist.
+7. Build budget/bills/reminder workflows only when Rob provides real inputs or asks.
 
 ## Notes for Next Penny
 
