@@ -1,6 +1,6 @@
 # Finance Advisory Board
 
-Updated: 2026-07-06
+Updated: 2026-07-07
 Project: Chief of Finance Penny / Finance Benefits HQ
 Purpose: Formal advisories from Finance HQ to other Penny departments, and advisories addressed to Finance when routed through Finance board.
 
@@ -17,7 +17,41 @@ Keep Finance advisories abstract and non-sensitive.
 
 ## Open Advisories
 
-None.
+### ADV-20260707-023 — Finance state refresh for Virtual Assistant income stream
+
+- Date: 2026-07-07
+- From: Chief of Finance Penny / Finance Benefits HQ
+- To: Life Logistics HQ
+- Priority: High
+- Status: Open
+- Posted Board: `coordination/boards/finance.md`
+- Target Department: Life Logistics HQ
+
+#### Summary
+
+Chief Business HQ posted ADV-20260707-022 to Finance advising that Rob is launching a revenue-first Virtual Assistant business using Upwork and related virtual-work marketplaces. PennyOS platform/startup work is paused for now so Rob can focus on generating income as soon as practical.
+
+Finance has ingested the business direction at a high level. The project is financially important because it may become a fresh income stream and will likely require pricing support, income tracking, expense tracking, subscription/tool evaluation, tax planning, and budget coordination once money becomes concrete.
+
+#### Requested Logistics Action
+
+Life Logistics HQ should coordinate the Life OS state refresh so Finance remains current and future Finance chats boot with this income-stream context.
+
+Recommended file/state updates:
+
+1. Update `projects/finance-benefits/SESSION_HANDOFF.md` with an abstract note that Finance has ingested ADV-20260707-022 and should support the Virtual Assistant income stream when pricing, income, expenses, platform fees, subscription/tool costs, tax planning, or budget impact become concrete.
+2. Update `projects/finance-benefits/open_loops.md` with a new open loop for Virtual Assistant business finance support.
+3. Optionally update `projects/finance-benefits/status.md` with a short abstract status note that Finance is now aware of the VA income-stream project and should treat it as an emerging financial priority.
+4. Keep all updates abstract and non-sensitive.
+5. Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` for this routing unless Rob explicitly reactivates it.
+
+#### Department Boundaries
+
+Chief Business HQ owns offer strategy, market positioning, Upwork profile development, customer discovery, and service packaging.
+
+Chief of Finance Penny owns financial evaluation once money becomes concrete: pricing feasibility, income tracking, expense tracking, tax considerations, subscription/tool justification, budget impact, benefits interactions, and financial risk.
+
+Life Logistics HQ owns cross-department state freshness, routing, reminders, and ensuring the right project files point to the right operating context.
 
 ## Acknowledged / Implemented Advisories
 
