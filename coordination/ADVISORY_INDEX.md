@@ -5,9 +5,11 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260707-021 — Open — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant business project setup needed
+None.
 
 ## Acknowledged / Implemented Advisories
+
+- ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as a Business HQ sub-project.
 
 See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-020.
 
