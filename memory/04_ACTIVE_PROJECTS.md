@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-04
+Updated: 2026-07-07
 Purpose: High-level Life OS project map.
 
 ## Operating Rule
@@ -22,6 +22,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options |
 | Active | Chief of Finance Penny | `projects/finance-benefits/` | REF-003 | Active | Use Drive Checkbook Register as primary ledger when Rob is ready |
 | Active | Chief Business HQ | `projects/business-development/` | To assign | Active | Continue positioning, unit economics, validation design, and business-model scoring |
+| Active | Virtual Assistant Business | `projects/virtual-assistant-business/` | To assign | Scaffolded / Business HQ sub-project | Chief Business HQ to resume positioning, offers, Upwork profile, proposals, and portfolio packet |
 | Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Continue Reliable Connector Execution Layer research track |
 | Active | Chief Wellness HQ | `projects/wellness/` | To assign | Active | Use for wellness routines, health-adjacent logistics, appointments, and stability supports |
 | Active | Life OS Infrastructure | `projects/life-os-infrastructure/` | REF-004 | Active / As Needed | Maintain design principles, decision rules architecture, sync architecture, and registry standards as needed |
@@ -47,6 +48,8 @@ GitHub is the map. Drive is the filing cabinet.
 Life Logistics HQ is the Chief of Staff / cross-project coordination desk. It maintains system clarity, GitHub state, project routing, housekeeping, and advisory structure.
 
 Main Assistant is the front desk for everyday assistant work and now absorbs lightweight daily logistics from consolidated departments.
+
+Virtual Assistant Business is an active Business HQ sub-project, not a standalone department at launch.
 
 Specialist departments remain available to awaken later if the domain becomes project-sized again. Do not delete project history.
 
