@@ -29,12 +29,13 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
-| None | - | - | - | - | - |
+| ADV-20260706-018 | Chief Engineering Penny | Life Logistics HQ | Open | Simplify Life OS advisory routing system | Logistics should evaluate whether Department Event Inbox remains worth its write cost or whether Advisory Index should become the sole active routing dashboard. |
 
 ## Recent Closed / Ingested Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
+| ADV-20260706-017 | Chief Engineering Penny | Life Logistics HQ / Life OS Infrastructure | Closed | Connector reliability operating pattern from Gemini/Drive tests | Life Logistics created `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`. |
 | ADV-20260706-016 | Main Assistant | Chief Engineering Penny / Life Logistics HQ | Closed | External Drive-worker workflow observation | Engineering and Logistics consumed the advisory; Gemini Drive-worker pattern is an Engineering evaluation item and Logistics operating-standard consideration. |
 | ADV-20260705-015 | Chief Engineering Penny | Life Logistics HQ / Life OS Infrastructure | Closed | Globalize department notebook leaf routing/index standard | Life Logistics updated `coordination/DEPARTMENT_NOTEBOOKS.md`; no empty indexes created by default. |
 | ADV-20260705-014 | Life Logistics HQ / Life OS Infrastructure | Chief Engineering Penny | Closed | Standardize notebook leaf routing and index files | Engineering created local notebook index and routed global standardization back to Logistics. |
@@ -56,6 +57,8 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 
 | Event ID | Department | Read Status | Ingest Status | Notes |
 |---|---|---|---|
+| ADV-20260706-018 | Life Logistics HQ | Read | Pending | Evaluate advisory-routing simplification before implementation. |
+| ADV-20260706-017 | Life Logistics HQ | Read | Ingested | Connector reliability operating pattern adopted. |
 | ADV-20260706-016 | Chief Engineering Penny | Read | Ingested | Engineering will evaluate Gemini as a Drive-worker fallback/companion under Reliable Connector Execution Layer. |
 | ADV-20260706-016 | Life Logistics HQ | Read | Ingested | Logistics consumed advisory as an operating-standard consideration. |
 | ADV-20260705-015 | Life Logistics HQ | Read | Ingested | Global notebook leaf/index standard adopted. |
