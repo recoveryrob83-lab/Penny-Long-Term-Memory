@@ -1,6 +1,6 @@
 # Captain's Log
 
-Updated: 2026-07-06
+Updated: 2026-07-07
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Short operational journal for major Life OS work sessions, discoveries, decisions, and completed batches.
 
@@ -13,6 +13,30 @@ Use this file for concise, dated entries future Penny should know about.
 Keep sensitive details out of this file. Detailed records belong in Drive, Gmail, Calendar, Todoist, or project-specific files.
 
 ---
+
+## 2026-07-07 — Delayed End-of-Week Review
+
+### Summary
+
+Ran delayed end-of-week Life OS review after Main Assistant reminded Rob.
+
+### Findings
+
+- Life OS core architecture is operational.
+- No open advisories were present in the Advisory Index.
+- Active core departments remain Life Logistics, Main Assistant, Finance, Business, Engineering, Wellness, and Life OS Infrastructure as needed.
+- Major recent architecture changes are stable enough to proceed: simplified advisory routing, boot-loop fix, connector reliability operating pattern, Finances-only session pattern, and scheduled-worker read-only/stateless guidance.
+
+### Approved Priorities
+
+Rob approved the recommended weekly focus:
+
+1. Finance plus Main Assistant as primary operational priorities.
+2. Engineering remains active as a background architecture/reliability track.
+
+### Boot Reminder
+
+During Life Logistics boot or weekly review, remind Rob of the current priorities: Finance plus Main Assistant first; Engineering reliability work remains the background architecture track.
 
 ## 2026-07-06 — Advisory Routing Simplified
 
