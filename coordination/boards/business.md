@@ -107,15 +107,18 @@ Use the simplified advisory model only:
 
 Life Logistics HQ should review this advisory and implement the parent Business HQ state updates needed to keep Business HQ clean, current, and aware of the new VA Business priority without duplicating the worker project's detailed records.
 
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260707-022 — Finance awareness needed for Virtual Assistant income stream
 
 - Date: 2026-07-07
 - From: Chief Business HQ
 - To: Chief of Finance Penny
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Ingested by Finance
 - Posted Board: `coordination/boards/business.md`
 - Target Department: Chief of Finance Penny
+- Acknowledged: 2026-07-07
 
 #### Summary
 
@@ -157,11 +160,11 @@ Chief of Finance Penny owns financial evaluation once money becomes concrete: pr
 
 No sensitive account data, balances, transaction details, client payment records, tax identifiers, or platform credentials should be stored in GitHub.
 
-#### Requested Action
+#### Finance Ingestion
 
-Chief of Finance Penny should ingest this advisory and be prepared to support the VA Business project when pricing, income tracking, expense tracking, tax planning, or financial decision-making begins.
+Finance has ingested this advisory and is prepared to support the VA Business project when pricing, income tracking, expense tracking, tax planning, or financial decision-making begins.
 
-## Acknowledged / Implemented Advisories
+Finance also posted ADV-20260707-023 to Life Logistics HQ requesting a Finance state refresh so future Finance chats boot with this income-stream context.
 
 ### ADV-20260707-021 — Virtual Assistant business project setup needed
 
