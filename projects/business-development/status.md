@@ -1,18 +1,20 @@
 # Chief Business HQ Status
 
-Updated: 2026-07-04
+Updated: 2026-07-07
 
 ## Current Phase
 
-Active / Penny Platform Competitor Research and Business Model Design
+Active / Virtual Assistant Business Launch
 
 ## Summary
 
-Chief Business HQ is active on Penny Platform viability research.
+Chief Business HQ's immediate focus has shifted from PennyOS / Penny Platform viability research to launching the Virtual Assistant Business as a revenue-first sub-project.
 
-The current strategic frame is Penny as an execution/coordination platform or personal AI operating system, not simply another chatbot.
+The immediate objective is income generation as soon as practical through systems-first virtual assistance, AI-enabled operations support, workflow organization, documentation, and practical process coordination.
 
-The major thesis: people do not want more AI conversation; they want less mental juggling and more completed outcomes.
+PennyOS / Penny Platform work is paused for now, not abandoned. It remains a longer-term platform concept and potential future productization path.
+
+The VA Business may become a cashflow engine, market-learning lab, and proof base for future PennyOS/productized services.
 
 ## Current Operating Rule
 
@@ -20,28 +22,30 @@ Keep GitHub abstract and non-sensitive.
 
 Use Drive for working records, Todoist for Rob-facing actions, Calendar for meetings and deadlines, Gmail for communication evidence, Contacts for lookup, and RPR for structured records when reliability matters.
 
-Use the Advisory Index as the advisory dashboard and the Department Event Inbox as the department synchronization/read/ingestion register.
+Use the Advisory Index as the sole active advisory dashboard. Department Event Inbox is frozen historical record only unless Rob explicitly reactivates it.
 
 Do not use Todoist for department synchronization unless Rob explicitly asks.
 
 ## Current Focus
 
-- Finish competitor Positioning Matrix work.
-- Rank direct threats and Penny white-space opportunity.
-- Refine unit economics and model-routing/cost-control assumptions.
-- Fill/refine Business Model Design scoring.
-- Choose a first target customer persona.
-- Define 3 to 5 painful coordination use cases.
-- Build a validation packet.
+- Guide VA Business strategy from parent HQ.
+- Define differentiation versus generic virtual assistants.
+- Clarify Rob's strengths, weaknesses, constraints, credibility assets, and positioning.
+- Identify target customer segments and marketplace gaps.
+- Define initial offers and service packages.
+- Build marketplace positioning, including Upwork profile and proposal strategy, through the VA Business worker project.
+- Coordinate with Finance on pricing, income tracking, expenses, taxes, budget impact, and sustainable rate assumptions.
+- Coordinate with Life Logistics on project file hygiene and worker handoff clarity.
+- Preserve PennyOS / Penny Platform as paused/parked, not the current execution priority.
 
 ## Current Working Hypotheses
 
-- Penny should be positioned around reduced coordination burden and completed outcomes.
-- Penny should hide specialist department complexity behind one trusted user-facing assistant.
-- Cost, reliability, support burden, and power-user exposure may be harder business problems than basic feasibility.
-- Penny should spend intelligence like money: premium reasoning only where needed, cheaper tools/templates/summaries/caching/human approval elsewhere.
-- Penny Solutions / Studio may be a practical revenue and customer-discovery bridge toward a scalable Penny Platform.
-- Templates / Marketplace and Hybrid Concierge MVP remain possible supporting paths.
+- Rob should not compete as a generic low-cost VA.
+- Stronger positioning is systems-first VA / AI-enabled operations support.
+- Busy people and small businesses may value reduced mental juggling, organized workflows, documentation, SOPs, task/calendar/email cleanup, and repeatable processes.
+- Rob's Life OS experience can serve as proof of systems thinking without exposing private operational details.
+- Service work can generate income quickly and produce market learning for possible later productized services.
+- PennyOS remains conceptually useful, but the current execution lane is practical service revenue.
 
 ## Drive / Working Records
 
@@ -52,12 +56,14 @@ Canonical Business Drive architecture:
 
 Business working records should live under the Chief Business HQ folder. Business Development is a subfolder beneath Chief Business HQ, not a separate top-level business root.
 
+Detailed VA Business working records should live in the appropriate VA Business Drive/RPR working area when created, with GitHub holding only abstract state and pointers.
+
 Earlier Business HQ working cabinet:
 
 - Life Organization > Chief Business HQ
 - Folder ID: `14KX6L-nacIsa5xYVmGKAqhclb0O2iJpR`
 
-Key Drive records:
+Key existing Drive records:
 
 - `Business Competitor Matrix`, Sheet ID `1svMTOzCeb4E_MfE0mjLUBG00qvt6sjY2LBcTG3bOb_I`
 - Tabs: `Competitors`, `Positioning Matrix`
@@ -65,34 +71,35 @@ Key Drive records:
 - Tabs: `Cost Estimates`, `Unit Economics`
 - `Business_Model_Design.xlsx`, File ID `1TzgU-68LeWGlWQNPMuWv52DTVvOo21WG`
 
-## Drive Architecture Decision
+## Business HQ / Worker Project Relationship
 
-Resolved 2026-07-04 by Rob:
+Parent department:
 
-Business uses the `Chief Business HQ` folder as the department root.
+- `projects/business-development/`
 
-`Business Development` lives under `Chief Business HQ`.
+Worker sub-project:
 
-Do not treat `Business Development` as a separate top-level business root unless Rob changes the architecture later.
+- `projects/virtual-assistant-business/`
+
+Business HQ owns parent strategy and routing. The VA Business worker project owns detailed execution artifacts such as business plan, marketing plan, offers, Upwork profile, proposals, customer research, sample packet, and lead/proposal/client workflow.
 
 ## Coordination Notes
 
 - Main Assistant handles one-off scheduling and daily execution.
 - Chief Engineering Penny handles technical implementation when architecture/build work is ready.
-- Chief of Finance Penny should be involved when pricing, budget, income tracking, bills, or paperwork becomes concrete.
-- Life Logistics HQ handles cross-project coordination, GitHub housekeeping, and Drive architecture decisions.
-- Department Event Inbox tracks read/ingestion state for cross-department advisories.
+- Chief of Finance Penny should be involved when pricing, budget, income tracking, expenses, taxes, benefits interaction, or paperwork becomes concrete.
+- Life Logistics HQ handles cross-project coordination, GitHub housekeeping, scaffold hygiene, and Drive architecture decisions.
 
 ## Advisory Status
 
-ADV-20260704-001 has been consumed by Life Logistics HQ and acknowledged after Business HQ research/context updates were ingested.
+ADV-20260707-024 has been implemented by Life Logistics HQ through Business HQ parent-state refresh.
 
-ADV-20260703-003 has been acknowledged after all targeted departments reported read.
+ADV-20260707-022 has been acknowledged/ingested by Finance.
 
-ADV-20260703-005 from Main Assistant has been acknowledged by Chief Business HQ and accepted into local working context.
+ADV-20260707-021 has been implemented by Life Logistics HQ through the VA Business scaffold.
 
-Future Business HQ advisories should update the Business advisory board, central Advisory Index, and Department Event Inbox.
+Future Business HQ advisories should update the Business advisory board and central Advisory Index only. Do not update Department Event Inbox unless Rob explicitly reactivates it.
 
 ## Boundary
 
-Chief Business HQ defines business direction. It does not own technical implementation or daily admin execution.
+Chief Business HQ defines business direction. It does not own technical implementation, finance execution, or daily admin execution.
