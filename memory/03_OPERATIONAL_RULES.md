@@ -23,10 +23,10 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
 - `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
 - `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` is the standard for authoritative homes and publication copies.
-- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` is the operating pattern for connector-heavy work and fallback workflows.
+- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` is the operating pattern for connector-heavy work, fallback workflows, and Finances-only session behavior.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
-Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
+Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, Todoist tasks, and Finances results where appropriate.
 
 ## Role Drift Check
 
@@ -90,6 +90,26 @@ Department Event Inbox is retained as historical record only. It should not be t
 Todoist should not be used as the source of truth for department synchronization state.
 
 For multi-target advisories, track target departments in the Advisory Index entry and source-board advisory text. Do not mark a multi-target advisory implemented until all required target departments have reported handled status to Rob or the source board records separate per-target acknowledgement.
+
+## Connector Reliability Rules
+
+Standard procedure lives at:
+
+- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
+
+Connector reliability rules are observed operating patterns, not confirmed claims about platform internals.
+
+Use explicit connector invocation when practical.
+
+Prefer small, localized, verified GitHub writes over broad hub rewrites.
+
+If a write safety trigger occurs, stop and wait before retrying. Do not hammer the same blocked operation.
+
+Treat Finances connector work as Finance-only session work. Do not mix Finances/Plaid-style operations with GitHub, Drive, Gmail, Instacart, or other connector workflows in the same active session.
+
+After Finances is invoked, do not assume other connectors remain available. Complete Finances work first, then use a separate GitHub-capable or general-purpose session for documentation and follow-up.
+
+No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents should be recorded in GitHub.
 
 ## Source-of-Truth and Publication Rule
 
