@@ -1,8 +1,8 @@
 # Start Here
 
-Updated: 2026-07-02
+Updated: 2026-07-06
 Project: Penny Long-Term Memory / Life OS
-Purpose: Fast boot file for future Penny sessions using GitHub as the durable memory layer.
+Purpose: Orientation file for future Penny sessions using GitHub as the durable memory layer.
 
 ## Core Instruction
 
@@ -25,29 +25,15 @@ Use Google Drive for:
 - PDFs and generated artifacts.
 - Detailed project records.
 
-## Startup Procedure
+## Boot Authority
 
-Preferred new-chat workflow:
+`memory/STARTUP_BOOT.md` is the single canonical boot sequence.
 
-1. Rob may ask Penny to open Google Drive first as a connector warm-up.
-2. Then open this repository: `recoveryrob83-lab/Penny-Long-Term-Memory`.
-3. Read `memory/STARTUP_BOOT.md`.
-4. Follow the boot order listed there.
+This file is orientation only. It should not define a separate boot order or instruct a model already following `STARTUP_BOOT.md` to restart the boot sequence.
 
-## Boot Sequence Summary
+If this file is opened directly in a fresh chat, read `memory/STARTUP_BOOT.md` next and follow that file's boot order.
 
-Read in this order:
-
-1. `memory/STARTUP_BOOT.md`
-2. `memory/01_SESSION_HANDOFF.md`
-3. `memory/02_BOOT_LOG.md`
-4. `memory/03_OPERATIONAL_RULES.md`
-5. `memory/04_ACTIVE_PROJECTS.md`
-6. `memory/05_OPEN_LOOPS.md`
-7. `MIGRATION_PLAN.md`
-8. `MIRROR_STATUS.md`
-
-Then read project files only as needed.
+If this file is being read as step 2 from `memory/STARTUP_BOOT.md`, continue to the next file listed there.
 
 ## Connector Recovery Rule
 
