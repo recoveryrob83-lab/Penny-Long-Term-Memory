@@ -1,37 +1,45 @@
 # Department Event Inbox
 
 Updated: 2026-07-06
-Purpose: Lightweight Life OS register for advisory and synchronization events between Penny departments.
+Purpose: Frozen historical Life OS register for past advisory synchronization/read/ingestion events.
 
-## Operating Rule
+## Status
 
-This file tracks abstract department-to-department sync events.
+Frozen / historical.
 
-It is not a user task list.
+As of ADV-20260706-018, the Department Event Inbox is no longer an active advisory routing file.
 
-Todoist owns Rob-facing action items. This file owns system synchronization state.
+Normal advisory routing now uses:
 
-Keep entries short and non-sensitive.
+1. Source department advisory board under `coordination/boards/`.
+2. `coordination/ADVISORY_INDEX.md` as the sole active routing dashboard.
 
-## Source of Truth
+Do not update this file for normal advisory routing unless Rob explicitly reactivates it.
+
+## Reason For Freeze
+
+Engineering observed that maintaining both Advisory Index and Department Event Inbox required duplicate writes and increased connector fragility.
+
+Life Logistics accepted ADV-20260706-018 and simplified advisory routing to reduce write load, safety-trigger exposure, stale routing information, and scheduled-worker complexity.
+
+## Historical Source Of Truth Notes
 
 - Advisory dashboard: `coordination/ADVISORY_INDEX.md`
 - Advisory details: `coordination/boards/`
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`
-- Finance advisory board: `coordination/boards/finance.md`
 - Pending advisory standard: `coordination/PENDING_ADVISORY_BOARDS.md`
 - Department notebook standard: `coordination/DEPARTMENT_NOTEBOOKS.md`
 - Source/publication standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
 
 GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
 
-## Current Open / Pending Events
+## Final Active Event Before Freeze
 
-| Event ID | Source | Target(s) | Status | Subject | Notes |
+| Event ID | Source | Target(s) | Final Status | Subject | Notes |
 |---|---|---|---|---|---|
-| ADV-20260706-018 | Chief Engineering Penny | Life Logistics HQ | Open | Simplify Life OS advisory routing system | Logistics should evaluate whether Department Event Inbox remains worth its write cost or whether Advisory Index should become the sole active routing dashboard. |
+| ADV-20260706-018 | Chief Engineering Penny | Life Logistics HQ | Implemented | Simplify Life OS advisory routing system | Department Event Inbox frozen as active routing file; Advisory Index promoted to sole active routing dashboard. |
 
-## Recent Closed / Ingested Events
+## Recent Historical Events
 
 | Event ID | Source | Target(s) | Status | Subject | Notes |
 |---|---|---|---|---|---|
@@ -53,32 +61,8 @@ GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes t
 | ADV-20260704-002 | Chief Business HQ | Chief Engineering Penny | Ingested | Drive connector reliability is a major Penny product risk | Engineering created Reliable Connector Execution Layer as first concrete research track. |
 | ADV-20260704-001 | Chief Business HQ | Life Logistics HQ | Closed | Business HQ research, Drive architecture, and reboot-state update needed | Life Logistics ingested; Business Drive architecture resolved. |
 
-## Department Read Tracking
-
-| Event ID | Department | Read Status | Ingest Status | Notes |
-|---|---|---|---|
-| ADV-20260706-018 | Life Logistics HQ | Read | Pending | Evaluate advisory-routing simplification before implementation. |
-| ADV-20260706-017 | Life Logistics HQ | Read | Ingested | Connector reliability operating pattern adopted. |
-| ADV-20260706-016 | Chief Engineering Penny | Read | Ingested | Engineering will evaluate Gemini as a Drive-worker fallback/companion under Reliable Connector Execution Layer. |
-| ADV-20260706-016 | Life Logistics HQ | Read | Ingested | Logistics consumed advisory as an operating-standard consideration. |
-| ADV-20260705-015 | Life Logistics HQ | Read | Ingested | Global notebook leaf/index standard adopted. |
-| ADV-20260705-014 | Chief Engineering Penny | Read | Ingested | Engineering created local notebook index and routed global standardization back to Logistics. |
-| ADV-20260704-013 | Life Logistics HQ | Read | Ingested | Source-board versus target-department wording clarified. |
-| ADV-20260704-012 | Chief Engineering Penny | Read | Ingested | Engineering will fold connector safety-trigger avoidance into Reliable Connector Execution Layer rules. |
-| ADV-20260704-011 | Life Logistics HQ | Read | Ingested | Active project map updated; advisory closed. |
-| ADV-20260704-010 | All Departments | Read | Ingested | All boards reported Decision Rules Registry and Role Drift Check architecture ingested. |
-| ADV-20260704-009 | Life Logistics HQ | Read | Ingested | Role Drift Check added to Operating Rules and Life Logistics handoff. |
-| ADV-20260704-008 | Life Logistics HQ | Read | Ingested | Discretionary Purchase Pause Rule routing reinforced. |
-| ADV-20260704-007 | Chief of Finance Penny | Read | Ingested | Finance re-synced advisory routing rule and Finance board location. |
-| ADV-20260704-006 | Life Logistics HQ | Read | Ingested | Source-of-Truth and Publication Standard adopted. |
-| ADV-20260704-003 | Chief Engineering Penny | Read | Ingested | Engineering re-consumed and closed self-addressed continuation advisory. |
-| ADV-20260704-005 | Life Logistics HQ | Read | Ingested | Department Notebook standard adopted. |
-| ADV-20260704-004 | Life Logistics HQ | Read | Ingested | Pending Advisory Board standard adopted. |
-| ADV-20260704-002 | Chief Engineering Penny | Read | Ingested | Reliable Connector Execution Layer research track created. |
-| ADV-20260704-001 | Life Logistics HQ | Read | Ingested | Business Drive architecture resolved. |
-
 ## Notes
 
 Historical advisory state is preserved in repository history and department boards.
 
-Use this inbox for active synchronization/read/ingestion state, not as a permanent transcript.
+Use `coordination/ADVISORY_INDEX.md` for current advisory routing.
