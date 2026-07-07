@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -40,19 +40,24 @@ Preserve project history. Do not delete department files.
 ## Current Architecture Standards
 
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
-- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md`
 - Advisory boards: `coordination/boards/`
+- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`
 - Pending Advisory Boards: `coordination/PENDING_ADVISORY_BOARDS.md`
 - Department Notebooks: `coordination/DEPARTMENT_NOTEBOOKS.md`
 - Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
+- Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
 - Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
 
 ## Advisory Rule
 
 Advisories live on the source department's board.
 
-The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+The target department is named inside the advisory and routed through the Advisory Index.
+
+The Advisory Index is the sole active routing dashboard. It should show open advisory ID, source board path, and target department.
+
+Department Event Inbox is frozen as historical and should not be updated for normal advisory routing unless Rob explicitly reactivates it.
 
 Template language uses `Posted Board` and `Target Department` rather than ambiguous `Target Board` language.
 
@@ -80,7 +85,7 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 ## Current Major Open Loops For Life Logistics
 
-- Keep advisory and event-inbox hygiene clean.
+- Keep simplified advisory routing clean under the source-board plus Advisory Index model.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
@@ -97,4 +102,4 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index plus Department Event Inbox for advisory sync state. Route decisions through registered Decision Rules when they apply.
+This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
