@@ -6,13 +6,89 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
+### ADV-20260706-020 — Adopt Finances-only session rule
+
+- Date: 2026-07-06
+- From: Chief Engineering Penny
+- To: Life Logistics HQ / Life OS Infrastructure
+- Priority: High
+- Status: Acknowledged / Implemented
+- Related Project(s): Life OS, Finance HQ, Finances connector, connector reliability, session isolation
+- Source Location: Engineering HQ chat / connector sandbox report
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ / Life OS Infrastructure
+
+#### Summary
+
+Engineering consumed ADV-20260706-019 from Finance and reviewed Rob's connector sandbox report.
+
+Current evidence supports treating Finances as a special high-sensitivity connector that may isolate or narrow the active connector environment during a financial session.
+
+#### Outcome
+
+Life Logistics adopted the Finances-only session rule as an observed operating pattern, not a confirmed claim about platform internals.
+
+Updated files include:
+
+- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
+- `memory/03_OPERATIONAL_RULES.md`
+- `projects/finance-benefits/SESSION_HANDOFF.md`
+
+Adopted rule:
+
+Finances connector work should occur in a dedicated Finance-only chat/session. Do not mix Finances/Plaid-style operations with GitHub, Drive, Gmail, Instacart, or other connector workflows in the same active session. After Finances is invoked, do not assume other connectors remain available.
+
+No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents should be recorded in GitHub.
+
+### ADV-20260706-018 — Simplify the Life OS Advisory Routing System
+
+- Date: 2026-07-06
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: High
+- Status: Acknowledged / Implemented
+- Related Project(s): Life OS, advisory routing, connector reliability, scheduled workers, operating standards
+- Source Location: Engineering HQ chat / Rob handoff
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ
+
+#### Summary
+
+Engineering recommended reviewing the current advisory routing architecture because the prior system required duplicate writes to source board, Advisory Index, and Department Event Inbox.
+
+#### Outcome
+
+Life Logistics accepted the recommendation and simplified advisory routing.
+
+New active routing architecture:
+
+- Source department board: canonical advisory text.
+- Advisory Index: sole active routing dashboard.
+
+Department Event Inbox is now frozen as a historical synchronization/read/ingestion register and should not be updated for normal advisory routing unless Rob explicitly reactivates it.
+
+Updated files include:
+
+- `memory/03_OPERATIONAL_RULES.md`
+- `memory/STARTUP_BOOT.md`
+- `coordination/README.md`
+- `coordination/template.md`
+- `coordination/ADVISORY_INDEX.md`
+- `coordination/DEPARTMENT_EVENT_INBOX.md`
+
+Decision: use fewer connector writes and reduce advisory routing fragility.
+
 ### ADV-20260706-017 — Adopt connector reliability operating pattern from Gemini/Drive tests
 
 - Date: 2026-07-06
 - From: Chief Engineering Penny
 - To: Life Logistics HQ / Life OS Infrastructure
 - Priority: High
-- Status: Open
+- Status: Acknowledged / Implemented
 - Related Project(s): Life OS, Reliable Connector Execution Layer, Google Drive workflows, Gemini worker evaluation, scheduled workers, boot reliability
 - Source Location: Engineering HQ chat
 - Posted Board: `coordination/boards/engineering.md`
@@ -22,67 +98,11 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 Engineering and Rob completed a small but useful connector-reliability test sequence involving Gemini, Google Drive, GitHub, and explicit connector invocation.
 
-Observed pattern:
+#### Outcome
 
-- Gemini can be useful as a Google Workspace artifact generator for Google Docs/Sheets whose structure contains sensitive-field wording, especially when ChatGPT Drive connector writes may trigger safety blocks.
-- Gemini created a new version of a test sheet rather than editing the moved original in place, so Gemini should not yet be treated as a complete in-place Drive record maintainer.
-- ChatGPT/Penny was able to find the Gemini-created sheet, find the correct Drive folder, move the sheet into the Engineering folder, and verify the parent folder afterward.
-- Explicitly invoking the intended connector with an `@` call before connector work appears to reduce context-routing ambiguity in active chats.
-- Small, localized GitHub writes plus read-back verification remain the safest GitHub update pattern.
-- After connector write safety triggers, waiting before retrying appears to allow connector work to become reactive again; repeated immediate retries of blocked writes should be avoided.
+Life Logistics created `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` as the durable operating note for explicit connector invocation, small verified writes, waiting after safety triggers, Gemini-as-optional-Drive-artifact-generator, and verification of generated artifacts.
 
-#### Engineering Interpretation
-
-This does not make Gemini a full Life OS worker yet.
-
-Recommended classification:
-
-- Penny / ChatGPT: orchestration, prompt design, GitHub state, audit, advisory routing, and Drive file placement when connector-safe.
-- Gemini: optional Google Workspace artifact generator or versioned updater for sensitive-structure Docs/Sheets when direct ChatGPT Drive writes are risky.
-- Rob: manual verification and manual placement/replacement when Gemini cannot place or update files in place.
-- GitHub: abstract operational memory only.
-- Drive: detailed working records and artifacts.
-
-This pattern materially reduces connector risk when paired with existing connector operating rules.
-
-#### Recommended Logistics / Operating Standard Update
-
-Life Logistics should consider promoting the following into an operating note or durable procedure for connector-heavy work:
-
-1. Use explicit `@Connector` invocation whenever a connector job needs to run.
-2. Prefer small, localized, verified GitHub writes over broad hub rewrites.
-3. After write safety triggers, stop and wait before retrying; do not hammer the same blocked operation.
-4. For Drive artifacts with sensitive-field wording or private/medical/benefits-style structure, consider a Gemini handoff for artifact generation or versioned update.
-5. Use Penny/ChatGPT to move Gemini-created Drive artifacts into the correct folder when direct folder placement is needed and connector-safe.
-6. Keep GitHub records abstract; store detailed working records in Drive.
-7. Treat Gemini output as requiring Rob/Penny verification, not as authoritative until checked.
-
-#### Reliability Claim
-
-Engineering does not recommend claiming connector issues are eliminated.
-
-However, Engineering does recommend recording that the combined pattern appears to address most observed Life OS connector failure modes so far:
-
-- Explicit `@` invocation reduces context-routing ambiguity.
-- Small verified writes reduce safety/write complexity failures.
-- Waiting after safety triggers reduces repeated blocked retries.
-- Gemini handoff provides a fallback path for sensitive Google Workspace artifact creation.
-- Penny/Drive connector can still handle file placement and verification where safe.
-
-#### Requested Logistics Output
-
-Life Logistics should decide whether to:
-
-1. Add this as an operating rule or procedure in the appropriate Life OS standards file.
-2. Cross-reference it from the Reliable Connector Execution Layer workstream.
-3. Update scheduled-worker or boot guidance to preserve explicit connector invocation and small-write principles.
-4. Keep Gemini as an optional fallback tool only, not a default Life OS dependency.
-
-#### Acknowledgement / Outcome
-
-Pending Life Logistics review.
-
-## Acknowledged / Implemented Advisories
+Decision: Gemini is an optional fallback or companion for selected Google Workspace artifact generation, not a default Life OS dependency and not a complete in-place Drive record maintainer.
 
 ### ADV-20260705-015 — Globalize department notebook leaf routing/index standard
 
@@ -129,30 +149,3 @@ Life Logistics clarified that advisories live on the source department's board a
 - Target Department: Chief Engineering Penny
 
 Engineering will incorporate connector safety-trigger avoidance into the Reliable Connector Execution Layer.
-
-### ADV-20260704-009 — Role Drift Check for Penny HQs
-
-- Status: Acknowledged / Ingested
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Life Logistics HQ adopted Role Drift Check as a gentle department-boundary safeguard.
-
-### ADV-20260704-006 — Life OS source-of-truth and publication architecture standard candidate
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Life Logistics HQ
-- Priority: High
-
-Life Logistics HQ adopted the Life OS Source-of-Truth and Publication Standard.
-
-### ADV-20260704-003 — Engineering sync completed and Reliable Connector Execution Layer next work
-
-- Status: Acknowledged
-- From: Chief Engineering Penny
-- To: Chief Engineering Penny
-- Priority: High
-
-Engineering re-consumed this self-addressed advisory. Reliable Connector Execution Layer remains the active Engineering research track.

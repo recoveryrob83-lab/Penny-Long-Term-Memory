@@ -1,6 +1,6 @@
 # Life OS Operating Rules
 
-Updated: 2026-07-04
+Updated: 2026-07-06
 Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
@@ -16,16 +16,17 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - Todoist is the Rob-facing action queue.
 - Google Calendar is the timed commitments queue.
 - Gmail is communication evidence.
-- `coordination/ADVISORY_INDEX.md` is the advisory dashboard.
-- `coordination/DEPARTMENT_EVENT_INBOX.md` is the department synchronization/read/ingestion register.
-- `coordination/boards/` contains formal department advisory boards.
+- `coordination/ADVISORY_INDEX.md` is the sole active advisory routing dashboard.
+- `coordination/boards/` contains formal department advisory boards and canonical advisory text.
+- `coordination/DEPARTMENT_EVENT_INBOX.md` is a frozen historical synchronization/read/ingestion register, not an active advisory routing surface unless Rob explicitly reactivates it.
 - `coordination/DECISION_RULES_REGISTRY.md` is the central registry for reusable decision rules.
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
 - `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
 - `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` is the standard for authoritative homes and publication copies.
+- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` is the operating pattern for connector-heavy work, fallback workflows, and Finances-only session behavior.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
-Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, and Todoist tasks.
+Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, Todoist tasks, and Finances results where appropriate.
 
 ## Role Drift Check
 
@@ -41,7 +42,7 @@ Suggested phrasing:
 
 Principle:
 
-Pause at the doorway before moving work into the wrong department.
+> Pause at the doorway before moving work into the wrong department.
 
 Use Role Drift Check to protect role clarity and avoid the wrong department creating files, advisories, procedures, or project state.
 
@@ -63,25 +64,52 @@ The owning department should apply the rule and return a structured recommendati
 
 Rob remains the final decision-maker.
 
-## Advisory and Department Event Rules
+## Advisory Routing Rules
 
 Formal Life OS advisories must be posted to the proper advisory routing files:
 
 1. The source department board under `coordination/boards/`.
 2. `coordination/ADVISORY_INDEX.md`.
-3. `coordination/DEPARTMENT_EVENT_INBOX.md`.
+
+Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing.
 
 GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
 
 Do not create, track, route, or close formal Life OS advisories through GitHub Issues.
 
-The Advisory Index is the official dashboard for formal advisory state.
+The Advisory Index is the official dashboard for formal advisory state. It should answer:
 
-The Department Event Inbox is the working notification/register layer for department read and ingestion state.
+- Which advisories are open?
+- Where are they located?
+- Who is the target department?
+
+Target departments read advisory details directly from the source department board.
+
+Department Event Inbox is retained as historical record only. It should not be treated as the active read/ingestion ledger unless Rob explicitly reactivates it.
 
 Todoist should not be used as the source of truth for department synchronization state.
 
-For multi-target advisories, do not mark acknowledged or implemented until all targeted departments have reported read/handled status to Rob, unless the source department records separate per-target acknowledgements.
+For multi-target advisories, track target departments in the Advisory Index entry and source-board advisory text. Do not mark a multi-target advisory implemented until all required target departments have reported handled status to Rob or the source board records separate per-target acknowledgement.
+
+## Connector Reliability Rules
+
+Standard procedure lives at:
+
+- `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
+
+Connector reliability rules are observed operating patterns, not confirmed claims about platform internals.
+
+Use explicit connector invocation when practical.
+
+Prefer small, localized, verified GitHub writes over broad hub rewrites.
+
+If a write safety trigger occurs, stop and wait before retrying. Do not hammer the same blocked operation.
+
+Treat Finances connector work as Finance-only session work. Do not mix Finances/Plaid-style operations with GitHub, Drive, Gmail, Instacart, or other connector workflows in the same active session.
+
+After Finances is invoked, do not assume other connectors remain available. Complete Finances work first, then use a separate GitHub-capable or general-purpose session for documentation and follow-up.
+
+No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents should be recorded in GitHub.
 
 ## Source-of-Truth and Publication Rule
 

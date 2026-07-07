@@ -1,6 +1,6 @@
 # Open Loops
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Priority Open Loops
@@ -11,7 +11,7 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Chief Business HQ: continue positioning, unit economics, validation design, and business-model scoring.
 - Chief Engineering Penny: continue Reliable Connector Execution Layer and connector safety-trigger rule work.
 - Chief Wellness HQ: begin wellness operations when useful.
-- Life OS Infrastructure: maintain design principles, decision rules, advisory routing, and sync architecture as needed.
+- Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
 - Startup Boot: keep Penny boot reliable.
 
 ## Consolidated / Dormant Domains
@@ -29,6 +29,9 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Done / Recently Closed
 
+- 2026-07-06: ADV-20260706-018 implemented; Department Event Inbox frozen as an active routing file and Advisory Index promoted to sole active routing dashboard.
+- 2026-07-06: ADV-20260706-017 consumed; Connector Reliability Operating Pattern created at `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`.
+- 2026-07-06: ADV-20260706-016 closed after Engineering and Logistics consumed the Gemini Drive-worker workflow observation.
 - 2026-07-05: ADV-20260704-013 consumed; advisory posting language clarified as source-board plus target-department routing.
 - 2026-07-04: ADV-20260704-012 consumed by Engineering; connector safety-trigger avoidance folded into Reliable Connector Execution Layer work.
 - 2026-07-04: ADV-20260704-011 consumed; project map simplified and several departments consolidated or marked dormant.

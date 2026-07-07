@@ -1,6 +1,6 @@
 # Finance Advisory Board
 
-Updated: 2026-07-04
+Updated: 2026-07-06
 Project: Chief of Finance Penny / Finance Benefits HQ
 Purpose: Formal advisories from Finance HQ to other Penny departments, and advisories addressed to Finance when routed through Finance board.
 
@@ -9,8 +9,7 @@ Purpose: Formal advisories from Finance HQ to other Penny departments, and advis
 Formal Life OS advisories must be posted through the advisory routing files:
 
 - source department board under `coordination/boards/`,
-- `coordination/ADVISORY_INDEX.md`,
-- `coordination/DEPARTMENT_EVENT_INBOX.md`.
+- `coordination/ADVISORY_INDEX.md`.
 
 GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
 
@@ -21,6 +20,33 @@ Keep Finance advisories abstract and non-sensitive.
 None.
 
 ## Acknowledged / Implemented Advisories
+
+### ADV-20260706-019 — Connector routing failure after Finances/Plaid load attempt
+
+- Date: 2026-07-06
+- From: Chief of Finance Penny
+- To: Chief Engineering Penny / Engineering HQ
+- Priority: High
+- Status: Acknowledged / Consumed by Engineering
+- Board: `coordination/boards/finance.md`
+
+#### Summary
+
+Rob reported connector instability after a Finance chat attempted to load the Finances/Plaid account-linking path.
+
+#### Engineering Consumption
+
+Engineering reviewed a controlled connector sandbox report. The report supported the hypothesis that Finances may operate under a special session-isolation model: GitHub read-only access worked before Finances was invoked, Finances backend calls returned success, the embedded UI did not render in that test, and GitHub was unavailable afterward.
+
+Rob also reported that a previous Finance HQ chat did render the financial linking UI successfully while other connectors were blocked in that session as well.
+
+#### Outcome
+
+Engineering treats the Finances connector as requiring isolated Finance-only sessions unless later testing proves otherwise.
+
+Engineering will issue a follow-up advisory to Life Logistics requesting a durable operating rule for Finances-only connector sessions.
+
+No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents were recorded in GitHub.
 
 ### ADV-20260704-008 — Discretionary Purchase Pause Rule routing reinforcement
 

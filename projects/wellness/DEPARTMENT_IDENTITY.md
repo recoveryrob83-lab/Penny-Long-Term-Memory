@@ -1,6 +1,6 @@
 # Department Identity: Chief Wellness HQ
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 
 ## Department Name
 
@@ -66,11 +66,11 @@ Read advisories only when Rob or Main Assistant routes a specific advisory to We
 When Chief Wellness HQ creates an advisory for another department:
 
 1. Create or update the advisory on `coordination/boards/wellness.md`.
-2. Update `coordination/ADVISORY_INDEX.md` as the central advisory dashboard.
-3. Create or update the matching entry in `coordination/DEPARTMENT_EVENT_INBOX.md` so read and ingestion state can be tracked.
+2. Update `coordination/ADVISORY_INDEX.md` with the advisory ID, status, board path, and target department.
+3. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing unless Rob explicitly reactivates it.
 4. Do not create Todoist reminders for department synchronization unless Rob explicitly asks.
 
-Treat the Department Event Inbox as the system synchronization register. Treat Todoist as Rob's personal task system.
+Treat the Advisory Index as the sole active advisory routing dashboard. Treat Department Event Inbox as historical/frozen unless Rob explicitly reactivates it. Treat Todoist as Rob's personal task system.
 
 ## Authoritative Memory
 

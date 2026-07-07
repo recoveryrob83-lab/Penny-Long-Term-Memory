@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-05
+Updated: 2026-07-07
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -28,6 +28,14 @@ Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-pr
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
 
+## Current Weekly Priority Reminder
+
+During Life Logistics boot, morning sync, or weekly review, remind Rob:
+
+Current approved focus is Finance plus Main Assistant first.
+
+Engineering remains active as the background architecture/reliability track.
+
 ## Consolidated / Dormant Departments
 
 - Work Search is consolidated into Main Assistant for current lightweight logistics and reminders.
@@ -40,19 +48,24 @@ Preserve project history. Do not delete department files.
 ## Current Architecture Standards
 
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
-- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md`
 - Advisory boards: `coordination/boards/`
+- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`
 - Pending Advisory Boards: `coordination/PENDING_ADVISORY_BOARDS.md`
 - Department Notebooks: `coordination/DEPARTMENT_NOTEBOOKS.md`
 - Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
+- Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
 - Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
 
 ## Advisory Rule
 
 Advisories live on the source department's board.
 
-The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+The target department is named inside the advisory and routed through the Advisory Index.
+
+The Advisory Index is the sole active routing dashboard. It should show open advisory ID, source board path, and target department.
+
+Department Event Inbox is frozen as historical and should not be updated for normal advisory routing unless Rob explicitly reactivates it.
 
 Template language uses `Posted Board` and `Target Department` rather than ambiguous `Target Board` language.
 
@@ -80,7 +93,8 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 ## Current Major Open Loops For Life Logistics
 
-- Keep advisory and event-inbox hygiene clean.
+- Keep simplified advisory routing clean under the source-board plus Advisory Index model.
+- Remind Rob during Life Logistics boot that this week's approved priority is Finance plus Main Assistant first, with Engineering reliability as the background architecture track.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
@@ -90,11 +104,15 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
 2. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
-3. Use active specialist chats for Finance, Business, Engineering, Wellness, and project-sized work.
-4. Use Role Drift Check when work appears to belong elsewhere.
-5. Route discretionary spending decisions to Chief of Finance Penny when possible.
-6. Prefer small verified GitHub edits.
+3. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits workflows when Rob is ready.
+4. Keep Engineering reliability work visible as background architecture.
+5. Use active specialist chats for Business, Engineering, Wellness, and project-sized work.
+6. Use Role Drift Check when work appears to belong elsewhere.
+7. Route discretionary spending decisions to Chief of Finance Penny when possible.
+8. Prefer small verified GitHub edits.
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index plus Department Event Inbox for advisory sync state. Route decisions through registered Decision Rules when they apply.
+This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
+
+Boot reminder: tell Rob the approved weekly priority is Finance plus Main Assistant first; Engineering reliability remains the background architecture track.

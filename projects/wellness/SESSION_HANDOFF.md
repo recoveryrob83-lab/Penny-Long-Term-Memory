@@ -1,6 +1,6 @@
 # Chief Wellness HQ Session Handoff
 
-Updated: 2026-07-05
+Updated: 2026-07-06
 Project: Chief Wellness HQ / Chief Wellness Penny
 Purpose: Project-specific handoff for Wellness HQ chats.
 
@@ -10,8 +10,9 @@ Purpose: Project-specific handoff for Wellness HQ chats.
 - Primary Chat: Chief Wellness HQ / Wellness HQ
 - Current Phase: Active / Department Setup Complete
 - Primary Systems: GitHub, Drive folder Wellness Admin, Todoist, Calendar, Gmail as needed, Contacts as needed, RPR/user-mediated files
-- Coordination Systems: `coordination/boards/wellness.md`, `coordination/ADVISORY_INDEX.md`, `coordination/DEPARTMENT_EVENT_INBOX.md`
-- Standards To Know: `coordination/DECISION_RULES_REGISTRY.md`, `coordination/PENDING_ADVISORY_BOARDS.md`, `coordination/DEPARTMENT_NOTEBOOKS.md`, `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
+- Advisory Systems: `coordination/boards/wellness.md`, `coordination/ADVISORY_INDEX.md`
+- Frozen / Historical: `coordination/DEPARTMENT_EVENT_INBOX.md`
+- Standards To Know: `coordination/DECISION_RULES_REGISTRY.md`, `coordination/PENDING_ADVISORY_BOARDS.md`, `coordination/DEPARTMENT_NOTEBOOKS.md`, `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`, `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
 - Sensitivity Level: Moderate
 - GitHub Rule: Keep GitHub abstract.
 
@@ -31,14 +32,16 @@ When Rob opens or refreshes Chief Wellness HQ:
 2. Read this project handoff.
 3. Read `projects/wellness/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/wellness/README.md`, `status.md`, and `open_loops.md` if present.
-5. Read `coordination/ADVISORY_INDEX.md` and `coordination/DEPARTMENT_EVENT_INBOX.md` when Rob asks for sync, when Wellness creates or consumes an advisory, or when current work requires synchronization status.
-6. Read `coordination/DECISION_RULES_REGISTRY.md` when a wellness-related decision may match a registered rule.
-7. Use Todoist, Calendar, Drive, Gmail, Contacts, or RPR only as needed for the specific wellness task.
-8. Keep GitHub abstract.
-9. Route daily one-off execution to Main Assistant when appropriate.
-10. Route cost, affordability, benefits, bills, or paperwork overlap to Chief of Finance Penny when appropriate.
-11. Route recovery-specific matters to Recovery Logistics if that department is active, or Main Assistant for lightweight daily logistics while Recovery Logistics is dormant.
-12. Route cross-project housekeeping to Life Logistics HQ.
+5. Read `coordination/ADVISORY_INDEX.md` when Rob asks for sync, when Wellness creates or consumes an advisory, or when current work requires advisory status.
+6. Read a specific source department board only when the Advisory Index points to a relevant open advisory or Rob names the board/advisory.
+7. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing unless Rob explicitly reactivates it.
+8. Read `coordination/DECISION_RULES_REGISTRY.md` when a wellness-related decision may match a registered rule.
+9. Use Todoist, Calendar, Drive, Gmail, Contacts, or RPR only as needed for the specific wellness task.
+10. Keep GitHub abstract.
+11. Route daily one-off execution to Main Assistant when appropriate.
+12. Route cost, affordability, benefits, bills, or paperwork overlap to Chief of Finance Penny when appropriate.
+13. Route recovery-specific matters to Recovery Logistics if that department is active, or Main Assistant for lightweight daily logistics while Recovery Logistics is dormant.
+14. Route cross-project housekeeping to Life Logistics HQ.
 
 ## Current Project Status
 
@@ -80,24 +83,28 @@ Current active central rule known to Wellness HQ:
 
 Wellness HQ does not currently own a department decision-rule file. Create `projects/wellness/DECISION_RULES.md` only when a recurring wellness decision procedure becomes useful.
 
-## Advisory / Event Procedure
+## Advisory Procedure
 
 When Chief Wellness HQ creates an advisory for another department:
 
 1. Create or update the advisory on `coordination/boards/wellness.md`.
-2. Update `coordination/ADVISORY_INDEX.md` as the central dashboard.
-3. Create or update the matching entry in `coordination/DEPARTMENT_EVENT_INBOX.md` so synchronization state is tracked.
+2. Update `coordination/ADVISORY_INDEX.md` with the advisory ID, status, board path, and target department.
+3. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing unless Rob explicitly reactivates it.
 4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
 
-The Department Event Inbox is the system synchronization register. Todoist is Rob's personal task system.
-
-Formal advisory details live on the source department board. Target departments are named inside the advisory and routed through the Advisory Index and Department Event Inbox.
+Formal advisory details live on the source department board. Target departments are named inside the advisory and routed through the Advisory Index.
 
 ## Optional Local Capture
 
 - Pending Advisory Boards are local staging notebooks. Create `projects/wellness/PENDING_ADVISORIES.md` only when useful.
 - Department Notebooks are optional idea-capture files. Create `projects/wellness/NOTEBOOK.md` only when useful.
-- Pending items and notebook items are not routed events and should not update the Advisory Index, Department Event Inbox, or Todoist unless promoted intentionally.
+- Pending items and notebook items are not routed events and should not update the Advisory Index, Department Event Inbox, Todoist, or other department boards unless promoted intentionally.
+
+## Connector Reliability Pattern
+
+Use explicit connector invocation when practical. Prefer small, localized, verified writes. If a write safety trigger occurs, stop and wait before retrying, and do not hammer the same blocked operation.
+
+For Drive artifacts with sensitive-field wording or private/medical/benefits-style structure, consider RPR or another approved fallback workflow rather than direct Drive editing.
 
 ## Completed Work
 
@@ -106,7 +113,8 @@ Formal advisory details live on the source department board. Target departments 
 - 2026-07-03: Added Wellness setup to Life OS routing and project map where needed.
 - 2026-07-03: Acknowledged advisory ADV-20260703-002 and updated references to Wellness Admin.
 - 2026-07-03: Added Wellness advisory board and updated Wellness documentation for the Department Event Inbox advisory workflow.
-- 2026-07-05: Morning sync consumed current advisory/event state; no open advisories remain. Wellness handoff updated for Decision Rules, Role Drift Check, source-board advisory routing, optional pending boards, optional notebooks, and publication/source-of-truth standards.
+- 2026-07-05: Morning sync consumed current advisory/event state; no open advisories remained. Wellness handoff updated for Decision Rules, Role Drift Check, source-board advisory routing, optional pending boards, optional notebooks, and publication/source-of-truth standards.
+- 2026-07-06: Full boot and sync consumed the simplified advisory routing architecture; Wellness handoff updated so Advisory Index is the sole active advisory routing dashboard and Department Event Inbox is historical/frozen unless Rob reactivates it.
 
 ## Active Open Loops
 
@@ -114,7 +122,7 @@ Formal advisory details live on the source department board. Target departments 
 - Clarify first wellness execution target when ready.
 - Keep appointment-scheduling execution in Main Assistant unless it becomes a larger Wellness HQ workflow.
 - Coordinate with Chief of Finance Penny for cost, affordability, benefits, bills, or paperwork overlap if needed.
-- Use advisory board + Advisory Index + Department Event Inbox for future cross-department advisories.
+- Use Wellness advisory board + Advisory Index for future cross-department advisories.
 - Use Role Drift Check for out-of-domain work.
 - Use Decision Rules Registry when a decision may match a registered rule.
 
@@ -136,7 +144,8 @@ Formal advisory details live on the source department board. Target departments 
 - Gmail: communication evidence when needed.
 - Contacts: lookup when needed.
 - RPR/user-mediated files: reliable path for structured records.
-- Department Event Inbox: department synchronization/read/ingestion register.
+- Advisory Index: sole active routing dashboard for formal advisories.
+- Department Event Inbox: frozen historical sync/read/ingestion register unless Rob explicitly reactivates it.
 
 ## Connector / Safety Notes
 
@@ -159,7 +168,8 @@ Operational details belong in the proper working system.
 - Chief of Finance Penny handles cost, affordability, benefits, bills, and paperwork overlap.
 - Life Logistics HQ keeps the cross-project map tidy.
 - Wellness Admin is the working Drive folder name.
-- Chief Wellness HQ uses the advisory board, Advisory Index, and Department Event Inbox for future cross-department advisories.
+- Chief Wellness HQ uses the Wellness advisory board and Advisory Index for future cross-department advisories.
+- Department Event Inbox is historical/frozen for Wellness unless Rob explicitly reactivates it.
 - Chief Wellness HQ has ingested the Decision Rules Registry and Role Drift Check architecture.
 - Chief Wellness HQ should not create local pending boards, notebooks, or decision-rule files until useful.
 
@@ -172,4 +182,4 @@ Operational details belong in the proper working system.
 
 ## Notes for Next Penny
 
-This chat is Chief Wellness HQ when booted directly. It should not absorb Main Assistant, Finance, Recovery, or Life Logistics work. It should coordinate wellness in a practical way, keep GitHub abstract, use Role Drift Check for out-of-domain work, use Decision Rules Registry when a registered decision rule applies, and use the Department Event Inbox for department synchronization state when creating or consuming advisories.
+This chat is Chief Wellness HQ when booted directly. It should not absorb Main Assistant, Finance, Recovery, or Life Logistics work. It should coordinate wellness in a practical way, keep GitHub abstract, use Role Drift Check for out-of-domain work, use Decision Rules Registry when a registered decision rule applies, use the Advisory Index as the sole active routing dashboard, and treat Department Event Inbox as historical/frozen unless Rob explicitly reactivates it.
