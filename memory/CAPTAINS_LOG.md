@@ -14,6 +14,25 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-06 — Advisory Routing Simplified
+
+### Summary
+
+Consumed ADV-20260706-018 from Engineering and simplified the Life OS advisory routing architecture.
+
+### Completed Work
+
+- Promoted `coordination/ADVISORY_INDEX.md` to the sole active advisory routing dashboard.
+- Kept source department boards under `coordination/boards/` as canonical advisory text.
+- Froze `coordination/DEPARTMENT_EVENT_INBOX.md` as historical read/ingestion record only.
+- Updated Startup Boot, Operating Rules, Coordination README, Advisory Template, Session Handoff, Life Logistics handoff, Open Loops, Engineering board, Advisory Index, and Department Event Inbox.
+
+### Decision / Lesson
+
+Normal advisory routing now requires two writes only: source board plus Advisory Index.
+
+This reduces connector write load, stale routing risk, safety-trigger exposure, and scheduled-worker complexity.
+
 ## 2026-07-06 — Nightly Sync and Connector Pattern Adoption
 
 ### Summary
@@ -63,29 +82,5 @@ Ran Life Logistics nightly GitHub sync after advisory routing cleanup, notebook-
 ### Decision / Lesson
 
 Use notebook leaf files for durable idea capture when a hub would become too large, but maintain a `notebook/README.md` index whenever leaf notes exist. Scheduled workers should read the notebook index before leaf notes when notebook review is requested.
-
-## 2026-07-05 — Morning Boot and Sync
-
-### Summary
-
-Ran Life Logistics morning GitHub boot and sync.
-
-### Findings
-
-- Boot files loaded successfully.
-- Active Project Map remains the authoritative current project map after department consolidation.
-- `memory/05_OPEN_LOOPS.md` is stale relative to Active Projects because earlier connector writes were blocked.
-- Engineering consumed ADV-20260704-012 and posted ADV-20260704-013.
-- Life Logistics consumed ADV-20260704-013 and tightened advisory posting language.
-
-### Completed Work
-
-- Updated `coordination/README.md`.
-- Updated `coordination/template.md`.
-- Closed ADV-20260704-013 on Engineering board, Advisory Index, and Department Event Inbox.
-
-### Decision / Lesson
-
-Advisories live on the source department's board. The target department is named inside the advisory and routed through the Advisory Index and Department Event Inbox. Template language now uses Posted Board and Target Department rather than ambiguous Target Board wording.
 
 (Older detailed entries are retained in repository history.)
