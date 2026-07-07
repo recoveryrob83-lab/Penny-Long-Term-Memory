@@ -38,6 +38,7 @@ Preserve project history. Do not delete department files.
 - Pending Advisory Boards standard: `coordination/PENDING_ADVISORY_BOARDS.md`.
 - Department Notebooks standard: `coordination/DEPARTMENT_NOTEBOOKS.md`.
 - Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`.
+- Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`.
 - Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
 
 ## Current Advisory Rule
@@ -68,13 +69,20 @@ Accepted connector safety rule:
 
 > Prefer small, localized, verified connector writes over large, broad, unverified rewrites. If a connector write is blocked, stop, classify the failure, simplify the operation, and resume only with a smaller or safer plan.
 
+Additional connector reliability pattern:
+
+- Use explicit connector invocation when practical.
+- Use small verified writes.
+- Stop and wait after safety-trigger blocks.
+- Use Gemini only as an optional Drive artifact-generation fallback or companion when direct Drive writes are risky.
+
 ## Current Open Advisory State
 
-As of the 2026-07-06 morning read-only boot, the Advisory Index shows no open advisories and the Department Event Inbox shows no current open or pending events.
+As of the 2026-07-06 nightly sync, ADV-20260706-018 is the only open advisory. It asks Life Logistics to evaluate whether the Department Event Inbox should remain an active routing file or whether the Advisory Index should become the sole active routing dashboard.
 
 ## Best Next Actions
 
-- For Life Logistics: keep advisory/event hygiene clean and avoid broad hub-file rewrites when smaller edits are safer.
+- For Life Logistics: evaluate ADV-20260706-018 and decide whether to simplify advisory routing.
 - For Engineering: continue connector safety-trigger rule design inside Reliable Connector Execution Layer.
 - For Business: continue positioning, unit economics, business-model scoring, customer persona/use-case definition, and validation packet work.
 - For Main Assistant: absorb lightweight daily logistics from consolidated departments.
