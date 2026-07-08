@@ -1,6 +1,6 @@
 # Open Loops
 
-Updated: 2026-07-07
+Updated: 2026-07-08
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Priority Open Loops
@@ -10,7 +10,7 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support VA Business pricing/income/expense/tax questions when concrete.
 - Chief Business HQ: guide VA Business parent strategy, positioning, offers, customer discovery, marketplace strategy, and business model.
 - Virtual Assistant Business: build marketplace-ready positioning, initial offers, Upwork profile, proposal templates, portfolio/sample packet, and basic client operating system.
-- Chief Engineering Penny: continue Reliable Connector Execution Layer and ingest ADV-20260707-025 for a repeatable VA delivery playbook.
+- Chief Engineering Penny: continue Reliable Connector Execution Layer and delivery-playbook architecture for bite-sized local service office cleanup offers.
 - Chief Wellness HQ: begin wellness operations when useful.
 - Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
 - Startup Boot: keep Penny boot reliable.
@@ -24,14 +24,16 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Waiting On
 
-- Chief Engineering Penny: consume and implement ADV-20260707-025 from Business, targeted to Engineering, for the local-service-office cleanup delivery playbook.
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
 - Virtual Assistant Business: Chief Business HQ / VA worker strategy sessions for marketplace-ready positioning, first offers, and repeatable delivery method.
+- Engineering delivery architecture: Engineering has acknowledged ADV-20260707-025 and should continue playbook design for one-problem local service office cleanup sprints.
 
 ## Done / Recently Closed
 
+- 2026-07-08: Refreshed global and Life Logistics advisory state after Engineering acknowledged ADV-20260707-025.
+- 2026-07-07: ADV-20260707-025 acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
 - 2026-07-07: ADV-20260707-024 implemented; Business HQ parent state refreshed for VA Business priority.
 - 2026-07-07: ADV-20260707-023 implemented; Finance state refreshed for Virtual Assistant income-stream context.
 - 2026-07-07: ADV-20260707-021 implemented; Virtual Assistant Business scaffold created as a Business HQ sub-project.
