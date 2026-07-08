@@ -35,3 +35,4 @@ Example:
 |---|---|---:|---|---|
 | NOTE-20260705-001 | Scheduled Task Connector Behavior | 2026-07-05 | Scheduled tasks, connector invocation, cron-worker model, execution context | Active observation |
 | NOTE-20260707-002 | VA Business Delivery Architecture Watchlist | 2026-07-07 | VA Business, local service office cleanup, service engineering, delivery playbook, reusable assets | Active observation / idea capture |
+| NOTE-20260707-003 | Prompt Library / Command Launcher | 2026-07-07 | Standard prompts, command language, Python launcher, manual-to-automation bridge | Active idea capture |
