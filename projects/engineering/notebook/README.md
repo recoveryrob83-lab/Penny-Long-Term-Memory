@@ -1,6 +1,6 @@
 # Engineering Notebook Leaf Index
 
-Updated: 2026-07-05
+Updated: 2026-07-07
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Discoverable index for Engineering notebook leaf notes.
 
@@ -34,3 +34,4 @@ Example:
 | Note ID | Title | Date | Topic | Status |
 |---|---|---:|---|---|
 | NOTE-20260705-001 | Scheduled Task Connector Behavior | 2026-07-05 | Scheduled tasks, connector invocation, cron-worker model, execution context | Active observation |
+| NOTE-20260707-002 | VA Business Delivery Architecture Watchlist | 2026-07-07 | VA Business, local service office cleanup, service engineering, delivery playbook, reusable assets | Active observation / idea capture |
