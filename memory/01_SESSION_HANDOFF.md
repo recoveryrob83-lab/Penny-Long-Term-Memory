@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-06
+Updated: 2026-07-07
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -8,12 +8,17 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 Life OS is operational with GitHub as durable memory map, Drive as working records cabinet, Todoist as Rob-facing action queue, Calendar as timed commitments, Gmail as communication evidence, project chats as knowledge producers, and Life Logistics HQ as cross-project curator.
 
+The immediate Life OS business priority is now the Virtual Assistant Business: a revenue-first Business HQ sub-project focused on systems-first virtual assistance, AI-enabled operations support, workflow organization, documentation, process cleanup, and local-service-business office cleanup offers.
+
+PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform/productization path and may be informed by VA Business service work and market learning.
+
 ## Current Active Core
 
 - Life Logistics HQ
 - Main Assistant / Daily Operations
 - Chief of Finance Penny
 - Chief Business HQ
+- Virtual Assistant Business worker project
 - Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
@@ -65,9 +70,13 @@ Active first rule:
 
 - DR-FIN-20260704-001 — Discretionary Purchase Pause Rule, owned by Chief of Finance Penny.
 
-## Current Engineering Reliability Track
+## Current Engineering Reliability / Delivery Track
 
 Chief Engineering Penny owns Reliable Connector Execution Layer work.
+
+Engineering now also has an open advisory from Business:
+
+- ADV-20260707-025 — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
 
 Accepted connector safety rule:
 
@@ -82,16 +91,24 @@ Additional connector reliability pattern:
 
 ## Current Open Advisory State
 
-As of the 2026-07-06 advisory routing simplification, there are no open advisories.
+Current open advisory:
 
-ADV-20260706-018 was implemented by freezing Department Event Inbox as an active routing file and promoting Advisory Index to the sole active routing dashboard.
+- ADV-20260707-025 — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
+
+Recently implemented:
+
+- ADV-20260707-024 — Business HQ parent-state refreshed for VA Business priority.
+- ADV-20260707-023 — Finance state refreshed for Virtual Assistant income stream.
+- ADV-20260707-021 — Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 ## Best Next Actions
 
+- For Virtual Assistant Business: develop marketplace-ready positioning, offers, Upwork profile, proposal templates, sample packet, and repeatable delivery method.
+- For Business: guide VA Business parent strategy and keep PennyOS paused/parked rather than current execution priority.
+- For Engineering: consume ADV-20260707-025 and design the bite-sized office cleanup delivery playbook.
+- For Finance: support VA Business pricing/income/expense/tax/budget work when concrete inputs exist.
+- For Main Assistant: support daily execution and lightweight logistics around the VA Business as routed.
 - For Life Logistics: keep advisory routing clean under the simplified source-board plus Advisory Index model.
-- For Engineering: continue connector safety-trigger rule design inside Reliable Connector Execution Layer.
-- For Business: continue positioning, unit economics, business-model scoring, customer persona/use-case definition, and validation packet work.
-- For Main Assistant: absorb lightweight daily logistics from consolidated departments.
 
 ## Guiding Principle
 
