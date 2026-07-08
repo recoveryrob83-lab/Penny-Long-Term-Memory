@@ -1,6 +1,6 @@
 # Captain's Log
 
-Updated: 2026-07-07
+Updated: 2026-07-08
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Short operational journal for major Life OS work sessions, discoveries, decisions, and completed batches.
 
@@ -13,6 +13,31 @@ Use this file for concise, dated entries future Penny should know about.
 Keep sensitive details out of this file. Detailed records belong in Drive, Gmail, Calendar, Todoist, or project-specific files.
 
 ---
+
+## 2026-07-08 — Morning Boot Sync: Advisory State Correction
+
+### Summary
+
+Ran Life Logistics morning GitHub boot and sync.
+
+### Findings
+
+- Advisory Index shows no open advisories.
+- ADV-20260707-025 is now acknowledged / ingested by Engineering.
+- Business board confirms ADV-20260707-025 was acknowledged by Engineering.
+- Scheduled-task logs show Engineering HQ Daily Sync remains the active pilot; no new logged run or issue after 2026-07-05 was present.
+- Global and Life Logistics handoffs still contained stale wording implying ADV-20260707-025 was open.
+
+### Completed Work
+
+- Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` to show no current open advisories and note that Engineering acknowledged ADV-20260707-025.
+- Updated `memory/01_SESSION_HANDOFF.md` to show no current open advisories and reflect Engineering's acknowledgement.
+- Updated `memory/05_OPEN_LOOPS.md` to move Engineering from advisory ingestion to continued delivery-playbook architecture work.
+- Updated `memory/04_ACTIVE_PROJECTS.md` so Engineering's next action reflects continued VA delivery-playbook architecture rather than advisory ingestion.
+
+### Next Best Action
+
+Proceed with VA Business work. Engineering should continue developing the delivery playbook for bite-sized local service office cleanup offers, while Business and the VA worker project continue positioning, offers, and marketplace materials.
 
 ## 2026-07-07 — Nightly Sync: VA Business Pivot and Engineering Delivery Advisory
 
