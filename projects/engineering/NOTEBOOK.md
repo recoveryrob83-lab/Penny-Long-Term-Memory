@@ -1,6 +1,6 @@
 # Engineering Notebook
 
-Updated: 2026-07-05
+Updated: 2026-07-07
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Durable idea notebook for Engineering insights, architecture reflections, lessons learned, and useful discussion fragments.
 
@@ -27,3 +27,4 @@ Items may later be promoted intentionally into pending advisories, formal adviso
 | Note ID | Title | Path |
 |---|---|---|
 | NOTE-20260705-001 | Scheduled Task Connector Behavior | `projects/engineering/notebook/NOTE-20260705-001-scheduled-task-connector-behavior.md` |
+| NOTE-20260707-002 | VA Business Delivery Architecture Watchlist | `projects/engineering/notebook/NOTE-20260707-002-va-business-delivery-architecture-watchlist.md` |
