@@ -33,6 +33,15 @@ Position toward:
 - Client onboarding and repeatable workflow design.
 - Practical Life OS-style operating models adapted for small clients.
 
+## Notebook
+
+VA Business has a local notebook hub and leaf index for durable idea capture:
+
+- `projects/virtual-assistant-business/NOTEBOOK.md`
+- `projects/virtual-assistant-business/notebook/README.md`
+
+Notebook notes are not advisories, tasks, open loops, or operational source-of-truth files. Read the notebook only when Rob asks, when doing deliberate project reflection, or when a notebook item may inform current VA Business work.
+
 ## Current Workstreams
 
 1. Define market differentiation.
