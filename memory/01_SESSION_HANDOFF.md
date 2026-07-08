@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-07
+Updated: 2026-07-08
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -74,7 +74,7 @@ Active first rule:
 
 Chief Engineering Penny owns Reliable Connector Execution Layer work.
 
-Engineering now also has an open advisory from Business:
+Engineering has acknowledged the Business advisory for VA Business delivery architecture:
 
 - ADV-20260707-025 — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
 
@@ -91,12 +91,11 @@ Additional connector reliability pattern:
 
 ## Current Open Advisory State
 
-Current open advisory:
+No open advisories are currently listed in the Advisory Index.
 
-- ADV-20260707-025 — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
+Recently acknowledged / implemented:
 
-Recently implemented:
-
+- ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
 - ADV-20260707-024 — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Finance state refreshed for Virtual Assistant income stream.
 - ADV-20260707-021 — Virtual Assistant Business scaffold created as Business HQ sub-project.
@@ -105,7 +104,7 @@ Recently implemented:
 
 - For Virtual Assistant Business: develop marketplace-ready positioning, offers, Upwork profile, proposal templates, sample packet, and repeatable delivery method.
 - For Business: guide VA Business parent strategy and keep PennyOS paused/parked rather than current execution priority.
-- For Engineering: consume ADV-20260707-025 and design the bite-sized office cleanup delivery playbook.
+- For Engineering: continue delivery-playbook architecture for bite-sized local service office cleanup offers.
 - For Finance: support VA Business pricing/income/expense/tax/budget work when concrete inputs exist.
 - For Main Assistant: support daily execution and lightweight logistics around the VA Business as routed.
 - For Life Logistics: keep advisory routing clean under the simplified source-board plus Advisory Index model.
