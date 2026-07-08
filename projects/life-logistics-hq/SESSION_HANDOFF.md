@@ -24,17 +24,20 @@ Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-pr
 - Main Assistant / Daily Operations
 - Chief of Finance Penny
 - Chief Business HQ
+- Virtual Assistant Business worker project
 - Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
 
-## Current Weekly Priority Reminder
+## Current Priority Reminder
 
-During Life Logistics boot, morning sync, or weekly review, remind Rob:
+During Life Logistics boot, morning sync, nightly sync, or weekly review, remind Rob:
 
-Current approved focus is Finance plus Main Assistant first.
+Current active business priority is the revenue-first Virtual Assistant Business.
 
-Engineering remains active as the background architecture/reliability track.
+Main Assistant supports daily execution. Chief Business HQ owns parent strategy. Chief of Finance Penny supports pricing/income/expense/tax/budget decisions when concrete. Chief Engineering Penny owns technical architecture and repeatable delivery playbooks when needed.
+
+PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term productization path.
 
 ## Consolidated / Dormant Departments
 
@@ -69,6 +72,14 @@ Department Event Inbox is frozen as historical and should not be updated for nor
 
 Template language uses `Posted Board` and `Target Department` rather than ambiguous `Target Board` language.
 
+## Current Open Advisory State
+
+Open advisory:
+
+- ADV-20260707-025 — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
+
+Life Logistics should not implement Engineering's advisory unless Rob explicitly routes implementation here. Life Logistics may track that Engineering needs to consume it.
+
 ## Role Drift Check
 
 When Rob asks Life Logistics to handle work that appears outside Life Logistics' assigned domain, pause gently before continuing and ask whether the discussion belongs in this HQ.
@@ -94,7 +105,8 @@ Use RPR when reliable structured-file editing matters more than connector automa
 ## Current Major Open Loops For Life Logistics
 
 - Keep simplified advisory routing clean under the source-board plus Advisory Index model.
-- Remind Rob during Life Logistics boot that this week's approved priority is Finance plus Main Assistant first, with Engineering reliability as the background architecture track.
+- Keep VA Business and parent Business HQ routing clear.
+- Track that Engineering must consume ADV-20260707-025.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
@@ -103,16 +115,18 @@ Use RPR when reliable structured-file editing matters more than connector automa
 ## Immediate Next Actions
 
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
-2. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
-3. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits workflows when Rob is ready.
-4. Keep Engineering reliability work visible as background architecture.
-5. Use active specialist chats for Business, Engineering, Wellness, and project-sized work.
-6. Use Role Drift Check when work appears to belong elsewhere.
-7. Route discretionary spending decisions to Chief of Finance Penny when possible.
-8. Prefer small verified GitHub edits.
+2. Route VA Business parent strategy to Chief Business HQ.
+3. Route VA Business worker execution to the Virtual Assistant Business worker project.
+4. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
+5. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits and VA Business money workflows when concrete.
+6. Keep Engineering reliability and VA delivery-playbook work visible as background architecture.
+7. Use active specialist chats for Business, Engineering, Wellness, and project-sized work.
+8. Use Role Drift Check when work appears to belong elsewhere.
+9. Route discretionary spending decisions to Chief of Finance Penny when possible.
+10. Prefer small verified GitHub edits.
 
 ## Notes for Next Penny
 
 This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
 
-Boot reminder: tell Rob the approved weekly priority is Finance plus Main Assistant first; Engineering reliability remains the background architecture track.
+Boot reminder: tell Rob the active business priority is VA Business. PennyOS is paused, not abandoned. Engineering has an open VA delivery-playbook advisory to consume.
