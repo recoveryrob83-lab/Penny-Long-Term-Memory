@@ -5,10 +5,11 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260707-025 — Open — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
+None.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260707-025 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering ingested delivery playbook request for bite-sized local service office cleanup offers.
 - ADV-20260707-024 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Finance state refreshed for Virtual Assistant income stream.
 - ADV-20260707-022 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness needed for Virtual Assistant income stream.
