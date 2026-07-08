@@ -14,6 +14,39 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-07 — Nightly Sync: VA Business Pivot and Engineering Delivery Advisory
+
+### Summary
+
+Ran Life Logistics nightly GitHub sync after the Virtual Assistant Business worker project was scaffolded and the business direction shifted to revenue-first VA / operations-support work.
+
+### Findings
+
+- Life OS remains operational with GitHub as durable memory map and Advisory Index as the sole active advisory dashboard.
+- Virtual Assistant Business is now the immediate active business priority.
+- PennyOS / Penny Platform is paused, not abandoned.
+- Business HQ is now the parent strategy department for VA Business.
+- Virtual Assistant Business is the worker sub-project for execution continuity.
+- Finance has ingested the VA Business income-stream context.
+- One open advisory remains: ADV-20260707-025, posted by Business and targeted to Chief Engineering Penny, requesting an Engineering delivery playbook for bite-sized local service office cleanup offers.
+- Scheduled-task logs show Engineering HQ Daily Sync remains the only active pilot; no new run or issue entries after 2026-07-05 were recorded.
+
+### Completed Work
+
+- Updated `memory/04_ACTIVE_PROJECTS.md` to reflect VA Business as the current active business priority and Business HQ as parent strategy.
+- Updated `memory/05_OPEN_LOOPS.md` to include VA Business execution loops, Finance support, and Engineering's open ADV-20260707-025.
+- Updated `memory/01_SESSION_HANDOFF.md` to reflect the VA Business pivot, Finance support, Engineering delivery-playbook advisory, and PennyOS paused status.
+- Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` with current priority reminders and routing notes.
+- Confirmed advisory state: ADV-20260707-023 and ADV-20260707-024 were previously implemented; ADV-20260707-025 remains open for Engineering.
+
+### Decision / Lesson
+
+The practical Life OS business lane is now service-first: build repeatable, bounded VA / operations-support delivery before building software product infrastructure. Business can shape and sell the promise, but Engineering needs to make the promise operational before Rob overcommits.
+
+### Next Best Action
+
+Chief Engineering Penny should consume ADV-20260707-025 and design a repeatable delivery playbook for one-problem local service office cleanup sprints.
+
 ## 2026-07-07 — Delayed End-of-Week Review
 
 ### Summary
