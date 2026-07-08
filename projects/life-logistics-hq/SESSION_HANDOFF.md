@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-07
+Updated: 2026-07-08
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -74,11 +74,14 @@ Template language uses `Posted Board` and `Target Department` rather than ambigu
 
 ## Current Open Advisory State
 
-Open advisory:
+No open advisories are currently listed in the Advisory Index.
 
-- ADV-20260707-025 — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
+Recently acknowledged / implemented:
 
-Life Logistics should not implement Engineering's advisory unless Rob explicitly routes implementation here. Life Logistics may track that Engineering needs to consume it.
+- ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
+- ADV-20260707-024 — Implemented; Business HQ parent-state refreshed for VA Business priority.
+- ADV-20260707-023 — Implemented; Finance state refreshed for Virtual Assistant income stream.
+- ADV-20260707-021 — Implemented; Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 ## Role Drift Check
 
@@ -106,7 +109,6 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 - Keep simplified advisory routing clean under the source-board plus Advisory Index model.
 - Keep VA Business and parent Business HQ routing clear.
-- Track that Engineering must consume ADV-20260707-025.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
@@ -129,4 +131,4 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
 
-Boot reminder: tell Rob the active business priority is VA Business. PennyOS is paused, not abandoned. Engineering has an open VA delivery-playbook advisory to consume.
+Boot reminder: tell Rob the active business priority is VA Business. PennyOS is paused, not abandoned. Engineering has acknowledged the VA delivery-playbook advisory.
