@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260707-025 — Open — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
 
 ## Acknowledged / Implemented Advisories
 
