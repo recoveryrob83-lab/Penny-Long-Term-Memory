@@ -33,4 +33,4 @@ Example:
 
 | Note ID | Title | Date | Topic | Status |
 |---|---|---:|---|---|
-| _None yet_ | _No VA Business notebook leaves have been created yet._ | 2026-07-07 | Notebook scaffold | Empty index |
+| NOTE-20260707-001 | HVAC Office Cleanup Beachhead | 2026-07-07 | Market positioning, offer direction, delivery dependency | Active working note |
