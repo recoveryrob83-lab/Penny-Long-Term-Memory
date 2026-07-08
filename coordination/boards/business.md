@@ -5,15 +5,20 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260707-025 — Engineering delivery playbook needed for bite-sized local service office cleanup offers
 
 - Date: 2026-07-07
 - From: Chief Business HQ / Virtual Assistant Business worker chat
 - To: Chief Engineering Penny
 - Priority: High
-- Status: Open / Unacknowledged
+- Status: Acknowledged / Ingested by Engineering
 - Posted Board: `coordination/boards/business.md`
 - Target Department: Chief Engineering Penny
+- Acknowledged: 2026-07-07
 - Related Project(s): Virtual Assistant Business, local service business offers, HVAC Office Chaos Diagnostic, delivery playbook, operational systems design
 - Source Location: Virtual Assistant Business worker chat, after HVAC ideal-client research and diagnostic draft
 
@@ -111,7 +116,9 @@ Business can sell the promise, but Engineering must make the promise operational
 
 Do not build a software product yet. Build the repeatable delivery method first.
 
-## Acknowledged / Implemented Advisories
+#### Engineering Acknowledgement
+
+Engineering ingested this advisory on 2026-07-07. Initial idea capture was added to the Engineering notebook as `NOTE-20260707-002 — VA Business Delivery Architecture Watchlist`. Engineering will treat this as service-delivery architecture first, not software-product implementation.
 
 ### ADV-20260707-024 — Business HQ state maintenance needed for VA Business project
 
