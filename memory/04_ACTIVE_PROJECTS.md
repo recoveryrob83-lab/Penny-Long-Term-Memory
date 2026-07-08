@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-07
+Updated: 2026-07-08
 Purpose: High-level Life OS project map.
 
 ## Operating Rule
@@ -23,7 +23,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Chief of Finance Penny | `projects/finance-benefits/` | REF-003 | Active | Support checkbook/budget/bills/benefits plus VA Business finance when pricing or money becomes concrete |
 | Active | Chief Business HQ | `projects/business-development/` | To assign | Active / VA Business parent strategy | Guide VA Business positioning, offers, marketplace strategy, and parent business direction; keep PennyOS paused, not abandoned |
 | Active | Virtual Assistant Business | `projects/virtual-assistant-business/` | To assign | Scaffolded / Business HQ sub-project | Build marketplace-ready positioning, offers, Upwork profile, proposals, portfolio packet, and delivery operating system |
-| Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Continue connector reliability and ingest Engineering-targeted VA delivery-playbook advisory |
+| Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Continue connector reliability and VA delivery-playbook architecture for bite-sized local service office cleanup offers |
 | Active | Chief Wellness HQ | `projects/wellness/` | To assign | Active | Use for wellness routines, health-adjacent logistics, appointments, and stability supports |
 | Active | Life OS Infrastructure | `projects/life-os-infrastructure/` | REF-004 | Active / As Needed | Maintain design principles, decision rules architecture, sync architecture, and registry standards as needed |
 | Dormant / Consolidated | Work Search | `projects/job-search/` | REF-001 | Consolidated into Main Assistant | Preserve history; route current lightweight work-search logistics through Main Assistant |
