@@ -29,6 +29,15 @@ This project is a Business HQ sub-project at launch. Do not create a separate HQ
 
 Systems-first VA and operations support for busy people and small businesses who need help turning scattered work into organized workflows, documents, task systems, and repeatable processes.
 
+## Notebook
+
+Local durable idea notebook:
+
+- Hub: `projects/virtual-assistant-business/NOTEBOOK.md`
+- Leaf index: `projects/virtual-assistant-business/notebook/README.md`
+
+The notebook is for durable ideas, service observations, offer reflections, market insights, and delivery-pattern fragments. It is not an advisory board, task list, open-loop tracker, or operational source of truth.
+
 ## First Response After Sync
 
 Confirm: "I am working in the Virtual Assistant Business project, owned by Chief Business HQ. The goal is to build a revenue-first systems-first VA/operations-support business, with Life Logistics maintaining structure and Business HQ owning strategy."
