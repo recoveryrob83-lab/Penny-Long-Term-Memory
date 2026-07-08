@@ -5,12 +5,12 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Priority Open Loops
 
-- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains.
+- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with VA Business daily execution now a priority when routed.
 - Site Cleanup: continue provider option gathering when Rob wants follow-up.
-- Chief of Finance Penny: begin checkbook, budget, bills, and benefits workflows when Rob is ready.
-- Chief Business HQ: continue positioning, unit economics, validation design, and business-model scoring.
-- Virtual Assistant Business: Chief Business HQ to resume positioning, initial offers, Upwork profile, proposal templates, portfolio/sample packet, and basic client operating system.
-- Chief Engineering Penny: continue Reliable Connector Execution Layer and connector safety-trigger rule work.
+- Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support VA Business pricing/income/expense/tax questions when concrete.
+- Chief Business HQ: guide VA Business parent strategy, positioning, offers, customer discovery, marketplace strategy, and business model.
+- Virtual Assistant Business: build marketplace-ready positioning, initial offers, Upwork profile, proposal templates, portfolio/sample packet, and basic client operating system.
+- Chief Engineering Penny: continue Reliable Connector Execution Layer and ingest ADV-20260707-025 for a repeatable VA delivery playbook.
 - Chief Wellness HQ: begin wellness operations when useful.
 - Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
 - Startup Boot: keep Penny boot reliable.
@@ -24,13 +24,16 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Waiting On
 
+- Chief Engineering Penny: consume and implement ADV-20260707-025 from Business, targeted to Engineering, for the local-service-office cleanup delivery playbook.
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
-- Virtual Assistant Business: Chief Business HQ strategy session for marketplace-ready positioning and first-offer work.
+- Virtual Assistant Business: Chief Business HQ / VA worker strategy sessions for marketplace-ready positioning, first offers, and repeatable delivery method.
 
 ## Done / Recently Closed
 
+- 2026-07-07: ADV-20260707-024 implemented; Business HQ parent state refreshed for VA Business priority.
+- 2026-07-07: ADV-20260707-023 implemented; Finance state refreshed for Virtual Assistant income-stream context.
 - 2026-07-07: ADV-20260707-021 implemented; Virtual Assistant Business scaffold created as a Business HQ sub-project.
 - 2026-07-06: ADV-20260706-018 implemented; Department Event Inbox frozen as an active routing file and Advisory Index promoted to sole active routing dashboard.
 - 2026-07-06: ADV-20260706-017 consumed; Connector Reliability Operating Pattern created at `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`.
