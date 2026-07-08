@@ -28,3 +28,4 @@ Items may later be promoted intentionally into pending advisories, formal adviso
 |---|---|---|
 | NOTE-20260705-001 | Scheduled Task Connector Behavior | `projects/engineering/notebook/NOTE-20260705-001-scheduled-task-connector-behavior.md` |
 | NOTE-20260707-002 | VA Business Delivery Architecture Watchlist | `projects/engineering/notebook/NOTE-20260707-002-va-business-delivery-architecture-watchlist.md` |
+| NOTE-20260707-003 | Prompt Library | `projects/engineering/notebook/NOTE-20260707-003-prompt-library-command-launcher.md` |
