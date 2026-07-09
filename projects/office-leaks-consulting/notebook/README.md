@@ -33,7 +33,7 @@ Example:
 
 | Note ID | Title | Date | Topic | Status |
 |---|---|---:|---|---|
-| _None yet_ | _New Office Leaks notebook folder created._ | 2026-07-09 | Notebook scaffold | Empty index |
+| NOTE-20260709-001 | Friendly Free Consulting Pilots | 2026-07-09 | Pilot clients / portfolio building | Raw / unprocessed |
 
 ## Legacy Notes To Consult When Needed
 
