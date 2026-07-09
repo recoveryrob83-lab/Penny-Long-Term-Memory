@@ -6,10 +6,10 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 ## Open / Unacknowledged Advisories
 
 - ADV-20260708-027 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Sync Engineering Office Leaks architecture updates across Life OS.
-- ADV-20260708-026 — Open / Partially Acknowledged — Posted Board: `coordination/boards/business.md` — Target Departments: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ — Office Leaks operating philosophy requires cross-department review. Life Logistics HQ, Chief Engineering Penny, and Main Assistant Penny acknowledged/ingested on 2026-07-08; awaiting Chief of Finance Penny.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260708-026 — Closed / Fully Acknowledged — Posted Board: `coordination/boards/business.md` — Target Departments: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ — Office Leaks operating philosophy reviewed by all target departments.
 - ADV-20260707-025 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering ingested delivery playbook request for bite-sized local service office cleanup offers.
 - ADV-20260707-024 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Finance state refreshed for Virtual Assistant income stream.
