@@ -7,10 +7,10 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 - Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with Office Leaks / VA Business daily execution now a priority when routed.
 - Site Cleanup: continue provider option gathering when Rob wants follow-up.
-- Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support Office Leaks / VA Business pricing/income/expense/tax questions when concrete.
+- Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support Office Leaks finance through `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` when pricing, startup costs, tool costs, revenue, tax set-aside, or money become concrete.
 - Chief Business HQ: guide Office Leaks / VA Business parent strategy, positioning, offers, customer discovery, marketplace/local strategy, and business model.
-- Virtual Assistant Business / Office Leaks: build marketplace/local positioning, initial offers, lead-leak materials, proposal templates, portfolio/sample packet, and basic client operating system.
-- Chief Engineering Penny: continue Reliable Connector Execution Layer and delivery-playbook architecture for bite-sized local service office cleanup offers.
+- Virtual Assistant Business / Office Leaks: build local positioning, initial offers, lead-leak materials, proposal templates, portfolio/sample packet, and basic client operating system.
+- Chief Engineering Penny: continue Reliable Connector Execution Layer and Office Leaks delivery architecture, including the human-system delivery layer.
 - Chief Wellness HQ: begin wellness operations when useful.
 - Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
 - Startup Boot: keep Penny boot reliable.
@@ -24,17 +24,18 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Waiting On
 
-- ADV-20260708-026: Life Logistics HQ acknowledged / ingested; awaiting Chief of Finance Penny, Chief Engineering Penny, and Main Assistant Penny.
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
 - Office Leaks / Virtual Assistant Business: Chief Business HQ / VA worker strategy sessions for positioning, first offers, lead-leak materials, outreach, and repeatable delivery method.
-- Engineering delivery architecture: Engineering has acknowledged ADV-20260707-025 and should continue playbook design for one-problem local service office cleanup sprints; Engineering also needs to ingest ADV-20260708-026.
-- Finance: ingest ADV-20260708-026 and evaluate pricing/cost implications when concrete.
-- Main Assistant: ingest ADV-20260708-026 and preserve Office Leaks context for future daily execution.
+- Engineering delivery architecture: continue playbook design for one-problem local service office cleanup sprints; use `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md` as the current human-system layer reference.
+- Finance: use Office Leaks finance working records through `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` when pricing, costs, revenue, tax set-aside, or tool decisions become concrete.
 
 ## Done / Recently Closed
 
+- 2026-07-08: ADV-20260708-028 implemented; Office Leaks finance working records synced across Life OS via `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`.
+- 2026-07-08: ADV-20260708-027 implemented; Engineering Office Leaks architecture updates synced across Life OS.
+- 2026-07-08: ADV-20260708-026 closed / fully acknowledged; all target departments reviewed Office Leaks operating philosophy.
 - 2026-07-08: ADV-20260708-026 partially acknowledged; Life Logistics HQ ingested Office Leaks operating philosophy and logistics implications.
 - 2026-07-08: Refreshed global and Life Logistics advisory state after Engineering acknowledged ADV-20260707-025.
 - 2026-07-07: ADV-20260707-025 acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
