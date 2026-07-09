@@ -14,6 +14,39 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-08 — Nightly Sync: Office Leaks Philosophy Advisory
+
+### Summary
+
+Ran Life Logistics nightly GitHub boot and housekeeping after Engineering Classroom Prompt Launcher scaffolding and a new Business advisory about Office Leaks Consulting.
+
+### Findings
+
+- Life OS core boot files remain consistent: GitHub is the durable map, Drive is the working records cabinet, and Advisory Index remains the sole active advisory dashboard.
+- Active Projects and Open Loops already reflected the VA Business priority before this sweep.
+- A new multi-target advisory appeared: ADV-20260708-026, posted by Business and targeted to Finance, Engineering, Main Assistant, and Life Logistics.
+- Source note `NOTE-20260708-003 — Office Leaks Operating Philosophy` reframes the VA Business direction as Office Leaks Consulting, a trust-based systems consulting lane for small local service businesses.
+- Core philosophy: Respect the people. Fix the process. Good people deserve good systems. The tool is not the product; the habit is the product.
+- Scheduled-task logs remain unchanged: Engineering HQ Daily Sync is still the active pilot, with no newer logged run or issue after 2026-07-05.
+
+### Completed Work
+
+- Read ADV-20260708-026 and the Office Leaks operating philosophy source note.
+- Marked ADV-20260708-026 as Open / Partially Acknowledged in `coordination/ADVISORY_INDEX.md`.
+- Updated `coordination/boards/business.md` to record Life Logistics HQ acknowledgement / ingestion while leaving Finance, Engineering, and Main Assistant pending.
+- Updated `memory/01_SESSION_HANDOFF.md` with Office Leaks / VA Business context and current advisory state.
+- Updated `memory/04_ACTIVE_PROJECTS.md` to keep Office Leaks visible as an emerging candidate inside the VA Business worker project without renaming or restructuring.
+- Updated `memory/05_OPEN_LOOPS.md` with Office Leaks logistics readiness and remaining target-department ingestion loops.
+- Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` with Office Leaks logistics context, role boundaries, and advisory status.
+
+### Decision / Lesson
+
+Office Leaks should be kept visible as an active income-stream candidate with possible near-term real-world logistics, but the GitHub project should not be renamed or restructured until Rob explicitly authorizes it.
+
+### Next Best Action
+
+Finance, Engineering, and Main Assistant should ingest ADV-20260708-026. Life Logistics should be ready to support scheduling, transportation, follow-up reminders, outreach loops, and calendar/task conversion once Rob authorizes real-world Office Leaks activity.
+
 ## 2026-07-08 — Morning Boot Sync: Advisory State Correction
 
 ### Summary
