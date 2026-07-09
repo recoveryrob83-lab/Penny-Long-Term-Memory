@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-06
+Updated: 2026-07-09
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Startup procedure for a fresh Penny chat window.
 
@@ -83,6 +83,8 @@ Project routing map:
 - Cleanup Project HQ / Site Cleanup: `projects/cleanup/SESSION_HANDOFF.md`
 - Chief of Finance Penny / Finance Benefits HQ: `projects/finance-benefits/SESSION_HANDOFF.md`
 - Chief Business HQ / Business Development: `projects/business-development/SESSION_HANDOFF.md`
+- Office Leaks Consulting HQ: `projects/office-leaks-consulting/SESSION_HANDOFF.md`
+- Legacy Virtual Assistant Business: `projects/virtual-assistant-business/SESSION_HANDOFF.md` redirects to Office Leaks Consulting HQ and should be used only for historical context.
 - Chief Engineering Penny / Engineering HQ: `projects/engineering/SESSION_HANDOFF.md`
 - Chief Wellness HQ / Wellness HQ: `projects/wellness/SESSION_HANDOFF.md`
 - Recovery Logistics / Daily Anchors: `projects/recovery-logistics/SESSION_HANDOFF.md`
