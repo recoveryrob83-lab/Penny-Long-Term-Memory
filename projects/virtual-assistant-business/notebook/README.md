@@ -1,6 +1,6 @@
 # Virtual Assistant Business Notebook Leaf Index
 
-Updated: 2026-07-07
+Updated: 2026-07-08
 Project: Virtual Assistant Business
 Purpose: Discoverable index for VA Business notebook leaf notes.
 
@@ -34,3 +34,4 @@ Example:
 | Note ID | Title | Date | Topic | Status |
 |---|---|---:|---|---|
 | NOTE-20260707-001 | HVAC Office Cleanup Beachhead | 2026-07-07 | Market positioning, offer direction, delivery dependency | Active working note |
+| NOTE-20260708-002 | Real-World Lead Leak Example | 2026-07-08 | Market insight, lead leak, follow-up failure, service offer seed | Active case-study seed |
