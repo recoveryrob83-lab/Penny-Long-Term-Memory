@@ -5,11 +5,11 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Priority Open Loops
 
-- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with VA Business daily execution now a priority when routed.
+- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with Office Leaks / VA Business daily execution now a priority when routed.
 - Site Cleanup: continue provider option gathering when Rob wants follow-up.
-- Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support VA Business pricing/income/expense/tax questions when concrete.
-- Chief Business HQ: guide VA Business parent strategy, positioning, offers, customer discovery, marketplace strategy, and business model.
-- Virtual Assistant Business: build marketplace-ready positioning, initial offers, Upwork profile, proposal templates, portfolio/sample packet, and basic client operating system.
+- Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support Office Leaks / VA Business pricing/income/expense/tax questions when concrete.
+- Chief Business HQ: guide Office Leaks / VA Business parent strategy, positioning, offers, customer discovery, marketplace/local strategy, and business model.
+- Virtual Assistant Business / Office Leaks: build marketplace/local positioning, initial offers, lead-leak materials, proposal templates, portfolio/sample packet, and basic client operating system.
 - Chief Engineering Penny: continue Reliable Connector Execution Layer and delivery-playbook architecture for bite-sized local service office cleanup offers.
 - Chief Wellness HQ: begin wellness operations when useful.
 - Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
@@ -24,14 +24,18 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Waiting On
 
+- ADV-20260708-026: Life Logistics HQ acknowledged / ingested; awaiting Chief of Finance Penny, Chief Engineering Penny, and Main Assistant Penny.
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
-- Virtual Assistant Business: Chief Business HQ / VA worker strategy sessions for marketplace-ready positioning, first offers, and repeatable delivery method.
-- Engineering delivery architecture: Engineering has acknowledged ADV-20260707-025 and should continue playbook design for one-problem local service office cleanup sprints.
+- Office Leaks / Virtual Assistant Business: Chief Business HQ / VA worker strategy sessions for positioning, first offers, lead-leak materials, outreach, and repeatable delivery method.
+- Engineering delivery architecture: Engineering has acknowledged ADV-20260707-025 and should continue playbook design for one-problem local service office cleanup sprints; Engineering also needs to ingest ADV-20260708-026.
+- Finance: ingest ADV-20260708-026 and evaluate pricing/cost implications when concrete.
+- Main Assistant: ingest ADV-20260708-026 and preserve Office Leaks context for future daily execution.
 
 ## Done / Recently Closed
 
+- 2026-07-08: ADV-20260708-026 partially acknowledged; Life Logistics HQ ingested Office Leaks operating philosophy and logistics implications.
 - 2026-07-08: Refreshed global and Life Logistics advisory state after Engineering acknowledged ADV-20260707-025.
 - 2026-07-07: ADV-20260707-025 acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
 - 2026-07-07: ADV-20260707-024 implemented; Business HQ parent state refreshed for VA Business priority.
@@ -50,6 +54,7 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Parking Lot
 
+- Decide later whether `projects/virtual-assistant-business/` should be renamed or left as the durable parent worker folder for Office Leaks Consulting.
 - Life Logistics HQ: retry `status.md` only if useful.
 - Chief of Finance Penny: budget / bills / dashboard later.
 - Chief Business HQ: add more Drive/RPR strategy records only when useful.
