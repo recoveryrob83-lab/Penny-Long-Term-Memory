@@ -38,3 +38,4 @@ Example:
 | NOTE-20260707-003 | Prompt Library / Command Launcher | 2026-07-07 | Standard prompts, command language, Python launcher, manual-to-automation bridge | Active idea capture |
 | NOTE-20260708-004 | Scheduled Task Runtime Observation | 2026-07-08 | Scheduled tasks, runtime behavior, same-chat execution, connector verification | Active observation |
 | NOTE-20260708-005 | Office Leak Delivery Playbooks v1 | 2026-07-08 | VA Business, HVAC office cleanup, six leak categories, repeatable delivery process | Active delivery architecture draft |
+| NOTE-20260708-006 | Office Leaks Human-System Delivery Layer | 2026-07-08 | Office Leaks operating philosophy, stakeholder roles, internal champions, Aha Moment, adoption verification | Active architecture refinement |
