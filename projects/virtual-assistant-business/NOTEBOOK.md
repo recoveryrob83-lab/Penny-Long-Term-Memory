@@ -1,37 +1,27 @@
-# Virtual Assistant Business Notebook
+# Legacy Notebook: Virtual Assistant Business
 
-Updated: 2026-07-07
-Project: Virtual Assistant Business
-Purpose: Durable idea notebook for VA Business insights, service-offer observations, client-market lessons, delivery reflections, and useful discussion fragments.
+Updated: 2026-07-09
 
-## Structural Note
+## Status
 
-Virtual Assistant Business is a Business HQ sub-project / worker project, not a standalone top-level HQ at launch.
+Legacy / redirect context.
 
-This notebook captures worker-project ideas that are useful to preserve but do not yet belong in the project handoff, status, open loops, formal advisory board, Drive working documents, or Rob-facing task system.
+New Office Leaks notebook hub:
 
-## Routing
+- `projects/office-leaks-consulting/NOTEBOOK.md`
 
-VA Business notebook leaves live in:
+New Office Leaks notebook index:
 
-- `projects/virtual-assistant-business/notebook/`
+- `projects/office-leaks-consulting/notebook/README.md`
 
-Start with the folder index:
+## Legacy Notes
 
-- `projects/virtual-assistant-business/notebook/README.md`
+This folder preserves early Office Leaks / VA Business notes created before Office Leaks became its own business-unit HQ.
 
-## Capture Rules
+Important legacy notes:
 
-This is not an advisory board, task list, open-loop tracker, or source of operational truth.
+- `projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md`
+- `projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md`
+- `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
 
-Use it for durable VA Business ideas worth preserving.
-
-Items may later be promoted intentionally into pending advisories, formal advisories, business plans, offer documents, implementation packets, Drive artifacts, or tasks.
-
-Keep notes abstract and non-sensitive. Do not store client private details, credentials, financial data, tax records, contracts, personal identifiers, or sensitive operational records in GitHub.
-
-## Current Leaf Notes
-
-| Note ID | Title | Path |
-|---|---|---|
-| _None yet_ | _No VA Business notebook leaves have been created yet._ | _Use `projects/virtual-assistant-business/notebook/README.md` when adding leaves._ |
+Do not add new Office Leaks notebook leaves here unless Rob explicitly asks to preserve something in legacy context.
