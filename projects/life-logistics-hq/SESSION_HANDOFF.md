@@ -63,6 +63,19 @@ Potential logistics support when authorized:
 
 Do not rename or restructure the GitHub project unless Rob explicitly authorizes that change.
 
+## Office Leaks Architecture / Finance Pointers
+
+Engineering delivery architecture:
+
+- Human-system delivery layer note: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
+- Related Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
+
+Finance working-record pointer:
+
+- `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
+
+Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, revenue records, and tax set-aside planning belong in Drive through the Finance pointer file.
+
 ## Consolidated / Dormant Departments
 
 - Work Search is consolidated into Main Assistant for current lightweight logistics and reminders.
@@ -98,12 +111,13 @@ Template language uses `Posted Board` and `Target Department` rather than ambigu
 
 ## Current Open Advisory State
 
-Open / partially acknowledged advisory:
+No open advisories are currently listed in the Advisory Index.
 
-- ADV-20260708-026 — Posted Board: `coordination/boards/business.md` — Target Departments: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ — Office Leaks operating philosophy requires cross-department review. Life Logistics HQ acknowledged/ingested on 2026-07-08; awaiting remaining target departments.
+Recently implemented / acknowledged:
 
-Recently acknowledged / implemented:
-
+- ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
+- ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
+- ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
 - ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
 - ADV-20260707-024 — Implemented; Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Implemented; Finance state refreshed for Virtual Assistant income stream.
@@ -135,7 +149,7 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 - Keep simplified advisory routing clean under the source-board plus Advisory Index model.
 - Keep Office Leaks / VA Business and parent Business HQ routing clear.
-- Track that Finance, Engineering, and Main Assistant still need to ingest ADV-20260708-026.
+- Keep Engineering and Finance Office Leaks pointers discoverable without storing sensitive details in GitHub.
 - Be ready to support Office Leaks logistics once Rob authorizes real-world outreach or visits.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
@@ -159,4 +173,4 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
 
-Boot reminder: tell Rob the active business priority is Office Leaks / VA Business. PennyOS is paused, not abandoned. ADV-20260708-026 is partially acknowledged with Life Logistics ingested and other target departments pending.
+Boot reminder: tell Rob the active business priority is Office Leaks / VA Business. PennyOS is paused, not abandoned. No open advisories are currently listed in the Advisory Index.
