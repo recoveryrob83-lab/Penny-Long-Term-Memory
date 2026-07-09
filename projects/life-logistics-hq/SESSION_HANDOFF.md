@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -24,7 +24,7 @@ Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-pr
 - Main Assistant / Daily Operations
 - Chief of Finance Penny
 - Chief Business HQ
-- Virtual Assistant Business worker project / Office Leaks Consulting candidate
+- Office Leaks Consulting HQ
 - Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
@@ -33,7 +33,9 @@ Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-pr
 
 During Life Logistics boot, morning sync, nightly sync, or weekly review, remind Rob:
 
-Current active business priority is the revenue-first Office Leaks / Virtual Assistant Business direction.
+Current active business priority is the revenue-first Office Leaks Consulting direction.
+
+Office Leaks Consulting HQ is now an active business-unit department under Chief Business HQ. It is no longer merely a Virtual Assistant Business worker project.
 
 Main Assistant supports daily execution. Chief Business HQ owns parent strategy. Chief of Finance Penny supports pricing/income/expense/tax/budget decisions when concrete. Chief Engineering Penny owns technical architecture and repeatable delivery playbooks when needed.
 
@@ -41,7 +43,7 @@ PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term prod
 
 ## Office Leaks Logistics Context
 
-Office Leaks Consulting is emerging inside the Virtual Assistant Business worker project as a practical, trust-based systems consulting lane for small local service businesses.
+Office Leaks Consulting is a practical, trust-based systems consulting lane for small local service businesses.
 
 Core philosophy:
 
@@ -61,7 +63,24 @@ Potential logistics support when authorized:
 - tracking outreach loops,
 - helping Rob turn business plans into calendar/task actions.
 
-Do not rename or restructure the GitHub project unless Rob explicitly authorizes that change.
+## Office Leaks Project Structure
+
+Official active HQ folder:
+
+- `projects/office-leaks-consulting/`
+
+Boot/sync files:
+
+- `projects/office-leaks-consulting/BOOT_SYNC.md`
+- `projects/office-leaks-consulting/SYNC_CHECKLIST.md`
+
+Advisory board:
+
+- `coordination/boards/office-leaks.md`
+
+Legacy folder:
+
+- `projects/virtual-assistant-business/` now exists as historical/redirect context only unless Rob later authorizes archival cleanup.
 
 ## Office Leaks Architecture / Finance Pointers
 
@@ -89,6 +108,7 @@ Preserve project history. Do not delete department files.
 
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
 - Advisory boards: `coordination/boards/`
+- Office Leaks Advisory Board: `coordination/boards/office-leaks.md`
 - Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`
 - Pending Advisory Boards: `coordination/PENDING_ADVISORY_BOARDS.md`
@@ -115,6 +135,7 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ; new folder created at `projects/office-leaks-consulting/`.
 - ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
@@ -148,9 +169,10 @@ Use RPR when reliable structured-file editing matters more than connector automa
 ## Current Major Open Loops For Life Logistics
 
 - Keep simplified advisory routing clean under the source-board plus Advisory Index model.
-- Keep Office Leaks / VA Business and parent Business HQ routing clear.
+- Keep Office Leaks HQ, parent Business HQ, Engineering, Finance, and Main Assistant routing clear.
 - Keep Engineering and Finance Office Leaks pointers discoverable without storing sensitive details in GitHub.
 - Be ready to support Office Leaks logistics once Rob authorizes real-world outreach or visits.
+- Track whether legacy `projects/virtual-assistant-business/` should later be archived or deleted.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
@@ -159,12 +181,12 @@ Use RPR when reliable structured-file editing matters more than connector automa
 ## Immediate Next Actions
 
 1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
-2. Route Office Leaks / VA Business parent strategy to Chief Business HQ.
-3. Route Office Leaks / VA Business worker execution to the Virtual Assistant Business worker project.
+2. Route Office Leaks parent strategy to Chief Business HQ.
+3. Route Office Leaks execution continuity to Office Leaks Consulting HQ.
 4. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
 5. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits and Office Leaks money workflows when concrete.
 6. Keep Engineering reliability and Office Leaks delivery-playbook work visible as background architecture.
-7. Use active specialist chats for Business, Engineering, Wellness, and project-sized work.
+7. Use active specialist chats for Business, Office Leaks, Engineering, Wellness, and project-sized work.
 8. Use Role Drift Check when work appears to belong elsewhere.
 9. Route discretionary spending decisions to Chief of Finance Penny when possible.
 10. Prefer small verified GitHub edits.
@@ -173,4 +195,4 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
 
-Boot reminder: tell Rob the active business priority is Office Leaks / VA Business. PennyOS is paused, not abandoned. No open advisories are currently listed in the Advisory Index.
+Boot reminder: tell Rob the active business priority is Office Leaks Consulting. PennyOS is paused, not abandoned. No open advisories are currently listed in the Advisory Index.
