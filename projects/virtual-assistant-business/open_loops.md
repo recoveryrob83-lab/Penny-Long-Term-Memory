@@ -1,29 +1,21 @@
-# Virtual Assistant Business Open Loops
+# Legacy Open Loops: Virtual Assistant Business
 
-Updated: 2026-07-07
+Updated: 2026-07-09
 
-## Priority Open Loops
+## Status
 
-- Define market differentiation for systems-first VA / AI-enabled operations support.
-- Identify Rob's strengths, weaknesses, constraints, and credibility assets for VA positioning.
-- Research gaps in VA, operations-support, and workflow-organization marketplaces.
-- Draft practical business plan.
-- Draft marketing plan.
-- Define initial service packages.
-- Build Upwork profile.
-- Build proposal templates.
-- Create portfolio or sample-work packet.
-- Create operating system for lead tracking, proposals, delivery, follow-up, and client onboarding.
+Legacy / redirect context.
 
-## Waiting On
+Current active Office Leaks open loops live at:
 
-- Chief Business HQ strategy session to begin positioning and first-offer work.
-- Rob's direction on which marketplace to prioritize first, unless Business HQ chooses Upwork as the default starting point.
+- `projects/office-leaks-consulting/open_loops.md`
 
-## Parking Lot
+## Note
 
-- Website or landing page.
-- Automation-heavy service packages.
-- Formal CRM.
-- Finance/tax structure.
-- Expansion into a standalone department if the project becomes large enough.
+Do not track new active Office Leaks work here.
+
+This file remains only to prevent stale project loads and preserve the old VA project history.
+
+## Legacy Cleanup Loop
+
+Decide later whether this folder should remain as redirect history, be archived, or be deleted after all useful historical context has been migrated.
