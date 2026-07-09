@@ -22,7 +22,8 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
   - `Office Leaks Consulting Leadership Philosophy`
 - Life Logistics HQ: Acknowledged / ingested on 2026-07-08
 - Chief Engineering Penny: Acknowledged / ingested on 2026-07-08
-- Awaiting: Chief of Finance Penny; Main Assistant Penny
+- Main Assistant Penny: Acknowledged / ingested on 2026-07-08
+- Awaiting: Chief of Finance Penny
 
 #### Summary
 
@@ -91,7 +92,7 @@ Engineering has incorporated internal champion identification, staff interview /
 
 ##### Main Assistant Penny
 
-Please read the source note and treat it as important Rob/Life OS context.
+Main Assistant Penny read and ingested this advisory on 2026-07-08.
 
 Main Assistant should preserve that Office Leaks is now best understood as service-business systems consulting, not generic VA work; Rob's natural strengths include connectedness, relational trust-building, plainspoken field presence, and systems thinking; office workers are likely a primary content audience and implementation partner; and owner, champion, users, and beneficiaries should not be collapsed into one generic customer.
 
