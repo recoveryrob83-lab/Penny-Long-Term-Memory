@@ -1,15 +1,15 @@
 # Open Loops
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Priority Open Loops
 
-- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with Office Leaks / VA Business daily execution now a priority when routed.
+- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with Office Leaks daily execution now a priority when routed.
 - Site Cleanup: continue provider option gathering when Rob wants follow-up.
 - Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support Office Leaks finance through `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` when pricing, startup costs, tool costs, revenue, tax set-aside, or money become concrete.
-- Chief Business HQ: guide Office Leaks / VA Business parent strategy, positioning, offers, customer discovery, marketplace/local strategy, and business model.
-- Virtual Assistant Business / Office Leaks: build local positioning, initial offers, lead-leak materials, proposal templates, portfolio/sample packet, and basic client operating system.
+- Chief Business HQ: guide Office Leaks parent strategy while preserving capacity for future businesses and PennyOS/productized strategy later.
+- Office Leaks Consulting HQ: build local positioning, first offers, lead-leak materials, proposal templates, portfolio/sample packet, and basic client operating system.
 - Chief Engineering Penny: continue Reliable Connector Execution Layer and Office Leaks delivery architecture, including the human-system delivery layer.
 - Chief Wellness HQ: begin wellness operations when useful.
 - Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
@@ -27,12 +27,14 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
-- Office Leaks / Virtual Assistant Business: Chief Business HQ / VA worker strategy sessions for positioning, first offers, lead-leak materials, outreach, and repeatable delivery method.
+- Office Leaks Consulting HQ: strategy/execution session for positioning, first offers, lead-leak materials, outreach, and repeatable delivery method.
 - Engineering delivery architecture: continue playbook design for one-problem local service office cleanup sprints; use `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md` as the current human-system layer reference.
 - Finance: use Office Leaks finance working records through `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` when pricing, costs, revenue, tax set-aside, or tool decisions become concrete.
+- Legacy cleanup: decide later whether `projects/virtual-assistant-business/` should remain as redirect history, be archived, or be deleted after all references are migrated.
 
 ## Done / Recently Closed
 
+- 2026-07-09: Office Leaks Consulting elevated from VA worker project to business-unit HQ under Chief Business HQ; new folder created at `projects/office-leaks-consulting/`.
 - 2026-07-08: ADV-20260708-028 implemented; Office Leaks finance working records synced across Life OS via `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`.
 - 2026-07-08: ADV-20260708-027 implemented; Engineering Office Leaks architecture updates synced across Life OS.
 - 2026-07-08: ADV-20260708-026 closed / fully acknowledged; all target departments reviewed Office Leaks operating philosophy.
@@ -55,7 +57,7 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Parking Lot
 
-- Decide later whether `projects/virtual-assistant-business/` should be renamed or left as the durable parent worker folder for Office Leaks Consulting.
+- Decide later whether `projects/virtual-assistant-business/` should be archived or deleted after all legacy references are no longer useful.
 - Life Logistics HQ: retry `status.md` only if useful.
 - Chief of Finance Penny: budget / bills / dashboard later.
 - Chief Business HQ: add more Drive/RPR strategy records only when useful.
