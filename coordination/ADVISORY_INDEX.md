@@ -6,6 +6,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 ## Open / Unacknowledged Advisories
 
 - ADV-20260708-027 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Sync Engineering Office Leaks architecture updates across Life OS.
+- ADV-20260708-028 — Open / Unacknowledged — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Sync Office Leaks finance working records across Life OS.
 
 ## Acknowledged / Implemented Advisories
 
