@@ -1,18 +1,18 @@
 # Chief Business HQ Status
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 
 ## Current Phase
 
-Active / Office Leaks Consulting Launch
+Active / Parent Strategy for Office Leaks Consulting
 
 ## Summary
 
-Chief Business HQ's immediate focus has shifted from PennyOS / Penny Platform viability research to launching the Office Leaks / Virtual Assistant Business direction as a revenue-first sub-project.
+Chief Business HQ is the parent strategy department for Rob's business portfolio.
 
-Office Leaks Consulting is emerging inside the Virtual Assistant Business worker project as the likely service-business systems consulting lane.
+Office Leaks Consulting has been elevated from the former Virtual Assistant Business worker project into an active business-unit HQ under Chief Business HQ.
 
-The immediate objective is income generation as soon as practical through trust-based local service-business systems consulting, office leak audits, bite-sized cleanup sprints, simple habits, documentation, and practical process coordination.
+The immediate objective is income generation as soon as practical through Office Leaks Consulting: trust-based local service-business systems consulting, office leak audits, bite-sized cleanup sprints, simple habits, documentation, and practical process coordination.
 
 PennyOS / Penny Platform work is paused for now, not abandoned. It remains a longer-term platform concept and potential future productization path.
 
@@ -30,15 +30,16 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 
 ## Current Focus
 
-- Guide Office Leaks / VA Business strategy from parent HQ.
-- Define differentiation versus generic virtual assistants or generic consultants.
+- Guide Office Leaks parent strategy without absorbing Office Leaks execution continuity.
+- Preserve capacity for future businesses under Chief Business HQ.
+- Define major positioning versus generic virtual assistants or generic consultants.
 - Clarify Rob's strengths, weaknesses, constraints, credibility assets, and positioning.
 - Identify target customer segments and local-service-business market gaps.
-- Define initial offers and service packages.
-- Build local-service-business positioning, lead-leak materials, and proposal strategy through the worker project.
+- Guide initial offers and service packages.
+- Coordinate with Office Leaks HQ on local-service-business positioning, lead-leak materials, and proposal strategy.
 - Coordinate with Finance on pricing, startup costs, income tracking, expenses, taxes, budget impact, and sustainable rate assumptions.
 - Coordinate with Engineering on delivery architecture, templates, adoption verification, and human-system playbook elements.
-- Coordinate with Life Logistics on project file hygiene and worker handoff clarity.
+- Coordinate with Life Logistics on project file hygiene and handoff clarity.
 - Preserve PennyOS / Penny Platform as paused/parked, not the current execution priority.
 
 ## Current Working Hypotheses
@@ -59,19 +60,28 @@ Canonical Business Drive architecture:
 - Life Organization > Chief Business HQ
 - Under that: Business Development
 
-Business working records should live under the Chief Business HQ folder. Business Development is a subfolder beneath Chief Business HQ, not a separate top-level business root.
+Business parent-strategy records should live under the Chief Business HQ folder.
 
-Detailed Office Leaks / VA Business working records should live in the appropriate Office Leaks / VA Business Drive/RPR working area when created, with GitHub holding only abstract state and pointers.
+Detailed Office Leaks business-unit working records should live in the appropriate Office Leaks Drive/RPR working area when created, with GitHub holding only abstract state and pointers.
 
 ## Office Leaks References
 
-Worker project:
+Office Leaks HQ:
+
+- `projects/office-leaks-consulting/`
+
+Office Leaks boot/sync:
+
+- `projects/office-leaks-consulting/BOOT_SYNC.md`
+- `projects/office-leaks-consulting/SYNC_CHECKLIST.md`
+
+Office Leaks advisory board:
+
+- `coordination/boards/office-leaks.md`
+
+Legacy VA context:
 
 - `projects/virtual-assistant-business/`
-
-Operating philosophy:
-
-- `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
 
 Engineering delivery architecture:
 
@@ -87,17 +97,21 @@ Earlier Business HQ working cabinet:
 - Life Organization > Chief Business HQ
 - Folder ID: `14KX6L-nacIsa5xYVmGKAqhclb0O2iJpR`
 
-## Business HQ / Worker Project Relationship
+## Business HQ / Office Leaks Relationship
 
 Parent department:
 
 - `projects/business-development/`
 
-Worker sub-project:
+Business-unit department:
+
+- `projects/office-leaks-consulting/`
+
+Legacy worker context:
 
 - `projects/virtual-assistant-business/`
 
-Business HQ owns parent strategy and routing. The Office Leaks / VA Business worker project owns detailed execution artifacts such as business plan, marketing plan, offers, proposal materials, customer research, sample packet, and lead/proposal/client workflow.
+Business HQ owns parent strategy and routing. Office Leaks Consulting HQ owns detailed execution artifacts such as service plans, marketing/content materials, offers, proposal materials, customer research, sample packet, and lead/proposal/client workflow.
 
 ## Coordination Notes
 
@@ -108,14 +122,14 @@ Business HQ owns parent strategy and routing. The Office Leaks / VA Business wor
 
 ## Advisory Status
 
-ADV-20260708-028 has been implemented by Life Logistics HQ through Office Leaks finance working-record pointer sync.
+No open advisories are currently listed in the Advisory Index.
 
-ADV-20260708-027 has been implemented by Life Logistics HQ through Office Leaks Engineering architecture sync.
+Future Business HQ advisories should update the Business advisory board and central Advisory Index only.
 
-ADV-20260708-026 has been closed / fully acknowledged across all target departments.
+Future Office Leaks-sourced advisories should update `coordination/boards/office-leaks.md` and the central Advisory Index.
 
-Future Business HQ advisories should update the Business advisory board and central Advisory Index only. Do not update Department Event Inbox unless Rob explicitly reactivates it.
+Do not update Department Event Inbox unless Rob explicitly reactivates it.
 
 ## Boundary
 
-Chief Business HQ defines business direction. It does not own technical implementation, finance execution, or daily admin execution.
+Chief Business HQ defines parent business direction. It does not own technical implementation, finance execution, daily admin execution, or Office Leaks business-unit execution continuity.
