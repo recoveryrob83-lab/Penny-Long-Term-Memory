@@ -1,12 +1,56 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-06
+Updated: 2026-07-08
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Business HQ, Finance, Main Assistant, or other departments.
 
 ## Open Advisories
 
-None.
+### ADV-20260708-027 — Sync Engineering Office Leaks architecture updates across Life OS
+
+- Date: 2026-07-08
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: High
+- Status: Open / Unacknowledged
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ
+- Related Project(s): Office Leaks Consulting, Virtual Assistant Business, Chief Engineering Penny, Life OS GitHub sync, Drive/GitHub artifact coordination
+- Source Advisory: ADV-20260708-026
+
+#### Summary
+
+Engineering consumed the Office Leaks operating philosophy from Business HQ and updated Engineering-owned artifacts to include the human-system delivery layer.
+
+Engineering outputs completed:
+
+- Created `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`.
+- Updated `projects/engineering/notebook/README.md`.
+- Updated `projects/engineering/NOTEBOOK.md`.
+- Updated Google Drive document `Engineering Delivery Architecture Specification - HVAC Office Cleanup` with a Human-System Delivery Layer addendum.
+- Recorded Engineering acknowledgement on `coordination/boards/business.md` for ADV-20260708-026.
+
+#### Engineering Interpretation
+
+Office Leaks delivery architecture now has two required layers:
+
+1. Mechanical workflow layer: map, score, scope, sprint, verify, handoff, follow up.
+2. Human-system layer: respect, rapport, internal champion, users, Aha Moment, adoption verification, relational follow-up.
+
+#### Logistics Request
+
+Please review these Engineering updates and perform whatever Life Logistics HQ determines is needed to keep the wider GitHub memory synchronized.
+
+Potential Logistics actions may include, if appropriate:
+
+- Update global handoff/open loops if Office Leaks architecture state needs to be reflected globally.
+- Update project handoffs/status files that should now reference Office Leaks Consulting rather than generic VA framing.
+- Check whether Business/VA project files need cross-links to the Engineering note or Drive doc.
+- Keep Advisory Index accurate for ADV-20260708-026 and this advisory.
+- Preserve the source-board plus Advisory Index routing model.
+- Do not use Department Event Inbox unless Rob explicitly reactivates it.
+
+Engineering is not asking Logistics to rewrite Business strategy. This advisory is for cross-project memory hygiene and synchronization after Engineering completed its domain-specific update.
 
 ## Acknowledged / Implemented Advisories
 
