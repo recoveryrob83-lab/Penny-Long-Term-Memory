@@ -1,33 +1,34 @@
-# Virtual Assistant Business
+# Legacy Redirect: Virtual Assistant Business
 
-Updated: 2026-07-07
-Owner: Chief Business HQ
-Implementation Support: Life Logistics HQ
+Updated: 2026-07-09
 
-## Purpose
+## Status
 
-Revenue-first business initiative for Rob focused on virtual assistant, operations support, workflow organization, and AI-enabled systems coordination services.
+Legacy / redirect context.
 
-## Relationship To Life OS
+The former Virtual Assistant Business project has been elevated and renamed operationally as:
 
-This is a Business HQ sub-project, not a separate top-level department at launch.
+- `projects/office-leaks-consulting/`
 
-- Chief Business HQ owns strategy, positioning, offers, marketing, customer research, and business model design.
-- Life Logistics HQ owns durable scaffold hygiene and cross-project routing.
-- Main Assistant may handle daily one-off execution, scheduling, reminders, and admin when routed.
-- Chief Engineering Penny is consulted only for technical architecture, automation, or implementation work.
-- Chief of Finance Penny is consulted when pricing, income tracking, taxes, budgeting, benefits, or paperwork become concrete.
+Use the Office Leaks Consulting HQ folder for all active work.
 
-## Working Positioning
+## Why This Folder Remains
 
-Rob should not compete as a generic low-cost VA. The stronger frame is systems-first, AI-enabled operations support for busy people and small businesses.
+This folder preserves early project history, legacy notebook notes, and references from the period when the business was still described as a Virtual Assistant Business.
 
-Draft framing:
+Do not start new active work here unless Rob explicitly asks to review legacy context.
 
-> I help busy people and small businesses reduce mental juggling by organizing their workflows, documents, tasks, AI tools, and repeatable processes into systems that actually get work done.
+## Active Replacement
 
-## Source Guidance
+Official active HQ:
 
-Created from Business HQ advisory ADV-20260707-021.
+- `projects/office-leaks-consulting/`
 
-Keep GitHub abstract and non-sensitive. Use Drive for working drafts, detailed research, proposals, client assets, and portfolio artifacts.
+Boot/sync:
+
+- `projects/office-leaks-consulting/BOOT_SYNC.md`
+- `projects/office-leaks-consulting/SYNC_CHECKLIST.md`
+
+## Guardrail
+
+Do not delete this folder until Rob explicitly authorizes archival cleanup.
