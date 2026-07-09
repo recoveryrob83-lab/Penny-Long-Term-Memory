@@ -8,9 +8,9 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 Life OS is operational with GitHub as durable memory map, Drive as working records cabinet, Todoist as Rob-facing action queue, Calendar as timed commitments, Gmail as communication evidence, project chats as knowledge producers, and Life Logistics HQ as cross-project curator.
 
-The immediate Life OS business priority is now the Virtual Assistant Business / Office Leaks Consulting direction: a revenue-first Business HQ sub-project focused on systems-first virtual assistance, service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
+The immediate Life OS business priority is the Virtual Assistant Business / Office Leaks Consulting direction: a revenue-first Business HQ sub-project focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
 
-PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform/productization path and may be informed by VA Business / Office Leaks service work and market learning.
+PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform/productization path and may be informed by Office Leaks service work and market learning.
 
 ## Current Active Core
 
@@ -70,33 +70,15 @@ Active first rule:
 
 - DR-FIN-20260704-001 — Discretionary Purchase Pause Rule, owned by Chief of Finance Penny.
 
-## Current Engineering Reliability / Delivery Track
-
-Chief Engineering Penny owns Reliable Connector Execution Layer work.
-
-Engineering has acknowledged the Business advisory for VA Business delivery architecture:
-
-- ADV-20260707-025 — Engineering delivery playbook needed for bite-sized local service office cleanup offers.
-
-Accepted connector safety rule:
-
-> Prefer small, localized, verified connector writes over large, broad, unverified rewrites. If a connector write is blocked, stop, classify the failure, simplify the operation, and resume only with a smaller or safer plan.
-
-Additional connector reliability pattern:
-
-- Use explicit connector invocation when practical.
-- Use small verified writes.
-- Stop and wait after safety-trigger blocks.
-- Use Gemini only as an optional Drive artifact-generation fallback or companion when direct Drive writes are risky.
-
 ## Current Open Advisory State
 
-Current open / partially acknowledged advisory:
+No open advisories are currently listed in the Advisory Index.
 
-- ADV-20260708-026 — Posted Board: `coordination/boards/business.md` — Target Departments: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ — Office Leaks operating philosophy requires cross-department review. Life Logistics HQ acknowledged/ingested on 2026-07-08; awaiting remaining target departments.
+Recently implemented / acknowledged:
 
-Recently acknowledged / implemented:
-
+- ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
+- ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
+- ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
 - ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
 - ADV-20260707-024 — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Finance state refreshed for Virtual Assistant income stream.
@@ -115,13 +97,26 @@ Core philosophy:
 
 Life Logistics should keep Office Leaks visible as an active income-stream candidate with possible near-term real-world logistics: discovery visits, transportation, follow-up reminders, outreach loops, document organization, and conversion of plans into calendar/task actions when Rob authorizes.
 
+## Office Leaks Architecture / Finance Pointers
+
+Engineering delivery architecture:
+
+- Human-system delivery layer note: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
+- Related Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
+
+Finance working-record pointer:
+
+- `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
+
+Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, revenue tracking, and tax set-aside planning live in Drive through the Finance pointer file.
+
 ## Best Next Actions
 
-- For Virtual Assistant Business / Office Leaks: develop marketplace-ready positioning, offers, Upwork/profile materials as needed, local-service-business content, lead-leak offer materials, and repeatable delivery method.
+- For Virtual Assistant Business / Office Leaks: develop local-service-business positioning, offers, lead-leak materials, proposal/portfolio packet, outreach path, and repeatable delivery method.
 - For Business: guide Office Leaks parent strategy and decide later whether the GitHub project name should remain Virtual Assistant Business or be renamed.
-- For Engineering: continue delivery-playbook architecture for bite-sized local service office cleanup offers and ingest ADV-20260708-026.
-- For Finance: support Office Leaks pricing/income/expense/tax/budget work when concrete inputs exist and ingest ADV-20260708-026.
-- For Main Assistant: support daily execution, reminders, scheduling, outreach loops, and lightweight logistics around Office Leaks as routed; ingest ADV-20260708-026.
+- For Engineering: continue delivery-playbook architecture for bite-sized local service office cleanup offers, now including the human-system delivery layer.
+- For Finance: use the Office Leaks finance working records for pricing, startup costs, tool decisions, revenue tracking, and tax set-aside planning once concrete.
+- For Main Assistant: support daily execution, reminders, scheduling, outreach loops, and lightweight logistics around Office Leaks as routed.
 - For Life Logistics: keep advisory routing clean and Office Leaks logistics visible without prematurely renaming or restructuring the project.
 
 ## Guiding Principle
