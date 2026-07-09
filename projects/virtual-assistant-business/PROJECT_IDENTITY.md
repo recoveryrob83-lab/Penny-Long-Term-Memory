@@ -1,43 +1,29 @@
-# Project Identity: Virtual Assistant Business
+# Legacy Project Identity: Virtual Assistant Business
 
-Updated: 2026-07-07
+Updated: 2026-07-09
 
-## Project Name
+## Status
 
-Virtual Assistant Business
+Legacy / redirect context.
 
-## Mission
+The active project is now:
 
-Create a revenue-first service business around systems-first virtual assistance, operations support, workflow organization, and AI-enabled productivity support.
+- `projects/office-leaks-consulting/`
 
-## Owner
+## Historical Note
 
-Chief Business HQ owns the business strategy and offer design.
+The Virtual Assistant Business concept matured into Office Leaks Consulting, a business-unit HQ under Chief Business HQ.
 
-## Support Roles
+This file remains to preserve historical continuity and prevent stale project loads.
 
-- Life Logistics HQ: durable project structure, routing, advisory hygiene, and memory cleanliness.
-- Main Assistant: daily execution support when tasks are ready.
-- Chief Engineering Penny: technical automation and implementation consultation when needed.
-- Chief of Finance Penny: pricing, income tracking, taxes, budgeting, benefits, and paperwork when needed.
+## Current Identity
 
-## Not A Separate Department Yet
+Read:
 
-This project is a Business HQ sub-project at launch. Do not create a separate HQ identity unless Rob explicitly expands it into a standalone department later.
+- `projects/office-leaks-consulting/PROJECT_IDENTITY.md`
+- `projects/office-leaks-consulting/DEPARTMENT_IDENTITY.md`
+- `projects/office-leaks-consulting/SESSION_HANDOFF.md`
 
-## Initial Market Frame
+## Guardrail
 
-Systems-first VA and operations support for busy people and small businesses who need help turning scattered work into organized workflows, documents, task systems, and repeatable processes.
-
-## Notebook
-
-Local durable idea notebook:
-
-- Hub: `projects/virtual-assistant-business/NOTEBOOK.md`
-- Leaf index: `projects/virtual-assistant-business/notebook/README.md`
-
-The notebook is for durable ideas, service observations, offer reflections, market insights, and delivery-pattern fragments. It is not an advisory board, task list, open-loop tracker, or operational source of truth.
-
-## First Response After Sync
-
-Confirm: "I am working in the Virtual Assistant Business project, owned by Chief Business HQ. The goal is to build a revenue-first systems-first VA/operations-support business, with Life Logistics maintaining structure and Business HQ owning strategy."
+Do not create new active work here unless Rob explicitly asks to inspect or restore legacy VA context.
