@@ -31,3 +31,4 @@ Items may later be promoted intentionally into pending advisories, formal adviso
 | NOTE-20260707-003 | Prompt Library | `projects/engineering/notebook/NOTE-20260707-003-prompt-library-command-launcher.md` |
 | NOTE-20260708-004 | Scheduled Task Runtime Observation | `projects/engineering/notebook/NOTE-20260708-004-scheduled-task-runtime-observation.md` |
 | NOTE-20260708-005 | Office Leak Delivery Playbooks v1 | `projects/engineering/notebook/NOTE-20260708-005-office-leak-delivery-playbooks-v1.md` |
+| NOTE-20260708-006 | Office Leaks Human-System Delivery Layer | `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md` |
