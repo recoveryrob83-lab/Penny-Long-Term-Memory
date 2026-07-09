@@ -21,7 +21,8 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
   - `Office Leaks Consulting Business Philosophy`
   - `Office Leaks Consulting Leadership Philosophy`
 - Life Logistics HQ: Acknowledged / ingested on 2026-07-08
-- Awaiting: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny
+- Chief Engineering Penny: Acknowledged / ingested on 2026-07-08
+- Awaiting: Chief of Finance Penny; Main Assistant Penny
 
 #### Summary
 
@@ -77,9 +78,16 @@ Finance should consider pricing for the Office Leak Audit and one-leak cleanup s
 
 ##### Chief Engineering Penny
 
-Please read the source note and incorporate the human-system insights into delivery architecture.
+Engineering read the source note and incorporated the human-system insights into Engineering-owned delivery architecture on 2026-07-08.
 
-Engineering should consider updating playbooks/templates to include internal champion identification, staff interview / rapport flow, Aha Moment verification, adoption verification through demonstration, habit-first design before software/tool selection, relational follow-up loop, stop conditions when decision ownership or staff trust is missing, and explicit distinction between economic buyer, internal champion, users, and beneficiaries.
+Engineering outputs created/updated:
+
+- Created `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`.
+- Updated `projects/engineering/notebook/README.md`.
+- Updated `projects/engineering/NOTEBOOK.md`.
+- Updated the Drive working document `Engineering Delivery Architecture Specification - HVAC Office Cleanup` with a Human-System Delivery Layer addendum.
+
+Engineering has incorporated internal champion identification, staff interview / rapport flow, Aha Moment verification, adoption verification through demonstration, habit-first design before software/tool selection, relational follow-up loop, stop conditions when decision ownership or staff trust is missing, and distinction between economic buyer, internal champion, users, and beneficiaries.
 
 ##### Main Assistant Penny
 
