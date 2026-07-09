@@ -5,13 +5,17 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260708-026 — Office Leaks operating philosophy requires cross-department review
 
 - Date: 2026-07-08
 - From: Chief Business HQ / Virtual Assistant Business worker chat
 - To: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ
 - Priority: High
-- Status: Open / Partially Acknowledged
+- Status: Closed / Fully Acknowledged
 - Posted Board: `coordination/boards/business.md`
 - Target Department(s): Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ
 - Related Project(s): Virtual Assistant Business, Office Leaks Consulting, Lead Leak Sprint, local service-business consulting, content strategy, delivery architecture, pricing, Life OS logistics
@@ -23,7 +27,8 @@ Purpose: Advisories from Chief Business HQ to other Penny departments.
 - Life Logistics HQ: Acknowledged / ingested on 2026-07-08
 - Chief Engineering Penny: Acknowledged / ingested on 2026-07-08
 - Main Assistant Penny: Acknowledged / ingested on 2026-07-08
-- Awaiting: Chief of Finance Penny
+- Chief of Finance Penny: Acknowledged / ingested on 2026-07-08
+- Closed: 2026-07-08 after all target departments acknowledged / ingested
 
 #### Summary
 
@@ -69,11 +74,11 @@ Office Leaks should operate through a Trust Loop:
 
 This is not only marketing. It should influence sales, delivery, follow-up, referrals, hiring, leadership, internal operations, and Life OS support.
 
-#### Department Requests
+#### Department Ingestion
 
 ##### Chief of Finance Penny
 
-Please read the source note and incorporate this operating philosophy into future financial guidance for Office Leaks Consulting.
+Finance read and ingested the source note on 2026-07-08. Finance will incorporate the Office Leaks operating philosophy into future financial guidance.
 
 Finance should consider pricing for the Office Leak Audit and one-leak cleanup sprints; whether follow-up checks become recurring revenue or relationship-maintenance touchpoints; early cost scenarios for tools, website, transportation, and branded materials; future contractor / employee planning; and whether pricing should reflect trust-building, bite-sized offers rather than broad transformation promises.
 
@@ -111,8 +116,6 @@ Read:
 `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
 
 This note summarizes the full breakthrough across positioning, audience, delivery, follow-up, referrals, company philosophy, and leadership philosophy.
-
-## Acknowledged / Implemented Advisories
 
 ### ADV-20260707-025 — Engineering delivery playbook needed for bite-sized local service office cleanup offers
 
