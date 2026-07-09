@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -8,7 +8,15 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 Life OS is operational with GitHub as durable memory map, Drive as working records cabinet, Todoist as Rob-facing action queue, Calendar as timed commitments, Gmail as communication evidence, project chats as knowledge producers, and Life Logistics HQ as cross-project curator.
 
-The immediate Life OS business priority is the Virtual Assistant Business / Office Leaks Consulting direction: a revenue-first Business HQ sub-project focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
+The immediate Life OS business priority is Office Leaks Consulting: a revenue-first business-unit HQ under Chief Business HQ focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
+
+Office Leaks grew out of the former Virtual Assistant Business worker project but is no longer merely a generic VA concept. It now has its own HQ folder:
+
+- `projects/office-leaks-consulting/`
+
+Legacy VA folder:
+
+- `projects/virtual-assistant-business/` now exists as historical/redirect context unless Rob later authorizes archival cleanup.
 
 PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform/productization path and may be informed by Office Leaks service work and market learning.
 
@@ -18,7 +26,7 @@ PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term plat
 - Main Assistant / Daily Operations
 - Chief of Finance Penny
 - Chief Business HQ
-- Virtual Assistant Business worker project / Office Leaks Consulting candidate
+- Office Leaks Consulting HQ
 - Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
@@ -76,6 +84,7 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
 - ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
@@ -86,7 +95,7 @@ Recently implemented / acknowledged:
 
 ## Office Leaks Operating Philosophy
 
-Office Leaks Consulting is emerging from the VA Business worker project as a practical, trust-based systems consulting lane for small local service businesses.
+Office Leaks Consulting is a practical, trust-based systems consulting lane for small local service businesses.
 
 Core philosophy:
 
@@ -98,6 +107,10 @@ Core philosophy:
 Life Logistics should keep Office Leaks visible as an active income-stream candidate with possible near-term real-world logistics: discovery visits, transportation, follow-up reminders, outreach loops, document organization, and conversion of plans into calendar/task actions when Rob authorizes.
 
 ## Office Leaks Architecture / Finance Pointers
+
+Office Leaks HQ:
+
+- `projects/office-leaks-consulting/`
 
 Engineering delivery architecture:
 
@@ -112,12 +125,12 @@ Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, r
 
 ## Best Next Actions
 
-- For Virtual Assistant Business / Office Leaks: develop local-service-business positioning, offers, lead-leak materials, proposal/portfolio packet, outreach path, and repeatable delivery method.
-- For Business: guide Office Leaks parent strategy and decide later whether the GitHub project name should remain Virtual Assistant Business or be renamed.
-- For Engineering: continue delivery-playbook architecture for bite-sized local service office cleanup offers, now including the human-system delivery layer.
+- For Office Leaks Consulting HQ: develop local-service-business positioning, offers, lead-leak materials, proposal/portfolio packet, outreach path, and repeatable delivery method.
+- For Business: guide parent strategy and decide later whether Office Leaks should remain a Business HQ department or grow into a separate top-level business division.
+- For Engineering: continue delivery-playbook architecture for bite-sized local service office cleanup offers, including the human-system delivery layer.
 - For Finance: use the Office Leaks finance working records for pricing, startup costs, tool decisions, revenue tracking, and tax set-aside planning once concrete.
 - For Main Assistant: support daily execution, reminders, scheduling, outreach loops, and lightweight logistics around Office Leaks as routed.
-- For Life Logistics: keep advisory routing clean and Office Leaks logistics visible without prematurely renaming or restructuring the project.
+- For Life Logistics: keep advisory routing clean and Office Leaks logistics visible.
 
 ## Guiding Principle
 
