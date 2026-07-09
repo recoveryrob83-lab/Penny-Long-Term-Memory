@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 Purpose: High-level Life OS project map.
 
 ## Operating Rule
@@ -21,8 +21,9 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Main Assistant / Daily Operations | `projects/main-assistant/` | To assign | Active | Use as daily operations desk and absorb lightweight daily logistics from consolidated departments, including Office Leaks reminders/logistics when routed |
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active | Continue collecting and comparing options when Rob wants follow-up |
 | Active | Chief of Finance Penny | `projects/finance-benefits/` | REF-003 | Active | Support Office Leaks finance through `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` when pricing, costs, revenue, taxes, or money become concrete |
-| Active | Chief Business HQ | `projects/business-development/` | To assign | Active / Office Leaks parent strategy | Guide Office Leaks / VA Business positioning, offers, marketplace/local strategy, and parent business direction; keep PennyOS paused, not abandoned |
-| Active | Virtual Assistant Business / Office Leaks Consulting candidate | `projects/virtual-assistant-business/` | To assign | Active Business HQ sub-project | Build local positioning, offers, lead-leak materials, proposals, portfolio packet, and delivery operating system with Engineering/Finance pointers |
+| Active | Chief Business HQ | `projects/business-development/` | To assign | Active / Parent business strategy | Guide Office Leaks as active business-unit HQ while preserving portfolio strategy and future-business capacity |
+| Active | Office Leaks Consulting HQ | `projects/office-leaks-consulting/` | To assign | Active business-unit HQ under Business HQ | Build local positioning, offers, lead-leak materials, proposals, portfolio packet, and delivery operating system with Engineering/Finance pointers |
+| Legacy / Redirect | Virtual Assistant Business | `projects/virtual-assistant-business/` | To assign | Legacy context | Preserve history and redirect future active work to `projects/office-leaks-consulting/` |
 | Active | Chief Engineering Penny | `projects/engineering/` | To assign | Active | Continue connector reliability and Office Leaks delivery architecture, including `NOTE-20260708-006` human-system delivery layer |
 | Active | Chief Wellness HQ | `projects/wellness/` | To assign | Active | Use for wellness routines, health-adjacent logistics, appointments, and stability supports |
 | Active | Life OS Infrastructure | `projects/life-os-infrastructure/` | REF-004 | Active / As Needed | Maintain design principles, decision rules architecture, sync architecture, and registry standards as needed |
@@ -39,7 +40,7 @@ GitHub is the map. Drive is the filing cabinet.
 - Main Assistant / Daily Operations
 - Chief of Finance Penny
 - Chief Business HQ
-- Virtual Assistant Business worker project / Office Leaks Consulting candidate
+- Office Leaks Consulting HQ
 - Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
@@ -50,9 +51,9 @@ Life Logistics HQ is the Chief of Staff / cross-project coordination desk. It ma
 
 Main Assistant is the front desk for everyday assistant work and now absorbs lightweight daily logistics from consolidated departments.
 
-Virtual Assistant Business is an active Business HQ sub-project, not a standalone department at launch. Office Leaks Consulting is emerging inside that worker project as the likely service-business systems consulting lane. Do not rename or restructure the project until Rob explicitly authorizes it.
+Office Leaks Consulting HQ is an active business-unit department under Chief Business HQ. It is no longer merely a VA worker project.
 
-Chief Business HQ is currently oriented around Office Leaks / VA Business parent strategy. PennyOS / Penny Platform is paused, not abandoned.
+Chief Business HQ remains the parent business strategy department and can still coordinate multiple businesses later. PennyOS / Penny Platform is paused, not abandoned.
 
 Engineering Office Leaks delivery architecture includes both a mechanical workflow layer and a human-system delivery layer.
 
