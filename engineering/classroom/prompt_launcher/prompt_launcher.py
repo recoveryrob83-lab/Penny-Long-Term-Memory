@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+import tkinter as tk
+
 
 PROMPT_LIBRARY_PATH = Path(__file__).with_name("prompt_library.json")
 
@@ -30,16 +32,49 @@ def load_prompt_library(path: Path = PROMPT_LIBRARY_PATH) -> dict[str, Any]:
 
     return data
 
+class Prompt:
+    def __init__(self, data: dict) -> None:
+        self.id: str = data["id"]
+        self.title: str = data["title"]
+        self.category: str = data["category"]
+        self.mode: str = data["mode"]
+        self.text: str = data["text"]
+
+def copy_prompt(root: tk.Tk, prompt: Prompt) -> None:
+    root.clipboard_clear()
+    root.clipboard_append(prompt.text)
+    root.update()
+
+    print(f"Copied: {prompt.title}")
+
+def button_clicked(title: str) -> None:
+    print(f"You clicked: {title}")
 
 def main() -> None:
-    """Placeholder entrypoint for Rob to build in Engineering Classroom."""
     prompt_library = load_prompt_library()
     prompts = prompt_library.get("prompts", [])
 
-    print("Prompt Launcher v0.1 placeholder")
-    print(f"Loaded {len(prompts)} prompt(s) from {PROMPT_LIBRARY_PATH.name}.")
-    print("Next classroom step: add a simple desktop UI and clipboard copy behavior.")
+    root = tk.Tk()
+    root.title("Prompt Launcher")
+    root.geometry("400x300")
+    root.resizable(False, False)
+    header = tk.Label(root, text="Prompt Launcher", font=("Segoe UI", 16, "bold")
+)
 
+    header.pack(pady=10)
+    for prompt_data in prompts:
+        prompt = Prompt(prompt_data)
+        print(prompt.title)
+        button = tk.Button(
+        root,
+        text=prompt.title,
+        command=lambda p=prompt: copy_prompt(root, p),
+    )
+        button.pack()
+    
 
+    
+
+    root.mainloop()
 if __name__ == "__main__":
     main()

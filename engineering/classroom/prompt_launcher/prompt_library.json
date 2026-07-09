@@ -2,5 +2,20 @@
   "schema_version": "0.1",
   "project": "Prompt Launcher",
   "description": "Skeleton prompt library for the Engineering Classroom Prompt Launcher learning project.",
-  "prompts": []
+  "prompts": [
+    {
+      "id": "test_prompt",
+      "title": "Test Prompt",
+      "category": "Testing",
+      "mode": "static",
+      "text": "This is a test prompt copied from Prompt Launcher."
+    },
+    {
+      "id": "engineering_classroom_status_check",
+      "title": "Engineering Classroom Status Check",
+      "category": "Engineering Classroom",
+      "mode": "static",
+      "text": "Check the Engineering Classroom folder for current project files and summarize anything relevant before we continue coding."
+    }
+  ]
 }
