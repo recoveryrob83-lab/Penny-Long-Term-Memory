@@ -6,7 +6,7 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with GitHub as durable memory map, Drive as working records cabinet, Todoist as Rob-facing action queue, Calendar as timed commitments, Gmail as communication evidence, project chats as knowledge producers, and Life Logistics HQ as cross-project curator.
+Life OS is operational with GitHub as durable memory map, Drive as working records cabinet, Todoist as Rob-facing action queue, Calendar as timed commitments, Gmail as communication evidence, project chats as knowledge producers, workers as narrow operational executors, and Life Logistics HQ as cross-project curator.
 
 The immediate Life OS business priority is Office Leaks Consulting: a revenue-first business-unit HQ under Chief Business HQ focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
 
@@ -31,6 +31,30 @@ PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term plat
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
 
+## Worker Layer
+
+Life OS now has a formal worker layer separate from departments and HQs.
+
+Worker root:
+
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+
+First worker:
+
+- Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
+- Mutable pointer / operational handoff: `workers/penny-raw-capture/SESSION_HANDOFF.md`
+
+Worker mission:
+
+> Capture first. Organize later.
+
+The Penny Raw Capture Worker appends Rob's raw ideas, reminders, observations, facts, questions, resources, contacts, and other intake to the canonical Google Sheet `Life OS Raw Capture Inbox`.
+
+Main Assistant Penny is the downstream owner for later processing of rows where `Processed = No`.
+
+Workers do not automatically read the full department boot. They load the shared worker standard, their worker-specific boot contract, and their handoff only when mutable pointers or current operational notes are needed.
+
 ## Consolidated / Dormant Departments
 
 - Work Search is consolidated into Main Assistant for current lightweight logistics and reminders.
@@ -44,6 +68,8 @@ Preserve project history. Do not delete department files.
 
 - Active Projects is the authoritative current project map: `memory/04_ACTIVE_PROJECTS.md`.
 - Open Loops tracks current unfinished work: `memory/05_OPEN_LOOPS.md`.
+- Worker registry: `workers/README.md`.
+- Shared worker standard: `workers/WORKER_STANDARD.md`.
 - Advisory dashboard: `coordination/ADVISORY_INDEX.md`.
 - Advisory details: `coordination/boards/`.
 - Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only.
@@ -84,6 +110,8 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- ADV-20260709-030 — Implemented by Life Logistics; formal worker layer, worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and boot routing created.
+- ADV-20260709-029 — Acknowledged / Architecture Complete / Implementation Routed by Engineering.
 - 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
 - ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
@@ -125,15 +153,17 @@ Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, r
 
 ## Best Next Actions
 
+- For Penny Raw Capture Worker: begin pilot use and confirm append/verification behavior in actual capture requests.
+- For Main Assistant: process raw inbox rows only when Rob authorizes or requests review.
 - For Office Leaks Consulting HQ: develop local-service-business positioning, offers, lead-leak materials, proposal/portfolio packet, outreach path, and repeatable delivery method.
 - For Business: guide parent strategy and decide later whether Office Leaks should remain a Business HQ department or grow into a separate top-level business division.
-- For Engineering: continue delivery-playbook architecture for bite-sized local service office cleanup offers, including the human-system delivery layer.
+- For Engineering: continue delivery-playbook architecture and worker reliability support as needed.
 - For Finance: use the Office Leaks finance working records for pricing, startup costs, tool decisions, revenue tracking, and tax set-aside planning once concrete.
-- For Main Assistant: support daily execution, reminders, scheduling, outreach loops, and lightweight logistics around Office Leaks as routed.
-- For Life Logistics: keep advisory routing clean and Office Leaks logistics visible.
+- For Main Assistant: support daily execution, reminders, scheduling, outreach loops, lightweight logistics, and authorized raw-inbox processing.
+- For Life Logistics: keep advisory routing, worker routing, and Office Leaks logistics visible and clean.
 
 ## Guiding Principle
 
-GitHub is the map. Drive is the filing cabinet. Calendar owns time. Todoist owns Rob-facing actions. Gmail owns communications. Captain's Log records meaningful operational sessions.
+GitHub is the map. Drive is the filing cabinet. Calendar owns time. Todoist owns Rob-facing actions. Gmail owns communications. Workers execute narrow contracts. Captain's Log records meaningful operational sessions.
 
 Use RPR when reliable structured-file editing matters more than connector automation.
