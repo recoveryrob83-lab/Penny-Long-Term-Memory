@@ -40,6 +40,31 @@ Scheduled tasks are not long-lived department chats. They should be treated as e
 
 Read scheduled-task files only when Rob asks about scheduled tasks, Life Logistics HQ is doing system review, Main Assistant needs morning-report notes, or a department is told to check its memo inbox.
 
+## Worker Layer
+
+Life OS workers live under:
+
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+- `workers/<worker-name>/`
+
+Workers are narrow operational executors, not departments or HQs.
+
+A worker should not automatically follow the global department boot sequence.
+
+Worker boot order:
+
+1. `workers/WORKER_STANDARD.md`
+2. The worker's `WORKER_BOOT.md`
+3. The worker's `SESSION_HANDOFF.md` only when mutable resource pointers or current operational notes are needed
+
+Current worker routing:
+
+- Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
+- Penny Raw Capture Worker resource handoff: `workers/penny-raw-capture/SESSION_HANDOFF.md`
+
+If Rob names a worker, use the worker boot instead of treating it as a project department.
+
 ## Advisory Routing Check
 
 Cross-project advisories live in:
@@ -107,8 +132,8 @@ During startup:
 - Do not write to Drive or GitHub during boot.
 - Build working context from the repo files.
 - For specialist chats, summarize global context briefly and then focus on the project handoff and department identity.
-- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, scheduled-task activity, and role clarity.
-- Include advisory or scheduled-task status only if the relevant files were read for a reason.
+- For Life Logistics HQ, focus on system-level state, active projects, open loops, advisory status, scheduled-task activity, worker-layer status, and role clarity.
+- Include advisory, worker, or scheduled-task status only if the relevant files were read for a reason.
 - Ask only if the next action is genuinely ambiguous.
 
 ## System Architecture
@@ -128,6 +153,10 @@ Gmail owns communication evidence.
 `coordination/ADVISORY_INDEX.md` owns advisory dashboard state.
 
 `coordination/DEPARTMENT_EVENT_INBOX.md` is historical/frozen unless explicitly reactivated.
+
+Departments own domains, judgment, strategy, and durable state.
+
+Workers execute narrow procedures under stable contracts.
 
 Project chats create project knowledge.
 
