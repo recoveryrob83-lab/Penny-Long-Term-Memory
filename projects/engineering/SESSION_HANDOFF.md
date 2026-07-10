@@ -1,6 +1,6 @@
 # Chief Engineering Penny Session Handoff
 
-Updated: 2026-07-06
+Updated: 2026-07-10
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Project-specific handoff for engineering and software architecture chats.
 
@@ -8,10 +8,10 @@ Purpose: Project-specific handoff for engineering and software architecture chat
 
 - Project Owner: Rob
 - Primary Chat: Chief Engineering Penny / Engineering HQ
-- Current Phase: Active / First Engineering Research Track Started
-- Primary Systems: GitHub, GitHub software repositories when created, Google Drive, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
+- Current Phase: Active / Connector Reliability, Worker Architecture, and Office Leaks Delivery Architecture
+- Primary Systems: GitHub, dedicated software repositories when created, Google Drive, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
 - Sensitivity Level: Moderate
-- GitHub Rule: Keep Life OS GitHub memory abstract. Never store secrets, credentials, tokens, API keys, or sensitive implementation details in memory files.
+- GitHub Rule: Keep Life OS GitHub memory abstract. Never store secrets, credentials, tokens, API keys, private user data, or sensitive implementation details in memory files.
 
 ## Department Identity
 
@@ -28,153 +28,223 @@ When Rob opens or refreshes Chief Engineering Penny:
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
 2. Read this project handoff.
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
-4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md` if present.
+4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
 5. Read `coordination/ADVISORY_INDEX.md` when advisory routing or cross-department advisory status is relevant.
-6. Read `coordination/boards/engineering.md` when Engineering needs to create, consume, or verify an Engineering advisory.
+6. Read `coordination/boards/engineering.md` when Engineering needs to create, consume, verify, or reconcile an Engineering advisory.
 7. Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing; it is frozen historical record unless Rob explicitly reactivates it.
 8. Use GitHub, Drive, Todoist, Calendar, Gmail, or RPR only as needed for the specific engineering task.
 9. Keep Life OS memory abstract.
-10. Route product strategy, positioning, customer discovery, market research, and roadmap priority to Chief Business HQ.
+10. Route product strategy, positioning, customer discovery, market research, and roadmap priority to Chief Business HQ or Office Leaks Consulting HQ.
 11. Route cost, subscriptions, tool budgeting, or paperwork overlap to Chief of Finance Penny.
 12. Route one-off daily execution to Main Assistant when appropriate.
 13. Route cross-project memory and housekeeping to Life Logistics HQ.
 
 ## Current Project Status
 
-Chief Engineering Penny has been activated as a specialist department.
+Chief Engineering Penny is active as a specialist department.
 
 Its scope is technical architecture and implementation planning, not business strategy.
 
-Chief Business HQ defines what should be built and why.
+Chief Business HQ and Office Leaks Consulting HQ define what should be built and why.
 
 Chief Engineering Penny defines how to build it safely, coherently, and in the right order.
 
-Engineering has consumed the Life OS advisory routing simplification. Advisory Index now owns active advisory routing state. Department Event Inbox is frozen historical record only. Todoist remains for Rob-facing action items.
+Engineering has consumed the simplified Life OS advisory routing model. The Advisory Index owns active routing state. Department Event Inbox is frozen historical record. Todoist remains for Rob-facing action items.
 
-Engineering has ingested ADV-20260704-002 from Chief Business HQ. Connector write reliability is now treated as a first-class Penny product architecture risk.
+## Current Engineering Tracks
 
-The first concrete engineering research track is:
+### 1. Reliable Connector Execution Layer
 
-- Reliable Connector Execution Layer
+Connector write reliability remains a first-class Penny product architecture risk.
 
-This track should evaluate operation ledgers / write-ahead logs, connector health states, idempotent writes, retry/backoff, degraded-mode UX, RPR/export fallback, queue-first execution, human approval checkpoints, and multi-provider abstraction.
+The track should evaluate:
 
-Working design note created in Drive:
+- operation ledgers and write-ahead logs,
+- connector health states,
+- idempotent writes,
+- bounded retry/backoff,
+- degraded-mode user experience,
+- RPR/export/manual-upload fallback,
+- queue-first execution,
+- human approval checkpoints,
+- multi-provider abstraction,
+- and explicit verified/unverified/failed operation states.
+
+Working design note:
 
 - `Reliable Connector Execution Layer - Design Note`
 - https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
 
-## Advisory Procedure
+### 2. Life OS Worker Architecture
 
-When Engineering creates an advisory for another department:
+Engineering completed the first formal Life OS worker architecture through ADV-20260709-029 and ADV-20260709-030.
 
-1. Create or update the appropriate Engineering advisory board entry, usually `coordination/boards/engineering.md`.
-2. Update `coordination/ADVISORY_INDEX.md` as the sole active routing dashboard, pointing to the source board and naming the target department.
-3. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reactivates it.
-4. Do not create Todoist reminders for department synchronization unless Rob explicitly asks.
-5. Keep all entries short, abstract, and non-sensitive.
-6. Report to Rob what was created or changed.
+Durable worker layer:
 
-For multi-target advisories, track target departments in the Advisory Index entry and source-board advisory text. Do not mark acknowledged or implemented until all required targets have reported read or handled status to Rob, unless the source department records separate per-target acknowledgements.
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+
+First worker package:
+
+- `workers/penny-raw-capture/WORKER_BOOT.md`
+- `workers/penny-raw-capture/SESSION_HANDOFF.md`
+
+Penny Raw Capture Worker mission:
+
+> Capture first. Organize later.
+
+The worker appends raw information to the canonical Google Sheet `Life OS Raw Capture Inbox` and leaves downstream processing to Main Assistant Penny.
+
+Engineering standards now formalized for workers:
+
+- narrow scope,
+- canonical resource identity,
+- explicit connector invocation when needed,
+- no fabricated success,
+- post-write verification,
+- precise failure states,
+- privacy and source-of-truth boundaries,
+- and escalation outside worker authority.
+
+The first worker is implemented and ready for pilot use. Engineering should observe reliability before recommending additional workers.
+
+### 3. Office Leaks Delivery Architecture
+
+Engineering supports Office Leaks Consulting with two integrated delivery layers.
+
+Mechanical workflow layer:
+
+- map,
+- score,
+- scope,
+- sprint,
+- verify,
+- handoff,
+- follow up.
+
+Human-system layer:
+
+- respect,
+- rapport,
+- internal champion,
+- users,
+- Aha Moment,
+- adoption verification,
+- relational follow-up.
+
+Current Engineering references:
+
+- `projects/engineering/notebook/NOTE-20260708-005-office-leak-delivery-playbooks-v1.md`
+- `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
+
+Related Drive document:
+
+- `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
+
+## Advisory State
+
+Canonical Advisory Index state:
+
+- No open advisories.
+- ADV-20260709-029 is closed / implemented through ADV-20260709-030.
+- ADV-20260709-030 is implemented by Life Logistics HQ.
+
+Known synchronization issue:
+
+- `coordination/boards/engineering.md` still displays ADV-20260709-030 under Open Advisories with stale `Open / Unacknowledged` language.
+- The Advisory Index, global handoff, open loops, and implementation report all record 030 as implemented.
+- Reconcile the source-board entry with the implemented state when a safe full-file update is practical.
+
+Do not update Department Event Inbox.
 
 ## Objectives
 
 - Translate business requirements into technical requirements.
-- Design software architecture, repositories, APIs, data models, automation flows, and testing plans.
+- Design software architecture, repositories, APIs, data models, automation flows, worker contracts, and testing plans.
 - Identify dependencies, risks, cost-bearing technical choices, and implementation sequence.
 - Prepare build-ready implementation packets.
-- Coordinate with Business, Finance, Main Assistant, and Life Logistics HQ when work overlaps their scope.
+- Coordinate with Business, Office Leaks, Finance, Main Assistant, and Life Logistics HQ when work overlaps their scope.
 - Keep GitHub memory abstract unless working in a dedicated software repository.
-- Use the Advisory Index and Engineering advisory board for cross-department synchronization when Engineering emits advisories.
+- Use the Advisory Index and Engineering advisory board for cross-department synchronization.
 
-## Completed Work
+## Completed Recent Work
 
-- 2026-07-06: Adopted simplified advisory routing: source board plus Advisory Index only; Department Event Inbox frozen historical.
-- 2026-07-04: Created `Reliable Connector Execution Layer - Design Note` in Drive.
-- 2026-07-04: Ingested ADV-20260704-002 and created the Reliable Connector Execution Layer research track.
-- 2026-07-03: Created Chief Engineering Penny / Engineering HQ project folder and department files.
-- 2026-07-03: Added Engineering setup to Life OS routing and project map where needed.
-- 2026-07-03: Created Engineering Drive working folder and initial scaffolding files.
-- 2026-07-03: Created Engineering advisories ADV-20260703-006 and ADV-20260703-007.
-- 2026-07-03: Consumed initial Department Event Inbox / Advisory Watcher procedure; later superseded by simplified Advisory Index routing.
+- 2026-07-09: Acknowledged ADV-20260709-029 and completed rapid-capture worker architecture.
+- 2026-07-09: Created ADV-20260709-030 for Life Logistics implementation.
+- 2026-07-09: Life Logistics implemented the worker layer and Penny Raw Capture Worker package.
+- 2026-07-08: Created Office Leaks delivery-playbook and human-system architecture notes.
+- 2026-07-08: Life Logistics implemented ADV-20260708-027 and synchronized Engineering architecture across Life OS.
+- 2026-07-06: Adopted simplified advisory routing.
+- 2026-07-04: Created the Reliable Connector Execution Layer design note.
+- 2026-07-04: Ingested ADV-20260704-002 and made connector reliability a first-class architecture risk.
+- 2026-07-03: Activated Chief Engineering Penny and created initial project scaffolding.
 
 ## Active Open Loops
 
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
-- Draft operation ledger / write-ahead log schema for intended connector writes.
-- Define idempotency, retry/backoff, connector health, degraded-mode UX, and RPR/export fallback patterns.
-- Coordinate with Chief Business HQ to translate the reliability design into product requirements.
-- Coordinate with Chief of Finance Penny before committing to cost-bearing tools, hosting, queues, APIs, or subscriptions.
-- Help refine advisory routing, boot reliability, or connector architecture if Rob routes that work back to Engineering.
+- Draft operation ledger / write-ahead log schema.
+- Define idempotency, verification, retry/backoff, connector health, degraded-mode UX, and RPR/export fallback patterns.
+- Pilot Penny Raw Capture Worker and observe actual append and verification behavior.
+- Continue Office Leaks one-problem delivery architecture as Business requirements mature.
+- Support future worker architecture only when a repeatable bounded job justifies a worker.
+- Reconcile the stale ADV-20260709-030 source-board status when safe.
+- Coordinate with Chief Business HQ and Office Leaks Consulting HQ on requirements.
+- Coordinate with Chief of Finance Penny before cost-bearing infrastructure commitments.
 
 ## Working Documents / Links
 
 - GitHub memory project folder: `projects/engineering/`
 - Engineering advisory board: `coordination/boards/engineering.md`
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
-- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only
+- Worker root: `workers/`
+- Department Event Inbox: historical/frozen only
 - Drive working folder: Life Organization > Chief Engineering Penny
 - Drive working docs:
   - `Engineering HQ - Technical Baseline`
   - `Engineering HQ - Implementation Packet Template`
   - `Engineering HQ - Tracker`
-  - `Reliable Connector Execution Layer - Design Note`: https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
+  - `Reliable Connector Execution Layer - Design Note`
+  - `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
 - Software repositories should be separate from Life OS memory when created.
-- Todoist owns Rob-facing engineering action reminders only.
+- Todoist owns Rob-facing engineering action reminders.
 - Calendar owns engineering meetings and deadlines.
-- Drive or RPR should hold working design docs, implementation packets, and generated artifacts when useful.
-
-## Source Systems
-
-- GitHub memory repo: abstract Engineering HQ state, handoff, open loops, status, role clarity, advisory board, and Advisory Index routing notes.
-- Dedicated software repos: code, technical docs, issues, branches, PRs, tests, and implementation artifacts when created.
-- Google Drive: working docs, design notes, architecture docs, and generated artifacts.
-- Todoist: Rob-facing tasks, reminders, follow-ups, and implementation actions.
-- Calendar: meetings, deadlines, and scheduled work.
-- Gmail: communications and evidence when needed.
-- RPR/user-mediated files: reliable path for structured records.
-- Department Event Inbox: frozen historical synchronization/read/ingestion register only.
+- Drive or RPR should hold working design docs, implementation packets, and generated artifacts.
 
 ## Connector / Safety Notes
 
 - Prefer small, verifiable updates.
 - Verify connector writes when possible.
-- Never place secrets, credentials, tokens, or API keys in GitHub memory.
-- Use RPR when reliability matters.
+- Never place secrets, credentials, tokens, API keys, or private operational data in GitHub memory.
+- Use RPR when reliability matters more than automation.
 - Do not repeatedly retry writes that trigger safety blocks.
-- For future product design, connector writes need observable operation states and durable recovery paths.
-
-## Privacy / Security Guardrails
-
-GitHub memory may store department scope, abstract open loops, routing notes, and non-sensitive status summaries.
-
-Operational details belong in the proper working system.
-
-Secrets and credentials should never be pasted into chat or committed to GitHub.
+- Connector-dependent execution needs observable operation states and durable recovery paths.
+- Never claim an external operation succeeded without an actual successful tool operation.
 
 ## Decision Log
 
 - Chief Engineering Penny is a specialist department.
-- Chief Business HQ defines what to build and why.
+- Chief Business HQ and Office Leaks Consulting HQ define what should be built and why.
 - Chief Engineering Penny defines how to build and in what order.
 - Chief of Finance Penny owns cost and paperwork overlap.
-- Main Assistant handles daily one-off execution.
+- Main Assistant handles daily one-off execution and authorized raw-inbox processing.
 - Life Logistics HQ keeps the Life OS cross-project map tidy.
 - Advisory Index owns active advisory routing state.
-- Department Event Inbox is frozen historical record only unless Rob explicitly reactivates it.
+- Department Event Inbox is frozen unless Rob explicitly reactivates it.
 - Todoist owns Rob-facing action items.
-- Reliable Connector Execution Layer is the first concrete Engineering research track after ADV-20260704-002.
+- Reliable Connector Execution Layer remains the first concrete Engineering research track.
+- Workers are narrow operational executors under stable contracts, not miniature departments.
 
 ## Immediate Next Actions
 
-1. Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
-2. Draft the operation ledger schema.
-3. Draft connector health and retry/backoff policy.
-4. Coordinate with Business HQ on product requirements and Finance on cost-bearing infrastructure.
-5. Update this handoff after meaningful engineering work.
+1. Pilot Penny Raw Capture Worker in real use.
+2. Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
+3. Draft the operation ledger schema.
+4. Draft connector health and retry/backoff policy.
+5. Continue Office Leaks delivery architecture when requirements arrive.
+6. Reconcile the stale Engineering source-board status for ADV-20260709-030 when safe.
 
 ## Notes for Next Penny
 
-This chat is Chief Engineering Penny when booted directly. It should not absorb Business, Finance, Main Assistant, or Life Logistics work. It should turn product requirements into build-ready technical plans and use the Engineering advisory board plus Advisory Index for cross-department synchronization.
+This chat is Chief Engineering Penny when booted directly. It should not absorb Business, Finance, Main Assistant, or Life Logistics work. It should turn requirements into build-ready technical plans and use the Engineering advisory board plus Advisory Index for cross-department synchronization.
 
-The current first engineering workstream is Reliable Connector Execution Layer: make Penny connector-dependent execution observable, verified, recoverable, idempotent, and user-safe.
+The active engineering themes are connector reliability, verified external operations, bounded worker architecture, and practical Office Leaks delivery design.
