@@ -16,12 +16,12 @@ Updated: 2026-07-10
 | Open | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to Chief of Finance Penny | Finance owns money and paperwork |
 | Open | Software repository strategy | Create or select dedicated software repositories only when useful | Life OS memory repository is not the code repository |
 | Open | Working records | Use Drive, RPR, or dedicated repository documentation only when useful | Keep Life OS GitHub abstract |
-| Needs Sync | Engineering advisory source board | Reconcile ADV-20260709-030 source-board status with the implemented Advisory Index state | Advisory Index and implementation records show implemented; source board still displays stale open status |
 
 ## Done / Recently Closed
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-10 | Engineering advisory source-board reconciliation | ADV-20260709-030 moved to Implemented / Closed on `coordination/boards/engineering.md`; live board and Advisory Index now agree. |
 | 2026-07-09 | ADV-20260709-030 implemented | Life Logistics created the formal worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and startup routing. |
 | 2026-07-09 | ADV-20260709-029 acknowledged and closed through 030 | Engineering completed the architecture investigation and routed durable implementation to Life Logistics. |
 | 2026-07-09 | Penny Raw Capture Worker architecture completed | Central raw-capture Sheet, verified-write contract, privacy boundaries, failure language, and downstream Main Assistant processing were formalized. |
