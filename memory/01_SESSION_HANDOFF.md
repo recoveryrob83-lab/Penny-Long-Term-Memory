@@ -33,7 +33,7 @@ PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term plat
 
 ## Worker Layer
 
-Life OS now has a formal worker layer separate from departments and HQs.
+Life OS has a formal worker layer separate from departments and HQs.
 
 Worker root:
 
@@ -72,6 +72,8 @@ Preserve project history. Do not delete department files.
 - Shared worker standard: `workers/WORKER_STANDARD.md`.
 - Advisory dashboard: `coordination/ADVISORY_INDEX.md`.
 - Advisory details: `coordination/boards/`.
+- Advisory Board Lifecycle Standard: `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md`.
+- Initial high-use board review: `coordination/ADVISORY_BOARD_REVIEW_2026-07-10.md`.
 - Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only.
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`.
 - Pending Advisory Boards standard: `coordination/PENDING_ADVISORY_BOARDS.md`.
@@ -88,9 +90,11 @@ The target department is named inside the advisory and routed through the Adviso
 
 The Advisory Index is the sole active routing dashboard. It should show open advisory ID, source board path, and target department.
 
-Do not update Department Event Inbox for normal advisory routing unless Rob explicitly reactivates it.
+Operational boards follow `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md` and should keep all open advisories plus a bounded recent completed working set.
 
-Template language uses `Posted Board` and `Target Department` rather than ambiguous `Target Board` language.
+Git history is the default archive for completed advisory text removed during justified compaction.
+
+Do not update Department Event Inbox for normal advisory routing unless Rob explicitly reactivates it.
 
 ## Current Decision Rules
 
@@ -110,6 +114,7 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- ADV-20260710-031 — Implemented / Closed; Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted.
 - ADV-20260709-030 — Implemented by Life Logistics; formal worker layer, worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and boot routing created.
 - ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; Engineering completed the architecture and Life Logistics implemented the resulting worker package. No separate work remains.
 - 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
@@ -117,9 +122,6 @@ Recently implemented / acknowledged:
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
 - ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
-- ADV-20260707-024 — Business HQ parent-state refreshed for VA Business priority.
-- ADV-20260707-023 — Finance state refreshed for Virtual Assistant income stream.
-- ADV-20260707-021 — Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 ## Office Leaks Operating Philosophy
 
@@ -156,11 +158,10 @@ Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, r
 - For Penny Raw Capture Worker: begin pilot use and confirm append/verification behavior in actual capture requests.
 - For Main Assistant: process raw inbox rows only when Rob authorizes or requests review.
 - For Office Leaks Consulting HQ: develop local-service-business positioning, offers, lead-leak materials, proposal/portfolio packet, outreach path, and repeatable delivery method.
-- For Business: guide parent strategy and decide later whether Office Leaks should remain a Business HQ department or grow into a separate top-level business division.
+- For Business: guide parent strategy and preserve capacity for future businesses.
 - For Engineering: continue delivery-playbook architecture and worker reliability support as needed.
-- For Finance: use the Office Leaks finance working records for pricing, startup costs, tool decisions, revenue tracking, and tax set-aside planning once concrete.
-- For Main Assistant: support daily execution, reminders, scheduling, outreach loops, lightweight logistics, and authorized raw-inbox processing.
-- For Life Logistics: keep advisory routing, worker routing, and Office Leaks logistics visible and clean.
+- For Finance: use the Office Leaks finance working records when pricing, costs, revenue, or tax planning become concrete.
+- For Life Logistics: maintain advisory-board hygiene under the lifecycle standard without turning compaction into recurring bureaucracy.
 
 ## Guiding Principle
 
