@@ -14,6 +14,39 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-09 — Nightly Sync: Office Leaks HQ Post-Elevation Verification
+
+### Summary
+
+Ran Life Logistics nightly boot and sync after Office Leaks Consulting was elevated to a business-unit HQ under Chief Business HQ.
+
+### Findings
+
+- Global startup routing correctly points Office Leaks chats to `projects/office-leaks-consulting/SESSION_HANDOFF.md`.
+- The old `projects/virtual-assistant-business/` path correctly redirects to Office Leaks Consulting HQ and remains historical context only.
+- Office Leaks HQ handoff, identity, boot guide, sync checklist, status, open loops, and notebook scaffold are present and coherent.
+- Active Projects correctly lists Office Leaks Consulting HQ as an active business-unit department and Virtual Assistant Business as legacy/redirect context.
+- No open advisories are listed in the Advisory Index.
+- Engineering HQ Daily Sync remains the only active scheduled-task pilot.
+- Scheduled-task run and issue logs contain no newer entries after 2026-07-05.
+
+### Completed Work
+
+- Verified the canonical global boot route.
+- Verified Office Leaks HQ boot/sync surfaces.
+- Verified active-project and open-loop state.
+- Verified advisory state.
+- Verified scheduled-task state.
+- No additional structural corrections were required.
+
+### Decision / Lesson
+
+The Office Leaks elevation is stable. Active work should now start from `projects/office-leaks-consulting/`, while the former VA folder remains a safe historical redirect until Rob later decides whether to archive or delete it.
+
+### Next Best Action
+
+Boot the Office Leaks specialist chat from its new HQ files and continue first-offer, lead-leak, outreach, and delivery-method work.
+
 ## 2026-07-09 — Office Leaks Consulting Elevated To Business-Unit HQ
 
 ### Summary
@@ -80,38 +113,5 @@ The name of the durable project folder should match the actual business reality.
 ### Next Best Action
 
 Boot future Office Leaks specialist chats from `projects/office-leaks-consulting/BOOT_SYNC.md` and `projects/office-leaks-consulting/SESSION_HANDOFF.md`.
-
-## 2026-07-08 — Advisory Consumption: Office Leaks Engineering and Finance Sync
-
-### Summary
-
-Life Logistics consumed ADV-20260708-027 from Engineering and ADV-20260708-028 from Finance.
-
-### Findings
-
-- Engineering added an Office Leaks human-system delivery layer to its delivery architecture.
-- Engineering reference note: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`.
-- Finance created a dedicated Office Leaks finance working layer in Drive and an abstract GitHub pointer file.
-- Finance pointer file: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`.
-- GitHub should continue storing pointers and abstract routing only; Drive owns detailed finance models, pricing notes, startup costs, revenue records, and tax set-aside planning.
-
-### Completed Work
-
-- Marked ADV-20260708-027 and ADV-20260708-028 implemented in `coordination/ADVISORY_INDEX.md`.
-- Updated `coordination/boards/engineering.md` and `coordination/boards/finance.md` to record Life Logistics implementation.
-- Updated global handoff, active project map, open loops, Life Logistics handoff, Business HQ handoff/status/open loops, and VA/Office Leaks worker handoff.
-- Preserved the decision not to rename or restructure `projects/virtual-assistant-business/` unless Rob explicitly authorizes it.
-
-### Decision / Lesson
-
-Office Leaks now has three discoverable support layers in GitHub:
-
-1. Business / worker project: `projects/virtual-assistant-business/`.
-2. Engineering delivery architecture: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`.
-3. Finance working-record pointer: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`.
-
-### Next Best Action
-
-Proceed with Office Leaks strategy and execution work through Business HQ / the VA worker project. Route delivery-template questions to Engineering and pricing/cost/tax questions to Finance.
 
 (Older detailed entries are retained in repository history.)
