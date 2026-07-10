@@ -19,13 +19,12 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 ## Consolidated / Dormant Domains
 
 - Work Search: consolidated into Main Assistant for current lightweight logistics and reminders.
-- Support Pathway: consolidated into Main Assistant for current lightweight research and logistics.
+- Support Pathway: consolidated into Main Assistant for current lightweight logistics and reminders.
 - Daily Anchors / Recovery Logistics: dormant until Rob reactivates it; routine calendar/Todoist items may route through Main Assistant.
 - Philosophy HQ: dormant until Rob reactivates it; chat/workbench activity continues outside active HQ overhead.
 
 ## Waiting On
 
-- ADV-20260709-029: Engineering-targeted implementation request from Main Assistant remains open in the Advisory Index; Engineering has completed initial architecture investigation and emitted ADV-20260709-030, now implemented by Life Logistics.
 - Penny Raw Capture Worker pilot: confirm reliable append and verification behavior in actual use.
 - Raw capture processing: Main Assistant should process rows where `Processed = No` only when Rob authorizes or requests inbox review.
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
@@ -38,6 +37,7 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Done / Recently Closed
 
+- 2026-07-09: ADV-20260709-029 closed / implemented through ADV-20260709-030; no separate work remains.
 - 2026-07-09: ADV-20260709-030 implemented; formal Life OS worker layer and Penny Raw Capture Worker package created.
 - 2026-07-09: Canonical `Life OS Raw Capture Inbox` verified by stable Sheet ID; no replacement or duplicate was created.
 - 2026-07-09: Office Leaks Consulting elevated from VA worker project to business-unit HQ under Chief Business HQ; new folder created at `projects/office-leaks-consulting/`.
@@ -68,4 +68,3 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Chief of Finance Penny: budget / bills / dashboard later.
 - Chief Business HQ: add more Drive/RPR strategy records only when useful.
 - Chief Wellness HQ: add working records only when useful.
-- Home Base Logistics, Stability Routines, Project Slot 07, and historical log import remain optional.
