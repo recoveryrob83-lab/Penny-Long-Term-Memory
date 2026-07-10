@@ -10,7 +10,7 @@ None.
 ## Acknowledged / Implemented Advisories
 
 - ADV-20260709-030 — Implemented — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Formal Life OS worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and worker boot routing created.
-- ADV-20260709-029 — Acknowledged / Architecture Complete / Implementation Routed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed the rapid capture worker architecture and routed durable worker-layer implementation to Life Logistics through ADV-20260709-030.
+- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030 — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed the rapid capture worker architecture; Life Logistics implemented the resulting worker package under ADV-20260709-030. No separate work remains.
 - ADV-20260708-028 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged — Posted Board: `coordination/boards/business.md` — Target Departments: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ — Office Leaks operating philosophy reviewed by all target departments.
