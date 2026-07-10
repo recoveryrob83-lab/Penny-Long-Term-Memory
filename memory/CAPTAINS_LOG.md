@@ -14,6 +14,61 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-09 — ADV-20260709-030 Implemented: Life OS Worker Layer
+
+### Summary
+
+Life Logistics implemented Engineering advisory ADV-20260709-030 and created the formal Life OS worker layer plus the first worker, Penny Raw Capture Worker.
+
+### Architecture Created
+
+Worker root:
+
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+
+Penny Raw Capture Worker package:
+
+- `workers/penny-raw-capture/WORKER_BOOT.md`
+- `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- `workers/penny-raw-capture/IMPLEMENTATION_REPORT.md`
+
+### Canonical Resource Verification
+
+Verified the populated/current Google Sheet:
+
+- Title: `Life OS Raw Capture Inbox`
+- File ID: `1CyhRsh-mByIfWwgiRSUDDD9rkHmvUj_y54iK8a327to`
+- Required schema: `Captured At`, `Raw Note`, `Processed`
+- Five unprocessed rows were observed during verification.
+
+No duplicate Sheet was created, renamed, deleted, or modified.
+
+The Sheet timezone discrepancy remains documented: worker timestamps must use `America/Chicago`; Life Logistics did not silently change the spreadsheet's observed `America/Los_Angeles` configuration.
+
+### Routing / State Updates
+
+- Added worker routing to `memory/STARTUP_BOOT.md`.
+- Added worker-layer orientation to `memory/00_START_HERE.md`.
+- Added the worker layer and raw capture worker to `memory/01_SESSION_HANDOFF.md`.
+- Added pilot and downstream processing loops to `memory/05_OPEN_LOOPS.md`.
+- Updated `projects/main-assistant/SESSION_HANDOFF.md` so Main Assistant is the downstream processor for rows where `Processed = No`.
+- Marked ADV-20260709-030 implemented in `coordination/ADVISORY_INDEX.md`.
+
+### Decision / Lesson
+
+Departments own judgment, strategy, and durable state. Workers execute narrow procedures under stable contracts.
+
+Penny Raw Capture Worker follows:
+
+> Capture first. Organize later.
+
+It must never claim storage success without a real connector write and verification.
+
+### Next Best Action
+
+Pilot the worker with real capture requests. Main Assistant should process the raw inbox only when Rob authorizes or requests review.
+
 ## 2026-07-09 — Nightly Sync: Office Leaks HQ Post-Elevation Verification
 
 ### Summary
@@ -26,92 +81,15 @@ Ran Life Logistics nightly boot and sync after Office Leaks Consulting was eleva
 - The old `projects/virtual-assistant-business/` path correctly redirects to Office Leaks Consulting HQ and remains historical context only.
 - Office Leaks HQ handoff, identity, boot guide, sync checklist, status, open loops, and notebook scaffold are present and coherent.
 - Active Projects correctly lists Office Leaks Consulting HQ as an active business-unit department and Virtual Assistant Business as legacy/redirect context.
-- No open advisories are listed in the Advisory Index.
-- Engineering HQ Daily Sync remains the only active scheduled-task pilot.
-- Scheduled-task run and issue logs contain no newer entries after 2026-07-05.
-
-### Completed Work
-
-- Verified the canonical global boot route.
-- Verified Office Leaks HQ boot/sync surfaces.
-- Verified active-project and open-loop state.
-- Verified advisory state.
-- Verified scheduled-task state.
-- No additional structural corrections were required.
+- No open advisories were listed at that sync.
+- Engineering HQ Daily Sync remained the only active scheduled-task pilot.
 
 ### Decision / Lesson
 
-The Office Leaks elevation is stable. Active work should now start from `projects/office-leaks-consulting/`, while the former VA folder remains a safe historical redirect until Rob later decides whether to archive or delete it.
+The Office Leaks elevation is stable. Active work should start from `projects/office-leaks-consulting/`, while the former VA folder remains a safe historical redirect until Rob later decides whether to archive or delete it.
 
 ### Next Best Action
 
 Boot the Office Leaks specialist chat from its new HQ files and continue first-offer, lead-leak, outreach, and delivery-method work.
-
-## 2026-07-09 — Office Leaks Consulting Elevated To Business-Unit HQ
-
-### Summary
-
-Rob authorized elevating the former Virtual Assistant Business worker project into Office Leaks Consulting HQ.
-
-### Decision
-
-Office Leaks Consulting is now an active business-unit department under Chief Business HQ, similar to a vice-president-level operating department.
-
-Chief Business HQ remains the parent strategy department and preserves capacity for future businesses.
-
-Office Leaks Consulting HQ owns Office Leaks execution continuity, service materials, delivery readiness, offer artifacts, and business-unit state.
-
-### Completed Work
-
-Created active Office Leaks HQ folder:
-
-- `projects/office-leaks-consulting/`
-
-Created Office Leaks files:
-
-- `README.md`
-- `DEPARTMENT_IDENTITY.md`
-- `PROJECT_IDENTITY.md`
-- `SESSION_HANDOFF.md`
-- `BOOT_SYNC.md`
-- `SYNC_CHECKLIST.md`
-- `status.md`
-- `open_loops.md`
-- `NOTEBOOK.md`
-- `notebook/README.md`
-
-Created Office Leaks advisory board:
-
-- `coordination/boards/office-leaks.md`
-
-Updated routing / context files:
-
-- `memory/STARTUP_BOOT.md`
-- `memory/01_SESSION_HANDOFF.md`
-- `memory/04_ACTIVE_PROJECTS.md`
-- `memory/05_OPEN_LOOPS.md`
-- `projects/README.md`
-- `projects/life-logistics-hq/SESSION_HANDOFF.md`
-- `projects/business-development/SESSION_HANDOFF.md`
-- `projects/business-development/status.md`
-- `projects/business-development/open_loops.md`
-
-Converted legacy VA files to redirect context:
-
-- `projects/virtual-assistant-business/README.md`
-- `projects/virtual-assistant-business/SESSION_HANDOFF.md`
-- `projects/virtual-assistant-business/DEPARTMENT_IDENTITY.md`
-- `projects/virtual-assistant-business/PROJECT_IDENTITY.md`
-- `projects/virtual-assistant-business/status.md`
-- `projects/virtual-assistant-business/open_loops.md`
-- `projects/virtual-assistant-business/NOTEBOOK.md`
-
-### Decision / Lesson
-
-The name of the durable project folder should match the actual business reality. Office Leaks is no longer just a VA project; it is a focused business-unit HQ under Business HQ.
-
-### Next Best Action
-
-Boot future Office Leaks specialist chats from `projects/office-leaks-consulting/BOOT_SYNC.md` and `projects/office-leaks-consulting/SESSION_HANDOFF.md`.
 
 (Older detailed entries are retained in repository history.)
