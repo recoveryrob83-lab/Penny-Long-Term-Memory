@@ -15,113 +15,65 @@ None.
 - From: Main Assistant Penny
 - To: Chief Engineering Penny
 - Priority: High
-- Status: Acknowledged / Architecture Complete / Implementation Routed
-- Acknowledged: 2026-07-09
-- Related Project(s): Life OS, Main Assistant, GitHub notebooks, custom GPT workers, rapid capture workflow, connector routing, nightly notebook review
+- Status: Closed / Implemented Through ADV-20260709-030
+- Closed: 2026-07-09
+- Related Project(s): Life OS, Main Assistant, worker architecture, rapid capture workflow, connector routing, raw capture processing
 - Source Location: `projects/main-assistant/NOTEBOOK.md`
 - Source Note: `2026-07-09 — Dedicated rapid capture worker GPT`
 - Posted Board: `coordination/boards/main-assistant.md`
-- Target Department(s): Chief Engineering Penny
+- Target Department: Chief Engineering Penny
 - Engineering Follow-up Advisory: `ADV-20260709-030`
 
 #### Summary
 
-Rob wants to implement a dedicated lightweight GPT / worker for rapid midday idea and request capture, especially when Marqueto provides several requests or ideas in quick succession.
+Rob requested a dedicated lightweight worker for rapid midday idea and request capture, especially when several requests or ideas arrive in quick succession.
 
-The worker should let Rob type or speak quickly, determine the likely department or project, apply standard routing metadata, and write the capture into the appropriate GitHub notebook using a consistent template.
+The requested outcome was a narrow, low-friction intake path that preserves information first and leaves classification, routing, prioritization, task creation, advisories, and project-state changes for later processing.
 
-The worker is not intended to replace Main Assistant, department HQs, or nightly review. Its role is narrow: preserve incoming thoughts and requests with minimal friction so they can be reviewed, deduplicated, prioritized, promoted, or discarded later.
+#### Engineering Architecture Decision
 
-#### Core Design Principle
+Chief Engineering Penny completed the architecture investigation and determined that the durable abstraction should be a technology-independent Life OS worker contract rather than a custom-GPT-only design.
 
-Optimize for speed and preservation, not judgment.
+Engineering selected this MVP architecture:
 
-The worker should capture first and avoid premature planning, task creation, advisory creation, or project-state changes unless Rob explicitly requests them.
+- One formal Life OS worker layer, separate from departments and HQs.
+- One central Google Sheet inbox rather than direct routing into multiple GitHub notebooks during intake.
+- Penny Raw Capture Worker as the first worker.
+- Main Assistant Penny as the downstream processor.
+- Mandatory connector invocation, canonical resource identity, post-write verification, failure truthfulness, and privacy boundaries.
 
-#### Required Worker Behavior
+Engineering routed the durable implementation package to Life Logistics HQ through ADV-20260709-030.
 
-The first implementation should support:
+#### Implementation Outcome
 
-- Rapid typed or spoken intake.
-- GitHub connector access with permission to read notebook routing instructions and write notebook captures.
-- Automatic selection of the most likely department or project notebook.
-- A standard capture template.
-- Preservation of Rob's raw wording where practical.
-- Explicit status marking as `Raw / unprocessed`.
-- No automatic Todoist tasks, Open Loop changes, advisories, project plans, or source-of-truth updates.
-- A safe fallback destination when routing confidence is low, likely Main Assistant Notebook or a dedicated capture inbox.
-- Compatibility with the existing 9:00 PM notebook review workflow.
+Life Logistics HQ implemented the complete package under ADV-20260709-030.
 
-#### Proposed Capture Fields
+Created:
 
-- Date / timestamp.
-- Source or context.
-- Raw capture.
-- Suggested routing destination.
-- Capture type: task candidate, idea, preference, fact, question, reminder, or project input.
-- Urgency signal only when clearly stated by Rob.
-- Status: Raw / unprocessed.
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+- `workers/penny-raw-capture/WORKER_BOOT.md`
+- `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- `workers/penny-raw-capture/IMPLEMENTATION_REPORT.md`
 
-#### Suggested Engineering Deliverables
+Canonical capture Sheet verified:
 
-Chief Engineering Penny should evaluate and produce the smallest viable implementation package, likely including:
+- Title: `Life OS Raw Capture Inbox`
+- Stable Sheet ID recorded in `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- Schema: `Captured At`, `Raw Note`, `Processed`
 
-1. A formal worker specification document.
-2. Reusable custom GPT instruction text.
-3. A GitHub notebook routing table.
-4. Standard capture templates for notebook entries and leaf notes.
-5. Connector setup and permission checklist.
-6. Fallback behavior for uncertain routing or failed writes.
-7. Verification rules after a GitHub write.
-8. Nightly reconciliation contract between the capture worker and Main Assistant.
-9. A simple first-run test plan using real but non-sensitive capture examples.
+Boot routing, Main Assistant downstream processing responsibility, global handoff, open loops, and advisory state were updated.
 
-#### Engineering Questions
+#### Final Closure
 
-- Should the worker write directly into department notebooks or write first into one central capture inbox that Main Assistant routes later?
-- What minimum routing taxonomy is needed for Main Assistant, Office Leaks, Housing Logistics, Job Search, Caregiver, Finance, Engineering, and Recovery-related captures?
-- How should the worker avoid overwriting or restructuring existing notebook files?
-- Should each capture append to a department `NOTEBOOK.md`, create a dated leaf note, or choose based on size/type?
-- What verification step confirms that the write succeeded and landed in the intended location?
-- What guardrails are needed to prevent sensitive personal, medical, financial, client, or credential data from entering GitHub?
-- How should the worker behave when Rob's spoken input contains several distinct items for different departments?
+ADV-20260709-029 and ADV-20260709-030 are one completed package of work:
 
-#### Suggested First Test Case
+1. ADV-029 defined the need and requested Engineering architecture.
+2. Engineering completed the architecture and created ADV-030.
+3. ADV-030 carried the durable implementation to Life Logistics.
+4. Life Logistics implemented and verified the worker layer.
 
-Use the Marqueto rapid-request scenario as the first test:
-
-- Rob speaks or types several household, caregiver, scheduling, and personal requests in one burst.
-- Worker separates distinct captures without overinterpreting them.
-- Worker routes each item to the correct notebook or fallback inbox.
-- Worker confirms what was captured and where.
-- Main Assistant reviews the captures during the nightly notebook review and promotes only the items that warrant action.
-
-#### Requested Outcome
-
-Chief Engineering Penny should acknowledge this advisory, review the source note, recommend the MVP architecture, and create the first implementation package for Rob to use as a practical custom GPT case study.
-
-#### Engineering Acknowledgement / Outcome
-
-Chief Engineering Penny acknowledged this advisory on 2026-07-09 and completed the initial architecture investigation.
-
-Engineering findings:
-
-- The durable abstraction should be a technology-independent Life OS worker contract rather than a custom-GPT-only design.
-- The first implementation should use a dedicated Penny worker chat with explicit Google Drive connector invocation and verified writes.
-- Raw intake should go first to one central Google Sheet named `Life OS Raw Capture Inbox` rather than routing directly into multiple GitHub notebooks during capture.
-- Main Assistant Penny should perform later classification, routing, task creation, advisory creation, notebook promotion, or discard decisions.
-- External-operation truthfulness, canonical resource identity, post-write verification, connector failure reporting, and privacy boundaries must be standardized for all future workers.
-- A custom GPT without Apps or a custom Action does not provide the needed storage path in Rob's current builder configuration.
-- Gemini was tested as a Drive-native alternative but showed weaker persistent resource handling and duplicate-Sheet behavior.
-
-Engineering created `ADV-20260709-030` on `coordination/boards/engineering.md`, targeting Life Logistics HQ, with the detailed implementation package for:
-
-- the Life OS worker layer,
-- `workers/WORKER_STANDARD.md`,
-- worker-specific boot routing,
-- and the first formal worker, Penny Raw Capture Worker.
-
-This advisory is acknowledged and its Engineering architecture work is complete. Durable file creation and Life OS synchronization now proceed under `ADV-20260709-030`.
+No separate implementation work remains under ADV-029.
 
 ### ADV-20260706-016 — Gemini Drive worker succeeded where direct connector writes may be risky
 
@@ -218,5 +170,3 @@ Note: attempts to update `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-
 ## Notes
 
 Main Assistant should usually read `coordination/ADVISORY_INDEX.md` first rather than scanning every board.
-
-Use this board when daily operations needs to notify or receive guidance from other departments.
