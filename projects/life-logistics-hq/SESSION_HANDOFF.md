@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -16,7 +16,7 @@ Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
 Read `projects/life-logistics-hq/DEPARTMENT_IDENTITY.md`.
 
-Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-project operational memory, advisory hygiene, routing clarity, and durable GitHub state.
+Life Logistics HQ is Rob's Chief of Staff Penny for Life OS. It curates cross-project operational memory, advisory hygiene, worker routing, role clarity, and durable GitHub state.
 
 ## Current Active Core
 
@@ -35,11 +35,37 @@ During Life Logistics boot, morning sync, nightly sync, or weekly review, remind
 
 Current active business priority is the revenue-first Office Leaks Consulting direction.
 
-Office Leaks Consulting HQ is now an active business-unit department under Chief Business HQ. It is no longer merely a Virtual Assistant Business worker project.
+Office Leaks Consulting HQ is an active business-unit department under Chief Business HQ. It is no longer merely a Virtual Assistant Business worker project.
 
 Main Assistant supports daily execution. Chief Business HQ owns parent strategy. Chief of Finance Penny supports pricing/income/expense/tax/budget decisions when concrete. Chief Engineering Penny owns technical architecture and repeatable delivery playbooks when needed.
 
 PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term productization path.
+
+## Life OS Worker Layer
+
+Life OS now has a formal worker layer separate from departments and HQs.
+
+Worker root:
+
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+
+First worker:
+
+- `workers/penny-raw-capture/WORKER_BOOT.md`
+- `workers/penny-raw-capture/SESSION_HANDOFF.md`
+
+Penny Raw Capture Worker mission:
+
+> Capture first. Organize later.
+
+The worker appends raw intake to the canonical Google Sheet `Life OS Raw Capture Inbox` and must verify external writes before claiming success.
+
+Main Assistant Penny owns downstream processing of rows where `Processed = No`.
+
+Life Logistics owns worker-root organization, durable routing, and canonical pointer hygiene. Chief Engineering Penny owns worker architecture and reliability guidance.
+
+Workers should not receive the full department boot unless their contract explicitly requires it.
 
 ## Office Leaks Logistics Context
 
@@ -80,7 +106,7 @@ Advisory board:
 
 Legacy folder:
 
-- `projects/virtual-assistant-business/` now exists as historical/redirect context only unless Rob later authorizes archival cleanup.
+- `projects/virtual-assistant-business/` exists as historical/redirect context only unless Rob later authorizes archival cleanup.
 
 ## Office Leaks Architecture / Finance Pointers
 
@@ -108,6 +134,8 @@ Preserve project history. Do not delete department files.
 
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
 - Advisory boards: `coordination/boards/`
+- Worker registry: `workers/README.md`
+- Shared Worker Standard: `workers/WORKER_STANDARD.md`
 - Office Leaks Advisory Board: `coordination/boards/office-leaks.md`
 - Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only
 - Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`
@@ -135,14 +163,13 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
-- 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ; new folder created at `projects/office-leaks-consulting/`.
+- ADV-20260709-030 — Implemented; formal Life OS worker layer and Penny Raw Capture Worker package created.
+- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; no separate work remains.
+- 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
 - ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
 - ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
-- ADV-20260707-024 — Implemented; Business HQ parent-state refreshed for VA Business priority.
-- ADV-20260707-023 — Implemented; Finance state refreshed for Virtual Assistant income stream.
-- ADV-20260707-021 — Implemented; Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 ## Role Drift Check
 
@@ -169,8 +196,10 @@ Use RPR when reliable structured-file editing matters more than connector automa
 ## Current Major Open Loops For Life Logistics
 
 - Keep simplified advisory routing clean under the source-board plus Advisory Index model.
+- Keep department and worker roles distinct.
+- Keep the Penny Raw Capture Worker canonical Sheet pointer stable and discoverable.
+- Observe the worker pilot's actual append and verification behavior.
 - Keep Office Leaks HQ, parent Business HQ, Engineering, Finance, and Main Assistant routing clear.
-- Keep Engineering and Finance Office Leaks pointers discoverable without storing sensitive details in GitHub.
 - Be ready to support Office Leaks logistics once Rob authorizes real-world outreach or visits.
 - Track whether legacy `projects/virtual-assistant-business/` should later be archived or deleted.
 - Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
@@ -180,19 +209,19 @@ Use RPR when reliable structured-file editing matters more than connector automa
 
 ## Immediate Next Actions
 
-1. Continue using Life Logistics HQ for cross-project coordination and advisory workflow cleanup.
-2. Route Office Leaks parent strategy to Chief Business HQ.
-3. Route Office Leaks execution continuity to Office Leaks Consulting HQ.
-4. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
-5. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits and Office Leaks money workflows when concrete.
-6. Keep Engineering reliability and Office Leaks delivery-playbook work visible as background architecture.
-7. Use active specialist chats for Business, Office Leaks, Engineering, Wellness, and project-sized work.
-8. Use Role Drift Check when work appears to belong elsewhere.
-9. Route discretionary spending decisions to Chief of Finance Penny when possible.
+1. Continue using Life Logistics HQ for cross-project coordination, worker routing, and advisory workflow cleanup.
+2. Pilot Penny Raw Capture Worker with real intake requests and verified writes.
+3. Route raw capture processing to Main Assistant only when Rob authorizes or requests inbox review.
+4. Route Office Leaks parent strategy to Chief Business HQ.
+5. Route Office Leaks execution continuity to Office Leaks Consulting HQ.
+6. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
+7. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits and Office Leaks money workflows when concrete.
+8. Keep Engineering reliability, worker architecture, and Office Leaks delivery-playbook work visible as background architecture.
+9. Use Role Drift Check when work appears to belong elsewhere.
 10. Prefer small verified GitHub edits.
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and consolidated lightweight logistics to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Route decisions through registered Decision Rules when they apply.
+This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and raw-capture processing to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Treat workers as narrow executors, not small departments.
 
-Boot reminder: tell Rob the active business priority is Office Leaks Consulting. PennyOS is paused, not abandoned. No open advisories are currently listed in the Advisory Index.
+Boot reminder: tell Rob the active business priority is Office Leaks Consulting. PennyOS is paused, not abandoned. Penny Raw Capture Worker is Pilot / Active. No open advisories are currently listed in the Advisory Index.
