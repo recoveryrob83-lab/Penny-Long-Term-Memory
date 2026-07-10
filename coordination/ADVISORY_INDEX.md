@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-08
+Updated: 2026-07-09
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260709-029 — Open / Unacknowledged — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering implementation request for dedicated rapid capture worker GPT.
 
 ## Acknowledged / Implemented Advisories
 
