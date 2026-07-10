@@ -5,18 +5,24 @@ Purpose: Advisories to or from Main Assistant / Daily Operations.
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260709-029 — Engineering implementation request for dedicated rapid capture worker GPT
 
 - Date: 2026-07-09
 - From: Main Assistant Penny
 - To: Chief Engineering Penny
 - Priority: High
-- Status: Open / Unacknowledged
+- Status: Acknowledged / Architecture Complete / Implementation Routed
+- Acknowledged: 2026-07-09
 - Related Project(s): Life OS, Main Assistant, GitHub notebooks, custom GPT workers, rapid capture workflow, connector routing, nightly notebook review
 - Source Location: `projects/main-assistant/NOTEBOOK.md`
 - Source Note: `2026-07-09 — Dedicated rapid capture worker GPT`
 - Posted Board: `coordination/boards/main-assistant.md`
 - Target Department(s): Chief Engineering Penny
+- Engineering Follow-up Advisory: `ADV-20260709-030`
 
 #### Summary
 
@@ -94,7 +100,28 @@ Use the Marqueto rapid-request scenario as the first test:
 
 Chief Engineering Penny should acknowledge this advisory, review the source note, recommend the MVP architecture, and create the first implementation package for Rob to use as a practical custom GPT case study.
 
-## Acknowledged / Implemented Advisories
+#### Engineering Acknowledgement / Outcome
+
+Chief Engineering Penny acknowledged this advisory on 2026-07-09 and completed the initial architecture investigation.
+
+Engineering findings:
+
+- The durable abstraction should be a technology-independent Life OS worker contract rather than a custom-GPT-only design.
+- The first implementation should use a dedicated Penny worker chat with explicit Google Drive connector invocation and verified writes.
+- Raw intake should go first to one central Google Sheet named `Life OS Raw Capture Inbox` rather than routing directly into multiple GitHub notebooks during capture.
+- Main Assistant Penny should perform later classification, routing, task creation, advisory creation, notebook promotion, or discard decisions.
+- External-operation truthfulness, canonical resource identity, post-write verification, connector failure reporting, and privacy boundaries must be standardized for all future workers.
+- A custom GPT without Apps or a custom Action does not provide the needed storage path in Rob's current builder configuration.
+- Gemini was tested as a Drive-native alternative but showed weaker persistent resource handling and duplicate-Sheet behavior.
+
+Engineering created `ADV-20260709-030` on `coordination/boards/engineering.md`, targeting Life Logistics HQ, with the detailed implementation package for:
+
+- the Life OS worker layer,
+- `workers/WORKER_STANDARD.md`,
+- worker-specific boot routing,
+- and the first formal worker, Penny Raw Capture Worker.
+
+This advisory is acknowledged and its Engineering architecture work is complete. Durable file creation and Life OS synchronization now proceed under `ADV-20260709-030`.
 
 ### ADV-20260706-016 — Gemini Drive worker succeeded where direct connector writes may be risky
 
