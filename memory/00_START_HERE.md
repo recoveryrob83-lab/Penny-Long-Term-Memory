@@ -1,6 +1,6 @@
 # Start Here
 
-Updated: 2026-07-06
+Updated: 2026-07-09
 Project: Penny Long-Term Memory / Life OS
 Purpose: Orientation file for future Penny sessions using GitHub as the durable memory layer.
 
@@ -15,6 +15,7 @@ Use GitHub for:
 - Operating rules.
 - Active project maps.
 - Open loops.
+- Worker contracts and canonical resource pointers.
 - Strategy and implementation workflow files.
 - Auditable state changes.
 
@@ -27,13 +28,26 @@ Use Google Drive for:
 
 ## Boot Authority
 
-`memory/STARTUP_BOOT.md` is the single canonical boot sequence.
+`memory/STARTUP_BOOT.md` is the single canonical department/project boot sequence and contains worker routing.
 
-This file is orientation only. It should not define a separate boot order or instruct a model already following `STARTUP_BOOT.md` to restart the boot sequence.
+This file is orientation only. It should not define a separate department boot order or instruct a model already following `STARTUP_BOOT.md` to restart the boot sequence.
 
-If this file is opened directly in a fresh chat, read `memory/STARTUP_BOOT.md` next and follow that file's boot order.
+If this file is opened directly in a fresh chat, read `memory/STARTUP_BOOT.md` next and follow that file's routing rules.
 
 If this file is being read as step 2 from `memory/STARTUP_BOOT.md`, continue to the next file listed there.
+
+## Department / Worker Distinction
+
+Departments and HQs own domains, judgment, strategy, durable state, and cross-project decisions.
+
+Workers perform narrow, repeatable operations under stable contracts.
+
+Worker root:
+
+- `workers/README.md`
+- `workers/WORKER_STANDARD.md`
+
+Workers do not automatically read the full global department boot. Use the worker boot path in `memory/STARTUP_BOOT.md` when Rob names a worker.
 
 ## Connector Recovery Rule
 
