@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -111,7 +111,7 @@ No open advisories are currently listed in the Advisory Index.
 Recently implemented / acknowledged:
 
 - ADV-20260709-030 — Implemented by Life Logistics; formal worker layer, worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and boot routing created.
-- ADV-20260709-029 — Acknowledged / Architecture Complete / Implementation Routed by Engineering.
+- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; Engineering completed the architecture and Life Logistics implemented the resulting worker package. No separate work remains.
 - 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
 - ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
