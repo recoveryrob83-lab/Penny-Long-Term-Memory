@@ -1,6 +1,6 @@
 # Captain's Log
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Short operational journal for major Life OS work sessions, discoveries, decisions, and completed batches.
 
@@ -13,6 +13,37 @@ Use this file for concise, dated entries future Penny should know about.
 Keep sensitive details out of this file. Detailed records belong in Drive, Gmail, Calendar, Todoist, or project-specific files.
 
 ---
+
+## 2026-07-10 — Morning Boot Sync: Worker Layer Verification
+
+### Summary
+
+Ran the full Life Logistics morning boot and sync after implementation of the formal Life OS worker layer and Penny Raw Capture Worker.
+
+### Findings
+
+- Global startup boot correctly distinguishes departments/HQs from workers.
+- Penny Raw Capture Worker is registered as Pilot / Active.
+- The worker boot, canonical Sheet pointer, truthfulness contract, and Main Assistant downstream-processing role are present and coherent.
+- Office Leaks Consulting remains the active revenue-first business priority under Chief Business HQ.
+- No open advisories are listed in the Advisory Index.
+- ADV-20260709-029 and ADV-20260709-030 are correctly one closed implementation package.
+- Engineering HQ Daily Sync remains the only active scheduled-task pilot.
+- Scheduled-task run and issue logs contain no newer entries after 2026-07-05.
+
+### Completed Work
+
+- Updated `memory/01_SESSION_HANDOFF.md` so ADV-20260709-029 is correctly shown as closed / implemented through ADV-20260709-030.
+- Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` with the worker layer, Penny Raw Capture Worker routing, worker governance, and current pilot loops.
+- No advisory, worker, project, or scheduled-task architecture changes were required.
+
+### Decision / Lesson
+
+The worker layer is stable enough for pilot use. The next useful evidence is not more scaffolding; it is successful real-world capture and verification behavior.
+
+### Next Best Action
+
+Pilot Penny Raw Capture Worker with real intake. Main Assistant should process the raw inbox only when Rob authorizes or requests review.
 
 ## 2026-07-09 — ADV-20260709-030 Implemented: Life OS Worker Layer
 
