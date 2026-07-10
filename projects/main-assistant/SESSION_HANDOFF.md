@@ -1,6 +1,6 @@
 # Main Assistant Session Handoff
 
-Updated: 2026-07-06
+Updated: 2026-07-09
 Project: Main Assistant / Daily Operations
 Purpose: Project-specific handoff for new Main Assistant Penny chats.
 
@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for new Main Assistant Penny chats.
 
 Main Assistant is the default daily operations desk.
 
-Use this department for itinerary checks, small admin tasks, quick lookups, reminders, basic scheduling support, and routing larger work to specialist departments.
+Use this department for itinerary checks, small admin tasks, quick lookups, reminders, basic scheduling support, raw-capture inbox processing, and routing larger work to specialist departments.
 
 Large ongoing work belongs in the relevant specialist department.
 
@@ -19,6 +19,42 @@ Large ongoing work belongs in the relevant specialist department.
 3. Read `projects/main-assistant/DEPARTMENT_IDENTITY.md`.
 4. Stay focused on daily operations.
 5. Route project-sized work outward.
+
+## Penny Raw Capture Worker
+
+Penny Raw Capture Worker is a narrow Life OS worker, not a Main Assistant sub-department.
+
+Worker package:
+
+- `workers/penny-raw-capture/WORKER_BOOT.md`
+- `workers/penny-raw-capture/SESSION_HANDOFF.md`
+
+Canonical inbox:
+
+- Google Sheet: `Life OS Raw Capture Inbox`
+- Stable Sheet ID is recorded in the worker handoff.
+
+Main Assistant Penny is the primary downstream consumer of the raw capture inbox.
+
+Main Assistant may later review rows where `Processed = No` and decide whether each item should be:
+
+- discarded,
+- merged,
+- clarified,
+- routed to a department notebook,
+- turned into a Rob-facing task,
+- promoted into an open loop,
+- developed into an implementation strategy,
+- recorded as a preference or fact,
+- used to draft an advisory,
+- retained in private Drive records,
+- or otherwise processed through the correct Life OS workflow.
+
+The capture worker does not perform these downstream decisions during intake.
+
+Do not mark a row processed until the downstream handling is actually complete.
+
+Do not copy private capture contents into GitHub merely to record processing state.
 
 ## Advisory Procedure
 
@@ -46,9 +82,9 @@ For multi-target advisories, track target departments in the Advisory Index entr
 
 ## Current Routing Notes
 
-Life OS has separate specialist departments. Main Assistant should not become the project junk drawer.
+Life OS has separate specialist departments and a separate worker layer. Main Assistant should not become the project junk drawer.
 
-Chief Business HQ is active on Penny Platform viability research. Route one-off business admin, quick lookups, scheduling, or communication support back to Chief Business HQ unless Rob says otherwise.
+Chief Business HQ is the parent business strategy department. Office Leaks Consulting HQ is the active revenue-first business-unit department. Route daily Office Leaks logistics to Main Assistant only when the work is genuinely one-off or operational.
 
 ## Operating Boundaries
 
@@ -58,6 +94,7 @@ Chief Business HQ is active on Penny Platform viability research. Route one-off 
 - Department Event Inbox is frozen historical record only unless Rob explicitly reactivates it.
 - Keep advisory entries short.
 - Verify important connector writes.
+- Treat worker output as intake, not automatically as tasks or priorities.
 
 ## Next Actions
 
@@ -66,5 +103,6 @@ When asked, Main Assistant should:
 1. Summarize the day's itinerary.
 2. Check Advisory Index status for full reports.
 3. Handle one-off daily admin.
-4. Route specialist work to the right department.
-5. Keep durable updates small and verified.
+4. Process raw capture inbox items when Rob authorizes or requests inbox review.
+5. Route specialist work to the right department.
+6. Keep durable updates small and verified.
