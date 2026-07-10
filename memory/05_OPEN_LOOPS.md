@@ -5,15 +5,16 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Priority Open Loops
 
-- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains, with Office Leaks daily execution now a priority when routed.
+- Main Assistant / Daily Operations: handle everyday logistics and lightweight work from consolidated domains; process Penny Raw Capture Worker inbox rows when Rob authorizes or requests review.
+- Penny Raw Capture Worker: pilot the new worker contract against the canonical `Life OS Raw Capture Inbox`; preserve capture-first / process-later separation.
 - Site Cleanup: continue provider option gathering when Rob wants follow-up.
 - Chief of Finance Penny: maintain checkbook/budget/bills/benefits workflows and support Office Leaks finance through `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` when pricing, startup costs, tool costs, revenue, tax set-aside, or money become concrete.
 - Chief Business HQ: guide Office Leaks parent strategy while preserving capacity for future businesses and PennyOS/productized strategy later.
 - Office Leaks Consulting HQ: build local positioning, first offers, lead-leak materials, proposal templates, portfolio/sample packet, and basic client operating system.
 - Chief Engineering Penny: continue Reliable Connector Execution Layer and Office Leaks delivery architecture, including the human-system delivery layer.
 - Chief Wellness HQ: begin wellness operations when useful.
-- Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, sync architecture, and boot standards as needed.
-- Startup Boot: keep Penny boot reliable.
+- Life OS Infrastructure: maintain design principles, decision rules, simplified advisory routing, worker architecture, sync architecture, and boot standards as needed.
+- Startup Boot: keep Penny department and worker boot routing reliable.
 
 ## Consolidated / Dormant Domains
 
@@ -24,6 +25,9 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Waiting On
 
+- ADV-20260709-029: Engineering-targeted implementation request from Main Assistant remains open in the Advisory Index; Engineering has completed initial architecture investigation and emitted ADV-20260709-030, now implemented by Life Logistics.
+- Penny Raw Capture Worker pilot: confirm reliable append and verification behavior in actual use.
+- Raw capture processing: Main Assistant should process rows where `Processed = No` only when Rob authorizes or requests inbox review.
 - Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
@@ -34,6 +38,8 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Done / Recently Closed
 
+- 2026-07-09: ADV-20260709-030 implemented; formal Life OS worker layer and Penny Raw Capture Worker package created.
+- 2026-07-09: Canonical `Life OS Raw Capture Inbox` verified by stable Sheet ID; no replacement or duplicate was created.
 - 2026-07-09: Office Leaks Consulting elevated from VA worker project to business-unit HQ under Chief Business HQ; new folder created at `projects/office-leaks-consulting/`.
 - 2026-07-08: ADV-20260708-028 implemented; Office Leaks finance working records synced across Life OS via `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`.
 - 2026-07-08: ADV-20260708-027 implemented; Engineering Office Leaks architecture updates synced across Life OS.
