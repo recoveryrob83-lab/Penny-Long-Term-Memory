@@ -1,13 +1,13 @@
 # Life OS Operating Rules
 
-Updated: 2026-07-06
+Updated: 2026-07-10
 Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, advisory-board lifecycle, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
 ## Source of Truth Rules
 
@@ -18,6 +18,7 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - Gmail is communication evidence.
 - `coordination/ADVISORY_INDEX.md` is the sole active advisory routing dashboard.
 - `coordination/boards/` contains formal department advisory boards and canonical advisory text.
+- `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md` governs operational board structure, closure, compaction, and archival behavior.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is a frozen historical synchronization/read/ingestion register, not an active advisory routing surface unless Rob explicitly reactivates it.
 - `coordination/DECISION_RULES_REGISTRY.md` is the central registry for reusable decision rules.
 - `coordination/PENDING_ADVISORY_BOARDS.md` is the standard procedure for local pending-advisory staging.
@@ -90,6 +91,31 @@ Department Event Inbox is retained as historical record only. It should not be t
 Todoist should not be used as the source of truth for department synchronization state.
 
 For multi-target advisories, track target departments in the Advisory Index entry and source-board advisory text. Do not mark a multi-target advisory implemented until all required target departments have reported handled status to Rob or the source board records separate per-target acknowledgement.
+
+## Advisory Board Lifecycle Rules
+
+Standard procedure lives at:
+
+- `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md`
+
+Operational boards should keep:
+
+- every open advisory in enough detail to act,
+- a bounded recent completed working set,
+- implementation-report or durable-output paths when available,
+- and concise board rules.
+
+Default recent completed working set:
+
+- the most recent 10 completed advisories, or
+- completed advisories from the last 30 days,
+- whichever produces the smaller practical set.
+
+Review a board for compaction when it becomes roughly 250–300 lines, completed history overwhelms active state, stale conflicts appear, connector-safe editing becomes difficult, or Rob requests cleanup.
+
+Git history is the default archive. Separate archive files are optional and should be created only when discoverability materially requires them.
+
+Life Logistics HQ owns board hygiene and compaction scheduling. Source departments own advisory text accuracy. Target departments report acknowledgement or implementation. Rob remains final authority for major restructuring, archive deletion, and exceptions.
 
 ## Connector Reliability Rules
 
@@ -196,6 +222,7 @@ If connector invocation fails or becomes unstable, do not fight the environment.
 GitHub memory files should be edited as Markdown text.
 
 When updating an existing file:
+
 1. Fetch the file first.
 2. Preserve existing content unless intentionally replacing it.
 3. Commit with a clear message.
