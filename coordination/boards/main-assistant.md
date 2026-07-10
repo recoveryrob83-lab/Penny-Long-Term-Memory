@@ -1,11 +1,98 @@
 # Main Assistant Advisory Board
 
-Updated: 2026-07-06
+Updated: 2026-07-09
 Purpose: Advisories to or from Main Assistant / Daily Operations.
 
 ## Open Advisories
 
-None.
+### ADV-20260709-029 — Engineering implementation request for dedicated rapid capture worker GPT
+
+- Date: 2026-07-09
+- From: Main Assistant Penny
+- To: Chief Engineering Penny
+- Priority: High
+- Status: Open / Unacknowledged
+- Related Project(s): Life OS, Main Assistant, GitHub notebooks, custom GPT workers, rapid capture workflow, connector routing, nightly notebook review
+- Source Location: `projects/main-assistant/NOTEBOOK.md`
+- Source Note: `2026-07-09 — Dedicated rapid capture worker GPT`
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department(s): Chief Engineering Penny
+
+#### Summary
+
+Rob wants to implement a dedicated lightweight GPT / worker for rapid midday idea and request capture, especially when Marqueto provides several requests or ideas in quick succession.
+
+The worker should let Rob type or speak quickly, determine the likely department or project, apply standard routing metadata, and write the capture into the appropriate GitHub notebook using a consistent template.
+
+The worker is not intended to replace Main Assistant, department HQs, or nightly review. Its role is narrow: preserve incoming thoughts and requests with minimal friction so they can be reviewed, deduplicated, prioritized, promoted, or discarded later.
+
+#### Core Design Principle
+
+Optimize for speed and preservation, not judgment.
+
+The worker should capture first and avoid premature planning, task creation, advisory creation, or project-state changes unless Rob explicitly requests them.
+
+#### Required Worker Behavior
+
+The first implementation should support:
+
+- Rapid typed or spoken intake.
+- GitHub connector access with permission to read notebook routing instructions and write notebook captures.
+- Automatic selection of the most likely department or project notebook.
+- A standard capture template.
+- Preservation of Rob's raw wording where practical.
+- Explicit status marking as `Raw / unprocessed`.
+- No automatic Todoist tasks, Open Loop changes, advisories, project plans, or source-of-truth updates.
+- A safe fallback destination when routing confidence is low, likely Main Assistant Notebook or a dedicated capture inbox.
+- Compatibility with the existing 9:00 PM notebook review workflow.
+
+#### Proposed Capture Fields
+
+- Date / timestamp.
+- Source or context.
+- Raw capture.
+- Suggested routing destination.
+- Capture type: task candidate, idea, preference, fact, question, reminder, or project input.
+- Urgency signal only when clearly stated by Rob.
+- Status: Raw / unprocessed.
+
+#### Suggested Engineering Deliverables
+
+Chief Engineering Penny should evaluate and produce the smallest viable implementation package, likely including:
+
+1. A formal worker specification document.
+2. Reusable custom GPT instruction text.
+3. A GitHub notebook routing table.
+4. Standard capture templates for notebook entries and leaf notes.
+5. Connector setup and permission checklist.
+6. Fallback behavior for uncertain routing or failed writes.
+7. Verification rules after a GitHub write.
+8. Nightly reconciliation contract between the capture worker and Main Assistant.
+9. A simple first-run test plan using real but non-sensitive capture examples.
+
+#### Engineering Questions
+
+- Should the worker write directly into department notebooks or write first into one central capture inbox that Main Assistant routes later?
+- What minimum routing taxonomy is needed for Main Assistant, Office Leaks, Housing Logistics, Job Search, Caregiver, Finance, Engineering, and Recovery-related captures?
+- How should the worker avoid overwriting or restructuring existing notebook files?
+- Should each capture append to a department `NOTEBOOK.md`, create a dated leaf note, or choose based on size/type?
+- What verification step confirms that the write succeeded and landed in the intended location?
+- What guardrails are needed to prevent sensitive personal, medical, financial, client, or credential data from entering GitHub?
+- How should the worker behave when Rob's spoken input contains several distinct items for different departments?
+
+#### Suggested First Test Case
+
+Use the Marqueto rapid-request scenario as the first test:
+
+- Rob speaks or types several household, caregiver, scheduling, and personal requests in one burst.
+- Worker separates distinct captures without overinterpreting them.
+- Worker routes each item to the correct notebook or fallback inbox.
+- Worker confirms what was captured and where.
+- Main Assistant reviews the captures during the nightly notebook review and promotes only the items that warrant action.
+
+#### Requested Outcome
+
+Chief Engineering Penny should acknowledge this advisory, review the source note, recommend the MVP architecture, and create the first implementation package for Rob to use as a practical custom GPT case study.
 
 ## Acknowledged / Implemented Advisories
 
