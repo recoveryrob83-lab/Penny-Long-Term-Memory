@@ -5,10 +5,11 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260709-030 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Create Life OS worker boot standard and Penny Raw Capture Worker.
+None.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260709-030 — Implemented — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Formal Life OS worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and worker boot routing created.
 - ADV-20260709-029 — Acknowledged / Architecture Complete / Implementation Routed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed the rapid capture worker architecture and routed durable worker-layer implementation to Life Logistics through ADV-20260709-030.
 - ADV-20260708-028 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Engineering Office Leaks architecture updates synced across Life OS.
