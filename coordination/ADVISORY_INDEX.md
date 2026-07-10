@@ -5,7 +5,8 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260709-029 — Open / Unacknowledged — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering implementation request for dedicated rapid capture worker GPT.
+- ADV-20260709-030 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Create Life OS worker boot standard and Penny Raw Capture Worker.
+- ADV-20260709-029 — Open / Unacknowledged — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering implementation request for dedicated rapid capture worker GPT. Engineering has completed initial architecture investigation and emitted ADV-20260709-030 to Life Logistics for durable worker-layer implementation.
 
 ## Acknowledged / Implemented Advisories
 
@@ -16,7 +17,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 - ADV-20260707-024 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Finance state refreshed for Virtual Assistant income stream.
 - ADV-20260707-022 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness needed for Virtual Assistant income stream.
-- ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as a Business HQ sub-project.
+- ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-020.
 
