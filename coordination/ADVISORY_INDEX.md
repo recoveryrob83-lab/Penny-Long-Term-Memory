@@ -5,10 +5,11 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260710-032 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Create the canonical Penny Inventory Worker boot package, resource handoff, implementation report, worker registry entry, and required boot routing under the shared worker standard.
+None.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260710-032 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Canonical Penny Inventory Worker package created, For Sale Inventory resource verified, worker registry and boot routing updated.
 - ADV-20260710-031 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted with Git history preserving prior detail.
 - ADV-20260709-030 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Formal Life OS worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and worker boot routing created.
 - ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030 — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed the rapid capture worker architecture; Life Logistics implemented the resulting worker package under ADV-20260709-030. No separate work remains.
@@ -19,7 +20,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 - ADV-20260707-024 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Finance state refreshed for Virtual Assistant income stream.
 - ADV-20260707-022 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness needed for Virtual Assistant income stream.
-- ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as a Business HQ sub-project.
+- ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-020.
 
