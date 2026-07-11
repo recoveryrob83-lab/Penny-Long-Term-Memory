@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Startup procedure for a fresh Penny chat window.
 
@@ -62,6 +62,8 @@ Current worker routing:
 
 - Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
 - Penny Raw Capture Worker resource handoff: `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
+- Penny Inventory Worker resource handoff: `workers/penny-inventory/SESSION_HANDOFF.md`
 
 If Rob names a worker, use the worker boot instead of treating it as a project department.
 
