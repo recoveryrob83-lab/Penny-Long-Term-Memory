@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260710-032 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Create the canonical Penny Inventory Worker boot package, resource handoff, implementation report, worker registry entry, and required boot routing under the shared worker standard.
 
 ## Acknowledged / Implemented Advisories
 
