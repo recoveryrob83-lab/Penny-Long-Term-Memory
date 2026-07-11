@@ -75,25 +75,42 @@ Working design note:
 - `Reliable Connector Execution Layer - Design Note`
 - https://docs.google.com/document/d/1R0SYHk7PLCDerOHcO-sSXGvybrGx8rOAGvQinsyAR3M/edit?usp=drivesdk
 
+Current field lessons:
+
+- small connector operations are materially more reliable than large batches,
+- explicit connector invocation improves reliability,
+- chats are more stable when focused on one connector,
+- and a fresh booted chat is preferable to repeated retries when connector state degrades.
+
+These are observed operating patterns, not confirmed claims about platform internals.
+
 ### 2. Life OS Worker Architecture
 
-Engineering completed the first formal Life OS worker architecture through ADV-20260709-029 and ADV-20260709-030.
+Engineering has completed and handed off two formal worker packages.
 
 Durable worker layer:
 
 - `workers/README.md`
 - `workers/WORKER_STANDARD.md`
 
-First worker package:
+Penny Raw Capture Worker:
 
 - `workers/penny-raw-capture/WORKER_BOOT.md`
 - `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- Mission: `Capture first. Organize later.`
+- Canonical target: `Life OS Raw Capture Inbox`
+- Downstream owner: Main Assistant Penny
 
-Penny Raw Capture Worker mission:
+Penny Inventory Worker:
 
-> Capture first. Organize later.
+- `workers/penny-inventory/WORKER_BOOT.md`
+- `workers/penny-inventory/SESSION_HANDOFF.md`
+- `workers/penny-inventory/IMPLEMENTATION_REPORT.md`
+- Mission: `See the item. Record the item. Verify the row.`
+- Canonical target: `For Sale Inventory`
+- Current state: architecture complete; ready for real-world pilot
 
-The worker appends raw information to the canonical Google Sheet `Life OS Raw Capture Inbox` and leaves downstream processing to Main Assistant Penny.
+The Inventory Worker uses one row per sale item and intentionally excludes pricing, bundling, listing creation, publication, and sale strategy.
 
 Engineering standards now formalized for workers:
 
@@ -104,9 +121,10 @@ Engineering standards now formalized for workers:
 - post-write verification,
 - precise failure states,
 - privacy and source-of-truth boundaries,
+- partial-success preservation,
 - and escalation outside worker authority.
 
-The first worker is implemented and ready for pilot use. Engineering should observe reliability before recommending additional workers.
+The next meaningful worker evidence is production behavior, not additional scaffolding.
 
 ### 3. Office Leaks Delivery Architecture
 
@@ -146,14 +164,12 @@ Related Drive document:
 Canonical Advisory Index state:
 
 - No open advisories.
+- ADV-20260710-032 is implemented / acknowledged / closed.
+- ADV-20260710-031 is implemented / closed.
+- ADV-20260709-030 is implemented / closed.
 - ADV-20260709-029 is closed / implemented through ADV-20260709-030.
-- ADV-20260709-030 is implemented by Life Logistics HQ.
 
-Known synchronization issue:
-
-- `coordination/boards/engineering.md` still displays ADV-20260709-030 under Open Advisories with stale `Open / Unacknowledged` language.
-- The Advisory Index, global handoff, open loops, and implementation report all record 030 as implemented.
-- Reconcile the source-board entry with the implemented state when a safe full-file update is practical.
+The Engineering source board and Advisory Index agree.
 
 Do not update Department Event Inbox.
 
@@ -169,25 +185,26 @@ Do not update Department Event Inbox.
 
 ## Completed Recent Work
 
-- 2026-07-09: Acknowledged ADV-20260709-029 and completed rapid-capture worker architecture.
-- 2026-07-09: Created ADV-20260709-030 for Life Logistics implementation.
+- 2026-07-10: Completed Penny Inventory Worker architecture review and handed off documentation refresh to Life Logistics.
+- 2026-07-10: Life Logistics implemented and closed ADV-20260710-032, creating the Penny Inventory Worker package and verifying the canonical inventory Sheet.
+- 2026-07-10: Advisory Board Lifecycle Standard created and Engineering advisory board compacted under ADV-20260710-031.
+- 2026-07-09: Engineering completed rapid-capture worker architecture through ADV-20260709-029 and ADV-20260709-030.
 - 2026-07-09: Life Logistics implemented the worker layer and Penny Raw Capture Worker package.
 - 2026-07-08: Created Office Leaks delivery-playbook and human-system architecture notes.
 - 2026-07-08: Life Logistics implemented ADV-20260708-027 and synchronized Engineering architecture across Life OS.
 - 2026-07-06: Adopted simplified advisory routing.
 - 2026-07-04: Created the Reliable Connector Execution Layer design note.
 - 2026-07-04: Ingested ADV-20260704-002 and made connector reliability a first-class architecture risk.
-- 2026-07-03: Activated Chief Engineering Penny and created initial project scaffolding.
 
 ## Active Open Loops
 
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
 - Draft operation ledger / write-ahead log schema.
 - Define idempotency, verification, retry/backoff, connector health, degraded-mode UX, and RPR/export fallback patterns.
-- Pilot Penny Raw Capture Worker and observe actual append and verification behavior.
+- Pilot Penny Inventory Worker with 2–3 real items before scaling to larger batches.
+- Observe Penny Raw Capture Worker in real use.
 - Continue Office Leaks one-problem delivery architecture as Business requirements mature.
-- Support future worker architecture only when a repeatable bounded job justifies a worker.
-- Reconcile the stale ADV-20260709-030 source-board status when safe.
+- Support additional worker architecture only when a repeatable bounded job justifies it.
 - Coordinate with Chief Business HQ and Office Leaks Consulting HQ on requirements.
 - Coordinate with Chief of Finance Penny before cost-bearing infrastructure commitments.
 
@@ -212,11 +229,14 @@ Do not update Department Event Inbox.
 
 ## Connector / Safety Notes
 
-- Prefer small, verifiable updates.
-- Verify connector writes when possible.
+- Prefer small, verifiable operations.
+- Invoke connectors explicitly when practical.
+- Keep connector-heavy chats focused on one connector when possible.
+- Verify connector writes.
 - Never place secrets, credentials, tokens, API keys, or private operational data in GitHub memory.
 - Use RPR when reliability matters more than automation.
 - Do not repeatedly retry writes that trigger safety blocks.
+- Start a fresh booted chat when connector state becomes unstable.
 - Connector-dependent execution needs observable operation states and durable recovery paths.
 - Never claim an external operation succeeded without an actual successful tool operation.
 
@@ -226,7 +246,7 @@ Do not update Department Event Inbox.
 - Chief Business HQ and Office Leaks Consulting HQ define what should be built and why.
 - Chief Engineering Penny defines how to build and in what order.
 - Chief of Finance Penny owns cost and paperwork overlap.
-- Main Assistant handles daily one-off execution and authorized raw-inbox processing.
+- Main Assistant handles daily one-off execution and authorized downstream processing.
 - Life Logistics HQ keeps the Life OS cross-project map tidy.
 - Advisory Index owns active advisory routing state.
 - Department Event Inbox is frozen unless Rob explicitly reactivates it.
@@ -236,15 +256,15 @@ Do not update Department Event Inbox.
 
 ## Immediate Next Actions
 
-1. Pilot Penny Raw Capture Worker in real use.
-2. Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
-3. Draft the operation ledger schema.
-4. Draft connector health and retry/backoff policy.
-5. Continue Office Leaks delivery architecture when requirements arrive.
-6. Reconcile the stale Engineering source-board status for ADV-20260709-030 when safe.
+1. Pilot Penny Inventory Worker with 2–3 real sale items.
+2. Observe one-row-per-item writes, image-reference sequencing, uncertainty labels, and final Sheet verification.
+3. Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
+4. Draft the operation ledger schema.
+5. Draft connector health and bounded retry/backoff policy.
+6. Continue Office Leaks delivery architecture when requirements arrive.
 
 ## Notes for Next Penny
 
 This chat is Chief Engineering Penny when booted directly. It should not absorb Business, Finance, Main Assistant, or Life Logistics work. It should turn requirements into build-ready technical plans and use the Engineering advisory board plus Advisory Index for cross-department synchronization.
 
-The active engineering themes are connector reliability, verified external operations, bounded worker architecture, and practical Office Leaks delivery design.
+The active engineering themes are connector reliability, verified external operations, live worker pilots, bounded worker architecture, and practical Office Leaks delivery design.
