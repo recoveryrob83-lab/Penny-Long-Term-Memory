@@ -40,18 +40,26 @@ Worker root:
 - `workers/README.md`
 - `workers/WORKER_STANDARD.md`
 
-First worker:
+Active pilot workers:
 
 - Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
-- Mutable pointer / operational handoff: `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- Penny Raw Capture Worker handoff: `workers/penny-raw-capture/SESSION_HANDOFF.md`
+- Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
+- Penny Inventory Worker handoff: `workers/penny-inventory/SESSION_HANDOFF.md`
 
-Worker mission:
+Penny Raw Capture Worker mission:
 
 > Capture first. Organize later.
 
-The Penny Raw Capture Worker appends Rob's raw ideas, reminders, observations, facts, questions, resources, contacts, and other intake to the canonical Google Sheet `Life OS Raw Capture Inbox`.
+It appends raw intake to the canonical Google Sheet `Life OS Raw Capture Inbox`. Main Assistant owns later processing of rows where `Processed = No`.
 
-Main Assistant Penny is the downstream owner for later processing of rows where `Processed = No`.
+Penny Inventory Worker mission:
+
+> See the item. Record the item. Verify the row.
+
+It converts sale-item photographs uploaded directly into chat into one verified row per item in the canonical Google Sheet `For Sale Inventory`.
+
+The Inventory Worker does not automatically price, bundle, group, write listings, publish Marketplace posts, or make sale-strategy decisions.
 
 Workers do not automatically read the full department boot. They load the shared worker standard, their worker-specific boot contract, and their handoff only when mutable pointers or current operational notes are needed.
 
@@ -66,8 +74,8 @@ Preserve project history. Do not delete department files.
 
 ## Current Durable Architecture
 
-- Active Projects is the authoritative current project map: `memory/04_ACTIVE_PROJECTS.md`.
-- Open Loops tracks current unfinished work: `memory/05_OPEN_LOOPS.md`.
+- Active Projects: `memory/04_ACTIVE_PROJECTS.md`.
+- Open Loops: `memory/05_OPEN_LOOPS.md`.
 - Worker registry: `workers/README.md`.
 - Shared worker standard: `workers/WORKER_STANDARD.md`.
 - Advisory dashboard: `coordination/ADVISORY_INDEX.md`.
@@ -88,9 +96,9 @@ Advisories live on the source department's board.
 
 The target department is named inside the advisory and routed through the Advisory Index.
 
-The Advisory Index is the sole active routing dashboard. It should show open advisory ID, source board path, and target department.
+The Advisory Index is the sole active routing dashboard.
 
-Operational boards follow `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md` and should keep all open advisories plus a bounded recent completed working set.
+Operational boards follow `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md` and keep all open advisories plus a bounded recent completed working set.
 
 Git history is the default archive for completed advisory text removed during justified compaction.
 
@@ -114,14 +122,14 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- ADV-20260710-032 — Implemented / Acknowledged / Closed; Penny Inventory Worker package created, canonical resource verified, and worker routing updated.
 - ADV-20260710-031 — Implemented / Closed; Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted.
 - ADV-20260709-030 — Implemented by Life Logistics; formal worker layer, worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and boot routing created.
-- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; Engineering completed the architecture and Life Logistics implemented the resulting worker package. No separate work remains.
+- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; no separate work remains.
 - 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
 - ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
-- ADV-20260707-025 — Acknowledged by Engineering; delivery playbook request for bite-sized local service office cleanup offers.
 
 ## Office Leaks Operating Philosophy
 
@@ -144,8 +152,8 @@ Office Leaks HQ:
 
 Engineering delivery architecture:
 
-- Human-system delivery layer note: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
-- Related Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
+- `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
+- Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
 
 Finance working-record pointer:
 
@@ -155,13 +163,12 @@ Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, r
 
 ## Best Next Actions
 
-- For Penny Raw Capture Worker: begin pilot use and confirm append/verification behavior in actual capture requests.
-- For Main Assistant: process raw inbox rows only when Rob authorizes or requests review.
-- For Office Leaks Consulting HQ: develop local-service-business positioning, offers, lead-leak materials, proposal/portfolio packet, outreach path, and repeatable delivery method.
-- For Business: guide parent strategy and preserve capacity for future businesses.
-- For Engineering: continue delivery-playbook architecture and worker reliability support as needed.
-- For Finance: use the Office Leaks finance working records when pricing, costs, revenue, or tax planning become concrete.
-- For Life Logistics: maintain advisory-board hygiene under the lifecycle standard without turning compaction into recurring bureaucracy.
+- Pilot Penny Raw Capture Worker with real intake and verified writes.
+- Pilot Penny Inventory Worker with real uploaded sale-item photographs and verified one-row-per-item writes.
+- Keep pricing, grouping, listing copy, and publication separate from inventory capture.
+- Process raw inbox rows only when Rob authorizes or requests review.
+- Continue Office Leaks positioning, offers, outreach, and delivery-method work.
+- Maintain advisory-board hygiene without turning compaction into recurring bureaucracy.
 
 ## Guiding Principle
 
