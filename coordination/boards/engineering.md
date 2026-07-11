@@ -6,7 +6,121 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260710-032 — Create Penny Inventory Worker boot package
+
+- Date: 2026-07-10
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: High
+- Status: Open / Unacknowledged
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ
+- Engineering Notebook: `engineering/notebooks/Inventory_Worker_v1.md`
+
+#### Request
+
+Create the canonical GitHub worker package for a new **Penny Inventory Worker** under the existing Life OS worker standard.
+
+The worker should be implemented as a dedicated regular chat with worker boot files, not as a custom GPT requirement.
+
+#### Required Deliverables
+
+Create at minimum:
+
+- `workers/penny-inventory/WORKER_BOOT.md`
+- `workers/penny-inventory/SESSION_HANDOFF.md`
+- `workers/penny-inventory/IMPLEMENTATION_REPORT.md`
+- updates to `workers/README.md`
+- any boot-routing update required by `memory/STARTUP_BOOT.md`
+
+Use `workers/WORKER_STANDARD.md` as the governing shared contract.
+
+#### Worker Mission
+
+Convert uploaded photographs of physical sale items into structured inventory records in the canonical Google Sheet while preserving connector truthfulness and role boundaries.
+
+#### Canonical Workflow
+
+1. Receive one or more images uploaded directly into chat.
+2. Identify sale items visible in each image.
+3. Ignore obvious background objects unless Rob explicitly says they are for sale.
+4. Produce one inventory record per sale item.
+5. Use stable worker-generated image references such as `IMG-0001`; do not use temporary chat upload file tokens.
+6. Append one row per item to the canonical inventory Google Sheet.
+7. Use one connector append operation per item when practical.
+8. Verify the resulting rows before reporting success.
+9. Report the number of items captured and any uncertain identifications.
+
+#### Canonical Operational Resources
+
+Google Drive folder structure:
+
+- `For Sale Items/Images/`
+- `For Sale Items/Inventory/`
+- `For Sale Items/Listings/`
+- `For Sale Items/Archive/`
+
+Canonical Google Sheet:
+
+- Title: `For Sale Inventory`
+- Spreadsheet ID: `1q3YCwIwKcV0fWAOvMlaolXAXuQ7ommVHEL2IGqt5jIg`
+- Tab: `Inventory`
+- Time zone: `America/Chicago`
+
+Current columns:
+
+- Timestamp
+- Batch ID
+- Image Reference
+- Category
+- Item
+- Quantity
+- Condition
+- Confidence
+- Notes
+- Processed
+- Listing Group
+- Asking Price
+- Status
+
+#### Verified Connector Pattern
+
+Prototype testing confirmed:
+
+- images uploaded directly into chat can be analyzed successfully;
+- Drive-hosted images are not currently a reliable direct vision input through the connector alone;
+- Google Sheets `appendCells` works for one-row-per-item writes;
+- stable internal image IDs work better than raw upload tokens;
+- one connector call per item completed successfully;
+- a final spreadsheet read can verify the completed batch.
+
+#### Scope Boundaries
+
+The Inventory Worker must not:
+
+- price items unless explicitly instructed by Rob;
+- decide listing groups or bundles;
+- create Marketplace listings;
+- make sale-strategy decisions;
+- delete or overwrite existing inventory rows;
+- claim success without a successful write and verification;
+- fabricate brand, model, quantity, condition, or confidence.
+
+Use `Unknown` or `Low` confidence when identification is uncertain.
+
+#### Failure Behavior
+
+- Distinguish image-analysis uncertainty from connector-write failure.
+- If a row fails to append, report the exact failed item and do not claim the batch is complete.
+- Do not repeatedly hammer the same failed connector request.
+- Preserve successfully written rows and resume from the first failed item when practical.
+- If the canonical Sheet cannot be accessed, stop and report the blocker rather than creating a replacement.
+
+#### Downstream Ownership
+
+The worker captures inventory only.
+
+Future pricing, grouping, listing-copy generation, and Facebook Marketplace publication belong to later workers or the appropriate Business/Main Assistant workflow.
 
 ## Recently Acknowledged / Implemented Advisories
 
