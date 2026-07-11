@@ -4,7 +4,7 @@ Updated: 2026-07-10
 
 ## Current Phase
 
-Active / Connector Reliability and Delivery Architecture
+Active / Connector Reliability, Worker Pilots, and Delivery Architecture
 
 ## Summary
 
@@ -26,7 +26,15 @@ Never store secrets, credentials, tokens, API keys, private user data, or sensit
 
 The first concrete Engineering research track remains the Reliable Connector Execution Layer.
 
-This track exists because connector write reliability is a product-level risk for Penny as an execution and coordination platform. Future Penny workflows must not claim writes succeeded until verified, must track intended operations, must support recoverable failure states, and must provide degraded-mode fallback such as RPR, export, manual upload, or explicit failure reporting when direct connector writes fail.
+Connector reliability is the primary engineering risk across worker execution.
+
+Current operating observations:
+
+- small operations are more reliable than large batches,
+- explicit connector invocation improves reliability,
+- chats are more stable when focused on one connector,
+- fresh booted chats are preferable to repeatedly retrying unstable connector operations,
+- and every external write requires a truthful verified/unverified/failed state.
 
 Working design note:
 
@@ -46,23 +54,33 @@ Likely design outputs:
 
 ### Life OS Worker Architecture
 
-Engineering completed the architecture for a formal Life OS worker layer through ADV-20260709-029 and ADV-20260709-030.
+Engineering has completed the architecture and handoff for two formal workers.
 
-Implemented worker architecture:
+Shared worker layer:
 
 - `workers/README.md`
 - `workers/WORKER_STANDARD.md`
+
+Penny Raw Capture Worker:
+
 - `workers/penny-raw-capture/WORKER_BOOT.md`
 - `workers/penny-raw-capture/SESSION_HANDOFF.md`
-
-First worker:
-
-- Penny Raw Capture Worker
 - Mission: `Capture first. Organize later.`
-- Canonical operational target: Google Sheet `Life OS Raw Capture Inbox`
+- Canonical target: `Life OS Raw Capture Inbox`
 - Primary downstream consumer: Main Assistant Penny
 
-The worker standard now requires explicit connector truthfulness, stable canonical resource identity, write verification, failure-state reporting, privacy boundaries, and narrow role preservation.
+Penny Inventory Worker:
+
+- `workers/penny-inventory/WORKER_BOOT.md`
+- `workers/penny-inventory/SESSION_HANDOFF.md`
+- `workers/penny-inventory/IMPLEMENTATION_REPORT.md`
+- Mission: `See the item. Record the item. Verify the row.`
+- Canonical target: `For Sale Inventory`
+- Current state: architecture complete and ready for real-world pilot
+
+The Inventory Worker uses one row per physical sale item and intentionally excludes pricing, bundling, listing generation, publishing, and sale strategy.
+
+Tomorrow's recommended pilot begins with 2–3 items before scaling.
 
 ### Office Leaks Delivery Architecture
 
@@ -81,20 +99,24 @@ Related Drive document:
 
 ## Completed Recent Work
 
-- 2026-07-09: Engineering acknowledged ADV-20260709-029 and completed the rapid-capture worker architecture.
-- 2026-07-09: Engineering emitted ADV-20260709-030 to Life Logistics HQ for durable worker-layer implementation.
+- 2026-07-10: Engineering completed the Inventory Worker review and declared the architecture ready for real-world pilot.
+- 2026-07-10: Life Logistics implemented and closed ADV-20260710-032, creating the Inventory Worker package and verifying the canonical Sheet.
+- 2026-07-10: Life Logistics implemented ADV-20260710-031 and created the Advisory Board Lifecycle Standard.
+- 2026-07-09: Engineering completed the rapid-capture worker architecture through ADV-20260709-029 and ADV-20260709-030.
 - 2026-07-09: Life Logistics implemented the formal worker layer and Penny Raw Capture Worker package.
 - 2026-07-08: Engineering created Office Leaks delivery-playbook and human-system architecture notes.
 - 2026-07-08: Life Logistics implemented ADV-20260708-027 and synchronized Engineering's Office Leaks architecture across Life OS.
 
 ## Current Open Work
 
-- Pilot Penny Raw Capture Worker against real capture requests and observe connector reliability.
+- Pilot Penny Inventory Worker with 2–3 real sale items before larger batches.
+- Observe one-row-per-item behavior, image-reference sequencing, uncertainty handling, append reliability, and final Sheet verification.
+- Observe Penny Raw Capture Worker in real use.
 - Continue Reliable Connector Execution Layer design.
 - Draft the operation ledger schema.
 - Define connector health and bounded retry/backoff behavior.
 - Continue Office Leaks one-problem delivery-playbook architecture as Business requirements mature.
-- Support worker architecture and verification standards when new workers are justified.
+- Support additional worker architecture only when a repeatable bounded job justifies it.
 
 ## Coordination Notes
 
@@ -102,7 +124,7 @@ Related Drive document:
 - Office Leaks Consulting HQ owns the active business-unit strategy and requirements.
 - Chief Engineering Penny defines how to build safely and in what order.
 - Chief of Finance Penny handles cost, subscription, hosting, tool, and paperwork overlap.
-- Main Assistant handles daily one-off execution and downstream raw-inbox processing when authorized.
+- Main Assistant handles daily one-off execution and downstream worker-output processing when authorized.
 - Life Logistics HQ handles cross-project coordination and GitHub housekeeping.
 
 ## Boundary
