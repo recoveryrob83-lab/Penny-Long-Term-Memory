@@ -14,6 +14,54 @@ Keep sensitive details out of this file. Detailed records belong in Drive, Gmail
 
 ---
 
+## 2026-07-10 — ADV-20260710-032 Implemented: Penny Inventory Worker
+
+### Summary
+
+Life Logistics consumed and implemented Engineering advisory ADV-20260710-032, creating the canonical Penny Inventory Worker package.
+
+### Completed Work
+
+Created:
+
+- `workers/penny-inventory/WORKER_BOOT.md`
+- `workers/penny-inventory/SESSION_HANDOFF.md`
+- `workers/penny-inventory/IMPLEMENTATION_REPORT.md`
+
+Updated:
+
+- `workers/README.md`
+- `memory/STARTUP_BOOT.md`
+- `memory/01_SESSION_HANDOFF.md`
+- `memory/05_OPEN_LOOPS.md`
+- `coordination/boards/engineering.md`
+- `coordination/ADVISORY_INDEX.md`
+
+### Canonical Resource Verification
+
+Verified:
+
+- Sheet title: `For Sale Inventory`
+- Spreadsheet ID: `1q3YCwIwKcV0fWAOvMlaolXAXuQ7ommVHEL2IGqt5jIg`
+- Tab: `Inventory`
+- Time zone: `America/Chicago`
+- Expected 13-column schema
+- Two existing prototype rows
+
+No Sheet, folder, schema, or inventory row was changed during implementation.
+
+### Decision / Lesson
+
+Inventory capture is a narrow worker job. Pricing, grouping, listing copy, publication, and sale strategy remain separate downstream workflows.
+
+The worker's operational rule is:
+
+> See the item. Record the item. Verify the row.
+
+### Next Best Action
+
+Pilot the worker with real uploaded sale-item photographs and verify one-row-per-item capture, stable image references, uncertainty labels, and final Sheet reads.
+
 ## 2026-07-10 — ADV-20260710-031 Implemented: Advisory Board Lifecycle Standard
 
 ### Summary
@@ -51,10 +99,6 @@ Live advisory boards should show current operational state. Git history and opti
 
 Operational boards keep all open advisories plus a bounded recent completed working set. Git history is the default archive.
 
-### Next Best Action
-
-Use the lifecycle standard during future board closures and housekeeping. Compact only when board size, stale-state risk, or editing difficulty justifies it.
-
 ## 2026-07-10 — Morning Boot Sync: Worker Layer Verification
 
 ### Summary
@@ -67,23 +111,11 @@ Ran the full Life Logistics morning boot and sync after implementation of the fo
 - Penny Raw Capture Worker is registered as Pilot / Active.
 - The worker boot, canonical Sheet pointer, truthfulness contract, and Main Assistant downstream-processing role are present and coherent.
 - Office Leaks Consulting remains the active revenue-first business priority under Chief Business HQ.
-- No open advisories are listed in the Advisory Index.
 - ADV-20260709-029 and ADV-20260709-030 are correctly one closed implementation package.
-- Engineering HQ Daily Sync remains the only active scheduled-task pilot.
-- Scheduled-task run and issue logs contain no newer entries after 2026-07-05.
-
-### Completed Work
-
-- Updated `memory/01_SESSION_HANDOFF.md` so ADV-20260709-029 is correctly shown as closed / implemented through ADV-20260709-030.
-- Updated `projects/life-logistics-hq/SESSION_HANDOFF.md` with the worker layer, Penny Raw Capture Worker routing, worker governance, and current pilot loops.
 
 ### Decision / Lesson
 
-The worker layer is stable enough for pilot use. The next useful evidence is not more scaffolding; it is successful real-world capture and verification behavior.
-
-### Next Best Action
-
-Pilot Penny Raw Capture Worker with real intake. Main Assistant should process the raw inbox only when Rob authorizes or requests review.
+The worker layer is stable enough for pilot use. The next useful evidence is successful real-world capture and verification behavior.
 
 ## 2026-07-09 — ADV-20260709-030 Implemented: Life OS Worker Layer
 
