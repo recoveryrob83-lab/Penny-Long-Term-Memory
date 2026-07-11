@@ -1,6 +1,6 @@
 # Life OS Workers
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 Purpose: Registry and routing guide for narrow Life OS execution workers.
 
 ## Worker Definition
@@ -79,6 +79,7 @@ A worker may read a department or global file only when its worker contract expl
 | Status | Worker | Path | Purpose | Owner / Consumer |
 |---|---|---|---|---|
 | Pilot / Active | Penny Raw Capture Worker | `workers/penny-raw-capture/` | Append raw information to the canonical Life OS Raw Capture Inbox for later processing | Primary consumer: Main Assistant Penny; architecture: Chief Engineering Penny; cross-project memory: Life Logistics HQ |
+| Pilot / Active | Penny Inventory Worker | `workers/penny-inventory/` | Convert uploaded sale-item photographs into verified rows in the canonical For Sale Inventory Sheet | Downstream consumers: Main Assistant Penny and later sale/listing workflows; architecture: Chief Engineering Penny; cross-project memory: Life Logistics HQ |
 
 ## Worker Package Pattern
 
