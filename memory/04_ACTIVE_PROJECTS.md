@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-10
+Updated: 2026-07-11
 Purpose: High-level Life OS project map.
 
 ## Operating Rule
@@ -31,7 +31,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Dormant / Consolidated | Support Pathway | `projects/caregiver-income/` | REF-005 | Consolidated into Main Assistant | Preserve history; route current lightweight support-pathway logistics through Main Assistant |
 | Dormant / Archived | Daily Anchors / Recovery Logistics | `projects/recovery-logistics/` | REF-006 | Dormant until needed | Preserve history; route calendar/Todoist items through Main Assistant unless reactivated |
 | Dormant / Archived | Philosophy HQ | `projects/philosophy/` | To assign | Dormant until needed | Preserve history; route calendar/Todoist/book-process logistics through Main Assistant unless reactivated |
-| Pending | Home Base Logistics | `projects/home-base-logistics/` | To assign | Scaffolded | Define active tasks when needed |
+| Pending | Home Base Logistics | `projects/housing-logistics/` | To assign | Scaffolded | Define active tasks when needed |
 | Pending | Project Slot 07 | `projects/project-slot-07/` | To assign | Reserved | Use only for abstract routing |
 
 ## Active Core Departments
