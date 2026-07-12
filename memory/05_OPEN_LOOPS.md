@@ -1,6 +1,6 @@
 # Open Loops
 
-Updated: 2026-07-10
+Updated: 2026-07-11
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Priority Open Loops
@@ -30,7 +30,7 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Penny Inventory Worker pilot: confirm real-photo item identification, stable image-reference sequencing, one-row-per-item writes, and final Sheet verification.
 - Raw capture processing: Main Assistant should process rows where `Processed = No` only when Rob authorizes or requests inbox review.
 - Inventory downstream work: pricing, bundling, listing copy, and publication remain separate workflows until Rob authorizes them.
-- Scheduled HQ Sync: Engineering HQ Daily Sync pilot result.
+- Scheduled HQ Sync: Engineering HQ Daily Sync pilot is paused by Rob pending additional scheduling/execution architecture; do not resume or roll out additional sync workers until authorized.
 - Site Cleanup / Support Pathway: external follow-ups and project inputs when Rob wants follow-up.
 - Work Search: source-system responses when Rob wants follow-up.
 - Office Leaks Consulting HQ: strategy/execution session for positioning, first offers, lead-leak materials, outreach, and repeatable delivery method.
