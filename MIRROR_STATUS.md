@@ -1,72 +1,39 @@
 # Mirror Status
 
-Updated: 2026-07-02
+Updated: 2026-07-11
 Repository: `recoveryrob83-lab/Penny-Long-Term-Memory`
 
 ## Status
 
-Initial GitHub mirror has been started.
+Core GitHub mirroring is complete and the repository is now in maintenance and synchronization mode.
 
-GitHub is now structured as the durable Markdown memory layer for Penny's personal-assistant / Life OS work.
+GitHub is the durable Markdown memory layer for Penny's Life OS work. Google Drive remains the operational workspace for detailed records and artifacts.
 
-## Files Created or Updated
+## Current Durable Layers
 
-- `README.md`
-- `memory/00_START_HERE.md`
-- `memory/01_SESSION_HANDOFF.md`
-- `memory/02_BOOT_LOG.md`
-- `memory/03_OPERATIONAL_RULES.md`
-- `memory/04_ACTIVE_PROJECTS.md`
-- `memory/05_OPEN_LOOPS.md`
-- `memory/06_WEEKLY_PLAN.md`
-- `memory/07_STRATEGY_BOOT.md`
-- `memory/08_IMPLEMENTATION_PACKET_TEMPLATE.md`
-- `memory/09_APP_INTEGRATIONS_REFERENCE.md`
+- Global boot, operating rules, project maps, and open loops live under `memory/`.
+- Project continuity and role definitions live under `projects/`.
+- Formal advisory routing lives under `coordination/ADVISORY_INDEX.md` and `coordination/boards/`.
+- Narrow execution contracts live under `workers/`.
+- Scheduled-task experiments live under `scheduled-tasks/`.
 
-## Files Not Mirrored
+## Privacy Boundary
 
-`memory/10_PROFILE_REFERENCE.md` was not created during the initial migration because the connector safety layer blocked attempts to mirror the profile reference, even after redaction.
+Exact personal profile, contact, medical, financial-account, credential, and other sensitive details remain in Drive or user-mediated context. GitHub stores abstract routing and operational state only.
 
-Current rule:
-- Keep exact personal profile/contact details in the existing Drive source or user-provided task context.
-- Do not force profile data into GitHub.
-- If a future GitHub profile file is created, keep it minimal and non-sensitive.
+## Current Maintenance Rules
 
-## Drive Sources Consulted
+- Keep GitHub abstract and internally consistent.
+- Keep detailed working records in Drive.
+- Use the Life OS Pointer Registry to resolve detailed records.
+- Use the Advisory Index as the sole active advisory dashboard.
+- Do not use GitHub Issues for formal Life OS advisories or open-loop routing.
+- Preserve legacy project history until Rob authorizes archival cleanup.
 
-- Penny Boot Log.
-- Session Handoff.
-- 00_ROB_PROFILE_REFERENCE.md.
-- 01_ACTIVE_PROJECTS.md.
-- 02_STRATEGY_BOOT.md.
-- 07_WEEKLY_PLAN.md.
-- 08_OPEN_LOOPS.md.
-- 09_IMPLEMENTATION_PACKET_TEMPLATE.md.
-- 10_APP_INTEGRATIONS_REFERENCE.md.
-- 11_OPERATIONAL_RULES.md.
+## Historical Note
 
-## Mirror Type
-
-This is an initial normalized mirror, not a byte-for-byte historical import.
-
-Meaning:
-- Current operational state was preserved.
-- Active projects and open loops were converted into Markdown.
-- GitHub-specific architecture decisions were incorporated.
-- Full historical Drive logs may still need archive import if Rob wants exact preservation.
-
-## Next Migration Options
-
-1. Import exact historical Boot Log and Session Handoff text into `archive/` files.
-2. Create dedicated project files under `projects/` for:
-   - Job Search.
-   - Caregiver Income.
-   - Cleanup.
-   - Finance & Benefits.
-   - Recovery Logistics.
-3. Use GitHub Issues for open loops if Rob wants a more formal task/audit workflow.
-4. Keep Drive Sheets for finance/checkbook tracking and link them from GitHub.
+This repository began as a normalized mirror of selected Drive sources rather than a byte-for-byte historical import. That historical limitation remains intentional.
 
 ## Connector Lesson
 
-If a long-running chat loses reliable connector behavior, start a fresh Penny session and boot from GitHub memory rather than over-debugging the degraded session.
+If a long-running chat loses reliable connector behavior, start a fresh Penny session and boot from GitHub memory rather than repeatedly retrying a degraded session.
