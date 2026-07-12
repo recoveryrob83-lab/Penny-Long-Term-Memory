@@ -204,7 +204,7 @@ Use RPR when reliable structured-file editing matters more than connector automa
 - Keep Office Leaks HQ, parent Business HQ, Engineering, Finance, and Main Assistant routing clear.
 - Be ready to support Office Leaks logistics once Rob authorizes real-world outreach or visits.
 - Track whether legacy `projects/virtual-assistant-business/` should later be archived or deleted.
-- Observe Engineering HQ Daily Sync pilot before rolling out additional daily sync workers.
+- Keep the Engineering HQ Daily Sync pilot paused while additional scheduling/execution architecture is designed.
 - Keep Reliable Connector Execution Layer visible as Engineering's active reliability track.
 - Maintain Decision Rules Registry and Role Drift Check adoption.
 - Avoid broad hub-file rewrites when smaller edits are safer.
@@ -219,11 +219,12 @@ Use RPR when reliable structured-file editing matters more than connector automa
 6. Use Main Assistant for daily operations and lightweight logistics from consolidated departments.
 7. Use Chief of Finance Penny for finance/checkbook/budget/bills/benefits and Office Leaks money workflows when concrete.
 8. Keep Engineering reliability, worker architecture, and Office Leaks delivery-playbook work visible as background architecture.
-9. Use Role Drift Check when work appears to belong elsewhere.
-10. Prefer small verified GitHub edits.
+9. Keep scheduled sync paused until Rob authorizes a resume after architecture work.
+10. Use Role Drift Check when work appears to belong elsewhere.
+11. Prefer small verified GitHub edits.
 
 ## Notes for Next Penny
 
 This chat is Life Logistics HQ, not Main Assistant. Protect role clarity. Route daily admin and raw-capture processing to Main Assistant. Keep GitHub tidy and abstract. Use the Advisory Index as the active advisory sync surface. Treat workers as narrow executors, not small departments.
 
-Boot reminder: tell Rob the active business priority is Office Leaks Consulting. PennyOS is paused, not abandoned. Penny Raw Capture Worker is Pilot / Active. No open advisories are currently listed in the Advisory Index.
+Boot reminder: tell Rob the active business priority is Office Leaks Consulting. PennyOS is paused, not abandoned. Penny Raw Capture Worker is Pilot / Active. Engineering HQ Daily Sync is paused pending additional architecture. No open advisories are currently listed in the Advisory Index.
