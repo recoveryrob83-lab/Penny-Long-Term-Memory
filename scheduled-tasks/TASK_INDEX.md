@@ -1,13 +1,13 @@
 # Scheduled Task Index
 
-Updated: 2026-07-03
+Updated: 2026-07-11
 Purpose: Dashboard of scheduled tasks, owners, cadence, and memo targets.
 
 ## Task Table
 
 | Task ID | Status | Owner / Role | Cadence | Purpose | Memo Target | Notes |
 |---|---|---|---|---|---|---|
-| ST-20260703-002 | Active Pilot | Chief Engineering Penny | Daily at 6:00 AM America/Chicago | Engineering HQ daily sync: boot Engineering context, read GitHub handoffs/advisories, consume Engineering-targeted advisories, and report meaningful updates | TBD / Engineering HQ chat response | First daily HQ sync pilot. Should not modify systems unless Rob explicitly authorizes. |
+| ST-20260703-002 | Paused | Chief Engineering Penny | Formerly daily at 6:00 AM America/Chicago | Engineering HQ daily sync: boot Engineering context, read GitHub handoffs/advisories, consume Engineering-targeted advisories, and report meaningful updates | TBD / Engineering HQ chat response | Paused by Rob on 2026-07-11 because scheduled-task execution behavior remains unreliable. Resume only after additional scheduling and execution architecture is designed and authorized. |
 | ST-20260703-001 | Retired | Life Logistics HQ | One-time / superseded | Original scheduler capability test / standalone watcher concept | `scheduled-tasks/memos/life-logistics-hq.md` | Superseded by daily HQ sync model. |
 
 ## Status Meanings
