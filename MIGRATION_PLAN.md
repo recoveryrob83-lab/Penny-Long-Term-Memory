@@ -1,66 +1,62 @@
 # Migration Plan
 
-Updated: 2026-07-02
+Updated: 2026-07-11
+Status: Core migration complete; maintenance mode
 
 ## Goal
 
 Move durable Life OS memory into GitHub while keeping Google Drive for working documents, spreadsheets, and detailed operational records.
 
-## Current Layout Built
-
-- `memory/`
-- `projects/`
-- `archive/`
-- `templates/`
-
-## Registry Architecture
-
-Life OS now uses a pointer model.
+## Current Architecture
 
 GitHub stores:
 - project map
 - durable state
 - boot instructions
 - handoffs
+- operating rules
 - abstract references
+- worker contracts
+- advisory routing state
 
 Drive stores:
 - working documents
 - spreadsheets
 - operational records
 - detailed notes
+- generated artifacts
 
-The Life OS Pointer Registry in Drive is the directory service between GitHub and source-system records.
+The Life OS Pointer Registry in Drive is the directory service between GitHub and detailed working records.
 
-## Project Folders Started
+## Migration State
 
-- `projects/job-search/`
-- `projects/caregiver-income/`
-- `projects/cleanup/`
-- `projects/finance-benefits/`
-- `projects/recovery-logistics/`
-- `projects/life-os-infrastructure/`
-- `projects/home-base-logistics/`
-- `projects/stability-routines/`
-- `projects/project-slot-07/`
+The core durable-memory migration is complete. Current work is maintenance and synchronization:
 
-## Deprecated / Avoided Labels
+- Keep GitHub abstract and internally consistent.
+- Keep detailed working records in Drive.
+- Update handoffs and open loops after meaningful state changes.
+- Assign registry references to active projects when useful.
+- Preserve historical project folders unless Rob authorizes archival cleanup.
 
-Some earlier project names were too direct for durable GitHub storage.
+## Project Structure
 
-Use neutral names or project slots when a project touches sensitive life domains.
+Current project routing is defined by:
+- `memory/STARTUP_BOOT.md`
+- `memory/04_ACTIVE_PROJECTS.md`
+- `projects/README.md`
 
-## Next Migration Order
+The current housing scaffold is `projects/housing-logistics/`.
 
-1. Replace detailed project facts in GitHub with registry references.
-2. Assign registry IDs for active projects that do not have them yet.
-3. Keep detailed working notes in Drive.
-4. Update handoff files after each meaningful batch.
+## Historical Preservation
 
-## Rule
+This repository is a normalized operational mirror, not a byte-for-byte import of all historical Drive material. Historical detail may be preserved in `archive/` only when discoverability justifies it.
 
-Migrate current state first.
+## Rules
 
-Preserve history later only if useful.
+Prefer one authoritative home per record.
 
-Prefer references over duplicated records.
+Use the Advisory Index and source department boards for formal advisories.
+
+Do not use GitHub Issues for Life OS advisory or open-loop routing.
+
+Prefer small, verified edits over broad rewrites.
