@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-10
+Updated: 2026-07-11
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -163,6 +163,8 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- ADV-20260710-032 — Implemented / Acknowledged / Closed; Penny Inventory Worker package created, canonical For Sale Inventory resource verified, and worker routing updated.
+- ADV-20260710-031 — Implemented / Closed; advisory-board lifecycle standard created, high-use boards reviewed, and Engineering board compacted.
 - ADV-20260709-030 — Implemented; formal Life OS worker layer and Penny Raw Capture Worker package created.
 - ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; no separate work remains.
 - 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
