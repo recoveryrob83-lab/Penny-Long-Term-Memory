@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-10
+Updated: 2026-07-13
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260713-033 — Open / Unacknowledged — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — `/BOOT` response shortcut added to `memory/CONTEXT_REMINDER.md` and wired into the canonical global boot order.
 
 ## Acknowledged / Implemented Advisories
 
