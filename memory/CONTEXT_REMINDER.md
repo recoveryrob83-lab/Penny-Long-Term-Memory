@@ -17,6 +17,7 @@ These are optional user-facing commands. They shape response style only; they do
 - `/FLOOD` — Brainstorm broadly, including unconventional or weird possibilities, while labeling risks and low-confidence ideas.
 - `/STEPS` — Turn the answer into a numbered checklist that can be followed immediately.
 - `/REDPEN` — Edit for grammar, clarity, awkward phrasing, and concision in one pass.
+- `/BOOT` — Run the canonical GitHub boot and synchronization sequence for the relevant Penny role or department. Boot is read-only unless Rob explicitly authorizes changes.
 
 ## Operating Notes
 
