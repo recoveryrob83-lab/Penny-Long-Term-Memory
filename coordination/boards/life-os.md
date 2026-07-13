@@ -5,7 +5,7 @@ Purpose: Advisories from Life OS Infrastructure / Life Logistics HQ to all Penny
 
 ## Open Advisories
 
-### ADV-20260713-033 — Add /BOOT response shortcut to Penny context boot
+### ADV-20260713-033 — Add boot and advisory response shortcuts to Penny context boot
 
 - Date: 2026-07-13
 - From: Chief Engineering Penny
@@ -19,9 +19,13 @@ Purpose: Advisories from Life OS Infrastructure / Life Logistics HQ to all Penny
 
 #### Summary
 
-Engineering added `/BOOT` as a response shortcut. It means: run the canonical GitHub boot and synchronization sequence for the relevant Penny role or department.
+Engineering implemented a focused shortcut rollout: `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY`.
 
-The shortcut is documented in `memory/CONTEXT_REMINDER.md`, and the context reminder is now included in the global boot order in `memory/STARTUP_BOOT.md`.
+`/BOOT` runs the canonical GitHub boot and synchronization sequence for the relevant Penny role or department. `/ADVISE` gives Rob a recommendation without creating durable work. `/ADVISORY` drafts a formal routed advisory and asks before posting. `/SYNCADVISORY` reads advisory state and reports drift without changing it.
+
+All four shortcuts are documented in `memory/CONTEXT_REMINDER.md`, and the context reminder is included in the global boot order in `memory/STARTUP_BOOT.md`.
+
+Rob approved `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` for active use during the day.
 
 #### Operating Constraint
 
@@ -29,7 +33,7 @@ The shortcut is documented in `memory/CONTEXT_REMINDER.md`, and the context remi
 
 #### Requested Logistics Action
 
-Please ingest this change into Life Logistics HQ synchronization awareness and include it in future boot/sync guidance where useful.
+Please ingest this rollout into Life Logistics HQ synchronization awareness and include the three advisory shortcuts in future boot/sync guidance where useful.
 
 ## Acknowledged / Implemented Advisories
 
