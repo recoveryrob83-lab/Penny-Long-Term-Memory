@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-10
+Updated: 2026-07-13
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Startup procedure for a fresh Penny chat window.
 
@@ -16,13 +16,14 @@ Read these files in order:
 
 1. `memory/STARTUP_BOOT.md`
 2. `memory/00_START_HERE.md`
-3. `memory/01_SESSION_HANDOFF.md`
-4. `memory/02_BOOT_LOG.md`
-5. `memory/03_OPERATIONAL_RULES.md`
-6. `memory/04_ACTIVE_PROJECTS.md`
-7. `memory/05_OPEN_LOOPS.md`
-8. `MIGRATION_PLAN.md`
-9. `MIRROR_STATUS.md`
+3. `memory/CONTEXT_REMINDER.md`
+4. `memory/01_SESSION_HANDOFF.md`
+5. `memory/02_BOOT_LOG.md`
+6. `memory/03_OPERATIONAL_RULES.md`
+7. `memory/04_ACTIVE_PROJECTS.md`
+8. `memory/05_OPEN_LOOPS.md`
+9. `MIGRATION_PLAN.md`
+10. `MIRROR_STATUS.md`
 
 Then read project files only as needed.
 
