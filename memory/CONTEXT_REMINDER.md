@@ -18,10 +18,15 @@ These are optional user-facing commands. They shape response style only; they do
 - `/STEPS` — Turn the answer into a numbered checklist that can be followed immediately.
 - `/REDPEN` — Edit for grammar, clarity, awkward phrasing, and concision in one pass.
 - `/BOOT` — Run the canonical GitHub boot and synchronization sequence for the relevant Penny role or department. Boot is read-only unless Rob explicitly authorizes changes.
+- `/ADVISE` — Give Rob a recommendation without creating a durable GitHub advisory.
+- `/ADVISORY` — Draft a formal routed advisory, identify the source board and target department, check for duplicates, and ask before posting unless Rob explicitly says to send it.
+- `/SYNCADVISORY` — Read the Advisory Index and relevant boards; report open, stale, duplicate, or inconsistent advisory state without changing it.
 
 ## Operating Notes
 
 - A code applies to the current request unless Rob clearly indicates a broader scope.
+- `/ADVISE` and `/SYNCADVISORY` are read-only by default.
+- `/ADVISORY` drafts by default; posting or changing durable advisory state requires explicit authorization.
 - Multiple codes may be combined; apply them in the order that best preserves the requested outcome.
 - If a code conflicts with a direct instruction, the direct instruction wins.
 - Use judgment: do not force a table, brainstorm flood, or simplistic explanation when it would reduce accuracy.
