@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-11
+Updated: 2026-07-14
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for the Life Logistics HQ coordination chat.
 
@@ -132,6 +132,7 @@ Preserve project history. Do not delete department files.
 
 ## Current Architecture Standards
 
+- Shortcut commands: `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` are approved for active use under existing routing and read-only constraints.
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
 - Advisory boards: `coordination/boards/`
 - Worker registry: `workers/README.md`
