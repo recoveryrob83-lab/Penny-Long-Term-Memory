@@ -182,6 +182,78 @@
       "description": "Fix grammar, clarity, awkward phrasing, and concision.",
       "mode": "simple",
       "template": "/REDPEN\n{custom_block}"
+    },
+    {
+      "id": "itinerary",
+      "title": "Daily Itinerary",
+      "category": "Daily Operations",
+      "description": "Build a practical day plan from Todoist, Calendar, overdue work, and priorities.",
+      "mode": "simple",
+      "template": "/ITINERARY @Todoist @Google Calendar\n\nReview today's calendar, Todoist tasks, overdue items, and known priorities. Produce a practical daily itinerary with time-sensitive commitments first, realistic task blocks, and a short list of what matters most. Do not change Todoist or Calendar unless I explicitly authorize changes.\n{custom_block}"
+    },
+    {
+      "id": "todoist",
+      "title": "Update Todoist",
+      "category": "Daily Operations",
+      "description": "Prepare or perform an authorized Todoist update and report exactly what changed.",
+      "mode": "simple",
+      "template": "/TODOIST @Todoist\n\nReview the current conversation and identify the exact Todoist task changes needed. Add, update, complete, reschedule, move, or review tasks only as authorized. Ask for clarification when project, date, time, or task identity is ambiguous. Report exactly what changed and what remains unresolved.\n{custom_block}"
+    },
+    {
+      "id": "morning",
+      "title": "Morning Sync",
+      "category": "Daily Operations",
+      "description": "Boot the selected department and produce its morning synchronization report.",
+      "mode": "department",
+      "template": "/MORNING @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and sync sequence for this department. Then provide a concise morning report covering today's priorities, calendar or task pressures when relevant, open loops, advisories, blockers, and the single best next action. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
+    },
+    {
+      "id": "nightly",
+      "title": "Nightly Sync",
+      "category": "Daily Operations",
+      "description": "Perform a read-only end-of-day synchronization and identify unfinished loops.",
+      "mode": "department",
+      "template": "/NIGHTLY @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and synchronization sequence for this department. Review completed work, unfinished loops, stale documentation, advisory state, blockers, and the next handoff needed. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
+    },
+    {
+      "id": "open_loops",
+      "title": "Review Open Loops",
+      "category": "Life OS",
+      "description": "Review durable open loops and recommend the next actions.",
+      "mode": "department",
+      "template": "/OPENLOOPS @GitHub\n\nDepartment: {department}\n\nRead the relevant handoff and open-loop files. Separate active, waiting, blocked, stale, and recently closed items. Recommend the smallest useful next actions without changing durable state.\n{custom_block}"
+    },
+    {
+      "id": "capture",
+      "title": "Capture Thought",
+      "category": "Life OS",
+      "description": "Route a raw thought to the correct durable or working location.",
+      "mode": "simple",
+      "template": "/CAPTURE @GitHub\n\nClassify the raw thought or note below. Recommend the correct destination: GitHub durable memory, a project notebook, an open loop, Todoist, Calendar, Google Drive, or no capture. Do not write anything until I explicitly authorize the destination and change.\n{custom_block}"
+    },
+    {
+      "id": "drive",
+      "title": "Drive Work",
+      "category": "Connectors",
+      "description": "Prepare a focused Google Drive discovery, creation, or edit request.",
+      "mode": "simple",
+      "template": "/DRIVE @Google Drive\n\nWork only with the requested Google Drive, Docs, Sheets, or Slides task. Confirm the target file or folder, use small verified operations, and report the exact result. Do not make unrelated changes.\n{custom_block}"
+    },
+    {
+      "id": "calendar",
+      "title": "Calendar Work",
+      "category": "Connectors",
+      "description": "Prepare a focused Google Calendar review or scheduling request.",
+      "mode": "simple",
+      "template": "/CALENDAR @Google Calendar\n\nReview or prepare the requested Calendar operation with timezone-aware details. Inspect conflicts before proposing changes, and do not create, move, or cancel events unless I explicitly authorize it.\n{custom_block}"
+    },
+    {
+      "id": "gmail",
+      "title": "Gmail Work",
+      "category": "Connectors",
+      "description": "Search Gmail, summarize evidence, and extract follow-up actions.",
+      "mode": "simple",
+      "template": "/GMAIL @Gmail\n\nSearch and summarize only the requested Gmail evidence. Extract decisions, unanswered messages, deadlines, and follow-up actions. Draft replies when useful, but do not send, archive, delete, or label messages without explicit authorization.\n{custom_block}"
     }
   ]
 }
