@@ -5,6 +5,8 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
+- ADV-20260714-034 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Expanded shortcut set and prompt-launcher database require Logistics context ingestion and duplicate-source review.
+
 
 ## Acknowledged / Implemented Advisories
 
