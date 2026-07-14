@@ -1,12 +1,51 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-10
+Updated: 2026-07-14
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Business HQ, Finance, Main Assistant, or other departments.
 
 ## Open Advisories
 
-None.
+### ADV-20260714-034 — Sync expanded Life OS shortcut set and prompt-launcher database
+
+- Date: 2026-07-14
+- From: Chief Engineering Penny
+- To: Life Logistics HQ
+- Priority: Medium
+- Status: Open / Unacknowledged
+- Related Project(s): Penny Long-Term Memory, Life OS Prompt Launcher, global boot, daily operations
+- Source Location:
+  - `memory/CONTEXT_REMINDER.md`
+  - `memory/01_SESSION_HANDOFF.md`
+  - `engineering/classroom/prompt_launcher/prompt_library.json`
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ
+
+#### Summary
+
+Engineering expanded the canonical shortcut set and the local Life OS Prompt Launcher database. The launcher uses connector-tagged prompts so Rob can create ready-to-paste commands that activate the needed connector context.
+
+New operational shortcuts added to global boot context:
+
+- `/ITINERARY @Todoist @Google Calendar`
+- `/TODOIST @Todoist`
+- `/MORNING @GitHub`
+- `/NIGHTLY @GitHub`
+- `/OPENLOOPS @GitHub`
+- `/CAPTURE @GitHub`
+- `/DRIVE @Google Drive`
+- `/CALENDAR @Google Calendar`
+- `/GMAIL @Gmail`
+
+The existing response-style, boot, and advisory shortcuts remain active.
+
+#### Requested Logistics Action
+
+Please ingest the expanded shortcut set into Life Logistics HQ context. Keep `memory/CONTEXT_REMINDER.md` as the canonical vocabulary, use `memory/01_SESSION_HANDOFF.md` for durable operational awareness, and treat `engineering/classroom/prompt_launcher/prompt_library.json` as the local launcher database rather than a second source of truth.
+
+Do not create duplicate command definitions. Report acknowledgement or any discovered routing/documentation drift.
+
+## Recently Acknowledged / Implemented Advisories
 
 ## Recently Acknowledged / Implemented Advisories
 
