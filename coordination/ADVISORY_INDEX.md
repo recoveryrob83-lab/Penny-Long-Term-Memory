@@ -1,14 +1,14 @@
 # Advisory Index
 
-Updated: 2026-07-13
+Updated: 2026-07-14
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260713-033 — Open / Unacknowledged — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` implemented in `memory/CONTEXT_REMINDER.md`; advisory rollout approved for active use.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260713-033 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — Shortcut rollout ingested; `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` are approved for active use under existing routing and read-only constraints.
 - ADV-20260710-032 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Canonical Penny Inventory Worker package created, For Sale Inventory resource verified, worker registry and boot routing updated.
 - ADV-20260710-031 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted with Git history preserving prior detail.
 - ADV-20260709-030 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Formal Life OS worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and worker boot routing created.
