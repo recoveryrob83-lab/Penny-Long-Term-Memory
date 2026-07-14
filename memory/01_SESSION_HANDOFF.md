@@ -89,7 +89,14 @@ Preserve project history. Do not delete department files.
 - Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`.
 - Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`.
 - Context Reminder and response shortcuts: `memory/CONTEXT_REMINDER.md`.
+- Local prompt-launcher database: `engineering/classroom/prompt_launcher/prompt_library.json`.
 - Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
+
+## Active Shortcut Set
+
+The current response/operations shortcut set is defined in `memory/CONTEXT_REMINDER.md` and includes response-style commands, `/BOOT`, advisory commands, `/ITINERARY`, `/TODOIST`, `/MORNING`, `/NIGHTLY`, `/OPENLOOPS`, `/CAPTURE`, `/DRIVE`, `/CALENDAR`, and `/GMAIL`.
+
+Connector-specific shortcuts deliberately include `@GitHub`, `@Todoist`, `@Google Calendar`, `@Google Drive`, or `@Gmail` so the intended connector is active in the launched chat.
 
 ## Current Advisory Rule
 
