@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-10
+Updated: 2026-07-14
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -88,6 +88,7 @@ Preserve project history. Do not delete department files.
 - Department Notebooks standard: `coordination/DEPARTMENT_NOTEBOOKS.md`.
 - Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`.
 - Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`.
+- Context Reminder and response shortcuts: `memory/CONTEXT_REMINDER.md`.
 - Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
 
 ## Current Advisory Rule
@@ -122,6 +123,7 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- ADV-20260713-033 — Implemented / Acknowledged / Closed; Life Logistics ingested the `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` shortcut rollout.
 - ADV-20260710-032 — Implemented / Acknowledged / Closed; Penny Inventory Worker package created, canonical resource verified, and worker routing updated.
 - ADV-20260710-031 — Implemented / Closed; Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted.
 - ADV-20260709-030 — Implemented by Life Logistics; formal worker layer, worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and boot routing created.
@@ -169,6 +171,7 @@ Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, r
 - Process raw inbox rows only when Rob authorizes or requests review.
 - Continue Office Leaks positioning, offers, outreach, and delivery-method work.
 - Maintain advisory-board hygiene without turning compaction into recurring bureaucracy.
+- Keep the Engineering HQ Daily Sync paused pending additional scheduling/execution architecture.
 
 ## Guiding Principle
 
