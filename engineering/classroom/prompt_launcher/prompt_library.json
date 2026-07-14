@@ -1,21 +1,187 @@
 {
-  "schema_version": "0.1",
-  "project": "Prompt Launcher",
-  "description": "Skeleton prompt library for the Engineering Classroom Prompt Launcher learning project.",
-  "prompts": [
+  "schema_version": "1.0",
+  "project": "Life OS Prompt Launcher",
+  "repository": "recoveryrob83-lab/Penny-Long-Term-Memory",
+  "description": "Editable prompt library for the local Life OS Prompt Launcher.",
+  "departments": [
     {
-      "id": "test_prompt",
-      "title": "Test Prompt",
-      "category": "Testing",
-      "mode": "static",
-      "text": "This is a test prompt copied from Prompt Launcher."
+      "id": "life_logistics_hq",
+      "label": "Life Logistics HQ / Chief of Staff Penny",
+      "project_folder": "projects/life-logistics-hq",
+      "report_name": "Life Logistics",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "open_loops.md"]
     },
     {
-      "id": "engineering_classroom_status_check",
-      "title": "Engineering Classroom Status Check",
-      "category": "Engineering Classroom",
-      "mode": "static",
-      "text": "Check the Engineering Classroom folder for current project files and summarize anything relevant before we continue coding."
+      "id": "main_assistant",
+      "label": "Main Assistant Penny / Daily Operations",
+      "project_folder": "projects/main-assistant",
+      "report_name": "Main Assistant",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+    },
+    {
+      "id": "chief_finance",
+      "label": "Chief of Finance Penny / Finance Benefits HQ",
+      "project_folder": "projects/finance-benefits",
+      "report_name": "Finance",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+    },
+    {
+      "id": "chief_business",
+      "label": "Chief Business HQ / Business Development",
+      "project_folder": "projects/business-development",
+      "report_name": "Business",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+    },
+    {
+      "id": "office_leaks",
+      "label": "Office Leaks VP Penny / Office Leaks Consulting HQ",
+      "project_folder": "projects/office-leaks-consulting",
+      "report_name": "Office Leaks",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+    },
+    {
+      "id": "chief_engineering",
+      "label": "Chief Engineering Penny / Engineering HQ",
+      "project_folder": "projects/engineering",
+      "report_name": "Engineering",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+    },
+    {
+      "id": "chief_wellness",
+      "label": "Chief Wellness HQ / Wellness Penny",
+      "project_folder": "projects/wellness",
+      "report_name": "Wellness",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+    },
+    {
+      "id": "life_os_infrastructure",
+      "label": "Life OS Infrastructure / Connector Operations",
+      "project_folder": "projects/life-os-infrastructure",
+      "report_name": "Life OS Infrastructure",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md"]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "quick_boot",
+      "title": "Quick Boot",
+      "category": "Boot / Sync",
+      "description": "Short department boot command for a fast GitHub sync.",
+      "mode": "department",
+      "template": "/BOOT @GitHub\n\nDepartment: {department}\n{custom_block}"
+    },
+    {
+      "id": "full_department_boot",
+      "title": "Full Department Boot",
+      "category": "Boot / Sync",
+      "description": "Complete read-only department boot prompt with global and project-specific instructions.",
+      "mode": "full_boot",
+      "template": "/BOOT @GitHub\n\nYou are {department}.\n\nRepository:\n{repository}\n\nFollow the canonical global boot sequence beginning with:\n\nmemory/STARTUP_BOOT.md\n\nRead all required global boot files in order.\n\nThen continue into this department's project boot files:\n\n{project_boot_files}\n\nRead the Advisory Index and the relevant source board only when advisory routing, consumption, creation, or reconciliation is relevant.\n\nOperate read-only unless I explicitly authorize GitHub modifications.\n\nAfter boot, provide a concise {report_name} synchronization report covering role and responsibilities, current state, active tracks, open loops, synchronization drift, and recommendations.\n{custom_block}"
+    },
+    {
+      "id": "advisory",
+      "title": "Create or Draft Advisory",
+      "category": "Advisory",
+      "description": "Create a formal advisory draft or send one when explicitly instructed.",
+      "mode": "department",
+      "department_label": "Target Department",
+      "template": "/ADVISORY @GitHub\n\nTarget Department: {department}\n\nDraft a concise advisory using the canonical source-board plus Advisory Index workflow. Do not post or change durable advisory state unless I explicitly say to send or implement it.\n{custom_block}"
+    },
+    {
+      "id": "advise",
+      "title": "Advise",
+      "category": "Advisory",
+      "description": "Request a recommendation without creating a durable advisory.",
+      "mode": "simple",
+      "template": "/ADVISE\n{custom_block}"
+    },
+    {
+      "id": "sync_advisory",
+      "title": "Sync Advisory",
+      "category": "Advisory",
+      "description": "Read advisory state and identify drift without changing it.",
+      "mode": "simple",
+      "template": "/SYNCADVISORY @GitHub\n\nRead the Advisory Index and relevant boards. Report open, stale, duplicate, or inconsistent advisory state. Do not make changes.\n{custom_block}"
+    },
+    {
+      "id": "human",
+      "title": "Human Rewrite",
+      "category": "Response Style",
+      "description": "Rewrite in natural, conversational language.",
+      "mode": "simple",
+      "template": "/HUMAN\n{custom_block}"
+    },
+    {
+      "id": "eli10",
+      "title": "Explain Simply",
+      "category": "Response Style",
+      "description": "Use plain language and one helpful analogy.",
+      "mode": "simple",
+      "template": "/ELI10\n{custom_block}"
+    },
+    {
+      "id": "deeper",
+      "title": "Deeper Analysis",
+      "category": "Response Style",
+      "description": "Test assumptions and provide a stronger answer.",
+      "mode": "simple",
+      "template": "/DEEPER\n{custom_block}"
+    },
+    {
+      "id": "noyes",
+      "title": "Challenge Me",
+      "category": "Response Style",
+      "description": "Challenge reflexive agreement and provide the strongest counterargument.",
+      "mode": "simple",
+      "template": "/NOYES\n{custom_block}"
+    },
+    {
+      "id": "give3",
+      "title": "Give Three Options",
+      "category": "Response Style",
+      "description": "Request three genuinely distinct options.",
+      "mode": "simple",
+      "template": "/GIVE3\n{custom_block}"
+    },
+    {
+      "id": "table",
+      "title": "Make a Table",
+      "category": "Response Style",
+      "description": "Turn comparisons or repeated fields into a clean table.",
+      "mode": "simple",
+      "template": "/TABLE\n{custom_block}"
+    },
+    {
+      "id": "tighten",
+      "title": "Tighten",
+      "category": "Response Style",
+      "description": "Make the previous answer sharper and shorter.",
+      "mode": "simple",
+      "template": "/TIGHTEN\n{custom_block}"
+    },
+    {
+      "id": "flood",
+      "title": "Flood Ideas",
+      "category": "Response Style",
+      "description": "Brainstorm broadly and label risk or low-confidence ideas.",
+      "mode": "simple",
+      "template": "/FLOOD\n{custom_block}"
+    },
+    {
+      "id": "steps",
+      "title": "Make Steps",
+      "category": "Response Style",
+      "description": "Turn the response into an immediately usable numbered checklist.",
+      "mode": "simple",
+      "template": "/STEPS\n{custom_block}"
+    },
+    {
+      "id": "redpen",
+      "title": "Red Pen",
+      "category": "Response Style",
+      "description": "Fix grammar, clarity, awkward phrasing, and concision.",
+      "mode": "simple",
+      "template": "/REDPEN\n{custom_block}"
     }
   ]
 }
