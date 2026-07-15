@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-14
+Updated: 2026-07-15
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-
+- ADV-20260715-035 — Open — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Implement and verify boot-order consumption of `memory/06_DAILY_OPERATING_SOP.md`.
 
 ## Acknowledged / Implemented Advisories
 
