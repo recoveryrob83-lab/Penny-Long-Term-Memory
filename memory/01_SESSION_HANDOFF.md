@@ -6,28 +6,65 @@ Purpose: Fast baton-pass file for future Penny chat windows.
 
 ## Current Handoff
 
-Life OS is operational with GitHub as durable memory map, Drive as working records cabinet, Todoist as Rob-facing action queue, Calendar as timed commitments, Gmail as communication evidence, project chats as knowledge producers, workers as narrow operational executors, and Life Logistics HQ as cross-project curator.
+Life OS is operational with:
 
-The immediate Life OS business priority is Office Leaks Consulting: a revenue-first business-unit HQ under Chief Business HQ focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
+- GitHub as the durable memory and architecture map;
+- Google Drive as the working-records cabinet;
+- Todoist as Rob-facing task management;
+- Calendar as the timed-commitment layer;
+- Gmail as communication evidence;
+- project chats as domain knowledge producers;
+- workers as narrow operational executors;
+- Main Assistant as daily coordinator and synthesizer;
+- Life Logistics HQ as cross-project curator and memory housekeeper.
 
-Office Leaks grew out of the former Virtual Assistant Business worker project but is no longer merely a generic VA concept. It now has its own HQ folder:
+The immediate business priority is Office Leaks Consulting, a revenue-first business-unit HQ under Chief Business HQ focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
 
-- `projects/office-leaks-consulting/`
+Office Leaks grew out of the former Virtual Assistant Business project. The legacy folder remains historical redirect context:
 
-Legacy VA folder:
+- Active HQ: `projects/office-leaks-consulting/`
+- Legacy context: `projects/virtual-assistant-business/`
 
-- `projects/virtual-assistant-business/` now exists as historical/redirect context unless Rob later authorizes archival cleanup.
+PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term productization path informed by Life OS operations and Office Leaks market learning.
 
-PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform/productization path and may be informed by Office Leaks service work and market learning.
+## Chat HQ Operating Architecture
+
+As of 2026-07-15, all seven LifeOS department discussion HQ chats are open and ready.
+
+These HQs are regular ChatGPT discussion rooms for:
+
+- planning and natural conversation;
+- GitHub boot and synchronization;
+- research and technical or strategic discussion;
+- advisories and cross-department routing;
+- small authorized connector-backed work;
+- maintaining useful domain context without consuming unnecessary Work capacity.
+
+They are not autonomous agents and do not independently share hidden state. They are structured departmental perspectives within one coherent Penny system.
+
+Work mode remains reserved for:
+
+- substantial code writing or testing;
+- local repository operations;
+- large file edits;
+- test-suite execution;
+- packaging applications;
+- browser or desktop automation;
+- complex artifact generation;
+- long-running implementation tasks.
+
+Main Assistant owns overall coordination and final synthesis. Departments own specialized judgment and durable domain state. Workers execute narrow procedures. Rob remains final authority for consequential, destructive, financial, or externally visible actions.
+
+Engineering should observe the live HQ system for routing friction, duplicated authority, stale boot assumptions, connector limitations, and unnecessary model usage. Refine only from real evidence.
 
 ## Current Active Core
 
+- Main Assistant / LifeOS Coordination Hub
 - Life Logistics HQ
-- Main Assistant / Daily Operations
+- Chief Engineering Penny
 - Chief of Finance Penny
 - Chief Business HQ
 - Office Leaks Consulting HQ
-- Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
 
@@ -47,21 +84,21 @@ Active pilot workers:
 - Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
 - Penny Inventory Worker handoff: `workers/penny-inventory/SESSION_HANDOFF.md`
 
-Penny Raw Capture Worker mission:
+Raw Capture mission:
 
 > Capture first. Organize later.
 
 It appends raw intake to the canonical Google Sheet `Life OS Raw Capture Inbox`. Main Assistant owns later processing of rows where `Processed = No`.
 
-Penny Inventory Worker mission:
+Inventory mission:
 
 > See the item. Record the item. Verify the row.
 
-It converts sale-item photographs uploaded directly into chat into one verified row per item in the canonical Google Sheet `For Sale Inventory`.
+It converts sale-item photographs uploaded directly into chat into one verified row per physical item in the canonical Google Sheet `For Sale Inventory`.
 
-The Inventory Worker does not automatically price, bundle, group, write listings, publish Marketplace posts, or make sale-strategy decisions.
+Inventory does not automatically price, bundle, group, write listings, publish Marketplace posts, or make sale-strategy decisions.
 
-Workers do not automatically read the full department boot. They load the shared worker standard, their worker-specific boot contract, and their handoff only when mutable pointers or current operational notes are needed.
+Workers load the shared worker standard and their worker-specific boot contract. They do not automatically follow the full department boot sequence.
 
 ## Consolidated / Dormant Departments
 
@@ -70,82 +107,75 @@ Workers do not automatically read the full department boot. They load the shared
 - Daily Anchors / Recovery Logistics is dormant until Rob reactivates it.
 - Philosophy HQ is dormant until Rob reactivates it.
 
-Preserve project history. Do not delete department files.
+Preserve project history. Do not delete department files without explicit authorization.
 
 ## Current Durable Architecture
 
-- Active Projects: `memory/04_ACTIVE_PROJECTS.md`.
-- Open Loops: `memory/05_OPEN_LOOPS.md`.
-- Worker registry: `workers/README.md`.
-- Shared worker standard: `workers/WORKER_STANDARD.md`.
-- Advisory dashboard: `coordination/ADVISORY_INDEX.md`.
-- Advisory details: `coordination/boards/`.
-- Advisory Board Lifecycle Standard: `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md`.
-- Initial high-use board review: `coordination/ADVISORY_BOARD_REVIEW_2026-07-10.md`.
-- Department Event Inbox: `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical record only.
-- Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`.
-- Pending Advisory Boards standard: `coordination/PENDING_ADVISORY_BOARDS.md`.
-- Department Notebooks standard: `coordination/DEPARTMENT_NOTEBOOKS.md`.
-- Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`.
-- Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`.
-- Context Reminder and response shortcuts: `memory/CONTEXT_REMINDER.md`.
-- Local prompt-launcher database: `engineering/classroom/prompt_launcher/prompt_library.json`.
-- Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`.
+- Canonical startup: `memory/STARTUP_BOOT.md`
+- Context shortcuts and hub commands: `memory/CONTEXT_REMINDER.md`
+- Daily Operating SOP: `memory/06_DAILY_OPERATING_SOP.md`
+- Active Projects: `memory/04_ACTIVE_PROJECTS.md`
+- Open Loops: `memory/05_OPEN_LOOPS.md`
+- Worker registry: `workers/README.md`
+- Shared worker standard: `workers/WORKER_STANDARD.md`
+- Advisory dashboard: `coordination/ADVISORY_INDEX.md`
+- Advisory details: `coordination/boards/`
+- Advisory Board Lifecycle Standard: `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md`
+- Decision Rules Registry: `coordination/DECISION_RULES_REGISTRY.md`
+- Pending Advisory Boards standard: `coordination/PENDING_ADVISORY_BOARDS.md`
+- Department Notebooks standard: `coordination/DEPARTMENT_NOTEBOOKS.md`
+- Source-of-Truth and Publication Standard: `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md`
+- Connector Reliability Operating Pattern: `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md`
+- Design Principles: `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
+- Local prompt-launcher database: `engineering/classroom/prompt_launcher/prompt_library.json`
+
+`coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical state and must not be updated for normal advisory routing.
+
+## Daily Operating Standard
+
+Every department boot inherits `memory/06_DAILY_OPERATING_SOP.md` through the canonical global boot sequence.
+
+Default pattern:
+
+- choose one major action;
+- add at most one low-friction support action when useful;
+- treat leaving home and transit as a complete major task;
+- prepare and delegate Penny-level work before asking Rob to act;
+- keep due dates sparse and meaningful;
+- preserve recovery, health, and basic-life commitments without creating another anxiety-producing checklist;
+- route specialized judgment to the owning department.
+
+The SOP is a testable operating standard, not a rigid task list.
 
 ## Active Shortcut Set
 
-The current response/operations shortcut set is defined in `memory/CONTEXT_REMINDER.md` and includes response-style commands, `/BOOT`, advisory commands, `/ITINERARY`, `/TODOIST`, `/MORNING`, `/NIGHTLY`, `/OPENLOOPS`, `/CAPTURE`, `/DRIVE`, `/CALENDAR`, and `/GMAIL`.
+The current response and operations shortcut vocabulary lives in `memory/CONTEXT_REMINDER.md`.
 
-Connector-specific shortcuts deliberately include `@GitHub`, `@Todoist`, `@Google Calendar`, `@Google Drive`, or `@Gmail` so the intended connector is active in the launched chat.
+It includes:
 
-## Current Advisory Rule
+- response controls such as `/HUMAN`, `/ELI10`, `/DEEPER`, `/NOYES`, `/GIVE3`, `/TABLE`, `/TIGHTEN`, `/FLOOD`, `/STEPS`, and `/REDPEN`;
+- boot, advisory, and synchronization commands;
+- connector-specific Drive, Calendar, Gmail, Todoist, itinerary, morning, nightly, capture, and open-loop commands;
+- hub coordination commands including `/HUB`, `/SYNC`, `/ROLES`, `/DECIDE`, `/DEPENDENCIES`, `/RIPPLE`, `/MINUTES`, `/WATCH`, `/DRIFT`, `/ROUTE`, `/ESCALATE`, `/BROADCAST`, `/CLOSELOOP`, and `/UPDATEGITHUB`;
+- department tags for Main, Logistics, Engineering, Finance, Business, and Wellness perspectives.
 
-Advisories live on the source department's board.
+The context file is canonical. Prompt launcher JSON is a secondary interface and must not silently redefine command meaning.
 
-The target department is named inside the advisory and routed through the Advisory Index.
+## Advisory State
 
-The Advisory Index is the sole active routing dashboard.
+As of 2026-07-15, the Advisory Index contains no open advisories.
 
-Operational boards follow `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md` and keep all open advisories plus a bounded recent completed working set.
+Recently closed:
 
-Git history is the default archive for completed advisory text removed during justified compaction.
+- ADV-20260715-036 — Seven LifeOS department discussion HQ chats opened and confirmed ready; Chat/Work separation and operating boundaries are active.
+- ADV-20260715-035 — Daily Operating SOP integrated into the global boot path.
+- ADV-20260714-034 — Expanded connector-tagged shortcut vocabulary synchronized.
+- ADV-20260713-033 — Core boot and advisory shortcut rollout synchronized.
+- ADV-20260710-032 — Penny Inventory Worker package implemented and canonical resource verified.
+- ADV-20260710-031 — Advisory Board Lifecycle Standard implemented.
+- ADV-20260709-030 — Formal worker layer and Raw Capture Worker implemented.
 
-Do not update Department Event Inbox for normal advisory routing unless Rob explicitly reactivates it.
-
-## Current Decision Rules
-
-Decision Rules are reusable decision procedures.
-
-Central registry:
-
-- `coordination/DECISION_RULES_REGISTRY.md`
-
-Active first rule:
-
-- DR-FIN-20260704-001 — Discretionary Purchase Pause Rule, owned by Chief of Finance Penny.
-
-## Current Open Advisory State
-
-As of 2026-07-15, the Advisory Index contains one open Engineering advisory:
-
-- ADV-20260715-036 — Open; Engineering prompt package for seven LifeOS discussion HQs.
-
-Recently implemented / acknowledged:
-
-- ADV-20260715-035 — Implemented / Acknowledged / Closed; Engineering verified and integrated the friction-aware Daily Operating SOP into the global boot flow.
-
-Recently implemented / acknowledged:
-
-- ADV-20260714-034 — Implemented / Acknowledged / Closed; expanded connector-tagged shortcut set ingested, canonical vocabulary preserved in `memory/CONTEXT_REMINDER.md`, and no duplicate definitions found.
-- ADV-20260713-033 — Implemented / Acknowledged / Closed; Life Logistics ingested the `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` shortcut rollout.
-- ADV-20260710-032 — Implemented / Acknowledged / Closed; Penny Inventory Worker package created, canonical resource verified, and worker routing updated.
-- ADV-20260710-031 — Implemented / Closed; Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted.
-- ADV-20260709-030 — Implemented by Life Logistics; formal worker layer, worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and boot routing created.
-- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030; no separate work remains.
-- 2026-07-09: Office Leaks Consulting elevated to business-unit HQ under Chief Business HQ.
-- ADV-20260708-028 — Implemented by Life Logistics; Office Leaks finance working records synced across Life OS.
-- ADV-20260708-027 — Implemented by Life Logistics; Engineering Office Leaks architecture updates synced across Life OS.
-- ADV-20260708-026 — Closed / Fully Acknowledged; Office Leaks operating philosophy reviewed by all target departments.
+The Advisory Index is the sole active routing dashboard. Source boards contain canonical advisory text. Git history is the default archive for compacted completed detail.
 
 ## Office Leaks Operating Philosophy
 
@@ -158,37 +188,31 @@ Core philosophy:
 - The tool is not the product. The habit is the product.
 - No shame. No blame. Fix the system.
 
-Life Logistics should keep Office Leaks visible as an active income-stream candidate with possible near-term real-world logistics: discovery visits, transportation, follow-up reminders, outreach loops, document organization, and conversion of plans into calendar/task actions when Rob authorizes.
-
-## Office Leaks Architecture / Finance Pointers
-
-Office Leaks HQ:
-
-- `projects/office-leaks-consulting/`
-
 Engineering delivery architecture:
 
 - `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
-- Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
+- Drive: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
 
 Finance working-record pointer:
 
 - `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
-Keep GitHub abstract. Detailed financial models, pricing notes, startup costs, revenue tracking, and tax set-aside planning live in Drive through the Finance pointer file.
+Keep GitHub abstract. Pricing, startup costs, revenue tracking, taxes, and detailed financial models belong in Finance-owned working records.
 
 ## Best Next Actions
 
+- Use the new Chat HQs for ordinary planning, discussion, synchronization, and light connector work.
 - Pilot Penny Raw Capture Worker with real intake and verified writes.
-- Pilot Penny Inventory Worker with real uploaded sale-item photographs and verified one-row-per-item writes.
+- Pilot Penny Inventory Worker with 2–3 real uploaded sale-item photographs.
 - Keep pricing, grouping, listing copy, and publication separate from inventory capture.
-- Process raw inbox rows only when Rob authorizes or requests review.
 - Continue Office Leaks positioning, offers, outreach, and delivery-method work.
-- Maintain advisory-board hygiene without turning compaction into recurring bureaucracy.
-- Keep the Engineering HQ Daily Sync paused pending additional scheduling/execution architecture.
+- Continue Engineering's Reliable Connector Execution Layer and operation-ledger design.
+- Observe the Chat HQ architecture before adding more complexity.
+- Keep Engineering HQ Daily Sync paused pending stronger scheduled-execution architecture and explicit authorization.
+- Maintain advisory-board hygiene without turning cleanup into recurring bureaucracy.
 
 ## Guiding Principle
 
-GitHub is the map. Drive is the filing cabinet. Calendar owns time. Todoist owns Rob-facing actions. Gmail owns communications. Workers execute narrow contracts. Captain's Log records meaningful operational sessions.
+GitHub is the map. Drive is the filing cabinet. Calendar owns time. Todoist owns Rob-facing actions. Gmail owns communications. Departments own judgment. Workers execute narrow contracts. Main Assistant coordinates. Life Logistics curates cross-project memory.
 
 Use RPR when reliable structured-file editing matters more than connector automation.
