@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "project": "Life OS Prompt Launcher",
   "repository": "recoveryrob83-lab/Penny-Long-Term-Memory",
   "description": "Editable prompt library for the local Life OS Prompt Launcher.",
@@ -9,56 +9,101 @@
       "label": "Life Logistics HQ / Chief of Staff Penny",
       "project_folder": "projects/life-logistics-hq",
       "report_name": "Life Logistics",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "main_assistant",
       "label": "Main Assistant Penny / Daily Operations",
       "project_folder": "projects/main-assistant",
       "report_name": "Main Assistant",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "status.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "chief_finance",
       "label": "Chief of Finance Penny / Finance Benefits HQ",
       "project_folder": "projects/finance-benefits",
       "report_name": "Finance",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "status.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "chief_business",
       "label": "Chief Business HQ / Business Development",
       "project_folder": "projects/business-development",
       "report_name": "Business",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "status.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "office_leaks",
       "label": "Office Leaks VP Penny / Office Leaks Consulting HQ",
       "project_folder": "projects/office-leaks-consulting",
       "report_name": "Office Leaks",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "status.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "chief_engineering",
       "label": "Chief Engineering Penny / Engineering HQ",
       "project_folder": "projects/engineering",
       "report_name": "Engineering",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "status.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "chief_wellness",
       "label": "Chief Wellness HQ / Wellness Penny",
       "project_folder": "projects/wellness",
       "report_name": "Wellness",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md",
+        "status.md",
+        "open_loops.md"
+      ]
     },
     {
       "id": "life_os_infrastructure",
       "label": "Life OS Infrastructure / Connector Operations",
       "project_folder": "projects/life-os-infrastructure",
       "report_name": "Life OS Infrastructure",
-      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md"]
+      "boot_files": [
+        "SESSION_HANDOFF.md",
+        "DEPARTMENT_IDENTITY.md",
+        "README.md"
+      ]
     }
   ],
   "prompts": [
@@ -254,6 +299,63 @@
       "description": "Search Gmail, summarize evidence, and extract follow-up actions.",
       "mode": "simple",
       "template": "/GMAIL @Gmail\n\nSearch and summarize only the requested Gmail evidence. Extract decisions, unanswered messages, deadlines, and follow-up actions. Draft replies when useful, but do not send, archive, delete, or label messages without explicit authorization.\n{custom_block}"
+    },
+    {
+      "id": "hub_boot",
+      "title": "Hub Boot",
+      "category": "Hub / Coordination",
+      "description": "Boot the single-chat LifeOS coordination hub with active role tags and connector guardrails.",
+      "mode": "simple",
+      "template": "/HUB @GitHub\\n\\n[MAIN] Boot the LifeOS coordination hub. Load current durable context, confirm active role tags, and preserve connector execution in this chat. Department roles advise; [MAIN] coordinates and executes authorized connector actions.\\n{custom_block}"
+    },
+    {
+      "id": "sync",
+      "title": "General Sync",
+      "category": "Boot / Sync",
+      "description": "Refresh current durable context without changing it.",
+      "mode": "simple",
+      "template": "/SYNC @GitHub\\n\\nRefresh the relevant durable context and report current state, stale assumptions, open loops, and synchronization drift. Do not make changes.\\n{custom_block}"
+    },
+    {
+      "id": "reboot",
+      "title": "Reboot Context",
+      "category": "Boot / Sync",
+      "description": "Summarize the current hub state and begin a clean operating phase.",
+      "mode": "simple",
+      "template": "/REBOOT @GitHub\\n\\nSummarize current decisions, active priorities, open loops, pending writes, and unresolved questions. Establish a clean operating state for the next phase. Do not make changes unless authorized.\\n{custom_block}"
+    },
+    {
+      "id": "role_review",
+      "title": "Role Review",
+      "category": "Hub / Coordination",
+      "description": "Ask selected department perspectives to review an issue, then have Main Assistant synthesize.",
+      "mode": "simple",
+      "template": "/ROLES\\n\\nAsk the relevant tagged department perspectives to review the issue below. Keep each response concise and labeled. Then have [MAIN] synthesize the recommendation, owner, next action, and any connector work requiring confirmation.\\n{custom_block}"
+    },
+    {
+      "id": "decide",
+      "title": "Decision Review",
+      "category": "Hub / Coordination",
+      "description": "Coordinate department perspectives into a decision with an owner and next action.",
+      "mode": "simple",
+      "template": "/DECIDE\\n\\nHave the relevant department roles assess the options, tradeoffs, risks, and owner. [MAIN] should recommend one decision and identify the smallest next action.\\n{custom_block}"
+    },
+    {
+      "id": "update_github",
+      "title": "Update GitHub",
+      "category": "Connectors",
+      "description": "Prepare or perform an explicitly authorized GitHub update and report the exact file changes.",
+      "mode": "simple",
+      "template": "/UPDATEGITHUB @GitHub\\n\\nIdentify the exact GitHub files and changes requested. Confirm scope, preserve department boundaries, and make only the explicitly authorized updates. Report paths, summaries, and any remaining drift.\\n{custom_block}"
+    },
+    {
+      "id": "hub_roles",
+      "title": "Hub Role Tags",
+      "category": "Hub / Coordination",
+      "description": "Load the tagged department advisor definitions for the single-chat hub.",
+      "mode": "simple",
+      "template": "[MAIN] Chair, coordinator, and connector operator.\\n[LOGISTICS] Serious, grounded executive-function and life-admin support.\\n[ENGINEERING] Direct, analytical software and automation review.\\n[FINANCE] Careful, numbers-first cost and affordability review.\\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\\n[WELLNESS] Warm, sustainable health and energy review.\\n\\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\\n{custom_block}"
     }
-  ]
+  ],
+  "updated": "2026-07-15"
 }
