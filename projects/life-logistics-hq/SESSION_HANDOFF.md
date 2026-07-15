@@ -132,7 +132,7 @@ Preserve project history. Do not delete department files.
 
 ## Current Architecture Standards
 
-- Shortcut commands: `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` are approved for active use under existing routing and read-only constraints.
+- Shortcut commands: `/BOOT`, `/ADVISE`, `/ADVISORY`, `/SYNCADVISORY`, and the expanded connector-tagged commands are approved for active use under existing routing and read-only constraints. Canonical vocabulary: `memory/CONTEXT_REMINDER.md`; launcher database is secondary.
 - Advisory Index: `coordination/ADVISORY_INDEX.md`
 - Advisory boards: `coordination/boards/`
 - Worker registry: `workers/README.md`
