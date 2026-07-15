@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-13
+Updated: 2026-07-15
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Startup procedure for a fresh Penny chat window.
 
@@ -25,6 +25,21 @@ Read these files in order:
 9. `memory/05_OPEN_LOOPS.md`
 10. `MIGRATION_PLAN.md`
 11. `MIRROR_STATUS.md`
+
+## Daily Operating SOP Application
+
+After reading `memory/06_DAILY_OPERATING_SOP.md`, apply it as the default planning and execution standard:
+
+- Select one major action for the day.
+- Add at most one low-friction support action when useful.
+- Treat high-friction actions, including leaving home and transit, as complete major tasks.
+- Prepare and delegate Penny-level work before asking Rob to act.
+- Keep due dates sparse and meaningful.
+- Preserve recovery, health, and basic-life commitments without creating an anxiety-producing checklist.
+- Route specialized judgment to the owning department.
+- Treat the SOP as a testable operating standard, not an additional task list.
+
+Department boots inherit this standard through the global boot order. Project-specific instructions may refine it only within their department boundary; they must not silently contradict it.
 
 Then read project files only as needed.
 
