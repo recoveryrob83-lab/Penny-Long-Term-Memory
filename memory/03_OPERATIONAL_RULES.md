@@ -201,11 +201,11 @@ Use notebooks for ideas worth preserving that are not yet tasks, advisories, ope
 
 Daily HQ sync workers are the preferred scheduled-task experiment for core HQs.
 
-The standalone Advisory Watcher is no longer the preferred scheduled-task slot usage; its useful reporting logic is folded into daily HQ sync prompts.
+The standalone Advisory Watcher is retired as a preferred scheduled-task pattern. Its useful reporting logic may inform a future sync design only after the paused Engineering pilot's execution architecture is strengthened.
 
 Scheduled HQ sync workers should boot into the correct department identity, read current boot/handoff/advisory/decision-rule context, consume advisories addressed to that department, report meaningful updates, and avoid modifying systems unless Rob explicitly authorizes that behavior.
 
-Engineering HQ Daily Sync is the first pilot. Observe results before rolling out additional daily sync workers.
+Engineering HQ Daily Sync was the first pilot and is currently paused by Rob because scheduled-task execution remains unreliable. Do not roll out additional daily sync workers until the architecture is strengthened and the pilot is explicitly resumed.
 
 ## Connector Truthfulness Rules
 
