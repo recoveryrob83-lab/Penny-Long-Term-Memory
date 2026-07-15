@@ -1,6 +1,6 @@
 # Scheduled Tasks
 
-Updated: 2026-07-03
+Updated: 2026-07-14
 Purpose: Architecture notes for ChatGPT scheduled tasks used by Life OS.
 
 ## Role
@@ -25,13 +25,15 @@ Likely core sync slots:
 4. Chief Business Sync
 5. Chief Engineering Sync
 
-## Active Pilot
+## Pilot State
 
-`Engineering HQ Daily Sync` is the first pilot.
+`Engineering HQ Daily Sync` was the first pilot. It is currently paused by Rob because scheduled-task execution behavior remains unreliable.
 
-Cadence: daily at 6:00 AM America/Chicago.
+Additional scheduling and execution architecture is required before resumption. No other daily HQ sync workers should be rolled out until the pilot is resumed and produces reliable evidence.
 
-Purpose: test whether a scheduled sync can preserve department identity, read GitHub boot/handoff/advisory context, consume Engineering-targeted advisories, and report useful updates without unwanted writes.
+Former cadence: daily at 6:00 AM America/Chicago.
+
+Purpose when resumed: test whether a scheduled sync can preserve department identity, read GitHub boot/handoff/advisory context, consume Engineering-targeted advisories, and report useful updates without unwanted writes.
 
 ## Operating Rule
 
