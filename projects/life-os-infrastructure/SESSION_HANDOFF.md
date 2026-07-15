@@ -1,6 +1,6 @@
 # Life OS Infrastructure Session Handoff
 
-Updated: 2026-07-11
+Updated: 2026-07-14
 Project: Life OS Infrastructure
 Purpose: Project-specific handoff for Life OS Infrastructure and connector/architecture workflows.
 
@@ -70,11 +70,11 @@ If adopted later, they should own department-level pipeline state only, most lik
 
 ## Scheduled HQ Sync Model
 
-Daily HQ sync workers are now the preferred experiment over a standalone Advisory Watcher.
+Daily HQ sync workers remain a possible future experiment, but the Engineering pilot is paused pending additional scheduling and execution architecture.
 
 Reason: Rob appears to have a scarce scheduled-task limit, so scheduled tasks should be treated as premium Life OS infrastructure slots.
 
-Likely core sync slots:
+Potential future sync slots, only after the pilot is proven:
 
 1. Life Logistics HQ
 2. Main Assistant
@@ -142,7 +142,7 @@ Authority remains:
 
 - Department Event Inbox owns system synchronization state.
 - Todoist owns Rob-facing actions.
-- Daily HQ sync is preferred over standalone Advisory Watcher if scheduled-task slots are scarce.
+- Daily HQ sync may be reconsidered only after the paused Engineering pilot's execution model is redesigned and produces reliable evidence.
 - Daily sync workers should report and consume advisories, not perform major writes or decisions without Rob authorization.
 - New platforms require measured pain, clear ownership, and no clean existing-component solution.
 - Kanban/project-management tools are deferred until real pipeline-state pain appears.
