@@ -1,43 +1,42 @@
 # Chief Business HQ
 
-Updated: 2026-07-04
+Updated: 2026-07-15
 
 ## Purpose
 
 Chief Business HQ coordinates Rob's business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and business planning.
 
-This department turns ideas into clear business strategy before Engineering builds.
+This department turns ideas into clear business strategy before Engineering builds or a business-unit HQ executes.
 
 ## Current Status
 
-Active department. Penny Platform viability research is active.
+Active parent-strategy department.
 
-Current research focus:
+Immediate business priority:
 
-- competitor landscape,
-- positioning and white-space opportunity,
-- unit economics,
-- business model paths,
-- customer discovery / validation packet.
+- Guide Office Leaks Consulting as the revenue-first business unit.
+- Strengthen positioning, trust, offers, customer selection, and go-to-market strategy.
+- Preserve capacity for future businesses under Chief Business HQ.
+- Keep PennyOS / Penny Platform paused, not abandoned, until Rob reactivates it or Office Leaks generates useful productization evidence.
 
 ## Current Strategic Frame
 
-Penny should not be framed as simply another chatbot.
+Office Leaks Consulting should not compete as a generic low-cost virtual assistant service.
 
-The stronger frame is Penny as an execution/coordination platform or personal AI operating system: one trusted user-facing assistant coordinates specialized departments behind the scenes.
+The stronger frame is trust-based systems consulting for small local service businesses with real office, follow-up, documentation, and workflow leaks.
 
-Core value hypothesis: users do not want more AI conversation; they want less mental juggling and more completed outcomes.
+Current commercial hypothesis:
 
-## Candidate Business Model Paths
+- Businesses lose money through weak follow-up, scattered information, unclear ownership, and inconsistent office habits.
+- Small bounded cleanup offers can create near-term income and market learning.
+- Trust, clarity, adoption, and follow-through matter as much as the tool or tracker delivered.
+- The tool is not the product; the habit is the product.
 
-- Penny Platform
-- Penny Solutions / Studio
-- Penny Templates / Marketplace
-- Hybrid Concierge MVP
+PennyOS remains a longer-term execution and coordination platform concept. Its prior competitor, positioning, unit-economics, and validation research is preserved but paused.
 
 ## Role
 
-Chief Business Development Penny is the specialist department for business continuity.
+Chief Business Development Penny is the specialist department for parent business strategy and commercial continuity.
 
 Use Chief Business HQ for:
 
@@ -47,13 +46,15 @@ Use Chief Business HQ for:
 - Market research and customer discovery.
 - Offer design and monetization.
 - Go-to-market planning.
-- Future Penny product/business concept planning.
-- Coordinating with Engineering, Finance, Main Assistant, and Life Logistics HQ.
+- Portfolio strategy across current and future businesses.
+- Future Penny product and business concept planning.
+- Coordinating with Office Leaks HQ, Engineering, Finance, Main Assistant, and Life Logistics HQ.
 
 ## Not This Department
 
+- Office Leaks execution continuity: Office Leaks Consulting HQ.
 - Technical implementation: Chief Engineering Penny.
-- Personal finance, benefits, budget, bills, or paperwork: Chief of Finance Penny.
+- Personal finance, benefits, budget, bills, or financial execution: Chief of Finance Penny.
 - Daily one-off scheduling or quick admin: Main Assistant.
 - System architecture and GitHub housekeeping: Life Logistics HQ.
 
@@ -66,8 +67,8 @@ Use Chief Business HQ for:
 - Gmail: communication evidence.
 - Contacts: people or organization lookup when needed.
 - RPR/user-mediated files: structured working records when connector reliability matters.
-- Advisory Index: advisory dashboard.
-- Department Event Inbox: department synchronization/read/ingestion register.
+- Advisory Index: sole active advisory routing dashboard.
+- Department Event Inbox: frozen historical record unless Rob explicitly reactivates it.
 
 ## Current Working Records
 
@@ -76,9 +77,9 @@ Canonical Business Drive architecture:
 - Life Organization > Chief Business HQ
 - Under that: Business Development
 
-Business working records should live under the Chief Business HQ folder. Business Development is a subfolder beneath Chief Business HQ, not a separate top-level business root.
+Business parent-strategy records should live under the Chief Business HQ folder. Detailed Office Leaks execution records belong in the Office Leaks working area or RPR artifacts, with GitHub holding only abstract state and pointers.
 
-Key Drive records include:
+Preserved Business records include:
 
 - `Business Competitor Matrix` with `Competitors` and `Positioning Matrix` tabs.
 - `Business Development Costs` with `Cost Estimates` and `Unit Economics` tabs.
@@ -90,8 +91,11 @@ When Chief Business HQ creates an advisory for another department:
 
 1. Update `coordination/boards/business.md`.
 2. Update `coordination/ADVISORY_INDEX.md`.
-3. Update `coordination/DEPARTMENT_EVENT_INBOX.md`.
-4. Do not use Todoist for department synchronization unless Rob explicitly asks.
+3. Name the target department in both places.
+4. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reactivates it.
+5. Do not use Todoist for department synchronization unless Rob explicitly asks.
+
+Office Leaks-sourced advisories use `coordination/boards/office-leaks.md` plus the Advisory Index.
 
 ## Privacy Rule
 
