@@ -6,6 +6,103 @@ Notebook entries are local idea capture only. They do not update the Advisory In
 
 ## Entries
 
+### 2026-07-15 — LifeOS Chat/Work architecture and seven discussion HQs
+
+Rob and the LifeOS coordination hub tested the new ChatGPT desktop experience and established a practical operating architecture based on observed behavior rather than product assumptions.
+
+#### Observed product behavior
+
+- Normal ChatGPT chats and legacy Projects remain available across mobile, web, and classic desktop, though web Project presentation may be changing.
+- The new desktop Work environment uses separate Work Projects and Tasks rather than normal chats.
+- A disposable synchronization test confirmed that a Work Project and Task did not appear on mobile, web, or classic desktop.
+- Existing normal ChatGPT Projects did not appear inside the new Work environment.
+- Work therefore currently behaves as a separate workshop and execution surface rather than a synchronized replacement for normal ChatGPT.
+- Connector access is unavailable in the desktop chat-only surface tested here, but remains usable through mobile and classic desktop Chat for now.
+
+#### Usage observations
+
+Work usage resets weekly. Rob also has one free reset available until approximately August 21, pending exact verification.
+
+Observed usage breakdown:
+
+- Building the Python desktop prompt database with Terra High registered about 3% Work usage.
+- Extended conversation inside Work using Luna Light added about 7%.
+- This morning's Sol 5.6 conversation plus the small Work synchronization test added about 3%.
+- Extended Sol 5.6 conversation in ordinary mobile Chat did not visibly increase Work usage.
+
+The strongest current inference is that sustained conversation inside Work can consume substantial weekly Work allocation even on a light model, while ordinary Chat outside Work does not appear to consume that allocation. Reasoning level matters, but environment and session length may matter more.
+
+#### Chosen operating architecture
+
+Core mental model:
+
+- Chat = think, discuss, coordinate, and perform light connector-backed work.
+- Work = execute tasks that genuinely require local tools or a heavier computer environment.
+- GitHub = durable technical memory and source of truth.
+- Google Drive = documents and working files.
+- Desktop computer = execution surface.
+
+Regular ChatGPT remains the primary LifeOS headquarters because it preserves mobile access, ordinary conversational continuity, planning, recovery work, philosophy, strategy, and light connector operations.
+
+The LifeOS Work Project remains a bounded execution workshop for:
+
+- coding and testing;
+- local-file inspection or transformation;
+- large artifact production;
+- browser automation;
+- desktop application control;
+- heavy implementation tasks that cannot be completed safely through Chat connectors.
+
+Operating rule:
+
+> Think and decide in Chat. Enter Work with a bounded objective. Execute, verify, and leave.
+
+Long open-ended conversation inside Work is specifically discouraged because it spends the weekly execution budget on activity Chat performs without moving the Work meter.
+
+#### Model policy
+
+- GPT-5.5 Instant is the default for routine conversation, coordination, capture, and planning.
+- GPT-5.6 Terra Medium is the normal escalation point for heavier synthesis or planning.
+- Terra High should be rare and justified by task complexity.
+- Sol is currently considered unnecessary for ordinary LifeOS planning and execution.
+- The smallest capable model should be used first; capability escalates only when the task requires it.
+
+#### Department HQ decision
+
+Rob plans to launch seven new persistent department HQ chats as planning and discussion spaces. These HQs will be regular ChatGPT chats rather than Work Projects.
+
+The purpose is to preserve specialized departmental context while keeping every department part of one coherent Penny organization. The HQs are conference rooms for one assistant wearing different operational hats, not autonomous agents running loose.
+
+Expected core departments include:
+
+- Main Assistant / LifeOS Coordination Hub
+- Life Logistics
+- Engineering
+- Finance
+- Business
+- Wellness
+- one additional department to be confirmed during Engineering review
+
+The current coordination hub has already demonstrated value by giving Rob multiple department perspectives in one conversation without requiring him to switch chats while planning from mobile.
+
+#### Connector and execution policy
+
+While connector access remains available through mobile or classic desktop Chat:
+
+- department HQs may perform light connector work such as GitHub updates, itinerary checks, task review, and ordinary record coordination;
+- Main Assistant remains the coordinating authority for cross-department connector actions in the shared hub unless Rob explicitly directs otherwise;
+- no department should claim an external action occurred unless a connector or Work result confirms it.
+
+If OpenAI later moves connector use fully into Work, the LifeOS architecture should still survive. Planning and departmental discussion remain in Chat, while connector-backed execution moves across the boundary through concise task briefs.
+
+#### Meeting decision and follow-up
+
+The architecture discussion is complete enough to proceed.
+
+A formal advisory, ADV-20260715-036, was routed to Chief Engineering Penny to design prompts for all seven department HQs. Engineering should perform that prompt work in Engineering HQ rather than expanding the current coordination discussion chat.
+
+The immediate priority remains practical use of the system, not further platform archaeology or infrastructure for its own sake. Work should support real engineering, business delivery, and automation without displacing immediate income and real-world action.
+
 ### 2026-07-15 — Friction-aware daily operating pattern
 
 Rob identified a daily operating pattern that plays to his strengths while respecting executive dysfunction and the high cognitive cost of leaving the house.
