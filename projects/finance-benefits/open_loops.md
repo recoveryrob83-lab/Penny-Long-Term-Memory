@@ -1,35 +1,40 @@
 # Finance Benefits Open Loops
 
-Updated: 2026-07-08
+Updated: 2026-07-15
 Project: Chief of Finance Penny / Finance Benefits HQ
 
 ## Active Open Loops
 
 | ID | Status | Area | Loop | Owner | Next Action |
 |---|---|---|---|---|---|
-| FIN-001 | Open | Checkbook | Use the Drive Checkbook Register as the primary working ledger. | Chief of Finance Penny | Confirm structure before real transaction work. |
-| FIN-002 | Open | Budget | Build a simple monthly budget view when Rob is ready. | Chief of Finance Penny | Wait for real income and bill inputs. |
-| FIN-003 | Open | Bills | Track recurring bills and payment reminders. | Chief of Finance Penny / Main Assistant | Add Todoist or Calendar reminders when dates are known. |
-| FIN-004 | Open | Benefits | Track benefits paperwork and notices at an abstract level. | Chief of Finance Penny | Use Gmail or Drive only when Rob asks. |
-| FIN-005 | Open | Privacy | Keep sensitive finance data out of GitHub. | All Pennys | Store only abstract state and references here. |
-| FIN-006 | Open | Office Leaks / VA Business | Support the Office Leaks / Virtual Assistant Business income stream when pricing, income, expenses, platform fees, subscription/tool costs, tax planning, budget impact, or benefits interaction becomes concrete. | Chief of Finance Penny | Coordinate with Chief Business HQ after initial offers/pricing assumptions exist. |
-| FIN-007 | Open | Office Leaks Finance Model | Maintain Office Leaks Finance Model in Drive for pricing, startup costs, tool decisions, revenue tracking, and tax set-aside planning. | Chief of Finance Penny | Use the Drive finance model when pricing offers or evaluating business expenses. |
-| FIN-008 | Open | Office Leaks Pricing | Develop pricing guidance for Office Leak Audit, One-Leak Cleanup Sprint, and Follow-Up Check offers. | Chief of Finance Penny / Chief Business HQ | Fill in estimated hours, cost assumptions, and suggested price ranges when Business defines offer scope. |
-| FIN-009 | Open | Office Leaks Tool Costs | Evaluate domain, website, email, transportation, branded materials, software, and marketplace fees against bootstrap cash flow. | Chief of Finance Penny | Approve only lean expenses that support leads, close rate, delivery quality, or financial accuracy. |
+| FIN-001 | Open | Checkbook | Maintain the Drive Checkbook Register as the primary working ledger. | Chief of Finance Penny | Read before editing, preserve formulas, and verify writes. |
+| FIN-002 | Open | Reconciliation | Resolve the ledger-to-account balance discrepancy after pending transactions settle. | Chief of Finance Penny | Compare posted activity, pending items, omissions, duplicates, fees, starting balance, and formula integrity. |
+| FIN-003 | Open | Forecast | Build or review a projected ledger separate from the working ledger. | Chief of Finance Penny | Use expected dates, amount, direction, confidence, condition, protected-fund status, and projected balance. |
+| FIN-004 | Open | Budget | Build a simple current budget and allocation plan when verified funds and obligations are available. | Chief of Finance Penny | Prioritize essentials, transportation, recovery support, communication, and minimum buffer. |
+| FIN-005 | Open | Bills and Subscriptions | Identify recurring bills, subscriptions, renewals, fees, and payment reminders. | Chief of Finance Penny / Main Assistant / Logistics | Review real records and add reminders only when Rob requests them. |
+| FIN-006 | Open | Benefits | Track benefits paperwork, notices, deadlines, and research at an abstract level. | Chief of Finance Penny | Use official sources, Gmail, or Drive when Rob requests review. |
+| FIN-007 | Open | Income | Track confirmed, pending, estimated, and hypothetical income separately. | Chief of Finance Penny | Do not count possible income as available before receipt. |
+| FIN-008 | Open | Privacy | Keep sensitive finance data out of GitHub. | All Pennys | Store only abstract state, rules, and pointers here. |
+| FIN-009 | Open | Office Leaks | Support Office Leaks financial feasibility once offer scope and costs are concrete. | Chief of Finance Penny / Chief Business HQ | Evaluate hours, fees, delivery costs, repeatability, follow-on value, and personal cash risk. |
+| FIN-010 | Open | Office Leaks Pricing | Evaluate the experimental low-cost first-task offer for sustainability. | Chief of Finance Penny / Chief Business HQ | Business defines scope; Finance models time, fees, costs, and minimum viable price. |
+| FIN-011 | Open | Office Leaks Tool Costs | Evaluate domain, website, email, transportation, branded materials, software, and marketplace costs against bootstrap cash flow. | Chief of Finance Penny | Approve only expenses tied credibly to leads, trust, conversion, delivery, or financial accuracy. |
+| FIN-012 | Open | Decision Rule | Apply DR-FIN-20260704-001 to discretionary spending decisions during scarcity. | Chief of Finance Penny | Return a clear recommendation and protect higher-priority needs. |
 
-## Waiting / Parked
+## Waiting or Conditional
 
-- Real transaction data.
-- Known bill list.
-- Known income sources and cadence.
+- Final posted transaction state for reconciliation.
+- Verified income dates and amounts for forecast entries.
+- Complete current bill and subscription list.
 - Benefits notices or paperwork requiring action.
-- Office Leaks / VA Business offer scope, pricing assumptions, or actual marketplace income/expenses.
-- Concrete website/domain/email/tool costs for Finance review.
+- Concrete Office Leaks offer scope, estimated delivery time, payment method, platform fees, or actual revenue and expenses.
+- Concrete website, domain, email, tool, transportation, or marketplace costs.
 
-## Done / Recently Closed
+## Done or Recently Closed
 
+- 2026-07-15 | Updated Finance files to the current Advisory Index routing model and removed stale Department Event Inbox instructions.
+- 2026-07-15 | Established the separate forecast-ledger direction as an active Finance workflow.
+- 2026-07-15 | Updated Finance state for current scarcity planning and Office Leaks experimental offer review without storing sensitive amounts.
 - 2026-07-08 | Created Office Leaks Drive finance folder, Finance Model spreadsheet, Pricing Notes document, and GitHub pointer file.
-- 2026-07-08 | Ingested Office Leaks operating philosophy from ADV-20260708-026 and aligned Finance planning to trust-building, bite-sized offers.
-- 2026-07-07 | Ingested VA Business income-stream context from ADV-20260707-022 and ADV-20260707-023 at an abstract level.
+- 2026-07-08 | Ingested Office Leaks operating philosophy and aligned Finance planning to trust-building, bite-sized offers.
 - 2026-07-03 | Located Drive Checkbook folder and Checkbook Register spreadsheet.
 - 2026-07-03 | Activated Chief of Finance Penny backend in GitHub.
