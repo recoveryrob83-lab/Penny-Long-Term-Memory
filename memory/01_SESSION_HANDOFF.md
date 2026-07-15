@@ -1,6 +1,6 @@
 # Session Handoff
 
-Updated: 2026-07-14
+Updated: 2026-07-15
 Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
 Purpose: Fast baton-pass file for future Penny chat windows.
 
@@ -126,7 +126,13 @@ Active first rule:
 
 ## Current Open Advisory State
 
-No open advisories are currently listed in the Advisory Index.
+As of 2026-07-15, the Advisory Index contains one open Engineering advisory:
+
+- ADV-20260715-036 — Open; Engineering prompt package for seven LifeOS discussion HQs.
+
+Recently implemented / acknowledged:
+
+- ADV-20260715-035 — Implemented / Acknowledged / Closed; Engineering verified and integrated the friction-aware Daily Operating SOP into the global boot flow.
 
 Recently implemented / acknowledged:
 
