@@ -167,6 +167,52 @@ Implemented routing:
 
 Note: attempts to update `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-hq/SESSION_HANDOFF.md` were blocked by connector safety checks. The canonical project map update succeeded.
 
+
+### ADV-20260715-035 — Standardize Rob's friction-aware daily operating pattern
+
+- Date: 2026-07-15
+- From: Main Assistant Penny / Daily Operations
+- To: Chief Engineering Penny
+- Priority: High
+- Status: Open / Awaiting Engineering implementation
+- Related Project(s): Main Assistant, Life OS, boot architecture, daily operations, cognitive-load reduction
+- Source Location: `memory/06_DAILY_OPERATING_SOP.md`
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department: Chief Engineering Penny
+
+#### Request
+
+Engineering should review and implement the durable integration needed for `memory/06_DAILY_OPERATING_SOP.md`, Daily Operating SOP v0.1.
+
+The SOP standardizes how Penny should support Rob's daily operation:
+
+- one major action per day, with at most one low-friction support action;
+- sparse, meaningful due dates rather than deadline-heavy task lists;
+- explicit friction categories, including transit and leaving the house as a full major task;
+- Penny-level preparation and delegation to reduce work before Rob acts;
+- transit and waiting time treated as recovery/productivity-lite time, not a second itinerary;
+- respect for Rob's strengths in systemizing, planning, recovery, philosophy, learning, programming, design, art, and idea creation;
+- preservation of department boundaries and truthful authorization/verification rules.
+
+#### Engineering implementation questions
+
+1. Confirm that `memory/06_DAILY_OPERATING_SOP.md` is included in the canonical global boot order and consumed by every department boot that follows global routing.
+2. Identify any project-specific boot files, templates, or prompt/launcher surfaces that need a pointer or reminder so the SOP is not silently skipped.
+3. Check for conflicting daily-planning, due-date, itinerary, or role-boundary rules and report any drift.
+4. Recommend the smallest implementation needed to make this a repeated operating pattern without creating another anxiety-producing checklist.
+5. Report the implementation path and any files changed back to Main Assistant / Life Logistics HQ.
+
+#### Boundary
+
+This is an operating-standard and boot-integration request. It does not authorize Engineering to change Todoist, Calendar, Gmail, Drive, or other external systems. Rob remains the final authority for later workflow changes.
+
+#### Acceptance criteria
+
+- SOP file exists at `memory/06_DAILY_OPERATING_SOP.md`.
+- Global boot order explicitly includes it.
+- Engineering identifies any additional integration points or conflicts.
+- Engineering returns a concise implementation report and does not mark the advisory implemented until the boot consumption path is verified.
+
 ## Notes
 
 Main Assistant should usually read `coordination/ADVISORY_INDEX.md` first rather than scanning every board.
