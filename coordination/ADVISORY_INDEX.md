@@ -5,24 +5,25 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260715-036 — Open — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Design and document launch prompts for seven LifeOS department discussion HQs, preserving Chat/Work separation, department boundaries, connector rules, and model-usage discipline.
-- ADV-20260715-035 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Daily Operating SOP integrated into global boot flow and inherited by department boots.
+- None.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260715-036 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Seven LifeOS department discussion HQ chats were launched with Chat/Work separation, department boundaries, connector rules, truthful action reporting, and model-usage discipline. Rob confirmed all HQs are open and ready on 2026-07-15.
+- ADV-20260715-035 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Daily Operating SOP integrated into global boot flow and inherited by department boots.
 - ADV-20260714-034 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Expanded connector-tagged shortcuts ingested; canonical vocabulary remains in `memory/CONTEXT_REMINDER.md`; launcher JSON treated as secondary; no duplicate definitions found.
-- ADV-20260713-033 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — Shortcut rollout ingested; `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` are approved for active use under existing routing and read-only constraints.
+- ADV-20260713-033 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — Shortcut rollout ingested; `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` approved for active use under existing routing and read-only constraints.
 - ADV-20260710-032 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Canonical Penny Inventory Worker package created, For Sale Inventory resource verified, worker registry and boot routing updated.
 - ADV-20260710-031 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted with Git history preserving prior detail.
 - ADV-20260709-030 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Formal Life OS worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and worker boot routing created.
-- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030 — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed the rapid capture worker architecture; Life Logistics implemented the resulting worker package under ADV-20260709-030. No separate work remains.
+- ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030 — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed rapid-capture worker architecture; Life Logistics implemented the resulting worker package. No separate work remains.
 - ADV-20260708-028 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Office Leaks finance working records synced across Life OS.
 - ADV-20260708-027 — Implemented — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Engineering Office Leaks architecture updates synced across Life OS.
 - ADV-20260708-026 — Closed / Fully Acknowledged — Posted Board: `coordination/boards/business.md` — Target Departments: Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ — Office Leaks operating philosophy reviewed by all target departments.
 - ADV-20260707-025 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief Engineering Penny — Engineering ingested delivery playbook request for bite-sized local service office cleanup offers.
 - ADV-20260707-024 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Business HQ parent-state refreshed for VA Business priority.
 - ADV-20260707-023 — Implemented — Posted Board: `coordination/boards/finance.md` — Target Department: Life Logistics HQ — Finance state refreshed for Virtual Assistant income stream.
-- ADV-20260707-022 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness needed for Virtual Assistant income stream.
+- ADV-20260707-022 — Acknowledged — Posted Board: `coordination/boards/business.md` — Target Department: Chief of Finance Penny — Finance awareness recorded for Virtual Assistant income stream.
 - ADV-20260707-021 — Implemented — Posted Board: `coordination/boards/business.md` — Target Department: Life Logistics HQ — Virtual Assistant Business scaffold created as Business HQ sub-project.
 
 See department boards and repository history for acknowledged advisories ADV-20260704-001 through ADV-20260706-020.
