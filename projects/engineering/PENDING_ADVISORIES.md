@@ -67,7 +67,7 @@ Routine advisories should wait in the system until the target department opens o
 
 Immediate advisory consumption causes context switching and makes Rob the human mail carrier. This is cognitively expensive, especially when ADHD-style capture pressure makes every visible item feel urgent.
 
-The Department Event Inbox should function more like a mailbox than an instant messaging system.
+This pending board is a local staging notebook only. The Department Event Inbox is frozen historical record and should not be used for normal routing.
 
 #### Possible Operating Rule
 
