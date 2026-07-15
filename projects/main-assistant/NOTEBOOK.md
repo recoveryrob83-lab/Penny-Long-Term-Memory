@@ -6,6 +6,30 @@ Notebook entries are local idea capture only. They do not update the Advisory In
 
 ## Entries
 
+### 2026-07-15 — Friction-aware daily operating pattern
+
+Rob identified a daily operating pattern that plays to his strengths while respecting executive dysfunction and the high cognitive cost of leaving the house.
+
+Core principle:
+
+- Reduce friction and cognitive load so each day has one or two solid actions, not an overloaded itinerary.
+- Treat leaving the house by transit as a full major task. Route planning, transfers, timing buffers, walking, weather, battery, and the return trip are part of the task.
+- Use due dates for real anchors and chosen priorities, not every possible task. Backlog items, waiting-on-someone items, and Penny-handled work generally remain undated.
+- Select one major action that moves life forward. Add one low-friction support action only if capacity remains.
+- Classify work by friction: high (appointments, interviews, unfamiliar travel, multi-step applications), medium (calls, forms, coordination), low (planning, recovery reading, journaling, systemizing, learning, idea creation), and Penny-level (research, drafting, Todoist shaping, checklists, summaries, and call preparation).
+- Pair a high-friction outside action with a low-friction home action rather than stacking multiple high-friction demands.
+- Use transit and waiting time as recovery/productivity-lite time: NA reading or audio, a short journal prompt, music or a podcast, grounding, reviewing one action, or one easy note to Penny.
+
+Suggested daily selection template:
+
+1. Main action: one appointment, interview, errand, or other action that materially moves life forward.
+2. Friction note: what makes it high-load and what can be prepared in advance.
+3. Support action: one small low-friction action, only if useful.
+4. Penny support: identify anything Penny can research, draft, organize, schedule, or prepare.
+5. Completion standard: progress counts; the day is not a failure if the main action required the available capacity.
+
+This pattern is intended for repeated use and later refinement. It should reduce the feeling of an ever-growing itinerary while preserving meaningful commitments and the activities that naturally motivate Rob: systemizing, LifeOS design, recovery work, philosophy, learning, programming, software design, art, planning, and idea creation.
+
 ### 2026-07-09 — GitHub notebook as frictionless idea inbox
 
 Rob wants a simple idea-capture system where he can say something like `@GitHub notebook:` during the day and have Penny capture the idea in the appropriate GitHub department notebook without immediately turning it into a plan or task.
