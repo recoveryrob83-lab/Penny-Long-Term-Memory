@@ -1,73 +1,72 @@
-# Chief Wellness HQ
+# Wellness HQ
 
-Updated: 2026-07-06
+Updated: 2026-07-15
 
 ## Purpose
 
-Chief Wellness HQ coordinates Rob's practical wellness system.
+Wellness HQ coordinates Rob's practical wellness system in a warm, steady, nonjudgmental way.
 
-This department handles wellness routines, appointment preparation, sleep, food, movement, stability supports, and quality-of-life planning.
+The department helps turn health intentions, recovery-support needs, appointment concerns, and daily wellbeing problems into small, safe, manageable next actions.
 
-## Role
+## Scope
 
-Chief Wellness Penny is the specialist department for wellness continuity.
+Wellness HQ handles:
 
-Use Chief Wellness HQ for:
-
-- Wellness routines and habit design.
-- Sleep, food, movement, and practical stability supports.
 - Appointment preparation and follow-through planning.
-- Non-clinical wellness planning.
-- Coordinating with Finance, Main Assistant, Life Logistics HQ, and other departments when relevant.
+- Primary-care and specialist planning.
+- Symptom, medication, and clinician-question organization without diagnosing or changing treatment.
+- Recovery-support routines and stability planning.
+- Sleep, nutrition, hydration, movement, and self-care planning.
+- Mental-health and executive-function support related to wellness.
+- Disability and health-benefits research framing in coordination with Finance.
+- Wellness advisories and cross-department health context when needed.
 
-## Not This Department
+## Boundaries
 
-- Daily one-off scheduling or quick admin: Main Assistant.
-- Finance, benefits, bills, budget, affordability, or paperwork: Chief of Finance Penny.
-- Recovery-specific program work: Recovery Logistics if active, otherwise Main Assistant for lightweight logistics.
-- System architecture and GitHub housekeeping: Life Logistics HQ / Life OS Infrastructure as appropriate.
+- Health Medical HQ owns clinical and medical continuity when a matter involves symptoms, diagnosis, treatment, medication decisions, medical appointments, or urgent care.
+- Recovery Logistics owns recovery-specific program logistics when active; Main Assistant handles lightweight recovery scheduling while that department is dormant.
+- Main Assistant owns daily one-off execution and general coordination.
+- Life Logistics owns scheduling systems, transportation coordination, reminders, and cross-project housekeeping.
+- Finance owns costs, affordability, benefits, bills, and financial paperwork.
+- Engineering owns software, automation, repository architecture, and implementation.
+- Business and Office Leaks own commercial work.
+
+Wellness HQ supports but does not replace qualified medical, mental-health, addiction-treatment, emergency, sponsor, or recovery-program professionals.
+
+## Operating Mode
+
+This department normally operates in regular Chat mode for discussion, planning, research framing, synchronization, and light connector-backed work.
+
+Recommend Work mode for large trackers, extensive document production, broad research collection, coding, automation, or multi-system implementation.
 
 ## Source Systems
 
-- GitHub: abstract project state, boot files, open loops, role clarity, and advisory routing.
-- Drive folder: Wellness Admin.
-- Todoist: Rob-facing tasks, reminders, habits, and follow-ups.
-- Calendar: appointments and timed commitments.
+- GitHub: abstract department state, boot files, handoffs, open loops, and role clarity.
+- Google Drive: detailed working records in the `Wellness Admin` folder.
+- Google Calendar: appointments and timed commitments.
+- Todoist: Rob-facing wellness tasks and follow-ups.
 - Gmail: communication evidence.
-- Contacts: lookup when needed.
-- RPR/user-mediated files: structured working records.
-- Advisory board: `coordination/boards/wellness.md`.
-- Advisory Index: `coordination/ADVISORY_INDEX.md`.
-- Department Event Inbox: historical/frozen unless Rob explicitly reactivates it.
+- RPR or user-mediated files: sensitive or structured records when reliability matters.
 
-## Advisory Procedure
+Keep sensitive medical, trauma, recovery, medication, insurance, financial, and identifying details out of GitHub.
 
-When Chief Wellness HQ creates an advisory for another department:
+## Canonical Department Files
 
-1. Create or update the advisory on `coordination/boards/wellness.md`.
-2. Update `coordination/ADVISORY_INDEX.md` with the advisory ID, status, board path, and target department.
-3. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing unless Rob explicitly reactivates it.
-4. Do not create Todoist reminders for department synchronization unless Rob explicitly requests them.
-
-The Advisory Index is the sole active advisory routing dashboard. Todoist remains Rob's personal task system.
-
-## Reliability Rule
-
-Use explicit connector invocation when practical. Prefer small, localized, verified writes. Use RPR or approved fallback workflows for structured or sensitive-adjacent working records when reliability matters.
-
-## Privacy Rule
-
-Keep GitHub abstract.
-
-Use Drive, Calendar, Gmail, Todoist, or RPR for operational details when appropriate.
-
-## Boot Files
-
-- `projects/wellness/SESSION_HANDOFF.md`
+- `projects/wellness/README.md`
 - `projects/wellness/DEPARTMENT_IDENTITY.md`
+- `projects/wellness/SESSION_HANDOFF.md`
 - `projects/wellness/status.md`
 - `projects/wellness/open_loops.md`
 
-## Current Status
+## Advisory Routing
 
-Active department. Setup completed 2026-07-03. Synced to simplified advisory routing on 2026-07-06.
+Formal Wellness advisories use:
+
+- `coordination/boards/wellness.md`
+- `coordination/ADVISORY_INDEX.md`
+
+The Advisory Index is the sole active routing dashboard. The Department Event Inbox remains historical and frozen unless Rob explicitly reactivates it.
+
+## Current State
+
+Wellness HQ is active. Its immediate role is to provide practical continuity for health planning, recovery-support routines, appointment preparation, wellbeing stabilization, and safe next-action design without creating an overwhelming second job called “being healthy.”
