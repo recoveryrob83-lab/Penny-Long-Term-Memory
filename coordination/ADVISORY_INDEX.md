@@ -5,11 +5,11 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260714-034 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Expanded shortcut set and prompt-launcher database require Logistics context ingestion and duplicate-source review.
 
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260714-034 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Expanded connector-tagged shortcuts ingested; canonical vocabulary remains in `memory/CONTEXT_REMINDER.md`; launcher JSON treated as secondary; no duplicate definitions found.
 - ADV-20260713-033 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — Shortcut rollout ingested; `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` are approved for active use under existing routing and read-only constraints.
 - ADV-20260710-032 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Canonical Penny Inventory Worker package created, For Sale Inventory resource verified, worker registry and boot routing updated.
 - ADV-20260710-031 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted with Git history preserving prior detail.
