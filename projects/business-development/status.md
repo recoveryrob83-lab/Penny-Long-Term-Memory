@@ -1,6 +1,6 @@
 # Chief Business HQ Status
 
-Updated: 2026-07-09
+Updated: 2026-07-15
 
 ## Current Phase
 
@@ -10,13 +10,21 @@ Active / Parent Strategy for Office Leaks Consulting
 
 Chief Business HQ is the parent strategy department for Rob's business portfolio.
 
-Office Leaks Consulting has been elevated from the former Virtual Assistant Business worker project into an active business-unit HQ under Chief Business HQ.
+Office Leaks Consulting is the active revenue-first business-unit HQ under Chief Business HQ. It focuses on trust-based systems consulting for small local service businesses with office, follow-up, documentation, lead-handling, and workflow leaks.
 
-The immediate objective is income generation as soon as practical through Office Leaks Consulting: trust-based local service-business systems consulting, office leak audits, bite-sized cleanup sprints, simple habits, documentation, and practical process coordination.
+PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform concept and potential future productization path that may benefit from Office Leaks service-market evidence.
 
-PennyOS / Penny Platform work is paused for now, not abandoned. It remains a longer-term platform concept and potential future productization path.
+## Immediate Commercial State
 
-Office Leaks may become a cashflow engine, market-learning lab, and proof base for future PennyOS/productized services.
+Current working development includes:
+
+- A low-friction introductory offer built around one small, clearly scoped admin or marketing cleanup task.
+- A working first-task price hypothesis of $20; this is not final pricing and requires Finance review before being treated as durable.
+- A simple landing-page direction using `OfficeLeaksConsulting@gmail.com` as the launch contact.
+- A stronger emerging messaging direction centered on costly follow-up failures and lost leads rather than broad generic task help.
+- A trust problem that must be solved through specificity, proof, transparent process, bounded scope, or a credible sample before broad promotion.
+
+Detailed copy and execution artifacts belong in Office Leaks HQ or Drive/RPR. GitHub stores only this abstract strategic state.
 
 ## Current Operating Rule
 
@@ -31,102 +39,57 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 ## Current Focus
 
 - Guide Office Leaks parent strategy without absorbing Office Leaks execution continuity.
-- Preserve capacity for future businesses under Chief Business HQ.
+- Pressure-test the introductory offer before expanding collateral.
+- Decide whether the entry offer is a general cleanup task, a lead-leak diagnostic, or a narrowly defined bridge between the two.
+- Define the first target customer segment and avoid positioning toward all small businesses at once.
+- Build a trust mechanism that answers why a stranger should choose Rob.
+- Separate the introductory offer from the eventual profitable service ladder.
 - Define major positioning versus generic virtual assistants or generic consultants.
-- Clarify Rob's strengths, weaknesses, constraints, credibility assets, and positioning.
-- Identify target customer segments and local-service-business market gaps.
-- Guide initial offers and service packages.
-- Coordinate with Office Leaks HQ on local-service-business positioning, lead-leak materials, and proposal strategy.
-- Coordinate with Finance on pricing, startup costs, income tracking, expenses, taxes, budget impact, and sustainable rate assumptions.
+- Clarify Rob's strengths, constraints, credibility assets, and positioning.
+- Coordinate with Office Leaks HQ on lead-loss stories, outreach, landing materials, offers, and proposal strategy.
+- Coordinate with Finance before treating pricing, startup costs, revenue assumptions, taxes, or tool costs as final.
 - Coordinate with Engineering on delivery architecture, templates, adoption verification, and human-system playbook elements.
 - Coordinate with Life Logistics on project file hygiene and handoff clarity.
-- Preserve PennyOS / Penny Platform as paused/parked, not the current execution priority.
+- Preserve PennyOS / Penny Platform as paused, not the current execution priority.
 
 ## Current Working Hypotheses
 
 - Rob should not compete as a generic low-cost VA.
-- Stronger positioning is Office Leaks Consulting: service-business systems consulting for local offices with real workflow leaks.
-- Office workers, dispatchers, receptionists, office managers, bookkeepers, spouses/family operators, and owners may all matter in the customer system.
+- Stronger positioning is Office Leaks Consulting: practical systems consulting for local service businesses with real workflow leaks.
+- A concrete costly problem, such as a lost lead caused by failed follow-up, creates stronger attention than a broad list of administrative tasks.
+- The $20 offer may work as a trust-building entry point, but price alone does not answer why the buyer should trust the service.
 - The economic buyer, internal champion, users, and beneficiaries should not be collapsed into one generic customer.
-- Trust, rapport, Aha Moment, adoption verification, and relational follow-up matter as much as the mechanical workflow map.
+- Trust, rapport, a visible Aha Moment, adoption verification, and relational follow-up matter as much as the mechanical workflow map.
 - The tool is not the product; the habit is the product.
-- Service work can generate income quickly and produce market learning for possible later productized services.
-- PennyOS remains conceptually useful, but the current execution lane is practical service revenue.
+- Service work can generate income and market learning for later productized services.
 
-## Drive / Working Records
+## Source and Project References
+
+- Parent department: `projects/business-development/`
+- Business-unit department: `projects/office-leaks-consulting/`
+- Legacy context: `projects/virtual-assistant-business/`
+- Office Leaks advisory board: `coordination/boards/office-leaks.md`
+- Engineering delivery architecture: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
+- Finance working-record pointer: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
 Canonical Business Drive architecture:
 
 - Life Organization > Chief Business HQ
 - Under that: Business Development
 
-Business parent-strategy records should live under the Chief Business HQ folder.
-
-Detailed Office Leaks business-unit working records should live in the appropriate Office Leaks Drive/RPR working area when created, with GitHub holding only abstract state and pointers.
-
-## Office Leaks References
-
-Office Leaks HQ:
-
-- `projects/office-leaks-consulting/`
-
-Office Leaks boot/sync:
-
-- `projects/office-leaks-consulting/BOOT_SYNC.md`
-- `projects/office-leaks-consulting/SYNC_CHECKLIST.md`
-
-Office Leaks advisory board:
-
-- `coordination/boards/office-leaks.md`
-
-Legacy VA context:
-
-- `projects/virtual-assistant-business/`
-
-Engineering delivery architecture:
-
-- `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
-- Related Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
-
-Finance working-record pointer:
-
-- `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
-
-Earlier Business HQ working cabinet:
-
-- Life Organization > Chief Business HQ
-- Folder ID: `14KX6L-nacIsa5xYVmGKAqhclb0O2iJpR`
-
-## Business HQ / Office Leaks Relationship
-
-Parent department:
-
-- `projects/business-development/`
-
-Business-unit department:
-
-- `projects/office-leaks-consulting/`
-
-Legacy worker context:
-
-- `projects/virtual-assistant-business/`
-
-Business HQ owns parent strategy and routing. Office Leaks Consulting HQ owns detailed execution artifacts such as service plans, marketing/content materials, offers, proposal materials, customer research, sample packet, and lead/proposal/client workflow.
-
 ## Coordination Notes
 
+- Office Leaks Consulting HQ owns detailed service plans, marketing materials, offers, proposals, customer research, sample packets, and lead/proposal/client workflow.
 - Main Assistant handles one-off scheduling and daily execution.
 - Chief Engineering Penny handles delivery architecture, templates, implementation, automation, and workflow tooling when concrete.
-- Chief of Finance Penny should be involved when pricing, startup costs, budget, income tracking, expenses, taxes, benefits interaction, or paperwork becomes concrete.
-- Life Logistics HQ handles cross-project coordination, GitHub housekeeping, scaffold hygiene, and Drive architecture decisions.
+- Chief of Finance Penny owns pricing feasibility, budget impact, income and expense tracking, taxes, benefits interaction, and financial risk once money becomes concrete.
+- Life Logistics HQ handles cross-project coordination, GitHub housekeeping, scaffold hygiene, and durable routing.
 
 ## Advisory Status
 
-No open advisories are currently listed in the Advisory Index.
+No open advisories are currently directed to Chief Business HQ.
 
-Future Business HQ advisories should update the Business advisory board and central Advisory Index only.
-
-Future Office Leaks-sourced advisories should update `coordination/boards/office-leaks.md` and the central Advisory Index.
+The Advisory Index may contain open advisories for other departments. Future Business HQ advisories should update the Business advisory board and central Advisory Index only. Future Office Leaks-sourced advisories should update the Office Leaks board and central Advisory Index.
 
 Do not update Department Event Inbox unless Rob explicitly reactivates it.
 
