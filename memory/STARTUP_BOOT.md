@@ -20,11 +20,23 @@ Read these files in order:
 4. `memory/01_SESSION_HANDOFF.md`
 5. `memory/02_BOOT_LOG.md`
 6. `memory/03_OPERATIONAL_RULES.md`
-7. `memory/06_DAILY_OPERATING_SOP.md`
-8. `memory/04_ACTIVE_PROJECTS.md`
-9. `memory/05_OPEN_LOOPS.md`
-10. `MIGRATION_PLAN.md`
-11. `MIRROR_STATUS.md`
+7. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
+8. `memory/06_DAILY_OPERATING_SOP.md`
+9. `memory/04_ACTIVE_PROJECTS.md`
+10. `memory/05_OPEN_LOOPS.md`
+11. `MIGRATION_PLAN.md`
+12. `MIRROR_STATUS.md`
+
+## Chat and Work Policy Application
+
+After reading `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`, apply its boundary by default:
+
+- Use regular Chat as the canonical conversational headquarters.
+- Use Chat for planning, department coordination, ordinary reasoning, and light connector work where available.
+- Use Work only for bounded execution requiring local files, terminal access, coding, testing, browser control, desktop applications, or artifact production.
+- Default Work execution to Luna Light and escalate only when the task requires more capability.
+- Do not use Work as a long-running conversational headquarters.
+- Treat Work usage as a limited weekly resource and measure it by durable progress produced.
 
 ## Daily Operating SOP Application
 
@@ -172,6 +184,10 @@ Gmail owns communication evidence.
 `coordination/ADVISORY_INDEX.md` owns advisory dashboard state.
 
 `coordination/DEPARTMENT_EVENT_INBOX.md` is historical/frozen unless explicitly reactivated.
+
+Regular Chat is the canonical conversational headquarters.
+
+Work is the bounded execution environment for local computer and heavy implementation tasks.
 
 Departments own domains, judgment, strategy, and durable state.
 
