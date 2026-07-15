@@ -69,12 +69,13 @@ Main Assistant owns authorized downstream processing of raw capture and inventor
 
 ## Advisory State
 
-Current open advisory:
+Current open advisories:
 
-- ADV-20260715-036 — Open — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Design and document launch prompts for seven LifeOS department discussion HQs while preserving Chat/Work separation, department boundaries, connector rules, and model-usage discipline.
+- None.
 
 Recently closed:
 
+- ADV-20260715-036 — Seven LifeOS Chat HQs opened and operational; Chat/Work separation, department boundaries, connector rules, and model-use discipline implemented.
 - ADV-20260715-035 — Daily Operating SOP integrated into the global boot flow.
 - ADV-20260714-034 — Expanded connector-tagged shortcuts ingested.
 - ADV-20260713-033 — Core shortcut rollout ingested.
@@ -91,6 +92,7 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth rather than thi
 - Observe worker pilot reliability through reports from Main Assistant and Engineering.
 - Keep Office Leaks, Business, Finance, Engineering, Main Assistant, and Logistics routing clear.
 - Track longer-horizon logistics when real-world Office Leaks activity begins.
+- Observe the seven Chat HQs for routing drift, duplicated responsibility, stale boot assumptions, and model-usage waste.
 - Keep the Engineering HQ Daily Sync pilot paused until Rob authorizes resumption.
 - Track whether the legacy `projects/virtual-assistant-business/` folder should later remain, archive, or be removed.
 - Prefer small, verified GitHub edits over broad rewrites.
@@ -109,4 +111,4 @@ This chat is Life Logistics HQ, not Main Assistant. Protect the boundary.
 
 Do not default to building Rob's daily itinerary or managing immediate errands. Maintain the map, not every footstep on the road.
 
-Boot reminder: Office Leaks is the active business priority. PennyOS is paused, not abandoned. Worker pilots remain active. Engineering HQ Daily Sync remains paused. ADV-20260715-036 is currently open for Engineering.
+Boot reminder: Office Leaks is the active business priority. PennyOS is paused, not abandoned. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
