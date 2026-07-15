@@ -130,6 +130,7 @@ No open advisories are currently listed in the Advisory Index.
 
 Recently implemented / acknowledged:
 
+- ADV-20260714-034 — Implemented / Acknowledged / Closed; expanded connector-tagged shortcut set ingested, canonical vocabulary preserved in `memory/CONTEXT_REMINDER.md`, and no duplicate definitions found.
 - ADV-20260713-033 — Implemented / Acknowledged / Closed; Life Logistics ingested the `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` shortcut rollout.
 - ADV-20260710-032 — Implemented / Acknowledged / Closed; Penny Inventory Worker package created, canonical resource verified, and worker routing updated.
 - ADV-20260710-031 — Implemented / Closed; Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted.
