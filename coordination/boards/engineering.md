@@ -52,8 +52,6 @@ Life Logistics HQ ingested the expanded shortcut set. `memory/CONTEXT_REMINDER.m
 
 No duplicate command definitions were found during review. The advisory is implemented and closed.
 
-## Recently Acknowledged / Implemented Advisories
-
 ### ADV-20260710-032 — Create Penny Inventory Worker boot package
 
 - Date: 2026-07-10
