@@ -97,7 +97,10 @@ This advisory authorizes prompt design and repository documentation only. It doe
 - From: Main Assistant Penny / Daily Operations
 - To: Chief Engineering Penny
 - Priority: High
-- Status: Open / Awaiting Engineering implementation
+- Status: Implemented / Acknowledged / Closed
+- Implemented: 2026-07-15
+- Acknowledged: 2026-07-15
+- Closed: 2026-07-15
 - Related Project(s): Main Assistant, Life OS, boot architecture, daily operations, cognitive-load reduction
 - Source Location: `memory/06_DAILY_OPERATING_SOP.md`
 - Posted Board: `coordination/boards/main-assistant.md`
@@ -135,6 +138,29 @@ This is an operating-standard and boot-integration request. It does not authoriz
 - Global boot order explicitly includes it.
 - Engineering identifies any additional integration points or conflicts.
 - Engineering returns a concise implementation report and does not mark the advisory implemented until the boot consumption path is verified.
+
+#### Implementation Outcome
+
+Engineering verified that `memory/06_DAILY_OPERATING_SOP.md` already existed and was present as item 7 in the canonical global boot order in `memory/STARTUP_BOOT.md`.
+
+Engineering added an explicit `Daily Operating SOP Application` section to `memory/STARTUP_BOOT.md`, establishing that every department boot inherits the SOP through global routing. The section directs Penny to:
+
+- select one major action and at most one low-friction support action;
+- treat leaving home and transit as full major tasks;
+- prepare Penny-level work before asking Rob to act;
+- keep due dates sparse and meaningful;
+- preserve recovery, health, and basic-life commitments without creating an anxiety-producing checklist;
+- route specialized judgment to the owning department; and
+- treat the SOP as a testable operating standard rather than another task list.
+
+Engineering also updated `memory/01_SESSION_HANDOFF.md` so the advisory state and SOP integration are durable and current.
+
+No Todoist, Calendar, Gmail, Drive, or other external systems were changed.
+
+#### Closure
+
+The boot-consumption path is verified. The SOP is integrated into the global boot flow and inherited by project departments. No additional project-specific pointer was required for this advisory.
+
 
 ## Acknowledged / Implemented Advisories
 
