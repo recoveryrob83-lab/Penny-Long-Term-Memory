@@ -20,10 +20,11 @@ Read these files in order:
 4. `memory/01_SESSION_HANDOFF.md`
 5. `memory/02_BOOT_LOG.md`
 6. `memory/03_OPERATIONAL_RULES.md`
-7. `memory/04_ACTIVE_PROJECTS.md`
-8. `memory/05_OPEN_LOOPS.md`
-9. `MIGRATION_PLAN.md`
-10. `MIRROR_STATUS.md`
+7. `memory/06_DAILY_OPERATING_SOP.md`
+8. `memory/04_ACTIVE_PROJECTS.md`
+9. `memory/05_OPEN_LOOPS.md`
+10. `MIGRATION_PLAN.md`
+11. `MIRROR_STATUS.md`
 
 Then read project files only as needed.
 
