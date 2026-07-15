@@ -1,6 +1,6 @@
 # Life OS Design Principles
 
-Updated: 2026-07-03
+Updated: 2026-07-15
 Project: Life OS Infrastructure
 Purpose: Durable design principles for Rob's Life OS architecture.
 
@@ -24,6 +24,18 @@ Before adopting a new platform, define:
 - what source-of-truth role it will and will not own,
 - the exit or rollback path if it creates more complexity than value.
 
+## Principle 002 — Separate Headquarters From Execution
+
+The regular ChatGPT hub is the canonical conversational headquarters. The Work environment is a bounded execution surface, not a second headquarters.
+
+Plan, coordinate, reason, and prepare instructions in Chat. Enter Work only when a task requires local files, terminal access, code execution, browser control, desktop applications, artifact production, or comparable execution capabilities.
+
+Default Work tasks to the least powerful model likely to succeed. Preserve higher-cost models and weekly Work usage for tasks that materially benefit from them.
+
+Detailed operating policy:
+
+- `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
+
 ## Current Platform Boundaries
 
 Current Life OS ownership boundaries:
@@ -35,6 +47,8 @@ Current Life OS ownership boundaries:
 - Gmail owns communication evidence.
 - Department Event Inbox owns department synchronization, read, and ingestion state.
 - Advisory Index owns cross-department advisory dashboard state.
+- Regular Chat owns conversational continuity, planning, department coordination, and light connector work where available.
+- Work owns bounded local-computer execution and heavy implementation tasks.
 
 ## Deferred Platform Decision — Kanban / Project Management Tools
 
@@ -74,6 +88,8 @@ Revisit a Kanban/project-management platform only when there is measurable frict
 - multiple concurrent implementation efforts,
 - repeated loss of pipeline visibility,
 - Todoist, GitHub, and Drive no longer answer: what state is this work in?
+
+Review the Chat and Work boundary when synchronization, connector availability, mobile access, model tiers, or Work metering materially changes.
 
 ## Decision Bias
 
