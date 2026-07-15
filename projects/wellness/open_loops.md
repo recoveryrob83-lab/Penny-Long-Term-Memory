@@ -1,37 +1,49 @@
-# Chief Wellness HQ Open Loops
+# Wellness HQ Open Loops
 
-Updated: 2026-07-06
+Updated: 2026-07-15
 
-## Open
+## Active Open Loops
 
-| Status | Item | Next Action | Notes |
+| Priority | Item | Smallest useful next action | Owner / route |
 |---|---|---|---|
-| Open | Begin wellness operations | Clarify first useful wellness workflow | Use when Rob wants wellness-specific continuity |
-| Open | Primary care appointment workflow | Use Main Assistant for one-off scheduling or Chief Wellness HQ for broader prep/follow-through | Keep details outside GitHub |
-| Open | Vision appointment workflow | Use Main Assistant for execution or Chief Wellness HQ for broader tracking | Keep details in Calendar/Drive/Todoist |
-| Open | Wellness routine design | Clarify first routine target | Keep details abstract |
-| Open | Working folder | Use Wellness Admin as the Drive working folder name | Keep GitHub abstract |
-| Open | Future department advisories | Use Wellness board + Advisory Index only | Do not update Department Event Inbox unless Rob reactivates it; no Todoist sync reminders unless Rob asks |
-| Open | Decision rules | Check Decision Rules Registry when a wellness-adjacent decision may match a registered rule | Route to owning HQ before acting when practical |
-| Open | Role Drift Check | Pause gently when work appears outside Wellness HQ scope | Nudge, do not block |
-| Open | Finance overlap | Route cost, affordability, benefits, bills, or paperwork overlap to Chief of Finance Penny | Finance owns money/paperwork |
-| Open | Dormant recovery overlap | Route lightweight daily routine logistics to Main Assistant unless Recovery Logistics is reactivated | Wellness can support routine scaffolding only |
+| High | Primary-care continuity | When Rob is ready, identify the appointment goal and prepare a concise question-and-history packet | Wellness prepares; Health Medical handles clinical judgment; Logistics schedules |
+| High | Vision-care continuity | Identify the immediate vision need and prepare appointment questions or records needed | Wellness prepares; Logistics schedules; Finance handles cost |
+| High | Recovery stability | Identify any current threat to meetings, sponsor contact, sleep, food, safety, or routine and reduce it to one manageable action | Wellness supports; Recovery Logistics or Main Assistant handles routine execution |
+| Medium | Basic wellness routine | Choose one concrete target among sleep, hydration, nutrition, movement, hygiene, or self-care | Wellness |
+| Medium | Appointment preparation pattern | Build a reusable lightweight preparation format when the next real appointment appears | Wellness; detailed record in Drive or RPR |
+| Medium | Executive-function friction | Use `/EXECUTIVEFUNCTION` when a health task is being avoided, stalled, or feels too large | Wellness prepares; Logistics executes reminders or scheduling |
+| Medium | Benefits and disability framing | Start only from a specific eligibility, evidence, or application question | Wellness frames health context; Finance owns benefits and paperwork |
+| Low | Wellness working records | Create a Drive document or tracker only when a concrete workflow requires one | Wellness Admin / Drive |
 
-## Done / Recently Closed
+## Standing Guardrails
 
-| Closed Date | Item | Notes |
-|---|---|---|
-| 2026-07-06 | Full boot and sync completed | Wellness files updated to simplified advisory routing: source board + Advisory Index only; Department Event Inbox frozen as historical unless Rob reactivates it. |
-| 2026-07-05 | Morning sync completed | Advisory Index and Department Event Inbox showed no open items; Wellness files updated for Decision Rules, Role Drift Check, and current consolidation state. |
-| 2026-07-03 | Activated Chief Wellness HQ | Upgraded wellness scaffold into a full specialist department. |
-| 2026-07-03 | Created department files | Created/updated handoff, identity, README, status, and open-loop structure. |
-| 2026-07-03 | Acknowledged ADV-20260703-002 | Wellness Admin reference update handled from Advisory Index. |
-| 2026-07-03 | Created Wellness advisory board | Added `coordination/boards/wellness.md` for Chief Wellness HQ advisories. |
-| 2026-07-03 | Ingested Department Event Inbox workflow | Historical note: later superseded by simplified Advisory Index routing on 2026-07-06. |
+These are operating rules, not separate tasks:
+
+- Keep sensitive details out of GitHub.
+- Use the canonical path `projects/wellness/`.
+- Use Health Medical HQ for clinical matters.
+- Use Finance for money, benefits, affordability, bills, and paperwork.
+- Use Life Logistics or Main Assistant for scheduling, reminders, transportation, and execution.
+- Use the Wellness board and Advisory Index only when formal cross-department routing is needed.
+- Do not create empty notebooks, pending-advisory files, decision-rule files, trackers, or templates before a real need exists.
+
+## Waiting On
+
+- Rob's choice of the first concrete wellness target.
+- A real appointment, symptom concern, routine barrier, recovery-stability issue, or benefits question that justifies a working record.
+
+## Recently Completed
+
+- 2026-07-15: Completed fresh Wellness HQ boot and synchronization.
+- 2026-07-15: Confirmed `projects/wellness/` as the canonical department path.
+- 2026-07-15: Refreshed README, department identity, session handoff, status, and open loops for regular Chat-mode operations.
+- 2026-07-15: Integrated current command vocabulary, safety boundaries, department routing, and friction-aware Daily Operating SOP into department-local files.
+- 2026-07-06: Synced Wellness to simplified advisory routing using the source board and Advisory Index.
+- 2026-07-03: Activated Chief Wellness HQ and created the initial department structure.
 
 ## Parking Lot
 
-- Create detailed wellness working docs in Wellness Admin or RPR only when useful.
-- Consider whether Health Medical HQ remains separate or becomes coordinated under Wellness depending on future needs.
-- Create local Wellness decision rules, pending advisory board, or notebook only when useful.
-- Add registry ref later if Life Logistics HQ assigns one.
+- Consider a local Wellness decision rule only after a recurring decision pattern appears.
+- Consider a Wellness notebook only when ideas exist that do not belong in status, open loops, advisories, or Drive.
+- Consider whether any future clinical workflow requires tighter coordination with Health Medical HQ.
+- Accept a registry reference later if Life Logistics HQ assigns one.
