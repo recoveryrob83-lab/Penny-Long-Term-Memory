@@ -1,24 +1,21 @@
 # Home Base Logistics
 
-Status: Pending
-Updated: 2026-07-02
-Registry Reference: To be assigned
+Status: Legacy / Redirect
+Updated: 2026-07-14
 
-## Purpose
+## Current Routing
 
-Track housing, transportation, paperwork, and practical stability tasks at a high level.
+The active housing and home-base project is:
 
-## Current State
+- `projects/housing-logistics/`
 
-This project bucket is not fully built yet.
+Use the Housing Logistics HQ handoff and identity files for current work. Preserve this lightweight file as historical scaffold context unless Rob authorizes archival cleanup.
 
-## Routing
+## Source-of-Truth Boundary
 
-- Drive: working notes and documents.
-- Todoist: next actions.
-- Calendar: scheduled commitments.
-- GitHub: durable status and references.
+- Drive: detailed working notes and documents.
+- Todoist: Rob-facing next actions.
+- Calendar: timed commitments.
+- GitHub: abstract durable status and references.
 
-## Rule
-
-Use registry IDs for details. Do not duplicate working records here.
+Do not duplicate current housing state in this legacy scaffold.
