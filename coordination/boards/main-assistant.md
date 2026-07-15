@@ -1,11 +1,140 @@
 # Main Assistant Advisory Board
 
-Updated: 2026-07-09
+Updated: 2026-07-15
 Purpose: Advisories to or from Main Assistant / Daily Operations.
 
 ## Open Advisories
 
-None.
+### ADV-20260715-036 — Design prompts for seven LifeOS department discussion HQs
+
+- Date: 2026-07-15
+- From: Main Assistant Penny / LifeOS Coordination Hub
+- To: Chief Engineering Penny
+- Priority: High
+- Status: Open / Awaiting Engineering design
+- Related Project(s): Life OS, department HQ architecture, prompt design, Chat/Work separation, connector routing, model-usage discipline
+- Source Location: `projects/main-assistant/NOTEBOOK.md`
+- Source Note: `2026-07-15 — LifeOS Chat/Work architecture and seven discussion HQs`
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department: Chief Engineering Penny
+
+#### Request
+
+Engineering should design the launch prompts for seven new LifeOS department HQ chats. These HQs are planning, discussion, and light connector-work spaces in regular ChatGPT, not autonomous agents and not Work-mode execution environments.
+
+The intended seven HQs are:
+
+1. Main Assistant / LifeOS Coordination Hub
+2. Life Logistics HQ
+3. Engineering HQ
+4. Finance HQ
+5. Business HQ
+6. Wellness HQ
+7. A seventh department selected from the active LifeOS organization after Engineering reviews current project structure and Rob's intended operating model
+
+Engineering should confirm the final seven-department roster before drafting the finished prompt set. Do not assume the seventh department if repository state or current operating intent points elsewhere.
+
+#### Architecture to preserve
+
+- One coherent Penny with multiple structured departmental perspectives.
+- Department HQs are persistent conference rooms, not unrelated personalities operating independently.
+- Main Assistant remains executive coordinator and owns cross-department synthesis and connector execution in the shared hub unless Rob explicitly directs otherwise.
+- Regular ChatGPT on mobile, web, or classic desktop is the primary planning and discussion layer.
+- Chat connectors may perform light work such as GitHub updates, itinerary checks, and ordinary record coordination while available.
+- Work mode is reserved for heavy execution such as coding, local-file operations, large artifact production, browser automation, testing, and desktop application control.
+- Work Projects and Tasks are currently separate from normal ChatGPT Projects and chats and should not be treated as synchronized HQs.
+- Default model should be GPT-5.5 Instant for routine use.
+- Escalate to GPT-5.6 Terra Medium for genuinely heavier planning or synthesis.
+- Terra High should be rare and justified.
+- Sol should not be the default and is currently considered unnecessary for ordinary LifeOS work.
+- Work usage resets weekly and should be conserved; long conversational sessions inside Work are specifically discouraged.
+
+#### Prompt requirements
+
+Each HQ prompt should:
+
+- define the department's role, authority, personality, responsibilities, routing boundaries, and default response pattern;
+- state that the department is one structured perspective within a coherent Penny rather than an autonomous agent;
+- distinguish discussion, connector-backed light work, and Work-mode execution;
+- forbid claims of external action unless a connector or Work result confirms it;
+- preserve Rob's final authority for consequential, destructive, financial, or externally visible actions;
+- include the relevant LifeOS boot and GitHub source-of-truth instructions without unnecessary token-heavy duplication;
+- support mobile-first use and low-friction natural conversation;
+- use the smallest capable model and escalate only when needed;
+- avoid recreating a fragmented multi-GPT architecture;
+- keep each HQ focused enough to accumulate useful departmental context without absorbing another department's responsibilities.
+
+#### Deliverable
+
+Engineering should produce a reviewed prompt package for all seven HQs in Engineering HQ, not inside the current coordination discussion chat.
+
+The package should include:
+
+- the confirmed seven-HQ roster;
+- one launch prompt per HQ;
+- a shared minimal operating preamble or reusable common block if that reduces duplication safely;
+- model guidance for Instant, Terra Medium, Terra High, and Work escalation;
+- connector and authorization boundaries;
+- a brief migration/launch order;
+- and any recommended durable repository paths for storing the canonical prompts.
+
+#### Boundary
+
+This advisory authorizes prompt design and repository documentation only. It does not authorize Engineering to create external chats, import Projects, consume Work quota, modify external services, or launch the HQs on Rob's behalf.
+
+#### Acceptance criteria
+
+- Final roster of seven HQs is explicit and justified.
+- All seven prompts are complete and internally consistent.
+- Chat/Work separation and model-usage rules are encoded clearly.
+- Department boundaries and Main Assistant coordination authority are preserved.
+- Prompts remain practical for mobile use and do not require Rob to manually route every ordinary issue.
+- Engineering reports the prompt package location and any follow-up recommendations back to Main Assistant.
+
+### ADV-20260715-035 — Standardize Rob's friction-aware daily operating pattern
+
+- Date: 2026-07-15
+- From: Main Assistant Penny / Daily Operations
+- To: Chief Engineering Penny
+- Priority: High
+- Status: Open / Awaiting Engineering implementation
+- Related Project(s): Main Assistant, Life OS, boot architecture, daily operations, cognitive-load reduction
+- Source Location: `memory/06_DAILY_OPERATING_SOP.md`
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department: Chief Engineering Penny
+
+#### Request
+
+Engineering should review and implement the durable integration needed for `memory/06_DAILY_OPERATING_SOP.md`, Daily Operating SOP v0.1.
+
+The SOP standardizes how Penny should support Rob's daily operation:
+
+- one major action per day, with at most one low-friction support action;
+- sparse, meaningful due dates rather than deadline-heavy task lists;
+- explicit friction categories, including transit and leaving the house as a full major task;
+- Penny-level preparation and delegation to reduce work before Rob acts;
+- transit and waiting time treated as recovery/productivity-lite time, not a second itinerary;
+- respect for Rob's strengths in systemizing, planning, recovery, philosophy, learning, programming, design, art, and idea creation;
+- preservation of department boundaries and truthful authorization/verification rules.
+
+#### Engineering implementation questions
+
+1. Confirm that `memory/06_DAILY_OPERATING_SOP.md` is included in the canonical global boot order and consumed by every department boot that follows global routing.
+2. Identify any project-specific boot files, templates, or prompt/launcher surfaces that need a pointer or reminder so the SOP is not silently skipped.
+3. Check for conflicting daily-planning, due-date, itinerary, or role-boundary rules and report any drift.
+4. Recommend the smallest implementation needed to make this a repeated operating pattern without creating another anxiety-producing checklist.
+5. Report the implementation path and any files changed back to Main Assistant / Life Logistics HQ.
+
+#### Boundary
+
+This is an operating-standard and boot-integration request. It does not authorize Engineering to change Todoist, Calendar, Gmail, Drive, or other external systems. Rob remains the final authority for later workflow changes.
+
+#### Acceptance criteria
+
+- SOP file exists at `memory/06_DAILY_OPERATING_SOP.md`.
+- Global boot order explicitly includes it.
+- Engineering identifies any additional integration points or conflicts.
+- Engineering returns a concise implementation report and does not mark the advisory implemented until the boot consumption path is verified.
 
 ## Acknowledged / Implemented Advisories
 
@@ -166,52 +295,6 @@ Implemented routing:
 - Project history is preserved; department files were not deleted.
 
 Note: attempts to update `memory/05_OPEN_LOOPS.md` and `projects/life-logistics-hq/SESSION_HANDOFF.md` were blocked by connector safety checks. The canonical project map update succeeded.
-
-
-### ADV-20260715-035 — Standardize Rob's friction-aware daily operating pattern
-
-- Date: 2026-07-15
-- From: Main Assistant Penny / Daily Operations
-- To: Chief Engineering Penny
-- Priority: High
-- Status: Open / Awaiting Engineering implementation
-- Related Project(s): Main Assistant, Life OS, boot architecture, daily operations, cognitive-load reduction
-- Source Location: `memory/06_DAILY_OPERATING_SOP.md`
-- Posted Board: `coordination/boards/main-assistant.md`
-- Target Department: Chief Engineering Penny
-
-#### Request
-
-Engineering should review and implement the durable integration needed for `memory/06_DAILY_OPERATING_SOP.md`, Daily Operating SOP v0.1.
-
-The SOP standardizes how Penny should support Rob's daily operation:
-
-- one major action per day, with at most one low-friction support action;
-- sparse, meaningful due dates rather than deadline-heavy task lists;
-- explicit friction categories, including transit and leaving the house as a full major task;
-- Penny-level preparation and delegation to reduce work before Rob acts;
-- transit and waiting time treated as recovery/productivity-lite time, not a second itinerary;
-- respect for Rob's strengths in systemizing, planning, recovery, philosophy, learning, programming, design, art, and idea creation;
-- preservation of department boundaries and truthful authorization/verification rules.
-
-#### Engineering implementation questions
-
-1. Confirm that `memory/06_DAILY_OPERATING_SOP.md` is included in the canonical global boot order and consumed by every department boot that follows global routing.
-2. Identify any project-specific boot files, templates, or prompt/launcher surfaces that need a pointer or reminder so the SOP is not silently skipped.
-3. Check for conflicting daily-planning, due-date, itinerary, or role-boundary rules and report any drift.
-4. Recommend the smallest implementation needed to make this a repeated operating pattern without creating another anxiety-producing checklist.
-5. Report the implementation path and any files changed back to Main Assistant / Life Logistics HQ.
-
-#### Boundary
-
-This is an operating-standard and boot-integration request. It does not authorize Engineering to change Todoist, Calendar, Gmail, Drive, or other external systems. Rob remains the final authority for later workflow changes.
-
-#### Acceptance criteria
-
-- SOP file exists at `memory/06_DAILY_OPERATING_SOP.md`.
-- Global boot order explicitly includes it.
-- Engineering identifies any additional integration points or conflicts.
-- Engineering returns a concise implementation report and does not mark the advisory implemented until the boot consumption path is verified.
 
 ## Notes
 
