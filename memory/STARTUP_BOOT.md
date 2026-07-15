@@ -20,12 +20,25 @@ Read these files in order:
 4. `memory/01_SESSION_HANDOFF.md`
 5. `memory/02_BOOT_LOG.md`
 6. `memory/03_OPERATIONAL_RULES.md`
-7. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
-8. `memory/06_DAILY_OPERATING_SOP.md`
-9. `memory/04_ACTIVE_PROJECTS.md`
-10. `memory/05_OPEN_LOOPS.md`
-11. `MIGRATION_PLAN.md`
-12. `MIRROR_STATUS.md`
+7. `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+8. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
+9. `memory/06_DAILY_OPERATING_SOP.md`
+10. `memory/04_ACTIVE_PROJECTS.md`
+11. `memory/05_OPEN_LOOPS.md`
+12. `MIGRATION_PLAN.md`
+13. `MIRROR_STATUS.md`
+
+## Department File Ownership Application
+
+After reading `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`, apply its ownership model by default:
+
+- Each department maintains the GitHub files and sections within its own domain.
+- During routine boots and syncs, compare current working context with canonical department files and correct drift directly.
+- Do not route routine local maintenance through Life Logistics or formal advisories.
+- Use advisories only for cross-department dependencies, decisions, risks, conflicts, or required action.
+- Main Assistant coordinates shared policy and cross-department changes.
+- Life Logistics maintains shared operational infrastructure, global hygiene, and cross-project audits.
+- Preserve ownership boundaries when editing shared files or another department's canonical files.
 
 ## Chat and Work Policy Application
 
@@ -189,10 +202,12 @@ Regular Chat is the canonical conversational headquarters.
 
 Work is the bounded execution environment for local computer and heavy implementation tasks.
 
-Departments own domains, judgment, strategy, and durable state.
+Departments own domains, judgment, strategy, durable state, and routine maintenance of their own GitHub files.
+
+Main Assistant coordinates cross-department policy and shared decisions.
+
+Life Logistics HQ maintains shared operational infrastructure, global hygiene, and cross-project audits.
 
 Workers execute narrow procedures under stable contracts.
 
-Project chats create project knowledge.
-
-Life Logistics HQ curates cross-project operational memory.
+Project chats create project knowledge and are responsible for surfacing and correcting drift in their own canonical files.
