@@ -1,17 +1,17 @@
 # Office Leaks Consulting HQ Session Handoff
 
-Updated: 2026-07-09
+Updated: 2026-07-16
 Project: Office Leaks Consulting HQ
 Parent: Chief Business HQ
-Phase: Active business-unit HQ / Revenue-first launch
+Phase: Public launch / live market test
 
 ## Current State
 
-Office Leaks Consulting has been elevated from the former Virtual Assistant Business worker project into its own business-unit HQ under Chief Business HQ.
+Office Leaks Consulting is now publicly launched.
 
-This reflects that the project is now a real business direction, not merely a generic virtual assistant or office-worker support concept.
+The current launch uses the Office Leaks Facebook Page as the initial landing page rather than a separate website. The Page has a live introduction post, a pinned starter offer/ad, and the first story-driven lead-loss Reel. The Reel was also shared to Rob's personal profile for organic distribution while preserving the business Page as the original content source.
 
-Office Leaks is a practical, trust-based systems consulting business for small local service businesses. The working promise is to help good people fix office process leaks through simple habits, documentation, follow-up routines, and bounded cleanup sprints.
+Office Leaks remains a practical, trust-based systems consulting business for small local service businesses. The working promise is to help good people fix office process leaks through simple habits, documentation, follow-up routines, and bounded cleanup sprints.
 
 PennyOS / Penny Platform remains paused, not abandoned. Office Leaks may become a cashflow engine, service-market learning lab, and future evidence base for productized systems or PennyOS.
 
@@ -32,12 +32,35 @@ Current direction:
 - The tool is not the product. The habit is the product.
 - No shame. No blame. Fix the system.
 
+Current lead message:
+
+> Some businesses do not need more leads first. They need a better system for converting the leads they already receive.
+
+## Launch Milestone
+
+Completed on 2026-07-16:
+
+- Facebook Page adopted as the initial landing-page surface.
+- Introduction post published.
+- Starter offer/ad published and pinned.
+- First lead-loss story script developed and saved in the Office Leaks Google Drive content workspace as `lost lead 750 story draft`.
+- First Office Leaks video recorded, edited, published as a Facebook Reel, and shared to Rob's personal profile.
+- Separate website work, paid boosting, formal A/B testing, and full campaign infrastructure intentionally deferred while the first organic response develops.
+
+Durable launch note:
+
+- `projects/office-leaks-consulting/notebook/NOTE-20260716-002-facebook-launch-and-first-lead-loss-video.md`
+
+Broadcast advisory:
+
+- `ADV-20260716-037` on `coordination/boards/office-leaks.md`
+
 ## Role Split
 
-- Office Leaks Consulting HQ owns business-unit execution continuity, service materials, offer/delivery artifacts, and current operating state.
+- Office Leaks Consulting HQ owns business-unit execution continuity, service materials, offer/delivery artifacts, content strategy, and current operating state.
 - Chief Business HQ owns parent strategy, portfolio-level business decisions, and major positioning/business-model decisions.
 - Chief Engineering Penny owns delivery architecture, workflow templates, automation/tooling, and implementation consultation when concrete.
-- Chief of Finance Penny owns pricing feasibility, startup costs, income tracking, tool decisions, tax set-aside, and financial risk once concrete.
+- Chief of Finance Penny owns pricing feasibility, startup costs, income tracking, paid-promotion affordability, tool decisions, tax set-aside, and financial risk once concrete.
 - Main Assistant handles daily admin, reminders, scheduling, outreach support, and one-off execution when routed.
 - Life Logistics HQ maintains cross-project routing, GitHub hygiene, and durable memory structure.
 
@@ -64,7 +87,7 @@ Office Leaks has a local notebook hub and leaf index:
 - `projects/office-leaks-consulting/NOTEBOOK.md`
 - `projects/office-leaks-consulting/notebook/README.md`
 
-Key source notes currently remain preserved in the legacy folder until fully migrated:
+Key source notes remain preserved in the legacy folder until fully migrated:
 
 - `projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md`
 - `projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md`
@@ -97,28 +120,32 @@ Reference:
 
 - `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
-Use Chief of Finance Penny for pricing, startup costs, tool decisions, revenue tracking, tax set-aside planning, budget impact, and financial risk when concrete.
+Use Chief of Finance Penny for pricing, startup costs, tool decisions, paid promotion, revenue tracking, tax set-aside planning, budget impact, and financial risk when concrete.
 
 Keep detailed financial records in Drive, not GitHub.
 
 ## Current Workstreams
 
-1. Clarify Office Leaks positioning and service identity.
-2. Define first focused service packages, especially Office Leak Audit and one-leak cleanup sprints.
-3. Build lead-leak materials and local-service-business outreach content.
-4. Create proposal / diagnostic / handoff artifacts.
-5. Build portfolio or sample-work packet.
-6. Create a day-to-day operating system for lead tracking, proposals, delivery, follow-up, and client onboarding.
-7. Coordinate with Engineering on delivery templates and human-system verification.
-8. Coordinate with Finance on pricing, startup costs, tool decisions, and tax set-aside when concrete.
-9. Coordinate with Main Assistant and Life Logistics for reminders, scheduling, transportation, and outreach loops when authorized.
+1. Observe organic response to the live Facebook launch package.
+2. Continue lead-loss content with short, practical videos.
+3. Refine positioning and the starter offer from real audience and inquiry signals.
+4. Define focused service packages, especially Office Leak Audit and one-leak cleanup sprints.
+5. Build lead-leak materials and local-service-business outreach content.
+6. Create proposal / diagnostic / handoff artifacts when required by a real prospect.
+7. Build portfolio or sample-work packet.
+8. Create a day-to-day operating system for lead tracking, proposals, delivery, follow-up, and client onboarding.
+9. Coordinate with Engineering on delivery templates and human-system verification.
+10. Coordinate with Finance on pricing, startup costs, paid promotion, tool decisions, and tax set-aside when concrete.
+11. Coordinate with Main Assistant and Life Logistics for reminders, scheduling, transportation, and outreach loops when authorized.
 
 ## Next Best Action
 
-Continue Office Leaks positioning, first offers, lead-leak materials, outreach path, and repeatable delivery method.
+Allow the first launch content to gather organic response, then publish the next short video in the lead-loss content family without rebuilding the launch infrastructure.
 
 ## Guardrails
 
 Keep GitHub abstract. Do not store client details, financial details, private proposal data, live pricing negotiations, tax records, payment records, or sensitive personal records here.
+
+Do not treat views, reactions, inquiries, or revenue as established until observed or verified.
 
 Do not rename or restructure broader Business HQ until Rob explicitly authorizes it.
