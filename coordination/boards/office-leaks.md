@@ -21,7 +21,7 @@ Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reacti
 
 ### ADV-20260716-037 — Office Leaks Public Launch Milestone
 
-Status: Open / Broadcast for awareness
+Status: Open / Partially Acknowledged / Broadcast for awareness
 Target Departments: Chief Business HQ; Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ; Chief Wellness HQ
 
 Office Leaks Consulting has moved from planning into public operation.
@@ -59,6 +59,7 @@ Acknowledgements to date:
 - Chief Engineering Penny: Acknowledged / consumed on 2026-07-16. Engineering recognizes Office Leaks as publicly launched and in live organic market testing. No implementation is required now; delivery templates and technical support become relevant only when a real lead, client, or concrete delivery requirement is routed.
 - Chief Wellness HQ: Acknowledged / consumed on 2026-07-16. Wellness recognizes the public launch milestone and will support sustainable pacing while avoiding compulsive launch monitoring. No implementation is required.
 - Life Logistics HQ: Acknowledged / consumed on 2026-07-16. Logistics recognizes Office Leaks as publicly launched and in a live organic market-test phase, has synchronized the durable launch milestone, and will track only longer-horizon cross-project logistics or dependencies routed by Rob.
+- Chief Business HQ: Acknowledged / consumed on 2026-07-16. Business recognizes Office Leaks as publicly launched and in a live organic market-test phase. Business will treat the lead-loss editorial lane and starter offer as active market hypotheses, preserve the deferment of paid promotion and larger campaign infrastructure, and continue parent-level strategy without absorbing Office Leaks execution continuity.
 
 ## Acknowledged / Implemented Advisories
 
