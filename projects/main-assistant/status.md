@@ -41,7 +41,7 @@ The hub is now the primary conversational front door for LifeOS. Separate depart
 - Reduce friction through preparation before asking Rob to act.
 - Use Trello Inbox for fast raw capture and the LifeOS Flow Board for visual attention management.
 - Preserve one card maximum in Now and three maximum in Next.
-- Use assigned Trello cards selectively so Rob's home-screen widget remains a focused execution surface.
+- Keep the Trello home-screen focus widget targeted directly to the `LifeOS Flow Board` and `Now` list; member assignment is not required.
 - Keep Todoist as the commitments and reminders system rather than duplicating every Flow Board card there.
 - Coordinate department perspectives without pretending they are autonomous agents.
 - Use regular Chat, especially classic desktop when connectors are needed, for substantial reasoning and connector-backed work where available.
@@ -63,7 +63,7 @@ The hub is now the primary conversational front door for LifeOS. Separate depart
 - Google Drive connector authentication and profile check succeeded.
 - Office Leaks published its first two graphics and reel on Facebook, activated the business email, and began collecting engagement data.
 - Agiflow was rejected as Rob's primary visual board because its mobile experience failed actual use.
-- Trello is connected, its mobile app fits Rob's workflow, the LifeOS Flow Board is live, and Rob placed Inbox and assigned-card widgets on his Android home screen.
+- Trello is connected, its mobile app fits Rob's workflow, the LifeOS Flow Board is live, and Rob placed an Inbox widget plus a Todo List widget targeted to the `Now` list on his Android home screen.
 
 ## Operating Boundary
 
