@@ -248,17 +248,25 @@
       "id": "morning",
       "title": "Morning Sync",
       "category": "Daily Operations",
-      "description": "Boot the selected department and produce its morning synchronization report.",
+      "description": "Boot the selected department, read today and yesterday's notebook entries, and produce its morning synchronization report.",
       "mode": "department",
-      "template": "/MORNING @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and sync sequence for this department. Then provide a concise morning report covering today's priorities, calendar or task pressures when relevant, open loops, advisories, blockers, and the single best next action. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
+      "template": "/MORNING @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and sync sequence for this department. Read department notebook entries from today and the previous calendar day. Then provide a concise morning report covering today's priorities, calendar or task pressures when relevant, open loops, advisories, blockers, and the single best next action. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
     },
     {
       "id": "nightly",
       "title": "Nightly Sync",
       "category": "Daily Operations",
-      "description": "Perform a read-only end-of-day synchronization and identify unfinished loops.",
+      "description": "Perform a read-only end-of-day synchronization, including today's notebook entries, and identify unfinished loops.",
       "mode": "department",
-      "template": "/NIGHTLY @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and synchronization sequence for this department. Review completed work, unfinished loops, stale documentation, advisory state, blockers, and the next handoff needed. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
+      "template": "/NIGHTLY @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and synchronization sequence for this department. Read the current calendar day's department notebook entries. Review completed work, unfinished loops, stale documentation, advisory state, blockers, and the next handoff needed. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
+    },
+    {
+      "id": "nbook",
+      "title": "Read Department Notebooks",
+      "category": "Daily Operations",
+      "description": "Read department notebook entries for today, one date, an inclusive date range, or all history when explicitly requested.",
+      "mode": "simple",
+      "template": "/NBOOK @GitHub\n\nDate scope: {custom_block}\n\nRead department notebook entries for today by default. Accept YYYY-MM-DD for one date, YYYY-MM-DD..YYYY-MM-DD for an inclusive range, or ALL only when full notebook history is explicitly requested. Search active notebook hubs and notebook-leaf indexes, remain read-only, and summarize cross-department implications without automatically creating tasks, advisories, open loops, or status changes."
     },
     {
       "id": "open_loops",
@@ -357,5 +365,5 @@
       "template": "[MAIN] Chair, coordinator, and connector operator.\\n[LOGISTICS] Serious, grounded executive-function and life-admin support.\\n[ENGINEERING] Direct, analytical software and automation review.\\n[FINANCE] Careful, numbers-first cost and affordability review.\\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\\n[WELLNESS] Warm, sustainable health and energy review.\\n\\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\\n{custom_block}"
     }
   ],
-  "updated": "2026-07-15"
+  "updated": "2026-07-16"
 }
