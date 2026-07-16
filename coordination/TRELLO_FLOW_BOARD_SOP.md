@@ -89,11 +89,11 @@ Process all clear Inbox cards into the correct Trello list or authoritative syst
 
 Review the current LifeOS Flow Board and recommend the best one card for Now plus up to three cards for Next. Update or move cards only when authorized.
 
-## Assignment and Mobile Widget Rule
+## Mobile Widget Rule
 
-Rob's lower Trello home-screen widget shows cards assigned to him.
+Rob's Trello home-screen focus widget is configured as a Todo List widget targeting the `LifeOS Flow Board` and the `Now` list directly.
 
-Use assignment selectively for cards Rob genuinely needs to see or act on. The widget should function as a focused execution surface, not a second backlog.
+No member assignment is required for a card to appear there. Keep the `Now` list to one card so the widget remains a focused execution surface rather than a second backlog.
 
 ## Operating Principle
 
