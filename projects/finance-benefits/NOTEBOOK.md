@@ -126,3 +126,66 @@ The design goal is to replace the vague feeling of “I have money” with a cle
 ### Privacy boundary
 
 Do not store live balances, detailed transactions, protected-fund calculations, current private goals, account information, or sensitive financial details in this notebook. Those belong in Google Drive or another appropriate working system.
+
+## NOTE-20260715-002 — Impulse Pause and Resource Conversion Method
+
+### Core idea
+
+Financial discipline should not rely on willpower alone. Build intentional friction between desire and purchase so an impulse must survive review before money moves.
+
+### Impulse Pause Method
+
+Use this sequence for nonessential spending urges:
+
+1. **Pause** — do not buy immediately.
+2. **Name the impulse** — identify the item, full cost, and why it is wanted.
+3. **Check the forecast** — compare the purchase with available-after-plans cash, protected money, essentials, and pending income.
+4. **Decide deliberately** — approve, delay, substitute, or decline.
+5. **Record the lesson** — note what helped when the decision reveals a reusable pattern.
+
+A resisted impulse is not “getting nothing.” It is purchasing control, preserving optionality, and strengthening the ability to direct future money intentionally.
+
+### Friction tools
+
+Useful external safeguards include:
+
+- Freezing the debit card between approved purchases.
+- Requiring an explicit review before unfreezing it.
+- Refreezing the card after the approved transaction.
+- Using the forecast as the decision surface rather than relying on the bank balance alone.
+
+The preferred flow is:
+
+> Pause → review forecast → decide → unfreeze only if approved → complete purchase → refreeze.
+
+These safeguards are not punishment. They are environmental design that gives discipline backup.
+
+### First validated use
+
+The method successfully interrupted a small discretionary energy-drink purchase. The important durable lesson is not the amount saved; it is that an urge can be acknowledged without automatically becoming a transaction.
+
+### Stored-resource principle
+
+Money spent on a deliberately stored and protected resource has not simply disappeared. It has changed form.
+
+Examples include:
+
+- Cash converted into a stored transit pass.
+- Cash converted into prepaid communication, food, or another essential resource.
+- Cash converted into an income-enabling asset.
+
+The financial records should reflect both sides:
+
+- The Register records the completed purchase.
+- The Forecast removes the item as a future cash expense.
+- Goals and reserves may continue showing the stored resource as assigned value.
+
+This prevents double-counting while preserving the practical truth that the resource still exists and has a job.
+
+### Support principle
+
+When reviewing an impulse, Finance Penny should be direct but nonjudgmental. The goal is to protect priorities, expose tradeoffs, and strengthen deliberate choice rather than impose blanket deprivation.
+
+### Privacy boundary
+
+Do not store exact live balances, detailed purchase histories, bank controls, or sensitive account information in this notebook. Preserve the method, not the private ledger.
