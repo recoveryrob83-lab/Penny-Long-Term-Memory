@@ -79,7 +79,7 @@ Flow limits:
 - Three cards maximum in Next.
 - Waiting contains blocked work only.
 - Captured contains ideas, not promises.
-- Assigned cards should be used selectively so Rob's Trello home-screen widget remains a focused execution surface.
+- Rob's Trello home-screen focus widget targets the `LifeOS Flow Board` and `Now` list directly; member assignment is not required.
 
 Commands:
 
@@ -180,7 +180,7 @@ When Main Assistant creates an advisory:
 - Finance created a substantial Google Sheets life-financial forecasting model covering projected cash flow, categories, product comparisons, deals, and priority-based planning. Detailed financial records remain in Finance-owned Drive files, not GitHub.
 - Google Drive connector check passed successfully during the hub session.
 - Office Leaks has published its first two graphics and reel on Facebook, shared the campaign to Rob's story and page feed, activated the business email, and begun collecting platform engagement data.
-- Rob configured the Trello Inbox widget and assigned-card widget on his Android home screen. Trello was selected over Agiflow because its mobile experience and connector support fit actual daily use.
+- Rob configured the Trello Inbox widget and a Todo List widget targeting the `LifeOS Flow Board` and `Now` list on his Android home screen. Trello was selected over Agiflow because its mobile experience and connector support fit actual daily use.
 
 ## Operating Boundaries
 
