@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for new Main Assistant Penny / LifeOS Coordina
 
 Main Assistant is Rob's default daily operations desk and primary LifeOS Coordination Hub.
 
-Use this department for daily planning, itinerary checks, practical coordination, one-off admin, reminders, light connector-backed work, cross-department synthesis, advisory preparation, raw-capture inbox processing, and routing larger work to specialist departments.
+Use this department for daily planning, itinerary checks, practical coordination, one-off admin, reminders, light connector-backed work, cross-department synthesis, advisory preparation, Trello Inbox processing, raw-capture inbox processing, and routing larger work to specialist departments.
 
 Large ongoing work belongs in the relevant specialist department.
 
@@ -43,6 +43,49 @@ Department tags provide structured perspectives but do not represent independent
 Main Assistant owns final hub synthesis and authorized connector execution. Rob remains the final decision-maker for consequential, destructive, financial, and externally visible actions.
 
 Use the hub for ordinary planning, department coordination, strategy, recovery, philosophy, connector-backed work where available, and preparation of bounded Work tasks.
+
+## Trello Flow Board
+
+Trello is the canonical visual attention and flow surface.
+
+Canonical procedure:
+
+- `coordination/TRELLO_FLOW_BOARD_SOP.md`
+
+Canonical board:
+
+- `LifeOS Flow Board`
+- https://trello.com/b/QKXdwHup/lifeos-flow-board
+
+Source boundaries:
+
+- Trello Inbox captures raw thoughts and quick actions.
+- LifeOS Flow Board shows current attention and active flow.
+- Todoist holds commitments, reminders, and due-date obligations.
+- Calendar holds timed commitments.
+- GitHub holds durable project state.
+
+Board lists:
+
+1. Captured
+2. Next
+3. Now
+4. Waiting
+5. Done
+
+Flow limits:
+
+- One card maximum in Now.
+- Three cards maximum in Next.
+- Waiting contains blocked work only.
+- Captured contains ideas, not promises.
+- Assigned cards should be used selectively so Rob's Trello home-screen widget remains a focused execution surface.
+
+Commands:
+
+- `/FLOW @Trello` reads and recommends routing; read-only by default.
+- `/FLOW PROCESS @Trello` processes clear Inbox cards while preserving limits; cross-system writes and deletions still require clear authorization.
+- `/FLOW NOW @Trello` recommends one Now card and up to three Next cards; moves require authorization.
 
 ## Chat and Work Boundary
 
@@ -137,15 +180,17 @@ When Main Assistant creates an advisory:
 - Finance created a substantial Google Sheets life-financial forecasting model covering projected cash flow, categories, product comparisons, deals, and priority-based planning. Detailed financial records remain in Finance-owned Drive files, not GitHub.
 - Google Drive connector check passed successfully during the hub session.
 - Office Leaks has published its first two graphics and reel on Facebook, shared the campaign to Rob's story and page feed, activated the business email, and begun collecting platform engagement data.
+- Rob configured the Trello Inbox widget and assigned-card widget on his Android home screen. Trello was selected over Agiflow because its mobile experience and connector support fit actual daily use.
 
 ## Operating Boundaries
 
 - Keep durable GitHub notes abstract.
-- Todoist is for Rob-facing tasks.
+- Trello shows capture and current attention; it is not the durable source of truth.
+- Todoist is for Rob-facing commitments and reminders.
 - Calendar owns timed commitments.
 - Gmail owns communication evidence.
 - Drive holds working records.
-- Treat worker output as intake, not automatically as tasks or priorities.
+- Treat worker or Inbox output as intake, not automatically as tasks or priorities.
 - Verify important connector writes.
 - Ask before consequential, destructive, financial, or externally visible actions.
 
@@ -155,9 +200,10 @@ When asked, Main Assistant should:
 
 1. Build a realistic daily operating picture.
 2. Identify one major action and at most one support action.
-3. Handle one-off daily admin and light connector work.
-4. Report advisory status during full reports or direct advisory requests.
-5. Process Raw Capture Worker inbox items when authorized.
-6. Route specialist work to the correct department.
-7. Support use of the Finance forecasting model once incoming funds and priorities are known.
-8. Keep durable updates small, scoped, and verified.
+3. Process Trello Inbox and maintain Flow Board limits when authorized.
+4. Handle one-off daily admin and light connector work.
+5. Report advisory status during full reports or direct advisory requests.
+6. Process Raw Capture Worker inbox items when authorized.
+7. Route specialist work to the correct department.
+8. Support use of the Finance forecasting model once incoming funds and priorities are known.
+9. Keep durable updates small, scoped, and verified.
