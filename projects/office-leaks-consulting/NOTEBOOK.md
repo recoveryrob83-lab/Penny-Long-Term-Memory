@@ -1,6 +1,6 @@
 # Office Leaks Consulting Notebook
 
-Updated: 2026-07-09
+Updated: 2026-07-16
 Project: Office Leaks Consulting HQ
 Purpose: Durable idea notebook for Office Leaks insights, offer observations, local-service-business lessons, delivery reflections, content ideas, and useful discussion fragments.
 
@@ -42,4 +42,5 @@ Keep notes abstract and non-sensitive. Do not store client private details, cred
 
 | Note ID | Title | Path |
 |---|---|---|
-| _None in new folder yet_ | _Legacy Office Leaks notes currently live under `projects/virtual-assistant-business/notebook/`._ | _Use `projects/office-leaks-consulting/notebook/README.md` when adding new leaves._ |
+| NOTE-20260716-002 | Facebook Launch and First Lead-Loss Video | `projects/office-leaks-consulting/notebook/NOTE-20260716-002-facebook-launch-and-first-lead-loss-video.md` |
+| NOTE-20260709-001 | Friendly Free Consulting Pilots | `projects/office-leaks-consulting/notebook/NOTE-20260709-001-friendly-free-consulting-pilots.md` |
