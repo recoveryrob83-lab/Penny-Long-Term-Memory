@@ -314,7 +314,7 @@
       "category": "Hub / Coordination",
       "description": "Boot the single-chat LifeOS coordination hub with active role tags and connector guardrails.",
       "mode": "simple",
-      "template": "/HUB @GitHub\\n\\n[MAIN] Boot the LifeOS coordination hub. Load current durable context, confirm active role tags, and preserve connector execution in this chat. Department roles advise; [MAIN] coordinates and executes authorized connector actions.\\n{custom_block}"
+      "template": "/HUB @GitHub\n\n[MAIN] Boot the LifeOS coordination hub. Load current durable context, confirm active role tags, and preserve connector execution in this chat. Department roles advise; [MAIN] coordinates and executes authorized connector actions.\n{custom_block}"
     },
     {
       "id": "sync",
@@ -322,7 +322,7 @@
       "category": "Boot / Sync",
       "description": "Refresh current durable context without changing it.",
       "mode": "simple",
-      "template": "/SYNC @GitHub\\n\\nRefresh the relevant durable context and report current state, stale assumptions, open loops, and synchronization drift. Do not make changes.\\n{custom_block}"
+      "template": "/SYNC @GitHub\n\nRefresh the relevant durable context and report current state, stale assumptions, open loops, and synchronization drift. Do not make changes.\n{custom_block}"
     },
     {
       "id": "reboot",
@@ -330,7 +330,7 @@
       "category": "Boot / Sync",
       "description": "Summarize the current hub state and begin a clean operating phase.",
       "mode": "simple",
-      "template": "/REBOOT @GitHub\\n\\nSummarize current decisions, active priorities, open loops, pending writes, and unresolved questions. Establish a clean operating state for the next phase. Do not make changes unless authorized.\\n{custom_block}"
+      "template": "/REBOOT @GitHub\n\nSummarize current decisions, active priorities, open loops, pending writes, and unresolved questions. Establish a clean operating state for the next phase. Do not make changes unless authorized.\n{custom_block}"
     },
     {
       "id": "role_review",
@@ -338,7 +338,7 @@
       "category": "Hub / Coordination",
       "description": "Ask selected department perspectives to review an issue, then have Main Assistant synthesize.",
       "mode": "simple",
-      "template": "/ROLES\\n\\nAsk the relevant tagged department perspectives to review the issue below. Keep each response concise and labeled. Then have [MAIN] synthesize the recommendation, owner, next action, and any connector work requiring confirmation.\\n{custom_block}"
+      "template": "/ROLES\n\nAsk the relevant tagged department perspectives to review the issue below. Keep each response concise and labeled. Then have [MAIN] synthesize the recommendation, owner, next action, and any connector work requiring confirmation.\n{custom_block}"
     },
     {
       "id": "decide",
@@ -346,7 +346,7 @@
       "category": "Hub / Coordination",
       "description": "Coordinate department perspectives into a decision with an owner and next action.",
       "mode": "simple",
-      "template": "/DECIDE\\n\\nHave the relevant department roles assess the options, tradeoffs, risks, and owner. [MAIN] should recommend one decision and identify the smallest next action.\\n{custom_block}"
+      "template": "/DECIDE\n\nHave the relevant department roles assess the options, tradeoffs, risks, and owner. [MAIN] should recommend one decision and identify the smallest next action.\n{custom_block}"
     },
     {
       "id": "update_github",
@@ -354,7 +354,7 @@
       "category": "Connectors",
       "description": "Prepare or perform an explicitly authorized GitHub update and report the exact file changes.",
       "mode": "simple",
-      "template": "/UPDATEGITHUB @GitHub\\n\\nIdentify the exact GitHub files and changes requested. Confirm scope, preserve department boundaries, and make only the explicitly authorized updates. Report paths, summaries, and any remaining drift.\\n{custom_block}"
+      "template": "/UPDATEGITHUB @GitHub\n\nIdentify the exact GitHub files and changes requested. Confirm scope, preserve department boundaries, and make only the explicitly authorized updates. Report paths, summaries, and any remaining drift.\n{custom_block}"
     },
     {
       "id": "hub_roles",
@@ -362,7 +362,7 @@
       "category": "Hub / Coordination",
       "description": "Load the tagged department advisor definitions for the single-chat hub.",
       "mode": "simple",
-      "template": "[MAIN] Chair, coordinator, and connector operator.\\n[LOGISTICS] Serious, grounded executive-function and life-admin support.\\n[ENGINEERING] Direct, analytical software and automation review.\\n[FINANCE] Careful, numbers-first cost and affordability review.\\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\\n[WELLNESS] Warm, sustainable health and energy review.\\n\\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\\n{custom_block}"
+      "template": "[MAIN] Chair, coordinator, and connector operator.\n[LOGISTICS] Serious, grounded executive-function and life-admin support.\n[ENGINEERING] Direct, analytical software and automation review.\n[FINANCE] Careful, numbers-first cost and affordability review.\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\n[WELLNESS] Warm, sustainable health and energy review.\n\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\n{custom_block}"
     }
   ],
   "updated": "2026-07-16"
