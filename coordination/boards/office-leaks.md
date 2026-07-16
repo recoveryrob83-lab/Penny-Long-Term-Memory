@@ -56,6 +56,7 @@ Each target department should acknowledge awareness when next synchronized. No i
 Acknowledgements to date:
 
 - Chief of Finance Penny: Acknowledged / consumed on 2026-07-16. Finance recognizes Office Leaks as publicly launched and in live organic market testing. No paid boost is authorized or budgeted; Finance will evaluate promotion spending only after funds exist and Rob routes a concrete decision.
+- Chief Engineering Penny: Acknowledged / consumed on 2026-07-16. Engineering recognizes Office Leaks as publicly launched and in live organic market testing. No implementation is required now; delivery templates and technical support become relevant only when a real lead, client, or concrete delivery requirement is routed.
 
 ## Acknowledged / Implemented Advisories
 
