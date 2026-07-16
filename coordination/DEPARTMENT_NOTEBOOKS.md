@@ -1,6 +1,6 @@
 # Department Notebooks
 
-Updated: 2026-07-05
+Updated: 2026-07-15
 Purpose: Standard Life OS workflow for durable department-level idea capture that is not advisory, task, or operating-state material.
 
 ## Status
@@ -25,7 +25,7 @@ Department Notebooks are not:
 - Drive working documents,
 - Department Event Inbox entries.
 
-A notebook entry is not routed, read, ingested, acknowledged, or closed.
+A notebook entry is not routed, acknowledged, or closed merely because it exists. Notebook material may be read during deliberate review or hub synchronization without being promoted into operational state.
 
 ## Standard Locations
 
@@ -163,14 +163,32 @@ Notebook first, Pending Advisory Board second, formal advisory only after delibe
 
 ## Review Cadence
 
-Department Notebooks are checked only when:
+Department Notebooks are checked when:
 
 - Rob asks,
 - a department is doing deliberate reflection or cleanup,
 - a department handoff says the notebook matters for current work,
-- a notebook item may inform a specific current decision.
+- a notebook item may inform a specific current decision,
+- Main Assistant runs an explicit morning, nightly, sync, or notebook-review command.
 
-Do not turn notebook review into a default daily interruption.
+Do not read full notebook history during ordinary boots or routine conversation.
+
+For the central Main Assistant hub:
+
+- Morning sync reads entries from today and the previous calendar day.
+- Nightly sync reads entries from the current calendar day.
+- `/NBOOK` reads the current day's entries.
+- `/NBOOK YYYY-MM-DD` reads one specified date.
+- `/NBOOK YYYY-MM-DD..YYYY-MM-DD` reads an inclusive date range.
+- `/NBOOK ALL` reads full notebook history only when Rob explicitly requests it.
+
+When reading by date:
+
+1. Search active department notebook hubs and notebook-leaf indexes.
+2. Read only entries or leaves whose date matches the requested scope.
+3. Treat the review as read-only unless Rob separately authorizes promotion or file changes.
+4. Summarize cross-department implications for the hub without converting every note into a task or open loop.
+5. Prefer bounded context over exhaustive history.
 
 ## Scheduled Worker Guidance
 
@@ -187,3 +205,5 @@ Capture useful ideas without forcing action.
 Preserve long-term memory without over-routing.
 
 Keep operational source-of-truth files clean.
+
+Read recent notebook context when coordination benefits, but do not carry the whole attic into every meeting.
