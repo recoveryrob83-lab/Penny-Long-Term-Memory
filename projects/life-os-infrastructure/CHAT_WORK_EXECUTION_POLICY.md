@@ -1,6 +1,6 @@
 # Chat and Work Execution Policy
 
-Updated: 2026-07-15
+Updated: 2026-07-17
 Project: Life OS Infrastructure
 Purpose: Define the operating boundary between regular ChatGPT conversations and the separate Work execution environment.
 
@@ -17,16 +17,19 @@ Short form:
 
 ## Current Product Boundary
 
-Observed on 2026-07-15:
+Observed through controlled use on 2026-07-15 through 2026-07-17:
 
 - Regular Chat conversations and existing ChatGPT Projects are available across mobile, web, and classic desktop surfaces.
 - The new desktop Work environment uses separate Projects and Tasks.
 - Work Projects created in the new desktop environment did not appear on mobile, web, or classic desktop during a controlled sync test.
 - Existing regular ChatGPT Projects did not appear in the new desktop Work environment.
-- A Work Project created a Task rather than a normal Chat conversation.
+- A Work Project created a Task rather than a normal regular-Chat conversation.
+- A controlled Work-side Chat test with no Task and limited visible output reduced the Work meter by one percentage point.
+- Therefore, both Work-side Chat and Work Tasks should be treated as consuming the weekly Work allowance.
+- Regular Chat on mobile, web, and classic desktop has not moved the Work meter during repeated observed use, including substantial reasoning and connector-backed work.
 - Connector availability may differ by surface. Do not assume a connector is available until invocation is verified.
 
-These are field observations, not claims about undocumented platform internals. Re-test after major product updates.
+These are field observations, not claims about undocumented platform internals. Meter rounding, delayed updates, hidden context, and product changes prevent exact token-to-percentage conclusions. Re-test after major product updates.
 
 ## Headquarters Rule
 
@@ -41,6 +44,8 @@ Use Chat for:
 - business strategy and offer development
 - drafting Work instructions
 - light connector actions when connectors are available
+
+Prefer classic desktop when desktop access and connectors are needed without entering the metered Work environment.
 
 Departments remain structured perspectives within one coherent Penny. Work is not another department and should not become a second conversational headquarters.
 
@@ -59,7 +64,7 @@ Valid Work triggers include:
 - producing or modifying artifacts
 - making bounded GitHub or other system changes when Work is the appropriate available execution surface
 
-Do not use Work merely because a task is important, interesting, lengthy, or benefits from conversation.
+Do not use Work merely because a task is important, interesting, lengthy, benefits from conversation, or needs ordinary connector access.
 
 ## Work Session Procedure
 
@@ -75,15 +80,16 @@ Operating maxim:
 
 > Never idle in Work.
 
-Long exploratory conversation, brainstorming, philosophy, routine planning, and ordinary coordination should remain in Chat because they can consume limited Work usage without producing a unique execution result.
+Long exploratory conversation, brainstorming, philosophy, routine planning, and ordinary coordination should remain in regular Chat because Work-side Chat itself can consume limited Work usage without producing a unique execution result.
 
 ## Model Selection Policy
 
 ### Chat
 
-- Default to GPT-5.5 Instant or the lightest suitable Chat model for routine coordination and conversation.
+- Default to the lightest regular-Chat model that can reliably handle the task.
+- Use Medium when context handling, connector planning, or multi-step reasoning materially benefits.
 - Escalate to stronger reasoning only when the expected quality gain justifies it.
-- Normal Chat use has not been observed to consume the separate weekly Work allowance, but this should be periodically verified after product changes.
+- Regular Chat use on mobile, web, and classic desktop has not been observed to consume the separate weekly Work allowance, but this should be periodically verified after product changes.
 
 ### Work
 
@@ -104,8 +110,10 @@ Work usage is a weekly metered resource.
 
 Current operating rules:
 
+- Treat both Work-side Chat and Work Tasks as metered.
 - Record visible usage checkpoints before and after meaningful Work sessions when practical.
-- Attribute changes cautiously because the meter may update slowly or in batches.
+- Attribute changes cautiously because the meter may update slowly, round to whole percentages, or change after product-side recalibration.
+- Do not infer an exact token-to-percentage conversion from one test.
 - Measure value by durable progress per percentage point, not by message count alone.
 - Protect Work usage for real execution, paid work, client deliverables, essential repository work, and high-value automation.
 - Avoid spending Work allowance to investigate the allowance beyond small controlled tests.
@@ -156,7 +164,7 @@ Examples include:
 - reviewing Gmail or Drive context
 - other ordinary connector-backed coordination
 
-Connector availability is surface-dependent and may change. If the current Chat surface lacks the needed connector, use another connector-enabled Chat surface or route the task to Work only when necessary.
+Connector availability is surface-dependent and may change. If one regular-Chat surface lacks the needed connector, try another connector-enabled regular-Chat surface, especially classic desktop, before routing the task to Work.
 
 ## Re-Evaluation Triggers
 
@@ -169,4 +177,4 @@ Review this policy when any of the following occur:
 - Work metering or model tiers change
 - observed usage no longer matches this operating model
 
-Until then, preserve continuity in Chat and reserve Work for bounded execution.
+Until then, preserve continuity in regular Chat and reserve Work for bounded execution.
