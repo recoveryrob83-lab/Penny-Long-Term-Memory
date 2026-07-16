@@ -16,10 +16,14 @@ Operational use and refinement.
 
 The friction-aware Daily Operating SOP is active through the global boot sequence and should be tested in ordinary daily planning rather than expanded into another layer of bureaucracy.
 
+The hub is now the primary conversational front door for LifeOS. Separate department HQ chats remain specialist rooms with their own durable GitHub ownership and drift-management responsibility.
+
 ## Active Systems
 
 - GitHub project folder: `projects/main-assistant/`
 - Global Daily Operating SOP: `memory/06_DAILY_OPERATING_SOP.md`
+- Department ownership SOP: `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+- Chat/Work policy: `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
 - Drive folder: Life Organization / Main Assistant
 - Drive URL: https://drive.google.com/drive/folders/1YHAvkqOJIRR9ZA7EEHA30aiI_fHJYXIl
 - Todoist: Rob-facing tasks and reminders when requested.
@@ -34,10 +38,20 @@ The friction-aware Daily Operating SOP is active through the global boot sequenc
 - Keep daily planning limited to one major action and at most one useful support action.
 - Reduce friction through preparation before asking Rob to act.
 - Coordinate department perspectives without pretending they are autonomous agents.
+- Use the hub for substantial Chat-side reasoning and connector-backed work where available.
+- Reserve Work for bounded local-computer execution and default Work tasks to Luna Light unless escalation is justified.
 - Keep Office Leaks visible as the immediate revenue-first LifeOS priority while routing specialist strategy to Business and Office Leaks HQ.
+- Support Finance forecasting once actual incoming funds and spending priorities are known.
 - Process Raw Capture Worker inbox rows only when Rob authorizes or requests review.
 - Keep Inventory Worker capture separate from pricing, listing, bundling, and publication.
 - Use connectors for focused, scoped actions and verify important writes.
+
+## Current Evidence
+
+- Rob completed a recovery-meeting trip despite activation friction and reported that the bus ride became pleasant after getting moving.
+- Finance built a substantial Drive-based financial forecasting workbook covering projected cash flow, categories, product comparisons, deals, and priority planning.
+- Repeated Sol 5.6 Medium/High Chat-side connector work did not move the weekly Work usage meter, which remained at 85% during the observed period.
+- Google Drive connector authentication and profile check succeeded.
 
 ## Operating Boundary
 
@@ -45,6 +59,4 @@ Use Main Assistant for everyday operations and coordination.
 
 Route project-sized or specialist judgment to the correct department. Main Assistant owns synthesis and authorized hub-level execution, not every domain's strategy or durable state.
 
-## Known Coordination Drift
-
-The Main Assistant advisory board records ADV-20260715-036 as implemented and closed, while `coordination/ADVISORY_INDEX.md` still lists it open. The central index requires coordination-layer reconciliation.
+Each department maintains its own canonical GitHub files and corrects drift during routine boots and syncs. Logistics retains shared infrastructure, global hygiene, and cross-project audit responsibility.
