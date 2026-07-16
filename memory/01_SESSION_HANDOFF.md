@@ -15,8 +15,8 @@ Life OS is operational with:
 - Gmail as communication evidence;
 - project chats as domain knowledge producers;
 - workers as narrow operational executors;
-- Main Assistant as daily coordinator and synthesizer;
-- Life Logistics HQ as cross-project curator and memory housekeeper.
+- Main Assistant as daily coordinator and primary conversational hub;
+- Life Logistics HQ as shared-infrastructure curator and cross-project housekeeper.
 
 The immediate business priority is Office Leaks Consulting, a revenue-first business-unit HQ under Chief Business HQ focused on service-business systems consulting, local office leak cleanup, workflow organization, documentation, process cleanup, and trust-based delivery for local service businesses.
 
@@ -29,7 +29,7 @@ PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term prod
 
 ## Chat HQ Operating Architecture
 
-As of 2026-07-15, all seven LifeOS department discussion HQ chats are open and ready.
+As of 2026-07-15, all seven LifeOS department discussion HQ chats are open and ready, while the Main Assistant hub is the primary conversational front door.
 
 These HQs are regular ChatGPT discussion rooms for:
 
@@ -37,16 +37,24 @@ These HQs are regular ChatGPT discussion rooms for:
 - GitHub boot and synchronization;
 - research and technical or strategic discussion;
 - advisories and cross-department routing;
-- small authorized connector-backed work;
+- substantial authorized connector-backed work where the current Chat surface supports it;
 - maintaining useful domain context without consuming unnecessary Work capacity.
 
 They are not autonomous agents and do not independently share hidden state. They are structured departmental perspectives within one coherent Penny system.
+
+Observed Chat/Work boundary as of 2026-07-15:
+
+- Repeated Sol 5.6 Medium and High reasoning, GitHub reads/writes, and extensive Google Drive spreadsheet work in general Chat did not move the weekly Work usage meter during the observed period.
+- Work usage appears tied to the separate Work/Task execution environment rather than ordinary Chat model strength.
+- Treat this as a strong field observation, not a permanent claim about undocumented platform internals.
+- Use the strongest Chat model justified by the reasoning task.
+- Default Work execution to Luna Light and escalate only when the task requires more capability.
 
 Work mode remains reserved for:
 
 - substantial code writing or testing;
 - local repository operations;
-- large file edits;
+- large local file edits;
 - test-suite execution;
 - packaging applications;
 - browser or desktop automation;
@@ -56,6 +64,20 @@ Work mode remains reserved for:
 Main Assistant owns overall coordination and final synthesis. Departments own specialized judgment and durable domain state. Workers execute narrow procedures. Rob remains final authority for consequential, destructive, financial, or externally visible actions.
 
 Engineering should observe the live HQ system for routing friction, duplicated authority, stale boot assumptions, connector limitations, and unnecessary model usage. Refine only from real evidence.
+
+## Department File Ownership and Drift
+
+Each department now owns routine maintenance of its own GitHub project subtree and canonical domain files.
+
+During routine boots and syncs, departments should compare current working context with GitHub and directly correct stale status, handoffs, open loops, decisions, and local procedures.
+
+Do not route routine local maintenance through Life Logistics or formal advisories. Use advisories for cross-department dependencies, decisions, risks, conflicts, or required action.
+
+Main coordinates shared policy and cross-department changes. Life Logistics maintains global boot integrity, shared procedures, advisory-index hygiene, cross-project audits, and system-wide housekeeping.
+
+Canonical SOP:
+
+- `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
 
 ## Current Active Core
 
@@ -114,6 +136,8 @@ Preserve project history. Do not delete department files without explicit author
 - Canonical startup: `memory/STARTUP_BOOT.md`
 - Context shortcuts and hub commands: `memory/CONTEXT_REMINDER.md`
 - Daily Operating SOP: `memory/06_DAILY_OPERATING_SOP.md`
+- Department File Ownership SOP: `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+- Chat/Work Execution Policy: `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
 - Active Projects: `memory/04_ACTIVE_PROJECTS.md`
 - Open Loops: `memory/05_OPEN_LOOPS.md`
 - Worker registry: `workers/README.md`
@@ -146,6 +170,25 @@ Default pattern:
 - route specialized judgment to the owning department.
 
 The SOP is a testable operating standard, not a rigid task list.
+
+Current real-world evidence: Rob attended a recovery meeting despite significant pre-departure activation friction and reported that the bus ride became pleasant once movement began. Preserve the working rule that friction predicts activation difficulty, not necessarily a poor outcome.
+
+## Finance Forecasting System
+
+Chief Finance Penny created a substantial Google Sheets life-financial forecasting model.
+
+Its working scope includes:
+
+- projected cash flow rather than only historical transactions;
+- category tracking;
+- planned spending and priority allocation;
+- product and price comparisons;
+- deal tracking;
+- downstream impact of present spending choices.
+
+Detailed financial records, balances, transactions, and forecasts remain in Finance-owned Google Drive files and must not be copied into GitHub. GitHub may retain only abstract operational context and pointers.
+
+Immediate transportation pressure is easing through expected recovery-community support and paid cleanup work with friends. Final projected spending should wait until actual incoming amounts are known.
 
 ## Active Shortcut Set
 
@@ -201,18 +244,21 @@ Keep GitHub abstract. Pricing, startup costs, revenue tracking, taxes, and detai
 
 ## Best Next Actions
 
-- Use the new Chat HQs for ordinary planning, discussion, synchronization, and light connector work.
+- Use the Main Assistant hub as the primary conversational front door.
+- Use department HQs for sustained specialist work and direct maintenance of their own GitHub state.
+- Use general Chat for substantial reasoning and connector-backed work where available.
+- Reserve Work for bounded local execution and default to Luna Light unless more capability is justified.
+- Use the Finance forecasting model once actual incoming funds and priorities are known.
 - Pilot Penny Raw Capture Worker with real intake and verified writes.
 - Pilot Penny Inventory Worker with 2–3 real uploaded sale-item photographs.
 - Keep pricing, grouping, listing copy, and publication separate from inventory capture.
 - Continue Office Leaks positioning, offers, outreach, and delivery-method work.
 - Continue Engineering's Reliable Connector Execution Layer and operation-ledger design.
-- Observe the Chat HQ architecture before adding more complexity.
 - Keep Engineering HQ Daily Sync paused pending stronger scheduled-execution architecture and explicit authorization.
 - Maintain advisory-board hygiene without turning cleanup into recurring bureaucracy.
 
 ## Guiding Principle
 
-GitHub is the map. Drive is the filing cabinet. Calendar owns time. Todoist owns Rob-facing actions. Gmail owns communications. Departments own judgment. Workers execute narrow contracts. Main Assistant coordinates. Life Logistics curates cross-project memory.
+GitHub is the map. Drive is the filing cabinet. Calendar owns time. Todoist owns Rob-facing actions. Gmail owns communications. Departments own judgment and their own durable state. Workers execute narrow contracts. Main Assistant coordinates. Life Logistics curates shared infrastructure and cross-project memory.
 
 Use RPR when reliable structured-file editing matters more than connector automation.
