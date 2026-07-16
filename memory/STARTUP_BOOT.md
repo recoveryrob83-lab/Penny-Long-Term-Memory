@@ -68,6 +68,22 @@ Department boots inherit this standard through the global boot order. Project-sp
 
 Then read project files only as needed.
 
+## Notebook Context During Hub Sync
+
+Department notebook standards live in:
+
+- `coordination/DEPARTMENT_NOTEBOOKS.md`
+
+Do not read every department notebook during an ordinary boot.
+
+When Main Assistant runs an explicit hub synchronization:
+
+- `/MORNING` reads notebook entries from today and the previous calendar day.
+- `/NIGHTLY` reads notebook entries from the current calendar day.
+- `/NBOOK` reads today by default and accepts one date, an inclusive date range, or `ALL` as defined in `memory/CONTEXT_REMINDER.md`.
+- Notebook review is read-only unless Rob separately authorizes promotion or file changes.
+- Read date-bounded entries to improve central context without automatically turning notes into tasks, advisories, open loops, or status.
+
 ## Scheduled Task Memo Layer
 
 Scheduled-task notes live in:
