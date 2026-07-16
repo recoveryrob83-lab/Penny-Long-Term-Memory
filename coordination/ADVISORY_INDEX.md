@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-15
+Updated: 2026-07-16
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- None.
+- ADV-20260716-037 — Open / Broadcast for Awareness — Posted Board: `coordination/boards/office-leaks.md` — Target Departments: Chief Business HQ; Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ; Chief Wellness HQ — Office Leaks is publicly launched with Facebook Page landing surface, pinned starter offer, introduction post, and first lead-loss Reel live; departments should acknowledge awareness when next synchronized.
 
 ## Acknowledged / Implemented Advisories
 
