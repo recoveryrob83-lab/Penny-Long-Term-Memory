@@ -1,6 +1,6 @@
 # Main Assistant Session Handoff
 
-Updated: 2026-07-15
+Updated: 2026-07-17
 Project: Main Assistant / Daily Operations
 Purpose: Project-specific handoff for new Main Assistant Penny / LifeOS Coordination Hub chats.
 
@@ -46,12 +46,15 @@ Use the hub for ordinary planning, department coordination, strategy, recovery, 
 
 ## Chat and Work Boundary
 
-Observed operating rule as of 2026-07-15:
+Observed operating rule as of 2026-07-17:
 
-- General Chat on mobile, web, and classic surfaces can support substantial Sol 5.6 reasoning and connector-backed GitHub or Google Drive work without moving the weekly Work usage meter during repeated tests.
-- Work usage appears tied to the separate Work/Task execution environment rather than ordinary Chat model strength.
-- Treat this as a strong field observation, not a permanent claim about undocumented platform internals.
-- Use the strongest Chat model justified by the reasoning task.
+- Regular Chat on mobile, web, and classic desktop can support substantial reasoning and connector-backed GitHub or Google Drive work without moving the weekly Work usage meter during repeated observations.
+- A controlled Work-side Chat test with no Task and limited visible output reduced the Work meter by one percentage point.
+- Treat both Work-side Chat and Work Tasks as consuming the weekly Work allowance.
+- Exact usage ratios cannot be inferred because the meter may round, update slowly, include hidden context, or be recalibrated.
+- Treat these as strong field observations, not permanent claims about undocumented platform internals.
+- Prefer classic desktop for desktop conversation and connectors without entering Work.
+- Use the strongest regular-Chat model justified by the reasoning task.
 - Use Luna Light as the default Work model and escalate only when required.
 - Reserve Work for local files, terminal, coding, testing, browser or desktop control, artifact production, and other bounded computer execution.
 
@@ -133,6 +136,7 @@ When Main Assistant creates an advisory:
 - Immediate transportation pressure is easing through expected recovery-community support and paid cleanup work with friends.
 - Finance created a substantial Google Sheets life-financial forecasting model covering projected cash flow, categories, product comparisons, deals, and priority-based planning. Detailed financial records remain in Finance-owned Drive files, not GitHub.
 - Google Drive connector check passed successfully during the hub session.
+- Office Leaks has published its first two graphics and reel on Facebook, shared the campaign to Rob's story and page feed, activated the business email, and begun collecting platform engagement data.
 
 ## Operating Boundaries
 
