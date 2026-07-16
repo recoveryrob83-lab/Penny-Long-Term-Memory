@@ -19,9 +19,14 @@ Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reacti
 
 ## Open Advisories
 
+None.
+
+## Acknowledged / Implemented Advisories
+
 ### ADV-20260716-037 — Office Leaks Public Launch Milestone
 
-Status: Fully Acknowledged / Broadcast complete
+Status: Fully Acknowledged / Closed
+Closed: 2026-07-16
 Target Departments: Chief Business HQ; Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ; Chief Wellness HQ
 
 Office Leaks Consulting has moved from planning into public operation.
@@ -53,7 +58,7 @@ Requested response:
 
 Each target department should acknowledge awareness when next synchronized. No implementation is required unless Rob separately routes a concrete task.
 
-Acknowledgements to date:
+Acknowledgements:
 
 - Chief of Finance Penny: Acknowledged / consumed on 2026-07-16. Finance recognizes Office Leaks as publicly launched and in live organic market testing. No paid boost is authorized or budgeted; Finance will evaluate promotion spending only after funds exist and Rob routes a concrete decision.
 - Chief Engineering Penny: Acknowledged / consumed on 2026-07-16. Engineering recognizes Office Leaks as publicly launched and in live organic market testing. No implementation is required now; delivery templates and technical support become relevant only when a real lead, client, or concrete delivery requirement is routed.
@@ -62,9 +67,9 @@ Acknowledgements to date:
 - Chief Business HQ: Acknowledged / consumed on 2026-07-16. Business recognizes Office Leaks as publicly launched and in a live organic market-test phase. Business will treat the lead-loss editorial lane and starter offer as active market hypotheses, preserve the deferment of paid promotion and larger campaign infrastructure, and continue parent-level strategy without absorbing Office Leaks execution continuity.
 - Main Assistant Penny: Acknowledged / consumed on 2026-07-16. Main Assistant recognizes Office Leaks as publicly launched and in a live organic market-test phase. It will route authorized follow-up, scheduling, outreach, and inquiry-handling support without creating a standing monitoring task. No implementation or external-system action was required.
 
-## Acknowledged / Implemented Advisories
+Closure outcome:
 
-None yet.
+All target departments acknowledged and consumed the launch milestone on 2026-07-16. The awareness broadcast is complete. No implementation was required by the advisory.
 
 ## Notes
 
