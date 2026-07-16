@@ -1,6 +1,6 @@
 # Main Assistant Status
 
-Updated: 2026-07-15
+Updated: 2026-07-17
 Project: Main Assistant / Daily Operations
 Status: Active / Operational
 
@@ -38,7 +38,8 @@ The hub is now the primary conversational front door for LifeOS. Separate depart
 - Keep daily planning limited to one major action and at most one useful support action.
 - Reduce friction through preparation before asking Rob to act.
 - Coordinate department perspectives without pretending they are autonomous agents.
-- Use the hub for substantial Chat-side reasoning and connector-backed work where available.
+- Use regular Chat, especially classic desktop when connectors are needed, for substantial reasoning and connector-backed work where available.
+- Treat both Work-side Chat and Work Tasks as metered.
 - Reserve Work for bounded local-computer execution and default Work tasks to Luna Light unless escalation is justified.
 - Keep Office Leaks visible as the immediate revenue-first LifeOS priority while routing specialist strategy to Business and Office Leaks HQ.
 - Support Finance forecasting once actual incoming funds and spending priorities are known.
@@ -50,8 +51,11 @@ The hub is now the primary conversational front door for LifeOS. Separate depart
 
 - Rob completed a recovery-meeting trip despite activation friction and reported that the bus ride became pleasant after getting moving.
 - Finance built a substantial Drive-based financial forecasting workbook covering projected cash flow, categories, product comparisons, deals, and priority planning.
-- Repeated Sol 5.6 Medium/High Chat-side connector work did not move the weekly Work usage meter, which remained at 85% during the observed period.
+- Repeated regular-Chat reasoning and connector work did not move the weekly Work meter during the observed period.
+- A controlled Work-side Chat test with no Task and limited visible output reduced the Work meter by one percentage point.
+- Meter rounding, delayed updates, hidden context, and possible product recalibration prevent an exact token-to-percentage conclusion.
 - Google Drive connector authentication and profile check succeeded.
+- Office Leaks published its first two graphics and reel on Facebook, activated the business email, and began collecting engagement data.
 
 ## Operating Boundary
 
