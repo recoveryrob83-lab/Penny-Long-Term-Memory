@@ -1,6 +1,6 @@
 # Office Leaks Consulting Advisory Board
 
-Updated: 2026-07-09
+Updated: 2026-07-16
 Project: Office Leaks Consulting HQ
 Purpose: Formal advisories from Office Leaks Consulting HQ to Business HQ, Engineering HQ, Finance HQ, Main Assistant, Life Logistics HQ, or other departments.
 
@@ -19,7 +19,39 @@ Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reacti
 
 ## Open Advisories
 
-None.
+### ADV-20260716-037 — Office Leaks Public Launch Milestone
+
+Status: Open / Broadcast for awareness
+Target Departments: Chief Business HQ; Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ; Chief Wellness HQ
+
+Office Leaks Consulting has moved from planning into public operation.
+
+Completed launch state:
+
+- Facebook Page is serving as the initial landing page.
+- Introduction post is live.
+- Starter offer/ad is live and pinned.
+- First story-driven lead-loss Reel is live on the business Page.
+- The Reel was shared to Rob's personal profile for organic distribution.
+- The current editorial lane focuses on lead loss caused by weak follow-up systems.
+- Separate website work, paid boosting, formal A/B testing, and full campaign infrastructure are intentionally deferred while the first organic market signal develops.
+
+Durable milestone note:
+
+- `projects/office-leaks-consulting/notebook/NOTE-20260716-002-facebook-launch-and-first-lead-loss-video.md`
+
+Department relevance:
+
+- Chief Business HQ: treat Office Leaks as publicly launched and in a live market-test phase.
+- Finance: no paid boost is authorized or budgeted; evaluate only when funds and a concrete promotion decision exist.
+- Engineering: no new implementation is requested yet; delivery templates become relevant when a real lead or client requires them.
+- Main Assistant: route any authorized follow-up, scheduling, outreach, or inquiry-handling support from this live launch.
+- Life Logistics HQ: synchronize durable project state and recognize the launch milestone.
+- Wellness: awareness only; preserve sustainable pacing and avoid turning launch monitoring into compulsive checking.
+
+Requested response:
+
+Each target department should acknowledge awareness when next synchronized. No implementation is required unless Rob separately routes a concrete task.
 
 ## Acknowledged / Implemented Advisories
 
