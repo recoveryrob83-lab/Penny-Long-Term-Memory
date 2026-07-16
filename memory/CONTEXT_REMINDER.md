@@ -1,6 +1,6 @@
 # Context Reminder: Response Shortcut Codes
 
-Updated: 2026-07-15
+Updated: 2026-07-17
 Purpose: A compact response-control vocabulary available in fresh Penny chats.
 
 These are optional user-facing commands. They shape response style only; they do not override safety rules, connector instructions, department boundaries, source-of-truth rules, or explicit user authorization requirements.
@@ -23,6 +23,9 @@ These are optional user-facing commands. They shape response style only; they do
 - `/SYNCADVISORY` — Read the Advisory Index and relevant boards; report open, stale, duplicate, or inconsistent advisory state without changing it.
 - `/ITINERARY` — With `@Todoist @Google Calendar`, create a practical daily plan from commitments, due tasks, overdue work, and known priorities. Read-only unless Rob authorizes changes.
 - `/TODOIST` — With `@Todoist`, prepare or perform an authorized task update and report exactly what changed. Ask when task identity, project, date, or time is ambiguous.
+- `/FLOW` — With `@Trello`, read the Trello Inbox and LifeOS Flow Board, classify captured cards, identify duplicates or ambiguity, and recommend routing. Read-only by default.
+- `/FLOW PROCESS` — With `@Trello`, process all clear Inbox cards into Captured, Next, Now, Waiting, or another authorized source system. Preserve one card maximum in Now and three maximum in Next; ask only about ambiguous or consequential items.
+- `/FLOW NOW` — With `@Trello`, review current flow and recommend the best one card for Now plus up to three cards for Next. Move or update cards only when authorized.
 - `/MORNING` — With `@GitHub`, run a read-only department morning sync; read notebook entries from today and the previous calendar day, then report priorities, pressures, open loops, and the best next action.
 - `/NIGHTLY` — With `@GitHub`, run a read-only department end-of-day sync; read the current day's notebook entries, then identify unfinished loops, drift, and needed handoff work.
 - `/NBOOK` — With `@GitHub`, read department notebook entries for today. Use `/NBOOK YYYY-MM-DD` for one date, `/NBOOK YYYY-MM-DD..YYYY-MM-DD` for an inclusive range, or `/NBOOK ALL` only for explicitly requested full history. Read-only unless Rob separately authorizes promotion or edits.
@@ -63,6 +66,24 @@ These tags activate structured departmental perspectives inside a single ordinar
 - `/CLOSELOOP` — Check whether an advisory or task can be acknowledged, implemented, or closed.
 - `/UPDATEGITHUB` — Make only explicitly authorized GitHub updates and report exact paths changed.
 
+## Flow Board Operating Model
+
+Canonical procedure:
+
+- `coordination/TRELLO_FLOW_BOARD_SOP.md`
+
+Source boundaries:
+
+- Trello Inbox captures raw thoughts.
+- LifeOS Flow Board shows current attention and flow.
+- Todoist holds commitments and reminders.
+- Calendar holds timed commitments.
+- GitHub holds durable state.
+
+The canonical LifeOS Flow Board is:
+
+- https://trello.com/b/QKXdwHup/lifeos-flow-board
+
 ## Operating Model
 
 - Use the smallest capable model for the task; reserve heavier Work-mode execution for coding, local files, large artifacts, browser automation, testing, or desktop control.
@@ -75,7 +96,8 @@ These tags activate structured departmental perspectives inside a single ordinar
 ## Operating Notes
 
 - A code applies to the current request unless Rob clearly indicates a broader scope.
-- `/ADVISE`, `/SYNCADVISORY`, and `/NBOOK` are read-only by default.
+- `/ADVISE`, `/SYNCADVISORY`, `/NBOOK`, `/FLOW`, and `/FLOW NOW` are read-only by default.
+- `/FLOW PROCESS` authorizes clear Trello routing but does not silently authorize Todoist, Calendar, GitHub, external publication, financial action, or deletion.
 - `/ADVISORY` drafts by default; posting or changing durable advisory state requires explicit authorization.
 - Connector-specific commands should name the needed connector with `@`; scope the work to that connector unless Rob explicitly requests a cross-connector workflow.
 - Morning and nightly notebook reading is date-bounded context refresh, not automatic promotion into tasks, open loops, advisories, or status.
