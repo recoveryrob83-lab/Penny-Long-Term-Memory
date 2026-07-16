@@ -1,6 +1,6 @@
 # Office Leaks Consulting Notebook Leaf Index
 
-Updated: 2026-07-09
+Updated: 2026-07-16
 Project: Office Leaks Consulting HQ
 Purpose: Discoverable index for Office Leaks notebook leaf notes.
 
@@ -33,6 +33,7 @@ Example:
 
 | Note ID | Title | Date | Topic | Status |
 |---|---|---:|---|---|
+| NOTE-20260716-002 | Facebook Launch and First Lead-Loss Video | 2026-07-16 | Public launch / content / lead-loss offer | Launch milestone / active market test |
 | NOTE-20260709-001 | Friendly Free Consulting Pilots | 2026-07-09 | Pilot clients / portfolio building | Raw / unprocessed |
 
 ## Legacy Notes To Consult When Needed
