@@ -6,7 +6,7 @@ Updated: 2026-07-18
 
 | Status | Priority | Item | Next Action | Notes |
 |---|---|---|---|---|
-| Active | High | Department ownership architecture and dashboard inspection | Verify the confirmed findings disappear after source cleanup, then formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes | Department Inspection is locally validated. Live audit improved from 458 records / 4 findings / 101 warnings to 459 records / 4 findings / 15 warnings before source cleanup. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
+| Active | High | Department ownership architecture and dashboard inspection | Review the remaining 13 warnings, correct only genuine source or parser defects, and observe ordinary role-routed specialist boots before closing the system wrapper | Department Inspection is locally validated. Live evidence progressed from 458 records / 4 findings / 101 warnings to 459 / 4 / 15 after tuning, then 414 / 0 / 13 after source cleanup. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
 | Active | Normal | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
 | Active | Normal | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
 | Open | Normal | Restart and overdue-run validation | Schedule a one-time draft, stop the dashboard before execution, restart afterward, and observe catch-up behavior | Decide whether late jobs should run immediately, skip, expire, or require approval only after evidence |
@@ -40,6 +40,7 @@ Updated: 2026-07-18
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Department Inspection post-cleanup verification | Rob confirmed 414 normalized records, zero findings, and 13 warnings after source cleanup; all four confirmed findings disappeared without weakening detection |
 | 2026-07-18 | Department Inspection first source cleanup | Separated Engineering lifecycle state from priority, removed the duplicated broad Chat HQ watch, consolidated Legacy VA folder disposition under Logistics, and removed speculative registry-reference placeholders from open-loop files |
 | 2026-07-18 | Department Inspection MVP local validation | Rob confirmed the new tab works in the local Windows dashboard after guarded GitHub synchronization and server restart; live classification audit remains open under the broader ownership package |
 | 2026-07-17 | Scheduled occupied-composer safety validation | A scheduled custom send to Logistics HQ found the exact destination behind `Show more`, preserved the existing composer draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery message in Run History |
