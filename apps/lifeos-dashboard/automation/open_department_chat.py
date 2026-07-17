@@ -2,6 +2,7 @@
 
 Windows-only prototype using pywinauto and the ChatGPT Classic UI Automation tree.
 Nothing is sent unless --send is explicitly provided together with --confirm-send SEND.
+Existing composer text is preserved unless --replace-existing is explicitly provided.
 """
 
 from __future__ import annotations
@@ -63,6 +64,11 @@ def parse_args() -> argparse.Namespace:
         help="Seconds to wait for destination verification",
     )
     parser.add_argument(
+        "--replace-existing",
+        action="store_true",
+        help="Replace existing composer text instead of stopping",
+    )
+    parser.add_argument(
         "--send",
         action="store_true",
         help="Submit the message after verification",
@@ -82,18 +88,6 @@ def get_chatgpt_window() -> BaseWrapper:
     return window
 
 
-def open_exact_chat(window: BaseWrapper, target: Target) -> None:
-    link = window.child_window(title=target.link_title, control_type="Hyperlink")
-    if not link.exists(timeout=2):
-        raise AutomationStopped(
-            "Exact chat link not found in the accessible sidebar: "
-            f"{target.link_title!r}"
-        )
-
-    window.set_focus()
-    link.invoke()
-
-
 def visible_document_titles(window: BaseWrapper) -> list[str]:
     titles: list[str] = []
     for control in window.descendants():
@@ -107,6 +101,32 @@ def visible_document_titles(window: BaseWrapper) -> list[str]:
     return titles
 
 
+def current_document_title(window: BaseWrapper) -> str:
+    titles = visible_document_titles(window)
+    return titles[0] if titles else ""
+
+
+def open_exact_chat(window: BaseWrapper, target: Target) -> bool:
+    """Open the target chat only when it is not already active.
+
+    Returns True when navigation was invoked and False when the target was
+    already active.
+    """
+    if current_document_title(window) == target.document_title:
+        return False
+
+    link = window.child_window(title=target.link_title, control_type="Hyperlink")
+    if not link.exists(timeout=2):
+        raise AutomationStopped(
+            "Exact chat link not found in the accessible sidebar: "
+            f"{target.link_title!r}"
+        )
+
+    window.set_focus()
+    link.invoke()
+    return True
+
+
 def wait_for_destination(
     window: BaseWrapper,
     expected_title: str,
@@ -116,8 +136,7 @@ def wait_for_destination(
     active_title = ""
 
     while time.time() < deadline:
-        titles = visible_document_titles(window)
-        active_title = titles[0] if titles else ""
+        active_title = current_document_title(window)
         if active_title == expected_title:
             return active_title
         time.sleep(0.25)
@@ -128,10 +147,57 @@ def wait_for_destination(
     )
 
 
-def place_text(window: BaseWrapper, text: str) -> BaseWrapper:
-    composer = window.child_window(title="Ask ChatGPT", control_type="Edit")
-    if not composer.exists(timeout=2):
-        raise AutomationStopped("Chat composer was not found after destination verification.")
+def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
+    """Find the visible message composer without relying on its current text.
+
+    ChatGPT changes the Edit control's accessible name when text is present, so
+    matching the literal title 'Ask ChatGPT' is not reliable. The composer is
+    instead selected as the lowest visible Edit control inside the app window.
+    """
+    edits: list[BaseWrapper] = []
+    window_rect = window.rectangle()
+
+    for control in window.descendants():
+        if control.element_info.control_type != "Edit":
+            continue
+
+        rect = control.rectangle()
+        if rect.top < window_rect.top or rect.bottom > window_rect.bottom:
+            continue
+        if rect.left < window_rect.left or rect.right > window_rect.right:
+            continue
+        if rect.width() <= 0 or rect.height() <= 0:
+            continue
+
+        edits.append(control)
+
+    if not edits:
+        raise AutomationStopped("No visible Edit control was found after verification.")
+
+    composer = max(edits, key=lambda control: control.rectangle().top)
+    return composer
+
+
+def read_composer_text(composer: BaseWrapper) -> str:
+    try:
+        return composer.get_value().strip()
+    except Exception:
+        return composer.window_text().strip()
+
+
+def place_text(
+    window: BaseWrapper,
+    text: str,
+    replace_existing: bool,
+) -> BaseWrapper:
+    composer = find_visible_composer(window)
+    existing = read_composer_text(composer)
+
+    if existing and existing != "Ask ChatGPT" and not replace_existing:
+        raise AutomationStopped(
+            "Composer already contains text. Existing draft was preserved. "
+            "Use --replace-existing only when replacement is intentional."
+        )
 
     composer.set_focus()
     composer.set_edit_text(text)
@@ -161,8 +227,12 @@ def main() -> int:
         print(f"1. Finding window: {APP_TITLE}")
         window = get_chatgpt_window()
 
-        print(f"2. Opening exact chat: {target.link_title}")
-        open_exact_chat(window, target)
+        print(f"2. Resolving exact chat: {target.link_title}")
+        navigated = open_exact_chat(window, target)
+        if navigated:
+            print("   Navigation invoked.")
+        else:
+            print("   Target chat already active. Navigation skipped.")
 
         print(f"3. Verifying destination: {target.document_title}")
         active_title = wait_for_destination(
@@ -172,8 +242,12 @@ def main() -> int:
         )
         print(f"   Verified active document: {active_title}")
 
-        print("4. Placing text in composer")
-        composer = place_text(window, args.text)
+        print("4. Locating visible composer and applying draft policy")
+        composer = place_text(
+            window,
+            text=args.text,
+            replace_existing=args.replace_existing,
+        )
 
         print("5. Applying send policy")
         maybe_send(composer, send=args.send, confirmation=args.confirm_send)
