@@ -174,6 +174,52 @@ def test_closed_department_work_can_flag_stale_system_mirror(
     )
 
 
+def test_late_notebook_status_field_is_recognized(tmp_path: Path) -> None:
+    _base_repository(tmp_path)
+    note_path = (
+        tmp_path
+        / "projects"
+        / "engineering"
+        / "notebook"
+        / "NOTE-20260704-007-drive-write-recovery.md"
+    )
+    long_context = "Long experiment setup context.\n\n" * 80
+    _write(
+        note_path,
+        "# Connector Test 001-D Retry\n\n"
+        "Date: 2026-07-04\nProject: Engineering HQ\n\n"
+        "## Objective\n\n"
+        f"{long_context}"
+        "## Result\n\nStatus: SUCCESS\n\n"
+        "The write, move, and independent read-back verification succeeded.\n",
+    )
+
+    payload = DepartmentInspectionSource(tmp_path).load()
+    note = next(
+        item for item in payload["records"]
+        if item["title"] == "Connector Test 001-D Retry"
+    )
+
+    assert note["state"] == "completed"
+    assert note["warnings"] == []
+
+
+def test_observed_notebook_status_vocabulary_is_normalized() -> None:
+    cases = (
+        ("Validated in production-like watched testing", "completed"),
+        ("Deferred / Captured for later implementation", "waiting"),
+        ("Raw / unprocessed", "open"),
+        ("BLOCKED BECAUSE provider access is unavailable", "blocked"),
+        ("Open", "open"),
+        ("Success", "completed"),
+    )
+
+    for source, expected in cases:
+        state, warning = DepartmentInspectionSource._notebook_state(source)
+        assert state == expected
+        assert warning is None
+
+
 def test_unavailable_repository_returns_empty_contract() -> None:
     payload = DepartmentInspectionSource(None).load()
 
