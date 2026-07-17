@@ -166,12 +166,13 @@ Do not copy balances, transactions, account details, or detailed forecasts into 
 
 ## Advisory State
 
-Current open advisory:
+Current open advisories:
 
-- ADV-20260717-040 — Engineering requested reconciliation of shared LifeOS memory after the live dashboard and PennyOS historical milestone. Life Logistics is implementing the reconciliation through this update.
+- None.
 
 Recently closed:
 
+- ADV-20260717-040 — Life Logistics reconciled shared global and local summaries after the live four-source dashboard, guarded GitHub auto-sync validation, and PennyOS historical milestone.
 - ADV-20260716-039 — Global handoff, active-project map, global open loops, and Life Logistics local state reconciled with current July 16–17 operating reality.
 - ADV-20260716-038 — Read-mostly LifeOS desktop dashboard concept acknowledged and ingested by Engineering.
 - ADV-20260716-037 — Office Leaks public-launch awareness broadcast fully acknowledged and closed.
