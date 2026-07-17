@@ -33,7 +33,7 @@
 
 .cc-field select,
 .cc-field textarea,
-.cc-save-controls input {
+.cc-field input {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 11px;
@@ -42,17 +42,23 @@
   padding: 10px 11px;
 }
 
+.cc-field input[readonly],
+.cc-field textarea[readonly] {
+  color: #bec9d8;
+  background: #090c11;
+}
+
 .cc-field textarea {
-  min-height: 130px;
+  min-height: 180px;
   resize: vertical;
   line-height: 1.45;
 }
 
 .cc-save-controls {
-  display: grid;
-  grid-template-columns: minmax(180px, 1fr) auto auto;
+  display: flex;
   gap: 10px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .cc-actions {
@@ -112,8 +118,7 @@
 
 @media (max-width: 900px) {
   .cc-layout,
-  .cc-fields,
-  .cc-save-controls {
+  .cc-fields {
     grid-template-columns: 1fr;
   }
 }
