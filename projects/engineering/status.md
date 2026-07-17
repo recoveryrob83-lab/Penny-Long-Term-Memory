@@ -4,7 +4,7 @@ Updated: 2026-07-17
 
 ## Current Phase
 
-Active / Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Department Ownership Architecture and Dashboard Inspection, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -23,6 +23,7 @@ Never claim an action, test, deployment, or external write occurred without veri
 ## Source-of-Truth Boundaries
 
 - GitHub: durable memory, architecture, advisories, stable project state, dashboard code, and automation code.
+- Department project files: authoritative department status, loops, notebooks, and implementation records.
 - Trello: current LifeOS attention and flow.
 - Todoist: Rob-facing tasks and commitments.
 - Calendar: timed commitments.
@@ -33,6 +34,24 @@ Never claim an action, test, deployment, or external write occurred without veri
 Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, or private user data in Life OS GitHub memory.
 
 ## Current Focus
+
+### Department Ownership Architecture and Dashboard Inspection
+
+Status: Highest-priority next work package.
+
+Canonical note:
+
+- `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
+
+Required work:
+
+- formalize department versus system open-loop ownership;
+- establish promotion, demotion, lifecycle, and reconciliation rules;
+- route specialist boot context by operational need rather than universal backlog loading;
+- preserve advisories and explicit dependencies for cross-department communication;
+- reconcile stale duplicated global state;
+- add a Department Inspection tab between Overview and Automation;
+- aggregate all seven departments' loops, notebooks, logs, and status records with filters while preserving department files as authoritative.
 
 ### Automation Command Center
 
@@ -52,27 +71,28 @@ Implemented capabilities:
 - draft or explicitly confirmed send mode;
 - one-job-at-a-time lock;
 - global pause;
-- structured result and exact failure reason;
+- structured result codes and exact failure reasons;
 - persistent SQLite activity history;
 - one-time, daily, and weekly schedules in `America/Chicago`;
 - persistent scheduled jobs across dashboard restarts;
-- schedule create, edit, pause, resume, and delete.
+- schedule create, edit, pause, resume, and delete;
+- separate Scheduled Jobs and Run History views with cadence, department, state, result, mode, and ordering filters.
 
 Live validation completed:
 
 - one-time custom live send to Engineering HQ succeeded and completed with no future run;
 - first daily custom live send to LifeOS HQ succeeded and advanced to the next day;
-- active mobile use and response generation in another chat did not interfere with the desktop scheduled send.
+- active mobile use and response generation in another chat did not interfere with the desktop scheduled send;
+- scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery reason.
 
 Current validation still open:
 
-- occupied-composer scheduled refusal in Logistics HQ;
 - overdue-run behavior after dashboard restart;
 - second real occurrence of a recurring job.
 
 ### Desktop Department Automation
 
-Status: Operational, with one newly identified recovery edge case.
+Status: Operational, with one known recovery edge case.
 
 Validated behavior:
 
@@ -80,14 +100,15 @@ Validated behavior:
 - one bounded hidden-sidebar `Show more` expansion;
 - exact destination verification;
 - stable Group composer discovery;
-- occupied-composer preservation in prior direct testing;
+- occupied-composer preservation in direct and scheduled testing;
 - clipboard round-trip verification;
 - draft-only default;
 - explicit send requirement;
 - stop on uncertainty;
-- successful live sends through both manual and scheduled paths.
+- successful live sends through both manual and scheduled paths;
+- structured safe-failure reporting through the dashboard.
 
-New edge case:
+Known edge case:
 
 ChatGPT Classic may collapse the LifeOS project folder after application restart or a narrow-window layout. The current automation has not been coded or validated to reopen a collapsed project folder before exact chat navigation.
 
@@ -108,11 +129,11 @@ Next recovery update, when authorized:
 
 ### Canonical Prompt Catalog
 
-Status: Next product/data milestone.
+Status: Active product/data milestone.
 
-The command center currently exposes primarily the Boot canonical family. Engineering must populate the protected canonical prompt registry using authoritative command definitions while preserving read-only canonical behavior and editable saved copies.
+The Command Center currently exposes primarily the Boot canonical family. Engineering must populate the protected canonical prompt registry using authoritative command definitions while preserving read-only canonical behavior and editable saved copies.
 
-Candidate families to reconcile before implementation:
+Candidate families:
 
 - Boot / Quick Boot / Full Boot;
 - Sync;
@@ -143,6 +164,10 @@ Current boundaries:
 - guarded GitHub sync only fast-forwards clean, strictly-behind `main`;
 - Gmail and Drive adapters remain deferred;
 - the dashboard remains a visibility and local-control layer rather than a replacement source of truth.
+
+Current product lesson:
+
+The dashboard is exposing duplicate state, stale global assumptions, over-engineering, and work routed beyond its owning department. Treat this diagnostic value as a core capability.
 
 ### Reliable Connector Execution Layer
 
@@ -183,7 +208,9 @@ Engineering preserves two integrated delivery layers:
 
 ## Current Open Work
 
-- Complete the scheduled occupied-composer failure test and record evidence.
+- Formalize department ownership, visibility, routing, and lifecycle procedures.
+- Reconcile stale global loop and boot context under the new ownership rules.
+- Build the Department Inspection tab across all seven departments.
 - Test overdue one-time behavior after dashboard restart.
 - Observe a second real recurring execution.
 - Design collapsed-LifeOS-project recovery, but do not change code until Rob authorizes it.
@@ -199,6 +226,8 @@ Engineering preserves two integrated delivery layers:
 
 ## Completed Recent Work
 
+- 2026-07-17: Scheduled occupied-composer refusal and structured dashboard reporting passed end to end.
+- 2026-07-17: Scheduled Jobs and Run History were separated and given independent filters.
 - 2026-07-17: Automation Command Center manual Run Now path implemented and live-validated.
 - 2026-07-17: Saved prompts, default destinations, mismatch safeguards, protected canonical behavior, and full saved-prompt lifecycle validated.
 - 2026-07-17: Persistent one-time, daily, and weekly scheduling implemented.
@@ -212,7 +241,7 @@ Engineering preserves two integrated delivery layers:
 
 ## Production Boundary
 
-Scheduling is operational but not yet production-ready for fully unattended Windows use. Production readiness still requires evidence or implementation for occupied-composer scheduled refusal, restart/overdue behavior, repeated recurrence, collapsed-project recovery, scheduler health/preflight, missed-run policy, and potentially Windows startup or service packaging.
+Scheduling is operational but not yet production-ready for fully unattended Windows use. Production readiness still requires evidence or implementation for restart/overdue behavior, repeated recurrence, collapsed-project recovery, scheduler health/preflight, missed-run policy, and potentially Windows startup or service packaging.
 
 ## Boundary
 
