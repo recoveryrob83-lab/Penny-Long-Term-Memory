@@ -1,6 +1,6 @@
 """Read-only clipboard probe for the ChatGPT Classic composer group.
 
-Anchors on the visible Send prompt button, locates the enclosing bottom composer Group,
+Anchors on the persistent composer-plus button, locates the enclosing bottom composer Group,
 clicks a safe text-surface point, and tests global Ctrl+A/Ctrl+C. The script preserves the
 user's clipboard, never writes text, and never submits.
 """
@@ -125,14 +125,13 @@ def verify_or_recover_destination(window, target: Target, timeout_seconds: float
 
 
 def find_composer_group(window):
-    submit = window.child_window(
-        auto_id="composer-submit-button", control_type="Button"
-    )
-    if not submit.exists(timeout=2):
-        raise RuntimeError("Visible Send prompt button was not found.")
+    """Find the smallest visible Group enclosing the persistent composer-plus button."""
+    anchor = window.child_window(auto_id="composer-plus-btn", control_type="Button")
+    if not anchor.exists(timeout=2):
+        raise RuntimeError("Visible composer-plus button was not found.")
 
-    submit_wrapper = submit.wrapper_object()
-    submit_rect = submit_wrapper.rectangle()
+    anchor_wrapper = anchor.wrapper_object()
+    anchor_rect = anchor_wrapper.rectangle()
     candidates = []
 
     for control in window.descendants():
@@ -141,14 +140,17 @@ def find_composer_group(window):
         rect = control.rectangle()
         if not control.is_visible() or not control.is_enabled():
             continue
-        if rect.left <= submit_rect.left and rect.right >= submit_rect.right:
-            if rect.top <= submit_rect.top and rect.bottom >= submit_rect.bottom:
+        if rect.left <= anchor_rect.left and rect.right >= anchor_rect.right:
+            if rect.top <= anchor_rect.top and rect.bottom >= anchor_rect.bottom:
                 candidates.append(control)
 
     if not candidates:
-        raise RuntimeError("No visible Group enclosing the Send prompt button was found.")
+        raise RuntimeError("No visible Group enclosing the composer-plus button was found.")
 
-    return min(candidates, key=lambda control: control.rectangle().width() * control.rectangle().height())
+    return min(
+        candidates,
+        key=lambda control: control.rectangle().width() * control.rectangle().height(),
+    )
 
 
 def main() -> int:
@@ -170,7 +172,6 @@ def main() -> int:
             flush=True,
         )
 
-        # Click inside the text surface, safely above the bottom-row buttons.
         x = rect.left + max(80, rect.width() // 2)
         y = max(rect.top + 30, rect.bottom - 70)
         group.click_input(coords=(x - rect.left, y - rect.top))
