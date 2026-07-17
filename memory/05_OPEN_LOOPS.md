@@ -44,7 +44,6 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Recently Closed
 
-- 2026-07-18: Department Inspection source cleanup removed the broad Engineering and Logistics Chat HQ watch mirrors, consolidated Legacy Virtual Assistant folder disposition under Logistics, and removed speculative registry-reference placeholders from department parking lots.
 - 2026-07-17: Scheduled occupied-composer validation passed end to end in Logistics HQ; the existing draft was preserved, nothing was sent, Run History recorded `failed`, and the explicit recovery reason displayed correctly.
 - 2026-07-17: Automation Command Center manual Phase 1, saved-prompt lifecycle, one-time scheduling, and daily/weekly scheduling were implemented and live-validated.
 - 2026-07-17: Scheduled Jobs and Run History were separated into distinct filtered views.
