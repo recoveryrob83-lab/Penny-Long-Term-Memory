@@ -22,6 +22,7 @@ from .adapters import (
     TrelloFlowDashboardSource,
 )
 from .command_center import CommandCenterError, CommandCenterService, CommandJob
+from .department_inspection import DepartmentInspectionSource
 from .service import DashboardService
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
@@ -88,12 +89,23 @@ def _environment_flag(name: str, default: bool) -> bool:
     return value.strip().casefold() not in {"0", "false", "no", "off"}
 
 
+def _repository_root() -> Path | None:
+    configured_root = os.getenv("LIFEOS_REPOSITORY_ROOT")
+    candidate = (
+        Path(configured_root).expanduser()
+        if configured_root
+        else PACKAGE_ROOT.parents[2]
+    )
+    if (candidate / ".git").exists() and (candidate / "memory").exists():
+        return candidate
+    return None
+
+
 def build_default_source() -> DashboardSource:
     sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
     source: DashboardSource = sample_source
-    configured_root = os.getenv("LIFEOS_REPOSITORY_ROOT")
-    repo_root = Path(configured_root).expanduser() if configured_root else PACKAGE_ROOT.parents[2]
-    if (repo_root / ".git").exists() and (repo_root / "memory").exists():
+    repo_root = _repository_root()
+    if repo_root is not None:
         source = LocalGitHubDashboardSource(
             repo_root,
             source,
@@ -115,6 +127,7 @@ def create_app(
     source: DashboardSource | None = None,
     *,
     start_scheduler: bool | None = None,
+    inspection_source: DepartmentInspectionSource | None = None,
 ) -> FastAPI:
     active_source = source or build_default_source()
     service = DashboardService(active_source)
@@ -123,6 +136,9 @@ def create_app(
         APP_ROOT,
         database_path=_cache_path("COMMAND_CENTER_DATABASE_PATH", "command_center.sqlite3"),
     )
+    department_inspection = inspection_source or DepartmentInspectionSource(
+        _repository_root() if source is None else None
+    )
     application = FastAPI(
         title="LifeOS Dashboard",
         description="Local read-mostly LifeOS command window",
@@ -130,6 +146,7 @@ def create_app(
     )
     application.state.dashboard_service = service
     application.state.command_center = command_center
+    application.state.department_inspection = department_inspection
     application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
     templates = Jinja2Templates(directory=PACKAGE_ROOT / "templates")
 
@@ -157,6 +174,10 @@ def create_app(
     @application.get("/api/dashboard")
     async def dashboard_data() -> dict[str, object]:
         return service.get_snapshot()
+
+    @application.get("/api/department-inspection")
+    async def department_inspection_data() -> dict[str, object]:
+        return await run_in_threadpool(department_inspection.load)
 
     @application.get("/api/command-center")
     async def command_center_status() -> dict[str, object]:
