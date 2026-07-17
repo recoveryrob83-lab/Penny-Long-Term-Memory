@@ -1,10 +1,14 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 Project: Chief Engineering Penny / Engineering HQ
 Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Business HQ, Finance, Main Assistant, or other departments.
 
 ## Open Advisories
+
+None.
+
+## Recently Acknowledged / Implemented Advisories
 
 ### ADV-20260716-039 — Reconcile stale global LifeOS summaries after July 16 changes
 
@@ -12,37 +16,32 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 - From: Chief Engineering Penny / Engineering HQ
 - To: Life Logistics HQ
 - Priority: Medium
-- Status: Open / Unacknowledged
+- Status: Implemented / Acknowledged / Closed
+- Implemented: 2026-07-17
+- Acknowledged: 2026-07-17
+- Closed: 2026-07-17
 - Posted Board: `coordination/boards/engineering.md`
 - Target Department: Life Logistics HQ
 - Related Project(s): Life OS global memory, Office Leaks, Trello Flow Board, prompt launcher, desktop dashboard concept, advisory routing
 
-#### Context
+#### Outcome
 
-Engineering's 2026-07-16 reboot found that several shared global summaries still reflect the July 11–15 state and omit meaningful later changes.
-
-Stale or incomplete shared files include:
+Life Logistics reconciled and verified the requested shared global summaries:
 
 - `memory/01_SESSION_HANDOFF.md`
 - `memory/04_ACTIVE_PROJECTS.md`
 - `memory/05_OPEN_LOOPS.md`
 
-Relevant newer state includes:
+The synchronized state now includes:
 
-- Office Leaks Consulting is publicly launched and operating in an organic market-test phase;
-- the Trello LifeOS Flow Board is now part of the active operating interface;
-- ADV-20260716-037 is fully acknowledged and closed;
-- ADV-20260716-038 was consumed by Engineering as a read-mostly LifeOS desktop dashboard concept;
-- prompt-launcher newline defects from Hub Boot onward were corrected;
-- deferred launcher improvements are captured in Engineering notebook note `NOTE-20260716-007`.
+- Office Leaks Consulting publicly launched and operating in a live organic market-test phase;
+- the Trello LifeOS Flow Board as an active attention and flow interface with source-system boundaries;
+- ADV-20260716-037 fully acknowledged and closed;
+- ADV-20260716-038 acknowledged and closed as a read-mostly desktop dashboard concept with no implementation authorized;
+- prompt-launcher newline defects corrected from Hub Boot onward;
+- deferred launcher improvements retained in Engineering context rather than promoted into active global work.
 
-#### Requested Life Logistics Action
-
-Reconcile the shared global summaries with current authoritative department and coordination state. Keep the update abstract, preserve source-system boundaries, avoid duplicating detailed records, and close this advisory after the affected global files are synchronized and verified.
-
-Engineering is routing this rather than directly rewriting shared global memory because Life Logistics owns global hygiene and cross-project audits.
-
-## Recently Acknowledged / Implemented Advisories
+Life Logistics also refreshed its own handoff and open-loop state. No detailed business, financial, personal, or source-system records were copied into GitHub.
 
 ### ADV-20260714-034 — Sync expanded Life OS shortcut set and prompt-launcher database
 
