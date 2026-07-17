@@ -34,3 +34,8 @@ const initial = tabButtons.some((button) => button.dataset.tabTarget === remembe
   ? remembered
   : "overview";
 activateTab(initial);
+
+const inspectionTuning = document.createElement("script");
+inspectionTuning.src = "/static/department-inspection-tuning.js";
+inspectionTuning.defer = true;
+document.head.appendChild(inspectionTuning);
