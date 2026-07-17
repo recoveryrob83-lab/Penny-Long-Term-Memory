@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lifeos_dashboard.command_center import CommandCenterService, CommandJob, ExecutionResult
+from lifeos_dashboard.command_center import CommandCenterService, ExecutionResult
 from lifeos_dashboard.command_center_store import CommandCenterStore
 
 
