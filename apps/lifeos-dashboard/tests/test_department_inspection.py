@@ -71,6 +71,53 @@ def test_priority_table_and_notebook_normalize(tmp_path: Path) -> None:
     assert payload["summary"]["records"] >= 4
 
 
+def test_bullet_work_uses_unknown_priority_without_warning(tmp_path: Path) -> None:
+    _base_repository(tmp_path)
+    _write(
+        tmp_path / "memory" / "05_OPEN_LOOPS.md",
+        "# Open Loops\n\nUpdated: 2026-07-18\n\n## Priority Open Loops\n\n"
+        "- Review DEPARTMENT_INSPECTION_DATA_CONTRACT.md before cleanup.\n",
+    )
+
+    payload = DepartmentInspectionSource(tmp_path).load()
+    record = next(
+        item for item in payload["records"]
+        if "DEPARTMENT_INSPECTION_DATA_CONTRACT.md" in item["title"]
+    )
+
+    assert record["priority"] == "unknown"
+    assert record["warnings"] == []
+    assert "DEPARTMENT_INSPECTION_DATA_CONTRACT.md" in record["summary"]
+
+
+def test_unrelated_cross_department_title_match_is_not_duplicate(
+    tmp_path: Path,
+) -> None:
+    _base_repository(tmp_path)
+    _write(
+        tmp_path / "memory" / "05_OPEN_LOOPS.md",
+        "# Open Loops\n\nUpdated: 2026-07-18\n\n## Priority Open Loops\n\n",
+    )
+    for project, detail in (
+        ("engineering", "Repair dashboard parser behavior."),
+        ("business-development", "Review market offer positioning."),
+    ):
+        _write(
+            tmp_path / "projects" / project / "open_loops.md",
+            "# Open Loops\n\nUpdated: 2026-07-18\n\n## Open\n\n"
+            "| Status | Item | Notes |\n"
+            "|---|---|---|\n"
+            f"| Open | Current operating review | {detail} |\n",
+        )
+
+    payload = DepartmentInspectionSource(tmp_path).load()
+
+    assert not any(
+        finding["anomaly_type"] == "possible_duplicate"
+        for finding in payload["findings"]
+    )
+
+
 def test_closed_department_work_can_flag_stale_system_mirror(
     tmp_path: Path,
 ) -> None:
