@@ -71,6 +71,35 @@ def test_priority_table_and_notebook_normalize(tmp_path: Path) -> None:
     assert payload["summary"]["records"] >= 4
 
 
+def test_explicit_priority_column_stays_separate_from_state(tmp_path: Path) -> None:
+    _base_repository(tmp_path)
+    _write(
+        tmp_path / "memory" / "05_OPEN_LOOPS.md",
+        "# Open Loops\n\nUpdated: 2026-07-18\n\n## Priority Open Loops\n\n",
+    )
+    _write(
+        tmp_path / "projects" / "engineering" / "open_loops.md",
+        "# Engineering HQ Open Loops\n\nUpdated: 2026-07-18\n\n## Open\n\n"
+        "| Status | Priority | Item | Notes |\n"
+        "|---|---|---|---|\n"
+        "| Active | High | Ownership architecture | Inspector-backed cleanup |\n",
+    )
+
+    payload = DepartmentInspectionSource(tmp_path).load()
+    record = next(
+        item for item in payload["records"]
+        if item["title"] == "Ownership architecture"
+    )
+
+    assert record["state"] == "active"
+    assert record["priority"] == "high"
+    assert record["warnings"] == []
+    assert not any(
+        finding["anomaly_type"] == "state_priority_mixed"
+        for finding in payload["findings"]
+    )
+
+
 def test_bullet_work_uses_unknown_priority_without_warning(tmp_path: Path) -> None:
     _base_repository(tmp_path)
     _write(
