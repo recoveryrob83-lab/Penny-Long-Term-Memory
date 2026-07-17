@@ -10,6 +10,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
+from starlette.concurrency import run_in_threadpool
 
 from . import __version__
 from .adapters import (
@@ -20,11 +22,24 @@ from .adapters import (
     TodoistDashboardSource,
     TrelloFlowDashboardSource,
 )
+from .command_center import CommandCenterService, CommandJob
 from .service import DashboardService
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 APP_ROOT = PACKAGE_ROOT.parent
 load_dotenv(APP_ROOT / ".env", override=False)
+
+
+class CommandJobRequest(BaseModel):
+    destination: str
+    prompt_type: str
+    mode: str = "draft"
+    custom_prompt: str = ""
+    confirm_send: bool = False
+
+
+class PauseRequest(BaseModel):
+    paused: bool
 
 
 def _cache_path(environment_name: str, filename: str) -> Path:
@@ -78,6 +93,7 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     """Create a configured dashboard application."""
     active_source = source or build_default_source()
     service = DashboardService(active_source)
+    command_center = CommandCenterService(APP_ROOT)
 
     application = FastAPI(
         title="LifeOS Dashboard",
@@ -85,6 +101,7 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
         version=__version__,
     )
     application.state.dashboard_service = service
+    application.state.command_center = command_center
 
     application.mount(
         "/static",
@@ -112,6 +129,27 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     @application.get("/api/dashboard")
     async def dashboard_data() -> dict[str, object]:
         return service.get_snapshot()
+
+    @application.get("/api/command-center")
+    async def command_center_status() -> dict[str, object]:
+        return command_center.status()
+
+    @application.post("/api/command-center/pause")
+    async def command_center_pause(request: PauseRequest) -> dict[str, object]:
+        command_center.set_paused(request.paused)
+        return command_center.status()
+
+    @application.post("/api/command-center/run")
+    async def command_center_run(request: CommandJobRequest) -> dict[str, object]:
+        job = CommandJob(
+            destination=request.destination,
+            prompt_type=request.prompt_type,  # type: ignore[arg-type]
+            mode=request.mode,  # type: ignore[arg-type]
+            custom_prompt=request.custom_prompt,
+            confirm_send=request.confirm_send,
+        )
+        result = await run_in_threadpool(command_center.execute, job)
+        return result.to_dict()
 
     return application
 
