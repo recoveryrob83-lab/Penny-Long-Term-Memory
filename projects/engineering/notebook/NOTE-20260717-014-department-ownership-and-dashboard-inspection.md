@@ -3,13 +3,13 @@
 Date: 2026-07-17
 Updated: 2026-07-18
 Department: Engineering HQ
-Status: MVP locally validated / first inspector-guided source cleanup awaiting refresh verification
+Status: MVP locally validated / first inspector-guided cleanup verified / warning review active
 
 ## Trigger
 
 The LifeOS Dashboard exposed stale and duplicated operational state. `memory/05_OPEN_LOOPS.md` still listed Automation Command Center Phase 1 as a priority open loop even though Engineering had completed it and recorded the closure locally.
 
-This revealed a structural problem rather than a display problem: global files are carrying department work that should remain authoritative only in the owning department.
+This revealed a structural problem rather than a display problem: global files were carrying department work that should remain authoritative only in the owning department.
 
 ## Decision Direction
 
@@ -144,9 +144,34 @@ Implemented changes:
 - The cleanup history remains Engineering-owned rather than being copied into the global Recently Closed list.
 - Test coverage now verifies that explicit priority remains separate from lifecycle state.
 
-## Required Operational Package
+## Post-Cleanup Verification
 
-Using inspector evidence, formalize clean rules and procedures for:
+After guarded synchronization and dashboard restart, Rob observed:
+
+- 414 normalized records;
+- 0 findings;
+- 13 records with warnings.
+
+Compared with the tuned pre-cleanup baseline of 459 / 4 / 15:
+
+- 45 mirrored, duplicated, or low-value normalized records disappeared;
+- all four confirmed structural findings disappeared naturally from source cleanup;
+- warning volume fell slightly again without broad detector weakening;
+- the remaining 13 warnings are now a bounded review queue, not evidence that the cleanup failed.
+
+This is the first end-to-end proof that the inspector can expose structural defects, guide source cleanup, and verify the result without becoming a write-enabled source of truth.
+
+## Implemented Operational Package
+
+The ownership and routing architecture is now durable in:
+
+- `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`;
+- `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`;
+- `memory/STARTUP_BOOT.md`;
+- `memory/05_OPEN_LOOPS.md`;
+- department-local handoffs, status files, and open-loop files.
+
+Implemented rules include:
 
 1. department versus system open-loop ownership;
 2. promotion and demotion thresholds for system-level loops;
@@ -154,18 +179,17 @@ Using inspector evidence, formalize clean rules and procedures for:
 4. advisory and dependency routing for work that crosses department boundaries;
 5. lifecycle rules for creation, update, pause, closure, and reconciliation;
 6. dashboard aggregation as a read-only visibility layer rather than a mirrored ledger;
-7. stale-state detection and cleanup of existing duplicated global entries.
-
-Likely durable output: an Open Loop Ownership and Visibility SOP plus targeted boot-routing updates and global-state reconciliation.
+7. stale-state detection and source cleanup through explicit human review.
 
 ## Remaining Sequence
 
-1. Refresh and restart the dashboard so the explicit-priority parser support and cleaned source files load.
-2. Compare the new record, warning, and finding counts with the 459 / 4 / 15 tuned baseline.
-3. Inspect any remaining findings individually rather than broadly weakening detection.
-4. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using the validated cleanup evidence.
-5. Reconcile remaining global and department files under the new rules.
-6. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
+1. Review the remaining 13 warnings and distinguish genuine ambiguity from harmless legacy metadata.
+2. Correct only warnings that reveal a real source or parser defect.
+3. Observe ordinary specialist boots for evidence that the universal-kernel plus role-routed model works in practice.
+4. Keep the system wrapper open only until ordinary use confirms stable routing.
+5. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
+
+Do not weaken finding detection merely to preserve a zero count, and do not chase zero warnings when a warning truthfully represents ambiguous source material.
 
 ## Product Lesson
 
