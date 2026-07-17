@@ -16,8 +16,8 @@ Life OS is operational with:
 - Gmail as communication evidence;
 - a locally running LifeOS Dashboard as a read-mostly four-source operational interface;
 - seven operational department HQ chats;
-- validated Windows desktop automation for drafting or explicitly sending canonical department boot prompts;
-- a planned dashboard-integrated Automation Command Center Phase 1 for manual Run Now jobs;
+- validated Windows desktop automation for drafting or explicitly sending prompts to exact LifeOS destinations;
+- an operational dashboard-integrated Automation Command Center with manual runs, saved prompts, one-time schedules, daily schedules, weekly schedules, persistent history, and safety reporting;
 - workers as narrow operational executors;
 - Main Assistant as daily coordinator and primary conversational hub;
 - Logistics HQ as shared-infrastructure curator and cross-project housekeeper.
@@ -66,9 +66,15 @@ Canonical SOP:
 
 - `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
 
+A newly promoted Engineering work package will tighten this architecture by distinguishing department-owned loops from genuine system loops, routing specialist boot context by need, and adding dashboard aggregation without mirrored sources of truth:
+
+- `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
+
+No global boot-routing changes have been implemented yet. That work is next and should be handled deliberately rather than as incidental housekeeping.
+
 ## Desktop Department Automation
 
-The Windows ChatGPT Classic department-boot automation is operational and validated across all seven department HQs.
+The Windows ChatGPT Classic department automation is operational and validated across all seven department HQs.
 
 Canonical implementation:
 
@@ -78,38 +84,48 @@ Canonical implementation:
 - legacy rollback reference: `apps/lifeos-dashboard/automation/open_department_chat.py`
 - naming standard: `memory/HQ_NAMING_STANDARD.md`
 
-Validated behavior includes exact chat selection, one bounded `Show more` expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, canonical prompt insertion, draft-only default behavior, and one explicit watched live send to Main Assistant HQ.
+Validated behavior includes exact chat selection, one bounded `Show more` expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, canonical prompt insertion, draft-only default behavior, explicit send authorization, and structured failure reporting.
 
-Submission requires `--send`. The engine stops on uncertainty. It does not independently prove that GitHub remains active as a connector in the target chat; a cold connector remains a rare, visible, recoverable soft failure.
+The automation stops on uncertainty. It does not independently prove that GitHub remains active as a connector in the target chat; a cold connector remains a visible recoverable soft failure.
+
+Known recovery edge:
+
+ChatGPT Classic may collapse the LifeOS project folder after application restart or narrow-window layout. Until bounded exact-project recovery is explicitly authorized and validated, keep the app open with the LifeOS project expanded and do not treat post-restart unattended execution as production-safe.
 
 Durable lessons and recovery playbook:
 
 - `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
-- `projects/engineering/notebook/NOTE-20260717-010-desktop-department-automation-live-send-handoff.md`
+- `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
 
 ## Automation Command Center
 
-Engineering has planned an Automation Command Center inside the existing LifeOS Dashboard.
+The Command Center is implemented inside the LifeOS Dashboard.
 
-Canonical plan:
-
-- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
-
-Phase 1 scope:
+Current capabilities:
 
 - eight exact destinations, including `LifeOS HQ` and the seven department HQs;
-- canonical boot prompt, saved template, or custom prompt;
-- draft or send mode;
-- explicit send confirmation;
-- manual Run Now only;
+- canonical, saved, or custom prompts;
+- protected canonical prompts and editable saved copies;
+- default-destination safeguards and mismatch confirmation;
+- draft or explicitly confirmed send mode;
 - one job at a time;
 - global pause control;
-- structured execution result;
-- local activity history.
+- structured execution results and exact failure reasons;
+- persistent SQLite activity history;
+- one-time, daily, and weekly schedules in `America/Chicago`;
+- schedule create, edit, pause, resume, and delete;
+- separate Scheduled Jobs and Run History categories with filters for cadence, department, state, result, mode, and ordering.
 
-Scheduling is not part of Phase 1. One-time schedules, recurring schedules, automatic ChatGPT launch, screenshots, notifications, and richer recovery features remain deferred until the manual dashboard-to-runner boundary proves safe and useful.
+Live evidence completed:
 
-The Command Center must inherit every validated desktop-automation safety gate. It is not authorization for unattended sends or revival of the paused Engineering HQ Daily Sync.
+- one-time live send to Engineering HQ succeeded;
+- first daily live send to LifeOS HQ succeeded and advanced correctly;
+- concurrent mobile chat activity did not interfere with scheduled desktop execution;
+- a scheduled Logistics HQ send encountered an occupied composer, preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason correctly.
+
+Scheduling is operational but not yet production-ready for fully unattended Windows use. Remaining evidence or implementation includes restart/overdue behavior, a second real recurring occurrence, collapsed-project recovery, scheduler preflight, missed-run policy, and possibly Windows startup or service packaging.
+
+The Command Center does not reactivate the paused Engineering HQ Daily Sync or authorize unattended production sends by itself.
 
 ## Trello Flow Board
 
@@ -150,6 +166,8 @@ The local suite passed 16 tests. Windows timezone support uses the runtime `tzda
 Guarded GitHub auto-sync may fetch remote changes and fast-forward only when local `main` is clean and strictly behind. It does not resolve conflicts, discard work, rebase, reset, or authorize broad automatic writes.
 
 Gmail and Google Drive dashboard adapters remain deferred until demonstrated operational need.
+
+The dashboard has demonstrated additional value by exposing stale duplicate loops, unnecessary universal context, and work promoted beyond its owning department. Engineering's next dashboard expansion is a Department Inspection tab between Overview and Automation, backed by authoritative department files rather than copied global records.
 
 Historical context:
 
@@ -193,11 +211,11 @@ Current open advisories:
 
 Recently closed:
 
-- ADV-20260717-040 — Shared state reconciled after the live four-source dashboard milestone.
-- ADV-20260716-039 — Global summaries reconciled with July 16–17 state.
-- ADV-20260716-038 — Dashboard concept ingested by Engineering.
-- ADV-20260716-037 — Office Leaks public-launch broadcast fully acknowledged.
-- ADV-20260715-036 — Seven department HQ chats opened and operational.
+- ADV-20260717-040: shared state reconciled after the live four-source dashboard milestone.
+- ADV-20260716-039: global summaries reconciled with July 16–17 state.
+- ADV-20260716-038: dashboard concept ingested by Engineering.
+- ADV-20260716-037: Office Leaks public-launch broadcast fully acknowledged.
+- ADV-20260715-036: seven department HQ chats opened and operational.
 
 The Advisory Index is the live source of truth:
 
@@ -205,15 +223,16 @@ The Advisory Index is the live source of truth:
 
 ## Scheduled Task State
 
-Engineering HQ Daily Sync remains paused because scheduled execution is unreliable. The standalone Logistics watcher is retired. Desktop department automation is an explicitly invoked tool, and Command Center Phase 1 is manual Run Now only. Neither authorizes unattended scheduled boots.
+Engineering HQ Daily Sync remains paused. The standalone Logistics watcher is retired. Command Center scheduling exists and is under active validation, but the paused daily sync must not resume without explicit authorization and stronger unattended-operation evidence.
 
 ## Best Next Actions
 
 - Continue Office Leaks organic market testing and route concrete work to the owning department.
 - Use the LifeOS Flow Board for current attention without duplicating Todoist or Calendar.
-- Use the dashboard as a read-mostly visibility layer while preserving source-system authority.
-- Use validated desktop department automation only with its safety gates and explicit send authorization.
-- Design Automation Command Center Phase 1 without importing scheduling complexity.
+- Use the dashboard as a visibility layer while preserving source-system authority.
+- Let Engineering formalize department ownership and boot-routing rules before changing universal startup behavior.
+- Build and validate the Department Inspection dashboard tab from authoritative department files.
+- Continue restart/overdue and recurring scheduler validation while preserving current safety gates.
 - Pilot Raw Capture and Inventory workers with verified real use.
 - Maintain global GitHub coherence without turning housekeeping into recurring bureaucracy.
 
