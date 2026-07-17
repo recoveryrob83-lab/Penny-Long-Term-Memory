@@ -77,6 +77,17 @@ DEPARTMENTS: dict[str, Department] = {
             "Logistics files only when the handoff or task requires cross-project coordination."
         ),
     ),
+    "office-leaks": Department(
+        key="office-leaks",
+        chat_title="Office Leaks HQ",
+        role_title="Office Leaks HQ",
+        project_folder="projects/office-leaks-consulting",
+        report_name="Office Leaks",
+        related_files_note=(
+            "Read related Business, Engineering, Finance, or Logistics files only "
+            "when the handoff or task requires cross-project coordination."
+        ),
+    ),
     "wellness": Department(
         key="wellness",
         chat_title="Wellness HQ",
