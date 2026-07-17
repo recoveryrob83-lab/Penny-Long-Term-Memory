@@ -14,12 +14,13 @@ Life OS is operational with:
 - Todoist as Rob-facing commitments and reminders;
 - Calendar as the timed-commitment layer;
 - Gmail as communication evidence;
+- a locally running LifeOS Dashboard as a read-mostly four-source operational interface;
 - project chats as domain knowledge producers;
 - workers as narrow operational executors;
 - Main Assistant as daily coordinator and primary conversational hub;
 - Life Logistics HQ as shared-infrastructure curator and cross-project housekeeper.
 
-GitHub remains abstract. Detailed financial, medical, business, personal, and operational records stay in their owning source systems.
+GitHub remains abstract. Detailed financial, medical, business, personal, credential, and operational records stay in their owning source systems.
 
 ## Current Operating Priority
 
@@ -37,7 +38,7 @@ Website work, paid boosting, formal A/B testing, and full campaign infrastructur
 
 Office Leaks Consulting HQ owns business-unit execution continuity. Chief Business HQ owns parent strategy. Finance owns concrete pricing, income, expense, tax, and budget decisions. Engineering owns technical architecture and delivery playbooks. Main Assistant owns daily execution and immediate logistics. Life Logistics preserves cross-project state and longer-horizon dependencies.
 
-PennyOS / Penny Platform is paused, not abandoned.
+PennyOS / Penny Platform remains a longer-term historical and productization framing, not a newly authorized roadmap or open loop.
 
 ## Chat and Work Architecture
 
@@ -69,7 +70,7 @@ Canonical SOP:
 
 ## Trello Flow Board
 
-Trello is now part of the active LifeOS operating interface.
+Trello is part of the active LifeOS operating interface.
 
 Source boundaries:
 
@@ -98,15 +99,30 @@ Canonical SOP:
 
 - `coordination/TRELLO_FLOW_BOARD_SOP.md`
 
-## Desktop Dashboard Concept
+## LifeOS Dashboard
 
-Engineering has ingested a read-mostly LifeOS desktop dashboard as an active design concept.
+The LifeOS Dashboard is now a locally running, tested, read-mostly operational interface on Rob's Windows machine.
 
-The dashboard is a window into existing LifeOS systems, not a replacement platform. Trello, Todoist, Calendar, Gmail, Drive, and GitHub remain authoritative. Penny remains the conversational worker and connector operator.
+Verified live sources:
 
-First useful dashboard scope should emphasize high-signal current state such as Trello Now and Next, daily commitments, near-term calendar pressure, mail-attention signals, and pinned working files. Direct write controls remain deferred until observed need justifies them.
+- GitHub for durable memory, advisories, open loops, notebooks, and recent repository activity;
+- Trello for Now, Next, and Waiting flow state;
+- Todoist for current and upcoming Rob-facing commitments;
+- Google Calendar private iCal for current and next timed commitments.
 
-No software implementation is currently authorized. The existing prompt launcher and prompt database remain part of the concept.
+The complete local test suite passed with 16 tests. Windows timezone support was corrected through the runtime `tzdata` dependency.
+
+Guarded GitHub auto-sync is implemented and live-verified. The dashboard may fetch remote changes and fast-forward only when the local `main` branch is clean and strictly behind, then display the newly synchronized commits in its own activity view. This does not authorize broad automatic writes or conflict resolution.
+
+The dashboard is a window into existing LifeOS systems, not a replacement platform. GitHub, Trello, Todoist, Calendar, Gmail, and Drive remain authoritative in their own domains. Penny remains the conversational worker and connector operator.
+
+Gmail and Google Drive dashboard adapters remain deferred until demonstrated operational need. No credentials, private calendar URLs, tokens, or source-system records belong in GitHub.
+
+Engineering historical context:
+
+- `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md`
+
+The note records this milestone as the humble beginnings of PennyOS. It is historical context only, not an open loop or speculative expansion authorization.
 
 ## Prompt Launcher State
 
@@ -150,9 +166,9 @@ Do not copy balances, transactions, account details, or detailed forecasts into 
 
 ## Advisory State
 
-Current open advisories:
+Current open advisory:
 
-- None.
+- ADV-20260717-040 — Engineering requested reconciliation of shared LifeOS memory after the live dashboard and PennyOS historical milestone. Life Logistics is implementing the reconciliation through this update.
 
 Recently closed:
 
@@ -174,6 +190,7 @@ Engineering HQ Daily Sync remains paused because scheduled execution is unreliab
 
 - Continue Office Leaks organic market testing and route concrete work to the owning department.
 - Use the LifeOS Flow Board for current attention without duplicating Todoist or Calendar.
+- Use the live dashboard as a read-mostly visibility layer while preserving source-system authority.
 - Observe the seven Chat HQs for real routing drift and refine only from evidence.
 - Pilot Raw Capture and Inventory workers with verified real use.
 - Preserve Work capacity for bounded execution and durable output.
@@ -181,4 +198,4 @@ Engineering HQ Daily Sync remains paused because scheduled execution is unreliab
 
 ## Guiding Principle
 
-GitHub is the map. Drive is the filing cabinet. Trello shows current flow. Calendar owns time. Todoist owns commitments and reminders. Gmail owns communications. Departments own judgment and their own durable state. Workers execute narrow contracts. Main Assistant coordinates. Life Logistics maintains the hallways.
+GitHub is the map. Drive is the filing cabinet. Trello shows current flow. Calendar owns time. Todoist owns commitments and reminders. Gmail owns communications. The dashboard shows selected high-signal state. Departments own judgment and their own durable state. Workers execute narrow contracts. Main Assistant coordinates. Life Logistics maintains the hallways.
