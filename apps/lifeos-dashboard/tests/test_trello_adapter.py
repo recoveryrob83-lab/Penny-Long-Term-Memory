@@ -139,8 +139,10 @@ def test_trello_uses_last_good_cache_after_connection_failure(tmp_path: Path) ->
 
 
 def test_unconfigured_trello_keeps_sample_flow_and_marks_source_stale(tmp_path: Path) -> None:
+    sample_source = _sample_source()
+    expected_flow = sample_source.load()["flow"]
     adapter = TrelloFlowDashboardSource(
-        _sample_source(),
+        sample_source,
         board_id=None,
         api_key=None,
         api_token=None,
@@ -150,9 +152,7 @@ def test_unconfigured_trello_keeps_sample_flow_and_marks_source_stale(tmp_path: 
     payload = adapter.load()
 
     assert adapter.name == "sample"
-    assert payload["flow"]["now"]["title"] == (
-        "Define $20 offer boundaries and scope-control response"
-    )
+    assert payload["flow"] == expected_flow
     trello_source = next(item for item in payload["sources"] if item["name"] == "Trello")
     assert trello_source == {
         "name": "Trello",
