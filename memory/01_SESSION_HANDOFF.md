@@ -17,6 +17,7 @@ Life OS is operational with:
 - a locally running LifeOS Dashboard as a read-mostly four-source operational interface;
 - seven operational department HQ chats;
 - validated Windows desktop automation for drafting or explicitly sending canonical department boot prompts;
+- a planned dashboard-integrated Automation Command Center Phase 1 for manual Run Now jobs;
 - workers as narrow operational executors;
 - Main Assistant as daily coordinator and primary conversational hub;
 - Logistics HQ as shared-infrastructure curator and cross-project housekeeper.
@@ -86,6 +87,30 @@ Durable lessons and recovery playbook:
 - `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
 - `projects/engineering/notebook/NOTE-20260717-010-desktop-department-automation-live-send-handoff.md`
 
+## Automation Command Center
+
+Engineering has planned an Automation Command Center inside the existing LifeOS Dashboard.
+
+Canonical plan:
+
+- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
+
+Phase 1 scope:
+
+- eight exact destinations, including `LifeOS HQ` and the seven department HQs;
+- canonical boot prompt, saved template, or custom prompt;
+- draft or send mode;
+- explicit send confirmation;
+- manual Run Now only;
+- one job at a time;
+- global pause control;
+- structured execution result;
+- local activity history.
+
+Scheduling is not part of Phase 1. One-time schedules, recurring schedules, automatic ChatGPT launch, screenshots, notifications, and richer recovery features remain deferred until the manual dashboard-to-runner boundary proves safe and useful.
+
+The Command Center must inherit every validated desktop-automation safety gate. It is not authorization for unattended sends or revival of the paused Engineering HQ Daily Sync.
+
 ## Trello Flow Board
 
 Trello is part of the active LifeOS operating interface.
@@ -136,7 +161,7 @@ That note is history only, not a roadmap authorization.
 
 The launcher remains a secondary interface. Canonical command meaning lives in `memory/CONTEXT_REMINDER.md`.
 
-Literal newline defects were corrected on 2026-07-16. Further advisory-command and scope improvements remain deferred in Engineering notebook context.
+Literal newline defects were corrected on 2026-07-16. Canonical HQ labels, the Logistics path, status-file handling, and hub-role boundaries were aligned during the July 17 audit. Further advisory-command and scope improvements remain deferred in Engineering notebook context.
 
 ## Worker Layer
 
@@ -180,7 +205,7 @@ The Advisory Index is the live source of truth:
 
 ## Scheduled Task State
 
-Engineering HQ Daily Sync remains paused because scheduled execution is unreliable. The standalone Logistics watcher is retired. Desktop department automation is an explicitly invoked tool, not authorization to resume unattended scheduled boots.
+Engineering HQ Daily Sync remains paused because scheduled execution is unreliable. The standalone Logistics watcher is retired. Desktop department automation is an explicitly invoked tool, and Command Center Phase 1 is manual Run Now only. Neither authorizes unattended scheduled boots.
 
 ## Best Next Actions
 
@@ -188,6 +213,7 @@ Engineering HQ Daily Sync remains paused because scheduled execution is unreliab
 - Use the LifeOS Flow Board for current attention without duplicating Todoist or Calendar.
 - Use the dashboard as a read-mostly visibility layer while preserving source-system authority.
 - Use validated desktop department automation only with its safety gates and explicit send authorization.
+- Design Automation Command Center Phase 1 without importing scheduling complexity.
 - Pilot Raw Capture and Inventory workers with verified real use.
 - Maintain global GitHub coherence without turning housekeeping into recurring bureaucracy.
 
