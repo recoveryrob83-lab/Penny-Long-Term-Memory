@@ -9,7 +9,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
 from . import __version__
@@ -65,7 +65,7 @@ class ScheduledJobRequest(BaseModel):
     cadence: str
     schedule_date: str
     schedule_time: str
-    weekdays: list[int] = []
+    weekdays: list[int] = Field(default_factory=list)
     timezone: str = "America/Chicago"
     enabled: bool = True
 
@@ -122,7 +122,6 @@ def create_app(
     command_center = CommandCenterService(
         APP_ROOT,
         database_path=_cache_path("COMMAND_CENTER_DATABASE_PATH", "command_center.sqlite3"),
-        start_scheduler=scheduler_enabled,
     )
     application = FastAPI(
         title="LifeOS Dashboard",
@@ -133,6 +132,11 @@ def create_app(
     application.state.command_center = command_center
     application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
     templates = Jinja2Templates(directory=PACKAGE_ROOT / "templates")
+
+    @application.on_event("startup")
+    async def start_command_scheduler() -> None:
+        if scheduler_enabled:
+            command_center.start_scheduler()
 
     @application.on_event("shutdown")
     async def stop_command_scheduler() -> None:
