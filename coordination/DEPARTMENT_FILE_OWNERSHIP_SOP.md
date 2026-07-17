@@ -1,6 +1,6 @@
 # Department File Ownership and Drift Management SOP
 
-Updated: 2026-07-15
+Updated: 2026-07-18
 Project: Life OS Coordination
 Purpose: Define how departments maintain their own durable GitHub state while minimizing Rob's manual routing burden.
 
@@ -13,6 +13,16 @@ The department that owns the working context should normally update the durable 
 Short form:
 
 > Departments maintain their own rooms. Main coordinates the building. Logistics maintains the hallways.
+
+## Companion Ownership Rule
+
+Open-loop classification, system-promotion thresholds, lifecycle rules, boot visibility, and dashboard aggregation are defined in:
+
+- `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
+
+Apply both SOPs together.
+
+A department file owns its local truth. The dashboard may aggregate that truth, but global visibility does not justify copying the record into system memory or another department.
 
 ## Why This Rule Exists
 
@@ -43,6 +53,8 @@ During routine work, syncs, and boots, the department should:
 3. Keep edits localized to files it owns.
 4. Verify significant writes when practical.
 5. Avoid creating duplicate sources of truth.
+6. Separate unfinished work from standing rules, watches, historical milestones, and speculative placeholders.
+7. Keep one authoritative record for each department-owned loop.
 
 ## Main Assistant Responsibilities
 
@@ -64,8 +76,9 @@ Life Logistics HQ owns shared operational infrastructure and cross-system hygien
 - shared operating procedures
 - advisory index hygiene
 - cross-project audits
-- shared open-loop and architecture review
+- system open-loop and architecture review
 - detecting conflicts between departments
+- repository-path, migration, archive, and shared-infrastructure work
 - system-wide housekeeping when requested
 
 Logistics is not the default implementation bottleneck for routine department file maintenance.
@@ -91,6 +104,7 @@ A department should not casually edit shared or another department's canonical f
 When a change touches:
 
 - `memory/STARTUP_BOOT.md`
+- `memory/05_OPEN_LOOPS.md`
 - global operating rules or SOPs
 - shared coordination files
 - another department's project subtree
@@ -98,6 +112,8 @@ When a change touches:
 - system architecture files
 
 route through Main Assistant, Life Logistics, the owning department, or an explicit coordinated action as appropriate.
+
+System files must not become mirrors of department backlogs. When shared coordination is genuinely needed, use the compact coordination-record rules in `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`.
 
 ## Rob's Role
 
