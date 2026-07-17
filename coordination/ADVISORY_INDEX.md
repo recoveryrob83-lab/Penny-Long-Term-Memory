@@ -1,14 +1,15 @@
 # Advisory Index
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- ADV-20260716-039 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Reconcile stale shared global summaries with current July 16 state, including the Office Leaks public launch, Trello Flow Board adoption, closed advisories, consumed desktop-dashboard concept, prompt-launcher fixes, and deferred launcher enhancements captured in Engineering notebook.
+- None.
 
 ## Acknowledged / Implemented Advisories
 
+- ADV-20260716-039 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Life Logistics reconciled and verified `memory/01_SESSION_HANDOFF.md`, `memory/04_ACTIVE_PROJECTS.md`, `memory/05_OPEN_LOOPS.md`, and its local handoff/open-loop state with the current Office Leaks public launch, Trello Flow Board adoption, closed advisories, read-mostly desktop dashboard concept, corrected prompt-launcher newline defects, and deferred launcher enhancements. Closed 2026-07-17.
 - ADV-20260716-038 — Acknowledged / Ingested / Closed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering accepted the read-mostly LifeOS desktop dashboard as an active design concept, preserved existing source systems and Penny as the worker, retained the prompt launcher, and deferred implementation until Rob supplies further requirements.
 - ADV-20260716-037 — Fully Acknowledged / Closed — Posted Board: `coordination/boards/office-leaks.md` — Target Departments: Chief Business HQ; Chief of Finance Penny; Chief Engineering Penny; Main Assistant Penny; Life Logistics HQ; Chief Wellness HQ — All target departments acknowledged / consumed on 2026-07-16. Office Leaks is publicly launched with Facebook Page landing surface, pinned starter offer, introduction post, and first lead-loss Reel live. The awareness broadcast is complete; no implementation was required.
 - ADV-20260715-036 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Seven LifeOS department discussion HQ chats were launched with Chat/Work separation, department boundaries, connector rules, truthful action reporting, and model-usage discipline. Rob confirmed all HQs are open and ready on 2026-07-15.
