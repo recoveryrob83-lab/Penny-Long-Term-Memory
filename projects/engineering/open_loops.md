@@ -6,6 +6,7 @@ Updated: 2026-07-17
 
 | Status | Item | Next Action | Notes |
 |---|---|---|---|
+| Active | Desktop department automation | Produce the technical discovery and implementation packet for a bounded Windows workflow that syncs and boots one LifeOS department with observable checkpoints and safe stops | Next Engineering goal selected by Rob; architecture note: `projects/engineering/notebook/NOTE-20260717-009-desktop-department-automation-goal.md`; Penny Commands should later become the control surface for proven automation |
 | Open | Four-source dashboard observation | Confirm ordinary refresh, independent source health, cached degraded operation, and accepted scan path remain useful in real use | Do not intentionally destroy valid credentials merely to demonstrate failure mode |
 | Open | Penny Inventory Worker pilot | Begin with 2–3 real sale items and verify one-row-per-item writes, stable image references, uncertainty labels, and final Sheet read | Architecture complete; implementation package lives at `workers/penny-inventory/` |
 | Open | Penny Raw Capture Worker pilot | Observe real append, canonical-target, timestamp, and verification behavior | Worker package implemented; operational reliability still needs live use |
@@ -27,7 +28,7 @@ Updated: 2026-07-17
 | Waiting | Gmail dashboard adapter | First client, multiple active leads, repeated manual inbox checking, or demonstrated risk of missing a client message | Current Gmail use is mostly Indeed notices, authorizations, and reminders already handled through Main Assistant queries |
 | Waiting | Drive dashboard adapter | Recurring client folders, proposals, deliverables, approvals, or working documents that need dashboard shortcuts | Current Drive use does not justify another adapter |
 | Waiting | Desktop window packaging | Revisit after the browser-based dashboard proves useful across several live sources | Preferred direction is pywebview around the same local FastAPI app |
-| Waiting | Deferred prompt-launcher improvements | Revisit when selected for implementation | `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher scope metadata are captured in `projects/engineering/notebook/NOTE-20260716-007-prompt-launcher-advisory-commands-and-scope.md` |
+| Waiting | Deferred prompt-launcher improvements | Revisit after the desktop automation foundation is proven and ready for a control surface | `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher scope metadata are captured in `projects/engineering/notebook/NOTE-20260716-007-prompt-launcher-advisory-commands-and-scope.md` |
 
 ## Done / Recently Closed
 
