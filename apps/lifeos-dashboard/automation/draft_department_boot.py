@@ -8,7 +8,7 @@ import io
 import sys
 from dataclasses import dataclass
 
-from open_department_chat_group import main
+from open_department_chat_group_verified import main
 
 
 GENERIC_LOADING_FAILURE = "observed 'ChatGPT'."
