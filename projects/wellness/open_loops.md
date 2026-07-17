@@ -1,6 +1,6 @@
 # Wellness HQ Open Loops
 
-Updated: 2026-07-15
+Updated: 2026-07-18
 
 ## Active Open Loops
 
@@ -34,6 +34,7 @@ These are operating rules, not separate tasks:
 
 ## Recently Completed
 
+- 2026-07-18: Removed the speculative registry-reference parking item; registry references are added only after Logistics actually assigns one.
 - 2026-07-15: Completed fresh Wellness HQ boot and synchronization.
 - 2026-07-15: Confirmed `projects/wellness/` as the canonical department path.
 - 2026-07-15: Refreshed README, department identity, session handoff, status, and open loops for regular Chat-mode operations.
@@ -46,4 +47,3 @@ These are operating rules, not separate tasks:
 - Consider a local Wellness decision rule only after a recurring decision pattern appears.
 - Consider a Wellness notebook only when ideas exist that do not belong in status, open loops, advisories, or Drive.
 - Consider whether any future clinical workflow requires tighter coordination with Health Medical HQ.
-- Accept a registry reference later if Life Logistics HQ assigns one.
