@@ -58,6 +58,10 @@
               <button id="cc-update-prompt" class="copy-button" type="button" hidden>Save changes</button>
               <button id="cc-delete-prompt" class="cc-danger-button" type="button" hidden>Delete selected</button>
             </div>
+            <div id="cc-destination-warning" class="cc-destination-warning" hidden>
+              <p id="cc-destination-warning-text"></p>
+              <label class="cc-confirm cc-mismatch-confirm"><input id="cc-confirm-destination" type="checkbox"><span id="cc-confirm-destination-text">I reviewed this prompt and intend to use it in the selected destination.</span></label>
+            </div>
             <label id="cc-confirm-wrap" class="cc-confirm"><input id="cc-confirm-send" type="checkbox">Send live after destination and clipboard verification. Leave unchecked to place a verified draft only.</label>
             <p id="cc-summary" class="cc-summary">Preparing Command Center...</p>
             <div class="cc-actions"><button id="cc-run" class="primary-button" type="button">Run now</button><button id="cc-pause" class="cc-danger-button" type="button">Pause automation</button></div>
