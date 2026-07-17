@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.8fr);
   gap: 18px;
+  align-items: start;
 }
 
 .cc-layout > *,
@@ -29,10 +30,17 @@
   gap: 14px;
 }
 
+.cc-form,
+.cc-fields,
+.cc-field {
+  align-content: start;
+}
+
 .cc-fields {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+  align-items: start;
 }
 
 .cc-field {
@@ -170,6 +178,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(120px, 0.7fr));
   gap: 10px;
+  align-items: start;
 }
 
 .cc-weekdays {
