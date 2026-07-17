@@ -1,6 +1,6 @@
 # Life Logistics HQ Session Handoff
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 Project: Life Logistics HQ / Chief of Staff Penny
 Purpose: Project-specific handoff for Life Logistics GitHub operations and long-horizon coordination.
 
@@ -16,54 +16,60 @@ Purpose: Project-specific handoff for Life Logistics GitHub operations and long-
 
 Read `projects/life-logistics-hq/DEPARTMENT_IDENTITY.md`.
 
-Life Logistics HQ maintains durable Life OS continuity, GitHub memory coherence, advisory hygiene, worker routing, role clarity, and longer-horizon logistical planning.
+Life Logistics HQ maintains durable Life OS continuity, global GitHub coherence, shared operating infrastructure, advisory hygiene, cross-project audits, role clarity, and longer-horizon logistical planning.
 
-Main Assistant owns Rob's daily life and ordinary execution support, including daily planning, basic logistics, errands, appointments, transportation, Calendar, Todoist, Gmail, reminders, and executive-function support.
+Main Assistant owns Rob's daily life and ordinary execution support, including daily planning, basic logistics, errands, appointments, transportation, Calendar, Todoist, Gmail, reminders, Trello Flow processing, and executive-function support.
 
 ## Current Active Core
 
+- Main Assistant / LifeOS Coordination Hub
 - Life Logistics HQ
-- Main Assistant / Daily Operations
+- Chief Engineering Penny
 - Chief of Finance Penny
 - Chief Business HQ
 - Office Leaks Consulting HQ
-- Chief Engineering Penny
 - Chief Wellness HQ
 - Life OS Infrastructure as needed
 
-## Current Priority Reminder
+## Current System State
 
-Office Leaks Consulting is publicly launched and is now in a live organic market-test phase.
+Office Leaks Consulting is publicly launched and operating in a live organic market-test phase.
 
-The current launch surface includes the Facebook Page, introduction post, pinned starter offer, and first lead-loss Reel. Website work, paid boosting, formal A/B testing, and full campaign infrastructure remain deferred while the first organic market signal develops.
+The current launch surface includes the Facebook Page, introduction post, pinned starter offer, and first lead-loss Reel. Website work, paid boosting, formal A/B testing, and full campaign infrastructure remain deferred while organic signal develops.
 
-Office Leaks Consulting HQ owns business-unit execution continuity. Chief Business HQ owns parent strategy. Finance owns concrete pricing, income, expense, tax, and budget decisions. Engineering owns technical architecture and repeatable delivery playbooks. Main Assistant owns daily execution and immediate logistics.
+The LifeOS Flow Board is active as the visual attention layer. Trello Inbox captures raw thoughts; the Flow Board shows active attention; Todoist holds commitments and reminders; Calendar holds timed commitments; GitHub holds durable state.
 
-Life Logistics preserves durable cross-project state, watches dependencies, and plans longer-term logistical needs when those needs span projects or departments.
+The read-mostly LifeOS desktop dashboard remains an ingested design concept. Existing source systems remain authoritative, Penny remains the conversational worker, and no software implementation is authorized until Rob provides further requirements.
+
+Prompt-launcher newline defects from Hub Boot onward were corrected on 2026-07-16. Further launcher improvements remain deferred in Engineering context.
 
 PennyOS / Penny Platform is paused, not abandoned.
 
-## Life OS Worker Layer
+## Role Boundaries
 
-Workers remain narrow operational executors, not departments.
+- Main Assistant: daily coordination, immediate logistics, Flow Board operation, task and calendar coordination, communications, and authorized downstream worker processing.
+- Life Logistics: global boot integrity, shared summaries, advisory-index hygiene, shared procedures, cross-project audits, system-wide housekeeping, and longer-horizon dependencies.
+- Departments: maintain routine state in their own project subtrees.
+- Engineering: software, reliability architecture, workers, prompt launcher, and future dashboard specification.
+- Finance: detailed financial records and concrete money decisions.
+- Business and Office Leaks: parent strategy and business-unit execution respectively.
+- Wellness: sustainable health, recovery, and pacing.
 
-Worker root:
-
-- `workers/README.md`
-- `workers/WORKER_STANDARD.md`
+## Worker Layer
 
 Active pilots:
 
 - Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
 - Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
 
-Main Assistant owns authorized downstream processing of raw capture and inventory outputs. Life Logistics owns durable worker routing and pointer hygiene. Engineering owns worker architecture and reliability guidance.
+Main Assistant owns authorized downstream processing. Life Logistics owns durable worker routing and pointer hygiene. Engineering owns worker architecture and reliability guidance.
 
 ## Source-of-Truth Architecture
 
 - GitHub is the durable memory map.
 - Google Drive is the working records cabinet.
-- Todoist owns Rob-facing action items.
+- Trello shows current attention and active flow.
+- Todoist owns commitments and reminders.
 - Google Calendar owns timed commitments.
 - Gmail owns communication evidence.
 - The Advisory Index is the sole active advisory dashboard.
@@ -71,46 +77,44 @@ Main Assistant owns authorized downstream processing of raw capture and inventor
 
 ## Advisory State
 
-Current open advisory:
+Current open advisories:
 
-- ADV-20260716-037 — Office Leaks Public Launch Milestone — Open / Broadcast for awareness. Life Logistics acknowledged and consumed the advisory on 2026-07-16. Remaining department acknowledgements are tracked in the Advisory Index and Office Leaks source board.
+- None.
 
 Recently closed:
 
-- ADV-20260715-036 — Seven LifeOS Chat HQs opened and operational; Chat/Work separation, department boundaries, connector rules, and model-use discipline implemented.
+- ADV-20260716-039 — Implemented / Acknowledged / Closed. Life Logistics reconciled `memory/01_SESSION_HANDOFF.md`, `memory/04_ACTIVE_PROJECTS.md`, and `memory/05_OPEN_LOOPS.md` with the current Office Leaks launch, Trello Flow Board, dashboard concept, prompt-launcher state, and advisory closures.
+- ADV-20260716-038 — Read-mostly LifeOS desktop dashboard concept acknowledged and ingested by Engineering.
+- ADV-20260716-037 — Office Leaks public-launch awareness broadcast fully acknowledged and closed.
+- ADV-20260715-036 — Seven LifeOS Chat HQs opened and operational.
 - ADV-20260715-035 — Daily Operating SOP integrated into the global boot flow.
-- ADV-20260714-034 — Expanded connector-tagged shortcuts ingested.
-- ADV-20260713-033 — Core shortcut rollout ingested.
 
-Use `coordination/ADVISORY_INDEX.md` as the live source of truth rather than this summary when advisory status matters.
+Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 ## Current Major Open Loops
 
-- Keep GitHub boot files, handoffs, project maps, status files, and open loops internally consistent.
-- Keep Main Assistant and Life Logistics role boundaries explicit.
-- Maintain simplified advisory routing and board hygiene.
-- Keep department and worker roles distinct.
-- Keep canonical worker pointers stable and discoverable.
-- Observe worker pilot reliability through reports from Main Assistant and Engineering.
-- Keep Office Leaks, Business, Finance, Engineering, Main Assistant, and Logistics routing clear.
-- Track longer-horizon logistics and cross-project dependencies as Office Leaks moves through live market testing.
-- Observe the seven Chat HQs for routing drift, duplicated responsibility, stale boot assumptions, and model-usage waste.
-- Keep the Engineering HQ Daily Sync pilot paused until Rob authorizes resumption.
-- Track whether the legacy `projects/virtual-assistant-business/` folder should later remain, archive, or be removed.
+- Keep global boot files, shared summaries, project maps, and open loops internally consistent.
+- Maintain Main Assistant and Life Logistics role boundaries.
+- Maintain advisory routing and board hygiene without creating bureaucracy.
+- Observe the seven Chat HQs for evidence-based routing drift.
+- Preserve Trello, Todoist, Calendar, GitHub, Drive, and Gmail source boundaries.
+- Keep canonical worker pointers stable and observe pilot reliability through reports from Main Assistant and Engineering.
+- Track longer-horizon Office Leaks dependencies as live market testing develops.
+- Keep the dashboard concept read-mostly and deferred until requirements are supplied.
+- Keep Engineering HQ Daily Sync paused until Rob authorizes resumption.
+- Track the future disposition of the legacy Virtual Assistant folder.
 - Prefer small, verified GitHub edits over broad rewrites.
 
 ## Immediate Next Actions
 
-1. Use Life Logistics for GitHub maintenance, synchronization, durable handoffs, advisory hygiene, and longer-horizon coordination.
-2. Route ordinary daily planning and basic logistics to Main Assistant.
+1. Use Life Logistics for GitHub maintenance, shared infrastructure, audits, advisory hygiene, and longer-horizon coordination.
+2. Route ordinary daily planning and Flow Board operation to Main Assistant.
 3. Route specialist decisions to the owning department.
-4. Review and update durable files only after meaningful state changes.
+4. Review shared files after meaningful cross-project state changes.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Protect the boundary.
+This chat is Life Logistics HQ, not Main Assistant. Maintain the map and the hallways, not every footstep.
 
-Do not default to building Rob's daily itinerary or managing immediate errands. Maintain the map, not every footstep on the road.
-
-Boot reminder: Office Leaks is publicly launched and in live organic market testing. Life Logistics has acknowledged ADV-20260716-037. PennyOS is paused, not abandoned. Worker pilots remain active. Engineering HQ Daily Sync remains paused.
+Boot reminder: Office Leaks is publicly launched and in organic market testing. The Flow Board is active. The dashboard remains a deferred read-mostly concept. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
