@@ -6,7 +6,7 @@ Updated: 2026-07-18
 
 | Status | Item | Next Action | Notes |
 |---|---|---|---|
-| Priority | Department ownership architecture and dashboard inspection | Sync and restart the local dashboard, validate the new Department Inspection tab against the real repository, and record classification or filter defects before GitHub cleanup | Read-only MVP implemented in GitHub at `58538624c1bb138d7f8e8be85ac6c6f96be5dddf`: normalized seven-department-plus-System model, conservative table/bullet/notebook/status/handoff parsing, Work/Knowledge/Operations/Findings categories, approved filters, source inspection, and derived findings. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
+| Priority | Department ownership architecture and dashboard inspection | Review the live Findings view, record useful or noisy classifications, tune the parser only where evidence warrants it, then use the inspector to clean duplicated or misplaced GitHub state and formalize the ownership SOP | Department Inspection MVP is implemented and locally validated on Rob's Windows dashboard. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
 | Active | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
 | Active | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
 | Open | Restart and overdue-run validation | Schedule a one-time draft, stop the dashboard before execution, restart afterward, and observe catch-up behavior | Decide whether late jobs should run immediately, skip, expire, or require approval only after evidence |
@@ -41,6 +41,7 @@ Updated: 2026-07-18
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Department Inspection MVP local validation | Rob confirmed the new tab works in the local Windows dashboard after guarded GitHub synchronization and server restart; live classification audit remains open under the broader ownership package |
 | 2026-07-17 | Scheduled occupied-composer safety validation | A scheduled custom send to Logistics HQ found the exact destination behind `Show more`, preserved the existing composer draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery message in Run History |
 | 2026-07-17 | Automation Command Center manual Phase 1 | Eight destinations, canonical/saved/custom prompts, draft/send mode, explicit send confirmation, one-job lock, global pause, structured results, and local history implemented |
 | 2026-07-17 | Saved prompt lifecycle and destination safeguards | Duplicate, save, edit, restore default destination, mismatch acknowledgement, update default, and delete validated in the UI |
