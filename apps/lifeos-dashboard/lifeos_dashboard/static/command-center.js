@@ -2,6 +2,12 @@ const commandCenter = {
   destination: document.getElementById("cc-destination"),
   promptType: document.getElementById("cc-prompt-type"),
   customPrompt: document.getElementById("cc-custom-prompt"),
+  savedWrap: document.getElementById("cc-saved-wrap"),
+  savedPrompt: document.getElementById("cc-saved-prompt"),
+  saveControls: document.getElementById("cc-save-controls"),
+  saveName: document.getElementById("cc-save-name"),
+  saveButton: document.getElementById("cc-save-prompt"),
+  deleteButton: document.getElementById("cc-delete-prompt"),
   mode: document.getElementById("cc-mode"),
   confirmWrap: document.getElementById("cc-confirm-wrap"),
   confirmSend: document.getElementById("cc-confirm-send"),
@@ -12,44 +18,66 @@ const commandCenter = {
   history: document.getElementById("cc-history"),
 };
 
+let savedPrompts = [];
+
 const ccEscape = (value) => String(value ?? "")
-  .replaceAll("&", "&amp;")
-  .replaceAll("<", "&lt;")
-  .replaceAll(">", "&gt;")
-  .replaceAll('"', "&quot;")
-  .replaceAll("'", "&#039;");
+  .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+
+const selectedSavedPrompt = () => savedPrompts.find(
+  (item) => String(item.id) === commandCenter.savedPrompt.value
+);
+
+const activePromptText = () => {
+  if (commandCenter.promptType.value === "saved") return selectedSavedPrompt()?.prompt || "";
+  return commandCenter.customPrompt.value;
+};
 
 const updateCommandCenterForm = () => {
-  const custom = commandCenter.promptType.value === "custom";
+  const type = commandCenter.promptType.value;
+  const custom = type === "custom";
+  const saved = type === "saved";
   const send = commandCenter.mode.value === "send";
   commandCenter.customPrompt.hidden = !custom;
+  commandCenter.savedWrap.hidden = !saved;
+  commandCenter.saveControls.hidden = !custom && !saved;
+  commandCenter.saveName.hidden = saved;
+  commandCenter.saveButton.hidden = saved;
+  commandCenter.deleteButton.hidden = !saved || !selectedSavedPrompt();
   commandCenter.confirmWrap.hidden = !send;
   if (!send) commandCenter.confirmSend.checked = false;
-  const promptLabel = custom ? "custom prompt" : "canonical boot prompt";
+  const promptLabel = type === "canonical" ? "canonical boot prompt" : type === "saved" ? "saved prompt" : "custom prompt";
   const action = send ? "send" : "place as a verified draft";
   const label = commandCenter.destination.selectedOptions[0]?.textContent || "destination";
   commandCenter.summary.textContent = `${action[0].toUpperCase()}${action.slice(1)} the ${promptLabel} in ${label}.`;
 };
 
+const renderSavedPrompts = (items = []) => {
+  const previous = commandCenter.savedPrompt.value;
+  savedPrompts = items;
+  commandCenter.savedPrompt.innerHTML = '<option value="">Choose a saved prompt</option>' + items.map((item) =>
+    `<option value="${ccEscape(item.id)}">${ccEscape(item.name)}</option>`
+  ).join("");
+  if (items.some((item) => String(item.id) === previous)) commandCenter.savedPrompt.value = previous;
+};
+
 const renderCommandCenter = (data) => {
-  commandCenter.status.textContent = data.paused
-    ? "Paused"
-    : data.running
-      ? "Running"
-      : "Ready";
+  commandCenter.status.textContent = data.paused ? "Paused" : data.running ? "Running" : "Ready";
   commandCenter.status.className = `mode-badge ${data.paused ? "cc-paused" : data.running ? "cc-running" : "cc-ready"}`;
   commandCenter.pauseButton.textContent = data.paused ? "Resume automation" : "Pause automation";
   commandCenter.runButton.disabled = Boolean(data.paused || data.running);
+  renderSavedPrompts(data.saved_prompts || []);
   const history = data.history || [];
-  commandCenter.history.innerHTML = history.map((item) => `
-    <div class="cc-history-item">
-      <div class="list-item-header">
-        <strong>${ccEscape(item.destination)}</strong>
-        <span class="badge">${ccEscape(item.status)}</span>
-      </div>
-      <p class="item-meta">${ccEscape(item.mode)} · ${ccEscape(item.prompt_type)} · ${ccEscape(item.reason)}</p>
-    </div>
-  `).join("") || '<div class="cc-history-item">No automation runs recorded yet.</div>';
+  commandCenter.history.innerHTML = history.map((item) => {
+    const when = item.finished_at ? new Date(item.finished_at * 1000).toLocaleString() : "";
+    const detail = item.stderr?.trim() || item.stdout?.trim() || item.reason;
+    return `<div class="cc-history-item">
+      <div class="list-item-header"><strong>${ccEscape(item.destination)}</strong><span class="badge">${ccEscape(item.status)}</span></div>
+      <p class="item-meta">${ccEscape(item.mode)} · ${ccEscape(item.prompt_type)} · ${ccEscape(when)}</p>
+      <p class="item-meta">${ccEscape(detail)}</p>
+    </div>`;
+  }).join("") || '<div class="cc-history-item">No automation runs recorded yet.</div>';
+  updateCommandCenterForm();
 };
 
 const loadCommandCenter = async () => {
@@ -61,14 +89,48 @@ const loadCommandCenter = async () => {
 commandCenter.promptType.addEventListener("change", updateCommandCenterForm);
 commandCenter.mode.addEventListener("change", updateCommandCenterForm);
 commandCenter.destination.addEventListener("change", updateCommandCenterForm);
+commandCenter.savedPrompt.addEventListener("change", updateCommandCenterForm);
+
+commandCenter.saveButton.addEventListener("click", async () => {
+  const name = commandCenter.saveName.value.trim();
+  const prompt = commandCenter.customPrompt.value.trim();
+  if (!name || !prompt) {
+    commandCenter.summary.textContent = "Enter both a prompt name and prompt text before saving.";
+    return;
+  }
+  const response = await fetch("/api/command-center/prompts", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({name, prompt}),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    commandCenter.summary.textContent = data.detail || "Saved prompt failed.";
+    return;
+  }
+  renderCommandCenter(data);
+  commandCenter.summary.textContent = `Saved prompt: ${name}`;
+});
+
+commandCenter.deleteButton.addEventListener("click", async () => {
+  const selected = selectedSavedPrompt();
+  if (!selected) return;
+  const response = await fetch(`/api/command-center/prompts/${selected.id}`, {method: "DELETE"});
+  const data = await response.json();
+  if (!response.ok) {
+    commandCenter.summary.textContent = data.detail || "Delete failed.";
+    return;
+  }
+  commandCenter.savedPrompt.value = "";
+  renderCommandCenter(data);
+  commandCenter.summary.textContent = `Deleted saved prompt: ${selected.name}`;
+});
 
 commandCenter.pauseButton.addEventListener("click", async () => {
   commandCenter.pauseButton.disabled = true;
   try {
     const current = await (await fetch("/api/command-center", {cache: "no-store"})).json();
     const response = await fetch("/api/command-center/pause", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
+      method: "POST", headers: {"Content-Type": "application/json"},
       body: JSON.stringify({paused: !current.paused}),
     });
     if (!response.ok) throw new Error(`Pause control returned ${response.status}.`);
@@ -81,10 +143,12 @@ commandCenter.pauseButton.addEventListener("click", async () => {
 });
 
 commandCenter.runButton.addEventListener("click", async () => {
-  const custom = commandCenter.promptType.value === "custom";
+  const type = commandCenter.promptType.value;
+  const custom = type !== "canonical";
   const send = commandCenter.mode.value === "send";
-  if (custom && !commandCenter.customPrompt.value.trim()) {
-    commandCenter.summary.textContent = "Custom prompt cannot be empty.";
+  const prompt = activePromptText();
+  if (custom && !prompt.trim()) {
+    commandCenter.summary.textContent = type === "saved" ? "Choose a saved prompt." : "Custom prompt cannot be empty.";
     return;
   }
   if (send && !commandCenter.confirmSend.checked) {
@@ -95,19 +159,17 @@ commandCenter.runButton.addEventListener("click", async () => {
   commandCenter.runButton.textContent = "Running...";
   try {
     const response = await fetch("/api/command-center/run", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
+      method: "POST", headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
         destination: commandCenter.destination.value,
-        prompt_type: commandCenter.promptType.value,
-        custom_prompt: commandCenter.customPrompt.value,
+        prompt_type: custom ? "custom" : "canonical",
+        custom_prompt: prompt,
         mode: commandCenter.mode.value,
         confirm_send: commandCenter.confirmSend.checked,
       }),
     });
     const result = await response.json();
     commandCenter.summary.textContent = result.reason || result.detail || "Automation finished.";
-    await loadCommandCenter();
   } catch (error) {
     commandCenter.summary.textContent = error.message;
   } finally {
@@ -117,6 +179,4 @@ commandCenter.runButton.addEventListener("click", async () => {
 });
 
 updateCommandCenterForm();
-loadCommandCenter().catch((error) => {
-  commandCenter.summary.textContent = error.message;
-});
+loadCommandCenter().catch((error) => { commandCenter.summary.textContent = error.message; });
