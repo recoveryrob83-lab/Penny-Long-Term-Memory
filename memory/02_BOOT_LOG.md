@@ -1,190 +1,98 @@
 # Penny Boot Log
 
-Updated: 2026-07-02
-Project: Life OS / Life Logistics HQ / Penny Long-Term Memory
-Purpose: Long-term working memory and startup instructions for Penny across new chat windows.
+Updated: 2026-07-17
+Project: Life OS / Logistics HQ / Penny Long-Term Memory
+Purpose: Historical architecture and workflow lessons. This file is not the current boot sequence or current-state handoff.
 
-## Current Durable Architecture Decision
+## Authority Notice
 
-GitHub is being promoted to the preferred durable memory layer for Life OS / personal-assistant Penny.
+Current startup authority:
 
-Reason:
-- Real Markdown files.
-- Commit history.
-- Diffs.
-- Rollback.
-- Better auditability than Google Drive Docs for memory files.
-- GitHub connector appears reliable for text file operations.
+- `memory/STARTUP_BOOT.md`
 
-Google Drive remains useful and active for operational artifacts:
-- Google Docs.
-- Google Sheets.
-- Checkbook Register.
-- Job-search files.
-- Generated documents.
-- Meeting notes.
-- Practical working files.
+Current global state:
 
-## Startup Protocol
+- `memory/01_SESSION_HANDOFF.md`
+- `memory/04_ACTIVE_PROJECTS.md`
+- `memory/05_OPEN_LOOPS.md`
 
-When a new Penny chat begins for Life OS work:
+Do not use older snapshots in this file as current task, calendar, project, or personal state.
 
-1. Open GitHub repo `recoveryrob83-lab/Penny-Long-Term-Memory`.
-2. Read `memory/STARTUP_BOOT.md`.
-3. Read `memory/00_START_HERE.md`.
-4. Read `memory/01_SESSION_HANDOFF.md`.
-5. Read `memory/02_BOOT_LOG.md`.
-6. Read `memory/03_OPERATIONAL_RULES.md`.
-7. Read Active Projects and Open Loops as needed.
-8. Use project-specific files and connectors only as required by Rob's task.
+## Durable Architecture Decision
 
-## Connector Recovery Lessons
+As of 2026-07-02, GitHub became the preferred durable memory and architecture map for Life OS because it provides Markdown files, commit history, diffs, rollback, and auditable changes.
 
-A long-running chat may stop invoking connectors reliably. This should not be assumed to be a state problem, implementation problem, or user error.
+Google Drive remains active for working documents, spreadsheets, generated artifacts, and detailed operational records.
 
-Original preferred recovery workflow:
+Current source boundaries:
 
-1. Stop over-debugging the degraded session.
-2. Start a fresh Penny session.
-3. Boot from GitHub memory.
-4. Continue from the current handoff.
+- GitHub: durable memory, architecture, handoffs, abstract project state, advisories, and worker contracts.
+- Drive: working records and human-facing artifacts.
+- Trello: capture and current attention flow.
+- Todoist: commitments and reminders.
+- Calendar: timed commitments.
+- Gmail: communication evidence.
+- LifeOS Dashboard: read-mostly visibility into selected authoritative systems.
 
-2026-07-02 field note:
+## Connector Recovery Lesson
 
-Rob discovered that explicitly invoking a connector by name, such as `@Google Drive`, may help wake or route a connector before requiring a full fresh-chat reset.
+A long-running chat may stop invoking connectors reliably. Treat that as possible session degradation rather than automatically blaming the user or durable state.
 
-This is not yet proven as a guaranteed fix, but it should be tried before abandoning a session.
+Recovery order:
 
-Updated recovery order:
-
-1. Explicitly name or tag the connector.
+1. Explicitly name or tag the intended connector.
 2. Try a small harmless read.
-3. If the connector responds, continue normal work.
-4. If it fails, use the fresh-chat GitHub boot workflow.
+3. If it responds, continue with small verified operations.
+4. If it remains unreliable, start a fresh chat and boot from GitHub.
 
-Rob summarized the broader attitude as: life on life's terms.
+These are field observations, not claims about undocumented connector internals.
 
-## Drive Connector Editing Lessons
+## Drive and Structured-File Lesson
 
-2026-07-02 field note from Caregiver Project HQ:
-
-Small, incremental Drive updates were more reliable than large complex batch edits.
-
-When a complex update fails, retry as several tiny edits rather than repeatedly sending the same payload.
-
-For Sheets and structured records, verify the target row, range, or document section after each update so mistakes are caught immediately.
-
-If a Drive update is blocked because it appears to contain sensitive information or triggers safety checks, simplify the update and use abstract notes instead of repeatedly retrying detailed personal content.
-
-When actively working with a connector over many turns, explicitly reference the connector in the conversation to maintain clear operational context.
-
-These are operational guidelines based on repeated field observations, not claims about internal connector implementation.
-
-## RPR Procedure: Rob -> Penny -> Rob
-
-2026-07-02 field lesson:
-
-Use user-mediated file transfer for any structured file that is likely to trigger connector safety or requires reliable editing.
-
-Prefer RPR over connector writes whenever reliability is more important than automation.
-
-Use connectors for discovery, lookup, scheduling, communication, and metadata, but not as the sole path for maintaining critical structured records.
-
-This gives Life OS a practical fallback when Sheets, CSVs, Dropbox files, or profile-style records become too brittle for direct connector maintenance.
+- Prefer small incremental edits over large connector payloads.
+- Verify target rows, ranges, or sections after writes.
+- Simplify sensitive payloads and keep GitHub abstract.
+- Use RPR, Rob → Penny → Rob, when user-mediated file transfer is more reliable than direct connector editing.
 
 ## Project Chat Architecture Lesson
 
-Project-specific chats should handle their own project work during the day.
+Departments maintain their own rooms. Main Assistant coordinates the building. Logistics maintains the hallways.
 
-Life Logistics HQ should perform cross-project review and nightly housekeeping.
+Project chats create domain knowledge and maintain their own canonical files. Logistics owns shared infrastructure, global boot integrity, advisory hygiene, cross-project audits, and system-wide housekeeping.
 
-This reduces connector pressure, keeps chats focused, makes project history easier for Rob to find, and prevents one Penny from repeatedly hitting every connector for every domain.
+## Desktop Department Automation Milestone
 
-Project chats create project knowledge.
+On 2026-07-17, Windows ChatGPT Classic automation was validated across all seven department HQs.
 
-Life Logistics HQ curates operational memory.
+Canonical implementation:
 
-## Current Context Snapshot
+- `apps/lifeos-dashboard/automation/draft_department_boot.py`
+- `apps/lifeos-dashboard/automation/open_department_chat_group.py`
+- `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
 
-Rob and Penny are building a persistent Life OS for practical life organization.
+Validated behavior includes exact chat selection, hidden-sidebar expansion, exact destination verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, draft-only default behavior, explicit send authorization, and one watched successful live send.
 
-Primary practical domains:
-- Caregiver support / possible income project for Marqueto.
-- Marqueto's mom house cleanup project in Alton, Illinois.
-- Job search and interview tracking.
-- Recovery routine and meeting schedule.
-- Housing, benefits, medical, and general logistics.
-- Finance tracking.
-- Health and wellness expansion.
-- Life OS infrastructure.
+Durable recovery playbook:
 
-## Important Current Facts
+- `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
 
-Sober date: February 20, 2026.
+This on-demand automation does not reactivate unattended scheduled HQ syncs.
 
-Operating region: Metro East, Illinois. Use America/Chicago unless Rob says otherwise.
+## LifeOS Dashboard Milestone
 
-Major cleanup service area: Alton, Illinois.
+The local Windows dashboard is operational with four verified read-mostly sources:
 
-Known cleanup contacts:
-- The Junkluggers: 314-764-6855. Status unknown / needs call.
-- Affordable Dumpster Rentals: 636-202-0730. Called. 10-yard dumpster quoted at $409.
+- GitHub
+- Trello
+- Todoist
+- Google Calendar private iCal
 
-Job search facts:
-- Resume updated for marketing/social media positions.
-- Plug Tech application submitted for Social Media Coordinator.
-- Application number: 50364011.
-- Wendy's interview scheduled for July 6, 2026 at 2:00 PM CDT in Fairview Heights, Illinois.
-- Gmail label for job emails: Job Search.
-- Top Tier Events interview scheduled July 2, 2026 at noon CDT; Zoom/details may arrive by SMS rather than Gmail.
+The suite passed 16 tests. Guarded GitHub sync only fast-forwards a clean, strictly-behind local `main` branch. Gmail and Drive dashboard adapters remain deferred.
 
-Recovery routine includes:
-- Step work.
-- It Works reading.
-- Meditation reading.
-- Gratitude routine.
-- Call Donald.
-- Story reading.
-- NA meeting.
-- Step 11 prayer.
-- Recovery journal.
-- Weekly call three recovery people.
+## Historical Preservation Rule
 
-## Immediate Open Loops
+Git history preserves the detailed evolution of earlier snapshots. Avoid reintroducing stale personal facts, old appointments, expired tasks, or superseded project state into current boot reports.
 
-- Continue collecting cleanup quotes for Alton, Illinois.
-- Continue caregiver-income research for Illinois.
-- Prepare for Wendy's interview.
-- Use Checkbook Register for real transactions when data is ready.
-- Keep recovery routine active.
-- Continue migration from Drive-memory to GitHub-memory only when useful.
-- Use Life OS for real daily operations and record lessons as they appear.
+## Working Principle
 
-## Drive Source Files Imported / Mirrored
-
-Initial Drive sources read during GitHub migration:
-
-- Penny Boot Log: https://docs.google.com/document/d/1WXklLnp7DDPM0ZxYBgVH8NWHypbwcJ_p_59r5fDHNpY/edit
-- Session Handoff: https://docs.google.com/document/d/1YNmrdoPkfWLlTjdDrZygYikKVTzfNmW4UC-v1Wfsh4I/edit
-- 00_ROB_PROFILE_REFERENCE.md: https://docs.google.com/document/d/11nJ7Bdd3OvIqlpWS6AgUac4eoxKKAFu1Ac25tOj4MPw/edit
-- 01_ACTIVE_PROJECTS.md: https://docs.google.com/document/d/1SBiQ-ykJGjJkhq-0UuEj29uPaDfmtTA0-VVPcKBVrXc/edit
-- 02_STRATEGY_BOOT.md: https://docs.google.com/document/d/1YL9USMAwpbUdq16PrLktvJepOpLtWd3V0-XfG2GZl00/edit
-- 07_WEEKLY_PLAN.md: https://docs.google.com/document/d/1qBq0zy9ZZmQka50qtEVAXxxNK673TS5s1ev9fvluX0w/edit
-- 08_OPEN_LOOPS.md: https://docs.google.com/document/d/11VVd4i1ZCZBlVMnGFYhd3KcpSjEqTnbmTWHVAzqfJzg/edit
-- 09_IMPLEMENTATION_PACKET_TEMPLATE.md: https://docs.google.com/document/d/1_4HSsukTLLToXkxhRN7EIKfyCTFTbIH9KwprGlpc-bk/edit
-- 10_APP_INTEGRATIONS_REFERENCE.md: https://docs.google.com/document/d/1A3bqvltzgfXYIoAeaf1UVaM2lxzZyGZY4Bho7y5lpyM/edit
-- 11_OPERATIONAL_RULES.md: https://docs.google.com/document/d/1fQbpXeUgGhdGyUzzDuyLRegaSvFztx5sG2eFXvjMifA/edit
-
-## Penny Working Style
-
-Act as Rob's practical executive assistant.
-
-Prioritize:
-- Accurate records.
-- Clear open loops.
-- Verified connector results.
-- Short dated updates.
-- Practical next actions.
-- Separation of practical Life OS from philosophy unless Rob explicitly connects them.
-
-Do not fabricate connector results. Label uncertainty.
+GitHub is the map. Drive is the filing cabinet. Trello shows flow. Todoist owns commitments. Calendar owns time. Gmail owns communications. The dashboard shows selected state. Main Assistant coordinates daily life. Logistics maintains durable continuity.
