@@ -52,8 +52,6 @@ Updated: 2026-07-17
 | 2026-07-17 | LifeOS Dashboard V0 scaffold | PR #2 merged as commit `bdf920112e8142179d3da91a3e7983e1a5d48c27`; FastAPI app, responsive sample dashboard, adapter boundary, documentation, and tests created |
 | 2026-07-17 | Dashboard GitHub-adapter verification | Reconstructed branch package passed 5 tests covering sample mode, local checkout detection, advisory parsing, priority-loop parsing, notebook discovery, and recent activity normalization |
 | 2026-07-17 | ADV-20260716-039 implemented / acknowledged / closed | Life Logistics reconciled shared global summaries with current state |
-| 2026-07-17 | Guarded GitHub auto-sync | PR #7 merged as `e6059a8ffbb056e308e5e509b89ae2ad2f413edd`; clean `main` fast-forwards on load and refresh, while dirty, ahead, diverged, detached, and uncertain states refuse to move |
-| 2026-07-17 | Windows timezone dependency repair | PR #6 merged as `366b2151e0155cbf2164c12a7384ff701043561f`; `tzdata` is now a runtime dependency for reliable `America/Chicago` resolution on Windows |
 | 2026-07-16 | ADV-20260716-038 acknowledged / ingested / closed | Engineering accepted the read-mostly dashboard concept while preserving source systems, Penny as worker, and financial-connector isolation |
 | 2026-07-16 | Prompt launcher newline repair | Literal `\n` output from Hub Boot onward was corrected and verified |
 | 2026-07-15 | Seven Chat HQs launched | Chat/Work separation, department boundaries, connector rules, and truthful action reporting became operational |
