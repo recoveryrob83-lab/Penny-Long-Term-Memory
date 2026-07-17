@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Updated: 2026-07-18
 Department: Engineering HQ
-Status: MVP locally validated / first live-audit tuning awaiting restart confirmation
+Status: MVP locally validated / first inspector-guided source cleanup awaiting refresh verification
 
 ## Trigger
 
@@ -96,7 +96,7 @@ Rob observed:
 - three `possible_duplicate` findings across Engineering / Logistics, Logistics / System, and Business / Wellness;
 - a parser defect that removed underscores from file names displayed inside normalized summaries.
 
-The baseline showed that the inventory is broad enough, but the first presentation and warning policy are too noisy for fast inspection.
+The baseline showed that the inventory was broad enough, but the first presentation and warning policy were too noisy for fast inspection.
 
 ## First Evidence-Based Tuning
 
@@ -111,7 +111,38 @@ Implemented after the live baseline:
 - enrich Finding details with related title, state, authority, and source path instead of normalized IDs alone;
 - add tests for underscore preservation, bullet-warning reduction, and unrelated cross-department title matches.
 
-This tuning remains read-only and does not alter the source Markdown.
+After restart, Rob observed:
+
+- 459 normalized records;
+- 4 findings;
+- 15 records with warnings.
+
+The warning reduction confirmed that routine missing-priority chatter had been removed without shrinking the underlying inventory.
+
+## Confirmed Findings
+
+The four remaining findings were inspected individually.
+
+1. **Engineering state / priority mixing** was a true schema defect. The priority Engineering item used `Priority` as a Status value.
+2. **Chat HQ observation** was duplicated in Engineering and Logistics while a system-level Seven Chat HQs operating watch already existed.
+3. **Legacy Virtual Assistant folder** appeared across Logistics, Business, and System records even though repository-path disposition and reference migration belong to Logistics.
+4. **Registry reference placeholders** in Business and Wellness were not real work. They were speculative reminders to accept a reference only if Logistics later assigned one. Engineering contained the same speculative placeholder in its parking lot.
+
+## First Inspector-Guided Source Cleanup
+
+Rob authorized the targeted cleanup on 2026-07-18.
+
+Implemented changes:
+
+- Engineering's Open table now separates `Status` and `Priority` columns.
+- The inspector runtime reads explicit priority columns and preserves High, Normal, Low, Critical, None, and Unknown values; Medium normalizes to Normal under the approved contract.
+- The broad Engineering and Logistics Chat HQ observation rows were removed; the system Seven Chat HQs operating watch remains authoritative.
+- Logistics is now the sole open-loop owner for the Legacy Virtual Assistant folder disposition.
+- Business open and parking mirrors for the Legacy VA folder were removed.
+- System Waiting On and Parking Lot mirrors for the Legacy VA folder were removed.
+- Speculative registry-reference placeholders were removed from Engineering, Business, and Wellness open-loop files.
+- The cleanup history remains Engineering-owned rather than being copied into the global Recently Closed list.
+- Test coverage now verifies that explicit priority remains separate from lifecycle state.
 
 ## Required Operational Package
 
@@ -129,14 +160,12 @@ Likely durable output: an Open Loop Ownership and Visibility SOP plus targeted b
 
 ## Remaining Sequence
 
-1. Pull and restart the dashboard to validate the first live-audit tuning.
-2. Compare new warning and finding counts with the baseline.
-3. Review the enriched Findings details and decide which records are genuinely duplicated or misplaced.
-4. Correct further parser or filter behavior only where evidence warrants it.
-5. Use the inspector to audit and clean duplicated, stale, or misplaced GitHub state.
-6. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using evidence from the inspector.
-7. Reconcile system and department files under the new rules.
-8. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
+1. Refresh and restart the dashboard so the explicit-priority parser support and cleaned source files load.
+2. Compare the new record, warning, and finding counts with the 459 / 4 / 15 tuned baseline.
+3. Inspect any remaining findings individually rather than broadly weakening detection.
+4. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using the validated cleanup evidence.
+5. Reconcile remaining global and department files under the new rules.
+6. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
 
 ## Product Lesson
 
