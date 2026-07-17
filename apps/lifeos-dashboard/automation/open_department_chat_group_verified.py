@@ -7,10 +7,10 @@ literal @. Verification therefore compares the exact non-whitespace character st
 only that one narrowly scoped leading-at omission.
 
 Exact chat navigation also permits one bounded sidebar expansion. When the exact project-chat link
-is not initially exposed, the shim invokes the visible Show more button once, waits briefly for the
-exact accessible link to appear, and then delegates to the base engine. No fuzzy chat matching or
-unbounded clicking is allowed. All other navigation, draft preservation, readiness, and send gates
-remain owned by the base engine.
+is not initially exposed, the shim invokes one visible Show more button in the left sidebar region,
+waits briefly for the exact accessible link to appear, and then delegates to the base engine. No
+fuzzy chat matching or unbounded clicking is allowed. All other navigation, draft preservation,
+readiness, and send gates remain owned by the base engine.
 """
 
 from __future__ import annotations
@@ -47,8 +47,36 @@ def text_matches_expected(observed: str, expected: str) -> bool:
 _original_open_exact_chat = base.open_exact_chat
 
 
+def find_sidebar_show_more(window):
+    """Return one visible, enabled Show more button from the left sidebar region."""
+    window_rect = window.rectangle()
+    sidebar_right_limit = window_rect.left + max(360, int(window_rect.width() * 0.35))
+    candidates = []
+
+    for control in window.descendants():
+        if control.element_info.control_type != "Button":
+            continue
+        if control.window_text().strip() != "Show more":
+            continue
+        try:
+            rect = control.rectangle()
+            if not control.is_visible() or not control.is_enabled():
+                continue
+        except Exception:
+            continue
+        if rect.left <= sidebar_right_limit:
+            candidates.append(control)
+
+    if not candidates:
+        return None
+
+    # Prefer the left-most candidate, then the upper-most one. This stays deterministic when the
+    # accessibility tree exposes more than one matching button elsewhere in the application.
+    return min(candidates, key=lambda item: (item.rectangle().left, item.rectangle().top))
+
+
 def open_exact_chat_with_bounded_sidebar_expansion(window, target) -> bool:
-    """Expose hidden chats with one Show more invocation, then require the exact link."""
+    """Expose hidden chats with one sidebar Show more invocation, then require the exact link."""
     if base.current_document_title(window) == target.document_title:
         return False
 
@@ -56,11 +84,11 @@ def open_exact_chat_with_bounded_sidebar_expansion(window, target) -> bool:
     if exact_link.exists(timeout=0.5):
         return _original_open_exact_chat(window, target)
 
-    show_more = window.child_window(title="Show more", control_type="Button")
-    if not show_more.exists(timeout=1.0):
+    show_more = find_sidebar_show_more(window)
+    if show_more is None:
         raise base.AutomationStopped(
-            "Exact chat link was hidden or unavailable, and no visible Show more button was found: "
-            f"{target.link_title!r}"
+            "Exact chat link was hidden or unavailable, and no visible sidebar Show more button "
+            f"was found: {target.link_title!r}"
         )
 
     print("   SIDEBAR EXPANSION: exact chat link is hidden. Invoking Show more once.")
@@ -76,7 +104,7 @@ def open_exact_chat_with_bounded_sidebar_expansion(window, target) -> bool:
         time.sleep(SIDEBAR_EXPANSION_POLL_SECONDS)
 
     raise base.AutomationStopped(
-        "Exact chat link did not become available after one bounded Show more expansion: "
+        "Exact chat link did not become available after one bounded sidebar Show more expansion: "
         f"{target.link_title!r}"
     )
 
