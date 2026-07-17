@@ -6,28 +6,26 @@ Updated: 2026-07-17
 
 | Status | Item | Next Action | Notes |
 |---|---|---|---|
-| Open | Todoist dashboard authorization | Guide Rob through adding a personal Todoist API token to the existing ignored `.env`, then verify real commitments and source health | Token must remain local and must not be pasted into chat or GitHub |
-| Open | Google Calendar dashboard authorization | Guide Rob through adding the private Secret address in iCal format to the existing ignored `.env`, then verify the real next event and recurrence behavior | Private iCal URL must be treated as a password and never committed or pasted into chat |
-| Open | Today dashboard local regression | Pull `main`, refresh editable dependencies, run the complete test suite, relaunch, and verify GitHub, Trello, Todoist, and Calendar together | Focused branch tests passed; full local suite and real authorization remain |
 | Open | Four-source dashboard observation | Confirm ordinary refresh, independent source health, cached degraded operation, and accepted scan path remain useful in real use | Do not intentionally destroy valid credentials merely to demonstrate failure mode |
 | Open | Penny Inventory Worker pilot | Begin with 2–3 real sale items and verify one-row-per-item writes, stable image references, uncertainty labels, and final Sheet read | Architecture complete; implementation package lives at `workers/penny-inventory/` |
 | Open | Penny Raw Capture Worker pilot | Observe real append, canonical-target, timestamp, and verification behavior | Worker package implemented; operational reliability still needs live use |
 | Open | Reliable Connector Execution Layer | Turn the design note into an implementation packet outline | Drive doc: `Reliable Connector Execution Layer - Design Note` |
 | Open | Operation ledger schema | Draft fields, states, idempotency keys, verification methods, partial-success handling, and recovery instructions | Keep the first schema small enough to test manually |
-| Open | Connector health and retry policy | Define read/write health states, bounded retry rules, stop/backoff triggers, and degraded-mode fallback | Trello, Todoist, and Calendar caches are concrete healthy / stale / unavailable examples |
+| Open | Connector health and retry policy | Define read/write health states, bounded retry rules, stop/backoff triggers, and degraded-mode fallback | Trello, Todoist, and Calendar caches plus guarded Git sync are concrete healthy / stale / unavailable / blocked examples |
 | Open | Worker reliability evidence | Compare real pilot results against `workers/WORKER_STANDARD.md` before proposing more workers | Do not create speculative worker bureaucracy |
 | Open | Chat HQ observation | Watch the seven operating HQ chats for routing friction, duplicated authority, stale boot assumptions, connector limits, and wasted model usage | Refine only from observed use |
 | Open | Office Leaks delivery architecture | Continue one-problem local-service-office cleanup playbooks as Business requirements mature | Preserve mechanical workflow and human-system layers |
 | Open | Business handoff path | Coordinate with Chief Business HQ and Office Leaks Consulting HQ when product or service requirements are ready | Business defines what; Engineering defines how |
 | Open | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to Chief of Finance Penny | Finance owns money and paperwork |
-| Open | Software repository strategy | Decide whether to move the dashboard into a dedicated software repository if implementation expands materially | Current application remains isolated under `apps/lifeos-dashboard/` |
+| Open | Software repository strategy | Keep LifeOS as the runtime mirror and use separate repositories for educational and future standalone projects | Revisit dashboard extraction only if implementation expands materially |
 | Open | Engineering HQ Daily Sync | Keep paused until scheduled execution architecture is more reliable and Rob explicitly resumes it | Do not roll out additional scheduled HQ sync workers |
 
 ## Waiting / Deferred
 
 | Status | Item | Owner / Trigger | Notes |
 |---|---|---|---|
-| Waiting | Gmail and Drive adapters | Begin after GitHub, Trello, Todoist, and Calendar data paths are stable in real use | Show attention signals and shortcuts, not full replicas of either system |
+| Waiting | Gmail dashboard adapter | First client, multiple active leads, repeated manual inbox checking, or demonstrated risk of missing a client message | Current Gmail use is mostly Indeed notices, authorizations, and reminders already handled through Main Assistant queries |
+| Waiting | Drive dashboard adapter | Recurring client folders, proposals, deliverables, approvals, or working documents that need dashboard shortcuts | Current Drive use does not justify another adapter |
 | Waiting | Desktop window packaging | Revisit after the browser-based dashboard proves useful across several live sources | Preferred direction is pywebview around the same local FastAPI app |
 | Waiting | Deferred prompt-launcher improvements | Revisit when selected for implementation | `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher scope metadata are captured in `projects/engineering/notebook/NOTE-20260716-007-prompt-launcher-advisory-commands-and-scope.md` |
 
@@ -35,6 +33,12 @@ Updated: 2026-07-17
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-17 | Guarded GitHub auto-sync | PR #7 merged as `e6059a8ffbb056e308e5e509b89ae2ad2f413edd`; clean `main` fast-forwards on load and refresh, while dirty, ahead, diverged, detached, and uncertain states refuse to move |
+| 2026-07-17 | Guarded GitHub auto-sync local validation | Full suite passed with 16 tests; dashboard reported `GitHub healthy · main · e6059a8 · clean · up to date` |
+| 2026-07-17 | Windows timezone dependency repair | PR #6 merged as `366b2151e0155cbf2164c12a7384ff701043561f`; `tzdata` is now a runtime dependency for reliable `America/Chicago` resolution on Windows |
+| 2026-07-17 | Todoist dashboard authorization | Rob stored the personal token only in ignored local `.env`; dashboard verified 2 today, 0 overdue, 7 upcoming, and real task titles and priority badges |
+| 2026-07-17 | Google Calendar dashboard authorization | Rob stored the private iCal URL only in ignored local `.env`; dashboard verified 13 upcoming and correctly parsed the next NA meeting title, relative date, time, and location |
+| 2026-07-17 | Today dashboard local regression | Full four-source launch passed after dependency installation; GitHub, Trello, Todoist, and Calendar remained healthy and live |
 | 2026-07-17 | Todoist and Calendar adapter implementation | PR #5 merged as commit `c7fc7d795abca8ddf56e964b36ea7bd86cc6cd17`; read-only Todoist and private-iCal Calendar sources, independent caches, recurrence expansion, timezone normalization, documentation, and focused tests added |
 | 2026-07-17 | Live Trello local authorization | Rob configured an ignored local `.env` with a read-only token and verified healthy live access |
 | 2026-07-17 | Trello dashboard verification | Real Now / Next / Waiting state, lane parsing, ordering, blocker reasons, and source health passed Rob's local review |
