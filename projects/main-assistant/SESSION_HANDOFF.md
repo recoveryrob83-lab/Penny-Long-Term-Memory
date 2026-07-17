@@ -1,14 +1,14 @@
-# Main Assistant Session Handoff
+# Main Assistant HQ Session Handoff
 
 Updated: 2026-07-17
 Project: Main Assistant / Daily Operations
-Purpose: Project-specific handoff for new Main Assistant Penny / LifeOS Coordination Hub chats.
+Purpose: Project-specific handoff for new Main Assistant HQ / LifeOS Coordination Hub chats.
 
 ## Role
 
 Main Assistant is Rob's default daily operations desk and primary LifeOS Coordination Hub.
 
-Use this department for daily planning, itinerary checks, practical coordination, one-off admin, reminders, light connector-backed work, cross-department synthesis, advisory preparation, Trello Inbox processing, raw-capture inbox processing, and routing larger work to specialist departments.
+Use this department for daily planning, itinerary checks, practical coordination, one-off admin, reminders, light connector-backed work, cross-department synthesis, advisory preparation, Trello Inbox processing, raw-capture processing, and routing larger work to specialist departments.
 
 Large ongoing work belongs in the relevant specialist department.
 
@@ -40,9 +40,7 @@ Main Assistant chairs one coherent Penny system and is the primary conversationa
 
 Department tags provide structured perspectives but do not represent independently running agents or independent connector access.
 
-Main Assistant owns final hub synthesis and authorized connector execution. Rob remains the final decision-maker for consequential, destructive, financial, and externally visible actions.
-
-Use the hub for ordinary planning, department coordination, strategy, recovery, philosophy, connector-backed work where available, and preparation of bounded Work tasks.
+Main Assistant owns final hub synthesis, daily-life coordination, executive-function support, and authorized connector execution. Rob remains the final decision-maker for consequential, destructive, financial, and externally visible actions.
 
 ## Trello Flow Board
 
@@ -52,11 +50,6 @@ Canonical procedure:
 
 - `coordination/TRELLO_FLOW_BOARD_SOP.md`
 
-Canonical board:
-
-- `LifeOS Flow Board`
-- https://trello.com/b/QKXdwHup/lifeos-flow-board
-
 Source boundaries:
 
 - Trello Inbox captures raw thoughts and quick actions.
@@ -65,21 +58,12 @@ Source boundaries:
 - Calendar holds timed commitments.
 - GitHub holds durable project state.
 
-Board lists:
-
-1. Captured
-2. Next
-3. Now
-4. Waiting
-5. Done
-
 Flow limits:
 
 - One card maximum in Now.
 - Three cards maximum in Next.
 - Waiting contains blocked work only.
 - Captured contains ideas, not promises.
-- Rob's Trello home-screen focus widget targets the `LifeOS Flow Board` and `Now` list directly; member assignment is not required.
 
 Commands:
 
@@ -87,19 +71,42 @@ Commands:
 - `/FLOW PROCESS @Trello` processes clear Inbox cards while preserving limits; cross-system writes and deletions still require clear authorization.
 - `/FLOW NOW @Trello` recommends one Now card and up to three Next cards; moves require authorization.
 
+## LifeOS Dashboard
+
+The locally running LifeOS Dashboard is a read-mostly visibility layer, not a new source of truth.
+
+Verified live sources:
+
+- GitHub
+- Trello
+- Todoist
+- Google Calendar private iCal
+
+Main Assistant may use the dashboard for rapid orientation, then use the authoritative source system or connector for consequential interpretation and all writes.
+
+Guarded GitHub auto-sync only fast-forwards a clean, strictly-behind local `main`. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
+
+## Desktop Department Automation
+
+Windows ChatGPT Classic automation is operational across all seven department HQs.
+
+Canonical launcher:
+
+- `apps/lifeos-dashboard/automation/draft_department_boot.py`
+
+The automation can navigate to an exact HQ, preserve an occupied composer, insert and clipboard-verify the canonical boot prompt, and submit only with explicit `--send` authorization.
+
+A watched live send to Main Assistant HQ succeeded and began a normal reboot. Main Assistant should treat this as an on-demand boot transport, not an autonomous agent or unattended scheduler.
+
+If GitHub is cold in the destination chat, manually invoke GitHub and retry. Do not assume the automation can verify connector activation.
+
 ## Chat and Work Boundary
 
-Observed operating rule as of 2026-07-17:
-
-- Regular Chat on mobile, web, and classic desktop can support substantial reasoning and connector-backed GitHub or Google Drive work without moving the weekly Work usage meter during repeated observations.
-- A controlled Work-side Chat test with no Task and limited visible output reduced the Work meter by one percentage point.
-- Treat both Work-side Chat and Work Tasks as consuming the weekly Work allowance.
-- Exact usage ratios cannot be inferred because the meter may round, update slowly, include hidden context, or be recalibrated.
-- Treat these as strong field observations, not permanent claims about undocumented platform internals.
-- Prefer classic desktop for desktop conversation and connectors without entering Work.
-- Use the strongest regular-Chat model justified by the reasoning task.
+- Regular Chat is headquarters.
+- Treat both Work-side Chat and Work Tasks as metered.
+- Prefer classic desktop when connector-enabled desktop conversation is sufficient.
 - Use Luna Light as the default Work model and escalate only when required.
-- Reserve Work for local files, terminal, coding, testing, browser or desktop control, artifact production, and other bounded computer execution.
+- Reserve Work for local files, terminal, coding, testing, browser or desktop control, artifact production, and other bounded execution.
 
 Canonical policy:
 
@@ -109,87 +116,46 @@ Canonical policy:
 
 Each department maintains the GitHub files and sections within its own domain and corrects drift during routine boots and syncs.
 
-Routine local maintenance should not be routed through Life Logistics or formal advisories. Use advisories only when work crosses department boundaries or requires durable shared action, decision, risk, or dependency communication.
+Routine local maintenance should not be routed through Logistics or formal advisories. Use advisories only when work crosses department boundaries or requires durable shared action, decision, risk, or dependency communication.
 
 Canonical SOP:
 
 - `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
 
-## Penny Raw Capture Worker
+## Worker Relationships
 
-Penny Raw Capture Worker is a narrow LifeOS worker, not a Main Assistant sub-department.
+Penny Raw Capture Worker and Penny Inventory Worker are narrow workers, not Main Assistant sub-departments.
 
-Worker package:
-
-- `workers/penny-raw-capture/WORKER_BOOT.md`
-- `workers/penny-raw-capture/SESSION_HANDOFF.md`
-
-Canonical inbox:
-
-- Google Sheet: `Life OS Raw Capture Inbox`
-- Stable Sheet ID is recorded in the worker handoff.
-
-Main Assistant is the primary downstream consumer of the raw capture inbox.
-
-Main Assistant may review rows where `Processed = No` only when Rob authorizes or requests inbox review. Each item may then be discarded, merged, clarified, routed, turned into a Rob-facing task, promoted into an open loop, recorded appropriately, used to draft an advisory, or retained in the correct working system.
-
-Do not mark a row processed until downstream handling is actually complete.
-
-Do not copy private capture contents into GitHub merely to record processing state.
-
-## Inventory Worker Relationship
-
-Penny Inventory Worker captures one verified Sheet row per item from photographs.
-
-Main Assistant may coordinate downstream work when requested, but pricing, bundling, listing copy, sale strategy, and publication remain separate workflows.
+Main Assistant owns authorized downstream processing of raw capture and inventory output. Do not mark capture processed until downstream handling is actually complete. Keep inventory capture separate from pricing, bundling, listing copy, sale strategy, and publication.
 
 ## Advisory Procedure
 
 Use `coordination/ADVISORY_INDEX.md` as the sole active advisory routing dashboard.
 
-Canonical advisory details live on source department boards under `coordination/boards/`.
+Read a source board only when the index points to a relevant open advisory or Rob names it. Do not update the frozen Department Event Inbox for normal routing.
 
-`coordination/DEPARTMENT_EVENT_INBOX.md` is frozen as a historical register and must not be updated for normal advisory routing unless Rob explicitly reactivates it.
+Current advisory state:
 
-During full advisory syncs:
-
-1. Read the Advisory Index first.
-2. Read a source board only when the index points to a relevant open advisory or Rob names it.
-3. Report open, stale, duplicate, or inconsistent advisory state without changing it unless authorized.
-
-When Main Assistant creates an advisory:
-
-1. Place the full advisory on `coordination/boards/main-assistant.md`.
-2. Update `coordination/ADVISORY_INDEX.md` with status, source board, and target department.
-3. Do not duplicate the full advisory on the target board unless the routing standard changes.
-4. Do not create Todoist synchronization reminders unless Rob explicitly requests them.
-5. Do not mark implemented or closed without verified handling.
+- No open advisories as of 2026-07-17.
 
 ## Current Routing Notes
 
-- Office Leaks Consulting remains the immediate revenue-first business priority. Route strategy, positioning, offers, and delivery design to Business HQ and Office Leaks HQ; keep genuinely one-off logistics in Main Assistant.
+- Office Leaks remains the immediate revenue-first business priority. Route strategy, positioning, offers, and delivery design to Business HQ and Office Leaks HQ; keep one-off logistics in Main Assistant.
 - Work Search and Support Pathway are consolidated into Main Assistant for lightweight current logistics.
 - Recovery Logistics and Philosophy HQ remain dormant until Rob reactivates them.
-- Life Logistics HQ owns shared operational infrastructure, global hygiene, and cross-project curation.
+- Logistics HQ owns shared operational infrastructure, global hygiene, and cross-project curation.
+- Engineering HQ owns dashboard and desktop-automation implementation.
 - Main Assistant should not become the project junk drawer.
-
-## Current Daily Context
-
-- Rob successfully attended a recovery meeting despite activation friction; the bus ride was pleasant once motion began. Treat this as evidence that pre-departure discomfort predicts activation difficulty, not a bad outcome.
-- Immediate transportation pressure is easing through expected recovery-community support and paid cleanup work with friends.
-- Finance created a substantial Google Sheets life-financial forecasting model covering projected cash flow, categories, product comparisons, deals, and priority-based planning. Detailed financial records remain in Finance-owned Drive files, not GitHub.
-- Google Drive connector check passed successfully during the hub session.
-- Office Leaks has published its first two graphics and reel on Facebook, shared the campaign to Rob's story and page feed, activated the business email, and begun collecting platform engagement data.
-- Rob configured the Trello Inbox widget and a Todo List widget targeting the `LifeOS Flow Board` and `Now` list on his Android home screen. Trello was selected over Agiflow because its mobile experience and connector support fit actual daily use.
 
 ## Operating Boundaries
 
 - Keep durable GitHub notes abstract.
-- Trello shows capture and current attention; it is not the durable source of truth.
-- Todoist is for Rob-facing commitments and reminders.
+- Trello shows capture and current attention.
+- Todoist holds commitments and reminders.
 - Calendar owns timed commitments.
 - Gmail owns communication evidence.
 - Drive holds working records.
+- The dashboard displays selected state but does not own it.
 - Treat worker or Inbox output as intake, not automatically as tasks or priorities.
 - Verify important connector writes.
 - Ask before consequential, destructive, financial, or externally visible actions.
@@ -202,8 +168,8 @@ When asked, Main Assistant should:
 2. Identify one major action and at most one support action.
 3. Process Trello Inbox and maintain Flow Board limits when authorized.
 4. Handle one-off daily admin and light connector work.
-5. Report advisory status during full reports or direct advisory requests.
-6. Process Raw Capture Worker inbox items when authorized.
-7. Route specialist work to the correct department.
-8. Support use of the Finance forecasting model once incoming funds and priorities are known.
+5. Use the dashboard for orientation without bypassing source systems.
+6. Report advisory status during full reports or direct advisory requests.
+7. Process worker inbox items when authorized.
+8. Route specialist work to the correct department.
 9. Keep durable updates small, scoped, and verified.
