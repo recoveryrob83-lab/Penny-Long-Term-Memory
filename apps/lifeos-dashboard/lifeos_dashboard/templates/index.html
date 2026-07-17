@@ -8,11 +8,13 @@
   <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/github.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/command-center.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='/department-inspection.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/tabs.css') }}">
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
   <script defer src="{{ url_for('static', path='/command-center.js') }}"></script>
   <script defer src="{{ url_for('static', path='/command-scheduler.js') }}"></script>
   <script defer src="{{ url_for('static', path='/command-history.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/department-inspection.js') }}"></script>
   <script defer src="{{ url_for('static', path='/tabs.js') }}"></script>
 </head>
 <body>
@@ -26,6 +28,7 @@
   </section>
   <nav class="dashboard-tabs" role="tablist" aria-label="LifeOS dashboard sections">
     <button class="dashboard-tab active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Overview</button>
+    <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-tab-target="departments">Department Inspection</button>
     <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-tab-target="automation">Automation</button>
   </nav>
   <section class="tab-page" data-tab-panel="overview" role="tabpanel">
@@ -37,6 +40,62 @@
       <section class="panel attention-panel github-panel" aria-labelledby="github-heading"><div class="section-heading"><div><p class="eyebrow">DURABLE SYSTEM PULSE</p><h2 id="github-heading">GitHub</h2></div><span id="github-repo-meta" class="panel-meta">Loading checkout</span></div><div id="github-facts" class="github-facts"></div><div><h3>Open advisories</h3><div id="github-advisories" class="stack-list"></div></div><div><h3>Priority open loops</h3><div id="github-open-loops" class="stack-list"></div></div><div><h3>Recent durable activity</h3><div id="github-activity" class="stack-list"></div></div></section>
       <section class="panel notebooks-panel" aria-labelledby="notebooks-heading"><div class="section-heading"><div><p class="eyebrow">WHAT CHANGED RECENTLY</p><h2 id="notebooks-heading">Recent LifeOS activity</h2></div><span class="panel-meta">GitHub notebooks</span></div><div id="notebook-list" class="notebook-list"></div></section>
       <section class="panel commands-panel" aria-labelledby="commands-heading"><div class="section-heading"><div><p class="eyebrow">WHAT PENNY CAN DO NEXT</p><h2 id="commands-heading">Penny commands</h2></div><span class="panel-meta">Copy and paste</span></div><div id="command-list" class="command-list"></div></section>
+    </main>
+  </section>
+  <section class="tab-page department-page" data-tab-panel="departments" role="tabpanel" hidden>
+    <main class="dashboard-grid">
+      <section class="panel department-inspector-panel" aria-labelledby="department-inspection-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow">DURABLE STATE UNDER GLASS</p><h2 id="department-inspection-heading">Department Inspection</h2></div>
+          <span id="di-status" class="mode-badge">Waiting</span>
+        </div>
+        <p class="item-meta">Read-only normalized inspection of department work, knowledge, operations, and structural findings. Source files remain authoritative.</p>
+        <div class="di-summary-grid">
+          <div class="di-summary-card"><span>Normalized records</span><strong id="di-total-records">0</strong></div>
+          <div class="di-summary-card"><span>Findings</span><strong id="di-total-findings">0</strong></div>
+          <div class="di-summary-card"><span>Records with warnings</span><strong id="di-total-warnings">0</strong></div>
+          <div class="di-summary-card"><span>Visible now</span><strong id="di-visible-count">0 records · 0 findings visible</strong></div>
+        </div>
+        <div id="di-error" class="di-error" hidden></div>
+        <section class="di-filter-panel" aria-label="Department Inspection filters">
+          <div class="di-filter-grid">
+            <label class="di-filter-field">Department<select id="di-filter-department"><option value="all">All departments and System</option></select></label>
+            <label class="di-filter-field">Category<select id="di-filter-category"><option value="all">All categories</option><option value="work">Work</option><option value="knowledge">Knowledge</option><option value="operations">Operations</option><option value="findings">Findings</option></select></label>
+            <label class="di-filter-field">Record type<select id="di-filter-type"><option value="all">All record types</option><option value="work_item">Work item</option><option value="note">Note</option><option value="status">Status</option><option value="rule">Rule</option><option value="watch">Watch</option><option value="decision">Decision</option><option value="milestone">Milestone</option><option value="log">Log</option><option value="handoff">Handoff</option></select></label>
+            <label class="di-filter-field">State<select id="di-filter-state"><option value="all">All states</option><option value="open">Open</option><option value="active">Active</option><option value="waiting">Waiting</option><option value="paused">Paused</option><option value="blocked">Blocked</option><option value="completed">Completed</option><option value="closed">Closed</option><option value="cancelled">Cancelled</option><option value="unknown">Unknown</option></select></label>
+            <label class="di-filter-field">Priority<select id="di-filter-priority"><option value="all">All priorities</option><option value="critical">Critical</option><option value="high">High</option><option value="normal">Normal</option><option value="low">Low</option><option value="none">None</option><option value="unknown">Unknown</option></select></label>
+            <label class="di-filter-field">From<input id="di-filter-date-from" type="date"></label>
+            <label class="di-filter-field">Through<input id="di-filter-date-to" type="date"></label>
+            <label class="di-filter-field">Cross-department<select id="di-filter-cross"><option value="all">All routing states</option><option value="true">Cross-department only</option><option value="false">Single-owner only</option></select></label>
+            <label class="di-filter-field">Authority<select id="di-filter-authority"><option value="all">All authority levels</option><option value="authoritative">Authoritative</option><option value="summary">Summary</option><option value="historical">Historical</option><option value="derived">Derived</option><option value="unknown">Unknown</option></select></label>
+            <label class="di-filter-field">Order<select id="di-filter-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="department">Department</option><option value="priority">Priority</option></select></label>
+            <label class="di-filter-field di-filter-wide">Search<input id="di-filter-search" type="search" placeholder="Titles, summaries, sources, raw text..."></label>
+          </div>
+          <div class="di-filter-actions">
+            <label class="di-checkbox"><input id="di-filter-warnings" type="checkbox">Warnings only</label>
+            <button id="di-reset" class="copy-button" type="button">Reset filters</button>
+          </div>
+        </section>
+        <div class="di-category-stack">
+          <section id="di-work-section" class="di-category-section">
+            <div class="di-category-heading"><div><div class="di-category-title">Work</div><p class="di-category-description">Open, active, waiting, paused, blocked, and recently completed work.</p></div><span id="di-work-count" class="di-category-count">0</span></div>
+            <div id="di-work" class="di-record-list" aria-live="polite"></div>
+          </section>
+          <section id="di-knowledge-section" class="di-category-section">
+            <div class="di-category-heading"><div><div class="di-category-title">Knowledge</div><p class="di-category-description">Notebooks, decisions, plans, validation records, and historical notes.</p></div><span id="di-knowledge-count" class="di-category-count">0</span></div>
+            <div id="di-knowledge" class="di-record-list" aria-live="polite"></div>
+          </section>
+          <section id="di-operations-section" class="di-category-section">
+            <div class="di-category-heading"><div><div class="di-category-title">Operations</div><p class="di-category-description">Standing rules, watches, status records, logs, and handoffs.</p></div><span id="di-operations-count" class="di-category-count">0</span></div>
+            <div id="di-operations" class="di-record-list" aria-live="polite"></div>
+          </section>
+          <section id="di-findings-section" class="di-category-section">
+            <div class="di-category-heading"><div><div class="di-category-title">Findings</div><p class="di-category-description">Possible duplicates, stale mirrors, mixed fields, and other cleanup signals.</p></div><span id="di-findings-count" class="di-category-count">0</span></div>
+            <div id="di-findings" class="di-record-list" aria-live="polite"></div>
+          </section>
+        </div>
+        <div id="di-no-results" class="di-no-results" hidden>No records or findings match these filters.</div>
+      </section>
     </main>
   </section>
   <section class="tab-page automation-page" data-tab-panel="automation" role="tabpanel" hidden>
