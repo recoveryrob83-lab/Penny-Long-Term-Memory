@@ -14,15 +14,18 @@ Short form:
 
 > Departments maintain their own rooms. Main coordinates the building. Logistics maintains the hallways.
 
-## Companion Ownership Rule
+## Companion Governance Rules
 
-Open-loop classification, system-promotion thresholds, lifecycle rules, boot visibility, and dashboard aggregation are defined in:
+Open-loop classification, system-promotion thresholds, lifecycle rules, boot visibility, idea intake, and durable-write promotion are defined in:
 
 - `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
+- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
 
-Apply both SOPs together.
+Apply all three SOPs together.
 
 A department file owns its local truth. The dashboard may aggregate that truth, but global visibility does not justify copying the record into system memory or another department.
+
+Raw ideas normally remain in Trello until they pass the promotion gate. Department ownership does not authorize turning every useful thought into durable GitHub state.
 
 ## Why This Rule Exists
 
@@ -55,6 +58,9 @@ During routine work, syncs, and boots, the department should:
 5. Avoid creating duplicate sources of truth.
 6. Separate unfinished work from standing rules, watches, historical milestones, and speculative placeholders.
 7. Keep one authoritative record for each department-owned loop.
+8. Apply `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md` before creating new durable state from an idea, brainstorm, note, or Trello card.
+9. Use explicit canonical lifecycle state and priority rather than combined or improvised labels.
+10. Preserve raw possibilities in Trello until ownership, outcome, next action or review trigger, destination, and authorization are clear.
 
 ## Main Assistant Responsibilities
 
@@ -65,8 +71,10 @@ Main Assistant owns:
 - shared policies and system-level decisions
 - identifying when a local department change has broader consequences
 - deciding when an advisory or coordinated update is warranted
+- supporting low-friction idea capture without creating accidental commitments
+- helping clarify ownership and destination before promotion
 
-Main should not become the routine editor of every department's internal files.
+Main should not become the routine editor of every department's internal files or promote every useful idea into system memory.
 
 ## Life Logistics Responsibilities
 
@@ -80,8 +88,26 @@ Life Logistics HQ owns shared operational infrastructure and cross-system hygien
 - detecting conflicts between departments
 - repository-path, migration, archive, and shared-infrastructure work
 - system-wide housekeeping when requested
+- auditing durable-write promotion, source boundaries, duplicate ownership, and canonical tag drift
 
 Logistics is not the default implementation bottleneck for routine department file maintenance.
+
+## Durable Write Threshold
+
+A department may update an existing authoritative record during an authorized sync or maintenance action.
+
+Before creating a new durable record, the department must confirm:
+
+- the record class;
+- the single owner;
+- the authoritative destination;
+- lifecycle state and priority;
+- smallest useful next action or review trigger;
+- completion or review condition;
+- duplicate check;
+- explicit or command-scoped authorization.
+
+If those fields are not clear, keep the material in conversation or Trello rather than manufacturing a GitHub commitment.
 
 ## Advisory Threshold
 
@@ -106,6 +132,7 @@ When a change touches:
 - `memory/STARTUP_BOOT.md`
 - `memory/05_OPEN_LOOPS.md`
 - global operating rules or SOPs
+- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
 - shared coordination files
 - another department's project subtree
 - the Advisory Index
@@ -117,10 +144,12 @@ System files must not become mirrors of department backlogs. When shared coordin
 
 ## Rob's Role
 
-Rob remains the final authority and may direct any department to update, coordinate, or make an exception.
+Rob remains the final authority and may direct any department to update, coordinate, promote, demote, or make an exception.
 
 Rob does not need to manually relay every routine internal change. As department chats are used, booted, and synchronized, their context windows will naturally surface drift and support direct maintenance of their own canonical files.
 
+Rob may capture ideas without committing to them. Capture permission is not durable-write permission unless the instruction also authorizes promotion or recording.
+
 ## Operating Principle
 
-> Decentralize maintenance. Preserve ownership. Escalate only across boundaries.
+> Decentralize maintenance. Preserve ownership. Promote deliberately. Escalate only across boundaries.
