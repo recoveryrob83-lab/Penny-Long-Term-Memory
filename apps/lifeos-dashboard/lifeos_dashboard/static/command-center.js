@@ -19,6 +19,8 @@ const commandCenter = {
 };
 
 let savedPrompts = [];
+let canonicalPrompt = {name: "", prompt: ""};
+let canonicalRequestToken = 0;
 
 const ccEscape = (value) => String(value ?? "")
   .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
@@ -28,24 +30,60 @@ const selectedSavedPrompt = () => savedPrompts.find(
   (item) => String(item.id) === commandCenter.savedPrompt.value
 );
 
-const activePromptText = () => {
-  if (commandCenter.promptType.value === "saved") return selectedSavedPrompt()?.prompt || "";
-  return commandCenter.customPrompt.value;
+const activePromptText = () => commandCenter.customPrompt.value;
+
+const loadCanonicalPrompt = async () => {
+  const token = ++canonicalRequestToken;
+  commandCenter.saveName.value = "Loading canonical prompt...";
+  commandCenter.customPrompt.value = "Loading prompt text...";
+  const response = await fetch(
+    `/api/command-center/canonical-prompt/${encodeURIComponent(commandCenter.destination.value)}`,
+    {cache: "no-store"},
+  );
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.detail || "Canonical prompt preview failed.");
+  if (token !== canonicalRequestToken || commandCenter.promptType.value !== "canonical") return;
+  canonicalPrompt = data;
+  commandCenter.saveName.value = data.name || "Canonical boot prompt";
+  commandCenter.customPrompt.value = data.prompt || "";
 };
 
-const updateCommandCenterForm = () => {
+const syncPromptDetails = async () => {
   const type = commandCenter.promptType.value;
-  const custom = type === "custom";
-  const saved = type === "saved";
+  const selected = selectedSavedPrompt();
+  commandCenter.savedWrap.hidden = type !== "saved";
+  commandCenter.saveControls.hidden = type === "canonical";
+  commandCenter.saveButton.hidden = type !== "custom";
+  commandCenter.deleteButton.hidden = type !== "saved" || !selected;
+  commandCenter.saveName.readOnly = type !== "custom";
+  commandCenter.customPrompt.readOnly = type !== "custom";
+
+  if (type === "canonical") {
+    try {
+      await loadCanonicalPrompt();
+    } catch (error) {
+      commandCenter.saveName.value = "Canonical boot prompt";
+      commandCenter.customPrompt.value = "";
+      commandCenter.summary.textContent = error.message;
+    }
+  } else if (type === "saved") {
+    canonicalRequestToken += 1;
+    commandCenter.saveName.value = selected?.name || "";
+    commandCenter.customPrompt.value = selected?.prompt || "";
+  } else {
+    canonicalRequestToken += 1;
+    if (commandCenter.saveName.readOnly) commandCenter.saveName.value = "";
+    commandCenter.saveName.readOnly = false;
+    commandCenter.customPrompt.readOnly = false;
+  }
+};
+
+const updateCommandCenterForm = async () => {
+  const type = commandCenter.promptType.value;
   const send = commandCenter.mode.value === "send";
-  commandCenter.customPrompt.hidden = !custom;
-  commandCenter.savedWrap.hidden = !saved;
-  commandCenter.saveControls.hidden = !custom && !saved;
-  commandCenter.saveName.hidden = saved;
-  commandCenter.saveButton.hidden = saved;
-  commandCenter.deleteButton.hidden = !saved || !selectedSavedPrompt();
   commandCenter.confirmWrap.hidden = !send;
   if (!send) commandCenter.confirmSend.checked = false;
+  await syncPromptDetails();
   const promptLabel = type === "canonical" ? "canonical boot prompt" : type === "saved" ? "saved prompt" : "custom prompt";
   const action = send ? "send" : "place as a verified draft";
   const label = commandCenter.destination.selectedOptions[0]?.textContent || "destination";
