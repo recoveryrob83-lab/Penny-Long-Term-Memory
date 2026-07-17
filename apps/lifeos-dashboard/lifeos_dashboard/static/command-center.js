@@ -11,6 +11,10 @@ const commandCenter = {
   saveButton: document.getElementById("cc-save-prompt"),
   updateButton: document.getElementById("cc-update-prompt"),
   deleteButton: document.getElementById("cc-delete-prompt"),
+  destinationWarning: document.getElementById("cc-destination-warning"),
+  destinationWarningText: document.getElementById("cc-destination-warning-text"),
+  confirmDestination: document.getElementById("cc-confirm-destination"),
+  confirmDestinationText: document.getElementById("cc-confirm-destination-text"),
   confirmWrap: document.getElementById("cc-confirm-wrap"),
   confirmSend: document.getElementById("cc-confirm-send"),
   runButton: document.getElementById("cc-run"),
@@ -29,7 +33,13 @@ let canonicalRequestToken = 0;
 let lastPromptType = commandCenter.promptType.value;
 let selectedCanonicalKey = "boot";
 let selectedSavedPromptId = "";
-let customDraft = {name: "", prompt: ""};
+let customDraft = {
+  name: "",
+  prompt: "",
+  defaultDestination: null,
+  originType: null,
+  originPromptKey: null,
+};
 
 const ccEscape = (value) => String(value ?? "")
   .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
@@ -41,9 +51,40 @@ const selectedSavedPrompt = () => savedPrompts.find(
 
 const activePromptText = () => commandCenter.customPrompt.value;
 
+const destinationLabel = (key) => {
+  const option = Array.from(commandCenter.destination.options).find((item) => item.value === key);
+  return option?.textContent || key || "the original destination";
+};
+
+const metadataDefaultDestination = (metadata) =>
+  metadata?.default_destination || metadata?.defaultDestination || null;
+
+const metadataOriginType = (metadata) =>
+  metadata?.origin_type || metadata?.originType || null;
+
+const metadataOriginPromptKey = (metadata) =>
+  metadata?.origin_prompt_key || metadata?.originPromptKey || null;
+
+const activePromptMetadata = () => {
+  const type = commandCenter.promptType.value;
+  if (type === "saved") return selectedSavedPrompt();
+  if (type === "custom") return customDraft;
+  return null;
+};
+
+const destinationMismatch = () => {
+  const defaultDestination = metadataDefaultDestination(activePromptMetadata());
+  return Boolean(defaultDestination && defaultDestination !== commandCenter.destination.value);
+};
+
+const resetDestinationConfirmation = () => {
+  commandCenter.confirmDestination.checked = false;
+};
+
 const rememberCustomDraft = () => {
   if (commandCenter.promptType.value !== "custom") return;
   customDraft = {
+    ...customDraft,
     name: commandCenter.saveName.value,
     prompt: commandCenter.customPrompt.value,
   };
@@ -81,6 +122,15 @@ const renderPromptSelector = () => {
     }
     commandCenter.promptSelect.value = selectedSavedPromptId;
   }
+};
+
+const applySavedDefaultDestination = () => {
+  const defaultDestination = metadataDefaultDestination(selectedSavedPrompt());
+  if (!defaultDestination) return;
+  const valid = Array.from(commandCenter.destination.options).some(
+    (item) => item.value === defaultDestination
+  );
+  if (valid) commandCenter.destination.value = defaultDestination;
 };
 
 const loadCanonicalPrompt = async () => {
@@ -132,10 +182,27 @@ const syncPromptDetails = async () => {
   }
 };
 
+const renderDestinationWarning = () => {
+  const metadata = activePromptMetadata();
+  const defaultDestination = metadataDefaultDestination(metadata);
+  const mismatch = destinationMismatch();
+  commandCenter.destinationWarning.hidden = !mismatch;
+
+  if (!mismatch) return;
+
+  const originalLabel = destinationLabel(defaultDestination);
+  const currentLabel = destinationLabel(commandCenter.destination.value);
+  commandCenter.destinationWarningText.textContent =
+    `This prompt was created for ${originalLabel}, but it will run in ${currentLabel}. Review the prompt text before continuing.`;
+  commandCenter.confirmDestinationText.textContent =
+    `I reviewed this prompt and intend to use it in ${currentLabel}.`;
+};
+
 const updateCommandCenterForm = async () => {
   const type = commandCenter.promptType.value;
   const send = commandCenter.confirmSend.checked;
   await syncPromptDetails();
+  renderDestinationWarning();
   const canonicalLabel = canonicalPrompts.find((item) => item.key === selectedCanonicalKey)?.label || "Canonical";
   const promptLabel = type === "canonical"
     ? `${canonicalLabel} canonical prompt`
@@ -182,27 +249,34 @@ const loadCommandCenter = async () => {
 
 commandCenter.promptType.addEventListener("change", async () => {
   capturePromptSelection(lastPromptType);
-  if (lastPromptType === "custom") {
-    customDraft = {
-      name: commandCenter.saveName.value,
-      prompt: commandCenter.customPrompt.value,
-    };
-  }
+  if (lastPromptType === "custom") rememberCustomDraft();
+  resetDestinationConfirmation();
+
   const nextType = commandCenter.promptType.value;
   lastPromptType = nextType;
   renderPromptSelector();
+
   if (nextType === "custom") {
     commandCenter.saveName.value = customDraft.name;
     commandCenter.customPrompt.value = customDraft.prompt;
+  } else if (nextType === "saved") {
+    applySavedDefaultDestination();
   }
   await updateCommandCenterForm();
 });
 
 commandCenter.promptSelect.addEventListener("change", async () => {
   capturePromptSelection();
+  resetDestinationConfirmation();
+  if (commandCenter.promptType.value === "saved") applySavedDefaultDestination();
   await updateCommandCenterForm();
 });
-commandCenter.destination.addEventListener("change", updateCommandCenterForm);
+
+commandCenter.destination.addEventListener("change", async () => {
+  resetDestinationConfirmation();
+  await updateCommandCenterForm();
+});
+commandCenter.confirmDestination.addEventListener("change", updateCommandCenterForm);
 commandCenter.confirmSend.addEventListener("change", updateCommandCenterForm);
 commandCenter.saveName.addEventListener("input", rememberCustomDraft);
 commandCenter.customPrompt.addEventListener("input", rememberCustomDraft);
@@ -219,9 +293,13 @@ commandCenter.duplicateButton.addEventListener("click", async () => {
   customDraft = {
     name: `${originalName} copy`,
     prompt: originalPrompt,
+    defaultDestination: commandCenter.destination.value,
+    originType: "canonical",
+    originPromptKey: selectedCanonicalKey,
   };
   commandCenter.promptType.value = "custom";
   lastPromptType = "custom";
+  resetDestinationConfirmation();
   renderPromptSelector();
   commandCenter.saveName.value = customDraft.name;
   commandCenter.customPrompt.value = customDraft.prompt;
@@ -238,9 +316,16 @@ commandCenter.saveButton.addEventListener("click", async () => {
     commandCenter.summary.textContent = "Enter both a prompt name and prompt text before saving.";
     return;
   }
+  const defaultDestination = metadataDefaultDestination(customDraft) || commandCenter.destination.value;
   const response = await fetch("/api/command-center/prompts", {
     method: "POST", headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({name, prompt}),
+    body: JSON.stringify({
+      name,
+      prompt,
+      default_destination: defaultDestination,
+      origin_type: metadataOriginType(customDraft),
+      origin_prompt_key: metadataOriginPromptKey(customDraft),
+    }),
   });
   const data = await response.json();
   if (!response.ok) {
@@ -254,6 +339,8 @@ commandCenter.saveButton.addEventListener("click", async () => {
     lastPromptType = "saved";
     selectedSavedPromptId = String(saved.id);
     renderPromptSelector();
+    applySavedDefaultDestination();
+    resetDestinationConfirmation();
     await updateCommandCenterForm();
   }
   commandCenter.summary.textContent = `Saved prompt: ${name}`;
@@ -273,7 +360,13 @@ commandCenter.updateButton.addEventListener("click", async () => {
   }
   const response = await fetch(`/api/command-center/prompts/${selected.id}`, {
     method: "PUT", headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({name, prompt}),
+    body: JSON.stringify({
+      name,
+      prompt,
+      default_destination: metadataDefaultDestination(selected),
+      origin_type: metadataOriginType(selected),
+      origin_prompt_key: metadataOriginPromptKey(selected),
+    }),
   });
   const data = await response.json();
   if (!response.ok) {
@@ -297,6 +390,7 @@ commandCenter.deleteButton.addEventListener("click", async () => {
     return;
   }
   selectedSavedPromptId = "";
+  resetDestinationConfirmation();
   await renderCommandCenter(data);
   commandCenter.summary.textContent = `Deleted saved prompt: ${selected.name}`;
 });
@@ -325,6 +419,12 @@ commandCenter.runButton.addEventListener("click", async () => {
   const prompt = activePromptText();
   if (custom && !prompt.trim()) {
     commandCenter.summary.textContent = type === "saved" ? "Choose a saved prompt." : "Custom prompt cannot be empty.";
+    return;
+  }
+  if (destinationMismatch() && !commandCenter.confirmDestination.checked) {
+    const target = destinationLabel(commandCenter.destination.value);
+    commandCenter.summary.textContent = `Review the destination warning and confirm that this prompt should run in ${target}.`;
+    commandCenter.confirmDestination.focus();
     return;
   }
   commandCenter.runButton.disabled = true;
