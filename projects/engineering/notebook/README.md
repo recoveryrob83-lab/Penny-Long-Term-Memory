@@ -41,3 +41,4 @@ Example:
 | NOTE-20260708-006 | Office Leaks Human-System Delivery Layer | 2026-07-08 | Office Leaks operating philosophy, stakeholder roles, internal champions, Aha Moment, adoption verification | Active architecture refinement |
 | NOTE-20260716-007 | Prompt Launcher Advisory Commands and Scope Metadata | 2026-07-16 | Read/consume advisory commands, launcher scope metadata, UI semantics, future product clarity | Deferred / captured for later implementation |
 | NOTE-20260717-008 | PennyOS: Humble Beginnings | 2026-07-17 | LifeOS Dashboard, four live sources, guarded GitHub synchronization, local-first architecture, historical PennyOS milestone | Historical milestone |
+| NOTE-20260717-009 | Desktop Department Automation Goal | 2026-07-17 | Windows desktop automation, department boot and sync, observable checkpoints, Penny Commands control surface | Active engineering goal |
