@@ -6,7 +6,61 @@ Purpose: Cross-project advisories from Engineering HQ to Life Logistics HQ, Busi
 
 ## Open Advisories
 
-None.
+### ADV-20260717-040 — Reconcile shared LifeOS memory after live dashboard and PennyOS milestone
+
+- Date: 2026-07-17
+- From: Chief Engineering Penny / Engineering HQ
+- To: Life Logistics HQ
+- Priority: Medium
+- Status: Open / Unacknowledged
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department: Life Logistics HQ
+- Related Project(s): LifeOS Dashboard, PennyOS historical milestone, shared global memory, dashboard source boundaries
+
+#### Context
+
+The LifeOS Dashboard moved from concept to a locally running, tested, four-source operational interface on Rob's Windows machine.
+
+Verified live sources now include:
+
+- GitHub for durable memory, advisories, open loops, notebooks, and recent repository activity;
+- Trello for Now, Next, and Waiting flow state;
+- Todoist for current and upcoming Rob-facing commitments;
+- Google Calendar private iCal for current and next timed commitments.
+
+The complete local test suite passed with 16 tests. Windows timezone support was corrected through the runtime `tzdata` dependency. Guarded GitHub auto-sync was implemented and live-verified: the dashboard fetched remote changes, confirmed the local `main` branch was clean and strictly behind, fast-forwarded two commits, and immediately displayed those commits in its own activity view.
+
+Engineering also created the historical notebook leaf:
+
+- `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md`
+
+This note records the dashboard as the humble beginnings of PennyOS. It is historical context only and must not be promoted into an open loop or implied roadmap commitment.
+
+#### Requested Life Logistics Action
+
+Review the current shared/global GitHub memory and update only the files that genuinely need reconciliation after this milestone. Likely candidates include, but are not limited to:
+
+- `memory/01_SESSION_HANDOFF.md`
+- `memory/04_ACTIVE_PROJECTS.md`
+- `memory/05_OPEN_LOOPS.md`
+- Life Logistics departmental handoff, status, or open-loop files when their current summaries are stale
+- any global dashboard or source-boundary summary that still describes Todoist or Calendar as unverified, the dashboard as merely conceptual, or GitHub updates as requiring routine manual pulls
+
+Preserve these boundaries:
+
+- Do not create a new open loop solely because PennyOS now exists as a historical framing.
+- Do not promote Gmail or Google Drive adapters into active work; both remain deferred until demonstrated operational need.
+- Do not copy credentials, private calendar URLs, tokens, personal details, or source-system records into GitHub.
+- Preserve source-of-truth boundaries among GitHub, Trello, Todoist, Calendar, Gmail, and Drive.
+- Keep the Engineering notebook milestone discoverable as history, not as an authorization for speculative expansion.
+
+#### Completion Standard
+
+- Read the current shared files before editing.
+- Reconcile only stale or materially incomplete summaries.
+- Report exactly which files changed and why.
+- Update this advisory and `coordination/ADVISORY_INDEX.md` when acknowledged or implemented.
+- Do not leave a separate board-sync open loop after reconciliation succeeds.
 
 ## Recently Acknowledged / Implemented Advisories
 
