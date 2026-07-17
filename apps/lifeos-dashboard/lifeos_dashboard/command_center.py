@@ -166,11 +166,43 @@ class CommandCenterService:
             self._paused = paused
             return self._paused
 
-    def save_prompt(self, name: str, prompt: str) -> dict[str, object]:
-        return self.store.save_prompt(name, prompt)
+    def save_prompt(
+        self,
+        name: str,
+        prompt: str,
+        default_destination: str | None = None,
+        origin_type: str | None = None,
+        origin_prompt_key: str | None = None,
+    ) -> dict[str, object]:
+        if default_destination is not None and default_destination not in DESTINATIONS:
+            raise ValueError("Saved prompt default destination is not recognized.")
+        return self.store.save_prompt(
+            name,
+            prompt,
+            default_destination=default_destination,
+            origin_type=origin_type,
+            origin_prompt_key=origin_prompt_key,
+        )
 
-    def update_prompt(self, prompt_id: int, name: str, prompt: str) -> dict[str, object] | None:
-        return self.store.update_prompt(prompt_id, name, prompt)
+    def update_prompt(
+        self,
+        prompt_id: int,
+        name: str,
+        prompt: str,
+        default_destination: str | None = None,
+        origin_type: str | None = None,
+        origin_prompt_key: str | None = None,
+    ) -> dict[str, object] | None:
+        if default_destination is not None and default_destination not in DESTINATIONS:
+            raise ValueError("Saved prompt default destination is not recognized.")
+        return self.store.update_prompt(
+            prompt_id,
+            name,
+            prompt,
+            default_destination=default_destination,
+            origin_type=origin_type,
+            origin_prompt_key=origin_prompt_key,
+        )
 
     def delete_prompt(self, prompt_id: int) -> bool:
         return self.store.delete_prompt(prompt_id)
