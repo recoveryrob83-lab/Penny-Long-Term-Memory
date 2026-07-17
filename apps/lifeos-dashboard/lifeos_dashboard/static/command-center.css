@@ -64,17 +64,12 @@
   line-height: 1.45;
 }
 
-.cc-save-controls {
+.cc-save-controls,
+.cc-actions,
+.cc-destination-options {
   display: flex;
   gap: 10px;
   align-items: center;
-  flex-wrap: wrap;
-}
-
-.cc-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -113,6 +108,19 @@
   margin: 0;
   color: var(--text);
   line-height: 1.45;
+}
+
+.cc-destination-options {
+  align-items: stretch;
+}
+
+.cc-destination-options .cc-confirm {
+  flex: 1 1 320px;
+}
+
+.cc-destination-options .copy-button {
+  flex: 0 1 auto;
+  white-space: normal;
 }
 
 .cc-mismatch-confirm {
