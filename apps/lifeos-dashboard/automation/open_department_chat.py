@@ -3,6 +3,7 @@
 Windows-only prototype using pywinauto and the ChatGPT Classic UI Automation tree.
 Nothing is sent unless --send is explicitly provided together with --confirm-send SEND.
 Existing composer text is preserved unless --replace-existing is explicitly provided.
+The composer must remain available and enabled for a stable interval before use.
 """
 
 from __future__ import annotations
@@ -19,6 +20,9 @@ from pywinauto.base_wrapper import BaseWrapper
 APP_TITLE = "ChatGPT Classic"
 DEFAULT_PROJECT = "Life OS"
 DEFAULT_TIMEOUT_SECONDS = 5.0
+DEFAULT_READY_TIMEOUT_SECONDS = 20.0
+DEFAULT_STABLE_SECONDS = 1.0
+POLL_SECONDS = 0.25
 
 
 class AutomationStopped(RuntimeError):
@@ -42,8 +46,8 @@ class Target:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Open an exact LifeOS department chat, verify the destination, and place "
-            "text in the composer. Draft-only by default."
+            "Open an exact LifeOS department chat, verify the destination, wait for "
+            "a stable composer, and place text. Draft-only by default."
         )
     )
     parser.add_argument("chat_title", help="Exact sidebar chat title")
@@ -62,6 +66,18 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=DEFAULT_TIMEOUT_SECONDS,
         help="Seconds to wait for destination verification",
+    )
+    parser.add_argument(
+        "--ready-timeout",
+        type=float,
+        default=DEFAULT_READY_TIMEOUT_SECONDS,
+        help="Seconds to wait for the composer to become stably ready",
+    )
+    parser.add_argument(
+        "--stable-seconds",
+        type=float,
+        default=DEFAULT_STABLE_SECONDS,
+        help="Continuous seconds the composer must remain ready before use",
     )
     parser.add_argument(
         "--replace-existing",
@@ -107,11 +123,7 @@ def current_document_title(window: BaseWrapper) -> str:
 
 
 def open_exact_chat(window: BaseWrapper, target: Target) -> bool:
-    """Open the target chat only when it is not already active.
-
-    Returns True when navigation was invoked and False when the target was
-    already active.
-    """
+    """Open the target chat only when it is not already active."""
     if current_document_title(window) == target.document_title:
         return False
 
@@ -139,7 +151,7 @@ def wait_for_destination(
         active_title = current_document_title(window)
         if active_title == expected_title:
             return active_title
-        time.sleep(0.25)
+        time.sleep(POLL_SECONDS)
 
     raise AutomationStopped(
         "Destination verification failed. "
@@ -148,12 +160,7 @@ def wait_for_destination(
 
 
 def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
-    """Find the visible message composer without relying on its current text.
-
-    ChatGPT changes the Edit control's accessible name when text is present, so
-    matching the literal title 'Ask ChatGPT' is not reliable. The composer is
-    instead selected as the lowest visible Edit control inside the app window.
-    """
+    """Find the lowest visible Edit control inside the application window."""
     edits: list[BaseWrapper] = []
     window_rect = window.rectangle()
 
@@ -174,8 +181,7 @@ def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
     if not edits:
         raise AutomationStopped("No visible Edit control was found after verification.")
 
-    composer = max(edits, key=lambda control: control.rectangle().top)
-    return composer
+    return max(edits, key=lambda control: control.rectangle().top)
 
 
 def read_composer_text(composer: BaseWrapper) -> str:
@@ -185,12 +191,83 @@ def read_composer_text(composer: BaseWrapper) -> str:
         return composer.window_text().strip()
 
 
-def place_text(
+def composer_signature(composer: BaseWrapper) -> tuple[int, int, int, int]:
+    rect = composer.rectangle()
+    return (rect.left, rect.top, rect.right, rect.bottom)
+
+
+def wait_for_composer_ready(
     window: BaseWrapper,
+    expected_document_title: str,
+    timeout_seconds: float,
+    stable_seconds: float,
+) -> BaseWrapper:
+    """Wait until the target composer is visible, enabled, and stable.
+
+    Destination-title verification can complete before a large conversation has
+    fully rendered. This gate requires the same visible composer geometry to stay
+    enabled for a continuous interval. Any disappearance, disablement, movement,
+    or destination change resets the stability clock.
+    """
+    deadline = time.time() + timeout_seconds
+    stable_since: float | None = None
+    last_signature: tuple[int, int, int, int] | None = None
+    last_reason = "composer not yet observed"
+
+    while time.time() < deadline:
+        if current_document_title(window) != expected_document_title:
+            stable_since = None
+            last_signature = None
+            last_reason = "active document changed during readiness wait"
+            time.sleep(POLL_SECONDS)
+            continue
+
+        try:
+            composer = find_visible_composer(window)
+            signature = composer_signature(composer)
+            enabled = composer.is_enabled()
+            visible = composer.is_visible()
+        except Exception as exc:
+            stable_since = None
+            last_signature = None
+            last_reason = f"composer unavailable: {exc}"
+            time.sleep(POLL_SECONDS)
+            continue
+
+        if not enabled or not visible:
+            stable_since = None
+            last_signature = None
+            last_reason = f"composer visible={visible}, enabled={enabled}"
+            time.sleep(POLL_SECONDS)
+            continue
+
+        if signature != last_signature:
+            last_signature = signature
+            stable_since = time.time()
+            last_reason = "composer geometry is still settling"
+            time.sleep(POLL_SECONDS)
+            continue
+
+        if stable_since is None:
+            stable_since = time.time()
+
+        if time.time() - stable_since >= stable_seconds:
+            return composer
+
+        last_reason = "composer has not remained stable long enough"
+        time.sleep(POLL_SECONDS)
+
+    raise AutomationStopped(
+        "Composer readiness timed out after "
+        f"{timeout_seconds:.1f}s. Last state: {last_reason}."
+    )
+
+
+def place_text(
+    composer: BaseWrapper,
     text: str,
     replace_existing: bool,
 ) -> BaseWrapper:
-    composer = find_visible_composer(window)
     existing = read_composer_text(composer)
 
     if existing and existing != "Ask ChatGPT" and not replace_existing:
@@ -201,18 +278,31 @@ def place_text(
 
     composer.set_focus()
     composer.set_edit_text(text)
+
+    observed = read_composer_text(composer)
+    if observed != text.strip():
+        raise AutomationStopped(
+            "Composer write verification failed. "
+            f"Expected {text.strip()!r}, observed {observed!r}. Nothing was sent."
+        )
+
     return composer
 
 
 def maybe_send(composer: BaseWrapper, send: bool, confirmation: str) -> None:
     if not send:
-        print("Draft placed. Nothing sent.")
+        print("Draft placed and verified. Nothing sent.")
         return
 
     if confirmation != "SEND":
         raise AutomationStopped(
             "Send requested but confirmation was missing. "
             "Use --confirm-send SEND to authorize submission."
+        )
+
+    if not composer.is_enabled() or not composer.is_visible():
+        raise AutomationStopped(
+            "Composer lost readiness before submission. Message was not sent."
         )
 
     composer.type_keys("{ENTER}")
@@ -242,14 +332,23 @@ def main() -> int:
         )
         print(f"   Verified active document: {active_title}")
 
-        print("4. Locating visible composer and applying draft policy")
-        composer = place_text(
+        print("4. Waiting for a stable, enabled composer")
+        composer = wait_for_composer_ready(
             window,
+            expected_document_title=target.document_title,
+            timeout_seconds=args.ready_timeout,
+            stable_seconds=args.stable_seconds,
+        )
+        print("   Composer readiness verified.")
+
+        print("5. Applying draft policy and verifying the write")
+        composer = place_text(
+            composer,
             text=args.text,
             replace_existing=args.replace_existing,
         )
 
-        print("5. Applying send policy")
+        print("6. Applying send policy")
         maybe_send(composer, send=args.send, confirmation=args.confirm_send)
         return 0
     except AutomationStopped as exc:
