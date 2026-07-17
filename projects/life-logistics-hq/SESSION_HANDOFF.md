@@ -49,7 +49,17 @@ Canonical launcher:
 
 Validated automation behavior includes exact HQ navigation, one bounded hidden-sidebar expansion, exact destination verification, stable Group composer discovery, preservation of existing draft text, clipboard verification, draft-only default behavior, explicit `--send` authorization, and one watched successful live send to Main Assistant HQ.
 
-The Logistics boot path is canonically:
+Engineering has planned an Automation Command Center inside the existing dashboard.
+
+Canonical plan:
+
+- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
+
+Phase 1 is manual Run Now only. It will support eight exact destinations, canonical or custom prompts, draft/send mode, explicit send confirmation, one-job locking, global pause, structured results, and local activity history.
+
+Scheduling, recurring jobs, automatic ChatGPT launch, screenshots, notifications, and advanced recovery remain deferred until Phase 1 proves safe. Logistics should preserve this boundary in shared summaries and audits.
+
+The canonical Logistics project path is:
 
 - `projects/life-logistics-hq/`
 
@@ -62,7 +72,7 @@ PennyOS remains historical and productization framing only, not a new open loop 
 - Main Assistant: daily coordination, immediate logistics, Flow Board operation, task and calendar coordination, communications, and authorized downstream worker processing.
 - Logistics: global boot integrity, shared summaries, advisory-index hygiene, shared procedures, cross-project audits, system-wide housekeeping, durable routing, and longer-horizon dependencies.
 - Departments: maintain routine state in their own project subtrees.
-- Engineering: software, dashboard, desktop automation, connector architecture, workers, and prompt launcher.
+- Engineering: software, dashboard, desktop automation, Automation Command Center, connector architecture, workers, and prompt launcher.
 - Finance: detailed financial records and concrete money decisions.
 - Business and Office Leaks: parent strategy and business-unit execution respectively.
 - Wellness: sustainable health, recovery, and pacing.
@@ -106,7 +116,7 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 ## Current Major Open Loops
 
-- Keep global boot files, shared summaries, project maps, status files, open loops, and automation prompts internally consistent.
+- Keep global boot files, shared summaries, project maps, status files, open loops, automation prompts, and source pointers internally consistent.
 - Maintain Main Assistant and Logistics role boundaries.
 - Maintain advisory routing and board hygiene without creating bureaucracy.
 - Preserve canonical HQ names and project-folder paths across prompts, scripts, and memory files.
@@ -114,6 +124,7 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 - Preserve GitHub, Trello, Todoist, Calendar, Gmail, Drive, and dashboard source boundaries.
 - Keep guarded GitHub dashboard sync limited to clean, strictly-behind fast-forward updates.
 - Keep desktop department automation draft-only by default and stop-on-uncertainty.
+- Preserve Automation Command Center Phase 1 as manual Run Now only; do not allow scheduling language to drift into current operational state.
 - Keep canonical worker pointers stable and observe pilot reliability through reports from Main Assistant and Engineering.
 - Track longer-horizon Office Leaks dependencies as live market testing develops.
 - Keep Gmail and Drive dashboard adapters deferred until demonstrated need.
@@ -125,7 +136,7 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 1. Use Logistics for GitHub maintenance, shared infrastructure, audits, advisory hygiene, and longer-horizon coordination.
 2. Route ordinary daily planning and Flow Board operation to Main Assistant.
-3. Route dashboard and desktop-automation implementation to Engineering.
+3. Route dashboard, desktop automation, and Automation Command Center implementation to Engineering.
 4. Review shared files after meaningful cross-project state changes.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
@@ -133,4 +144,4 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 This chat is Logistics HQ, not Main Assistant. Maintain the map and the hallways, not every footstep.
 
-Boot reminder: Office Leaks is publicly launched. The Flow Board and four-source dashboard are active. Seven-HQ desktop boot automation is validated. Gmail and Drive dashboard adapters remain deferred. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
+Boot reminder: Office Leaks is publicly launched. The Flow Board and four-source dashboard are active. Seven-HQ desktop boot automation is validated. Automation Command Center Phase 1 is planned as manual Run Now only. Gmail and Drive dashboard adapters remain deferred. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
