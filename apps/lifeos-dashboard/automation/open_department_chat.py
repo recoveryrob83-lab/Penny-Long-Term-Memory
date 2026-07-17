@@ -16,12 +16,12 @@ from dataclasses import dataclass
 from pywinauto import Desktop
 from pywinauto.base_wrapper import BaseWrapper
 
-
 APP_TITLE = "ChatGPT Classic"
 DEFAULT_PROJECT = "Life OS"
 DEFAULT_TIMEOUT_SECONDS = 5.0
 DEFAULT_READY_TIMEOUT_SECONDS = 20.0
 DEFAULT_STABLE_SECONDS = 1.0
+DEFAULT_WRITE_TIMEOUT_SECONDS = 3.0
 POLL_SECONDS = 0.25
 
 
@@ -80,6 +80,12 @@ def parse_args() -> argparse.Namespace:
         help="Continuous seconds the composer must remain ready before use",
     )
     parser.add_argument(
+        "--write-timeout",
+        type=float,
+        default=DEFAULT_WRITE_TIMEOUT_SECONDS,
+        help="Seconds to wait for the accessibility tree to reflect inserted text",
+    )
+    parser.add_argument(
         "--replace-existing",
         action="store_true",
         help="Replace existing composer text instead of stopping",
@@ -123,7 +129,6 @@ def current_document_title(window: BaseWrapper) -> str:
 
 
 def open_exact_chat(window: BaseWrapper, target: Target) -> bool:
-    """Open the target chat only when it is not already active."""
     if current_document_title(window) == target.document_title:
         return False
 
@@ -160,7 +165,6 @@ def wait_for_destination(
 
 
 def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
-    """Find the lowest visible Edit control inside the application window."""
     edits: list[BaseWrapper] = []
     window_rect = window.rectangle()
 
@@ -185,10 +189,19 @@ def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
 
 
 def read_composer_text(composer: BaseWrapper) -> str:
-    try:
-        return composer.get_value().strip()
-    except Exception:
-        return composer.window_text().strip()
+    readers = (
+        lambda: composer.get_value(),
+        lambda: composer.iface_value.CurrentValue,
+        lambda: composer.window_text(),
+    )
+    for reader in readers:
+        try:
+            value = reader()
+        except Exception:
+            continue
+        if value is not None:
+            return str(value).strip()
+    return ""
 
 
 def composer_signature(composer: BaseWrapper) -> tuple[int, int, int, int]:
@@ -202,13 +215,6 @@ def wait_for_composer_ready(
     timeout_seconds: float,
     stable_seconds: float,
 ) -> BaseWrapper:
-    """Wait until the target composer is visible, enabled, and stable.
-
-    Destination-title verification can complete before a large conversation has
-    fully rendered. This gate requires the same visible composer geometry to stay
-    enabled for a continuous interval. Any disappearance, disablement, movement,
-    or destination change resets the stability clock.
-    """
     deadline = time.time() + timeout_seconds
     stable_since: float | None = None
     last_signature: tuple[int, int, int, int] | None = None
@@ -263,10 +269,37 @@ def wait_for_composer_ready(
     )
 
 
+def wait_for_written_text(
+    window: BaseWrapper,
+    expected_text: str,
+    timeout_seconds: float,
+) -> BaseWrapper:
+    """Re-discover the composer until the UIA tree reports the inserted value."""
+    deadline = time.time() + timeout_seconds
+    observed = ""
+
+    while time.time() < deadline:
+        try:
+            composer = find_visible_composer(window)
+            observed = read_composer_text(composer)
+            if observed == expected_text:
+                return composer
+        except Exception:
+            pass
+        time.sleep(POLL_SECONDS)
+
+    raise AutomationStopped(
+        "Composer write verification timed out. "
+        f"Expected {expected_text!r}, last observed {observed!r}. Nothing was sent."
+    )
+
+
 def place_text(
+    window: BaseWrapper,
     composer: BaseWrapper,
     text: str,
     replace_existing: bool,
+    write_timeout_seconds: float,
 ) -> BaseWrapper:
     existing = read_composer_text(composer)
 
@@ -278,15 +311,11 @@ def place_text(
 
     composer.set_focus()
     composer.set_edit_text(text)
-
-    observed = read_composer_text(composer)
-    if observed != text.strip():
-        raise AutomationStopped(
-            "Composer write verification failed. "
-            f"Expected {text.strip()!r}, observed {observed!r}. Nothing was sent."
-        )
-
-    return composer
+    return wait_for_written_text(
+        window,
+        expected_text=text.strip(),
+        timeout_seconds=write_timeout_seconds,
+    )
 
 
 def maybe_send(composer: BaseWrapper, send: bool, confirmation: str) -> None:
@@ -343,9 +372,11 @@ def main() -> int:
 
         print("5. Applying draft policy and verifying the write")
         composer = place_text(
+            window,
             composer,
             text=args.text,
             replace_existing=args.replace_existing,
+            write_timeout_seconds=args.write_timeout,
         )
 
         print("6. Applying send policy")
@@ -354,7 +385,7 @@ def main() -> int:
     except AutomationStopped as exc:
         print(f"STOPPED: {exc}", file=sys.stderr)
         return 1
-    except Exception as exc:  # Defensive boundary for early prototype work.
+    except Exception as exc:
         print(f"STOPPED: unexpected automation error: {exc}", file=sys.stderr)
         return 1
 
