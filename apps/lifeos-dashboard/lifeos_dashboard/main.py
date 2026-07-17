@@ -14,8 +14,10 @@ from fastapi.templating import Jinja2Templates
 from . import __version__
 from .adapters import (
     DashboardSource,
+    GoogleCalendarIcalDashboardSource,
     LocalGitHubDashboardSource,
     SampleDashboardSource,
+    TodoistDashboardSource,
     TrelloFlowDashboardSource,
 )
 from .service import DashboardService
@@ -23,6 +25,13 @@ from .service import DashboardService
 PACKAGE_ROOT = Path(__file__).resolve().parent
 APP_ROOT = PACKAGE_ROOT.parent
 load_dotenv(APP_ROOT / ".env", override=False)
+
+
+def _cache_path(environment_name: str, filename: str) -> Path:
+    configured = os.getenv(environment_name)
+    if configured:
+        return Path(configured).expanduser()
+    return APP_ROOT / ".local" / filename
 
 
 def build_default_source() -> DashboardSource:
@@ -39,13 +48,18 @@ def build_default_source() -> DashboardSource:
     if (repo_root / ".git").exists() and (repo_root / "memory").exists():
         source = LocalGitHubDashboardSource(repo_root, source)
 
-    configured_cache = os.getenv("TRELLO_CACHE_PATH")
-    cache_path = (
-        Path(configured_cache).expanduser()
-        if configured_cache
-        else APP_ROOT / ".local" / "trello_flow_cache.json"
+    source = TrelloFlowDashboardSource.from_environment(
+        source,
+        cache_path=_cache_path("TRELLO_CACHE_PATH", "trello_flow_cache.json"),
     )
-    return TrelloFlowDashboardSource.from_environment(source, cache_path=cache_path)
+    source = TodoistDashboardSource.from_environment(
+        source,
+        cache_path=_cache_path("TODOIST_CACHE_PATH", "todoist_commitments_cache.json"),
+    )
+    return GoogleCalendarIcalDashboardSource.from_environment(
+        source,
+        cache_path=_cache_path("GOOGLE_CALENDAR_CACHE_PATH", "google_calendar_cache.json"),
+    )
 
 
 def create_app(source: DashboardSource | None = None) -> FastAPI:
