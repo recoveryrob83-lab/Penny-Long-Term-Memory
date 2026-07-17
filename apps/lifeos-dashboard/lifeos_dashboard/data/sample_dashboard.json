@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": "LifeOS Dashboard",
+    "subtitle": "Eagle-eye view of current LifeOS activity",
+    "snapshot_at": "2026-07-16T19:00:00-05:00",
+    "status": "sample"
+  },
+  "sources": [
+    {"name": "GitHub", "state": "healthy", "freshness": "sample data"},
+    {"name": "Trello", "state": "healthy", "freshness": "sample data"},
+    {"name": "Todoist", "state": "stale", "freshness": "not connected"},
+    {"name": "Calendar", "state": "healthy", "freshness": "sample data"},
+    {"name": "Gmail", "state": "partial", "freshness": "attention signals only"},
+    {"name": "Drive", "state": "partial", "freshness": "shortcuts only"}
+  ],
+  "today": {
+    "date_label": "Thursday, July 16",
+    "next_event": {
+      "time": "8:30 PM",
+      "title": "WTF Recovery Meeting",
+      "location": "Online"
+    },
+    "commitments": [
+      {"title": "Review current LifeOS flow", "state": "today", "source": "Todoist"},
+      {"title": "Keep evening recovery anchor", "state": "anchored", "source": "Calendar"}
+    ]
+  },
+  "flow": {
+    "now": {
+      "title": "Define $20 offer boundaries and scope-control response",
+      "lane": "Office Leaks / Business",
+      "status": "Now"
+    },
+    "next": [
+      {"title": "Create task-sizing checklist", "lane": "Engineering / Office Leaks"},
+      {"title": "Create standard client intake questions", "lane": "Office Leaks / Engineering"},
+      {"title": "Draft standard delivery-summary template", "lane": "Office Leaks / Engineering"}
+    ],
+    "waiting": [
+      {"title": "Wait for first real inquiry", "reason": "Blocked by a prospect contacting Office Leaks"},
+      {"title": "Wait for Facebook engagement signals", "reason": "Needs enough organic response for a useful signal"}
+    ]
+  },
+  "attention": {
+    "gmail": [
+      {"label": "Needs review", "count": 2, "detail": "Sample attention signal"},
+      {"label": "Unread", "count": 7, "detail": "Full inbox is intentionally not shown"}
+    ],
+    "drive": [
+      {"title": "Life OS Pointer Registry", "kind": "Google Sheet", "status": "Pinned"},
+      {"title": "Reliable Connector Execution Layer - Design Note", "kind": "Google Doc", "status": "Recent"},
+      {"title": "Engineering Delivery Architecture Specification", "kind": "Google Doc", "status": "Recent"}
+    ]
+  },
+  "notebooks": [
+    {
+      "department": "ENGINEERING",
+      "title": "Prompt Launcher Advisory Commands and Scope Metadata",
+      "date": "2026-07-16",
+      "summary": "Captured future READADVISORY, CONSUMEADVISORY, and explicit scope metadata work.",
+      "status": "Deferred"
+    },
+    {
+      "department": "MAIN",
+      "title": "Read-mostly LifeOS desktop dashboard concept",
+      "date": "2026-07-16",
+      "summary": "Established the dashboard as a window into source systems rather than a replacement platform.",
+      "status": "Ingested"
+    },
+    {
+      "department": "ENGINEERING",
+      "title": "Office Leaks Human-System Delivery Layer",
+      "date": "2026-07-08",
+      "summary": "Preserved respect, rapport, internal champion, adoption verification, and follow-up as delivery requirements.",
+      "status": "Active reference"
+    }
+  ],
+  "commands": [
+    {
+      "label": "Reboot Engineering",
+      "prompt": "/REBOOT @GitHub\n\nSummarize current decisions, active priorities, open loops, pending writes, and unresolved questions. Establish a clean operating state for the next phase. Do not make changes unless authorized."
+    },
+    {
+      "label": "Review Open Loops",
+      "prompt": "/OPENLOOPS @GitHub\n\nDepartment: Chief Engineering Penny / Engineering HQ"
+    },
+    {
+      "label": "Sync Advisories",
+      "prompt": "/SYNCADVISORY @GitHub\n\nRead the Advisory Index and relevant boards. Report open, stale, duplicate, or inconsistent advisory state. Do not make changes."
+    }
+  ]
+}
