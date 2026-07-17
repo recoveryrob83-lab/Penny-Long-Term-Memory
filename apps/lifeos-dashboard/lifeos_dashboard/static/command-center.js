@@ -147,7 +147,12 @@ const loadCommandCenter = async () => {
 };
 
 commandCenter.promptType.addEventListener("change", async () => {
-  if (lastPromptType === "custom") rememberCustomDraft();
+  if (lastPromptType === "custom") {
+    customDraft = {
+      name: commandCenter.saveName.value,
+      prompt: commandCenter.customPrompt.value,
+    };
+  }
   const nextType = commandCenter.promptType.value;
   if (nextType === "custom" && lastPromptType !== "custom") {
     commandCenter.saveName.value = customDraft.name;
