@@ -1,12 +1,12 @@
 # Engineering HQ Open Loops
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 
 ## Open
 
 | Status | Item | Next Action | Notes |
 |---|---|---|---|
-| Priority | Department ownership architecture and dashboard inspection | Formalize open-loop ownership, role-routed boot context, cross-department routing, and lifecycle procedures; then add a Department Inspection tab between Overview and Automation | Aggregate all seven departments' loops, notebooks, logs, and status records with department, status, priority, date, type, search, and sort filters. Preserve department files as authoritative and keep system loops limited to genuinely shared work. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
+| Priority | Department ownership architecture and dashboard inspection | Implement the normalized record model, conservative parsers, and read-only Department Inspection MVP between Overview and Automation | Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Load seven departments plus System; expose Work, Knowledge, Operations, and Findings with department, type, state, priority, date, authority, warning, search, and sort filters. Preserve source authority and use the inspector to guide later GitHub cleanup. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
 | Active | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
 | Active | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
 | Open | Restart and overdue-run validation | Schedule a one-time draft, stop the dashboard before execution, restart afterward, and observe catch-up behavior | Decide whether late jobs should run immediately, skip, expire, or require approval only after evidence |
