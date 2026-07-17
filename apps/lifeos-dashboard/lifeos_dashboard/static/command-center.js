@@ -9,7 +9,6 @@ const commandCenter = {
   saveButton: document.getElementById("cc-save-prompt"),
   updateButton: document.getElementById("cc-update-prompt"),
   deleteButton: document.getElementById("cc-delete-prompt"),
-  mode: document.getElementById("cc-mode"),
   confirmWrap: document.getElementById("cc-confirm-wrap"),
   confirmSend: document.getElementById("cc-confirm-send"),
   runButton: document.getElementById("cc-run"),
@@ -79,12 +78,10 @@ const syncPromptDetails = async () => {
 
 const updateCommandCenterForm = async () => {
   const type = commandCenter.promptType.value;
-  const send = commandCenter.mode.value === "send";
-  commandCenter.confirmWrap.hidden = !send;
-  if (!send) commandCenter.confirmSend.checked = false;
+  const send = commandCenter.confirmSend.checked;
   await syncPromptDetails();
   const promptLabel = type === "canonical" ? "canonical boot prompt" : type === "saved" ? "saved prompt" : "custom prompt";
-  const action = send ? "send" : "place as a verified draft";
+  const action = send ? "send live" : "place as a verified draft";
   const label = commandCenter.destination.selectedOptions[0]?.textContent || "destination";
   commandCenter.summary.textContent = `${action[0].toUpperCase()}${action.slice(1)} the ${promptLabel} in ${label}.`;
 };
@@ -124,9 +121,9 @@ const loadCommandCenter = async () => {
 };
 
 commandCenter.promptType.addEventListener("change", updateCommandCenterForm);
-commandCenter.mode.addEventListener("change", updateCommandCenterForm);
 commandCenter.destination.addEventListener("change", updateCommandCenterForm);
 commandCenter.savedPrompt.addEventListener("change", updateCommandCenterForm);
+commandCenter.confirmSend.addEventListener("change", updateCommandCenterForm);
 
 commandCenter.saveButton.addEventListener("click", async () => {
   const name = commandCenter.saveName.value.trim();
@@ -209,14 +206,10 @@ commandCenter.pauseButton.addEventListener("click", async () => {
 commandCenter.runButton.addEventListener("click", async () => {
   const type = commandCenter.promptType.value;
   const custom = type !== "canonical";
-  const send = commandCenter.mode.value === "send";
+  const send = commandCenter.confirmSend.checked;
   const prompt = activePromptText();
   if (custom && !prompt.trim()) {
     commandCenter.summary.textContent = type === "saved" ? "Choose a saved prompt." : "Custom prompt cannot be empty.";
-    return;
-  }
-  if (send && !commandCenter.confirmSend.checked) {
-    commandCenter.summary.textContent = "Send mode requires the confirmation checkbox.";
     return;
   }
   commandCenter.runButton.disabled = true;
@@ -228,8 +221,8 @@ commandCenter.runButton.addEventListener("click", async () => {
         destination: commandCenter.destination.value,
         prompt_type: custom ? "custom" : "canonical",
         custom_prompt: prompt,
-        mode: commandCenter.mode.value,
-        confirm_send: commandCenter.confirmSend.checked,
+        mode: send ? "send" : "draft",
+        confirm_send: send,
       }),
     });
     const result = await response.json();
