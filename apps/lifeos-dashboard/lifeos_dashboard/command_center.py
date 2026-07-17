@@ -12,9 +12,7 @@ from typing import Literal
 
 from .command_center_store import CommandCenterStore
 
-DestinationKey = Literal[
-    "hub", "main", "engineering", "logistics", "business", "office-leaks", "finance", "wellness"
-]
+DestinationKey = Literal["hub", "main", "engineering", "logistics", "business", "office-leaks", "finance", "wellness"]
 PromptType = Literal["canonical", "custom"]
 ExecutionMode = Literal["draft", "send"]
 
@@ -96,13 +94,7 @@ def build_command(job: CommandJob, app_root: Path) -> list[str]:
     if job.prompt_type == "canonical":
         command = [sys.executable, str(automation_root / "draft_department_boot.py"), destination.key]
     else:
-        command = [
-            sys.executable,
-            str(automation_root / "open_department_chat_group_verified.py"),
-            destination.chat_title,
-            "--text",
-            job.custom_prompt,
-        ]
+        command = [sys.executable, str(automation_root / "open_department_chat_group_verified.py"), destination.chat_title, "--text", job.custom_prompt]
     if job.mode == "send":
         command.extend(["--send", "--confirm-send", "SEND"])
     return command
@@ -113,39 +105,13 @@ def run_job(job: CommandJob, app_root: Path, timeout_seconds: int = 120) -> Exec
     try:
         command = build_command(job, app_root)
     except CommandCenterError as exc:
-        return ExecutionResult(
-            "refused", job.destination, job.mode, job.prompt_type, None,
-            started_at, time.time(), "", "", str(exc),
-        )
+        return ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", str(exc))
     try:
-        completed = subprocess.run(
-            command,
-            cwd=app_root,
-            env=os.environ.copy(),
-            capture_output=True,
-            text=True,
-            timeout=timeout_seconds,
-            check=False,
-        )
+        completed = subprocess.run(command, cwd=app_root, env=os.environ.copy(), capture_output=True, text=True, timeout=timeout_seconds, check=False)
     except subprocess.TimeoutExpired as exc:
-        return ExecutionResult(
-            "failed", job.destination, job.mode, job.prompt_type, None,
-            started_at, time.time(), exc.stdout or "", exc.stderr or "",
-            f"Automation timed out after {timeout_seconds} seconds.",
-        )
+        return ExecutionResult("failed", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), exc.stdout or "", exc.stderr or "", f"Automation timed out after {timeout_seconds} seconds.")
     succeeded = completed.returncode == 0
-    return ExecutionResult(
-        "succeeded" if succeeded else "failed",
-        job.destination,
-        job.mode,
-        job.prompt_type,
-        completed.returncode,
-        started_at,
-        time.time(),
-        completed.stdout,
-        completed.stderr,
-        "Completed successfully." if succeeded else "Automation process returned an error.",
-    )
+    return ExecutionResult("succeeded" if succeeded else "failed", job.destination, job.mode, job.prompt_type, completed.returncode, started_at, time.time(), completed.stdout, completed.stderr, "Completed successfully." if succeeded else "Automation process returned an error.")
 
 
 class CommandCenterService:
@@ -180,6 +146,9 @@ class CommandCenterService:
     def save_prompt(self, name: str, prompt: str) -> dict[str, object]:
         return self.store.save_prompt(name, prompt)
 
+    def update_prompt(self, prompt_id: int, name: str, prompt: str) -> dict[str, object] | None:
+        return self.store.update_prompt(prompt_id, name, prompt)
+
     def delete_prompt(self, prompt_id: int) -> bool:
         return self.store.delete_prompt(prompt_id)
 
@@ -187,39 +156,16 @@ class CommandCenterService:
         destination = DESTINATIONS.get(destination_key)
         if destination is None:
             raise CommandCenterError("Unknown destination. Exact LifeOS destination required.")
-        completed = subprocess.run(
-            [
-                sys.executable,
-                str(self.app_root / "automation" / "draft_department_boot.py"),
-                destination.key,
-                "--print-prompt",
-            ],
-            cwd=self.app_root,
-            env=os.environ.copy(),
-            capture_output=True,
-            text=True,
-            timeout=30,
-            check=False,
-        )
+        completed = subprocess.run([sys.executable, str(self.app_root / "automation" / "draft_department_boot.py"), destination.key, "--print-prompt"], cwd=self.app_root, env=os.environ.copy(), capture_output=True, text=True, timeout=30, check=False)
         if completed.returncode != 0:
-            detail = completed.stderr.strip() or "Canonical prompt preview failed."
-            raise CommandCenterError(detail)
-        return {
-            "name": f"{destination.label} canonical boot",
-            "prompt": completed.stdout,
-        }
+            raise CommandCenterError(completed.stderr.strip() or "Canonical prompt preview failed.")
+        return {"name": f"{destination.label} canonical boot", "prompt": completed.stdout}
 
     def history(self) -> list[dict[str, object]]:
         return self.store.history(self.history_limit)
 
     def status(self) -> dict[str, object]:
-        return {
-            "paused": self.paused,
-            "running": self.running,
-            "destinations": [asdict(destination) for destination in DESTINATIONS.values()],
-            "saved_prompts": self.store.list_prompts(),
-            "history": self.history(),
-        }
+        return {"paused": self.paused, "running": self.running, "destinations": [asdict(destination) for destination in DESTINATIONS.values()], "saved_prompts": self.store.list_prompts(), "history": self.history()}
 
     def _record(self, result: ExecutionResult) -> ExecutionResult:
         self.store.add_history(result.to_dict())
@@ -228,15 +174,9 @@ class CommandCenterService:
     def execute(self, job: CommandJob, timeout_seconds: int = 120) -> ExecutionResult:
         started_at = time.time()
         if self.paused:
-            return self._record(ExecutionResult(
-                "refused", job.destination, job.mode, job.prompt_type, None,
-                started_at, time.time(), "", "", "Automation Command Center is globally paused.",
-            ))
+            return self._record(ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", "Automation Command Center is globally paused."))
         if not self._run_lock.acquire(blocking=False):
-            return self._record(ExecutionResult(
-                "refused", job.destination, job.mode, job.prompt_type, None,
-                started_at, time.time(), "", "", "Another automation job is already running.",
-            ))
+            return self._record(ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", "Another automation job is already running."))
         try:
             return self._record(run_job(job, self.app_root, timeout_seconds=timeout_seconds))
         finally:
