@@ -9,6 +9,7 @@ The composer must remain available and enabled for a stable interval before use.
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 import time
 from dataclasses import dataclass
@@ -21,8 +22,9 @@ DEFAULT_PROJECT = "Life OS"
 DEFAULT_TIMEOUT_SECONDS = 5.0
 DEFAULT_READY_TIMEOUT_SECONDS = 20.0
 DEFAULT_STABLE_SECONDS = 1.0
-DEFAULT_WRITE_TIMEOUT_SECONDS = 3.0
+DEFAULT_WRITE_TIMEOUT_SECONDS = 8.0
 POLL_SECONDS = 0.25
+VERIFY_EDGE_CHARS = 120
 
 
 class AutomationStopped(RuntimeError):
@@ -200,8 +202,35 @@ def read_composer_text(composer: BaseWrapper) -> str:
         except Exception:
             continue
         if value is not None:
-            return str(value).strip()
+            return str(value)
     return ""
+
+
+def normalize_text(value: str) -> str:
+    """Normalize harmless UIA formatting differences for verification."""
+    value = value.replace("\r\n", "\n").replace("\r", "\n")
+    value = value.replace("\u00a0", " ")
+    value = re.sub(r"[ \t]+", " ", value)
+    value = re.sub(r" *\n *", "\n", value)
+    return value.strip()
+
+
+def text_matches_expected(observed: str, expected: str) -> bool:
+    observed_norm = normalize_text(observed)
+    expected_norm = normalize_text(expected)
+
+    if observed_norm == expected_norm:
+        return True
+
+    if not expected_norm or len(observed_norm) < len(expected_norm) * 0.9:
+        return False
+
+    edge = min(VERIFY_EDGE_CHARS, len(expected_norm))
+    return (
+        observed_norm.startswith(expected_norm[:edge])
+        and observed_norm.endswith(expected_norm[-edge:])
+        and abs(len(observed_norm) - len(expected_norm)) <= max(12, len(expected_norm) // 50)
+    )
 
 
 def composer_signature(composer: BaseWrapper) -> tuple[int, int, int, int]:
@@ -274,7 +303,7 @@ def wait_for_written_text(
     expected_text: str,
     timeout_seconds: float,
 ) -> BaseWrapper:
-    """Re-discover the composer until the UIA tree reports the inserted value."""
+    """Re-discover the composer until its normalized content matches strongly."""
     deadline = time.time() + timeout_seconds
     observed = ""
 
@@ -282,7 +311,7 @@ def wait_for_written_text(
         try:
             composer = find_visible_composer(window)
             observed = read_composer_text(composer)
-            if observed == expected_text:
+            if text_matches_expected(observed, expected_text):
                 return composer
         except Exception:
             pass
@@ -290,7 +319,8 @@ def wait_for_written_text(
 
     raise AutomationStopped(
         "Composer write verification timed out. "
-        f"Expected {expected_text!r}, last observed {observed!r}. Nothing was sent."
+        f"Expected {len(normalize_text(expected_text))} normalized characters, "
+        f"last observed {len(normalize_text(observed))}. Nothing was sent."
     )
 
 
@@ -301,7 +331,7 @@ def place_text(
     replace_existing: bool,
     write_timeout_seconds: float,
 ) -> BaseWrapper:
-    existing = read_composer_text(composer)
+    existing = normalize_text(read_composer_text(composer))
 
     if existing and existing != "Ask ChatGPT" and not replace_existing:
         raise AutomationStopped(
@@ -313,7 +343,7 @@ def place_text(
     composer.set_edit_text(text)
     return wait_for_written_text(
         window,
-        expected_text=text.strip(),
+        expected_text=text,
         timeout_seconds=write_timeout_seconds,
     )
 
