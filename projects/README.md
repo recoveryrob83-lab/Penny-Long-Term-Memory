@@ -1,52 +1,55 @@
 # Projects
 
+Updated: 2026-07-17
 Purpose: Durable project folders for Penny's Life OS work with Rob.
 
-Each active project should eventually have its own folder with a README, status, open loops, session handoff, department identity, and any project-specific notes that are safe to keep in GitHub.
+Each active department or project should maintain a README, status, open loops, session handoff, department identity, and any project-specific notes that are safe to keep in GitHub.
+
+## Canonical HQ Naming
+
+Top-level HQ display names follow:
+
+- `memory/HQ_NAMING_STANDARD.md`
+
+Project folder names remain stable filesystem paths and do not need to match display names exactly.
 
 ## Current Project Folders
 
-- `life-logistics-hq/`
-- `main-assistant/`
-- `job-search/`
-- `caregiver-income/`
-- `cleanup/`
-- `finance-benefits/` — Chief of Finance Penny / CFO Penny
-- `business-development/` — Chief Business HQ / Chief Business Development Penny
-- `office-leaks-consulting/` — Office Leaks Consulting HQ; active business-unit department under Chief Business HQ
-- `virtual-assistant-business/` — Legacy / redirect context for the former VA worker project; active Office Leaks state now lives in `office-leaks-consulting/`
-- `engineering/` — Chief Engineering Penny / Engineering HQ
-- `wellness/` — Chief Wellness HQ / Chief Wellness Penny
-- `recovery-logistics/`
-- `philosophy/`
-- `life-os-infrastructure/`
-- `health-medical/`
-- `housing-logistics/`
+- `life-logistics-hq/` — Logistics HQ; GitHub operations, shared infrastructure, audits, and long-horizon coordination
+- `main-assistant/` — Main Assistant HQ; daily operations and LifeOS coordination hub
+- `job-search/` — dormant / consolidated work-search history
+- `caregiver-income/` — dormant / consolidated support-pathway history
+- `cleanup/` — Site Cleanup project
+- `finance-benefits/` — Finance HQ
+- `business-development/` — Business HQ
+- `office-leaks-consulting/` — Office Leaks HQ; active business-unit department under Business HQ
+- `virtual-assistant-business/` — legacy redirect context; active Office Leaks state lives in `office-leaks-consulting/`
+- `engineering/` — Engineering HQ
+- `wellness/` — Wellness HQ
+- `recovery-logistics/` — dormant Recovery Logistics history
+- `philosophy/` — dormant Philosophy HQ history
+- `life-os-infrastructure/` — shared Life OS infrastructure and policies
+- `health-medical/` — Health Medical HQ
+- `housing-logistics/` — Housing Logistics HQ scaffold
 
 ## Project Session Handoffs
 
-Each project folder should use its `SESSION_HANDOFF.md` as the project-specific continuity anchor.
+Each project folder uses `SESSION_HANDOFF.md` as its project-specific continuity anchor.
 
-When Rob starts a new specialist or coordination chat, the initiation message should name the project, such as:
+When Rob starts or boots a top-level HQ chat, use the canonical display name:
 
-- Life Logistics HQ.
-- Main Assistant.
-- Caregiver Project HQ.
-- Job Search HQ.
-- Cleanup Project HQ.
-- Chief of Finance Penny / Finance Benefits HQ.
-- Chief Business HQ / Business Development.
-- Office Leaks Consulting HQ.
-- Legacy Virtual Assistant Business, only for historical context.
-- Chief Engineering Penny / Engineering HQ.
-- Chief Wellness HQ / Wellness HQ.
-- Recovery Logistics.
-- Philosophy HQ.
-- Life OS Infrastructure.
-- Health Medical HQ.
-- Housing Logistics HQ.
+- Logistics HQ
+- Main Assistant HQ
+- Finance HQ
+- Business HQ
+- Office Leaks HQ
+- Engineering HQ
+- Wellness HQ
+- LifeOS HQ for the central hub when needed
 
-The new Penny should read the global boot files first, then read the matching project `SESSION_HANDOFF.md` and `DEPARTMENT_IDENTITY.md` if present.
+Other project names may use their established descriptive labels, such as Site Cleanup, Recovery Logistics, Philosophy HQ, Life OS Infrastructure, Health Medical HQ, or Housing Logistics HQ.
+
+The new Penny should read the global boot files first, then the matching project `SESSION_HANDOFF.md`, `DEPARTMENT_IDENTITY.md`, `README.md`, `status.md`, and `open_loops.md` when they exist or are maintained.
 
 ## Department Identity Files
 
@@ -67,7 +70,7 @@ Use `SESSION_HANDOFF.md` for full project continuity.
 
 ## RPR Procedure for Project Files
 
-RPR means Rob -> Penny -> Rob.
+RPR means Rob → Penny → Rob.
 
 Use user-mediated file transfer when reliable structured-file handling matters more than connector automation.
 
