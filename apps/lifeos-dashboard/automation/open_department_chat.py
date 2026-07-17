@@ -1,6 +1,6 @@
 """Safely open a LifeOS department chat and place text in the composer.
 
-Windows-only prototype using pywinauto and the ChatGPT Classic UI Automation tree.
+Windows-only automation using pywinauto and the ChatGPT Classic UI Automation tree.
 Nothing is sent unless --send is explicitly provided together with --confirm-send SEND.
 Existing composer text is preserved unless --replace-existing is explicitly provided.
 The composer must remain available and enabled for a stable interval before use.
@@ -14,6 +14,7 @@ import sys
 import time
 from dataclasses import dataclass
 
+import win32clipboard
 from pywinauto import Desktop
 from pywinauto.base_wrapper import BaseWrapper
 
@@ -25,6 +26,7 @@ DEFAULT_STABLE_SECONDS = 1.0
 DEFAULT_WRITE_TIMEOUT_SECONDS = 8.0
 POLL_SECONDS = 0.25
 VERIFY_EDGE_CHARS = 120
+CLIPBOARD_SENTINEL = "__LIFEOS_COMPOSER_COPY_SENTINEL__"
 
 
 class AutomationStopped(RuntimeError):
@@ -85,7 +87,7 @@ def parse_args() -> argparse.Namespace:
         "--write-timeout",
         type=float,
         default=DEFAULT_WRITE_TIMEOUT_SECONDS,
-        help="Seconds to wait for the accessibility tree to reflect inserted text",
+        help="Seconds to wait for copied composer text to match the inserted text",
     )
     parser.add_argument(
         "--replace-existing",
@@ -181,7 +183,6 @@ def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
             continue
         if rect.width() <= 0 or rect.height() <= 0:
             continue
-
         edits.append(control)
 
     if not edits:
@@ -190,7 +191,7 @@ def find_visible_composer(window: BaseWrapper) -> BaseWrapper:
     return max(edits, key=lambda control: control.rectangle().top)
 
 
-def read_composer_text(composer: BaseWrapper) -> str:
+def read_composer_text_uia(composer: BaseWrapper) -> str:
     readers = (
         lambda: composer.get_value(),
         lambda: composer.iface_value.CurrentValue,
@@ -206,8 +207,57 @@ def read_composer_text(composer: BaseWrapper) -> str:
     return ""
 
 
+def clipboard_get_text() -> str:
+    try:
+        win32clipboard.OpenClipboard()
+        if win32clipboard.IsClipboardFormatAvailable(win32clipboard.CF_UNICODETEXT):
+            return str(win32clipboard.GetClipboardData(win32clipboard.CF_UNICODETEXT))
+        return ""
+    finally:
+        try:
+            win32clipboard.CloseClipboard()
+        except Exception:
+            pass
+
+
+def clipboard_set_text(value: str) -> None:
+    try:
+        win32clipboard.OpenClipboard()
+        win32clipboard.EmptyClipboard()
+        win32clipboard.SetClipboardText(value, win32clipboard.CF_UNICODETEXT)
+    finally:
+        try:
+            win32clipboard.CloseClipboard()
+        except Exception:
+            pass
+
+
+def copy_composer_text(composer: BaseWrapper) -> str:
+    """Copy the editor contents while preserving the user's clipboard.
+
+    A sentinel distinguishes an empty editor from a failed or no-op copy. The right-arrow
+    key collapses the select-all range to the end so a later Enter submits rather than
+    replacing the selected prompt.
+    """
+    original_clipboard = clipboard_get_text()
+    copied = ""
+    try:
+        clipboard_set_text(CLIPBOARD_SENTINEL)
+        composer.set_focus()
+        composer.type_keys("^a", set_foreground=True)
+        composer.type_keys("^c", set_foreground=True)
+        time.sleep(0.15)
+        copied = clipboard_get_text()
+        composer.type_keys("{RIGHT}", set_foreground=True)
+    finally:
+        clipboard_set_text(original_clipboard)
+
+    if copied == CLIPBOARD_SENTINEL:
+        return ""
+    return copied
+
+
 def normalize_text(value: str) -> str:
-    """Normalize harmless UIA formatting differences for verification."""
     value = value.replace("\r\n", "\n").replace("\r", "\n")
     value = value.replace("\u00a0", " ")
     value = re.sub(r"[ \t]+", " ", value)
@@ -221,7 +271,6 @@ def text_matches_expected(observed: str, expected: str) -> bool:
 
     if observed_norm == expected_norm:
         return True
-
     if not expected_norm or len(observed_norm) < len(expected_norm) * 0.9:
         return False
 
@@ -229,7 +278,8 @@ def text_matches_expected(observed: str, expected: str) -> bool:
     return (
         observed_norm.startswith(expected_norm[:edge])
         and observed_norm.endswith(expected_norm[-edge:])
-        and abs(len(observed_norm) - len(expected_norm)) <= max(12, len(expected_norm) // 50)
+        and abs(len(observed_norm) - len(expected_norm))
+        <= max(12, len(expected_norm) // 50)
     )
 
 
@@ -303,14 +353,14 @@ def wait_for_written_text(
     expected_text: str,
     timeout_seconds: float,
 ) -> BaseWrapper:
-    """Re-discover the composer until its normalized content matches strongly."""
+    """Re-discover and copy the composer until its content matches strongly."""
     deadline = time.time() + timeout_seconds
     observed = ""
 
     while time.time() < deadline:
         try:
             composer = find_visible_composer(window)
-            observed = read_composer_text(composer)
+            observed = copy_composer_text(composer)
             if text_matches_expected(observed, expected_text):
                 return composer
         except Exception:
@@ -318,10 +368,17 @@ def wait_for_written_text(
         time.sleep(POLL_SECONDS)
 
     raise AutomationStopped(
-        "Composer write verification timed out. "
+        "Composer clipboard verification timed out. "
         f"Expected {len(normalize_text(expected_text))} normalized characters, "
-        f"last observed {len(normalize_text(observed))}. Nothing was sent."
+        f"last copied {len(normalize_text(observed))}. Nothing was sent."
     )
+
+
+def read_existing_composer_text(composer: BaseWrapper) -> str:
+    uia_text = normalize_text(read_composer_text_uia(composer))
+    if uia_text and uia_text != "Ask ChatGPT":
+        return uia_text
+    return normalize_text(copy_composer_text(composer))
 
 
 def place_text(
@@ -331,7 +388,7 @@ def place_text(
     replace_existing: bool,
     write_timeout_seconds: float,
 ) -> BaseWrapper:
-    existing = normalize_text(read_composer_text(composer))
+    existing = read_existing_composer_text(composer)
 
     if existing and existing != "Ask ChatGPT" and not replace_existing:
         raise AutomationStopped(
@@ -350,7 +407,7 @@ def place_text(
 
 def maybe_send(composer: BaseWrapper, send: bool, confirmation: str) -> None:
     if not send:
-        print("Draft placed and verified. Nothing sent.")
+        print("Draft placed and clipboard-verified. Nothing sent.")
         return
 
     if confirmation != "SEND":
@@ -358,14 +415,14 @@ def maybe_send(composer: BaseWrapper, send: bool, confirmation: str) -> None:
             "Send requested but confirmation was missing. "
             "Use --confirm-send SEND to authorize submission."
         )
-
     if not composer.is_enabled() or not composer.is_visible():
         raise AutomationStopped(
             "Composer lost readiness before submission. Message was not sent."
         )
 
-    composer.type_keys("{ENTER}")
-    print("Message submitted after explicit confirmation.")
+    composer.set_focus()
+    composer.type_keys("{ENTER}", set_foreground=True)
+    print("Message submitted after explicit confirmation and clipboard verification.")
 
 
 def main() -> int:
@@ -400,7 +457,7 @@ def main() -> int:
         )
         print("   Composer readiness verified.")
 
-        print("5. Applying draft policy and verifying the write")
+        print("5. Applying draft policy and clipboard-verifying the write")
         composer = place_text(
             window,
             composer,
