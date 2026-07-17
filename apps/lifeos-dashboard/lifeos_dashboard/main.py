@@ -34,6 +34,13 @@ def _cache_path(environment_name: str, filename: str) -> Path:
     return APP_ROOT / ".local" / filename
 
 
+def _environment_flag(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().casefold() not in {"0", "false", "no", "off"}
+
+
 def build_default_source() -> DashboardSource:
     """Build the live source chain, falling back source-by-source when needed."""
     sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
@@ -46,7 +53,12 @@ def build_default_source() -> DashboardSource:
         else PACKAGE_ROOT.parents[2]
     )
     if (repo_root / ".git").exists() and (repo_root / "memory").exists():
-        source = LocalGitHubDashboardSource(repo_root, source)
+        source = LocalGitHubDashboardSource(
+            repo_root,
+            source,
+            auto_sync=_environment_flag("LIFEOS_GITHUB_AUTO_SYNC", True),
+            sync_branch=os.getenv("LIFEOS_GITHUB_SYNC_BRANCH", "main"),
+        )
 
     source = TrelloFlowDashboardSource.from_environment(
         source,
