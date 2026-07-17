@@ -4,28 +4,27 @@ Updated: 2026-07-18
 
 ## Open
 
-| Status | Item | Next Action | Notes |
-|---|---|---|---|
-| Priority | Department ownership architecture and dashboard inspection | Pull and restart the dashboard, compare warning and finding counts with the 458-record / 4-finding / 101-warning baseline, review enriched Finding details, then use confirmed evidence to clean duplicated or misplaced GitHub state and formalize the ownership SOP | Department Inspection MVP is locally validated. First evidence-based tuning preserves underscores, removes routine bullet-priority warnings, filters weak cross-department duplicate matches, contains long lists, and enriches related-record details. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
-| Active | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
-| Active | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
-| Open | Restart and overdue-run validation | Schedule a one-time draft, stop the dashboard before execution, restart afterward, and observe catch-up behavior | Decide whether late jobs should run immediately, skip, expire, or require approval only after evidence |
-| Open | Recurring second-occurrence validation | Observe the next real daily or weekly occurrence | First daily LifeOS HQ run succeeded and advanced correctly; a second occurrence is still needed to prove sustained recurrence |
-| Open | Scheduler production preflight | Define health visibility, missed-run policy, and unattended operating requirements | Consider ChatGPT availability, expanded-project state, upcoming/overdue visibility, execution window, and Windows startup/service packaging |
-| Active | Desktop department automation maintenance | Use the validated automation in normal operation; change selectors or recovery only after demonstrated failure or material UI change | Preserve exact navigation, occupied-composer protection, clipboard verification, explicit send, one-job lock, and stop-on-uncertainty behavior |
-| Open | Dashboard auto-refresh | Add a configurable in-page auto-refresh control only if ordinary use still demonstrates value | Reuse the existing refresh path, prevent overlaps, show last/next refresh state, and preserve guarded Git sync |
-| Open | Four-source dashboard observation | Confirm ordinary refresh, independent source health, cached degraded operation, and accepted scan path remain useful in real use | Do not intentionally destroy valid credentials merely to demonstrate failure mode |
-| Open | Penny Inventory Worker pilot | Begin with 2–3 real sale items and verify one-row-per-item writes, stable image references, uncertainty labels, and final Sheet read | Architecture complete; package lives at `workers/penny-inventory/` |
-| Open | Penny Raw Capture Worker pilot | Observe real append, canonical-target, timestamp, and verification behavior | Worker package implemented; operational reliability still needs live use |
-| Open | Reliable Connector Execution Layer | Turn the design note into an implementation packet outline | Drive doc: `Reliable Connector Execution Layer - Design Note` |
-| Open | Operation ledger schema | Draft fields, states, idempotency keys, verification methods, partial-success handling, and recovery instructions | Keep the first schema small enough to test manually |
-| Open | Connector health and retry policy | Define read/write health states, bounded retry rules, stop/backoff triggers, and degraded-mode fallback | Dashboard caches, guarded Git sync, desktop automation safety gates, and Command Center results provide concrete examples |
-| Open | Worker reliability evidence | Compare real pilot results against `workers/WORKER_STANDARD.md` before proposing more workers | Do not create speculative worker bureaucracy |
-| Open | Chat HQ observation | Watch the seven HQ chats for routing friction, duplicated authority, stale boot assumptions, connector limits, and wasted model usage | Refine only from observed use |
-| Open | Office Leaks delivery architecture | Continue one-problem local-service-office cleanup playbooks as Business requirements mature | Preserve mechanical workflow and human-system layers |
-| Open | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to Finance HQ | Finance owns money and paperwork |
-| Open | Software repository strategy | Keep LifeOS as the runtime mirror and use separate repositories for educational and future standalone projects | Revisit dashboard extraction only if implementation expands materially |
-| Paused | Engineering HQ Daily Sync | Keep paused until the scheduler's recovery and missed-run behavior are production-safe and Rob explicitly resumes it | Scheduling now exists, but this specific unattended production task is not yet reauthorized |
+| Status | Priority | Item | Next Action | Notes |
+|---|---|---|---|---|
+| Active | High | Department ownership architecture and dashboard inspection | Verify the confirmed findings disappear after source cleanup, then formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes | Department Inspection is locally validated. Live audit improved from 458 records / 4 findings / 101 warnings to 459 records / 4 findings / 15 warnings before source cleanup. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
+| Active | Normal | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
+| Active | Normal | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
+| Open | Normal | Restart and overdue-run validation | Schedule a one-time draft, stop the dashboard before execution, restart afterward, and observe catch-up behavior | Decide whether late jobs should run immediately, skip, expire, or require approval only after evidence |
+| Open | Normal | Recurring second-occurrence validation | Observe the next real daily or weekly occurrence | First daily LifeOS HQ run succeeded and advanced correctly; a second occurrence is still needed to prove sustained recurrence |
+| Open | Normal | Scheduler production preflight | Define health visibility, missed-run policy, and unattended operating requirements | Consider ChatGPT availability, expanded-project state, upcoming/overdue visibility, execution window, and Windows startup/service packaging |
+| Active | Normal | Desktop department automation maintenance | Use the validated automation in normal operation; change selectors or recovery only after demonstrated failure or material UI change | Preserve exact navigation, occupied-composer protection, clipboard verification, explicit send, one-job lock, and stop-on-uncertainty behavior |
+| Open | Normal | Dashboard auto-refresh | Add a configurable in-page auto-refresh control only if ordinary use still demonstrates value | Reuse the existing refresh path, prevent overlaps, show last/next refresh state, and preserve guarded Git sync |
+| Open | Normal | Four-source dashboard observation | Confirm ordinary refresh, independent source health, cached degraded operation, and accepted scan path remain useful in real use | Do not intentionally destroy valid credentials merely to demonstrate failure mode |
+| Open | Normal | Penny Inventory Worker pilot | Begin with 2–3 real sale items and verify one-row-per-item writes, stable image references, uncertainty labels, and final Sheet read | Architecture complete; package lives at `workers/penny-inventory/` |
+| Open | Normal | Penny Raw Capture Worker pilot | Observe real append, canonical-target, timestamp, and verification behavior | Worker package implemented; operational reliability still needs live use |
+| Open | Normal | Reliable Connector Execution Layer | Turn the design note into an implementation packet outline | Drive doc: `Reliable Connector Execution Layer - Design Note` |
+| Open | Normal | Operation ledger schema | Draft fields, states, idempotency keys, verification methods, partial-success handling, and recovery instructions | Keep the first schema small enough to test manually |
+| Open | Normal | Connector health and retry policy | Define read/write health states, bounded retry rules, stop/backoff triggers, and degraded-mode fallback | Dashboard caches, guarded Git sync, desktop automation safety gates, and Command Center results provide concrete examples |
+| Open | Normal | Worker reliability evidence | Compare real pilot results against `workers/WORKER_STANDARD.md` before proposing more workers | Do not create speculative worker bureaucracy |
+| Open | Normal | Office Leaks delivery architecture | Continue one-problem local-service-office cleanup playbooks as Business requirements mature | Preserve mechanical workflow and human-system layers |
+| Open | Normal | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to Finance HQ | Finance owns money and paperwork |
+| Open | Normal | Software repository strategy | Keep LifeOS as the runtime mirror and use separate repositories for educational and future standalone projects | Revisit dashboard extraction only if implementation expands materially |
+| Paused | Low | Engineering HQ Daily Sync | Keep paused until the scheduler's recovery and missed-run behavior are production-safe and Rob explicitly resumes it | Scheduling now exists, but this specific unattended production task is not yet reauthorized |
 
 ## Waiting / Deferred
 
@@ -41,6 +40,7 @@ Updated: 2026-07-18
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Department Inspection first source cleanup | Separated Engineering lifecycle state from priority, removed the duplicated broad Chat HQ watch, consolidated Legacy VA folder disposition under Logistics, and removed speculative registry-reference placeholders from open-loop files |
 | 2026-07-18 | Department Inspection MVP local validation | Rob confirmed the new tab works in the local Windows dashboard after guarded GitHub synchronization and server restart; live classification audit remains open under the broader ownership package |
 | 2026-07-17 | Scheduled occupied-composer safety validation | A scheduled custom send to Logistics HQ found the exact destination behind `Show more`, preserved the existing composer draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery message in Run History |
 | 2026-07-17 | Automation Command Center manual Phase 1 | Eight destinations, canonical/saved/custom prompts, draft/send mode, explicit send confirmation, one-job lock, global pause, structured results, and local history implemented |
@@ -57,6 +57,5 @@ Updated: 2026-07-18
 
 ## Parking Lot
 
-- Add registry references later if Logistics assigns them.
 - Evaluate additional workers only after Raw Capture and Inventory pilots produce real evidence.
 - Revisit software-backed capture services only if connector-based operation proves insufficient.
