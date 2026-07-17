@@ -1,6 +1,6 @@
 # Open Loops
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 Purpose: Track unfinished Life OS work without storing detailed operational records in GitHub.
 
 ## Priority Open Loops
@@ -41,10 +41,10 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Desktop automation evolution: a demonstrated UI change or failure before modifying selectors, verification rules, navigation recovery, or send behavior.
 - Scheduled HQ Sync: Engineering HQ Daily Sync remains paused pending restart/recovery evidence, repeated recurrence, stronger production preflight, and explicit authorization.
 - Site Cleanup and consolidated domains: external inputs or explicit routing from Rob.
-- Legacy Virtual Assistant folder: later decision on continued redirect history, archive, or removal after references are safely migrated.
 
 ## Recently Closed
 
+- 2026-07-18: Department Inspection source cleanup removed the broad Engineering and Logistics Chat HQ watch mirrors, consolidated Legacy Virtual Assistant folder disposition under Logistics, and removed speculative registry-reference placeholders from department parking lots.
 - 2026-07-17: Scheduled occupied-composer validation passed end to end in Logistics HQ; the existing draft was preserved, nothing was sent, Run History recorded `failed`, and the explicit recovery reason displayed correctly.
 - 2026-07-17: Automation Command Center manual Phase 1, saved-prompt lifecycle, one-time scheduling, and daily/weekly scheduling were implemented and live-validated.
 - 2026-07-17: Scheduled Jobs and Run History were separated into distinct filtered views.
@@ -67,7 +67,6 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 ## Parking Lot
 
-- Decide whether `projects/virtual-assistant-business/` should remain redirect history, be archived, or be removed.
 - Revisit scheduled HQ sync only after restart/overdue behavior, repeated recurrence, collapsed-project recovery, and production preflight are strong enough and Rob explicitly authorizes it.
 - Revisit dashboard extraction into a dedicated repository only if implementation expands materially.
 
