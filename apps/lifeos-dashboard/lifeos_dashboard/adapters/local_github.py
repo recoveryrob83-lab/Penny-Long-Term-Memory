@@ -1,14 +1,17 @@
-"""Read-only adapter for LifeOS state in a local GitHub checkout.
+"""Read-mostly adapter for LifeOS state in a local GitHub checkout.
 
-The dashboard intentionally reads the repository already managed by GitHub
-Desktop. It never needs a GitHub token and never writes repository content.
+The dashboard reads the repository already managed by GitHub Desktop. When
+guarded auto-sync is enabled, it may fetch and fast-forward a clean main branch.
+It never merges divergent history, rebases, resets, or discards local work.
 """
 
 from __future__ import annotations
 
 import re
 import subprocess
+import threading
 from copy import deepcopy
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -18,6 +21,20 @@ from .base import DashboardSource
 _NOTE_DATE = re.compile(r"NOTE-(\d{4})(\d{2})(\d{2})")
 _MARKDOWN_LINK = re.compile(r"\[([^]]+)]\([^)]+\)")
 _MARKDOWN_DECORATION = re.compile(r"[`*_]")
+
+
+@dataclass(frozen=True)
+class GitSyncResult:
+    """Sanitized outcome from one guarded repository synchronization attempt."""
+
+    status: str
+    detail: str
+    changed: bool = False
+    commits: int = 0
+
+    @property
+    def healthy(self) -> bool:
+        return self.status in {"disabled", "up-to-date", "synced"}
 
 
 class LocalGitHubDashboardSource:
@@ -33,15 +50,21 @@ class LocalGitHubDashboardSource:
         notebook_limit: int = 5,
         open_loop_limit: int = 5,
         commit_limit: int = 4,
+        auto_sync: bool = False,
+        sync_branch: str = "main",
     ) -> None:
         self._repo_root = repo_root.resolve()
         self._fallback_source = fallback_source
         self._notebook_limit = notebook_limit
         self._open_loop_limit = open_loop_limit
         self._commit_limit = commit_limit
+        self._auto_sync = auto_sync
+        self._sync_branch = sync_branch.strip() or "main"
+        self._sync_lock = threading.Lock()
 
     def load(self) -> dict[str, Any]:
         """Return a dashboard payload with the GitHub portions made live."""
+        sync_result = self._sync_checkout()
         payload = deepcopy(self._fallback_source.load())
         git_state = self._load_git_state()
         advisories = self._load_open_advisories()
@@ -54,7 +77,7 @@ class LocalGitHubDashboardSource:
         metadata["snapshot_at"] = datetime.now(UTC).isoformat()
 
         payload["sources"] = self._replace_github_source(
-            payload.get("sources", []), git_state
+            payload.get("sources", []), git_state, sync_result
         )
         payload["notebooks"] = notebooks
         payload["github"] = {
@@ -63,6 +86,12 @@ class LocalGitHubDashboardSource:
             "head": git_state["head"],
             "working_tree": git_state["working_tree"],
             "last_commit": git_state["last_commit"],
+            "sync": {
+                "status": sync_result.status,
+                "detail": sync_result.detail,
+                "changed": sync_result.changed,
+                "commits": sync_result.commits,
+            },
             "open_advisories": advisories,
             "open_loops": open_loops,
             "recent_activity": recent_activity,
@@ -70,20 +99,32 @@ class LocalGitHubDashboardSource:
         return payload
 
     def _replace_github_source(
-        self, sources: object, git_state: dict[str, str]
+        self,
+        sources: object,
+        git_state: dict[str, str],
+        sync_result: GitSyncResult,
     ) -> list[dict[str, str]]:
         normalized = (
             [dict(item) for item in sources if isinstance(item, dict)]
             if isinstance(sources, list)
             else []
         )
-        state = "healthy" if git_state["available"] == "yes" else "partial"
-        freshness = (
-            f"{git_state['branch']} · {git_state['head']} · "
-            f"{git_state['working_tree']}"
-            if git_state["available"] == "yes"
-            else "local files available; Git command unavailable"
+        state = (
+            "healthy"
+            if git_state["available"] == "yes" and sync_result.healthy
+            else "partial"
         )
+        if git_state["available"] == "yes":
+            freshness = (
+                f"{git_state['branch']} · {git_state['head']} · "
+                f"{git_state['working_tree']}"
+            )
+            sync_label = self._sync_freshness(sync_result)
+            if sync_label:
+                freshness = f"{freshness} · {sync_label}"
+        else:
+            freshness = "local files available; Git command unavailable"
+
         github_source = {
             "name": "GitHub",
             "state": state,
@@ -96,6 +137,114 @@ class LocalGitHubDashboardSource:
                 return normalized
 
         return [github_source, *normalized]
+
+    @staticmethod
+    def _sync_freshness(sync_result: GitSyncResult) -> str:
+        if sync_result.status == "disabled":
+            return ""
+        if sync_result.status == "up-to-date":
+            return "up to date"
+        if sync_result.status == "synced":
+            suffix = "commit" if sync_result.commits == 1 else "commits"
+            return f"synced {sync_result.commits} {suffix}"
+        if sync_result.status == "blocked":
+            return f"sync blocked: {sync_result.detail}"
+        return f"sync error: {sync_result.detail}"
+
+    def _sync_checkout(self) -> GitSyncResult:
+        if not self._auto_sync:
+            return GitSyncResult("disabled", "Automatic GitHub synchronization is disabled.")
+
+        with self._sync_lock:
+            return self._sync_checkout_locked()
+
+    def _sync_checkout_locked(self) -> GitSyncResult:
+        branch = self._run_git("rev-parse", "--abbrev-ref", "HEAD")
+        if branch is None:
+            return GitSyncResult("error", "Git is unavailable.")
+
+        if branch != self._sync_branch:
+            return GitSyncResult(
+                "blocked",
+                f"expected {self._sync_branch}; on {branch}",
+            )
+
+        status = self._run_git("status", "--porcelain")
+        if status is None:
+            return GitSyncResult("error", "Working-tree state is unavailable.")
+        if status.strip():
+            return GitSyncResult("blocked", "local changes present")
+
+        if self._run_git("fetch", "--quiet", "origin") is None:
+            return GitSyncResult("error", f"unable to fetch origin/{self._sync_branch}")
+
+        remote_ref = f"origin/{self._sync_branch}"
+        if self._run_git("rev-parse", "--verify", remote_ref) is None:
+            return GitSyncResult("error", f"{remote_ref} is unavailable")
+
+        counts = self._run_git(
+            "rev-list",
+            "--left-right",
+            "--count",
+            f"HEAD...{remote_ref}",
+        )
+        parsed_counts = self._parse_ahead_behind(counts)
+        if parsed_counts is None:
+            return GitSyncResult("error", "unable to compare local and remote history")
+        ahead, behind = parsed_counts
+
+        if ahead and behind:
+            return GitSyncResult(
+                "blocked",
+                f"local and remote histories diverged ({ahead} ahead, {behind} behind)",
+            )
+        if ahead:
+            suffix = "commit" if ahead == 1 else "commits"
+            return GitSyncResult(
+                "blocked",
+                f"local branch is ahead by {ahead} {suffix}",
+            )
+        if behind == 0:
+            return GitSyncResult(
+                "up-to-date",
+                f"{remote_ref} already matches local {self._sync_branch}",
+            )
+
+        status_after_fetch = self._run_git("status", "--porcelain")
+        if status_after_fetch is None:
+            return GitSyncResult("error", "Working-tree state changed unexpectedly.")
+        if status_after_fetch.strip():
+            return GitSyncResult("blocked", "local changes appeared after fetch")
+
+        if self._run_git("merge", "--ff-only", remote_ref) is None:
+            return GitSyncResult("error", "fast-forward update failed")
+
+        final_status = self._run_git("status", "--porcelain")
+        if final_status is None or final_status.strip():
+            return GitSyncResult("error", "post-sync working-tree verification failed")
+
+        suffix = "commit" if behind == 1 else "commits"
+        return GitSyncResult(
+            "synced",
+            f"Fast-forwarded {behind} {suffix} from {remote_ref}.",
+            changed=True,
+            commits=behind,
+        )
+
+    @staticmethod
+    def _parse_ahead_behind(value: str | None) -> tuple[int, int] | None:
+        if value is None:
+            return None
+        parts = value.replace("\t", " ").split()
+        if len(parts) != 2:
+            return None
+        try:
+            ahead, behind = (int(part) for part in parts)
+        except ValueError:
+            return None
+        if ahead < 0 or behind < 0:
+            return None
+        return ahead, behind
 
     def _load_git_state(self) -> dict[str, str]:
         branch = self._run_git("rev-parse", "--abbrev-ref", "HEAD")
@@ -210,13 +359,14 @@ class LocalGitHubDashboardSource:
         return activity
 
     def _run_git(self, *args: str) -> str | None:
+        timeout = 15 if args and args[0] in {"fetch", "merge"} else 4
         try:
             result = subprocess.run(
                 ["git", "-C", str(self._repo_root), *args],
                 check=False,
                 capture_output=True,
                 text=True,
-                timeout=4,
+                timeout=timeout,
             )
         except (FileNotFoundError, OSError, subprocess.TimeoutExpired):
             return None

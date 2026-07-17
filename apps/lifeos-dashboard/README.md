@@ -18,7 +18,7 @@ It includes:
 
 - a FastAPI backend;
 - a responsive browser-based dashboard;
-- a read-only local GitHub adapter;
+- a local GitHub adapter with guarded fast-forward synchronization;
 - live branch, commit, working-tree, advisory, open-loop, notebook, and durable-activity state;
 - a read-only Trello Flow Board adapter;
 - live Trello Now, top Next, and selected Waiting cards;
@@ -147,18 +147,37 @@ When the dashboard is installed inside the LifeOS repository, it automatically f
 - `projects/*/notebook/NOTE-*.md` for recent notebook activity;
 - local Git history for branch, commit, working-tree, and recent durable activity.
 
-GitHub remains authoritative. The dashboard shows the state currently pulled to the computer.
+GitHub remains authoritative. On every dashboard load or **Refresh view**, the adapter checks the local checkout and attempts a guarded synchronization.
+
+Automatic synchronization proceeds only when all of these conditions are true:
+
+- the checkout is on the configured branch, `main` by default;
+- the working tree is clean;
+- `origin/main` can be fetched;
+- the local branch is behind the remote without any local-only commits;
+- Git can apply the update with `git merge --ff-only`.
+
+The dashboard never rebases, resets, discards files, creates merge commits, or resolves conflicts. A dirty, ahead, diverged, detached, or non-main checkout is left untouched and shown as a partial GitHub source with a plain-language reason.
+
+Optional controls:
+
+```text
+LIFEOS_GITHUB_AUTO_SYNC=1
+LIFEOS_GITHUB_SYNC_BRANCH=main
+```
+
+Set `LIFEOS_GITHUB_AUTO_SYNC=0` to restore manual-pull behavior.
 
 ## Refresh and degraded behavior
 
 Use **Refresh view** for ordinary source updates:
 
-- pulled GitHub markdown or commit changes;
+- guarded GitHub fetch and fast-forward, followed by refreshed repository state;
 - Trello card changes;
 - Todoist task changes;
 - Google Calendar event changes.
 
-Restart the dashboard after changing `.env` or pulling dashboard application code. Run `pip install -e ".[dev]"` again when dependencies changed.
+Restart the dashboard after changing `.env`. If auto-sync pulls dashboard application code, restart before expecting the running Python process to use that new code. Run `pip install -e ".[dev]"` again when dependencies changed.
 
 Each live web adapter writes only normalized display data to `.local/`, which is ignored by Git. If a source later times out or returns an error, the dashboard uses that source's last-good cache and marks it stale. Tokens, keys, and the private Calendar URL are never cached.
 
@@ -205,10 +224,10 @@ ruff check .
 
 ## Planned integration order
 
-1. GitHub notebooks, advisories, open loops, and durable activity: implemented
+1. GitHub notebooks, advisories, open loops, durable activity, and guarded auto-sync: implemented
 2. Trello Flow Board state: implemented
 3. Todoist and Google Calendar commitments: implemented; local credentials required
-4. Gmail attention signals and Google Drive shortcuts
+4. Gmail attention signals and Google Drive shortcuts: deferred until client work creates a demonstrated need
 5. Optional pywebview desktop packaging
 
 ## Security rules
@@ -217,6 +236,7 @@ ruff check .
 - Keep secrets in the ignored local `.env` file or process environment variables.
 - Bind the development server to `127.0.0.1`, not every network interface.
 - Treat the dashboard as read-only or read-mostly until a specific write action earns its place.
+- The only current write behavior is the guarded Git fast-forward of a clean configured branch.
 - Keep Trello, Todoist, Calendar, Gmail, Drive, and GitHub as their own sources of truth.
 - Penny remains the worker and conversational control layer.
 

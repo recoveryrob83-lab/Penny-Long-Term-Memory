@@ -37,7 +37,7 @@ SampleDashboardSource
 The sources form a fallback chain:
 
 - packaged sample data supplies a complete dashboard shape;
-- the local GitHub adapter replaces GitHub-backed sections;
+- the local GitHub adapter safely synchronizes and replaces GitHub-backed sections;
 - the Trello adapter replaces Flow when local read credentials are configured;
 - the Todoist adapter replaces Today commitments;
 - the Calendar adapter replaces the next-event card;
@@ -45,16 +45,26 @@ The sources form a fallback chain:
 
 ## Local GitHub adapter
 
-The GitHub adapter reads the checkout already managed by GitHub Desktop. It requires no GitHub API credential and performs no writes.
+The GitHub adapter reads the local LifeOS checkout and requires no GitHub API credential. It has one narrowly bounded write capability: a guarded fast-forward update of the configured branch.
 
-It reads:
+Before reading dashboard state, it may:
+
+1. confirm the checkout is on `main`, or the configured sync branch;
+2. confirm the working tree is clean;
+3. run `git fetch --quiet origin`;
+4. compare `HEAD` with `origin/main`;
+5. run `git merge --ff-only origin/main` only when local history has no unique commits and is strictly behind.
+
+It never rebases, resets, discards files, creates merge commits, changes branches, or resolves conflicts. Dirty, ahead, diverged, detached, nonconfigured, or unreachable states are left untouched and surfaced as partial source health.
+
+After synchronization, it reads:
 
 - `coordination/ADVISORY_INDEX.md` for open advisories;
 - `memory/05_OPEN_LOOPS.md` for global priority open loops;
 - `projects/*/notebook/NOTE-*.md` for recent notebook entries;
-- local Git metadata for branch, current commit, working-tree state, last commit, and recent durable-memory commits.
+- local Git metadata for branch, current commit, working-tree state, last commit, recent durable-memory commits, and the sanitized synchronization result.
 
-The application detects the surrounding LifeOS repository automatically. `LIFEOS_REPOSITORY_ROOT` may override the detected root.
+The application detects the surrounding LifeOS repository automatically. `LIFEOS_REPOSITORY_ROOT` may override the detected root. Auto-sync defaults on and may be disabled with `LIFEOS_GITHUB_AUTO_SYNC=0`. `LIFEOS_GITHUB_SYNC_BRANCH` defaults to `main`.
 
 If the Git executable is unavailable, markdown-backed sections remain readable and Git command metadata reports a partial state rather than blanking the dashboard.
 
@@ -147,12 +157,12 @@ FastAPI application
   v
 DashboardService and local caches
   |
-  +--> Local GitHub read adapter       [implemented]
-  +--> Trello Flow read adapter        [implemented]
-  +--> Todoist commitments adapter     [implemented]
-  +--> Calendar private-iCal adapter   [implemented]
-  +--> Gmail attention adapter         [planned]
-  +--> Drive shortcuts adapter         [planned]
+  +--> Local GitHub read + guarded sync [implemented]
+  +--> Trello Flow read adapter          [implemented]
+  +--> Todoist commitments adapter       [implemented]
+  +--> Calendar private-iCal adapter     [implemented]
+  +--> Gmail attention adapter           [deferred]
+  +--> Drive shortcuts adapter           [deferred]
 ```
 
 Each adapter returns normalized data plus source health and freshness metadata. One failed source must not blank the entire dashboard.
@@ -169,15 +179,16 @@ Each adapter returns normalized data plus source health and freshness metadata. 
 8. The prompt launcher is reused, not discarded.
 9. The financial connector remains isolated from Hub and multi-connector operation.
 10. Build only from observed need.
+11. Any write behavior must be narrowly authorized, deterministic, guarded, and refusal-first.
 
 ## Dashboard regions
 
 - System bar: refresh state and source warnings.
 - Today: live Calendar next event and live Todoist commitments when configured.
 - Flow: live Trello Now, top Next, and selected Waiting state when configured.
-- Attention: lightweight Gmail signals.
-- Working files: pinned or recent Drive links.
-- GitHub pulse: branch, checkout state, advisories, priority open loops, and recent durable commits.
+- Attention: lightweight Gmail signals, deferred until client work creates the need.
+- Working files: pinned or recent Drive links, deferred until client work creates the need.
+- GitHub pulse: branch, checkout state, sync outcome, advisories, priority open loops, and recent durable commits.
 - Recent LifeOS activity: recent GitHub notebook notes.
 - Penny commands: common prompts and future launcher integration.
 
@@ -189,23 +200,25 @@ Adapters must:
 
 - time out rather than hang indefinitely;
 - distinguish unavailable, stale, partial, and healthy states;
-- avoid writes unless a separate explicitly authorized write contract exists;
+- avoid writes unless a separate explicitly authorized and guarded write contract exists;
 - avoid logging or caching secrets;
 - return enough source metadata for the interface to explain what happened;
 - paginate bounded APIs safely;
 - normalize time using an explicit local timezone;
 - preserve last-good display state when possible.
 
+The Local GitHub adapter's guarded fast-forward is the only current write contract.
+
 ## Refresh behavior
 
 The server runs with code reload disabled.
 
-- Repository content changes: pull with GitHub Desktop, then use **Refresh view**.
+- Repository content changes: **Refresh view** fetches `origin` and fast-forwards a clean configured branch when safe.
 - Trello card changes: use **Refresh view**.
 - Todoist task changes: use **Refresh view**.
 - Google Calendar event changes: use **Refresh view**.
 - `.env` changes: stop the server with `Ctrl+C` and relaunch it.
-- Dashboard code or dependency changes: pull, reinstall the editable package if needed, and relaunch.
+- Dashboard code or dependency changes: auto-sync may download the files, but relaunch the running process and reinstall the editable package when dependencies changed.
 
 ## Cache direction
 
