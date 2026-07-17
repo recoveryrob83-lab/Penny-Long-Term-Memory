@@ -1,42 +1,38 @@
-"""Production shim for Group composer verification with bounded UI-text tolerance.
+"""Production shim for Group composer verification across UI copy transforms.
 
-The modern ChatGPT Classic composer can interleave a small amount of accessibility text
-inside the clipboard payload. Verification succeeds only when every normalized expected
-character appears in order with no deletions or substitutions, and the copied payload has
-at most a tightly bounded number of extra UI characters. Navigation, draft preservation,
-readiness, and send gates remain owned by the base engine.
+The modern ChatGPT Classic composer applies two deterministic presentation transforms when
+copying a pasted prompt: paragraph separators may expand into additional newlines, and a leading
+@GitHub token may be represented as an accessible GitHub mention whose clipboard text omits the
+literal @. Verification therefore compares the exact non-whitespace character stream and permits
+only that one narrowly scoped leading-at omission. Navigation, draft preservation, readiness, and
+send gates remain owned by the base engine.
 """
 
 from __future__ import annotations
 
+import re
+
 import open_department_chat_group as base
 
-MAX_ACCESSIBILITY_EXTRA_CHARS = 64
 
-
-def expected_is_insertion_only_subsequence(observed: str, expected: str) -> bool:
-    """Return True only when observed equals expected plus bounded inserted characters."""
-    expected_index = 0
-    for character in observed:
-        if expected_index < len(expected) and character == expected[expected_index]:
-            expected_index += 1
-    return expected_index == len(expected)
+def compact_non_whitespace(value: str) -> str:
+    """Remove only whitespace while preserving every other character exactly and in order."""
+    return re.sub(r"\s+", "", value)
 
 
 def text_matches_expected(observed: str, expected: str) -> bool:
-    observed_norm = base.normalize_text(observed)
-    expected_norm = base.normalize_text(expected)
+    observed_compact = compact_non_whitespace(base.normalize_text(observed))
+    expected_compact = compact_non_whitespace(base.normalize_text(expected))
 
-    if not expected_norm:
-        return observed_norm == expected_norm
-    if observed_norm == expected_norm:
+    if observed_compact == expected_compact:
         return True
 
-    extra_chars = len(observed_norm) - len(expected_norm)
-    if extra_chars < 0 or extra_chars > MAX_ACCESSIBILITY_EXTRA_CHARS:
-        return False
+    # ChatGPT may render the leading literal @GitHub token as a mention object. Its accessible
+    # clipboard representation then begins with GitHub while preserving every remaining character.
+    if expected_compact.startswith("@GitHub"):
+        return observed_compact == expected_compact[1:]
 
-    return expected_is_insertion_only_subsequence(observed_norm, expected_norm)
+    return False
 
 
 base.text_matches_expected = text_matches_expected
