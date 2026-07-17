@@ -12,6 +12,7 @@
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
   <script defer src="{{ url_for('static', path='/command-center.js') }}"></script>
   <script defer src="{{ url_for('static', path='/command-scheduler.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/command-history.js') }}"></script>
   <script defer src="{{ url_for('static', path='/tabs.js') }}"></script>
 </head>
 <body>
@@ -97,8 +98,32 @@
             </section>
           </div>
           <div class="cc-side-stack">
-            <div><div class="cc-subheading"><h3>Scheduled automation</h3><span id="cc-scheduler-status" class="panel-meta">Loading</span></div><div id="cc-schedules" class="cc-history" aria-live="polite"></div></div>
-            <div><h3>Persistent automation activity</h3><div id="cc-history" class="cc-history" aria-live="polite"></div></div>
+            <section class="cc-list-panel" aria-labelledby="cc-scheduled-jobs-heading">
+              <div class="cc-subheading">
+                <div><p class="eyebrow">UPCOMING</p><h3 id="cc-scheduled-jobs-heading">Scheduled jobs</h3></div>
+                <div class="cc-list-meta"><span id="cc-scheduler-status" class="panel-meta">Loading</span><span id="cc-schedule-count" class="panel-meta"></span></div>
+              </div>
+              <div class="cc-filter-grid" aria-label="Scheduled job filters">
+                <label class="cc-filter-field">Cadence<select id="cc-schedule-filter-cadence"><option value="all">All cadences</option><option value="once">Once</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
+                <label class="cc-filter-field">Department<select id="cc-schedule-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+                <label class="cc-filter-field">State<select id="cc-schedule-filter-state"><option value="scheduled">Scheduled</option><option value="active">Active only</option><option value="paused">Paused only</option><option value="finished">Finished one-time</option><option value="all">All definitions</option></select></label>
+                <label class="cc-filter-field">Order<select id="cc-schedule-filter-sort"><option value="next">Next run</option><option value="recent">Recently changed</option><option value="name">Name A–Z</option></select></label>
+              </div>
+              <div id="cc-schedules" class="cc-history" aria-live="polite"></div>
+            </section>
+            <section class="cc-list-panel" aria-labelledby="cc-run-history-heading">
+              <div class="cc-subheading">
+                <div><p class="eyebrow">EXECUTION RECORD</p><h3 id="cc-run-history-heading">Run history</h3></div>
+                <span id="cc-history-count" class="panel-meta"></span>
+              </div>
+              <div class="cc-filter-grid" aria-label="Run history filters">
+                <label class="cc-filter-field">Result<select id="cc-history-filter-status"><option value="all">All results</option><option value="succeeded">Succeeded</option><option value="failed">Failed</option><option value="refused">Refused</option></select></label>
+                <label class="cc-filter-field">Department<select id="cc-history-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+                <label class="cc-filter-field">Mode<select id="cc-history-filter-mode"><option value="all">Draft and send</option><option value="draft">Draft</option><option value="send">Send</option></select></label>
+                <label class="cc-filter-field">Order<select id="cc-history-filter-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
+              </div>
+              <div id="cc-history" class="cc-history" aria-live="polite"></div>
+            </section>
           </div>
         </div>
       </section>
