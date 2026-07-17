@@ -1,4 +1,4 @@
-"""Draft canonical LifeOS department boot prompts without sending them."""
+"""Draft or explicitly submit canonical LifeOS department boot prompts."""
 
 from __future__ import annotations
 
@@ -144,19 +144,40 @@ After boot, provide a concise {department.report_name} synchronization report in
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Place a canonical department boot prompt in the exact LifeOS chat."
+        description=(
+            "Place a canonical department boot prompt in the exact LifeOS chat. "
+            "Draft-only unless --send is explicitly supplied."
+        )
     )
     parser.add_argument("department", choices=sorted(DEPARTMENTS))
+    parser.add_argument(
+        "--send",
+        action="store_true",
+        help=(
+            "Submit after destination, readiness, and write verification. "
+            "The literal @GitHub text may rely on connector context already being active."
+        ),
+    )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
     department = DEPARTMENTS[args.department]
-    sys.argv = [
+
+    forwarded_args = [
         sys.argv[0],
         department.chat_title,
         "--text",
         build_prompt(department),
     ]
+
+    if args.send:
+        forwarded_args.extend(["--send", "--confirm-send", "SEND"])
+        print(
+            "SEND MODE: connector resolution is not verified; this relies on GitHub "
+            "remaining active in the target chat context."
+        )
+
+    sys.argv = forwarded_args
     raise SystemExit(main())
