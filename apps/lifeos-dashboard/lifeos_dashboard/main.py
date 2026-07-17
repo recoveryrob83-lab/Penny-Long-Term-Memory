@@ -35,6 +35,8 @@ class CommandJobRequest(BaseModel):
     mode: str = "draft"
     custom_prompt: str = ""
     confirm_send: bool = False
+    default_destination: str | None = None
+    confirm_destination: bool = False
 
 
 class PauseRequest(BaseModel):
@@ -180,6 +182,8 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
             mode=request.mode,  # type: ignore[arg-type]
             custom_prompt=request.custom_prompt,
             confirm_send=request.confirm_send,
+            default_destination=request.default_destination,
+            confirm_destination=request.confirm_destination,
         )
         result = await run_in_threadpool(command_center.execute, job)
         return result.to_dict()
