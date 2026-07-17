@@ -1,0 +1,46 @@
+.github-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.github-fact {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.github-fact span,
+.github-fact strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.github-fact span {
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.github-fact strong {
+  color: var(--accent);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.github-panel h3 {
+  margin-top: 18px;
+}
+
+@media (max-width: 720px) {
+  .github-facts {
+    grid-template-columns: 1fr;
+  }
+}
