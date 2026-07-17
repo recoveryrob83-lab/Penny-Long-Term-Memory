@@ -1,6 +1,6 @@
 # Chief Business HQ Open Loops
 
-Updated: 2026-07-15
+Updated: 2026-07-18
 
 ## Open
 
@@ -19,7 +19,6 @@ Updated: 2026-07-15
 | Open | Finance coordination | Coordinate with Chief of Finance Penny on pricing, startup costs, income tracking, expenses, taxes, and sustainable rate assumptions | See `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md` |
 | Open | Engineering coordination | Coordinate with Chief Engineering Penny on delivery architecture, diagnostic templates, adoption verification, and human-system templates | See `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md` |
 | Open | Logistics coordination | Coordinate with Life Logistics on project file hygiene, Office Leaks handoff clarity, and real-world logistics when authorized | Keep parent HQ and business-unit HQ distinct |
-| Open | Legacy VA cleanup | Decide later whether `projects/virtual-assistant-business/` should be archived, deleted, or kept as redirect history | Active state is now `projects/office-leaks-consulting/` |
 | Open | PennyOS parking | Preserve PennyOS as paused, not current execution priority | Not abandoned; potential future productization path |
 | Open | Advisory workflow | Use Business advisory board and Advisory Index for Business-sourced advisories; use Office Leaks board for Office Leaks-sourced advisories | Department Event Inbox remains frozen unless Rob explicitly reactivates it |
 
@@ -38,6 +37,7 @@ Updated: 2026-07-15
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Legacy VA cleanup routed to Logistics | Removed Business-owned mirrors because repository-folder disposition and reference migration belong to Logistics |
 | 2026-07-15 | Business HQ documentation cleanup | README, department identity, status, and open loops aligned with current advisory rules, Office Leaks priority, PennyOS pause, and current offer development. |
 | 2026-07-09 | Office Leaks elevated | Office Leaks Consulting became a business-unit HQ under Chief Business HQ. |
 | 2026-07-08 | ADV-20260708-028 implemented | Office Leaks finance working records synced across Life OS. |
@@ -53,5 +53,3 @@ Updated: 2026-07-15
 ## Parking Lot
 
 - Decide the future relationship between Office Leaks, Business HQ, PennyOS, and productized services after service-market learning begins.
-- Decide whether `projects/virtual-assistant-business/` should eventually be archived, deleted, or remain durable redirect history.
-- Add a registry reference later if Life Logistics HQ assigns one.
