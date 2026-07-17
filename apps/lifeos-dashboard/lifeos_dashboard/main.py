@@ -51,6 +51,29 @@ class SavedPromptRequest(BaseModel):
     origin_prompt_key: str | None = None
 
 
+class ScheduledJobRequest(BaseModel):
+    name: str
+    destination: str
+    prompt_type: str
+    custom_prompt: str = ""
+    mode: str = "draft"
+    confirm_send: bool = False
+    default_destination: str | None = None
+    confirm_destination: bool = False
+    source_type: str
+    source_prompt_id: int | None = None
+    cadence: str
+    schedule_date: str
+    schedule_time: str
+    weekdays: list[int] = []
+    timezone: str = "America/Chicago"
+    enabled: bool = True
+
+
+class ScheduleEnabledRequest(BaseModel):
+    enabled: bool
+
+
 def _cache_path(environment_name: str, filename: str) -> Path:
     configured = os.getenv(environment_name)
     if configured:
@@ -88,12 +111,18 @@ def build_default_source() -> DashboardSource:
     )
 
 
-def create_app(source: DashboardSource | None = None) -> FastAPI:
+def create_app(
+    source: DashboardSource | None = None,
+    *,
+    start_scheduler: bool | None = None,
+) -> FastAPI:
     active_source = source or build_default_source()
     service = DashboardService(active_source)
+    scheduler_enabled = source is None if start_scheduler is None else start_scheduler
     command_center = CommandCenterService(
         APP_ROOT,
         database_path=_cache_path("COMMAND_CENTER_DATABASE_PATH", "command_center.sqlite3"),
+        start_scheduler=scheduler_enabled,
     )
     application = FastAPI(
         title="LifeOS Dashboard",
@@ -104,6 +133,10 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     application.state.command_center = command_center
     application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
     templates = Jinja2Templates(directory=PACKAGE_ROOT / "templates")
+
+    @application.on_event("shutdown")
+    async def stop_command_scheduler() -> None:
+        command_center.stop_scheduler()
 
     @application.get("/", response_class=HTMLResponse)
     async def dashboard_home(request: Request) -> HTMLResponse:
@@ -152,7 +185,9 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
         return command_center.status()
 
     @application.put("/api/command-center/prompts/{prompt_id}")
-    async def update_command_prompt(prompt_id: int, request: SavedPromptRequest) -> dict[str, object]:
+    async def update_command_prompt(
+        prompt_id: int, request: SavedPromptRequest
+    ) -> dict[str, object]:
         try:
             updated = command_center.update_prompt(
                 prompt_id,
@@ -172,6 +207,44 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     async def delete_command_prompt(prompt_id: int) -> dict[str, object]:
         if not command_center.delete_prompt(prompt_id):
             raise HTTPException(status_code=404, detail="Saved prompt not found.")
+        return command_center.status()
+
+    @application.post("/api/command-center/schedules")
+    async def create_command_schedule(request: ScheduledJobRequest) -> dict[str, object]:
+        try:
+            command_center.create_schedule(request.model_dump())
+        except (ValueError, CommandCenterError) as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return command_center.status()
+
+    @application.put("/api/command-center/schedules/{schedule_id}")
+    async def update_command_schedule(
+        schedule_id: int, request: ScheduledJobRequest
+    ) -> dict[str, object]:
+        try:
+            updated = command_center.update_schedule(schedule_id, request.model_dump())
+        except (ValueError, CommandCenterError) as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        if updated is None:
+            raise HTTPException(status_code=404, detail="Scheduled job not found.")
+        return command_center.status()
+
+    @application.post("/api/command-center/schedules/{schedule_id}/enabled")
+    async def set_command_schedule_enabled(
+        schedule_id: int, request: ScheduleEnabledRequest
+    ) -> dict[str, object]:
+        try:
+            updated = command_center.set_schedule_enabled(schedule_id, request.enabled)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        if updated is None:
+            raise HTTPException(status_code=404, detail="Scheduled job not found.")
+        return command_center.status()
+
+    @application.delete("/api/command-center/schedules/{schedule_id}")
+    async def delete_command_schedule(schedule_id: int) -> dict[str, object]:
+        if not command_center.delete_schedule(schedule_id):
+            raise HTTPException(status_code=404, detail="Scheduled job not found.")
         return command_center.status()
 
     @application.post("/api/command-center/run")
