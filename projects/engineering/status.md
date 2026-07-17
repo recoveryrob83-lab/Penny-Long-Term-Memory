@@ -4,7 +4,7 @@ Updated: 2026-07-17
 
 ## Current Phase
 
-Active / LifeOS Dashboard V0, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / LifeOS Dashboard Live Sources, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -22,7 +22,7 @@ Never claim an action, test, deployment, or external write occurred without veri
 
 ## Source-of-Truth Boundaries
 
-- GitHub: durable memory, architecture, advisories, stable project state, and the current dashboard scaffold.
+- GitHub: durable memory, architecture, advisories, stable project state, and dashboard code.
 - Trello: current LifeOS attention and flow.
 - Todoist: Rob-facing tasks and commitments.
 - Calendar: timed commitments.
@@ -34,46 +34,55 @@ Never store secrets, credentials, tokens, API keys, financial account details, m
 
 ## Current Focus
 
-### LifeOS Dashboard V0
+### LifeOS Dashboard
 
-A runnable local dashboard scaffold is merged into `main` at:
+Application location:
 
 - `apps/lifeos-dashboard/`
 
-Pull request:
+Merged implementation milestones:
 
-- PR #2 — `Scaffold local LifeOS dashboard`
+- PR #2 / `bdf920112e8142179d3da91a3e7983e1a5d48c27` — runnable FastAPI scaffold, responsive interface, sample source, documentation, and original smoke tests.
+- PR #3 / `62b815608bc19f657922c6e088965c1e3eeab8a2` — live read-only local GitHub adapter for branch, commit, working tree, advisories, priority open loops, recent notebooks, and durable activity.
+- PR #4 / `262ebf98eb7e9b84eb95c421dcd1647a7c059d47` — live read-only Trello Flow adapter for Now, top Next, selected Waiting, source health, local credentials, and a last-good cache.
 
-Merged commit:
+Rob successfully launched V0 and confirmed that the title, source health, Today, Current Movement, Next, Waiting, GitHub pulse, and responsive side-by-side layout provide a clear at-a-glance view without visual noise.
 
-- `bdf920112e8142179d3da91a3e7983e1a5d48c27`
+Current source state:
 
-Implemented V0 foundation:
+- GitHub: live and verified on Rob's machine through the local GitHub Desktop checkout.
+- Trello: adapter code merged; local read credentials and first real-machine verification remain.
+- Todoist: sample.
+- Calendar: sample.
+- Gmail: sample attention signals.
+- Drive: sample shortcuts.
 
-- FastAPI backend;
-- browser-based responsive dashboard shell;
-- sample-data adapter and replaceable source boundary;
-- Today, Trello Flow, attention signals, Drive shortcuts, recent GitHub notebook activity, and copyable Penny-command regions;
-- source-health and freshness language;
-- Windows setup and launch instructions;
-- architecture and security documentation;
-- smoke tests for the home page, health endpoint, and dashboard endpoint.
+Trello adapter behavior:
 
-Verification completed before merge:
+- reads board identity, open lists, and open cards through Trello REST;
+- preserves card order;
+- extracts `Lane:` and `Blocked by:` description metadata;
+- displays one Now, up to three Next, and up to three Waiting cards;
+- writes normalized display data only to ignored `.local/trello_flow_cache.json`;
+- uses the last-good cache and marks Trello stale when a later request fails;
+- never writes Trello or stores credentials in the cache or GitHub.
 
-- Python compilation succeeded;
-- `python -m pytest -q` returned 3 passing tests;
-- a live Uvicorn server started on `127.0.0.1:8765`;
-- `/`, `/api/health`, and `/api/dashboard` returned HTTP 200.
+Verification before PR #4 merge:
 
-V0 remains sample-data only. No account credentials, live source integrations, write controls, or financial connector data were added.
+- 8 tests passed;
+- Python compile pass completed;
+- changed Python files stayed within the 100-column project limit;
+- local Uvicorn server started successfully;
+- `/api/health` and `/api/dashboard` returned HTTP 200;
+- tests verified live normalization, card ordering, metadata parsing, missing credentials, source composition, cache fallback, and secret-safe error language.
 
 Immediate dashboard milestone:
 
-1. Rob pulls current `main`.
-2. Rob launches the scaffold locally with Engineering guidance.
-3. Engineering captures first-use layout and usefulness feedback.
-4. GitHub becomes the first live read adapter after the sample screen is accepted.
+1. Rob pulls current `main` through GitHub Desktop.
+2. Rob refreshes the editable installation because runtime dependencies changed.
+3. Engineering guides creation of the ignored local `.env` with a read-only Trello API key, token, and Flow Board ID.
+4. Rob relaunches and verifies `local-github+trello mode` plus real Now, Next, and Waiting state.
+5. Todoist and Calendar become the next source track after Trello proves stable locally.
 
 ### Reliable Connector Execution Layer
 
@@ -90,6 +99,8 @@ Current design concerns:
 - manual, export, RPR, or alternate-worker fallback.
 
 Observed field lessons favor small operations, explicit connector invocation, narrow connector scope, post-write verification, and fresh-chat recovery when a session degrades.
+
+The Trello dashboard cache is the first implemented dashboard example of explicit healthy, stale, unavailable, and last-good fallback behavior.
 
 ### Life OS Worker Architecture
 
@@ -135,9 +146,9 @@ That note preserves `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher s
 
 ## Current Open Work
 
-- Complete Rob's first local launch of LifeOS Dashboard V0.
-- Capture first-use dashboard feedback before adding live integrations.
-- Build the GitHub read adapter after V0 layout acceptance.
+- Complete local Trello credential setup and verify the real Flow Board on Rob's machine.
+- Confirm live Trello refresh and cached degraded mode do not disturb the accepted dashboard scan path.
+- Design Todoist and Calendar source adapters after Trello verification.
 - Pilot Penny Inventory Worker with 2–3 real sale items.
 - Observe Penny Raw Capture Worker in real use.
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
@@ -148,7 +159,10 @@ That note preserves `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher s
 
 ## Completed Recent Work
 
-- 2026-07-17: LifeOS Dashboard V0 scaffold merged through PR #2 and verified locally in sample-data mode.
+- 2026-07-17: Live read-only Trello Flow adapter merged through PR #4 with local ignored credentials, last-good caching, documentation, and 8-test verification.
+- 2026-07-17: Live local GitHub dashboard adapter merged through PR #3 and verified on Rob's machine.
+- 2026-07-17: Dashboard V0 launched; first-use hierarchy, usefulness, and responsive side-by-side layout passed Rob's review.
+- 2026-07-17: LifeOS Dashboard V0 scaffold merged through PR #2.
 - 2026-07-17: ADV-20260716-039 closed after shared global-summary reconciliation.
 - 2026-07-16: ADV-20260716-038 consumed and closed; dashboard concept ingested with read-mostly boundaries.
 - 2026-07-16: Prompt-launcher newline defect corrected and deferred advisory-command improvements captured.
