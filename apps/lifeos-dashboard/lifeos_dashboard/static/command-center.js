@@ -4,6 +4,8 @@ const commandCenter = {
   customPrompt: document.getElementById("cc-custom-prompt"),
   savedWrap: document.getElementById("cc-saved-wrap"),
   savedPrompt: document.getElementById("cc-saved-prompt"),
+  canonicalControls: document.getElementById("cc-canonical-controls"),
+  duplicateButton: document.getElementById("cc-duplicate-prompt"),
   saveControls: document.getElementById("cc-save-controls"),
   saveName: document.getElementById("cc-save-name"),
   saveButton: document.getElementById("cc-save-prompt"),
@@ -50,6 +52,7 @@ const syncPromptDetails = async () => {
   const type = commandCenter.promptType.value;
   const selected = selectedSavedPrompt();
   commandCenter.savedWrap.hidden = type !== "saved";
+  commandCenter.canonicalControls.hidden = type !== "canonical";
   commandCenter.saveControls.hidden = type === "canonical";
   commandCenter.saveButton.hidden = type !== "custom";
   commandCenter.updateButton.hidden = type !== "saved" || !selected;
@@ -124,6 +127,31 @@ commandCenter.promptType.addEventListener("change", updateCommandCenterForm);
 commandCenter.destination.addEventListener("change", updateCommandCenterForm);
 commandCenter.savedPrompt.addEventListener("change", updateCommandCenterForm);
 commandCenter.confirmSend.addEventListener("change", updateCommandCenterForm);
+
+commandCenter.duplicateButton.addEventListener("click", async () => {
+  if (commandCenter.promptType.value !== "canonical") return;
+  const originalName = commandCenter.saveName.value.trim() || "Canonical boot prompt";
+  const originalPrompt = commandCenter.customPrompt.value;
+  if (!originalPrompt.trim()) {
+    commandCenter.summary.textContent = "Canonical prompt text is not loaded yet.";
+    return;
+  }
+  canonicalRequestToken += 1;
+  commandCenter.promptType.value = "custom";
+  commandCenter.saveName.readOnly = false;
+  commandCenter.customPrompt.readOnly = false;
+  commandCenter.saveName.value = `${originalName} copy`;
+  commandCenter.customPrompt.value = originalPrompt;
+  commandCenter.savedWrap.hidden = true;
+  commandCenter.canonicalControls.hidden = true;
+  commandCenter.saveControls.hidden = false;
+  commandCenter.saveButton.hidden = false;
+  commandCenter.updateButton.hidden = true;
+  commandCenter.deleteButton.hidden = true;
+  commandCenter.summary.textContent = "Editable copy created. Rename it, adjust the prompt if needed, then save it as a new prompt.";
+  commandCenter.saveName.focus();
+  commandCenter.saveName.select();
+});
 
 commandCenter.saveButton.addEventListener("click", async () => {
   const name = commandCenter.saveName.value.trim();
