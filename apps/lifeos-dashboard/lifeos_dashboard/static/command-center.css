@@ -10,6 +10,13 @@
   gap: 18px;
 }
 
+.cc-layout > *,
+.cc-form,
+.cc-fields,
+.cc-field {
+  min-width: 0;
+}
+
 .cc-form,
 .cc-history {
   display: grid;
@@ -34,7 +41,10 @@
 .cc-field select,
 .cc-field textarea,
 .cc-field input {
+  box-sizing: border-box;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--border);
   border-radius: 11px;
   background: #0b1017;
@@ -88,6 +98,26 @@
   background: rgba(255, 142, 158, 0.07);
   color: var(--text);
   font-size: 0.82rem;
+}
+
+.cc-destination-warning {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(255, 208, 122, 0.5);
+  border-radius: 11px;
+  background: rgba(255, 208, 122, 0.08);
+}
+
+.cc-destination-warning p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.cc-mismatch-confirm {
+  border-color: rgba(255, 208, 122, 0.45);
+  background: rgba(255, 208, 122, 0.06);
 }
 
 .cc-summary {
