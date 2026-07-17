@@ -20,7 +20,69 @@ if not getattr(parser, "_RUNTIME_POLICY_TUNED", False):
     parser.MARKDOWN_DECORATION = re.compile(r"[`*~]")
 
     _original_parse_open_loops = parser.DepartmentInspectionSource._parse_open_loops
+    _original_table_record = parser.DepartmentInspectionSource._table_record
     _original_findings = parser.DepartmentInspectionSource._findings
+
+    _priority_map = {
+        "critical": "critical",
+        "high": "high",
+        "medium": "normal",
+        "normal": "normal",
+        "low": "low",
+        "none": "none",
+        "unknown": "unknown",
+    }
+
+    def _table_record(
+        self: parser.DepartmentInspectionSource,
+        department: str,
+        owner: str,
+        scope: str,
+        authority: str,
+        path: Any,
+        section_title: str,
+        semantics: dict[str, str],
+        row: dict[str, str],
+        updated_at: str | None,
+        index: int,
+    ) -> dict[str, Any] | None:
+        record = _original_table_record(
+            self,
+            department,
+            owner,
+            scope,
+            authority,
+            path,
+            section_title,
+            semantics,
+            row,
+            updated_at,
+            index,
+        )
+        if record is None:
+            return None
+
+        explicit_priority = next(
+            (
+                value.strip()
+                for key, value in row.items()
+                if key.strip().casefold() == "priority" and value.strip()
+            ),
+            "",
+        )
+        if not explicit_priority:
+            return record
+
+        normalized = _priority_map.get(explicit_priority.casefold())
+        if normalized is None:
+            record["priority"] = "unknown"
+            record.setdefault("warnings", []).append(
+                f"Unrecognized explicit priority: {explicit_priority}"
+            )
+            record["parse_confidence"] = "medium"
+        else:
+            record["priority"] = normalized
+        return record
 
     def _parse_open_loops(
         self: parser.DepartmentInspectionSource,
@@ -98,6 +160,7 @@ if not getattr(parser, "_RUNTIME_POLICY_TUNED", False):
 
         return filtered
 
+    parser.DepartmentInspectionSource._table_record = _table_record
     parser.DepartmentInspectionSource._parse_open_loops = _parse_open_loops
     parser.DepartmentInspectionSource._findings = _findings
     parser._RUNTIME_POLICY_TUNED = True
