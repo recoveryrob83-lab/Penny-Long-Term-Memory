@@ -1,16 +1,26 @@
-"""Production shim for Group composer verification with bounded UI-wrapper tolerance.
+"""Production shim for Group composer verification with bounded UI-text tolerance.
 
-The modern ChatGPT Classic composer may place a small accessibility label around the exact
-clipboard payload. Verification succeeds only when the complete normalized expected prompt
-appears contiguously inside the copied text and the total surrounding text is tightly bounded.
-All navigation, draft-preservation, readiness, and send gates remain owned by the base engine.
+The modern ChatGPT Classic composer can interleave a small amount of accessibility text
+inside the clipboard payload. Verification succeeds only when every normalized expected
+character appears in order with no deletions or substitutions, and the copied payload has
+at most a tightly bounded number of extra UI characters. Navigation, draft preservation,
+readiness, and send gates remain owned by the base engine.
 """
 
 from __future__ import annotations
 
 import open_department_chat_group as base
 
-MAX_ACCESSIBILITY_WRAPPER_CHARS = 64
+MAX_ACCESSIBILITY_EXTRA_CHARS = 64
+
+
+def expected_is_insertion_only_subsequence(observed: str, expected: str) -> bool:
+    """Return True only when observed equals expected plus bounded inserted characters."""
+    expected_index = 0
+    for character in observed:
+        if expected_index < len(expected) and character == expected[expected_index]:
+            expected_index += 1
+    return expected_index == len(expected)
 
 
 def text_matches_expected(observed: str, expected: str) -> bool:
@@ -21,11 +31,12 @@ def text_matches_expected(observed: str, expected: str) -> bool:
         return observed_norm == expected_norm
     if observed_norm == expected_norm:
         return True
-    if expected_norm not in observed_norm:
-        return False
 
     extra_chars = len(observed_norm) - len(expected_norm)
-    return 0 <= extra_chars <= MAX_ACCESSIBILITY_WRAPPER_CHARS
+    if extra_chars < 0 or extra_chars > MAX_ACCESSIBILITY_EXTRA_CHARS:
+        return False
+
+    return expected_is_insertion_only_subsequence(observed_norm, expected_norm)
 
 
 base.text_matches_expected = text_matches_expected
