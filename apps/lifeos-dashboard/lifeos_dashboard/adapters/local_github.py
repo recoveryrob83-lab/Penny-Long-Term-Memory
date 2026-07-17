@@ -72,14 +72,23 @@ class LocalGitHubDashboardSource:
     def _replace_github_source(
         self, sources: object, git_state: dict[str, str]
     ) -> list[dict[str, str]]:
-        normalized = [dict(item) for item in sources if isinstance(item, dict)] if isinstance(sources, list) else []
+        normalized = (
+            [dict(item) for item in sources if isinstance(item, dict)]
+            if isinstance(sources, list)
+            else []
+        )
         state = "healthy" if git_state["available"] == "yes" else "partial"
         freshness = (
-            f"{git_state['branch']} · {git_state['head']} · {git_state['working_tree']}"
+            f"{git_state['branch']} · {git_state['head']} · "
+            f"{git_state['working_tree']}"
             if git_state["available"] == "yes"
             else "local files available; Git command unavailable"
         )
-        github_source = {"name": "GitHub", "state": state, "freshness": freshness}
+        github_source = {
+            "name": "GitHub",
+            "state": state,
+            "freshness": freshness,
+        }
 
         for index, source in enumerate(normalized):
             if str(source.get("name", "")).lower() == "github":
@@ -101,7 +110,8 @@ class LocalGitHubDashboardSource:
             working_tree = "clean"
         else:
             count = len([line for line in status.splitlines() if line.strip()])
-            working_tree = f"{count} local change{'s' if count != 1 else ''}"
+            suffix = "s" if count != 1 else ""
+            working_tree = f"{count} local change{suffix}"
 
         return {
             "available": "yes" if available else "no",
@@ -140,7 +150,9 @@ class LocalGitHubDashboardSource:
             loops.append(
                 {
                     "title": self._clean_markdown(title.strip()),
-                    "detail": self._clean_markdown(detail.strip() if separator else item),
+                    "detail": self._clean_markdown(
+                        detail.strip() if separator else item
+                    ),
                 }
             )
             if len(loops) >= self._open_loop_limit:
@@ -159,7 +171,8 @@ class LocalGitHubDashboardSource:
             notebooks.append(
                 {
                     "department": department,
-                    "title": self._heading(text) or self._title_from_filename(path),
+                    "title": self._heading(text)
+                    or self._title_from_filename(path),
                     "date": self._date_from_filename(path),
                     "summary": self._summary(text),
                     "status": self._note_status(text),
@@ -189,7 +202,9 @@ class LocalGitHubDashboardSource:
             activity.append(
                 {
                     "title": title,
-                    "detail": f"{commit} · {self._display_timestamp(timestamp)}",
+                    "detail": (
+                        f"{commit} · {self._display_timestamp(timestamp)}"
+                    ),
                 }
             )
         return activity
@@ -225,7 +240,9 @@ class LocalGitHubDashboardSource:
             return ""
         content_start = start + len(marker)
         next_heading = text.find("\n## ", content_start)
-        return text[content_start:] if next_heading < 0 else text[content_start:next_heading]
+        if next_heading < 0:
+            return text[content_start:]
+        return text[content_start:next_heading]
 
     @staticmethod
     def _bullet_text(line: str) -> str:
@@ -242,7 +259,9 @@ class LocalGitHubDashboardSource:
 
     def _summary(self, text: str) -> str:
         for paragraph in re.split(r"\n\s*\n", text):
-            cleaned = " ".join(line.strip() for line in paragraph.splitlines()).strip()
+            cleaned = " ".join(
+                line.strip() for line in paragraph.splitlines()
+            ).strip()
             if not cleaned or cleaned.startswith("#") or cleaned.startswith("-"):
                 continue
             if cleaned.lower().startswith(("date:", "status:", "department:")):
@@ -268,7 +287,8 @@ class LocalGitHubDashboardSource:
 
     @classmethod
     def _notebook_sort_key(cls, path: Path) -> tuple[str, str]:
-        return cls._date_from_filename(path), path.name
+        date = cls._date_from_filename(path)
+        return ("" if date == "Unknown date" else date), path.name
 
     @staticmethod
     def _title_from_filename(path: Path) -> str:
@@ -282,7 +302,10 @@ class LocalGitHubDashboardSource:
             parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
         except ValueError:
             return value
-        return parsed.astimezone().strftime("%b %-d, %I:%M %p") if hasattr(parsed, "strftime") else value
+        local = parsed.astimezone()
+        date_part = f"{local.strftime('%b')} {local.day}"
+        time_part = local.strftime("%I:%M %p").lstrip("0")
+        return f"{date_part}, {time_part}"
 
     @staticmethod
     def _clean_markdown(value: str) -> str:
