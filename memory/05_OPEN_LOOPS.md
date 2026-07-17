@@ -5,7 +5,7 @@ Purpose: Track genuinely system-owned unfinished work and operating watches with
 
 ## Active System Work
 
-- Department ownership and role-routed boot reconciliation. Lead: Engineering HQ. Coordination: Logistics HQ and Main Assistant HQ. Finish reconciling stale global summaries and boot assumptions, verify the Department Inspection findings after cleanup, and confirm specialists receive only relevant shared context. Canonical record: `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`.
+- Department ownership and role-routed boot reconciliation. Lead: Engineering HQ. Coordination: Logistics HQ and Main Assistant HQ. Source cleanup is verified at 414 normalized records, zero findings, and 13 warnings. Review only the remaining warning queue and observe ordinary specialist boots before closing this system wrapper. Canonical record: `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`.
 
 ## Current System Operating Watches
 
@@ -18,6 +18,7 @@ Purpose: Track genuinely system-owned unfinished work and operating watches with
 
 ## Recently Closed System Work
 
+- 2026-07-18: Post-cleanup Department Inspection verification returned 414 normalized records, zero findings, and 13 warnings; all four confirmed structural findings disappeared without detector weakening.
 - 2026-07-18: Added `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`, linked it to department ownership rules, and replaced universal backlog loading with a universal kernel plus role-routed boot context.
 - 2026-07-18: First Department Inspection audit removed broad Chat HQ watch mirrors, consolidated Legacy Virtual Assistant folder disposition under Logistics, removed speculative registry-reference placeholders, and separated Engineering state from priority.
 - 2026-07-17: Full GitHub alignment audit corrected role boundaries, canonical HQ names, Logistics boot paths, launcher data, shared summaries, and active department state.
