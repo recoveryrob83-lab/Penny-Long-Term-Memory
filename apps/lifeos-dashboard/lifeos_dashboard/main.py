@@ -21,7 +21,7 @@ from .adapters import (
     TodoistDashboardSource,
     TrelloFlowDashboardSource,
 )
-from .command_center import CommandCenterService, CommandJob
+from .command_center import CommandCenterError, CommandCenterService, CommandJob
 from .service import DashboardService
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
@@ -119,6 +119,13 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     @application.get("/api/command-center")
     async def command_center_status() -> dict[str, object]:
         return command_center.status()
+
+    @application.get("/api/command-center/canonical-prompt/{destination}")
+    async def canonical_prompt_preview(destination: str) -> dict[str, str]:
+        try:
+            return await run_in_threadpool(command_center.canonical_prompt, destination)
+        except CommandCenterError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @application.post("/api/command-center/pause")
     async def command_center_pause(request: PauseRequest) -> dict[str, object]:
