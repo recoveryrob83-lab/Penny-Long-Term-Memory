@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="dark">
   <title>LifeOS Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='/github.css') }}">
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
 </head>
 <body>
@@ -85,6 +86,29 @@
         </div>
       </div>
       <div id="drive-list" class="stack-list"></div>
+    </section>
+
+    <section class="panel attention-panel github-panel" aria-labelledby="github-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">DURABLE SYSTEM PULSE</p>
+          <h2 id="github-heading">GitHub</h2>
+        </div>
+        <span id="github-repo-meta" class="panel-meta">Loading checkout</span>
+      </div>
+      <div id="github-facts" class="github-facts"></div>
+      <div>
+        <h3>Open advisories</h3>
+        <div id="github-advisories" class="stack-list"></div>
+      </div>
+      <div>
+        <h3>Priority open loops</h3>
+        <div id="github-open-loops" class="stack-list"></div>
+      </div>
+      <div>
+        <h3>Recent durable activity</h3>
+        <div id="github-activity" class="stack-list"></div>
+      </div>
     </section>
 
     <section class="panel notebooks-panel" aria-labelledby="notebooks-heading">

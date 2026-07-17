@@ -12,23 +12,45 @@ The dashboard is intended to answer five questions quickly:
 
 ## Current status
 
-This is the first runnable scaffold.
+The dashboard is runnable and its first live source is operational.
 
 It includes:
 
 - a FastAPI backend;
-- a browser-based dashboard shell;
-- sample data for Trello, Todoist, Calendar, Gmail, Drive, GitHub notebooks, and prompt commands;
+- a responsive browser-based dashboard;
+- a read-only local GitHub adapter;
+- live branch, commit, and working-tree state;
+- live open-advisory and global priority-loop summaries;
+- live recent notebook discovery across departments;
+- live recent durable-memory commit activity;
+- sample data for Trello, Todoist, Calendar, Gmail, and Drive;
 - health and dashboard JSON endpoints;
-- explicit freshness and unavailable-state placeholders;
-- a source-adapter boundary for later live integrations;
 - a small test suite.
 
-No live account credentials or connector integrations are included yet.
+The GitHub adapter reads the repository checkout already managed by GitHub Desktop. It does not require a token, password, OAuth setup, or secret configuration file.
+
+## How live GitHub mode works
+
+When the dashboard is installed inside the LifeOS repository, it automatically finds the repository root and starts in `local-github` mode.
+
+The dashboard reads:
+
+- `coordination/ADVISORY_INDEX.md` for open advisories;
+- `memory/05_OPEN_LOOPS.md` for priority open loops;
+- `projects/*/notebook/NOTE-*.md` for recent notebook activity;
+- local Git history for branch, commit, working-tree, and recent durable activity.
+
+GitHub remains authoritative. The dashboard shows the state currently pulled to the computer.
+
+After GitHub Desktop pulls new LifeOS content, use **Refresh view** in the dashboard. A server restart is not required for ordinary markdown or Git-history updates.
+
+After pulling dashboard code changes, stop the running server with `Ctrl+C` and launch it again because the launcher intentionally runs with automatic code reload disabled.
+
+An alternate checkout can be selected with the `LIFEOS_REPOSITORY_ROOT` environment variable.
 
 ## Quick start on Windows
 
-Open PowerShell in the repository root, then run:
+Open PowerShell or Command Prompt in the repository root, then run:
 
 ```powershell
 cd apps/lifeos-dashboard
@@ -39,13 +61,17 @@ pip install -e ".[dev]"
 python run_dashboard.py
 ```
 
+In Command Prompt, activate with:
+
+```cmd
+.venv\Scripts\activate
+```
+
 Then open:
 
 ```text
 http://127.0.0.1:8765
 ```
-
-The dashboard starts in sample-data mode.
 
 ## Useful endpoints
 
@@ -57,19 +83,17 @@ The dashboard starts in sample-data mode.
 ## Development commands
 
 ```powershell
-pytest
+python -m pytest -q
 ruff check .
 ```
 
 ## Planned integration order
 
-1. GitHub notebook and advisory summaries
+1. GitHub notebooks, advisories, open loops, and durable activity: implemented
 2. Trello Flow Board state
 3. Todoist and Google Calendar commitments
 4. Gmail attention signals and Google Drive shortcuts
 5. Optional pywebview desktop packaging
-
-The first live adapter should be GitHub because it can provide recent notebook activity, advisory state, open loops, and durable LifeOS context without changing external state.
 
 ## Security rules
 

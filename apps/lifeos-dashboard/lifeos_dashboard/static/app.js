@@ -86,6 +86,50 @@ const renderAttention = (attention = {}) => {
   `).join("") || '<div class="list-item">No Drive shortcuts loaded.</div>';
 };
 
+const compactList = (items = [], emptyMessage = "Nothing loaded.") => items.map((item) => `
+  <div class="list-item">
+    <div class="item-title">${escapeHtml(item.title)}</div>
+    <p class="item-meta">${escapeHtml(item.detail)}</p>
+  </div>
+`).join("") || `<div class="list-item">${escapeHtml(emptyMessage)}</div>`;
+
+const renderGitHub = (github = {}) => {
+  const advisories = github.open_advisories || [];
+  const openLoops = github.open_loops || [];
+  const recentActivity = github.recent_activity || [];
+
+  byId("github-repo-meta").textContent = github.repository
+    ? `${github.repository} · ${github.head || "unknown"}`
+    : "Sample placeholder";
+
+  const facts = [
+    {label: "Branch", value: github.branch || "Not connected"},
+    {label: "Working tree", value: github.working_tree || "Unknown"},
+    {label: "Open advisories", value: advisories.length},
+    {label: "Priority loops", value: openLoops.length},
+  ];
+
+  byId("github-facts").innerHTML = facts.map((fact) => `
+    <div class="github-fact">
+      <span>${escapeHtml(fact.label)}</span>
+      <strong>${escapeHtml(fact.value)}</strong>
+    </div>
+  `).join("");
+
+  byId("github-advisories").innerHTML = compactList(
+    advisories,
+    "No open advisories. The routing board is clear."
+  );
+  byId("github-open-loops").innerHTML = compactList(
+    openLoops,
+    "No priority open loops found."
+  );
+  byId("github-activity").innerHTML = compactList(
+    recentActivity,
+    "No recent durable commits found."
+  );
+};
+
 const renderNotebooks = (notebooks = []) => {
   byId("notebook-list").innerHTML = notebooks.map((note) => `
     <article class="notebook-item">
@@ -149,6 +193,7 @@ const renderDashboard = (data) => {
   renderToday(data.today);
   renderFlow(data.flow);
   renderAttention(data.attention);
+  renderGitHub(data.github);
   renderNotebooks(data.notebooks);
   renderCommands(data.commands);
 };

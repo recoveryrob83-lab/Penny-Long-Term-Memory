@@ -1,8 +1,10 @@
 from fastapi.testclient import TestClient
 
-from lifeos_dashboard.main import create_app
+from lifeos_dashboard.adapters import SampleDashboardSource
+from lifeos_dashboard.main import PACKAGE_ROOT, create_app
 
-client = TestClient(create_app())
+sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
+client = TestClient(create_app(sample_source))
 
 
 def test_health_endpoint() -> None:
@@ -34,4 +36,5 @@ def test_dashboard_home_renders_interface() -> None:
     assert response.status_code == 200
     assert "LifeOS Dashboard" in response.text
     assert "Recent LifeOS activity" in response.text
+    assert "DURABLE SYSTEM PULSE" in response.text
     assert "Penny commands" in response.text
