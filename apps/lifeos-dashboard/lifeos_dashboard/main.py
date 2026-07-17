@@ -140,6 +140,16 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
         return command_center.status()
 
+    @application.put("/api/command-center/prompts/{prompt_id}")
+    async def update_command_prompt(prompt_id: int, request: SavedPromptRequest) -> dict[str, object]:
+        try:
+            updated = command_center.update_prompt(prompt_id, request.name, request.prompt)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        if updated is None:
+            raise HTTPException(status_code=404, detail="Saved prompt not found.")
+        return command_center.status()
+
     @application.delete("/api/command-center/prompts/{prompt_id}")
     async def delete_command_prompt(prompt_id: int) -> dict[str, object]:
         if not command_center.delete_prompt(prompt_id):
