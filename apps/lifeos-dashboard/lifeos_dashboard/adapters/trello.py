@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+from contextlib import AbstractContextManager, nullcontext
 from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
@@ -141,7 +142,12 @@ class TrelloFlowDashboardSource:
                 {"fields": "name,desc,url,pos,idList,dateLastActivity"},
             )
 
-        if not isinstance(board, dict) or not isinstance(lists, list) or not isinstance(cards, list):
+        unexpected_shape = (
+            not isinstance(board, dict)
+            or not isinstance(lists, list)
+            or not isinstance(cards, list)
+        )
+        if unexpected_shape:
             raise ValueError("Trello returned an unexpected payload shape.")
 
         list_names = {
@@ -198,9 +204,9 @@ class TrelloFlowDashboardSource:
         response.raise_for_status()
         return response.json()
 
-    def _client_context(self) -> httpx.Client:
+    def _client_context(self) -> AbstractContextManager[httpx.Client]:
         if self._client is not None:
-            return _BorrowedClientContext(self._client)
+            return nullcontext(self._client)
         return httpx.Client(
             timeout=httpx.Timeout(8.0),
             headers={"Accept": "application/json", "User-Agent": "LifeOS-Dashboard/0.1"},
@@ -335,16 +341,3 @@ class TrelloFlowDashboardSource:
         local = parsed.astimezone()
         hour = local.strftime("%I").lstrip("0") or "0"
         return f"{local.strftime('%b')} {local.day}, {hour}:{local.strftime('%M %p')}"
-
-
-class _BorrowedClientContext:
-    """Use an injected test client without closing it after each snapshot."""
-
-    def __init__(self, client: httpx.Client) -> None:
-        self._client = client
-
-    def __enter__(self) -> httpx.Client:
-        return self._client
-
-    def __exit__(self, *args: object) -> None:
-        return None
