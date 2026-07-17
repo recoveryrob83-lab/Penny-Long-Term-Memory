@@ -1,9 +1,11 @@
-"""SQLite persistence for Command Center saved prompts and execution history."""
+"""SQLite persistence for Command Center prompts, schedules, and execution history."""
 from __future__ import annotations
 
 import sqlite3
 import time
 from pathlib import Path
+
+from .command_center_schedule import weekdays_from_storage, weekdays_to_storage
 
 
 class CommandCenterStore:
@@ -44,6 +46,33 @@ class CommandCenterStore:
                     stderr TEXT NOT NULL,
                     reason TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS scheduled_jobs (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    enabled INTEGER NOT NULL DEFAULT 1,
+                    destination TEXT NOT NULL,
+                    prompt_type TEXT NOT NULL,
+                    custom_prompt TEXT NOT NULL DEFAULT '',
+                    mode TEXT NOT NULL,
+                    confirm_send INTEGER NOT NULL DEFAULT 0,
+                    default_destination TEXT,
+                    confirm_destination INTEGER NOT NULL DEFAULT 0,
+                    source_type TEXT NOT NULL,
+                    source_prompt_id INTEGER,
+                    cadence TEXT NOT NULL,
+                    schedule_date TEXT NOT NULL,
+                    schedule_time TEXT NOT NULL,
+                    weekdays TEXT NOT NULL DEFAULT '',
+                    timezone TEXT NOT NULL,
+                    next_run_at REAL,
+                    last_run_at REAL,
+                    last_status TEXT,
+                    last_reason TEXT NOT NULL DEFAULT '',
+                    created_at REAL NOT NULL,
+                    updated_at REAL NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_scheduled_jobs_due
+                    ON scheduled_jobs(enabled, next_run_at);
                 """
             )
             existing_columns = {
@@ -60,6 +89,17 @@ class CommandCenterStore:
             return None
         clean_value = value.strip()
         return clean_value or None
+
+    @staticmethod
+    def _schedule_dict(row: sqlite3.Row | None) -> dict[str, object] | None:
+        if row is None:
+            return None
+        item = dict(row)
+        item["enabled"] = bool(item["enabled"])
+        item["confirm_send"] = bool(item["confirm_send"])
+        item["confirm_destination"] = bool(item["confirm_destination"])
+        item["weekdays"] = list(weekdays_from_storage(str(item.get("weekdays") or "")))
+        return item
 
     def list_prompts(self) -> list[dict[str, object]]:
         with self._connect() as connection:
@@ -180,6 +220,172 @@ class CommandCenterStore:
         with self._connect() as connection:
             cursor = connection.execute("DELETE FROM saved_prompts WHERE id = ?", (prompt_id,))
         return cursor.rowcount > 0
+
+    def list_schedules(self) -> list[dict[str, object]]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT * FROM scheduled_jobs ORDER BY enabled DESC, next_run_at IS NULL, next_run_at, name COLLATE NOCASE"
+            ).fetchall()
+        return [self._schedule_dict(row) or {} for row in rows]
+
+    def get_schedule(self, schedule_id: int) -> dict[str, object] | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT * FROM scheduled_jobs WHERE id = ?", (schedule_id,)
+            ).fetchone()
+        return self._schedule_dict(row)
+
+    def create_schedule(self, values: dict[str, object]) -> dict[str, object]:
+        now = time.time()
+        with self._connect() as connection:
+            cursor = connection.execute(
+                """
+                INSERT INTO scheduled_jobs(
+                    name, enabled, destination, prompt_type, custom_prompt, mode,
+                    confirm_send, default_destination, confirm_destination,
+                    source_type, source_prompt_id, cadence, schedule_date,
+                    schedule_time, weekdays, timezone, next_run_at,
+                    created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    values["name"],
+                    int(bool(values["enabled"])),
+                    values["destination"],
+                    values["prompt_type"],
+                    values["custom_prompt"],
+                    values["mode"],
+                    int(bool(values["confirm_send"])),
+                    values.get("default_destination"),
+                    int(bool(values["confirm_destination"])),
+                    values["source_type"],
+                    values.get("source_prompt_id"),
+                    values["cadence"],
+                    values["schedule_date"],
+                    values["schedule_time"],
+                    weekdays_to_storage(values.get("weekdays", [])),
+                    values["timezone"],
+                    values["next_run_at"],
+                    now,
+                    now,
+                ),
+            )
+            row = connection.execute(
+                "SELECT * FROM scheduled_jobs WHERE id = ?", (cursor.lastrowid,)
+            ).fetchone()
+        return self._schedule_dict(row) or {}
+
+    def update_schedule(self, schedule_id: int, values: dict[str, object]) -> dict[str, object] | None:
+        with self._connect() as connection:
+            cursor = connection.execute(
+                """
+                UPDATE scheduled_jobs SET
+                    name = ?, enabled = ?, destination = ?, prompt_type = ?,
+                    custom_prompt = ?, mode = ?, confirm_send = ?,
+                    default_destination = ?, confirm_destination = ?,
+                    source_type = ?, source_prompt_id = ?, cadence = ?,
+                    schedule_date = ?, schedule_time = ?, weekdays = ?,
+                    timezone = ?, next_run_at = ?, updated_at = ?
+                WHERE id = ?
+                """,
+                (
+                    values["name"],
+                    int(bool(values["enabled"])),
+                    values["destination"],
+                    values["prompt_type"],
+                    values["custom_prompt"],
+                    values["mode"],
+                    int(bool(values["confirm_send"])),
+                    values.get("default_destination"),
+                    int(bool(values["confirm_destination"])),
+                    values["source_type"],
+                    values.get("source_prompt_id"),
+                    values["cadence"],
+                    values["schedule_date"],
+                    values["schedule_time"],
+                    weekdays_to_storage(values.get("weekdays", [])),
+                    values["timezone"],
+                    values["next_run_at"],
+                    time.time(),
+                    schedule_id,
+                ),
+            )
+            if cursor.rowcount == 0:
+                return None
+            row = connection.execute(
+                "SELECT * FROM scheduled_jobs WHERE id = ?", (schedule_id,)
+            ).fetchone()
+        return self._schedule_dict(row)
+
+    def set_schedule_enabled(
+        self, schedule_id: int, enabled: bool, next_run_at: float | None
+    ) -> dict[str, object] | None:
+        with self._connect() as connection:
+            cursor = connection.execute(
+                "UPDATE scheduled_jobs SET enabled = ?, next_run_at = ?, updated_at = ? WHERE id = ?",
+                (int(enabled), next_run_at, time.time(), schedule_id),
+            )
+            if cursor.rowcount == 0:
+                return None
+            row = connection.execute(
+                "SELECT * FROM scheduled_jobs WHERE id = ?", (schedule_id,)
+            ).fetchone()
+        return self._schedule_dict(row)
+
+    def delete_schedule(self, schedule_id: int) -> bool:
+        with self._connect() as connection:
+            cursor = connection.execute("DELETE FROM scheduled_jobs WHERE id = ?", (schedule_id,))
+        return cursor.rowcount > 0
+
+    def due_schedules(self, now: float, limit: int = 5) -> list[dict[str, object]]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT * FROM scheduled_jobs
+                WHERE enabled = 1 AND next_run_at IS NOT NULL AND next_run_at <= ?
+                ORDER BY next_run_at LIMIT ?
+                """,
+                (now, limit),
+            ).fetchall()
+        return [self._schedule_dict(row) or {} for row in rows]
+
+    def defer_schedule(self, schedule_id: int, next_run_at: float, reason: str) -> None:
+        with self._connect() as connection:
+            connection.execute(
+                """
+                UPDATE scheduled_jobs
+                SET next_run_at = ?, last_status = 'deferred', last_reason = ?, updated_at = ?
+                WHERE id = ?
+                """,
+                (next_run_at, reason, time.time(), schedule_id),
+            )
+
+    def complete_schedule(
+        self,
+        schedule_id: int,
+        *,
+        enabled: bool,
+        next_run_at: float | None,
+        result: dict[str, object],
+    ) -> None:
+        with self._connect() as connection:
+            connection.execute(
+                """
+                UPDATE scheduled_jobs SET
+                    enabled = ?, next_run_at = ?, last_run_at = ?,
+                    last_status = ?, last_reason = ?, updated_at = ?
+                WHERE id = ?
+                """,
+                (
+                    int(enabled),
+                    next_run_at,
+                    result["finished_at"],
+                    result["status"],
+                    result["reason"],
+                    time.time(),
+                    schedule_id,
+                ),
+            )
 
     def add_history(self, result: dict[str, object]) -> None:
         with self._connect() as connection:
