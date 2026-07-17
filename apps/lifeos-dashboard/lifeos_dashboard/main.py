@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -15,25 +16,36 @@ from .adapters import (
     DashboardSource,
     LocalGitHubDashboardSource,
     SampleDashboardSource,
+    TrelloFlowDashboardSource,
 )
 from .service import DashboardService
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
+APP_ROOT = PACKAGE_ROOT.parent
+load_dotenv(APP_ROOT / ".env", override=False)
 
 
 def build_default_source() -> DashboardSource:
-    """Use the surrounding LifeOS checkout when available, otherwise samples."""
+    """Build the live source chain, falling back source-by-source when needed."""
     sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
+    source: DashboardSource = sample_source
+
     configured_root = os.getenv("LIFEOS_REPOSITORY_ROOT")
     repo_root = (
         Path(configured_root).expanduser()
         if configured_root
         else PACKAGE_ROOT.parents[2]
     )
-
     if (repo_root / ".git").exists() and (repo_root / "memory").exists():
-        return LocalGitHubDashboardSource(repo_root, sample_source)
-    return sample_source
+        source = LocalGitHubDashboardSource(repo_root, source)
+
+    configured_cache = os.getenv("TRELLO_CACHE_PATH")
+    cache_path = (
+        Path(configured_cache).expanduser()
+        if configured_cache
+        else APP_ROOT / ".local" / "trello_flow_cache.json"
+    )
+    return TrelloFlowDashboardSource.from_environment(source, cache_path=cache_path)
 
 
 def create_app(source: DashboardSource | None = None) -> FastAPI:

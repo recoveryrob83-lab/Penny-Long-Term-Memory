@@ -4,7 +4,10 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-from lifeos_dashboard.adapters import LocalGitHubDashboardSource
+from lifeos_dashboard.adapters import (
+    LocalGitHubDashboardSource,
+    TrelloFlowDashboardSource,
+)
 from lifeos_dashboard.main import build_default_source
 
 
@@ -132,7 +135,11 @@ def test_default_source_detects_configured_checkout(
 ) -> None:
     write_checkout_fixture(tmp_path)
     monkeypatch.setenv("LIFEOS_REPOSITORY_ROOT", str(tmp_path))
+    monkeypatch.delenv("TRELLO_API_KEY", raising=False)
+    monkeypatch.delenv("TRELLO_API_TOKEN", raising=False)
+    monkeypatch.delenv("TRELLO_BOARD_ID", raising=False)
 
     source = build_default_source()
 
-    assert isinstance(source, LocalGitHubDashboardSource)
+    assert isinstance(source, TrelloFlowDashboardSource)
+    assert source.name == "local-github"

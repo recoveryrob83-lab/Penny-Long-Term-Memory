@@ -8,6 +8,7 @@ htmlcov/
 .env
 .env.*
 !.env.example
+.local/
 local-config.json
 *.db
 *.sqlite
