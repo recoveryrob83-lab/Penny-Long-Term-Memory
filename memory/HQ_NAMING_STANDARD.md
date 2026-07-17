@@ -13,6 +13,7 @@ This file is the canonical naming source for top-level LifeOS headquarters acros
 - `Finance HQ`
 - `Main Assistant HQ`
 - `Business HQ`
+- `Office Leaks HQ`
 
 ## Rules
 
@@ -34,3 +35,4 @@ The following are legacy labels and should not be used for new top-level HQ refe
 - `Finance Benefits HQ`
 - `Chief Business HQ`
 - `Main Assistant Penny`
+- `Office Leaks VP Penny / Office Leaks Consulting HQ`
