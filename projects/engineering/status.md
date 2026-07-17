@@ -4,7 +4,7 @@ Updated: 2026-07-17
 
 ## Current Phase
 
-Active / Desktop Department Automation Maintenance, LifeOS Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Automation Command Center Phase 1 Design, Desktop Automation Maintenance, LifeOS Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -34,6 +34,28 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ## Current Focus
 
+### Automation Command Center Phase 1
+
+Status: Planned and ready for implementation.
+
+Canonical plan:
+
+- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
+
+First release scope:
+
+- eight exact destinations;
+- canonical, saved, or custom prompts;
+- draft or send mode;
+- explicit send confirmation;
+- manual Run Now only;
+- one-job-at-a-time lock;
+- global pause;
+- structured result and exact failure reason;
+- local activity history.
+
+No scheduling in Phase 1. One-time and recurring schedules, automatic ChatGPT launch, screenshots, notifications, and richer recovery features remain deferred.
+
 ### Desktop Department Automation
 
 Status: Operational and validated across all seven HQs.
@@ -59,10 +81,6 @@ Validated behavior:
 - watched successful live send to Main Assistant HQ.
 
 The prior Wellness loading failure is resolved. Future changes require demonstrated UI drift or failure, followed by draft-only and watched live-send revalidation.
-
-Durable recovery reference:
-
-- `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
 
 ### LifeOS Dashboard
 
@@ -91,8 +109,8 @@ Current dashboard work:
 
 1. Observe ordinary refresh behavior.
 2. Add a small browser-side auto-refresh control only if normal use demonstrates value.
-3. Preserve independent caches and guarded Git sync.
-4. Keep Gmail and Drive deferred until a concrete need appears.
+3. Integrate Command Center Phase 1 without blocking normal refreshes.
+4. Preserve independent caches and guarded Git sync.
 
 ### Reliable Connector Execution Layer
 
@@ -132,8 +150,9 @@ Completed:
 
 - literal newline repair;
 - Logistics project path corrected to `projects/life-logistics-hq`;
-- legacy Logistics wrapper routed through the canonical department launcher;
-- generated boot prompts aligned with current HQ naming and optional status-file handling.
+- legacy Logistics wrapper routed through the canonical launcher;
+- launcher labels aligned with canonical HQ names;
+- generated boot prompts aligned with current status-file handling and role boundaries.
 
 Deferred improvements remain captured in:
 
@@ -148,6 +167,7 @@ Deferred improvements remain captured in:
 
 ## Current Open Work
 
+- Design and implement Automation Command Center Phase 1 with manual Run Now only.
 - Maintain and observe desktop automation in normal on-demand use.
 - Observe the four-source dashboard during ordinary refresh and real degraded conditions.
 - Add dashboard auto-refresh only if still useful after ordinary use.
@@ -161,17 +181,13 @@ Deferred improvements remain captured in:
 
 ## Completed Recent Work
 
+- 2026-07-17: Automation Command Center plan captured with a manual-only Phase 1 and explicit scheduling deferral.
 - 2026-07-17: Desktop automation validated across all seven HQs with one watched successful live send to Main Assistant HQ.
 - 2026-07-17: NOTE-010 closed and NOTE-011 established the durable UI automation recovery playbook.
-- 2026-07-17: Logistics boot path and wrapper corrected.
+- 2026-07-17: Logistics boot path, wrapper, launcher labels, and role boundaries corrected.
 - 2026-07-17: Guarded GitHub auto-sync locally verified with 16 passing tests.
-- 2026-07-17: Windows timezone packaging repaired through `tzdata`.
 - 2026-07-17: Todoist, Calendar, Trello, and GitHub dashboard paths verified.
-- 2026-07-17: Dashboard V0 launched and passed first-use review.
 - 2026-07-17: ADV-20260717-040 and ADV-20260716-039 closed after shared-summary reconciliation.
-- 2026-07-16: ADV-20260716-038 consumed and closed.
-- 2026-07-16: Prompt-launcher newline defect corrected.
-- 2026-07-15: Seven LifeOS department chats opened and declared ready.
 
 ## Boundary
 
