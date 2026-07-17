@@ -1,7 +1,7 @@
 # Desktop Department Automation Live-Send Handoff
 
 Date: 2026-07-17
-Status: Active test / pause after current Wellness run
+Status: Paused after guarded Wellness load failure
 Owner: Engineering HQ
 
 ## Purpose
@@ -82,13 +82,14 @@ python automation\draft_department_boot.py wellness --send
 
 ## What has been proven
 
-- Exact chat selection works for all seven department chats.
+- Exact chat selection works for all seven department chats when the destination loads normally.
 - Standardized chat naming works across all launch targets.
-- Active document verification works.
+- Active document verification works and prevents action in an unverified destination.
 - Composer readiness checks work.
 - Long canonical prompts are visibly written into the composer.
 - Draft-only mode works.
 - Explicit send mode is wired through the department launcher.
+- The destination safety gate correctly stopped when Wellness remained stuck on the loading spinner.
 
 ## Connector behavior and accepted operating assumption
 
@@ -124,6 +125,24 @@ Latest relevant commit:
 
 - `4413fd384572452b05bf36ce3ada7dca55046917` — clipboard-based composer verification.
 
+## Confirmed loading failure mode
+
+The watched Wellness `--send` test stopped before composer work with:
+
+```text
+STOPPED: Destination verification failed. Expected 'Life OS - Wellness HQ', observed 'ChatGPT'.
+```
+
+Visible behavior:
+
+- Wellness showed the persistent loading spinner;
+- the target document never became available to UI Automation;
+- the script observed only the generic `ChatGPT` document title;
+- no prompt was written and nothing was sent;
+- Rob had to click away and click back manually before Wellness loaded.
+
+This is correct safe-stop behavior. The unresolved question is whether the generic engine should perform one bounded re-navigation retry when the observed title remains `ChatGPT`, or continue treating this as a manual recovery case.
+
 ## Important commit trail
 
 - `84ffd1833d996832795f2bf0f81f5bf664aa4836` — initial generic chat automation.
@@ -140,29 +159,17 @@ Latest relevant commit:
 - `dc732a628c1eb40b8648e517cf73c093b0c33cb3` — normalized long-prompt verification attempt.
 - `4413fd384572452b05bf36ce3ada7dca55046917` — clipboard round-trip verification.
 
-## Current test in progress
-
-Rob is testing:
-
-```cmd
-python automation\draft_department_boot.py wellness --send
-```
-
-using the clipboard-verification patch.
-
-The result of this test is not yet recorded in this note.
-
 ## Next Penny instructions
 
-1. Ask Rob for the exact output and visible behavior of the Wellness `--send` test.
-2. Do not assume the clipboard verification succeeded until Rob confirms the message submitted.
-3. If it succeeded, record the result and move to a bounded multi-department send test before scheduling anything.
-4. If it failed, inspect the clipboard-specific error and patch only that failure.
+1. Continue in a fresh Engineering HQ chat.
+2. Read this note before changing either automation script.
+3. Do not misclassify the latest test as a clipboard-verification failure; the run never reached the composer.
+4. Decide whether to add exactly one bounded re-navigation retry for the generic `ChatGPT` loading state.
 5. Keep draft-only as the default.
 6. Keep `--send` explicit.
 7. Do not attempt automatic connector-pill resolution unless later evidence makes it necessary.
-8. Do not proceed to unattended morning scheduling until live send is proven and Rob explicitly authorizes the scheduling layer.
+8. Do not proceed to unattended morning scheduling until a full live send completes successfully and Rob explicitly authorizes the scheduling layer.
 
 ## Pause reason
 
-The current Engineering chat is becoming increasingly laggy, with more repeated loading spinner behavior each time Rob returns. Continue this work in a fresh Engineering HQ chat after the current Wellness test result is captured.
+The current Engineering chat is increasingly laggy, with repeated loading-spinner behavior each time Rob returns. Resume from this note in a fresh Engineering HQ chat.
