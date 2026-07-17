@@ -1,6 +1,6 @@
 # Engineering HQ Session Handoff
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 Project: Engineering HQ
 Purpose: Project-specific handoff for software architecture, prompt systems, workers, connector reliability, desktop automation, the LifeOS Dashboard, and the Automation Command Center.
 
@@ -8,20 +8,21 @@ Purpose: Project-specific handoff for software architecture, prompt systems, wor
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Department Ownership Architecture and Dashboard Inspection, Automation Operational Validation, Desktop Recovery, Canonical Prompt Catalog, Connector Reliability, Worker Pilots, and Delivery Architecture
+- Current Phase: Active / Department Ownership Verification, Automation Operational Validation, Desktop Recovery, Canonical Prompt Catalog, Connector Reliability, Worker Pilots, and Delivery Architecture
 - Primary Systems: GitHub, Google Drive, Trello, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, financial account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
 
 ## Boot Instructions
 
-1. Follow `memory/STARTUP_BOOT.md`.
+1. Follow `memory/STARTUP_BOOT.md` and its universal-kernel plus role-routed rules.
 2. Read this handoff.
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
 5. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
 6. Read a source board only when the index points to a relevant advisory or Rob names it.
-7. Keep connector work small, explicit, and verifiable.
+7. Do not load the global handoff, all active projects, or system loops during an ordinary Engineering boot unless the current task is explicitly system-level.
+8. Keep connector work small, explicit, and verifiable.
 
 ## Department Role
 
@@ -41,27 +42,47 @@ Never claim an action, test, deployment, or connector write occurred without ver
 
 ## Highest-Priority Work Package
 
-Canonical note:
+Status: Ownership architecture implemented; post-cleanup verification pending.
+
+Canonical references:
 
 - `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
+- `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`
+- `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
+- `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+- `memory/STARTUP_BOOT.md`
 
-Decision direction:
+Implemented decisions:
 
 - department `open_loops.md` files are authoritative for department-owned work;
-- system loops are reserved for genuinely shared or multi-owner work;
-- specialist departments should not load unrelated department backlogs;
-- cross-department awareness should move through advisories, explicit dependencies, routed handoffs, or Main/Logistics coordination;
-- the dashboard may aggregate all department state without becoming another source of truth.
+- `memory/05_OPEN_LOOPS.md` is system-only;
+- global visibility does not justify mirrored department records;
+- the dashboard aggregates department and system state read-only;
+- shared rules are universal, operational state is role-routed;
+- specialists load their own files and only relevant shared dependencies;
+- Main Assistant and Logistics receive broader context according to role;
+- system promotion, demotion, lifecycle, reference, and reconciliation rules are formalized.
 
-Required sequence:
+Inspector implementation and evidence:
 
-1. audit current global and department loop duplication;
-2. formalize ownership, promotion, demotion, lifecycle, and reconciliation procedures;
-3. update boot routing so specialists receive only relevant global context;
-4. reconcile stale global loop and handoff language;
-5. add a Department Inspection tab between Overview and Automation;
-6. aggregate all seven departments' loops, notebooks, logs, and status records with department, status, priority, date, type, search, and sort filters;
-7. validate that department files remain authoritative.
+- Department Inspection tab is locally validated;
+- seven departments plus System are normalized;
+- Work, Knowledge, Operations, and Findings are filterable;
+- first baseline was 458 records / 4 findings / 101 warnings;
+- first tuning produced 459 records / 4 findings / 15 warnings;
+- confirmed findings exposed state/priority mixing, broad Chat HQ watch mirrors, Legacy VA folder mirrors, and speculative registry placeholders;
+- first source cleanup and explicit-priority parsing are committed.
+
+Immediate validation boundary:
+
+1. restore or confirm the local desktop/dashboard connection;
+2. refresh and restart the FastAPI dashboard process;
+3. compare post-cleanup counts with the 459 / 4 / 15 tuned baseline;
+4. inspect any remaining findings individually;
+5. observe ordinary specialist boots for real routing defects;
+6. close the ownership-reconciliation system wrapper after stable use.
+
+Do not broadly weaken finding detection merely to reach zero findings.
 
 ## Automation Command Center
 
@@ -91,9 +112,9 @@ Current implementation includes:
 Live evidence completed:
 
 - one-time `Hi Penny Test` live send to Engineering HQ succeeded and completed with no future run;
-- first daily `Hi Penny LifeOS Test` live send to LifeOS HQ succeeded and advanced to 2026-07-18 15:05 CT;
+- first daily `Hi Penny LifeOS Test` live send to LifeOS HQ succeeded and advanced correctly;
 - mobile use and active response generation did not interfere with the desktop scheduled send;
-- scheduled Logistics HQ occupied-composer refusal preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery reason at 2026-07-17 16:07:12 CT.
+- scheduled Logistics HQ occupied-composer refusal preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason.
 
 Still awaiting evidence:
 
@@ -177,15 +198,20 @@ Verified live sources:
 - Todoist
 - Google Calendar private iCal
 
+Current tabs:
+
+- Overview
+- Department Inspection
+- Automation
+
 Current boundaries:
 
 - Windows timezone support uses `tzdata`;
 - guarded GitHub sync is limited to clean, strictly-behind fast-forward updates;
 - Trello, Todoist, and Calendar remain independent read-only adapters with cache behavior;
 - Gmail and Drive adapters remain deferred until demonstrated need;
-- the dashboard is a visibility and local-control layer, not a replacement source of truth.
-
-The dashboard's newly proven diagnostic value is exposing stale duplicates, unnecessary universal context, over-engineering, and department work promoted beyond its real ownership boundary.
+- the dashboard is a visibility and local-control layer, not a replacement source of truth;
+- Department Inspection does not edit, merge, close, promote, demote, or create advisories automatically.
 
 ## Production Readiness
 
@@ -211,7 +237,7 @@ Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after t
 
 ## Advisory State
 
-As of 2026-07-17:
+As of 2026-07-18:
 
 - No open advisories are listed in `coordination/ADVISORY_INDEX.md`.
 - ADV-20260717-040 is implemented / acknowledged / closed.
@@ -220,9 +246,9 @@ As of 2026-07-17:
 
 ## Active Open Loops
 
-- Formalize department ownership, visibility, routing, and lifecycle procedures.
-- Reconcile stale global state and role-routed boot context.
-- Build and validate the Department Inspection dashboard tab.
+- Verify post-cleanup Department Inspection counts and findings.
+- Observe role-routed specialist boots and correct only demonstrated defects.
+- Close the ownership-reconciliation system wrapper after stable use.
 - Test dashboard restart and overdue-run behavior.
 - Observe the next real recurring occurrence.
 - Design collapsed-project recovery without changing code until Rob authorizes it.
@@ -238,21 +264,22 @@ As of 2026-07-17:
 
 ## Completed Recent Work
 
+- 2026-07-18: Department Inspection MVP locally validated and tuned from 101 warnings to 15.
+- 2026-07-18: First inspector-guided source cleanup completed.
+- 2026-07-18: Open Loop Ownership and Visibility SOP implemented.
+- 2026-07-18: Startup boot changed to a universal kernel plus role-routed context.
+- 2026-07-18: System open loops and system handoff reconciled under the new ownership rules.
 - 2026-07-17: Scheduled occupied-composer refusal and structured dashboard reporting passed end to end.
 - 2026-07-17: Scheduled Jobs and Run History were separated with independent filters.
 - 2026-07-17: Manual Automation Command Center path implemented and live-validated.
 - 2026-07-17: Saved prompt lifecycle, default destinations, mismatch safeguards, and delete behavior validated.
 - 2026-07-17: Persistent one-time, daily, and weekly scheduling implemented.
-- 2026-07-17: One-time live send to Engineering HQ succeeded and completed correctly.
-- 2026-07-17: First daily live send to LifeOS HQ succeeded and advanced correctly.
-- 2026-07-17: Concurrent mobile chat activity did not interfere with scheduled desktop execution.
-- 2026-07-17: Collapsed LifeOS project-folder behavior identified as the next recovery edge case; no code change authorized.
 - 2026-07-17: Desktop automation validated across all seven HQs.
 - 2026-07-17: Guarded GitHub auto-sync and four-source dashboard operation validated.
 
 ## Immediate Next Action
 
-Begin the department ownership and dashboard inspection package while the remaining scheduler tests fire. Preserve the current automation safety boundary and do not change collapsed-project recovery code without explicit authorization.
+When the local desktop/dashboard connection is available, refresh and restart the dashboard, record the post-cleanup Department Inspection counts, and inspect only the findings that remain. Until then, preserve the new ownership and boot architecture and do not perform broad parser weakening.
 
 ## Safety and Truthfulness
 
@@ -260,4 +287,4 @@ Begin the department ownership and dashboard inspection package while the remain
 - Fetch before editing and verify after writing.
 - Keep connector-heavy work narrowly scoped.
 - Never commit secrets or private account data.
-- Never claim success without a successful tool or runtime result.
+- Never claim local runtime success without Rob's confirmation.
