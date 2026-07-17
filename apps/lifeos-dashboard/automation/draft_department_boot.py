@@ -22,10 +22,10 @@ class Department:
 DEPARTMENTS: dict[str, Department] = {
     "logistics": Department(
         key="logistics",
-        chat_title="Chief Logistics HQ",
-        role_title="Life Logistics HQ",
+        chat_title="Logistics HQ",
+        role_title="Logistics HQ",
         project_folder="projects/life-logistics",
-        report_name="Life Logistics",
+        report_name="Logistics",
         related_files_note=(
             "Read related Main Assistant, Finance, Housing, Recovery Logistics, "
             "Wellness, or Engineering files only when the handoff or task requires "
@@ -34,20 +34,20 @@ DEPARTMENTS: dict[str, Department] = {
     ),
     "engineering": Department(
         key="engineering",
-        chat_title="Chief Engineering HQ",
-        role_title="Chief Engineering Penny / Engineering HQ",
+        chat_title="Engineering HQ",
+        role_title="Engineering HQ",
         project_folder="projects/engineering",
         report_name="Engineering",
         related_files_note=(
-            "Read related Main Assistant, Life Logistics, Business, Office Leaks, "
-            "Finance, or infrastructure files only when the handoff or task requires "
+            "Read related Main Assistant, Logistics, Business, Finance, or "
+            "infrastructure files only when the handoff or task requires "
             "cross-project coordination."
         ),
     ),
     "main": Department(
         key="main",
-        chat_title="Life OS Hub",
-        role_title="Main Assistant Penny / Daily Operations",
+        chat_title="Main Assistant HQ",
+        role_title="Main Assistant HQ",
         project_folder="projects/main-assistant",
         report_name="Main Assistant",
         related_files_note=(
@@ -57,41 +57,30 @@ DEPARTMENTS: dict[str, Department] = {
     ),
     "finance": Department(
         key="finance",
-        chat_title="Finance Benefits HQ",
-        role_title="Chief of Finance Penny / Finance Benefits HQ",
+        chat_title="Finance HQ",
+        role_title="Finance HQ",
         project_folder="projects/finance-benefits",
         report_name="Finance",
         related_files_note=(
-            "Read related Main Assistant, Life Logistics, Housing, Business, or "
+            "Read related Main Assistant, Logistics, Housing, Business, or "
             "Wellness files only when the handoff or task requires cross-project coordination."
         ),
     ),
     "business": Department(
         key="business",
-        chat_title="Chief Business HQ",
-        role_title="Chief Business HQ / Business Development",
+        chat_title="Business HQ",
+        role_title="Business HQ",
         project_folder="projects/business-development",
         report_name="Business",
         related_files_note=(
             "Read related Main Assistant, Finance, Engineering, Office Leaks, or "
-            "Life Logistics files only when the handoff or task requires cross-project coordination."
-        ),
-    ),
-    "office-leaks": Department(
-        key="office-leaks",
-        chat_title="Office Leaks HQ",
-        role_title="Office Leaks VP Penny / Office Leaks Consulting HQ",
-        project_folder="projects/office-leaks-consulting",
-        report_name="Office Leaks",
-        related_files_note=(
-            "Read related Chief Business HQ, Chief Engineering Penny, Finance, or "
-            "Life Logistics files only when the handoff or task requires cross-project coordination."
+            "Logistics files only when the handoff or task requires cross-project coordination."
         ),
     ),
     "wellness": Department(
         key="wellness",
         chat_title="Wellness HQ",
-        role_title="Chief Wellness HQ / Wellness Penny",
+        role_title="Wellness HQ",
         project_folder="projects/wellness",
         report_name="Wellness",
         related_files_note=(
