@@ -1,21 +1,23 @@
 # Life OS Operating Rules
 
-Updated: 2026-07-10
+Updated: 2026-07-18
 Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
 
 This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
 
-These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, advisories, advisory-board lifecycle, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
+These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, ideas, durable-write promotion, advisories, advisory-board lifecycle, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
 ## Source of Truth Rules
 
-- GitHub is the preferred durable source for long-term memory, boot files, handoffs, operating rules, active projects, and open loops.
+- GitHub is the preferred durable source for long-term memory, boot files, handoffs, operating rules, active projects, committed open loops, decisions, and validated knowledge.
+- Trello is the intake, attention, flow, and possibility layer for raw ideas, candidate work, someday items, and promoted-work pointers.
 - Google Drive remains the operational workspace for Docs, Sheets, checkbook tracking, generated files, job-search working documents, and human-readable artifacts.
 - Todoist is the Rob-facing action queue.
 - Google Calendar is the timed commitments queue.
 - Gmail is communication evidence.
+- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md` governs idea capture, canonical Trello tags, promotion gates, durable-write authorization, and destination selection.
 - `coordination/ADVISORY_INDEX.md` is the sole active advisory routing dashboard.
 - `coordination/boards/` contains formal department advisory boards and canonical advisory text.
 - `coordination/ADVISORY_BOARD_LIFECYCLE_STANDARD.md` governs operational board structure, closure, compaction, and archival behavior.
@@ -27,7 +29,26 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` is the operating pattern for connector-heavy work, fallback workflows, and Finances-only session behavior.
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
 
-Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, Todoist tasks, and Finances results where appropriate.
+Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, Todoist tasks, Trello cards, and Finances results where appropriate.
+
+## Idea Intake and Durable Promotion Rules
+
+Standard procedure lives at:
+
+- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
+
+Core rules:
+
+- Capture is cheap; promotion is earned.
+- Raw ideas normally belong in Trello, not GitHub.
+- A Trello capture does not create a commitment, priority, due date, project, or open loop.
+- Before creating new durable GitHub state, identify the record class, one owner, one authoritative destination, lifecycle state, priority, next action or review trigger, completion or review condition, duplicate check, and authorization.
+- Brainstorming, enthusiasm, repeated mention, assistant recommendation, dashboard visibility, and broad usefulness do not authorize durable promotion.
+- During an authorized sync, a department may update existing records in files it owns, but new durable records must still pass the promotion gate.
+- GitHub lifecycle state and priority must remain separate and use the canonical vocabulary in the SOP.
+- Pure someday ideas remain in Trello. Durable parked work uses `Paused` with `Low` priority and a meaningful review or resume trigger.
+- Promoted Trello cards become attention pointers to the authoritative GitHub or Drive record rather than competing detailed ledgers.
+- Do not automate idea promotion until the human workflow is stable and validated.
 
 ## Role Drift Check
 
@@ -175,13 +196,13 @@ A department may create a local pending board at:
 
 Create a pending board only when needed. Do not create empty pending boards across every department by default.
 
-Pending items do not update the Advisory Index, Department Event Inbox, Todoist, or other department boards.
+Pending items do not update the Advisory Index, Department Event Inbox, Todoist, open loops, or other department boards.
 
 Promote pending items into formal advisories only during deliberate review and only when cross-department routing or a durable shared decision is needed.
 
 ## Department Notebook Rules
 
-Department Notebooks are optional local sketchpads for durable idea capture.
+Department Notebooks are optional local durable records for promoted reasoning, decisions, experiments, validation, discoveries, and historical context.
 
 Standard procedure lives at:
 
@@ -193,9 +214,13 @@ A department may create a local notebook at:
 
 Create a notebook only when useful. Do not create empty notebooks across every department by default.
 
-Notebook entries do not update the Advisory Index, Department Event Inbox, Todoist, open loops, or other department boards.
+Notebook entries do not automatically update the Advisory Index, Department Event Inbox, Todoist, open loops, or other department boards.
 
-Use notebooks for ideas worth preserving that are not yet tasks, advisories, open loops, handoff state, design principles, or Drive artifacts.
+Raw ideas and someday possibilities normally belong in Trello. Promote material into a notebook only when its reasoning, evidence, decision, validation, discovery, or history has durable value.
+
+A notebook entry does not automatically become a task, advisory, open loop, project, or status item. Any further promotion must independently pass the relevant gate.
+
+Notebook entries should use explicit status metadata and canonical vocabulary so the Department Inspector can distinguish active, completed, waiting, paused, blocked, historical, and ambiguous records.
 
 ## Scheduled HQ Sync Rules
 
@@ -221,6 +246,8 @@ If connector invocation fails or becomes unstable, do not fight the environment.
 
 GitHub memory files should be edited as Markdown text.
 
+Before creating a new durable record, apply `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`.
+
 When updating an existing file:
 
 1. Fetch the file first.
@@ -236,6 +263,8 @@ Use housekeeping updates only when meaningful state changes occur.
 
 Update Session Handoff after meaningful Life OS work.
 
-Update Open Loops when open loops are created, closed, clarified, or changed.
+Update Open Loops when committed open loops are created, closed, clarified, or changed.
+
+Do not create an open loop merely because an idea was captured.
 
 Update Boot Log or Captain's Log for durable architecture changes, major workflow lessons, important new root files, or significant technical lessons.
