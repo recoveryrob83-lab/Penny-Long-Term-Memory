@@ -1,8 +1,9 @@
 # Department Ownership and Dashboard Inspection
 
 Date: 2026-07-17
+Updated: 2026-07-18
 Department: Engineering HQ
-Status: High-priority next work package
+Status: Approved / implementation-ready
 
 ## Trigger
 
@@ -22,9 +23,32 @@ Use need-to-know operational routing instead of universal duplication.
 
 Example: dashboard and desktop-automation implementation help Life OS broadly, but the work is Engineering-owned. Wellness does not need the Engineering backlog unless pacing, recovery stability, burnout, sleep, or another Wellness dependency is actually involved.
 
+## Approved Data Contract
+
+Rob approved the Department Inspection data contract on 2026-07-18.
+
+Canonical contract:
+
+- `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`
+
+Approved foundations:
+
+1. one normalized record envelope;
+2. seven department scopes plus System;
+3. nine normalized record types;
+4. separate lifecycle state and priority;
+5. explicit source authority;
+6. conservative parsing with confidence and warnings;
+7. read-only duplicate and stale-state findings;
+8. department files remain authoritative;
+9. system files contain only genuinely system-owned work;
+10. the dashboard remains an aggregation and diagnostic layer, not a mirrored ledger.
+
+The contract intentionally preserves source ambiguity rather than allowing the inspector to hide inconsistent GitHub structure behind polished classification.
+
 ## Required Operational Package
 
-Before expanding the dashboard, formalize clean rules and procedures for:
+Formalize clean rules and procedures for:
 
 1. department versus system open-loop ownership;
 2. promotion and demotion thresholds for system-level loops;
@@ -38,38 +62,43 @@ Likely durable output: an Open Loop Ownership and Visibility SOP plus targeted b
 
 ## Dashboard Requirement
 
-Add a new tab between Overview and Automation for department-level inspection across all seven departments.
+Add a new tab between Overview and Automation for department-level inspection across all seven departments plus System.
 
 Working label: `Departments` or `Department Inspection`.
 
-The tab should present separate categories for:
+The tab should present four primary categories:
 
-- department open loops;
-- department notebooks;
-- department logs and status records where useful;
-- system-wide open loops as a clearly distinct category.
+- Work;
+- Knowledge;
+- Operations;
+- Findings.
 
-Filters and controls should include, where the source data supports them:
+Version 1 filters:
 
 - department;
-- status;
+- category;
+- record type;
+- lifecycle state;
 - priority;
 - date or date range;
-- newest or oldest order;
-- notebook or record type;
-- cross-department-only view;
-- text search over titles and summaries.
+- cross-department status;
+- source authority;
+- warnings only;
+- text search;
+- newest, oldest, department, or priority sorting.
 
-The dashboard should show source paths and compact previews while preserving the department files as the only authoritative records.
+The dashboard should show source paths, compact previews, raw text when requested, confidence, and warnings while preserving the department files as the only authoritative records.
 
 ## Implementation Sequence
 
-1. Audit current global and department loop duplication.
-2. Define and record ownership and routing rules.
-3. Update boot behavior so specialist departments receive only relevant global context.
-4. Reconcile stale global loops and handoff language.
-5. Build the Department Inspection tab.
-6. Validate filters against all seven departments and confirm no new source-of-truth duplication is introduced.
+1. Implement the normalized record model and conservative parsers against the approved contract.
+2. Build a read-only Department Inspection tab between Overview and Automation.
+3. Load all seven department scopes plus System from canonical source families.
+4. Expose Work, Knowledge, Operations, and Findings views with approved filters.
+5. Validate classifications and anomaly findings against existing GitHub inconsistencies.
+6. Use the inspector to audit and clean duplicated or misplaced GitHub state.
+7. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using evidence from the inspector.
+8. Confirm no new source-of-truth duplication is introduced.
 
 ## Product Lesson
 
