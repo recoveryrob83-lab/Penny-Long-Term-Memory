@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Updated: 2026-07-18
 Department: Engineering HQ
-Status: MVP implemented and locally validated / live audit active
+Status: MVP locally validated / first live-audit tuning awaiting restart confirmation
 
 ## Trigger
 
@@ -83,7 +83,35 @@ This validates the essential runtime path:
 4. the live repository inspection loaded rather than the unavailable fallback state;
 5. the existing Overview and Automation surfaces remained operational enough for normal use.
 
-Detailed classification quality, filter behavior, finding usefulness, and noise levels remain part of the live audit rather than being assumed from the initial successful load.
+## First Live Audit Baseline
+
+Rob observed:
+
+- 458 normalized records;
+- 4 findings;
+- 101 records with warnings;
+- a useful separation between Work, Operations, Knowledge, and Findings;
+- a very large but legitimate notebook inventory;
+- one `state_priority_mixed` finding;
+- three `possible_duplicate` findings across Engineering / Logistics, Logistics / System, and Business / Wellness;
+- a parser defect that removed underscores from file names displayed inside normalized summaries.
+
+The baseline showed that the inventory is broad enough, but the first presentation and warning policy are too noisy for fast inspection.
+
+## First Evidence-Based Tuning
+
+Implemented after the live baseline:
+
+- preserve underscores in file names and identifiers;
+- remove routine `Priority not explicitly provided` warnings from bullet work items;
+- normalize those bullet priorities to `unknown` while retaining medium confidence;
+- require summary similarity before reporting cross-department duplicates when System is not involved;
+- keep System mirrors and same-department duplicates eligible for findings;
+- contain long record lists inside scrollable workbenches rather than extending the entire page;
+- enrich Finding details with related title, state, authority, and source path instead of normalized IDs alone;
+- add tests for underscore preservation, bullet-warning reduction, and unrelated cross-department title matches.
+
+This tuning remains read-only and does not alter the source Markdown.
 
 ## Required Operational Package
 
@@ -101,12 +129,14 @@ Likely durable output: an Open Loop Ownership and Visibility SOP plus targeted b
 
 ## Remaining Sequence
 
-1. Review the live Findings view and record useful, noisy, or incorrect classifications.
-2. Correct parser or filter behavior only where real repository evidence warrants it.
-3. Use the inspector to audit and clean duplicated, stale, or misplaced GitHub state.
-4. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using evidence from the inspector.
-5. Reconcile system and department files under the new rules.
-6. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
+1. Pull and restart the dashboard to validate the first live-audit tuning.
+2. Compare new warning and finding counts with the baseline.
+3. Review the enriched Findings details and decide which records are genuinely duplicated or misplaced.
+4. Correct further parser or filter behavior only where evidence warrants it.
+5. Use the inspector to audit and clean duplicated, stale, or misplaced GitHub state.
+6. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using evidence from the inspector.
+7. Reconcile system and department files under the new rules.
+8. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
 
 ## Product Lesson
 
