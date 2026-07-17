@@ -1,12 +1,11 @@
 """FastAPI application for the local LifeOS dashboard."""
-
 from __future__ import annotations
 
 import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -42,6 +41,11 @@ class PauseRequest(BaseModel):
     paused: bool
 
 
+class SavedPromptRequest(BaseModel):
+    name: str
+    prompt: str
+
+
 def _cache_path(environment_name: str, filename: str) -> Path:
     configured = os.getenv(environment_name)
     if configured:
@@ -57,16 +61,10 @@ def _environment_flag(name: str, default: bool) -> bool:
 
 
 def build_default_source() -> DashboardSource:
-    """Build the live source chain, falling back source-by-source when needed."""
     sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
     source: DashboardSource = sample_source
-
     configured_root = os.getenv("LIFEOS_REPOSITORY_ROOT")
-    repo_root = (
-        Path(configured_root).expanduser()
-        if configured_root
-        else PACKAGE_ROOT.parents[2]
-    )
+    repo_root = Path(configured_root).expanduser() if configured_root else PACKAGE_ROOT.parents[2]
     if (repo_root / ".git").exists() and (repo_root / "memory").exists():
         source = LocalGitHubDashboardSource(
             repo_root,
@@ -74,27 +72,24 @@ def build_default_source() -> DashboardSource:
             auto_sync=_environment_flag("LIFEOS_GITHUB_AUTO_SYNC", True),
             sync_branch=os.getenv("LIFEOS_GITHUB_SYNC_BRANCH", "main"),
         )
-
     source = TrelloFlowDashboardSource.from_environment(
-        source,
-        cache_path=_cache_path("TRELLO_CACHE_PATH", "trello_flow_cache.json"),
+        source, cache_path=_cache_path("TRELLO_CACHE_PATH", "trello_flow_cache.json")
     )
     source = TodoistDashboardSource.from_environment(
-        source,
-        cache_path=_cache_path("TODOIST_CACHE_PATH", "todoist_commitments_cache.json"),
+        source, cache_path=_cache_path("TODOIST_CACHE_PATH", "todoist_commitments_cache.json")
     )
     return GoogleCalendarIcalDashboardSource.from_environment(
-        source,
-        cache_path=_cache_path("GOOGLE_CALENDAR_CACHE_PATH", "google_calendar_cache.json"),
+        source, cache_path=_cache_path("GOOGLE_CALENDAR_CACHE_PATH", "google_calendar_cache.json")
     )
 
 
 def create_app(source: DashboardSource | None = None) -> FastAPI:
-    """Create a configured dashboard application."""
     active_source = source or build_default_source()
     service = DashboardService(active_source)
-    command_center = CommandCenterService(APP_ROOT)
-
+    command_center = CommandCenterService(
+        APP_ROOT,
+        database_path=_cache_path("COMMAND_CENTER_DATABASE_PATH", "command_center.sqlite3"),
+    )
     application = FastAPI(
         title="LifeOS Dashboard",
         description="Local read-mostly LifeOS command window",
@@ -102,12 +97,7 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     )
     application.state.dashboard_service = service
     application.state.command_center = command_center
-
-    application.mount(
-        "/static",
-        StaticFiles(directory=PACKAGE_ROOT / "static"),
-        name="static",
-    )
+    application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
     templates = Jinja2Templates(directory=PACKAGE_ROOT / "templates")
 
     @application.get("/", response_class=HTMLResponse)
@@ -120,11 +110,7 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
 
     @application.get("/api/health")
     async def health() -> dict[str, str]:
-        return {
-            "status": "ok",
-            "version": __version__,
-            "mode": service.mode,
-        }
+        return {"status": "ok", "version": __version__, "mode": service.mode}
 
     @application.get("/api/dashboard")
     async def dashboard_data() -> dict[str, object]:
@@ -137,6 +123,20 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     @application.post("/api/command-center/pause")
     async def command_center_pause(request: PauseRequest) -> dict[str, object]:
         command_center.set_paused(request.paused)
+        return command_center.status()
+
+    @application.post("/api/command-center/prompts")
+    async def save_command_prompt(request: SavedPromptRequest) -> dict[str, object]:
+        try:
+            command_center.save_prompt(request.name, request.prompt)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return command_center.status()
+
+    @application.delete("/api/command-center/prompts/{prompt_id}")
+    async def delete_command_prompt(prompt_id: int) -> dict[str, object]:
+        if not command_center.delete_prompt(prompt_id):
+            raise HTTPException(status_code=404, detail="Saved prompt not found.")
         return command_center.status()
 
     @application.post("/api/command-center/run")
