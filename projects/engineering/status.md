@@ -1,16 +1,16 @@
 # Engineering HQ Status
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 
 ## Current Phase
 
-Active / Department Ownership Architecture and Dashboard Inspection, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Department Ownership Verification, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
 Engineering HQ owns technical architecture, software planning, repository strategy, automation design, connector and API research, testing strategy, prompt systems, implementation sequencing, and build-readiness.
 
-Engineering defines how to build safely and in the right order. Business and Office Leaks define what should be built and why. Finance owns cost-bearing choices. Main Assistant coordinates daily operations. Logistics owns shared global memory hygiene.
+Engineering defines how to build safely and in the right order. Business and Office Leaks define what should be built and why. Finance owns cost-bearing choices. Main Assistant coordinates daily operations. Logistics owns shared global memory hygiene, boot integrity, migrations, and cross-project audits.
 
 ## Operating Model
 
@@ -24,12 +24,13 @@ Never claim an action, test, deployment, or external write occurred without veri
 
 - GitHub: durable memory, architecture, advisories, stable project state, dashboard code, and automation code.
 - Department project files: authoritative department status, loops, notebooks, and implementation records.
+- `memory/05_OPEN_LOOPS.md`: genuinely system-owned work and operating watches only.
 - Trello: current LifeOS attention and flow.
 - Todoist: Rob-facing tasks and commitments.
 - Calendar: timed commitments.
 - Gmail: communication evidence when explicitly queried; dashboard integration deferred until demonstrated need.
 - Google Drive: working records and human-facing artifacts; dashboard integration deferred until demonstrated need.
-- LifeOS Dashboard: read-mostly visibility into selected authoritative systems plus the local Automation Command Center.
+- LifeOS Dashboard: read-only aggregation of selected authoritative systems plus bounded local Automation Command Center controls.
 
 Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, or private user data in Life OS GitHub memory.
 
@@ -37,21 +38,40 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ### Department Ownership Architecture and Dashboard Inspection
 
-Status: Highest-priority next work package.
+Status: Architecture implemented; post-cleanup dashboard verification pending.
 
-Canonical note:
+Canonical references:
 
 - `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
+- `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`
+- `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
+- `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+- `memory/STARTUP_BOOT.md`
 
-Required work:
+Implemented:
 
-- formalize department versus system open-loop ownership;
-- establish promotion, demotion, lifecycle, and reconciliation rules;
-- route specialist boot context by operational need rather than universal backlog loading;
-- preserve advisories and explicit dependencies for cross-department communication;
-- reconcile stale duplicated global state;
-- add a Department Inspection tab between Overview and Automation;
-- aggregate all seven departments' loops, notebooks, logs, and status records with filters while preserving department files as authoritative.
+- normalized read-only Department Inspection across seven departments plus System;
+- Work, Knowledge, Operations, and Findings categories;
+- source paths, raw fragments, authority, confidence, warnings, and filters;
+- evidence-based warning reduction from 101 to 15 while preserving the full inventory;
+- enriched finding details and contained record workbenches;
+- explicit priority-column parsing;
+- one-authoritative-record ownership rules;
+- system-promotion and demotion thresholds;
+- lifecycle and reconciliation rules;
+- dashboard visibility contract;
+- universal operating kernel plus role-routed boot context;
+- conversion of `memory/05_OPEN_LOOPS.md` into a system-only file;
+- first inspector-guided cleanup of Chat HQ watch mirrors, Legacy VA folder mirrors, registry placeholders, and Engineering state/priority mixing;
+- reconciliation of the system session handoff.
+
+Validation still required:
+
+- refresh and restart the local dashboard after the parser and source changes;
+- compare post-cleanup counts with the 459 records / 4 findings / 15 warnings tuned baseline;
+- inspect any remaining findings individually;
+- confirm ordinary specialist boots no longer load unrelated global backlogs;
+- close the system coordination wrapper after stable ordinary use.
 
 ### Automation Command Center
 
@@ -83,7 +103,7 @@ Live validation completed:
 - one-time custom live send to Engineering HQ succeeded and completed with no future run;
 - first daily custom live send to LifeOS HQ succeeded and advanced to the next day;
 - active mobile use and response generation in another chat did not interfere with the desktop scheduled send;
-- scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery reason.
+- scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason.
 
 Current validation still open:
 
@@ -158,12 +178,19 @@ Verified sources:
 - Todoist
 - Google Calendar private iCal
 
+Current tabs:
+
+- Overview;
+- Department Inspection;
+- Automation.
+
 Current boundaries:
 
 - Windows timezone support uses `tzdata`;
 - guarded GitHub sync only fast-forwards clean, strictly-behind `main`;
 - Gmail and Drive adapters remain deferred;
-- the dashboard remains a visibility and local-control layer rather than a replacement source of truth.
+- the dashboard remains a visibility and local-control layer rather than a replacement source of truth;
+- Department Inspection remains read-only and does not rewrite classifications or ownership automatically.
 
 Current product lesson:
 
@@ -201,16 +228,16 @@ Engineering preserves two integrated delivery layers:
 
 ## Advisory State
 
-- No open advisories are listed in `coordination/ADVISORY_INDEX.md` as of 2026-07-17.
+- No open advisories are listed in `coordination/ADVISORY_INDEX.md` as of 2026-07-18.
 - ADV-20260717-040 is implemented / acknowledged / closed.
 - ADV-20260716-039 is implemented / acknowledged / closed.
 - ADV-20260716-038 is acknowledged / ingested / closed.
 
 ## Current Open Work
 
-- Formalize department ownership, visibility, routing, and lifecycle procedures.
-- Reconcile stale global loop and boot context under the new ownership rules.
-- Build the Department Inspection tab across all seven departments.
+- Verify post-cleanup Department Inspection counts and findings after local restart.
+- Observe ordinary role-routed specialist boots and correct only demonstrated routing defects.
+- Close the ownership-reconciliation system wrapper after stable use.
 - Test overdue one-time behavior after dashboard restart.
 - Observe a second real recurring execution.
 - Design collapsed-LifeOS-project recovery, but do not change code until Rob authorizes it.
@@ -222,10 +249,14 @@ Engineering preserves two integrated delivery layers:
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
 - Draft the operation-ledger schema and connector-health policy.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
-- Observe Chat HQ routing and model-use friction.
 
 ## Completed Recent Work
 
+- 2026-07-18: Open Loop Ownership and Visibility SOP implemented.
+- 2026-07-18: Startup boot changed from universal backlog loading to a universal kernel plus role-routed context.
+- 2026-07-18: System open loops and system handoff reconciled to stop mirroring department backlogs.
+- 2026-07-18: First Department Inspection source cleanup completed.
+- 2026-07-18: Department Inspection MVP locally validated and warning noise reduced from 101 to 15.
 - 2026-07-17: Scheduled occupied-composer refusal and structured dashboard reporting passed end to end.
 - 2026-07-17: Scheduled Jobs and Run History were separated and given independent filters.
 - 2026-07-17: Automation Command Center manual Run Now path implemented and live-validated.
@@ -234,7 +265,6 @@ Engineering preserves two integrated delivery layers:
 - 2026-07-17: One-time live send to Engineering HQ succeeded and completed correctly.
 - 2026-07-17: First daily live send to LifeOS HQ succeeded and advanced to the next run.
 - 2026-07-17: Concurrent mobile chat use and response generation did not interfere with scheduled desktop execution.
-- 2026-07-17: Collapsed LifeOS project-folder behavior identified as the next desktop recovery edge case; no code change authorized yet.
 - 2026-07-17: Desktop automation validated across all seven HQs with exact navigation and safety gates.
 - 2026-07-17: Guarded GitHub auto-sync locally verified with 16 passing tests.
 - 2026-07-17: Todoist, Calendar, Trello, and GitHub dashboard paths verified.
@@ -245,4 +275,4 @@ Scheduling is operational but not yet production-ready for fully unattended Wind
 
 ## Boundary
 
-Engineering HQ owns technical architecture and implementation planning. It does not own business strategy, financial decisions, daily administration, wellness judgment, or cross-project memory curation.
+Engineering HQ owns technical architecture and implementation planning. It does not own business strategy, financial decisions, daily administration, wellness judgment, or routine cross-project memory curation.
