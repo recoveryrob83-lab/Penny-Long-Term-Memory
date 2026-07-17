@@ -19,11 +19,27 @@ const ui = {
   cancelEditButton: document.getElementById("cc-cancel-schedule-edit"),
   list: document.getElementById("cc-schedules"),
   status: document.getElementById("cc-scheduler-status"),
+  count: document.getElementById("cc-schedule-count"),
+  filterCadence: document.getElementById("cc-schedule-filter-cadence"),
+  filterDestination: document.getElementById("cc-schedule-filter-destination"),
+  filterState: document.getElementById("cc-schedule-filter-state"),
+  filterSort: document.getElementById("cc-schedule-filter-sort"),
 };
 
 let state = {saved_prompts: [], scheduled_jobs: []};
 let editingId = null;
 let editingSnapshot = null;
+
+const destinationLabels = {
+  hub: "LifeOS HQ",
+  main: "Main Assistant HQ",
+  engineering: "Engineering HQ",
+  logistics: "Logistics HQ",
+  business: "Business HQ",
+  "office-leaks": "Office Leaks HQ",
+  finance: "Finance HQ",
+  wellness: "Wellness HQ",
+};
 
 const escapeHtml = (value) => String(value ?? "")
   .replaceAll("&", "&amp;")
@@ -103,17 +119,44 @@ function scheduleState(schedule) {
   return "Paused";
 }
 
-function scheduleSortKey(schedule) {
-  if (schedule.enabled && schedule.next_run_at) return [0, Number(schedule.next_run_at)];
-  const recent = Number(schedule.last_run_at || schedule.updated_at || schedule.created_at || 0);
-  return [1, -recent];
+function isFinishedOneTime(schedule) {
+  return schedule.cadence === "once" && !schedule.next_run_at && Boolean(schedule.last_status);
 }
 
-function sortedSchedules() {
-  return [...(state.scheduled_jobs || [])].sort((a, b) => {
-    const left = scheduleSortKey(a);
-    const right = scheduleSortKey(b);
-    return left[0] - right[0] || left[1] - right[1] || Number(b.id) - Number(a.id);
+function matchesStateFilter(schedule) {
+  switch (ui.filterState.value) {
+    case "active":
+      return Boolean(schedule.enabled);
+    case "paused":
+      return !schedule.enabled && !isFinishedOneTime(schedule);
+    case "finished":
+      return isFinishedOneTime(schedule);
+    case "all":
+      return true;
+    default:
+      return !isFinishedOneTime(schedule);
+  }
+}
+
+function recentTime(schedule) {
+  return Number(schedule.last_run_at || schedule.updated_at || schedule.created_at || 0);
+}
+
+function filteredSchedules() {
+  const cadence = ui.filterCadence.value;
+  const destination = ui.filterDestination.value;
+  const sort = ui.filterSort.value;
+  const rows = (state.scheduled_jobs || [])
+    .filter((schedule) => cadence === "all" || schedule.cadence === cadence)
+    .filter((schedule) => destination === "all" || schedule.destination === destination)
+    .filter(matchesStateFilter);
+
+  return rows.sort((left, right) => {
+    if (sort === "name") return String(left.name || "").localeCompare(String(right.name || ""));
+    if (sort === "recent") return recentTime(right) - recentTime(left) || Number(right.id) - Number(left.id);
+    const leftNext = left.next_run_at ? Number(left.next_run_at) : Number.POSITIVE_INFINITY;
+    const rightNext = right.next_run_at ? Number(right.next_run_at) : Number.POSITIVE_INFINITY;
+    return leftNext - rightNext || String(left.name || "").localeCompare(String(right.name || ""));
   });
 }
 
@@ -124,14 +167,17 @@ function description(schedule) {
 }
 
 function render() {
+  const schedules = filteredSchedules();
   ui.status.textContent = state.scheduler_running ? "Scheduler running" : "Scheduler stopped";
-  ui.list.innerHTML = sortedSchedules().map((schedule) => {
+  ui.count.textContent = `${schedules.length} of ${(state.scheduled_jobs || []).length} definitions`;
+  ui.list.innerHTML = schedules.map((schedule) => {
     const last = schedule.last_run_at
       ? `Last: ${new Date(Number(schedule.last_run_at) * 1000).toLocaleString()} · ${schedule.last_status || "unknown"}`
       : "Not run yet";
+    const department = destinationLabels[schedule.destination] || schedule.destination;
     return `<article class="cc-history-item cc-schedule-item" data-schedule-id="${escapeHtml(schedule.id)}">
       <div class="list-item-header"><strong>${escapeHtml(schedule.name)}</strong><span class="badge">${escapeHtml(scheduleState(schedule))}</span></div>
-      <p class="item-meta">${escapeHtml(schedule.destination)} · ${escapeHtml(schedule.mode)} · ${escapeHtml(description(schedule))}</p>
+      <p class="item-meta">${escapeHtml(department)} · ${escapeHtml(schedule.mode)} · ${escapeHtml(description(schedule))}</p>
       <p class="item-meta">${escapeHtml(last)}</p>
       ${schedule.last_reason ? `<p class="item-meta">${escapeHtml(schedule.last_reason)}</p>` : ""}
       <div class="cc-mini-actions">
@@ -140,7 +186,7 @@ function render() {
         <button class="cc-danger-button" type="button" data-schedule-action="delete">Delete</button>
       </div>
     </article>`;
-  }).join("") || '<div class="cc-history-item">No timed runs scheduled yet.</div>';
+  }).join("") || '<div class="cc-history-item">No scheduled-job definitions match these filters.</div>';
 }
 
 async function loadStatus() {
@@ -231,6 +277,7 @@ async function loadIntoEditor(schedule) {
 }
 
 [ui.date, ui.time, ui.destination, ui.confirmSend, ui.confirmDestination].forEach((item) => item.addEventListener("change", updateSummary));
+[ui.filterCadence, ui.filterDestination, ui.filterState, ui.filterSort].forEach((item) => item.addEventListener("change", render));
 ui.cadence.addEventListener("change", updateCadenceUi);
 ui.name.addEventListener("input", updateSummary);
 ui.weekdays.addEventListener("change", updateSummary);
