@@ -11,7 +11,9 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
+import threading
 import time
+from collections import deque
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Literal
@@ -132,11 +134,7 @@ def build_command(job: CommandJob, app_root: Path) -> list[str]:
 
 
 def run_job(job: CommandJob, app_root: Path, timeout_seconds: int = 120) -> ExecutionResult:
-    """Execute one validated foreground job and return a structured result.
-
-    The caller owns process locking and global pause policy. This function performs no retries
-    beyond those already bounded inside the validated desktop-automation engine.
-    """
+    """Execute one validated foreground job and return a structured result."""
     started_at = time.time()
     try:
         command = build_command(job, app_root)
@@ -195,3 +193,82 @@ def run_job(job: CommandJob, app_root: Path, timeout_seconds: int = 120) -> Exec
         stderr=completed.stderr,
         reason="Completed successfully." if succeeded else "Automation process returned an error.",
     )
+
+
+class CommandCenterService:
+    """Own the Phase 1 pause switch, one-job lock, and bounded in-memory activity history."""
+
+    def __init__(self, app_root: Path, history_limit: int = 25) -> None:
+        self.app_root = app_root
+        self._paused = False
+        self._state_lock = threading.Lock()
+        self._run_lock = threading.Lock()
+        self._history: deque[ExecutionResult] = deque(maxlen=history_limit)
+
+    @property
+    def paused(self) -> bool:
+        with self._state_lock:
+            return self._paused
+
+    @property
+    def running(self) -> bool:
+        acquired = self._run_lock.acquire(blocking=False)
+        if acquired:
+            self._run_lock.release()
+            return False
+        return True
+
+    def set_paused(self, paused: bool) -> bool:
+        with self._state_lock:
+            self._paused = paused
+            return self._paused
+
+    def history(self) -> list[dict[str, object]]:
+        with self._state_lock:
+            return [result.to_dict() for result in reversed(self._history)]
+
+    def status(self) -> dict[str, object]:
+        return {
+            "paused": self.paused,
+            "running": self.running,
+            "destinations": [asdict(destination) for destination in DESTINATIONS.values()],
+            "history": self.history(),
+        }
+
+    def execute(self, job: CommandJob, timeout_seconds: int = 120) -> ExecutionResult:
+        started_at = time.time()
+        if self.paused:
+            return ExecutionResult(
+                status="refused",
+                destination=job.destination,
+                mode=job.mode,
+                prompt_type=job.prompt_type,
+                exit_code=None,
+                started_at=started_at,
+                finished_at=time.time(),
+                stdout="",
+                stderr="",
+                reason="Automation Command Center is globally paused.",
+            )
+
+        if not self._run_lock.acquire(blocking=False):
+            return ExecutionResult(
+                status="refused",
+                destination=job.destination,
+                mode=job.mode,
+                prompt_type=job.prompt_type,
+                exit_code=None,
+                started_at=started_at,
+                finished_at=time.time(),
+                stdout="",
+                stderr="",
+                reason="Another automation job is already running.",
+            )
+
+        try:
+            result = run_job(job, self.app_root, timeout_seconds=timeout_seconds)
+            with self._state_lock:
+                self._history.append(result)
+            return result
+        finally:
+            self._run_lock.release()
