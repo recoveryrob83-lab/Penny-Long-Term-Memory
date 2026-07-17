@@ -1,3 +1,4 @@
+(() => {
 const commandScheduler = {
   promptType: document.getElementById("cc-prompt-type"),
   promptSelect: document.getElementById("cc-prompt-select"),
@@ -344,3 +345,4 @@ loadSchedulerStatus().catch((error) => {
   commandScheduler.summary.textContent = error.message;
 });
 setInterval(() => loadSchedulerStatus().catch(() => {}), 15000);
+})();
