@@ -6,104 +6,59 @@
   "departments": [
     {
       "id": "life_logistics_hq",
-      "label": "Life Logistics HQ / Chief of Staff Penny",
+      "label": "Logistics HQ",
       "project_folder": "projects/life-logistics-hq",
-      "report_name": "Life Logistics",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "open_loops.md"
-      ]
+      "report_name": "Logistics",
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "main_assistant",
-      "label": "Main Assistant Penny / Daily Operations",
+      "label": "Main Assistant HQ",
       "project_folder": "projects/main-assistant",
       "report_name": "Main Assistant",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "status.md",
-        "open_loops.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_finance",
-      "label": "Chief of Finance Penny / Finance Benefits HQ",
+      "label": "Finance HQ",
       "project_folder": "projects/finance-benefits",
       "report_name": "Finance",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "status.md",
-        "open_loops.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_business",
-      "label": "Chief Business HQ / Business Development",
+      "label": "Business HQ",
       "project_folder": "projects/business-development",
       "report_name": "Business",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "status.md",
-        "open_loops.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "office_leaks",
-      "label": "Office Leaks VP Penny / Office Leaks Consulting HQ",
+      "label": "Office Leaks HQ",
       "project_folder": "projects/office-leaks-consulting",
       "report_name": "Office Leaks",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "status.md",
-        "open_loops.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_engineering",
-      "label": "Chief Engineering Penny / Engineering HQ",
+      "label": "Engineering HQ",
       "project_folder": "projects/engineering",
       "report_name": "Engineering",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "status.md",
-        "open_loops.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_wellness",
-      "label": "Chief Wellness HQ / Wellness Penny",
+      "label": "Wellness HQ",
       "project_folder": "projects/wellness",
       "report_name": "Wellness",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md",
-        "status.md",
-        "open_loops.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "life_os_infrastructure",
-      "label": "Life OS Infrastructure / Connector Operations",
+      "label": "Life OS Infrastructure",
       "project_folder": "projects/life-os-infrastructure",
       "report_name": "Life OS Infrastructure",
-      "boot_files": [
-        "SESSION_HANDOFF.md",
-        "DEPARTMENT_IDENTITY.md",
-        "README.md"
-      ]
+      "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md"]
     }
   ],
   "prompts": [
@@ -148,86 +103,16 @@
       "mode": "simple",
       "template": "/SYNCADVISORY @GitHub\n\nRead the Advisory Index and relevant boards. Report open, stale, duplicate, or inconsistent advisory state. Do not make changes.\n{custom_block}"
     },
-    {
-      "id": "human",
-      "title": "Human Rewrite",
-      "category": "Response Style",
-      "description": "Rewrite in natural, conversational language.",
-      "mode": "simple",
-      "template": "/HUMAN\n{custom_block}"
-    },
-    {
-      "id": "eli10",
-      "title": "Explain Simply",
-      "category": "Response Style",
-      "description": "Use plain language and one helpful analogy.",
-      "mode": "simple",
-      "template": "/ELI10\n{custom_block}"
-    },
-    {
-      "id": "deeper",
-      "title": "Deeper Analysis",
-      "category": "Response Style",
-      "description": "Test assumptions and provide a stronger answer.",
-      "mode": "simple",
-      "template": "/DEEPER\n{custom_block}"
-    },
-    {
-      "id": "noyes",
-      "title": "Challenge Me",
-      "category": "Response Style",
-      "description": "Challenge reflexive agreement and provide the strongest counterargument.",
-      "mode": "simple",
-      "template": "/NOYES\n{custom_block}"
-    },
-    {
-      "id": "give3",
-      "title": "Give Three Options",
-      "category": "Response Style",
-      "description": "Request three genuinely distinct options.",
-      "mode": "simple",
-      "template": "/GIVE3\n{custom_block}"
-    },
-    {
-      "id": "table",
-      "title": "Make a Table",
-      "category": "Response Style",
-      "description": "Turn comparisons or repeated fields into a clean table.",
-      "mode": "simple",
-      "template": "/TABLE\n{custom_block}"
-    },
-    {
-      "id": "tighten",
-      "title": "Tighten",
-      "category": "Response Style",
-      "description": "Make the previous answer sharper and shorter.",
-      "mode": "simple",
-      "template": "/TIGHTEN\n{custom_block}"
-    },
-    {
-      "id": "flood",
-      "title": "Flood Ideas",
-      "category": "Response Style",
-      "description": "Brainstorm broadly and label risk or low-confidence ideas.",
-      "mode": "simple",
-      "template": "/FLOOD\n{custom_block}"
-    },
-    {
-      "id": "steps",
-      "title": "Make Steps",
-      "category": "Response Style",
-      "description": "Turn the response into an immediately usable numbered checklist.",
-      "mode": "simple",
-      "template": "/STEPS\n{custom_block}"
-    },
-    {
-      "id": "redpen",
-      "title": "Red Pen",
-      "category": "Response Style",
-      "description": "Fix grammar, clarity, awkward phrasing, and concision.",
-      "mode": "simple",
-      "template": "/REDPEN\n{custom_block}"
-    },
+    {"id": "human", "title": "Human Rewrite", "category": "Response Style", "description": "Rewrite in natural, conversational language.", "mode": "simple", "template": "/HUMAN\n{custom_block}"},
+    {"id": "eli10", "title": "Explain Simply", "category": "Response Style", "description": "Use plain language and one helpful analogy.", "mode": "simple", "template": "/ELI10\n{custom_block}"},
+    {"id": "deeper", "title": "Deeper Analysis", "category": "Response Style", "description": "Test assumptions and provide a stronger answer.", "mode": "simple", "template": "/DEEPER\n{custom_block}"},
+    {"id": "noyes", "title": "Challenge Me", "category": "Response Style", "description": "Challenge reflexive agreement and provide the strongest counterargument.", "mode": "simple", "template": "/NOYES\n{custom_block}"},
+    {"id": "give3", "title": "Give Three Options", "category": "Response Style", "description": "Request three genuinely distinct options.", "mode": "simple", "template": "/GIVE3\n{custom_block}"},
+    {"id": "table", "title": "Make a Table", "category": "Response Style", "description": "Turn comparisons or repeated fields into a clean table.", "mode": "simple", "template": "/TABLE\n{custom_block}"},
+    {"id": "tighten", "title": "Tighten", "category": "Response Style", "description": "Make the previous answer sharper and shorter.", "mode": "simple", "template": "/TIGHTEN\n{custom_block}"},
+    {"id": "flood", "title": "Flood Ideas", "category": "Response Style", "description": "Brainstorm broadly and label risk or low-confidence ideas.", "mode": "simple", "template": "/FLOOD\n{custom_block}"},
+    {"id": "steps", "title": "Make Steps", "category": "Response Style", "description": "Turn the response into an immediately usable numbered checklist.", "mode": "simple", "template": "/STEPS\n{custom_block}"},
+    {"id": "redpen", "title": "Red Pen", "category": "Response Style", "description": "Fix grammar, clarity, awkward phrasing, and concision.", "mode": "simple", "template": "/REDPEN\n{custom_block}"},
     {
       "id": "itinerary",
       "title": "Daily Itinerary",
@@ -256,7 +141,7 @@
       "id": "nightly",
       "title": "Nightly Sync",
       "category": "Daily Operations",
-      "description": "Perform a read-only end-of-day synchronization, including today's notebook entries, and identify unfinished loops.",
+      "description": "Perform a read-only end-of-day synchronization and identify unfinished loops.",
       "mode": "department",
       "template": "/NIGHTLY @GitHub\n\nDepartment: {department}\n\nRun the canonical read-only boot and synchronization sequence for this department. Read the current calendar day's department notebook entries. Review completed work, unfinished loops, stale documentation, advisory state, blockers, and the next handoff needed. Do not modify GitHub or external systems unless I explicitly authorize it.\n{custom_block}"
     },
@@ -264,9 +149,9 @@
       "id": "nbook",
       "title": "Read Department Notebooks",
       "category": "Daily Operations",
-      "description": "Read department notebook entries for today, one date, an inclusive date range, or all history when explicitly requested.",
+      "description": "Read department notebook entries for today, one date, an inclusive range, or all history when explicitly requested.",
       "mode": "simple",
-      "template": "/NBOOK @GitHub\n\nDate scope: {custom_block}\n\nRead department notebook entries for today by default. Accept YYYY-MM-DD for one date, YYYY-MM-DD..YYYY-MM-DD for an inclusive range, or ALL only when full notebook history is explicitly requested. Search active notebook hubs and notebook-leaf indexes, remain read-only, and summarize cross-department implications without automatically creating tasks, advisories, open loops, or status changes."
+      "template": "/NBOOK @GitHub\n\nDate scope: {custom_block}\n\nRead department notebook entries for today by default. Accept YYYY-MM-DD for one date, YYYY-MM-DD..YYYY-MM-DD for an inclusive range, or ALL only when full notebook history is explicitly requested. Remain read-only and do not automatically create tasks, advisories, open loops, or status changes."
     },
     {
       "id": "open_loops",
@@ -298,7 +183,7 @@
       "category": "Connectors",
       "description": "Prepare a focused Google Calendar review or scheduling request.",
       "mode": "simple",
-      "template": "/CALENDAR @Google Calendar\n\nReview or prepare the requested Calendar operation with timezone-aware details. Inspect conflicts before proposing changes, and do not create, move, or cancel events unless I explicitly authorize it.\n{custom_block}"
+      "template": "/CALENDAR @Google Calendar\n\nReview or prepare only the requested Google Calendar work. Preserve timezone awareness, identify conflicts, and do not create, update, respond to, or delete events without explicit authorization.\n{custom_block}"
     },
     {
       "id": "gmail",
@@ -314,7 +199,7 @@
       "category": "Hub / Coordination",
       "description": "Boot the single-chat LifeOS coordination hub with active role tags and connector guardrails.",
       "mode": "simple",
-      "template": "/HUB @GitHub\n\n[MAIN] Boot the LifeOS coordination hub. Load current durable context, confirm active role tags, and preserve connector execution in this chat. Department roles advise; [MAIN] coordinates and executes authorized connector actions.\n{custom_block}"
+      "template": "/HUB @GitHub\n\n[MAIN] Boot the LifeOS coordination hub. Load current durable context, confirm active role tags, and preserve connector execution in this chat. Department roles advise; [MAIN] coordinates daily operations and executes authorized connector actions.\n{custom_block}"
     },
     {
       "id": "sync",
@@ -362,8 +247,8 @@
       "category": "Hub / Coordination",
       "description": "Load the tagged department advisor definitions for the single-chat hub.",
       "mode": "simple",
-      "template": "[MAIN] Chair, coordinator, and connector operator.\n[LOGISTICS] Serious, grounded executive-function and life-admin support.\n[ENGINEERING] Direct, analytical software and automation review.\n[FINANCE] Careful, numbers-first cost and affordability review.\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\n[WELLNESS] Warm, sustainable health and energy review.\n\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\n{custom_block}"
+      "template": "[MAIN] Chair, daily-operations lead, coordinator, synthesizer, executive-function support, and connector operator.\n[LOGISTICS] GitHub operations, durable continuity, shared infrastructure, cross-project audits, and longer-horizon coordination.\n[ENGINEERING] Direct, analytical software, dashboard, and automation review.\n[FINANCE] Careful, numbers-first cost and affordability review.\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\n[WELLNESS] Warm, sustainable health and energy review.\n\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\n{custom_block}"
     }
   ],
-  "updated": "2026-07-16"
+  "updated": "2026-07-17"
 }
