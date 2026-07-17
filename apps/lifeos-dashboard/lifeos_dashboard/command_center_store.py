@@ -74,6 +74,29 @@ class CommandCenterStore:
             ).fetchone()
         return dict(row) if row else {}
 
+    def update_prompt(self, prompt_id: int, name: str, prompt: str) -> dict[str, object] | None:
+        clean_name = name.strip()
+        clean_prompt = prompt.strip()
+        if not clean_name:
+            raise ValueError("Saved prompt name cannot be empty.")
+        if not clean_prompt:
+            raise ValueError("Saved prompt text cannot be empty.")
+        try:
+            with self._connect() as connection:
+                cursor = connection.execute(
+                    "UPDATE saved_prompts SET name = ?, prompt = ?, updated_at = ? WHERE id = ?",
+                    (clean_name, clean_prompt, time.time(), prompt_id),
+                )
+                if cursor.rowcount == 0:
+                    return None
+                row = connection.execute(
+                    "SELECT id, name, prompt, created_at, updated_at FROM saved_prompts WHERE id = ?",
+                    (prompt_id,),
+                ).fetchone()
+        except sqlite3.IntegrityError as exc:
+            raise ValueError("Another saved prompt already uses that name.") from exc
+        return dict(row) if row else None
+
     def delete_prompt(self, prompt_id: int) -> bool:
         with self._connect() as connection:
             cursor = connection.execute("DELETE FROM saved_prompts WHERE id = ?", (prompt_id,))
