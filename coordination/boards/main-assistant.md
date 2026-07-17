@@ -1,11 +1,51 @@
 # Main Assistant Advisory Board
 
-Updated: 2026-07-15
+Updated: 2026-07-16
 Purpose: Advisories to or from Main Assistant / Daily Operations.
 
 ## Open Advisories
 
-- None.
+### ADV-20260716-038 — Explore a read-mostly LifeOS desktop dashboard window
+
+- Date: 2026-07-16
+- From: Main Assistant Penny / LifeOS Coordination Hub
+- To: Chief Engineering Penny
+- Priority: Medium
+- Status: Open / Unacknowledged
+- Related Project(s): Life OS, desktop tooling, prompt launcher, Trello, Todoist, Google Calendar, Gmail, Google Drive
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department: Chief Engineering Penny
+
+#### Context
+
+Rob is developing an early concept for a LifeOS desktop dashboard. The intent is not to replace Trello, Todoist, Google Calendar, Gmail, Google Drive, or Penny. It is a single desktop window that shows the most important active state from each system while Penny remains the worker that performs changes through conversation and connector-backed actions.
+
+#### Current Concept
+
+The dashboard would surface a small, high-signal slice of each major operational system:
+
+- Trello: current `Now`, top `Next`, selected waiting state, and possibly Inbox count;
+- Todoist: due today, overdue, and highest-priority commitments;
+- Google Calendar: today's timeline, next event, and near-term schedule pressure;
+- Gmail: unread or needs-attention signals rather than a full mail client;
+- Google Drive: pinned or recently used LifeOS working files;
+- Prompt launcher: the existing prompt database and launcher as the primary directly usable component.
+
+The dashboard itself should initially be read-only or read-mostly. Penny remains responsible for modifications, routing, synthesis, and connector execution through chat. The dashboard updates to reflect source-system changes.
+
+#### Architectural Direction
+
+- Treat the dashboard as a window into LifeOS, not a replacement productivity platform.
+- Preserve existing systems as sources of truth.
+- Reuse the existing prompt launcher and prompt database rather than discarding them.
+- Keep the center of gravity on current active state, especially the Trello `Now` card.
+- Avoid adding direct write controls until a real need justifies them.
+- Design around desktop visibility and low-friction awareness.
+- Keep the account-linked financial connector excluded from Hub or multi-connector operation under `coordination/FINANCIAL_CONNECTOR_ISOLATION_SOP.md`.
+
+#### Requested Engineering Response
+
+Chief Engineering Penny should ingest this as an active concept, evaluate feasible architecture and scope boundaries, and help Rob turn the idea into a staged specification when he arrives at Engineering HQ with further requirements. No implementation is authorized by this advisory alone.
 
 ## Acknowledged / Implemented Advisories
 
