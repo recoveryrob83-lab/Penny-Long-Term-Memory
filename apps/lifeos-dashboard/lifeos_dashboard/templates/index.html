@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>LifeOS Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
+  <script defer src="{{ url_for('static', path='/app.js') }}"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">LIFEOS COMMAND WINDOW</p>
+      <h1 id="dashboard-title">LifeOS Dashboard</h1>
+      <p id="dashboard-subtitle" class="subtitle">Loading the eagle-eye view...</p>
+    </div>
+    <div class="topbar-actions">
+      <span id="last-refreshed" class="timestamp">Not refreshed yet</span>
+      <button id="refresh-button" class="primary-button" type="button">Refresh view</button>
+    </div>
+  </header>
+
+  <section class="source-area" aria-labelledby="source-heading">
+    <div class="section-heading compact-heading">
+      <div>
+        <p class="eyebrow">SYSTEM FRESHNESS</p>
+        <h2 id="source-heading">Source health</h2>
+      </div>
+      <span id="mode-badge" class="mode-badge">Loading</span>
+    </div>
+    <div id="source-strip" class="source-strip" aria-live="polite"></div>
+  </section>
+
+  <main class="dashboard-grid">
+    <section class="panel today-panel" aria-labelledby="today-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT MUST HAPPEN</p>
+          <h2 id="today-heading">Today</h2>
+        </div>
+        <span id="today-date" class="panel-meta"></span>
+      </div>
+      <div id="next-event" class="next-event"></div>
+      <div id="commitment-list" class="stack-list"></div>
+    </section>
+
+    <section class="panel flow-panel" aria-labelledby="flow-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">CURRENT MOVEMENT</p>
+          <h2 id="flow-heading">Flow</h2>
+        </div>
+        <span class="panel-meta">Trello view</span>
+      </div>
+      <div id="now-card" class="now-card"></div>
+      <div class="flow-columns">
+        <div>
+          <h3>Next</h3>
+          <div id="next-list" class="stack-list"></div>
+        </div>
+        <div>
+          <h3>Waiting</h3>
+          <div id="waiting-list" class="stack-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel attention-panel" aria-labelledby="attention-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT NEEDS A LOOK</p>
+          <h2 id="attention-heading">Attention</h2>
+        </div>
+        <span class="panel-meta">Signals, not full inboxes</span>
+      </div>
+      <div id="gmail-signals" class="signal-grid"></div>
+    </section>
+
+    <section class="panel files-panel" aria-labelledby="files-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WORKING CABINET</p>
+          <h2 id="files-heading">Drive shortcuts</h2>
+        </div>
+      </div>
+      <div id="drive-list" class="stack-list"></div>
+    </section>
+
+    <section class="panel notebooks-panel" aria-labelledby="notebooks-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT CHANGED RECENTLY</p>
+          <h2 id="notebooks-heading">Recent LifeOS activity</h2>
+        </div>
+        <span class="panel-meta">GitHub notebooks</span>
+      </div>
+      <div id="notebook-list" class="notebook-list"></div>
+    </section>
+
+    <section class="panel commands-panel" aria-labelledby="commands-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT PENNY CAN DO NEXT</p>
+          <h2 id="commands-heading">Penny commands</h2>
+        </div>
+        <span class="panel-meta">Copy and paste</span>
+      </div>
+      <div id="command-list" class="command-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>LifeOS Dashboard v{{ app_version }}</span>
+    <span id="snapshot-state">Waiting for snapshot</span>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
