@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import Any
 
 from lifeos_dashboard.adapters import (
+    GoogleCalendarIcalDashboardSource,
     LocalGitHubDashboardSource,
-    TrelloFlowDashboardSource,
 )
 from lifeos_dashboard.main import build_default_source
 
@@ -116,9 +116,7 @@ def test_local_github_source_overlays_live_checkout_state(
     }
     assert payload["github"]["branch"] == "main"
     assert payload["github"]["working_tree"] == "clean"
-    assert payload["github"]["open_advisories"][0]["title"] == (
-        "ADV-20260717-040"
-    )
+    assert payload["github"]["open_advisories"][0]["title"] == "ADV-20260717-040"
     assert payload["github"]["open_loops"][0]["title"] == (
         "Main Assistant / Daily Operations"
     )
@@ -135,11 +133,16 @@ def test_default_source_detects_configured_checkout(
 ) -> None:
     write_checkout_fixture(tmp_path)
     monkeypatch.setenv("LIFEOS_REPOSITORY_ROOT", str(tmp_path))
-    monkeypatch.delenv("TRELLO_API_KEY", raising=False)
-    monkeypatch.delenv("TRELLO_API_TOKEN", raising=False)
-    monkeypatch.delenv("TRELLO_BOARD_ID", raising=False)
+    for name in (
+        "TRELLO_API_KEY",
+        "TRELLO_API_TOKEN",
+        "TRELLO_BOARD_ID",
+        "TODOIST_API_TOKEN",
+        "GOOGLE_CALENDAR_ICAL_URL",
+    ):
+        monkeypatch.delenv(name, raising=False)
 
     source = build_default_source()
 
-    assert isinstance(source, TrelloFlowDashboardSource)
+    assert isinstance(source, GoogleCalendarIcalDashboardSource)
     assert source.name == "local-github"
