@@ -43,6 +43,8 @@ class CommandJob:
     mode: ExecutionMode = "draft"
     custom_prompt: str = ""
     confirm_send: bool = False
+    default_destination: str | None = None
+    confirm_destination: bool = False
 
 
 @dataclass(frozen=True)
@@ -78,6 +80,14 @@ def validate_job(job: CommandJob) -> Destination:
         raise CommandCenterError("Custom prompt cannot be empty.")
     if job.mode == "send" and not job.confirm_send:
         raise CommandCenterError("Send mode requires explicit confirmation.")
+    if job.default_destination is not None:
+        default_destination = DESTINATIONS.get(job.default_destination)
+        if default_destination is None:
+            raise CommandCenterError("Saved prompt default destination is not recognized.")
+        if default_destination.key != destination.key and not job.confirm_destination:
+            raise CommandCenterError(
+                f"Destination mismatch requires explicit confirmation. This prompt defaults to {default_destination.label}, not {destination.label}."
+            )
     return destination
 
 
