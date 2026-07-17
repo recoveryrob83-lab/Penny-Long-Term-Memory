@@ -88,6 +88,26 @@ def summarize_job(job: CommandJob) -> str:
     return f"{action.capitalize()} the {prompt_label} in {destination.label}."
 
 
+def explain_failure(stdout: str, stderr: str, exit_code: int | None) -> str:
+    """Translate known automation failures into a safe next action without hiding diagnostics."""
+    diagnostic = f"{stderr}\n{stdout}".casefold()
+    if "composer" in diagnostic and any(word in diagnostic for word in ("occupied", "contains", "not empty", "existing")):
+        return "The target composer already contains text. Clear or save that draft, then run the job again."
+    if "show more" in diagnostic and ("match" in diagnostic or "elements" in diagnostic):
+        return "ChatGPT exposed multiple sidebar controls. Pull the latest automation patch, restart the dashboard, and retry."
+    if "chatgpt classic" in diagnostic and any(word in diagnostic for word in ("not found", "window", "connect")):
+        return "ChatGPT Classic was not available. Open the desktop app, leave it signed in, and retry."
+    if "exact chat" in diagnostic or "exact link" in diagnostic or "destination" in diagnostic and "not found" in diagnostic:
+        return "The exact LifeOS chat could not be verified. Open the sidebar, confirm the chat name, and retry without renaming it."
+    if "document title" in diagnostic or "title verification" in diagnostic:
+        return "The destination opened, but its exact title could not be verified. Stop and confirm the selected chat before retrying."
+    if "clipboard" in diagnostic or "write verification" in diagnostic:
+        return "The prompt could not be verified after writing. Leave the composer untouched, focus ChatGPT Classic, and retry."
+    if "timed out" in diagnostic:
+        return "The automation timed out. Make sure ChatGPT Classic is responsive and no modal window is blocking it, then retry."
+    return f"Automation stopped safely with exit code {exit_code}. Review the technical details below before retrying."
+
+
 def build_command(job: CommandJob, app_root: Path) -> list[str]:
     destination = validate_job(job)
     automation_root = app_root / "automation"
@@ -109,9 +129,12 @@ def run_job(job: CommandJob, app_root: Path, timeout_seconds: int = 120) -> Exec
     try:
         completed = subprocess.run(command, cwd=app_root, env=os.environ.copy(), capture_output=True, text=True, timeout=timeout_seconds, check=False)
     except subprocess.TimeoutExpired as exc:
-        return ExecutionResult("failed", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), exc.stdout or "", exc.stderr or "", f"Automation timed out after {timeout_seconds} seconds.")
+        stdout = exc.stdout or ""
+        stderr = exc.stderr or ""
+        return ExecutionResult("failed", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), stdout, stderr, "The automation timed out. Make sure ChatGPT Classic is responsive and no modal window is blocking it, then retry.")
     succeeded = completed.returncode == 0
-    return ExecutionResult("succeeded" if succeeded else "failed", job.destination, job.mode, job.prompt_type, completed.returncode, started_at, time.time(), completed.stdout, completed.stderr, "Completed successfully." if succeeded else "Automation process returned an error.")
+    reason = "Completed successfully." if succeeded else explain_failure(completed.stdout, completed.stderr, completed.returncode)
+    return ExecutionResult("succeeded" if succeeded else "failed", job.destination, job.mode, job.prompt_type, completed.returncode, started_at, time.time(), completed.stdout, completed.stderr, reason)
 
 
 class CommandCenterService:
@@ -174,9 +197,9 @@ class CommandCenterService:
     def execute(self, job: CommandJob, timeout_seconds: int = 120) -> ExecutionResult:
         started_at = time.time()
         if self.paused:
-            return self._record(ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", "Automation Command Center is globally paused."))
+            return self._record(ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", "Automation is paused. Resume it before running a job."))
         if not self._run_lock.acquire(blocking=False):
-            return self._record(ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", "Another automation job is already running."))
+            return self._record(ExecutionResult("refused", job.destination, job.mode, job.prompt_type, None, started_at, time.time(), "", "", "Another automation job is running. Let it finish before starting a new one."))
         try:
             return self._record(run_job(job, self.app_root, timeout_seconds=timeout_seconds))
         finally:
