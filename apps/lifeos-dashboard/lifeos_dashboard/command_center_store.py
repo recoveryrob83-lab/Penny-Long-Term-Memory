@@ -25,6 +25,9 @@ class CommandCenterStore:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL UNIQUE,
                     prompt TEXT NOT NULL,
+                    default_destination TEXT,
+                    origin_type TEXT,
+                    origin_prompt_key TEXT,
                     created_at REAL NOT NULL,
                     updated_at REAL NOT NULL
                 );
@@ -43,38 +46,93 @@ class CommandCenterStore:
                 );
                 """
             )
+            existing_columns = {
+                str(row["name"])
+                for row in connection.execute("PRAGMA table_info(saved_prompts)").fetchall()
+            }
+            for column_name in ("default_destination", "origin_type", "origin_prompt_key"):
+                if column_name not in existing_columns:
+                    connection.execute(f"ALTER TABLE saved_prompts ADD COLUMN {column_name} TEXT")
+
+    @staticmethod
+    def _clean_optional(value: str | None) -> str | None:
+        if value is None:
+            return None
+        clean_value = value.strip()
+        return clean_value or None
 
     def list_prompts(self) -> list[dict[str, object]]:
         with self._connect() as connection:
             rows = connection.execute(
-                "SELECT id, name, prompt, created_at, updated_at FROM saved_prompts ORDER BY name COLLATE NOCASE"
+                """
+                SELECT id, name, prompt, default_destination, origin_type,
+                       origin_prompt_key, created_at, updated_at
+                FROM saved_prompts ORDER BY name COLLATE NOCASE
+                """
             ).fetchall()
         return [dict(row) for row in rows]
 
-    def save_prompt(self, name: str, prompt: str) -> dict[str, object]:
+    def save_prompt(
+        self,
+        name: str,
+        prompt: str,
+        default_destination: str | None = None,
+        origin_type: str | None = None,
+        origin_prompt_key: str | None = None,
+    ) -> dict[str, object]:
         clean_name = name.strip()
         clean_prompt = prompt.strip()
         if not clean_name:
             raise ValueError("Saved prompt name cannot be empty.")
         if not clean_prompt:
             raise ValueError("Saved prompt text cannot be empty.")
+        clean_destination = self._clean_optional(default_destination)
+        clean_origin_type = self._clean_optional(origin_type)
+        clean_origin_prompt_key = self._clean_optional(origin_prompt_key)
         now = time.time()
         with self._connect() as connection:
             connection.execute(
                 """
-                INSERT INTO saved_prompts(name, prompt, created_at, updated_at)
-                VALUES (?, ?, ?, ?)
-                ON CONFLICT(name) DO UPDATE SET prompt=excluded.prompt, updated_at=excluded.updated_at
+                INSERT INTO saved_prompts(
+                    name, prompt, default_destination, origin_type,
+                    origin_prompt_key, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(name) DO UPDATE SET
+                    prompt=excluded.prompt,
+                    default_destination=excluded.default_destination,
+                    origin_type=excluded.origin_type,
+                    origin_prompt_key=excluded.origin_prompt_key,
+                    updated_at=excluded.updated_at
                 """,
-                (clean_name, clean_prompt, now, now),
+                (
+                    clean_name,
+                    clean_prompt,
+                    clean_destination,
+                    clean_origin_type,
+                    clean_origin_prompt_key,
+                    now,
+                    now,
+                ),
             )
             row = connection.execute(
-                "SELECT id, name, prompt, created_at, updated_at FROM saved_prompts WHERE name = ?",
+                """
+                SELECT id, name, prompt, default_destination, origin_type,
+                       origin_prompt_key, created_at, updated_at
+                FROM saved_prompts WHERE name = ?
+                """,
                 (clean_name,),
             ).fetchone()
         return dict(row) if row else {}
 
-    def update_prompt(self, prompt_id: int, name: str, prompt: str) -> dict[str, object] | None:
+    def update_prompt(
+        self,
+        prompt_id: int,
+        name: str,
+        prompt: str,
+        default_destination: str | None = None,
+        origin_type: str | None = None,
+        origin_prompt_key: str | None = None,
+    ) -> dict[str, object] | None:
         clean_name = name.strip()
         clean_prompt = prompt.strip()
         if not clean_name:
@@ -84,13 +142,34 @@ class CommandCenterStore:
         try:
             with self._connect() as connection:
                 cursor = connection.execute(
-                    "UPDATE saved_prompts SET name = ?, prompt = ?, updated_at = ? WHERE id = ?",
-                    (clean_name, clean_prompt, time.time(), prompt_id),
+                    """
+                    UPDATE saved_prompts SET
+                        name = ?,
+                        prompt = ?,
+                        default_destination = COALESCE(?, default_destination),
+                        origin_type = COALESCE(?, origin_type),
+                        origin_prompt_key = COALESCE(?, origin_prompt_key),
+                        updated_at = ?
+                    WHERE id = ?
+                    """,
+                    (
+                        clean_name,
+                        clean_prompt,
+                        self._clean_optional(default_destination),
+                        self._clean_optional(origin_type),
+                        self._clean_optional(origin_prompt_key),
+                        time.time(),
+                        prompt_id,
+                    ),
                 )
                 if cursor.rowcount == 0:
                     return None
                 row = connection.execute(
-                    "SELECT id, name, prompt, created_at, updated_at FROM saved_prompts WHERE id = ?",
+                    """
+                    SELECT id, name, prompt, default_destination, origin_type,
+                           origin_prompt_key, created_at, updated_at
+                    FROM saved_prompts WHERE id = ?
+                    """,
                     (prompt_id,),
                 ).fetchone()
         except sqlite3.IntegrityError as exc:
