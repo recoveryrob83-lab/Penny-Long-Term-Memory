@@ -15,43 +15,21 @@
 </head>
 <body>
   <header class="topbar">
-    <div>
-      <p class="eyebrow">LIFEOS COMMAND WINDOW</p>
-      <h1 id="dashboard-title">LifeOS Dashboard</h1>
-      <p id="dashboard-subtitle" class="subtitle">Loading the eagle-eye view...</p>
-    </div>
-    <div class="topbar-actions">
-      <span id="last-refreshed" class="timestamp">Not refreshed yet</span>
-      <button id="refresh-button" class="primary-button" type="button">Refresh view</button>
-    </div>
+    <div><p class="eyebrow">LIFEOS COMMAND WINDOW</p><h1 id="dashboard-title">LifeOS Dashboard</h1><p id="dashboard-subtitle" class="subtitle">Loading the eagle-eye view...</p></div>
+    <div class="topbar-actions"><span id="last-refreshed" class="timestamp">Not refreshed yet</span><button id="refresh-button" class="primary-button" type="button">Refresh view</button></div>
   </header>
-
   <section class="source-area" aria-labelledby="source-heading">
-    <div class="section-heading compact-heading">
-      <div>
-        <p class="eyebrow">SYSTEM FRESHNESS</p>
-        <h2 id="source-heading">Source health</h2>
-      </div>
-      <span id="mode-badge" class="mode-badge">Loading</span>
-    </div>
+    <div class="section-heading compact-heading"><div><p class="eyebrow">SYSTEM FRESHNESS</p><h2 id="source-heading">Source health</h2></div><span id="mode-badge" class="mode-badge">Loading</span></div>
     <div id="source-strip" class="source-strip" aria-live="polite"></div>
   </section>
-
   <nav class="dashboard-tabs" role="tablist" aria-label="LifeOS dashboard sections">
     <button class="dashboard-tab active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Overview</button>
     <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-tab-target="automation">Automation</button>
   </nav>
-
   <section class="tab-page" data-tab-panel="overview" role="tabpanel">
     <main class="dashboard-grid">
-      <section class="panel today-panel" aria-labelledby="today-heading">
-        <div class="section-heading"><div><p class="eyebrow">WHAT MUST HAPPEN</p><h2 id="today-heading">Today</h2></div><span id="today-date" class="panel-meta"></span></div>
-        <div id="next-event" class="next-event"></div><div id="commitment-list" class="stack-list"></div>
-      </section>
-      <section class="panel flow-panel" aria-labelledby="flow-heading">
-        <div class="section-heading"><div><p class="eyebrow">CURRENT MOVEMENT</p><h2 id="flow-heading">Flow</h2></div><span class="panel-meta">Trello view</span></div>
-        <div id="now-card" class="now-card"></div><div class="flow-columns"><div><h3>Next</h3><div id="next-list" class="stack-list"></div></div><div><h3>Waiting</h3><div id="waiting-list" class="stack-list"></div></div></div>
-      </section>
+      <section class="panel today-panel" aria-labelledby="today-heading"><div class="section-heading"><div><p class="eyebrow">WHAT MUST HAPPEN</p><h2 id="today-heading">Today</h2></div><span id="today-date" class="panel-meta"></span></div><div id="next-event" class="next-event"></div><div id="commitment-list" class="stack-list"></div></section>
+      <section class="panel flow-panel" aria-labelledby="flow-heading"><div class="section-heading"><div><p class="eyebrow">CURRENT MOVEMENT</p><h2 id="flow-heading">Flow</h2></div><span class="panel-meta">Trello view</span></div><div id="now-card" class="now-card"></div><div class="flow-columns"><div><h3>Next</h3><div id="next-list" class="stack-list"></div></div><div><h3>Waiting</h3><div id="waiting-list" class="stack-list"></div></div></div></section>
       <section class="panel attention-panel" aria-labelledby="attention-heading"><div class="section-heading"><div><p class="eyebrow">WHAT NEEDS A LOOK</p><h2 id="attention-heading">Attention</h2></div><span class="panel-meta">Signals, not full inboxes</span></div><div id="gmail-signals" class="signal-grid"></div></section>
       <section class="panel files-panel" aria-labelledby="files-heading"><div class="section-heading"><div><p class="eyebrow">WORKING CABINET</p><h2 id="files-heading">Drive shortcuts</h2></div></div><div id="drive-list" class="stack-list"></div></section>
       <section class="panel attention-panel github-panel" aria-labelledby="github-heading"><div class="section-heading"><div><p class="eyebrow">DURABLE SYSTEM PULSE</p><h2 id="github-heading">GitHub</h2></div><span id="github-repo-meta" class="panel-meta">Loading checkout</span></div><div id="github-facts" class="github-facts"></div><div><h3>Open advisories</h3><div id="github-advisories" class="stack-list"></div></div><div><h3>Priority open loops</h3><div id="github-open-loops" class="stack-list"></div></div><div><h3>Recent durable activity</h3><div id="github-activity" class="stack-list"></div></div></section>
@@ -59,40 +37,33 @@
       <section class="panel commands-panel" aria-labelledby="commands-heading"><div class="section-heading"><div><p class="eyebrow">WHAT PENNY CAN DO NEXT</p><h2 id="commands-heading">Penny commands</h2></div><span class="panel-meta">Copy and paste</span></div><div id="command-list" class="command-list"></div></section>
     </main>
   </section>
-
   <section class="tab-page automation-page" data-tab-panel="automation" role="tabpanel" hidden>
     <main class="dashboard-grid">
       <section class="panel command-center-panel" aria-labelledby="command-center-heading">
-        <div class="section-heading">
-          <div><p class="eyebrow">DESKTOP AUTOMATION</p><h2 id="command-center-heading">Automation Command Center</h2></div>
-          <span id="cc-status" class="mode-badge">Loading</span>
-        </div>
+        <div class="section-heading"><div><p class="eyebrow">DESKTOP AUTOMATION</p><h2 id="command-center-heading">Automation Command Center</h2></div><span id="cc-status" class="mode-badge">Loading</span></div>
         <div class="cc-layout">
           <div class="cc-form">
             <div class="cc-fields">
-              <label class="cc-field">Destination
-                <select id="cc-destination">
-                  <option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option>
-                </select>
-              </label>
-              <label class="cc-field">Prompt
-                <select id="cc-prompt-type"><option value="canonical">Canonical boot prompt</option><option value="custom">Custom prompt</option></select>
-              </label>
-              <label class="cc-field">Mode
-                <select id="cc-mode"><option value="draft">Verified draft only</option><option value="send">Send after verification</option></select>
-              </label>
+              <label class="cc-field">Destination<select id="cc-destination"><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+              <label class="cc-field">Prompt<select id="cc-prompt-type"><option value="canonical">Canonical boot prompt</option><option value="custom">Custom prompt</option><option value="saved">Saved prompt</option></select></label>
+              <label class="cc-field">Mode<select id="cc-mode"><option value="draft">Verified draft only</option><option value="send">Send after verification</option></select></label>
             </div>
+            <label id="cc-saved-wrap" class="cc-field" hidden>Saved prompt<select id="cc-saved-prompt"><option value="">Choose a saved prompt</option></select></label>
             <label class="cc-field"><span>Custom prompt</span><textarea id="cc-custom-prompt" hidden placeholder="Enter the exact prompt to place in the selected chat."></textarea></label>
+            <div id="cc-save-controls" class="cc-save-controls" hidden>
+              <input id="cc-save-name" type="text" placeholder="Prompt name">
+              <button id="cc-save-prompt" class="copy-button" type="button">Save prompt</button>
+              <button id="cc-delete-prompt" class="cc-danger-button" type="button" hidden>Delete selected</button>
+            </div>
             <label id="cc-confirm-wrap" class="cc-confirm" hidden><input id="cc-confirm-send" type="checkbox">I understand this will submit the message after destination and clipboard verification.</label>
             <p id="cc-summary" class="cc-summary">Preparing Command Center...</p>
             <div class="cc-actions"><button id="cc-run" class="primary-button" type="button">Run now</button><button id="cc-pause" class="cc-danger-button" type="button">Pause automation</button></div>
           </div>
-          <div><h3>Recent automation activity</h3><div id="cc-history" class="cc-history" aria-live="polite"></div></div>
+          <div><h3>Persistent automation activity</h3><div id="cc-history" class="cc-history" aria-live="polite"></div></div>
         </div>
       </section>
     </main>
   </section>
-
   <footer class="footer"><span>LifeOS Dashboard v{{ app_version }}</span><span id="snapshot-state">Waiting for snapshot</span></footer>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
