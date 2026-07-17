@@ -46,7 +46,6 @@
             <div class="cc-fields">
               <label class="cc-field">Destination<select id="cc-destination"><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
               <label class="cc-field">Prompt source<select id="cc-prompt-type"><option value="canonical">Canonical boot prompt</option><option value="custom">Custom prompt</option><option value="saved">Saved prompt</option></select></label>
-              <label class="cc-field">Mode<select id="cc-mode"><option value="draft">Verified draft only</option><option value="send">Send after verification</option></select></label>
             </div>
             <label id="cc-saved-wrap" class="cc-field" hidden>Saved prompt<select id="cc-saved-prompt"><option value="">Choose a saved prompt</option></select></label>
             <label class="cc-field">Prompt name<input id="cc-save-name" type="text" placeholder="Prompt name"></label>
@@ -56,7 +55,7 @@
               <button id="cc-update-prompt" class="copy-button" type="button" hidden>Save changes</button>
               <button id="cc-delete-prompt" class="cc-danger-button" type="button" hidden>Delete selected</button>
             </div>
-            <label id="cc-confirm-wrap" class="cc-confirm" hidden><input id="cc-confirm-send" type="checkbox">I understand this will submit the message after destination and clipboard verification.</label>
+            <label id="cc-confirm-wrap" class="cc-confirm"><input id="cc-confirm-send" type="checkbox">Send live after destination and clipboard verification. Leave unchecked to place a verified draft only.</label>
             <p id="cc-summary" class="cc-summary">Preparing Command Center...</p>
             <div class="cc-actions"><button id="cc-run" class="primary-button" type="button">Run now</button><button id="cc-pause" class="cc-danger-button" type="button">Pause automation</button></div>
           </div>
