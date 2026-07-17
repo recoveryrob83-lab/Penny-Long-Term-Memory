@@ -7,11 +7,12 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 - Main Assistant / Daily Operations: operate as the primary conversational hub; handle ordinary daily logistics; process the Trello Inbox and LifeOS Flow Board when requested; process Raw Capture and Inventory outputs only when authorized.
 - LifeOS Flow Board: preserve one card maximum in Now and three maximum in Next; keep Trello as current-attention flow rather than a duplicate commitment system.
+- LifeOS Dashboard: maintain the verified read-mostly GitHub, Trello, Todoist, and Calendar views and guarded GitHub fast-forward sync; expand only after demonstrated need and explicit routing.
 - Office Leaks Consulting HQ: continue the live organic market test, lead-loss editorial lane, starter offer, inquiry handling, and delivery preparation when concrete demand appears.
 - Chief Business HQ: evaluate market signal and parent-level direction without absorbing Office Leaks execution continuity.
 - Chief of Finance Penny: maintain Finance-owned forecasting and review paid promotion, pricing, costs, revenue, tax, or tool decisions only when concrete and funded.
-- Chief Engineering Penny: continue connector reliability, worker reliability guidance, prompt-launcher maintenance, and delivery architecture; stage the desktop dashboard only after further requirements are supplied.
-- Life Logistics HQ: maintain global boot integrity, shared summaries, advisory hygiene, cross-project audits, and longer-horizon dependencies.
+- Chief Engineering Penny: continue connector reliability, dashboard reliability, worker guidance, prompt-launcher maintenance, and delivery architecture; keep Gmail and Drive dashboard adapters deferred until demonstrated need.
+- Life Logistics HQ: maintain global boot integrity, shared summaries, advisory hygiene, cross-project audits, source boundaries, and longer-horizon dependencies.
 - Chief Wellness HQ: support sustainable pacing and guard against compulsive launch monitoring.
 - Penny Raw Capture Worker: pilot reliable append-and-verification behavior against the canonical `Life OS Raw Capture Inbox`.
 - Penny Inventory Worker: pilot real-photo item identification and one-row-per-item verification against the canonical `For Sale Inventory` Sheet.
@@ -21,8 +22,10 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Seven Chat HQs: observe real routing drift, duplicated responsibility, stale boot assumptions, connector friction, and model-usage waste. Refine only from observed evidence.
 - Chat / Work boundary: preserve regular Chat as headquarters and Work as bounded execution; re-evaluate only after meaningful product changes.
 - Trello source boundaries: do not silently convert captured ideas into Todoist commitments, Calendar events, GitHub state, or deletion.
+- Dashboard source boundaries: treat the dashboard as a visibility layer, not a new source of truth or replacement productivity platform.
+- Guarded GitHub sync: preserve the clean-and-strictly-behind fast-forward guard; do not imply automatic conflict resolution or broad write authority.
 - Office Leaks market test: website work, paid boosting, formal A/B testing, and full campaign infrastructure remain deferred while organic signal develops.
-- Desktop dashboard concept: keep read-only or read-mostly, preserve existing source systems, and exclude account-linked financial connector data from multi-connector Hub operation.
+- Gmail and Drive dashboard adapters: remain deferred until demonstrated operational need.
 - Prompt launcher: newline defects from Hub Boot onward were corrected on 2026-07-16; deferred improvements remain Engineering context rather than active global work.
 
 ## Waiting On
@@ -30,15 +33,18 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 - Raw Capture Worker pilot: verified real use.
 - Inventory Worker pilot: verified use with 2–3 real uploaded item photographs.
 - Office Leaks: organic response, inquiries, or a concrete client need before expanding infrastructure.
-- Desktop dashboard: further requirements from Rob before Engineering creates a staged specification or implementation plan.
+- Dashboard expansion: demonstrated need and explicit requirements before adding Gmail, Drive, direct write controls, or other adapters.
 - Scheduled HQ Sync: Engineering HQ Daily Sync remains paused pending stronger execution architecture and explicit authorization.
 - Site Cleanup and consolidated domains: external inputs or explicit routing from Rob.
 - Legacy Virtual Assistant folder: later decision on continued redirect history, archive, or removal after references are safely migrated.
 
 ## Recently Closed
 
+- 2026-07-17: ADV-20260717-040 implemented by Life Logistics through reconciliation of shared global summaries and local Logistics state after the live four-source dashboard milestone.
+- 2026-07-17: LifeOS Dashboard locally running and tested with GitHub, Trello, Todoist, and Google Calendar private iCal; 16 tests passed and guarded GitHub auto-sync was live-verified.
+- 2026-07-17: Engineering recorded the dashboard as the historical humble beginnings of PennyOS without creating a new roadmap commitment or open loop.
 - 2026-07-17: ADV-20260716-039 implemented by Life Logistics through reconciliation of shared global summaries and local Logistics state.
-- 2026-07-16: ADV-20260716-038 acknowledged / ingested / closed; Engineering accepted the read-mostly LifeOS desktop dashboard concept with no implementation authorized.
+- 2026-07-16: ADV-20260716-038 acknowledged / ingested / closed; Engineering accepted the read-mostly LifeOS desktop dashboard concept.
 - 2026-07-16: ADV-20260716-037 fully acknowledged / closed; Office Leaks public-launch milestone consumed by all target departments.
 - 2026-07-16: Office Leaks publicly launched through its Facebook Page, pinned starter offer, introduction post, and first lead-loss Reel.
 - 2026-07-16: prompt-launcher newline defects from Hub Boot onward corrected.
@@ -52,9 +58,12 @@ Purpose: Track unfinished Life OS work without storing detailed operational reco
 
 - Decide whether `projects/virtual-assistant-business/` should remain redirect history, be archived, or be removed.
 - Create a Life Logistics `status.md` only if it adds distinct value beyond the handoff and open-loops files.
-- Build the LifeOS desktop dashboard only after requirements and a bounded Work brief exist.
 - Revisit scheduled HQ sync only after reliability architecture improves.
+
+## Historical Context Rule
+
+The Engineering note `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md` is discoverable history only. Do not promote its PennyOS framing into a separate open loop or implied roadmap.
 
 ## Source Boundaries
 
-GitHub tracks durable abstract state. Drive holds working records. Trello shows attention and flow. Todoist holds commitments and reminders. Calendar holds timed commitments. Gmail holds communication evidence. Detailed finance remains in Finance-owned systems.
+GitHub tracks durable abstract state. Drive holds working records. Trello shows attention and flow. Todoist holds commitments and reminders. Calendar holds timed commitments. Gmail holds communication evidence. The dashboard displays selected state from authoritative systems. Detailed finance remains in Finance-owned systems.
