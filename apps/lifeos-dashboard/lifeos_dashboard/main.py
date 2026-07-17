@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -10,17 +11,34 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from . import __version__
-from .adapters import DashboardSource, SampleDashboardSource
+from .adapters import (
+    DashboardSource,
+    LocalGitHubDashboardSource,
+    SampleDashboardSource,
+)
 from .service import DashboardService
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 
 
+def build_default_source() -> DashboardSource:
+    """Use the surrounding LifeOS checkout when available, otherwise samples."""
+    sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
+    configured_root = os.getenv("LIFEOS_REPOSITORY_ROOT")
+    repo_root = (
+        Path(configured_root).expanduser()
+        if configured_root
+        else PACKAGE_ROOT.parents[2]
+    )
+
+    if (repo_root / ".git").exists() and (repo_root / "memory").exists():
+        return LocalGitHubDashboardSource(repo_root, sample_source)
+    return sample_source
+
+
 def create_app(source: DashboardSource | None = None) -> FastAPI:
     """Create a configured dashboard application."""
-    active_source = source or SampleDashboardSource(
-        PACKAGE_ROOT / "data" / "sample_dashboard.json"
-    )
+    active_source = source or build_default_source()
     service = DashboardService(active_source)
 
     application = FastAPI(
