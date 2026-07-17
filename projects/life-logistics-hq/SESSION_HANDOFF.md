@@ -35,22 +35,35 @@ Main Assistant owns Rob's daily life and ordinary execution support, including d
 
 Office Leaks Consulting is publicly launched and operating in a live organic market-test phase.
 
-The current launch surface includes the Facebook Page, introduction post, pinned starter offer, and first lead-loss Reel. Website work, paid boosting, formal A/B testing, and full campaign infrastructure remain deferred while organic signal develops.
-
 The LifeOS Flow Board is active as the visual attention layer. Trello Inbox captures raw thoughts; the Flow Board shows active attention; Todoist holds commitments and reminders; Calendar holds timed commitments; GitHub holds durable state.
 
-The read-mostly LifeOS desktop dashboard remains an ingested design concept. Existing source systems remain authoritative, Penny remains the conversational worker, and no software implementation is authorized until Rob provides further requirements.
+The LifeOS Dashboard is now locally running and tested on Rob's Windows machine as a read-mostly four-source operational interface.
+
+Verified dashboard sources:
+
+- GitHub for durable memory, advisories, open loops, notebooks, and recent repository activity;
+- Trello for Now, Next, and Waiting;
+- Todoist for current and upcoming commitments;
+- Google Calendar private iCal for current and next timed commitments.
+
+The local suite passed 16 tests. Windows timezone support was corrected with the runtime `tzdata` dependency. Guarded GitHub auto-sync was live-verified and may fast-forward only when local `main` is clean and strictly behind.
+
+Gmail and Google Drive dashboard adapters remain deferred until demonstrated operational need. The dashboard remains a visibility layer, not a replacement source system or broad automatic writer.
+
+Engineering historical note:
+
+- `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md`
+
+The note preserves this milestone as the humble beginnings of PennyOS. It is history only, not a new open loop or roadmap authorization.
 
 Prompt-launcher newline defects from Hub Boot onward were corrected on 2026-07-16. Further launcher improvements remain deferred in Engineering context.
-
-PennyOS / Penny Platform is paused, not abandoned.
 
 ## Role Boundaries
 
 - Main Assistant: daily coordination, immediate logistics, Flow Board operation, task and calendar coordination, communications, and authorized downstream worker processing.
 - Life Logistics: global boot integrity, shared summaries, advisory-index hygiene, shared procedures, cross-project audits, system-wide housekeeping, and longer-horizon dependencies.
 - Departments: maintain routine state in their own project subtrees.
-- Engineering: software, reliability architecture, workers, prompt launcher, and future dashboard specification.
+- Engineering: software, reliability architecture, workers, prompt launcher, and dashboard implementation.
 - Finance: detailed financial records and concrete money decisions.
 - Business and Office Leaks: parent strategy and business-unit execution respectively.
 - Wellness: sustainable health, recovery, and pacing.
@@ -72,8 +85,9 @@ Main Assistant owns authorized downstream processing. Life Logistics owns durabl
 - Todoist owns commitments and reminders.
 - Google Calendar owns timed commitments.
 - Gmail owns communication evidence.
+- The LifeOS Dashboard displays selected high-signal state from authoritative systems.
 - The Advisory Index is the sole active advisory dashboard.
-- Detailed financial, medical, business, and personal records remain outside GitHub.
+- Detailed financial, medical, business, personal, credential, and source-system records remain outside GitHub.
 
 ## Advisory State
 
@@ -83,11 +97,11 @@ Current open advisories:
 
 Recently closed:
 
-- ADV-20260716-039 — Implemented / Acknowledged / Closed. Life Logistics reconciled `memory/01_SESSION_HANDOFF.md`, `memory/04_ACTIVE_PROJECTS.md`, and `memory/05_OPEN_LOOPS.md` with the current Office Leaks launch, Trello Flow Board, dashboard concept, prompt-launcher state, and advisory closures.
+- ADV-20260717-040 — Implemented / Acknowledged / Closed. Life Logistics reconciled shared global and local summaries after the live four-source dashboard, guarded GitHub auto-sync validation, and PennyOS historical milestone.
+- ADV-20260716-039 — Implemented / Acknowledged / Closed. Life Logistics reconciled global summaries with the Office Leaks launch, Flow Board, dashboard concept, launcher state, and advisory closures.
 - ADV-20260716-038 — Read-mostly LifeOS desktop dashboard concept acknowledged and ingested by Engineering.
 - ADV-20260716-037 — Office Leaks public-launch awareness broadcast fully acknowledged and closed.
 - ADV-20260715-036 — Seven LifeOS Chat HQs opened and operational.
-- ADV-20260715-035 — Daily Operating SOP integrated into the global boot flow.
 
 Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
@@ -97,10 +111,11 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 - Maintain Main Assistant and Life Logistics role boundaries.
 - Maintain advisory routing and board hygiene without creating bureaucracy.
 - Observe the seven Chat HQs for evidence-based routing drift.
-- Preserve Trello, Todoist, Calendar, GitHub, Drive, and Gmail source boundaries.
+- Preserve GitHub, Trello, Todoist, Calendar, Gmail, Drive, and dashboard source boundaries.
+- Keep guarded GitHub dashboard sync limited to clean, strictly-behind fast-forward updates.
 - Keep canonical worker pointers stable and observe pilot reliability through reports from Main Assistant and Engineering.
 - Track longer-horizon Office Leaks dependencies as live market testing develops.
-- Keep the dashboard concept read-mostly and deferred until requirements are supplied.
+- Keep Gmail and Drive dashboard adapters deferred until demonstrated need.
 - Keep Engineering HQ Daily Sync paused until Rob authorizes resumption.
 - Track the future disposition of the legacy Virtual Assistant folder.
 - Prefer small, verified GitHub edits over broad rewrites.
@@ -109,7 +124,7 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 1. Use Life Logistics for GitHub maintenance, shared infrastructure, audits, advisory hygiene, and longer-horizon coordination.
 2. Route ordinary daily planning and Flow Board operation to Main Assistant.
-3. Route specialist decisions to the owning department.
+3. Route dashboard implementation and reliability work to Engineering.
 4. Review shared files after meaningful cross-project state changes.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
@@ -117,4 +132,4 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 This chat is Life Logistics HQ, not Main Assistant. Maintain the map and the hallways, not every footstep.
 
-Boot reminder: Office Leaks is publicly launched and in organic market testing. The Flow Board is active. The dashboard remains a deferred read-mostly concept. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
+Boot reminder: Office Leaks is publicly launched and in organic market testing. The Flow Board is active. The dashboard is live with four verified sources and guarded GitHub sync. Gmail and Drive adapters remain deferred. The PennyOS milestone is historical only. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
