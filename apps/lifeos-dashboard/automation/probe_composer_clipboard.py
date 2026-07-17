@@ -15,13 +15,20 @@ from pywinauto.keyboard import send_keys
 from open_department_chat import (
     APP_TITLE,
     CLIPBOARD_SENTINEL,
+    AutomationStopped,
     Target,
     clipboard_get_text,
     clipboard_set_text,
     current_document_title,
     find_visible_composer,
     get_chatgpt_window,
+    open_exact_chat,
+    wait_for_destination,
 )
+
+
+GENERIC_LOADING_TITLE = "ChatGPT"
+DEFAULT_DESTINATION_TIMEOUT_SECONDS = 5.0
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,6 +37,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("chat_title", help="Exact active chat title, such as Wellness HQ")
     parser.add_argument("--project", default="Life OS")
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=DEFAULT_DESTINATION_TIMEOUT_SECONDS,
+        help="Seconds to wait after the one bounded loading-state re-navigation",
+    )
     return parser.parse_args()
 
 
@@ -55,6 +68,38 @@ def run_probe(label: str, composer, action) -> int:
     return len(copied)
 
 
+def verify_or_recover_destination(window, target: Target, timeout_seconds: float) -> bool:
+    """Verify the target, allowing one exact re-navigation from the generic loading title."""
+    observed = current_document_title(window)
+    if observed == target.document_title:
+        return True
+
+    if observed != GENERIC_LOADING_TITLE:
+        print(
+            "STOPPED: active destination mismatch. "
+            f"Expected {target.document_title!r}, observed {observed!r}."
+        )
+        return False
+
+    print(
+        "BOUNDED RETRY: active document is the generic ChatGPT loading state. "
+        "Re-invoking the exact department link once."
+    )
+    try:
+        open_exact_chat(window, target)
+        verified = wait_for_destination(
+            window,
+            expected_title=target.document_title,
+            timeout_seconds=timeout_seconds,
+        )
+    except AutomationStopped as exc:
+        print(f"STOPPED: {exc}")
+        return False
+
+    print(f"Verified active document after retry: {verified}")
+    return True
+
+
 def main() -> int:
     args = parse_args()
     target = Target(chat_title=args.chat_title, project_title=args.project)
@@ -63,12 +108,7 @@ def main() -> int:
     try:
         print(f"Finding window: {APP_TITLE}")
         window = get_chatgpt_window()
-        observed = current_document_title(window)
-        if observed != target.document_title:
-            print(
-                "STOPPED: active destination mismatch. "
-                f"Expected {target.document_title!r}, observed {observed!r}."
-            )
+        if not verify_or_recover_destination(window, target, args.timeout):
             return 1
 
         composer = find_visible_composer(window)
