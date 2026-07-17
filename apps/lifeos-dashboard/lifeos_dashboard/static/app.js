@@ -219,7 +219,11 @@ const loadDashboard = async () => {
     if (!response.ok) {
       throw new Error(`Dashboard API returned ${response.status}.`);
     }
-    renderDashboard(await response.json());
+    const data = await response.json();
+    renderDashboard(data);
+    window.dispatchEvent(new CustomEvent("lifeos:dashboard-refreshed", {
+      detail: data,
+    }));
   } catch (error) {
     showLoadError(error);
   } finally {
