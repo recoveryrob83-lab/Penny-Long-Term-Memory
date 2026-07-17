@@ -32,7 +32,8 @@
 }
 
 .cc-field select,
-.cc-field textarea {
+.cc-field textarea,
+.cc-save-controls input {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 11px;
@@ -45,6 +46,13 @@
   min-height: 130px;
   resize: vertical;
   line-height: 1.45;
+}
+
+.cc-save-controls {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
 }
 
 .cc-actions {
@@ -92,21 +100,20 @@
   background: rgba(255, 255, 255, 0.025);
 }
 
-.cc-ready {
-  color: var(--good);
+.cc-history-item .item-meta:last-child {
+  max-height: 7.5em;
+  overflow: auto;
+  white-space: pre-wrap;
 }
 
-.cc-running {
-  color: var(--warn);
-}
-
-.cc-paused {
-  color: var(--bad);
-}
+.cc-ready { color: var(--good); }
+.cc-running { color: var(--warn); }
+.cc-paused { color: var(--bad); }
 
 @media (max-width: 900px) {
   .cc-layout,
-  .cc-fields {
+  .cc-fields,
+  .cc-save-controls {
     grid-template-columns: 1fr;
   }
 }
