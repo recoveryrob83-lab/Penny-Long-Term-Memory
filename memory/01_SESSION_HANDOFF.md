@@ -150,12 +150,13 @@ Do not copy balances, transactions, account details, or detailed forecasts into 
 
 ## Advisory State
 
-Current open advisory:
+Current open advisories:
 
-- ADV-20260716-039 — Engineering requested reconciliation of stale global summaries. Life Logistics is implementing the synchronization through this update.
+- None.
 
 Recently closed:
 
+- ADV-20260716-039 — Global handoff, active-project map, global open loops, and Life Logistics local state reconciled with current July 16–17 operating reality.
 - ADV-20260716-038 — Read-mostly LifeOS desktop dashboard concept acknowledged and ingested by Engineering.
 - ADV-20260716-037 — Office Leaks public-launch awareness broadcast fully acknowledged and closed.
 - ADV-20260715-036 — Seven LifeOS department discussion HQs opened and operational.
