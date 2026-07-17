@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for software architecture, prompt systems, wor
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Automation Command Center Operational Validation, Desktop Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+- Current Phase: Active / Department Ownership Architecture and Dashboard Inspection, Automation Operational Validation, Desktop Recovery, Canonical Prompt Catalog, Connector Reliability, Worker Pilots, and Delivery Architecture
 - Primary Systems: GitHub, Google Drive, Trello, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, financial account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -39,9 +39,31 @@ Use Work for bounded execution requiring local files, terminal access, substanti
 
 Never claim an action, test, deployment, or connector write occurred without verified evidence.
 
-## Current Engineering Tracks
+## Highest-Priority Work Package
 
-### 1. Automation Command Center
+Canonical note:
+
+- `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
+
+Decision direction:
+
+- department `open_loops.md` files are authoritative for department-owned work;
+- system loops are reserved for genuinely shared or multi-owner work;
+- specialist departments should not load unrelated department backlogs;
+- cross-department awareness should move through advisories, explicit dependencies, routed handoffs, or Main/Logistics coordination;
+- the dashboard may aggregate all department state without becoming another source of truth.
+
+Required sequence:
+
+1. audit current global and department loop duplication;
+2. formalize ownership, promotion, demotion, lifecycle, and reconciliation procedures;
+3. update boot routing so specialists receive only relevant global context;
+4. reconcile stale global loop and handoff language;
+5. add a Department Inspection tab between Overview and Automation;
+6. aggregate all seven departments' loops, notebooks, logs, and status records with department, status, priority, date, type, search, and sort filters;
+7. validate that department files remain authoritative.
+
+## Automation Command Center
 
 Status: Implemented and in live operational validation.
 
@@ -63,25 +85,24 @@ Current implementation includes:
 - persistent SQLite activity history;
 - one-time, daily, and weekly schedules in `America/Chicago`;
 - persistent scheduled jobs across dashboard restarts;
-- schedule create, edit, pause, resume, and delete.
+- schedule create, edit, pause, resume, and delete;
+- separate Scheduled Jobs and Run History categories with independent filters.
 
 Live evidence completed:
 
 - one-time `Hi Penny Test` live send to Engineering HQ succeeded and completed with no future run;
 - first daily `Hi Penny LifeOS Test` live send to LifeOS HQ succeeded and advanced to 2026-07-18 15:05 CT;
-- Rob continued chatting on mobile while another response was generating and the desktop scheduled send fired into LifeOS HQ without cross-chat interference.
+- mobile use and active response generation did not interfere with the desktop scheduled send;
+- scheduled Logistics HQ occupied-composer refusal preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit occupied-composer recovery reason at 2026-07-17 16:07:12 CT.
 
 Still awaiting evidence:
 
-- scheduled occupied-composer refusal in Logistics HQ;
 - restart and overdue one-time behavior;
 - second real occurrence of a recurring schedule.
 
-Do not claim the Logistics failure test passed until Rob supplies the completed result and confirms the existing draft remained unchanged.
+## Desktop Department Automation
 
-### 2. Desktop Department Automation
-
-Status: Operational with one newly identified recovery edge case.
+Status: Operational with one known recovery edge case.
 
 Canonical implementation:
 
@@ -96,49 +117,42 @@ Validated behavior:
 - one bounded `Show more` expansion;
 - exact active-document verification;
 - stable Group composer discovery;
-- preservation of existing draft text in prior direct testing;
+- occupied-composer preservation in direct and scheduled tests;
 - clipboard round-trip verification;
 - canonical prompt insertion;
 - draft-only default behavior;
 - explicit send requirement;
 - stop on uncertainty;
-- successful manual and scheduled live sends.
+- successful manual and scheduled live sends;
+- structured safe-failure reporting through the scheduler and dashboard.
 
-Current safety contract:
+Safety contract:
 
 - never use arbitrary fuzzy matching;
 - never overwrite an occupied composer without explicit replacement authorization;
 - never submit without destination, readiness, content, and send gates passing;
 - never blind-retry after uncertain send state.
 
-New edge case:
+Known edge case:
 
 ChatGPT Classic may collapse the LifeOS project folder after application restart or when the window is narrowed. The current engine handles `Show more` inside an expanded project, but it has not been coded or validated to reopen a collapsed LifeOS project folder.
 
-Current authorized workaround:
+Current workaround:
 
 - keep ChatGPT Classic open;
 - keep the LifeOS project expanded;
 - keep chats available through the normal sidebar / `Show more` path;
-- do not update the automation code yet;
 - do not treat execution after restart or major resize as unattended-production-safe.
 
-Next code update, only after Rob authorizes it:
+Do not change the recovery code until Rob explicitly authorizes the bounded exact-project expansion update.
 
-1. detect the exact collapsed LifeOS project control;
-2. expand it once;
-3. verify the project chat region is visible;
-4. continue through existing exact-chat and `Show more` navigation;
-5. stop safely if expansion or verification is uncertain;
-6. revalidate in draft mode across restart, narrow-window, hidden-chat, and occupied-composer cases before watched live-send testing.
+## Canonical Prompt Catalog
 
-### 3. Canonical Prompt Catalog
+Status: Active product/data milestone.
 
-Status: Next product/data milestone.
+The Command Center currently exposes primarily the Boot canonical family. Populate the protected canonical prompt registry from authoritative LifeOS command definitions while preserving read-only canonical behavior and editable saved copies.
 
-The command center currently exposes primarily the Boot canonical family. Populate the protected canonical prompt registry from authoritative LifeOS command definitions.
-
-Likely candidates requiring reconciliation:
+Candidate families:
 
 - Boot / Quick Boot / Full Boot;
 - Sync;
@@ -148,9 +162,7 @@ Likely candidates requiring reconciliation:
 - Read Advisory;
 - Consume Advisory.
 
-Canonical definitions must remain protected and read-only. User-editable variants must be created as saved copies.
-
-### 4. LifeOS Dashboard
+## LifeOS Dashboard
 
 Canonical application path:
 
@@ -173,13 +185,14 @@ Current boundaries:
 - Gmail and Drive adapters remain deferred until demonstrated need;
 - the dashboard is a visibility and local-control layer, not a replacement source of truth.
 
-### 5. Production Readiness
+The dashboard's newly proven diagnostic value is exposing stale duplicates, unnecessary universal context, over-engineering, and department work promoted beyond its real ownership boundary.
+
+## Production Readiness
 
 Scheduling is operational but not yet production-ready for fully unattended Windows use.
 
 Remaining evidence or implementation:
 
-- scheduled occupied-composer refusal;
 - overdue-run behavior after dashboard restart;
 - repeated recurrence across a second real occurrence;
 - collapsed-project recovery;
@@ -190,37 +203,11 @@ Remaining evidence or implementation:
 
 Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after these unattended-operation boundaries are safe enough.
 
-### 6. Reliable Connector Execution Layer
+## Other Active Tracks
 
-Connector reliability remains a first-class architecture risk.
-
-Current design concerns:
-
-- operation ledger or write-ahead log;
-- connector health states;
-- idempotency and duplicate prevention;
-- post-write verification;
-- bounded retry and stop rules;
-- degraded-mode language and recovery paths;
-- manual, RPR, export, or alternate-worker fallback;
-- queue-first execution and human approval checkpoints.
-
-Command Center structured execution results may be a concrete local proving ground for these patterns, but do not conflate UI automation jobs with connector writes.
-
-### 7. Life OS Worker Architecture
-
-Implemented workers:
-
-- Penny Raw Capture Worker: `workers/penny-raw-capture/`
-- Penny Inventory Worker: `workers/penny-inventory/`
-
-Both need real operational evidence before more workers are proposed.
-
-### 8. Office Leaks Delivery Architecture
-
-Mechanical layer: map, score, scope, sprint, verify, handoff, follow up.
-
-Human-system layer: respect, rapport, internal champion, users, Aha Moment, adoption verification, relational follow-up.
+- Reliable Connector Execution Layer: operation ledger, connector health, idempotency, verification, bounded retries, degraded modes, and recovery paths.
+- Worker architecture: Raw Capture and Inventory workers need real operational evidence before more workers are proposed.
+- Office Leaks delivery architecture: preserve mechanical and human-system implementation layers as concrete requirements mature.
 
 ## Advisory State
 
@@ -233,7 +220,9 @@ As of 2026-07-17:
 
 ## Active Open Loops
 
-- Complete and record the Logistics HQ occupied-composer scheduled refusal test.
+- Formalize department ownership, visibility, routing, and lifecycle procedures.
+- Reconcile stale global state and role-routed boot context.
+- Build and validate the Department Inspection dashboard tab.
 - Test dashboard restart and overdue-run behavior.
 - Observe the next real recurring occurrence.
 - Design collapsed-project recovery without changing code until Rob authorizes it.
@@ -249,19 +238,21 @@ As of 2026-07-17:
 
 ## Completed Recent Work
 
+- 2026-07-17: Scheduled occupied-composer refusal and structured dashboard reporting passed end to end.
+- 2026-07-17: Scheduled Jobs and Run History were separated with independent filters.
 - 2026-07-17: Manual Automation Command Center path implemented and live-validated.
 - 2026-07-17: Saved prompt lifecycle, default destinations, mismatch safeguards, and delete behavior validated.
 - 2026-07-17: Persistent one-time, daily, and weekly scheduling implemented.
 - 2026-07-17: One-time live send to Engineering HQ succeeded and completed correctly.
 - 2026-07-17: First daily live send to LifeOS HQ succeeded and advanced correctly.
-- 2026-07-17: Concurrent mobile chat activity and response generation did not interfere with scheduled desktop execution.
+- 2026-07-17: Concurrent mobile chat activity did not interfere with scheduled desktop execution.
 - 2026-07-17: Collapsed LifeOS project-folder behavior identified as the next recovery edge case; no code change authorized.
 - 2026-07-17: Desktop automation validated across all seven HQs.
 - 2026-07-17: Guarded GitHub auto-sync and four-source dashboard operation validated.
 
 ## Immediate Next Action
 
-Finish the occupied-composer scheduled refusal test and capture the result. Then populate the protected canonical prompt catalog or, when explicitly authorized, implement bounded collapsed-LifeOS-project recovery. Do not change the desktop automation for the collapsed-project edge case before Rob authorizes it.
+Begin the department ownership and dashboard inspection package while the remaining scheduler tests fire. Preserve the current automation safety boundary and do not change collapsed-project recovery code without explicit authorization.
 
 ## Safety and Truthfulness
 
@@ -270,7 +261,3 @@ Finish the occupied-composer scheduled refusal test and capture the result. Then
 - Keep connector-heavy work narrowly scoped.
 - Never commit secrets or private account data.
 - Never claim success without a successful tool or runtime result.
-
-## Notes for Next Penny
-
-Engineering HQ now maintains a working four-source dashboard, validated seven-HQ desktop automation, a fully implemented Automation Command Center, and operational one-time/daily/weekly scheduling. The most important newly discovered boundary is the collapsed LifeOS project folder after restart or narrow-window layout. Preserve the current workaround, await authorization before changing code, and treat the canonical prompt catalog as the next product/data milestone.
