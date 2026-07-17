@@ -19,6 +19,12 @@ FastAPI application
 DashboardService
   |
   v
+GoogleCalendarIcalDashboardSource
+  |
+  v
+TodoistDashboardSource
+  |
+  v
 TrelloFlowDashboardSource
   |
   v
@@ -33,11 +39,13 @@ The sources form a fallback chain:
 - packaged sample data supplies a complete dashboard shape;
 - the local GitHub adapter replaces GitHub-backed sections;
 - the Trello adapter replaces Flow when local read credentials are configured;
+- the Todoist adapter replaces Today commitments;
+- the Calendar adapter replaces the next-event card;
 - each source may fail without blanking unrelated panels.
 
 ## Local GitHub adapter
 
-The first live adapter reads the checkout already managed by GitHub Desktop. It requires no GitHub API credential and performs no writes.
+The GitHub adapter reads the checkout already managed by GitHub Desktop. It requires no GitHub API credential and performs no writes.
 
 It reads:
 
@@ -60,32 +68,75 @@ Required settings:
 - `TRELLO_API_TOKEN`
 - `TRELLO_BOARD_ID`
 
-The adapter performs read-only requests for:
-
-- board identity;
-- open board lists;
-- open cards and their list, position, description, and URL fields.
-
-It normalizes:
-
-- the first card in `Now`;
-- the first three cards in `Next`;
-- the first three cards in `Waiting`;
-- counts for Now, Next, Waiting, and Captured.
+The adapter performs read-only requests for board identity, open lists, and open cards. It normalizes the first card in `Now`, the first three cards in `Next`, the first three cards in `Waiting`, and counts for Now, Next, Waiting, and Captured.
 
 Lane metadata is read from a `Lane:` line in the card description. Waiting reasons prefer a `Blocked by:` line. Trello card order is preserved through the card position field.
 
-### Last-good cache
+## Todoist commitments adapter
 
-A successful Trello refresh writes only normalized display data to:
+The Todoist adapter uses the unified Todoist API with a personal bearer token stored only in `.env`.
+
+Required setting:
+
+- `TODOIST_API_TOKEN`
+
+The adapter reads active tasks through the paginated `/api/v1/tasks` endpoint and filters locally so the dashboard does not depend on natural-language filter syntax.
+
+It normalizes:
+
+- overdue tasks;
+- tasks due today;
+- tasks due within a configurable near-term horizon;
+- timed and date-only due values in `LIFEOS_TIMEZONE`;
+- Todoist priority into P1 through P4 display labels;
+- stable task links from the current task ID format.
+
+The default horizon is seven days and the default display limit is six commitments. Overdue tasks sort before current and upcoming tasks. Otherwise due time, priority, and title determine display order.
+
+## Google Calendar private-iCal adapter
+
+The Calendar adapter reads one private Google Calendar through its **Secret address in iCal format**. The URL is stored only in `.env` and must be treated as a password.
+
+Required setting:
+
+- `GOOGLE_CALENDAR_ICAL_URL`
+
+The adapter performs one read-only HTTP request and parses VEVENT components locally. It supports:
+
+- UTC, timezone-qualified, floating, and all-day start values;
+- folded iCalendar lines and escaped text;
+- recurring rules through `python-dateutil`;
+- recurrence exclusions;
+- recurrence dates;
+- moved or edited recurrence instances;
+- cancelled instances;
+- current, upcoming, overnight, and all-day events.
+
+The default horizon is fourteen days. Only normalized next-event data and event counts reach the dashboard payload.
+
+## Source-specific last-good caches
+
+Successful live web reads write normalized JSON snapshots under `.local/`:
 
 ```text
 .local/trello_flow_cache.json
+.local/todoist_commitments_cache.json
+.local/google_calendar_cache.json
 ```
 
-The cache contains no API key or token and is ignored by Git. If a later request fails, the adapter returns the last-good Flow snapshot and marks Trello stale. If no cache exists, sample Flow remains visible and Trello is marked unavailable.
+The `.local` directory is ignored by Git. Caches contain no API key, bearer token, or private Calendar URL.
 
-## Intended multi-source architecture
+When a source refresh fails:
+
+1. the adapter attempts to load its last-good cache;
+2. the dashboard keeps that source's previous normalized display state;
+3. source health changes to `stale`;
+4. the adapter exposes only a sanitized error label;
+5. unrelated sources continue refreshing normally.
+
+If no cache exists, packaged sample data remains visible for that region and the source is marked unavailable.
+
+## Multi-source architecture
 
 ```text
 Browser or pywebview desktop window
@@ -98,8 +149,8 @@ DashboardService and local caches
   |
   +--> Local GitHub read adapter       [implemented]
   +--> Trello Flow read adapter        [implemented]
-  +--> Todoist read adapter            [planned]
-  +--> Calendar read adapter           [planned]
+  +--> Todoist commitments adapter     [implemented]
+  +--> Calendar private-iCal adapter   [implemented]
   +--> Gmail attention adapter         [planned]
   +--> Drive shortcuts adapter         [planned]
 ```
@@ -113,7 +164,7 @@ Each adapter returns normalized data plus source health and freshness metadata. 
 3. Source systems remain authoritative.
 4. Partial success is visible and useful.
 5. Every source reports freshness and health honestly.
-6. No secret may be stored in GitHub.
+6. No secret may be stored in GitHub or normalized caches.
 7. Localhost only by default.
 8. The prompt launcher is reused, not discarded.
 9. The financial connector remains isolated from Hub and multi-connector operation.
@@ -122,7 +173,7 @@ Each adapter returns normalized data plus source health and freshness metadata. 
 ## Dashboard regions
 
 - System bar: refresh state and source warnings.
-- Today: Calendar events and Todoist commitments.
+- Today: live Calendar next event and live Todoist commitments when configured.
 - Flow: live Trello Now, top Next, and selected Waiting state when configured.
 - Attention: lightweight Gmail signals.
 - Working files: pinned or recent Drive links.
@@ -140,7 +191,10 @@ Adapters must:
 - distinguish unavailable, stale, partial, and healthy states;
 - avoid writes unless a separate explicitly authorized write contract exists;
 - avoid logging or caching secrets;
-- return enough source metadata for the interface to explain what happened.
+- return enough source metadata for the interface to explain what happened;
+- paginate bounded APIs safely;
+- normalize time using an explicit local timezone;
+- preserve last-good display state when possible.
 
 ## Refresh behavior
 
@@ -148,12 +202,14 @@ The server runs with code reload disabled.
 
 - Repository content changes: pull with GitHub Desktop, then use **Refresh view**.
 - Trello card changes: use **Refresh view**.
+- Todoist task changes: use **Refresh view**.
+- Google Calendar event changes: use **Refresh view**.
 - `.env` changes: stop the server with `Ctrl+C` and relaunch it.
 - Dashboard code or dependency changes: pull, reinstall the editable package if needed, and relaunch.
 
 ## Cache direction
 
-Trello establishes the first source-specific local JSON cache. A small SQLite cache may replace or consolidate source caches after more live adapters exist and the shared requirements are understood.
+Source-specific JSON caches remain appropriate while the dashboard has a small number of independent read sources. A small SQLite cache may replace or consolidate them only after shared cache requirements are demonstrated.
 
 ## Packaging direction
 
