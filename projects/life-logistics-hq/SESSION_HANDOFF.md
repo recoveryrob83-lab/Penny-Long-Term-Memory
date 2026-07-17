@@ -1,69 +1,68 @@
-# Life Logistics HQ Session Handoff
+# Logistics HQ Session Handoff
 
 Updated: 2026-07-17
-Project: Life Logistics HQ / Chief of Staff Penny
-Purpose: Project-specific handoff for Life Logistics GitHub operations and long-horizon coordination.
+Project: Logistics HQ
+Purpose: Project-specific handoff for Life OS GitHub operations, shared infrastructure, audits, and long-horizon coordination.
 
 ## Metadata
 
 - Project Owner: Rob
-- Primary Chat: Life Logistics HQ
-- Current Phase: Active / Durable Coordination and GitHub Operations
+- Primary Chat: Logistics HQ
+- Current Phase: Active / Durable Coordination, GitHub Operations, and Cross-Project Hygiene
 - Sensitivity Level: Moderate
-- GitHub Rule: Keep GitHub abstract, current, and organized.
+- GitHub Rule: Keep GitHub abstract, current, organized, and free of detailed private records.
 
 ## Department Identity
 
 Read `projects/life-logistics-hq/DEPARTMENT_IDENTITY.md`.
 
-Life Logistics HQ maintains durable Life OS continuity, global GitHub coherence, shared operating infrastructure, advisory hygiene, cross-project audits, role clarity, and longer-horizon logistical planning.
+Logistics HQ maintains durable Life OS continuity, global GitHub coherence, shared operating infrastructure, advisory hygiene, cross-project audits, role clarity, and longer-horizon logistical planning.
 
 Main Assistant owns Rob's daily life and ordinary execution support, including daily planning, basic logistics, errands, appointments, transportation, Calendar, Todoist, Gmail, reminders, Trello Flow processing, and executive-function support.
 
 ## Current Active Core
 
-- Main Assistant / LifeOS Coordination Hub
-- Life Logistics HQ
-- Chief Engineering Penny
-- Chief of Finance Penny
-- Chief Business HQ
-- Office Leaks Consulting HQ
-- Chief Wellness HQ
+- Main Assistant HQ
+- Logistics HQ
+- Engineering HQ
+- Finance HQ
+- Business HQ
+- Office Leaks HQ
+- Wellness HQ
 - Life OS Infrastructure as needed
 
 ## Current System State
 
-Office Leaks Consulting is publicly launched and operating in a live organic market-test phase.
+Office Leaks is publicly launched and operating in a live organic market-test phase.
 
 The LifeOS Flow Board is active as the visual attention layer. Trello Inbox captures raw thoughts; the Flow Board shows active attention; Todoist holds commitments and reminders; Calendar holds timed commitments; GitHub holds durable state.
 
-The LifeOS Dashboard is now locally running and tested on Rob's Windows machine as a read-mostly four-source operational interface.
+The LifeOS Dashboard is locally running and tested on Rob's Windows machine as a read-mostly four-source interface using GitHub, Trello, Todoist, and Google Calendar private iCal.
 
-Verified dashboard sources:
+The dashboard suite passed 16 tests. Guarded GitHub auto-sync may fast-forward only when local `main` is clean and strictly behind. Gmail and Drive adapters remain deferred until demonstrated need.
 
-- GitHub for durable memory, advisories, open loops, notebooks, and recent repository activity;
-- Trello for Now, Next, and Waiting;
-- Todoist for current and upcoming commitments;
-- Google Calendar private iCal for current and next timed commitments.
+Windows ChatGPT Classic department automation is operational across all seven HQs.
 
-The local suite passed 16 tests. Windows timezone support was corrected with the runtime `tzdata` dependency. Guarded GitHub auto-sync was live-verified and may fast-forward only when local `main` is clean and strictly behind.
+Canonical launcher:
 
-Gmail and Google Drive dashboard adapters remain deferred until demonstrated operational need. The dashboard remains a visibility layer, not a replacement source system or broad automatic writer.
+- `apps/lifeos-dashboard/automation/draft_department_boot.py`
 
-Engineering historical note:
+Validated automation behavior includes exact HQ navigation, one bounded hidden-sidebar expansion, exact destination verification, stable Group composer discovery, preservation of existing draft text, clipboard verification, draft-only default behavior, explicit `--send` authorization, and one watched successful live send to Main Assistant HQ.
 
-- `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md`
+The Logistics boot path is canonically:
 
-The note preserves this milestone as the humble beginnings of PennyOS. It is history only, not a new open loop or roadmap authorization.
+- `projects/life-logistics-hq/`
 
-Prompt-launcher newline defects from Hub Boot onward were corrected on 2026-07-16. Further launcher improvements remain deferred in Engineering context.
+Do not use the nonexistent legacy path `projects/life-logistics/`.
+
+PennyOS remains historical and productization framing only, not a new open loop or roadmap authorization.
 
 ## Role Boundaries
 
 - Main Assistant: daily coordination, immediate logistics, Flow Board operation, task and calendar coordination, communications, and authorized downstream worker processing.
-- Life Logistics: global boot integrity, shared summaries, advisory-index hygiene, shared procedures, cross-project audits, system-wide housekeeping, and longer-horizon dependencies.
+- Logistics: global boot integrity, shared summaries, advisory-index hygiene, shared procedures, cross-project audits, system-wide housekeeping, durable routing, and longer-horizon dependencies.
 - Departments: maintain routine state in their own project subtrees.
-- Engineering: software, reliability architecture, workers, prompt launcher, and dashboard implementation.
+- Engineering: software, dashboard, desktop automation, connector architecture, workers, and prompt launcher.
 - Finance: detailed financial records and concrete money decisions.
 - Business and Office Leaks: parent strategy and business-unit execution respectively.
 - Wellness: sustainable health, recovery, and pacing.
@@ -75,12 +74,12 @@ Active pilots:
 - Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
 - Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
 
-Main Assistant owns authorized downstream processing. Life Logistics owns durable worker routing and pointer hygiene. Engineering owns worker architecture and reliability guidance.
+Main Assistant owns authorized downstream processing. Logistics owns durable worker routing and pointer hygiene. Engineering owns worker architecture and reliability guidance.
 
 ## Source-of-Truth Architecture
 
 - GitHub is the durable memory map.
-- Google Drive is the working records cabinet.
+- Google Drive is the working-records cabinet.
 - Trello shows current attention and active flow.
 - Todoist owns commitments and reminders.
 - Google Calendar owns timed commitments.
@@ -97,39 +96,41 @@ Current open advisories:
 
 Recently closed:
 
-- ADV-20260717-040 — Implemented / Acknowledged / Closed. Life Logistics reconciled shared global and local summaries after the live four-source dashboard, guarded GitHub auto-sync validation, and PennyOS historical milestone.
-- ADV-20260716-039 — Implemented / Acknowledged / Closed. Life Logistics reconciled global summaries with the Office Leaks launch, Flow Board, dashboard concept, launcher state, and advisory closures.
-- ADV-20260716-038 — Read-mostly LifeOS desktop dashboard concept acknowledged and ingested by Engineering.
-- ADV-20260716-037 — Office Leaks public-launch awareness broadcast fully acknowledged and closed.
-- ADV-20260715-036 — Seven LifeOS Chat HQs opened and operational.
+- ADV-20260717-040 — Shared global and local summaries reconciled after the live dashboard milestone.
+- ADV-20260716-039 — Global summaries reconciled with July 16–17 state.
+- ADV-20260716-038 — Dashboard concept ingested by Engineering.
+- ADV-20260716-037 — Office Leaks public-launch broadcast fully acknowledged.
+- ADV-20260715-036 — Seven Chat HQs opened and operational.
 
 Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
 
 ## Current Major Open Loops
 
-- Keep global boot files, shared summaries, project maps, and open loops internally consistent.
-- Maintain Main Assistant and Life Logistics role boundaries.
+- Keep global boot files, shared summaries, project maps, status files, open loops, and automation prompts internally consistent.
+- Maintain Main Assistant and Logistics role boundaries.
 - Maintain advisory routing and board hygiene without creating bureaucracy.
-- Observe the seven Chat HQs for evidence-based routing drift.
+- Preserve canonical HQ names and project-folder paths across prompts, scripts, and memory files.
+- Observe the seven HQs for evidence-based routing drift.
 - Preserve GitHub, Trello, Todoist, Calendar, Gmail, Drive, and dashboard source boundaries.
 - Keep guarded GitHub dashboard sync limited to clean, strictly-behind fast-forward updates.
+- Keep desktop department automation draft-only by default and stop-on-uncertainty.
 - Keep canonical worker pointers stable and observe pilot reliability through reports from Main Assistant and Engineering.
 - Track longer-horizon Office Leaks dependencies as live market testing develops.
 - Keep Gmail and Drive dashboard adapters deferred until demonstrated need.
-- Keep Engineering HQ Daily Sync paused until Rob authorizes resumption.
+- Keep Engineering HQ Daily Sync paused until Rob authorizes resumption under a separate safe scheduling architecture.
 - Track the future disposition of the legacy Virtual Assistant folder.
 - Prefer small, verified GitHub edits over broad rewrites.
 
 ## Immediate Next Actions
 
-1. Use Life Logistics for GitHub maintenance, shared infrastructure, audits, advisory hygiene, and longer-horizon coordination.
+1. Use Logistics for GitHub maintenance, shared infrastructure, audits, advisory hygiene, and longer-horizon coordination.
 2. Route ordinary daily planning and Flow Board operation to Main Assistant.
-3. Route dashboard implementation and reliability work to Engineering.
+3. Route dashboard and desktop-automation implementation to Engineering.
 4. Review shared files after meaningful cross-project state changes.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
 ## Notes for Next Penny
 
-This chat is Life Logistics HQ, not Main Assistant. Maintain the map and the hallways, not every footstep.
+This chat is Logistics HQ, not Main Assistant. Maintain the map and the hallways, not every footstep.
 
-Boot reminder: Office Leaks is publicly launched and in organic market testing. The Flow Board is active. The dashboard is live with four verified sources and guarded GitHub sync. Gmail and Drive adapters remain deferred. The PennyOS milestone is historical only. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
+Boot reminder: Office Leaks is publicly launched. The Flow Board and four-source dashboard are active. Seven-HQ desktop boot automation is validated. Gmail and Drive dashboard adapters remain deferred. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
