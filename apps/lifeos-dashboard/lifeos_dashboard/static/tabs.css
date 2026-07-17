@@ -1,0 +1,60 @@
+.dashboard-tabs {
+  display: flex;
+  gap: 8px;
+  max-width: 1500px;
+  margin: 0 auto 18px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(17, 23, 33, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.dashboard-tab {
+  flex: 0 0 auto;
+  padding: 10px 15px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.dashboard-tab:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dashboard-tab.active {
+  border-color: rgba(141, 212, 255, 0.42);
+  background: rgba(61, 183, 255, 0.14);
+  color: var(--text);
+}
+
+.tab-page[hidden] {
+  display: none;
+}
+
+.tab-page {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.tab-page .dashboard-grid {
+  margin: 0;
+}
+
+.automation-page .command-center-panel {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+  .dashboard-tabs {
+    overflow-x: auto;
+  }
+
+  .dashboard-tab {
+    flex: 1 0 auto;
+  }
+}
