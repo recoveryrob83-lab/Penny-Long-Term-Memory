@@ -7,6 +7,7 @@ const commandCenter = {
   saveControls: document.getElementById("cc-save-controls"),
   saveName: document.getElementById("cc-save-name"),
   saveButton: document.getElementById("cc-save-prompt"),
+  updateButton: document.getElementById("cc-update-prompt"),
   deleteButton: document.getElementById("cc-delete-prompt"),
   mode: document.getElementById("cc-mode"),
   confirmWrap: document.getElementById("cc-confirm-wrap"),
@@ -19,7 +20,6 @@ const commandCenter = {
 };
 
 let savedPrompts = [];
-let canonicalPrompt = {name: "", prompt: ""};
 let canonicalRequestToken = 0;
 
 const ccEscape = (value) => String(value ?? "")
@@ -43,7 +43,6 @@ const loadCanonicalPrompt = async () => {
   const data = await response.json();
   if (!response.ok) throw new Error(data.detail || "Canonical prompt preview failed.");
   if (token !== canonicalRequestToken || commandCenter.promptType.value !== "canonical") return;
-  canonicalPrompt = data;
   commandCenter.saveName.value = data.name || "Canonical boot prompt";
   commandCenter.customPrompt.value = data.prompt || "";
 };
@@ -54,9 +53,10 @@ const syncPromptDetails = async () => {
   commandCenter.savedWrap.hidden = type !== "saved";
   commandCenter.saveControls.hidden = type === "canonical";
   commandCenter.saveButton.hidden = type !== "custom";
+  commandCenter.updateButton.hidden = type !== "saved" || !selected;
   commandCenter.deleteButton.hidden = type !== "saved" || !selected;
-  commandCenter.saveName.readOnly = type !== "custom";
-  commandCenter.customPrompt.readOnly = type !== "custom";
+  commandCenter.saveName.readOnly = type === "canonical" || (type === "saved" && !selected);
+  commandCenter.customPrompt.readOnly = type === "canonical" || (type === "saved" && !selected);
 
   if (type === "canonical") {
     try {
@@ -72,7 +72,6 @@ const syncPromptDetails = async () => {
     commandCenter.customPrompt.value = selected?.prompt || "";
   } else {
     canonicalRequestToken += 1;
-    if (commandCenter.saveName.readOnly) commandCenter.saveName.value = "";
     commandCenter.saveName.readOnly = false;
     commandCenter.customPrompt.readOnly = false;
   }
@@ -147,6 +146,33 @@ commandCenter.saveButton.addEventListener("click", async () => {
   }
   renderCommandCenter(data);
   commandCenter.summary.textContent = `Saved prompt: ${name}`;
+});
+
+commandCenter.updateButton.addEventListener("click", async () => {
+  const selected = selectedSavedPrompt();
+  const name = commandCenter.saveName.value.trim();
+  const prompt = commandCenter.customPrompt.value.trim();
+  if (!selected) {
+    commandCenter.summary.textContent = "Choose a saved prompt before saving changes.";
+    return;
+  }
+  if (!name || !prompt) {
+    commandCenter.summary.textContent = "Prompt name and text cannot be empty.";
+    return;
+  }
+  const response = await fetch(`/api/command-center/prompts/${selected.id}`, {
+    method: "PUT", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({name, prompt}),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    commandCenter.summary.textContent = data.detail || "Update failed.";
+    return;
+  }
+  renderCommandCenter(data);
+  commandCenter.savedPrompt.value = String(selected.id);
+  await updateCommandCenterForm();
+  commandCenter.summary.textContent = `Updated saved prompt: ${name}`;
 });
 
 commandCenter.deleteButton.addEventListener("click", async () => {
