@@ -6,13 +6,15 @@ Updated: 2026-07-17
 
 | Status | Item | Next Action | Notes |
 |---|---|---|---|
-| Open | Live Trello local authorization | Guide Rob through pulling `main`, refreshing the editable install, creating the ignored `.env`, and adding a read-only Trello API key, token, and Flow Board ID | Adapter is merged; no credential may be committed or pasted into GitHub |
-| Open | Trello dashboard verification | Confirm `local-github+trello mode`, real Now / Next / Waiting state, source health, refresh behavior, and accepted scan path on Rob's machine | Test last-good cache behavior later without intentionally destroying valid credentials |
+| Open | Todoist dashboard authorization | Guide Rob through adding a personal Todoist API token to the existing ignored `.env`, then verify real commitments and source health | Token must remain local and must not be pasted into chat or GitHub |
+| Open | Google Calendar dashboard authorization | Guide Rob through adding the private Secret address in iCal format to the existing ignored `.env`, then verify the real next event and recurrence behavior | Private iCal URL must be treated as a password and never committed or pasted into chat |
+| Open | Today dashboard local regression | Pull `main`, refresh editable dependencies, run the complete test suite, relaunch, and verify GitHub, Trello, Todoist, and Calendar together | Focused branch tests passed; full local suite and real authorization remain |
+| Open | Four-source dashboard observation | Confirm ordinary refresh, independent source health, cached degraded operation, and accepted scan path remain useful in real use | Do not intentionally destroy valid credentials merely to demonstrate failure mode |
 | Open | Penny Inventory Worker pilot | Begin with 2–3 real sale items and verify one-row-per-item writes, stable image references, uncertainty labels, and final Sheet read | Architecture complete; implementation package lives at `workers/penny-inventory/` |
 | Open | Penny Raw Capture Worker pilot | Observe real append, canonical-target, timestamp, and verification behavior | Worker package implemented; operational reliability still needs live use |
 | Open | Reliable Connector Execution Layer | Turn the design note into an implementation packet outline | Drive doc: `Reliable Connector Execution Layer - Design Note` |
 | Open | Operation ledger schema | Draft fields, states, idempotency keys, verification methods, partial-success handling, and recovery instructions | Keep the first schema small enough to test manually |
-| Open | Connector health and retry policy | Define read/write health states, bounded retry rules, stop/backoff triggers, and degraded-mode fallback | Trello dashboard cache is now a concrete healthy / stale / unavailable example |
+| Open | Connector health and retry policy | Define read/write health states, bounded retry rules, stop/backoff triggers, and degraded-mode fallback | Trello, Todoist, and Calendar caches are concrete healthy / stale / unavailable examples |
 | Open | Worker reliability evidence | Compare real pilot results against `workers/WORKER_STANDARD.md` before proposing more workers | Do not create speculative worker bureaucracy |
 | Open | Chat HQ observation | Watch the seven operating HQ chats for routing friction, duplicated authority, stale boot assumptions, connector limits, and wasted model usage | Refine only from observed use |
 | Open | Office Leaks delivery architecture | Continue one-problem local-service-office cleanup playbooks as Business requirements mature | Preserve mechanical workflow and human-system layers |
@@ -25,8 +27,7 @@ Updated: 2026-07-17
 
 | Status | Item | Owner / Trigger | Notes |
 |---|---|---|---|
-| Waiting | Todoist and Calendar adapters | Begin after Trello is verified with Rob's real board | Add commitments and schedule pressure without turning the dashboard into a full task manager |
-| Waiting | Gmail and Drive adapters | Begin after GitHub, Trello, Todoist, and Calendar data paths are stable | Show attention signals and shortcuts, not full replicas of either system |
+| Waiting | Gmail and Drive adapters | Begin after GitHub, Trello, Todoist, and Calendar data paths are stable in real use | Show attention signals and shortcuts, not full replicas of either system |
 | Waiting | Desktop window packaging | Revisit after the browser-based dashboard proves useful across several live sources | Preferred direction is pywebview around the same local FastAPI app |
 | Waiting | Deferred prompt-launcher improvements | Revisit when selected for implementation | `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher scope metadata are captured in `projects/engineering/notebook/NOTE-20260716-007-prompt-launcher-advisory-commands-and-scope.md` |
 
@@ -34,6 +35,9 @@ Updated: 2026-07-17
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-17 | Todoist and Calendar adapter implementation | PR #5 merged as commit `c7fc7d795abca8ddf56e964b36ea7bd86cc6cd17`; read-only Todoist and private-iCal Calendar sources, independent caches, recurrence expansion, timezone normalization, documentation, and focused tests added |
+| 2026-07-17 | Live Trello local authorization | Rob configured an ignored local `.env` with a read-only token and verified healthy live access |
+| 2026-07-17 | Trello dashboard verification | Real Now / Next / Waiting state, lane parsing, ordering, blocker reasons, and source health passed Rob's local review |
 | 2026-07-17 | Live Trello Flow adapter implementation | PR #4 merged as commit `262ebf98eb7e9b84eb95c421dcd1647a7c059d47`; read-only REST source, Now / Next / Waiting normalization, source health, local ignored credentials, last-good cache, documentation, and tests added |
 | 2026-07-17 | Trello adapter verification packet | 8 tests passed; compile and local server checks passed; live normalization, order, description parsing, missing credentials, cache fallback, composed sources, and secret-safe errors verified |
 | 2026-07-17 | Live local GitHub dashboard adapter | PR #3 merged as commit `62b815608bc19f657922c6e088965c1e3eeab8a2`; local checkout detection, GitHub pulse, live advisories, global priority loops, notebook discovery, recent durable commits, documentation, and tests added |
