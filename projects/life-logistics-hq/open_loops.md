@@ -13,21 +13,23 @@ Updated: 2026-07-17
 | Open | Chat HQ observation | Watch the seven operational HQ chats for routing drift, duplicated responsibility, stale assumptions, connector friction, and model-usage waste | Refine only from observed evidence |
 | Open | Source-system boundaries | Preserve GitHub as durable state, Trello as attention flow, Todoist as commitments, Calendar as timed commitments, Drive as working records, Gmail as communication evidence, and the dashboard as a visibility layer | Avoid duplicate truth surfaces |
 | Open | Desktop automation safety | Preserve exact HQ matching, draft-only default behavior, occupied-composer protection, clipboard verification, explicit send authorization, and stop-on-uncertainty | Validated across all seven HQs; modify only after demonstrated failure or material UI change |
+| Open | Automation Command Center scope | Keep Phase 1 dashboard-integrated and manual Run Now only; verify eight exact destinations, explicit send confirmation, one-job locking, global pause, structured results, and local activity history | Scheduling, recurring jobs, automatic ChatGPT launch, screenshots, notifications, and unattended sends remain deferred |
 | Open | Dashboard sync guard | Preserve clean-and-strictly-behind fast-forward behavior for guarded GitHub auto-sync | Do not imply automatic conflict resolution or broad write authority |
 | Open | Worker routing and pointer hygiene | Keep Raw Capture and Inventory worker pointers stable and preserve the worker/department distinction | Main Assistant processes authorized outputs; Engineering owns worker architecture |
 | Open | Longer-horizon Office Leaks logistics | Track cross-project dependencies, recurring operational needs, future visits, document routing, and scaling pressure as the live organic test develops | Immediate execution remains with Main Assistant and Office Leaks HQ |
 | Open | Dashboard adapter restraint | Keep Gmail and Drive adapters deferred until demonstrated operational need | The live dashboard currently uses GitHub, Trello, Todoist, and Calendar private iCal |
-| Parked | Scheduled HQ sync experiments | Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it under a stronger scheduling architecture | Validated on-demand desktop automation does not authorize unattended scheduling |
+| Parked | Scheduled HQ sync experiments | Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it under a stronger scheduling architecture | Command Center Phase 1 and validated on-demand automation do not authorize unattended scheduling |
 | Parked | Legacy Virtual Assistant folder | Decide later whether `projects/virtual-assistant-business/` remains redirect history, is archived, or is removed | Preserve until references are safely migrated |
 
 ## Done / Recently Closed
 
 | Closed Date | Item | Notes |
 |---|---|---|
-| 2026-07-17 | Full GitHub alignment audit | Reconciled global memory, Main Assistant, Engineering, Logistics, automation prompts, role vocabulary, and canonical paths with current chat context |
+| 2026-07-17 | Full GitHub alignment audit | Reconciled global memory, Main Assistant, Engineering, Logistics, automation prompts, role vocabulary, canonical paths, and the Automation Command Center plan with current context |
 | 2026-07-17 | Logistics status file created | Added `projects/life-logistics-hq/status.md` so the canonical boot file set resolves cleanly |
 | 2026-07-17 | Desktop department automation validated | All seven HQs passed draft-mode testing and one watched live send succeeded to Main Assistant HQ |
 | 2026-07-17 | Logistics boot-path defect closed | Corrected active automation from `projects/life-logistics/` to `projects/life-logistics-hq/` |
+| 2026-07-17 | Automation Command Center plan synchronized | Added Phase 1 manual-only scope to global, Engineering, and Logistics durable state without reactivating scheduling |
 | 2026-07-17 | ADV-20260717-040 implemented and closed | Reconciled global and local summaries after the live four-source dashboard milestone |
 | 2026-07-17 | LifeOS Dashboard operational milestone | Dashboard running locally with GitHub, Trello, Todoist, and Calendar private iCal; 16 tests passed and guarded GitHub sync was verified |
 | 2026-07-17 | PennyOS humble-beginnings note preserved as history | No separate open loop or roadmap commitment was created |
@@ -40,4 +42,4 @@ Updated: 2026-07-17
 
 ## Operating Rule
 
-Use Logistics for maintaining the map, shared infrastructure, cross-project audits, and longer-term operational structure. Route ordinary daily planning, Trello Flow processing, errands, appointments, transportation, reminders, Calendar, Todoist, Gmail, and immediate executive-function support to Main Assistant. Route dashboard and desktop-automation implementation to Engineering.
+Use Logistics for maintaining the map, shared infrastructure, cross-project audits, and longer-term operational structure. Route ordinary daily planning, Trello Flow processing, errands, appointments, transportation, reminders, Calendar, Todoist, Gmail, and immediate executive-function support to Main Assistant. Route dashboard, desktop automation, and Automation Command Center implementation to Engineering.
