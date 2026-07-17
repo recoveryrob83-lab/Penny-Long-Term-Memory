@@ -25,7 +25,8 @@ The dashboard-integrated Automation Command Center now supports:
 - schedule creation, editing, pause, resume, and deletion;
 - reuse of the validated desktop automation safety boundary.
 
-Current implementation head after scheduling work: `84b99b138b0c096b8e8067490f602fee309b4720`.
+Scheduling implementation head: `84b99b138b0c096b8e8067490f602fee309b4720`.
+Reporting and schedule-presentation fix head: `f000686082ca6e3d5ca1b5213bf6ffa83c4d9f6a`.
 
 ## Live Validation Evidence
 
@@ -52,21 +53,31 @@ Observed successful live tests on Rob's Windows machine:
    - Another response was actively generating in the mobile chat.
    - The desktop automation navigated to LifeOS HQ and sent the scheduled prompt without interfering with the mobile chat or sending to the wrong destination.
 
-## Safety Test In Progress
+4. Scheduled occupied-composer refusal behind `Show more`
+   - Name: `Hi Penny Logistics Failure Test`
+   - Destination: Logistics HQ
+   - Scheduled: 2026-07-17 15:26 CT
+   - Completed: 2026-07-17 15:26:15 CT
+   - Navigation expanded `Show more`, found the exact Logistics HQ chat, and verified the destination.
+   - Existing harmless composer text remained intact.
+   - No scheduled text was inserted or sent.
+   - Result: failed safely / no future run.
 
-A one-time live-send test is scheduled for Logistics HQ while harmless text is deliberately left in the Logistics composer.
+The safety behavior passed. The first dashboard report incorrectly labeled the disabled one-time failure as `Paused`, placed it below the active LifeOS schedule without clear ordering semantics, and displayed the generic ChatGPT-unavailable explanation.
 
-This test also exercises a destination behind the bounded `Show more` expansion.
+## Reporting Fix
 
-Expected result:
+Authorized and implemented after the Logistics test:
 
-- exact Logistics HQ navigation;
-- existing composer text remains unchanged;
-- no scheduled prompt is inserted or sent;
-- execution stops with the occupied-composer failure explanation;
-- the one-time schedule records the result and has no future run.
+- the verified automation shim now captures the base engine output and emits a stable `LIFEOS_RESULT_CODE` marker on failure;
+- occupied-composer failures emit `composer_occupied` plus an explicit preserved-draft message;
+- failed or refused one-time schedules display `Failed` rather than `Paused`;
+- successful one-time schedules display `Completed`;
+- manually disabled recurring or future schedules display `Paused`;
+- active schedules sort first by next run;
+- completed and failed schedules sort afterward by most recent activity.
 
-Do not record this test as passed until Rob supplies the completed log and confirms visible draft preservation.
+Local pull, restart, and visual confirmation remain required because Engineering cannot execute the Windows UI runtime from the connector environment.
 
 ## Newly Identified Edge Case
 
@@ -128,7 +139,7 @@ Scheduling is operational but not yet production-ready for fully unattended Wind
 
 Before that label, Engineering still needs evidence and/or implementation for:
 
-- occupied-composer scheduled refusal;
+- local confirmation of the reporting and ordering patch;
 - dashboard restart and overdue-run behavior;
 - recurring execution across a second real occurrence;
 - collapsed-project recovery;
