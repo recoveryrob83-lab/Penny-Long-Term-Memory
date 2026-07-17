@@ -184,6 +184,11 @@ def parse_args() -> argparse.Namespace:
             "The literal @GitHub text may rely on connector context already being active."
         ),
     )
+    parser.add_argument(
+        "--print-prompt",
+        action="store_true",
+        help="Print the selected canonical prompt and exit without opening ChatGPT.",
+    )
     return parser.parse_args()
 
 
@@ -202,12 +207,17 @@ def run_engine_once(forwarded_args: list[str]) -> tuple[int, str]:
 if __name__ == "__main__":
     args = parse_args()
     department = DEPARTMENTS[args.department]
+    prompt = build_prompt(department)
+
+    if args.print_prompt:
+        print(prompt, end="")
+        raise SystemExit(0)
 
     forwarded_args = [
         sys.argv[0],
         department.chat_title,
         "--text",
-        build_prompt(department),
+        prompt,
     ]
 
     if args.send:
