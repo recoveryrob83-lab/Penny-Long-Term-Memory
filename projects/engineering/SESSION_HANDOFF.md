@@ -1,96 +1,151 @@
 # Chief Engineering Penny Session Handoff
 
-Updated: 2026-07-16
+Updated: 2026-07-17
 Project: Chief Engineering Penny / Engineering HQ
-Purpose: Project-specific handoff for engineering and software architecture chats.
+Purpose: Project-specific handoff for engineering, software architecture, prompt systems, workers, connector reliability, and the LifeOS Dashboard.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Chief Engineering Penny / Engineering HQ
-- Current Phase: Active / Connector Reliability, Worker Pilots, Prompt Systems, Office Leaks Delivery Architecture, and LifeOS Dashboard Exploration
-- Primary Systems: GitHub, dedicated software repositories when created, Google Drive, Trello, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
+- Current Phase: Active / LifeOS Dashboard V0, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+- Primary Systems: GitHub, Google Drive, Trello, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
 - Sensitivity Level: Moderate
-- GitHub Rule: Keep Life OS GitHub memory abstract. Never store secrets, credentials, tokens, API keys, private user data, or sensitive implementation details in memory files.
+- GitHub Rule: Never store secrets, credentials, tokens, API keys, financial account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
 
 ## Boot Instructions
 
-1. Follow the canonical global boot sequence in `memory/STARTUP_BOOT.md`.
+1. Follow `memory/STARTUP_BOOT.md`.
 2. Read this handoff.
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
-5. Read `coordination/ADVISORY_INDEX.md` when advisory routing or cross-department status is relevant.
-6. Read a source department advisory board only when the index points to a relevant open advisory or Rob names it.
-7. Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` for normal routing; it is frozen historical state.
-8. Use connectors and RPR only as required by the specific task.
-9. Keep Life OS GitHub memory abstract and non-sensitive.
+5. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
+6. Read a source board only when the index points to a relevant advisory or Rob names it.
+7. Do not use `coordination/DEPARTMENT_EVENT_INBOX.md` for normal routing.
+8. Keep connector work small, explicit, and verifiable.
 
 ## Department Role
 
-Chief Engineering Penny owns technical architecture, software planning, repository strategy, automation design, connector and API research, testing strategy, worker contracts, debugging analysis, implementation sequencing, prompt systems, and build-readiness.
+Chief Engineering Penny owns:
 
-Chief Business HQ and Office Leaks Consulting HQ define what should be built and why. Engineering defines how to build it safely, coherently, and in the right order.
+- technical architecture;
+- software planning and repository strategy;
+- API, connector, and MCP research;
+- automation and data-model design;
+- prompt systems and command interfaces;
+- testing and debugging strategy;
+- worker contracts;
+- implementation sequencing;
+- build-readiness and truthful verification.
+
+Chief Business HQ and Office Leaks Consulting HQ define what should be built and why. Engineering defines how to build it safely and in the right order.
 
 Route:
 
-- business strategy, positioning, customer discovery, and monetization to Business or Office Leaks;
-- costs, subscriptions, paid APIs, hosting, and financial risk to Finance;
+- business strategy and monetization to Business or Office Leaks;
+- cost-bearing technical choices to Finance;
 - daily one-off execution to Main Assistant;
-- shared global memory hygiene and cross-project housekeeping to Life Logistics;
-- health, recovery sustainability, and wellness planning to Wellness.
+- shared global memory hygiene to Life Logistics;
+- recovery and health sustainability to Wellness.
 
-## Chat and Work Operating Model
+## Chat and Work Model
 
-The seven LifeOS department discussion HQ chats are open and operational.
+Use regular Chat for architecture discussion, planning, research, GitHub synchronization, prompt work, code-review discussion, debugging analysis, advisories, and small authorized connector updates.
 
-Regular Chat is the default environment for:
+Use Work for bounded execution requiring local files, terminal access, substantial coding, test execution, browser or desktop control, application packaging, or complex artifacts.
 
-- architecture discussion and planning;
-- GitHub boot, synchronization, and light documentation work;
-- prompt systems and command databases;
-- API, connector, MCP, and platform research;
-- code review and debugging discussion;
-- advisories and cross-department routing;
-- small authorized connector-backed updates.
-
-Work mode is reserved for:
-
-- substantial code writing or testing;
-- local repository operations;
-- large file edits;
-- test-suite execution;
-- application packaging;
-- browser or desktop automation;
-- complex artifact generation;
-- long-running implementation work.
-
-Each HQ is one structured perspective within a coherent Penny system, not an autonomous agent. Never claim an action, test, deployment, or connector write occurred without verified tool evidence.
+Never claim an action, test, deployment, or connector write occurred without verified evidence.
 
 ## Current Engineering Tracks
 
-### 1. Reliable Connector Execution Layer
+### 1. LifeOS Dashboard V0
 
-Connector reliability remains a first-class architecture risk. Current design concerns:
+The dashboard has moved from concept to a runnable first scaffold.
+
+Canonical application path:
+
+- `apps/lifeos-dashboard/`
+
+Pull request:
+
+- PR #2 — `Scaffold local LifeOS dashboard`
+
+Merged commit:
+
+- `bdf920112e8142179d3da91a3e7983e1a5d48c27`
+
+Current stack:
+
+- Python 3.11+;
+- FastAPI backend;
+- Jinja2 templates;
+- plain HTML, CSS, and JavaScript frontend;
+- Uvicorn localhost server;
+- sample JSON source adapter;
+- pytest smoke tests.
+
+Implemented V0 regions:
+
+- source health and freshness;
+- Today and next-event view;
+- Trello Now, Next, and Waiting mock state;
+- Gmail attention signals;
+- Drive shortcuts;
+- recent GitHub notebook activity;
+- copyable Penny commands.
+
+Architecture boundaries:
+
+- local browser app first;
+- bind to `127.0.0.1`;
+- sample data before authentication;
+- source systems remain authoritative;
+- Penny remains the worker and conversational control layer;
+- read-only or read-mostly before write controls;
+- account-linked financial connector remains excluded from multi-connector dashboard operation;
+- pywebview packaging may come later after the browser version proves useful.
+
+Verification completed before merge:
+
+- Python compilation succeeded;
+- `python -m pytest -q` returned 3 passing tests;
+- a live Uvicorn server started on `127.0.0.1:8765`;
+- `/`, `/api/health`, and `/api/dashboard` returned HTTP 200.
+
+The execution container could not resolve GitHub for a fresh clone, so verification used locally reconstructed copies of the exact runtime scaffold. The application itself passed all runtime checks.
+
+Immediate next milestone:
+
+1. Rob pulls current `main` on his Windows machine.
+2. Engineering guides Rob through environment creation, dependency installation, and first launch.
+3. Rob reviews what the sample dashboard communicates within ten seconds.
+4. Engineering records layout, noise, missing information, and usefulness feedback.
+5. GitHub becomes the first live read adapter after the screen is accepted.
+
+Do not connect every source before validating the dashboard itself.
+
+### 2. Reliable Connector Execution Layer
+
+Connector reliability remains a first-class architecture risk.
+
+Current design concerns:
 
 - operation ledger or write-ahead log;
 - connector health states;
-- idempotency keys and duplicate prevention;
+- idempotency and duplicate prevention;
 - post-write verification;
 - bounded retry and stop rules;
 - degraded-mode language and recovery paths;
-- RPR, export, manual-upload, or alternate-worker fallback;
+- manual, RPR, export, or alternate-worker fallback;
 - queue-first execution and human approval checkpoints.
 
-Observed operating patterns, not platform guarantees:
+Observed field lessons favor small operations, explicit connector invocation, narrow connector scope, post-write verification, and fresh-chat recovery after degradation.
 
-- small connector operations are more reliable than large batches;
-- explicit connector invocation helps maintain scope;
-- one-connector-focused sessions are easier to verify;
-- fresh booted chats are preferable to repeated retries when connector behavior degrades.
+Working Drive document:
 
-Working Drive document: `Reliable Connector Execution Layer - Design Note`.
+- `Reliable Connector Execution Layer - Design Note`
 
-### 2. Life OS Worker Architecture
+### 3. Life OS Worker Architecture
 
 Implemented worker packages:
 
@@ -101,9 +156,9 @@ Raw Capture mission: `Capture first. Organize later.`
 
 Inventory mission: `See the item. Record the item. Verify the row.`
 
-The Inventory Worker uses one row per physical item and excludes pricing, bundling, listing creation, publication, and sale strategy. Both workers need real operational evidence before Engineering proposes additional worker architecture.
+Both workers need real operational evidence before more workers are proposed.
 
-### 3. Office Leaks Delivery Architecture
+### 4. Office Leaks Delivery Architecture
 
 Mechanical layer:
 
@@ -125,121 +180,96 @@ Human-system layer:
 - adoption verification;
 - relational follow-up.
 
-Current references:
+References:
 
 - `projects/engineering/notebook/NOTE-20260708-005-office-leak-delivery-playbooks-v1.md`
 - `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
 - Drive: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
 
-### 4. LifeOS Chat HQ Architecture
+### 5. Prompt Launcher and Command Interface
 
-ADV-20260715-036 is implemented, acknowledged, and closed. Rob confirmed all seven discussion HQ chats are open and ready.
+The launcher remains a secondary interface over the canonical vocabulary in `memory/CONTEXT_REMINDER.md`.
 
-The operating architecture separates:
+Completed repair:
 
-- Chat HQs for conversation, planning, research, synchronization, and light connector work;
-- Work mode for heavy implementation;
-- departments for judgment and durable state;
-- workers for narrow repeatable procedures;
-- Main Assistant for overall coordination and synthesis.
+- corrected literal `\n` output from Hub Boot onward.
 
-The next Engineering responsibility is observation and refinement based on real use, not more launch scaffolding.
+Deferred improvements:
 
-### 5. Read-Mostly LifeOS Desktop Dashboard
+- `/READADVISORY`;
+- `/CONSUMEADVISORY`;
+- explicit scope metadata and better department-selector labels.
 
-ADV-20260716-038 is acknowledged, ingested, and closed.
-
-Engineering recognizes the concept as a future staged desktop window into LifeOS rather than a new source-of-truth platform.
-
-Initial boundaries:
-
-- surface a small high-signal view from Trello, Todoist, Calendar, Gmail, and Drive;
-- preserve each connected system as authoritative;
-- keep Penny as the worker, coordinator, and connector operator;
-- retain the existing prompt launcher and prompt database as the primary directly usable component;
-- center early design on Trello `Now`, top `Next`, due or overdue commitments, near-term calendar pressure, mail-attention signals, and pinned working files;
-- begin read-only or read-mostly;
-- add direct write controls only after real need is observed;
-- exclude account-linked financial connector data from Hub or multi-connector operation;
-- create a staged specification only after Rob supplies further requirements and authorizes the work.
-
-No software implementation was performed under ADV-038.
-
-### 6. Prompt Launcher and Command Interface
-
-The current launcher remains a secondary interface over the canonical shortcut vocabulary in `memory/CONTEXT_REMINDER.md`.
-
-Recent repair:
-
-- literal `\n` output from Hub Boot onward was corrected in `engineering/classroom/prompt_launcher/prompt_library.json` and verified.
-
-Deferred improvements are captured in:
+Notebook reference:
 
 - `projects/engineering/notebook/NOTE-20260716-007-prompt-launcher-advisory-commands-and-scope.md`
 
-That note preserves future `/READADVISORY`, `/CONSUMEADVISORY`, and explicit launcher scope metadata work without adding all three as active open loops tonight.
+### 6. LifeOS Chat HQ Architecture
+
+All seven department discussion HQ chats are operational.
+
+The system separates:
+
+- Chat HQs for conversation, planning, research, synchronization, and light connector work;
+- Work for heavy implementation;
+- departments for judgment and durable state;
+- workers for narrow procedures;
+- Main Assistant for coordination and synthesis.
+
+Refine this architecture only from observed friction.
 
 ## Advisory State
 
-As of 2026-07-16:
+As of 2026-07-17:
 
-- ADV-20260716-038 is acknowledged / ingested / closed after Engineering accepted the dashboard concept and its scope boundaries.
-- ADV-20260716-039 is open from Engineering to Life Logistics HQ for reconciliation of stale shared global summaries.
-- ADV-20260716-037 is fully acknowledged and closed after the Office Leaks public-launch broadcast was consumed by all target departments.
-- Department Event Inbox remains frozen and must not be updated for normal advisory routing.
+- No open advisories are listed in `coordination/ADVISORY_INDEX.md`.
+- ADV-20260716-038 is acknowledged / ingested / closed.
+- ADV-20260716-039 is implemented / acknowledged / closed after shared global summaries were reconciled.
+- Department Event Inbox remains frozen historical state.
 
 ## Active Open Loops
 
-- Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
-- Draft the operation ledger / write-ahead log schema.
-- Define idempotency, verification, retry, connector-health, degraded-mode, and recovery patterns.
-- Pilot Penny Inventory Worker with 2–3 real items before scaling.
+- Guide Rob through the first local LifeOS Dashboard V0 launch.
+- Capture dashboard first-use feedback before live integrations.
+- Build the GitHub read adapter after the screen is accepted.
+- Pilot Penny Inventory Worker with 2–3 real items.
 - Observe Penny Raw Capture Worker in real use.
-- Compare worker pilot results against `workers/WORKER_STANDARD.md` before proposing more workers.
-- Continue Office Leaks delivery architecture as Business requirements mature.
-- Observe the seven Chat HQs for routing friction, duplicated responsibility, stale boot assumptions, connector limitations, and model-usage waste.
-- Develop a staged LifeOS dashboard specification when Rob returns with concrete requirements.
-- Keep Engineering HQ Daily Sync paused until scheduled execution architecture is more reliable and Rob explicitly resumes it.
+- Draft the Reliable Connector Execution Layer implementation packet and operation-ledger schema.
+- Define idempotency, verification, connector-health, retry, and recovery patterns.
+- Continue Office Leaks delivery architecture as requirements mature.
+- Observe Chat HQ routing friction and model-use waste.
+- Keep Engineering HQ Daily Sync paused until explicitly resumed.
 
-## Routed / Deferred
+## Deferred
 
-- Shared global-summary drift is routed to Life Logistics HQ through ADV-20260716-039.
-- Prompt-launcher advisory commands and scope metadata are deferred in NOTE-20260716-007 rather than promoted into active work tonight.
-- Notebook resurfacing and open-loop overload need a separate workflow review later; do not solve that by creating another stack of immediate tasks.
+- Trello, Todoist, Calendar, Gmail, and Drive live dashboard adapters follow the GitHub adapter and screen validation.
+- Desktop-window packaging follows browser usefulness.
+- Prompt-launcher advisory commands and scope metadata remain captured in NOTE-20260716-007.
+- Notebook resurfacing should be tested through the dashboard rather than solved by adding more undifferentiated open loops.
 
 ## Completed Recent Work
 
-- 2026-07-16: ADV-20260716-038 consumed and closed; read-mostly LifeOS dashboard concept ingested without authorizing implementation.
-- 2026-07-16: ADV-20260716-039 routed to Life Logistics HQ for shared global-summary reconciliation.
-- 2026-07-16: Prompt-launcher newline defects from Hub Boot onward corrected and verified.
-- 2026-07-15: Seven LifeOS department discussion HQ chats opened and declared ready by Rob; ADV-20260715-036 closed.
-- 2026-07-15: Daily Operating SOP integrated into the global boot path under ADV-20260715-035.
-- 2026-07-15: Expanded LifeOS shortcut and hub command vocabulary synchronized in `memory/CONTEXT_REMINDER.md`.
-- 2026-07-10: Penny Inventory Worker architecture completed and package implemented.
-- 2026-07-10: Advisory Board Lifecycle Standard created and Engineering board compacted.
+- 2026-07-17: LifeOS Dashboard V0 scaffold merged through PR #2 and verified in sample-data mode.
+- 2026-07-17: ADV-20260716-039 closed after global-summary reconciliation.
+- 2026-07-16: ADV-20260716-038 consumed and closed; dashboard boundaries established.
+- 2026-07-16: Prompt-launcher newline defects corrected and deferred improvements captured.
+- 2026-07-15: Seven LifeOS Chat HQs launched.
+- 2026-07-10: Penny Inventory Worker package implemented.
 - 2026-07-09: Formal worker layer and Penny Raw Capture Worker implemented.
-- 2026-07-08: Office Leaks delivery-playbook and human-system architecture notes created.
-- 2026-07-04: Reliable Connector Execution Layer research track established.
 
-## Immediate Next Actions
+## Immediate Next Action
 
-1. Use the Engineering Chat HQ for ordinary planning and light GitHub work.
-2. Wait for concrete dashboard requirements before producing a staged specification.
-3. Pilot the Inventory Worker with 2–3 real sale items when Rob is ready.
-4. Observe Raw Capture Worker behavior in real use.
-5. Draft the Reliable Connector Execution Layer implementation packet outline and operation ledger schema when that becomes the selected major action.
-6. Refine the Chat HQ architecture only from observed friction, not speculative complexity.
+Rob should pull current `main`. After that, Engineering will provide exactly one local setup step at a time.
 
 ## Safety and Truthfulness
 
 - Prefer small, verifiable operations.
 - Fetch before editing and verify after writing.
 - Keep connector-heavy work narrowly scoped.
-- Never place secrets, credentials, tokens, API keys, financial account details, medical details, or private operational data in GitHub memory.
-- Use dedicated software repositories for code when created.
-- Use Drive or RPR for working design documents and structured artifacts.
-- Never claim success without a successful tool result.
+- Never commit secrets or private account data.
+- Use a dedicated software repository if the dashboard grows materially.
+- Never claim success without a successful tool or runtime result.
 
 ## Notes for Next Penny
 
-This is Chief Engineering Penny. Keep engineering practical, skeptical, maintainable, and aligned with Rob's available time, money, attention, and model usage. The active themes are connector reliability, verified external operations, real worker pilots, Chat/Work separation, practical Office Leaks delivery architecture, prompt-interface clarity, and a deliberately staged read-mostly LifeOS dashboard concept.
+This is Chief Engineering Penny. The dashboard is no longer hypothetical. V0 exists under `apps/lifeos-dashboard/`, passes smoke tests, and awaits Rob's first local launch. Do not leap into live integrations before validating the screen. Keep engineering practical, maintainable, and aligned with Rob's time, money, attention, and available execution surfaces.
