@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for software architecture, prompt systems, wor
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Automation Command Center Phase 1 Design, Desktop Automation Maintenance, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+- Current Phase: Active / Automation Command Center Operational Validation, Desktop Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 - Primary Systems: GitHub, Google Drive, Trello, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, financial account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -41,91 +41,116 @@ Never claim an action, test, deployment, or connector write occurred without ver
 
 ## Current Engineering Tracks
 
-### 1. Automation Command Center Phase 1
+### 1. Automation Command Center
 
-Status: Planned and ready for design and implementation.
+Status: Implemented and in live operational validation.
 
-Canonical plan:
+Canonical references:
 
 - `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
+- `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
 
-Phase 1 goal:
+Current implementation includes:
 
-Create a dashboard-integrated manual command center that safely invokes the validated desktop automation engine.
-
-Required Phase 1 scope:
-
-- eight exact destinations: `LifeOS HQ` plus the seven department HQs;
-- canonical boot prompt, saved template, or custom prompt;
-- draft or send mode;
-- explicit confirmation for send mode;
-- manual Run Now only;
-- plain-language execution summary before run;
+- eight exact destinations: LifeOS HQ plus seven department HQs;
+- canonical, saved, and custom prompt sources;
+- protected read-only canonical prompts and editable saved copies;
+- saved-prompt default destinations and explicit mismatch handling;
+- draft or explicitly confirmed live-send mode;
 - one-job-at-a-time process lock;
-- global pause control;
-- structured result and exact failure reason;
-- local activity log.
+- global pause;
+- structured results and exact failure reasons;
+- persistent SQLite activity history;
+- one-time, daily, and weekly schedules in `America/Chicago`;
+- persistent scheduled jobs across dashboard restarts;
+- schedule create, edit, pause, resume, and delete.
 
-Phase 1 exclusions:
+Live evidence completed:
 
-- no scheduling;
-- no recurring jobs;
-- no automatic ChatGPT launch;
-- no simultaneous jobs;
-- no connector-pill automation;
-- no blind retry after uncertain send state.
+- one-time `Hi Penny Test` live send to Engineering HQ succeeded and completed with no future run;
+- first daily `Hi Penny LifeOS Test` live send to LifeOS HQ succeeded and advanced to 2026-07-18 15:05 CT;
+- Rob continued chatting on mobile while another response was generating and the desktop scheduled send fired into LifeOS HQ without cross-chat interference.
 
-Architecture direction:
+Still awaiting evidence:
 
-- dashboard UI manages validated job definitions;
-- a local job runner invokes the existing engine outside the web request handler;
-- SQLite is recommended later for persisted schedules and history, but Phase 1 may begin with the smallest safe local job store;
-- the existing automation safety contract must be inherited without weakening.
+- scheduled occupied-composer refusal in Logistics HQ;
+- restart and overdue one-time behavior;
+- second real occurrence of a recurring schedule.
 
-Scheduling begins only after Phase 1 proves the dashboard-to-runner boundary, locking, structured results, and safety controls.
+Do not claim the Logistics failure test passed until Rob supplies the completed result and confirms the existing draft remained unchanged.
 
 ### 2. Desktop Department Automation
 
-Status: Operational and validated.
+Status: Operational with one newly identified recovery edge case.
 
 Canonical implementation:
 
 - launcher: `apps/lifeos-dashboard/automation/draft_department_boot.py`
 - production engine: `apps/lifeos-dashboard/automation/open_department_chat_group.py`
 - verification shim: `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
-- legacy rollback reference: `apps/lifeos-dashboard/automation/open_department_chat.py`
 - naming standard: `memory/HQ_NAMING_STANDARD.md`
 
-Validated across all seven HQs:
+Validated behavior:
 
 - exact sidebar chat-link matching;
 - one bounded `Show more` expansion;
 - exact active-document verification;
-- bounded recovery for the known generic `ChatGPT` loading state;
 - stable Group composer discovery;
-- preservation of existing draft text;
+- preservation of existing draft text in prior direct testing;
 - clipboard round-trip verification;
 - canonical prompt insertion;
 - draft-only default behavior;
-- explicit `--send` requirement;
-- one watched successful live send to Main Assistant HQ.
+- explicit send requirement;
+- stop on uncertainty;
+- successful manual and scheduled live sends.
 
 Current safety contract:
 
-- stop on uncertainty;
 - never use arbitrary fuzzy matching;
 - never overwrite an occupied composer without explicit replacement authorization;
-- never submit without all destination, readiness, content, and send gates passing;
-- treat inability to prove connector activation as a rare visible soft failure rather than adding fragile connector-pill automation.
+- never submit without destination, readiness, content, and send gates passing;
+- never blind-retry after uncertain send state.
 
-Durable references:
+New edge case:
 
-- `projects/engineering/notebook/NOTE-20260717-010-desktop-department-automation-live-send-handoff.md`
-- `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
+ChatGPT Classic may collapse the LifeOS project folder after application restart or when the window is narrowed. The current engine handles `Show more` inside an expanded project, but it has not been coded or validated to reopen a collapsed LifeOS project folder.
 
-The prior Wellness loading failure is resolved historical context. Do not reopen it as active work unless a comparable failure recurs.
+Current authorized workaround:
 
-### 3. LifeOS Dashboard
+- keep ChatGPT Classic open;
+- keep the LifeOS project expanded;
+- keep chats available through the normal sidebar / `Show more` path;
+- do not update the automation code yet;
+- do not treat execution after restart or major resize as unattended-production-safe.
+
+Next code update, only after Rob authorizes it:
+
+1. detect the exact collapsed LifeOS project control;
+2. expand it once;
+3. verify the project chat region is visible;
+4. continue through existing exact-chat and `Show more` navigation;
+5. stop safely if expansion or verification is uncertain;
+6. revalidate in draft mode across restart, narrow-window, hidden-chat, and occupied-composer cases before watched live-send testing.
+
+### 3. Canonical Prompt Catalog
+
+Status: Next product/data milestone.
+
+The command center currently exposes primarily the Boot canonical family. Populate the protected canonical prompt registry from authoritative LifeOS command definitions.
+
+Likely candidates requiring reconciliation:
+
+- Boot / Quick Boot / Full Boot;
+- Sync;
+- Nightly;
+- Advisory;
+- Sync Advisory;
+- Read Advisory;
+- Consume Advisory.
+
+Canonical definitions must remain protected and read-only. User-editable variants must be created as saved copies.
+
+### 4. LifeOS Dashboard
 
 Canonical application path:
 
@@ -140,24 +165,32 @@ Verified live sources:
 - Todoist
 - Google Calendar private iCal
 
-Verification:
+Current boundaries:
 
-- full suite passed with 16 tests;
 - Windows timezone support uses `tzdata`;
 - guarded GitHub sync is limited to clean, strictly-behind fast-forward updates;
-- Trello, Todoist, and Calendar remain independent read-only adapters with cache behavior.
+- Trello, Todoist, and Calendar remain independent read-only adapters with cache behavior;
+- Gmail and Drive adapters remain deferred until demonstrated need;
+- the dashboard is a visibility and local-control layer, not a replacement source of truth.
 
-Current dashboard work:
+### 5. Production Readiness
 
-- observe ordinary daily refresh behavior;
-- add a small configurable browser-side auto-refresh control only if still useful;
-- integrate Command Center Phase 1 without blocking normal dashboard refreshes;
-- preserve independent cache behavior and guarded Git sync;
-- defer Gmail and Drive until demonstrated operational need.
+Scheduling is operational but not yet production-ready for fully unattended Windows use.
 
-The dashboard is a visibility layer, not a replacement source of truth or newly authorized PennyOS roadmap.
+Remaining evidence or implementation:
 
-### 4. Reliable Connector Execution Layer
+- scheduled occupied-composer refusal;
+- overdue-run behavior after dashboard restart;
+- repeated recurrence across a second real occurrence;
+- collapsed-project recovery;
+- scheduler health and preflight visibility;
+- explicit missed-run policy;
+- potential execution-window controls;
+- Windows startup, desktop shell, or service packaging if sustained use requires it.
+
+Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after these unattended-operation boundaries are safe enough.
+
+### 6. Reliable Connector Execution Layer
 
 Connector reliability remains a first-class architecture risk.
 
@@ -172,9 +205,9 @@ Current design concerns:
 - manual, RPR, export, or alternate-worker fallback;
 - queue-first execution and human approval checkpoints.
 
-Command Center structured execution results may become a concrete local proving ground for these patterns, but do not conflate UI automation jobs with connector writes.
+Command Center structured execution results may be a concrete local proving ground for these patterns, but do not conflate UI automation jobs with connector writes.
 
-### 5. Life OS Worker Architecture
+### 7. Life OS Worker Architecture
 
 Implemented workers:
 
@@ -183,40 +216,11 @@ Implemented workers:
 
 Both need real operational evidence before more workers are proposed.
 
-### 6. Office Leaks Delivery Architecture
+### 8. Office Leaks Delivery Architecture
 
 Mechanical layer: map, score, scope, sprint, verify, handoff, follow up.
 
 Human-system layer: respect, rapport, internal champion, users, Aha Moment, adoption verification, relational follow-up.
-
-References:
-
-- `projects/engineering/notebook/NOTE-20260708-005-office-leak-delivery-playbooks-v1.md`
-- `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
-
-### 7. Prompt Launcher and Command Interface
-
-The launcher remains a secondary interface over `memory/CONTEXT_REMINDER.md`.
-
-Completed:
-
-- corrected literal newline output;
-- corrected the Logistics project path to `projects/life-logistics-hq`;
-- routed the legacy Logistics wrapper through the canonical department launcher;
-- aligned launcher labels with canonical HQ names;
-- aligned generated boot prompts with current status-file handling and role boundaries.
-
-Deferred improvements remain captured in:
-
-- `projects/engineering/notebook/NOTE-20260716-007-prompt-launcher-advisory-commands-and-scope.md`
-
-### 8. LifeOS Chat HQ Architecture
-
-All seven department HQ chats are operational. On-demand Windows automation can draft or explicitly submit the canonical boot prompt to each HQ.
-
-Command Center Phase 1 will expose this on-demand engine through the dashboard. It does not authorize unattended scheduling.
-
-Engineering HQ Daily Sync remains paused until Rob explicitly resumes it under a separate safe scheduling architecture after manual Command Center validation.
 
 ## Advisory State
 
@@ -229,42 +233,35 @@ As of 2026-07-17:
 
 ## Active Open Loops
 
-- Design and implement Automation Command Center Phase 1 with manual Run Now only.
-- Maintain desktop automation safety and revalidate only after material UI changes or observed failures.
-- Add configurable browser-side dashboard auto-refresh if ordinary use still demonstrates value.
+- Complete and record the Logistics HQ occupied-composer scheduled refusal test.
+- Test dashboard restart and overdue-run behavior.
+- Observe the next real recurring occurrence.
+- Design collapsed-project recovery without changing code until Rob authorizes it.
+- Populate the protected canonical prompt catalog.
+- Define missed-run policy and production preflight requirements.
+- Maintain desktop automation safety and revalidate after material UI changes or observed failures.
 - Observe four-source dashboard behavior during ordinary use and real degraded conditions.
 - Pilot Penny Inventory Worker with 2–3 real items.
 - Observe Penny Raw Capture Worker in real use.
 - Draft the Reliable Connector Execution Layer implementation packet and operation-ledger schema.
-- Define idempotency, verification, connector-health, retry, and recovery patterns.
 - Continue Office Leaks delivery architecture as requirements mature.
-- Observe Chat HQ routing friction and model-use waste.
 - Keep Engineering HQ Daily Sync paused until explicitly resumed.
-
-## Deferred
-
-- One-time and recurring Command Center schedules wait for Phase 1 proof.
-- Automatic ChatGPT launch, screenshots, notifications, and advanced recovery wait for later phases.
-- Gmail and Drive dashboard adapters remain deferred until demonstrated need.
-- Desktop-window packaging follows sustained browser usefulness.
-- Prompt-launcher advisory commands and scope metadata remain deferred.
-- Additional workers wait for real Raw Capture and Inventory evidence.
 
 ## Completed Recent Work
 
-- 2026-07-17: Automation Command Center plan captured with Phase 1 manual-only scope and explicit scheduling deferral.
-- 2026-07-17: Desktop automation validated across all seven HQs and one watched live send completed successfully to Main Assistant HQ.
-- 2026-07-17: NOTE-010 closed as completed and NOTE-011 established the durable UI automation recovery playbook.
-- 2026-07-17: Logistics boot path and generated boot prompts corrected.
-- 2026-07-17: Guarded GitHub auto-sync merged and locally verified with 16 passing tests.
-- 2026-07-17: Live Todoist, Calendar, Trello, and GitHub dashboard adapters verified.
-- 2026-07-17: ADV-20260717-040 and ADV-20260716-039 closed after shared-summary reconciliation.
-- 2026-07-16: ADV-20260716-038 consumed and closed; dashboard boundaries established.
-- 2026-07-15: Seven LifeOS Chat HQs launched.
+- 2026-07-17: Manual Automation Command Center path implemented and live-validated.
+- 2026-07-17: Saved prompt lifecycle, default destinations, mismatch safeguards, and delete behavior validated.
+- 2026-07-17: Persistent one-time, daily, and weekly scheduling implemented.
+- 2026-07-17: One-time live send to Engineering HQ succeeded and completed correctly.
+- 2026-07-17: First daily live send to LifeOS HQ succeeded and advanced correctly.
+- 2026-07-17: Concurrent mobile chat activity and response generation did not interfere with scheduled desktop execution.
+- 2026-07-17: Collapsed LifeOS project-folder behavior identified as the next recovery edge case; no code change authorized.
+- 2026-07-17: Desktop automation validated across all seven HQs.
+- 2026-07-17: Guarded GitHub auto-sync and four-source dashboard operation validated.
 
 ## Immediate Next Action
 
-Start Automation Command Center Phase 1 with the smallest safe dashboard-to-runner boundary: exact destination selection, prompt choice, draft/send mode, explicit confirmation, one-job lock, Run Now, structured result, global pause, and local activity history. Do not implement scheduling in Phase 1.
+Finish the occupied-composer scheduled refusal test and capture the result. Then populate the protected canonical prompt catalog or, when explicitly authorized, implement bounded collapsed-LifeOS-project recovery. Do not change the desktop automation for the collapsed-project edge case before Rob authorizes it.
 
 ## Safety and Truthfulness
 
@@ -276,4 +273,4 @@ Start Automation Command Center Phase 1 with the smallest safe dashboard-to-runn
 
 ## Notes for Next Penny
 
-Engineering HQ now maintains a working four-source dashboard, working seven-HQ desktop boot automation, and a planned dashboard-integrated Automation Command Center. The next build is Phase 1 manual Run Now only. Scheduling is a later phase, not a hidden requirement.
+Engineering HQ now maintains a working four-source dashboard, validated seven-HQ desktop automation, a fully implemented Automation Command Center, and operational one-time/daily/weekly scheduling. The most important newly discovered boundary is the collapsed LifeOS project folder after restart or narrow-window layout. Preserve the current workaround, await authorization before changing code, and treat the canonical prompt catalog as the next product/data milestone.
