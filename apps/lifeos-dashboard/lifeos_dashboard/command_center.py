@@ -433,8 +433,10 @@ class CommandCenterService:
             if self.paused or self.running:
                 continue
             for schedule in self.store.due_schedules(time.time()):
-                if self._scheduler_stop.is_set() or self.paused:
+                if self._scheduler_stop.is_set():
                     return
+                if self.paused:
+                    break
                 self._run_scheduled(schedule)
 
     def _run_scheduled(self, schedule: dict[str, object]) -> None:
