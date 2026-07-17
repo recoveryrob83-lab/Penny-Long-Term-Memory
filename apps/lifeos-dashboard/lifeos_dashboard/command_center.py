@@ -1,11 +1,4 @@
-"""Safe manual execution boundary for the LifeOS Automation Command Center.
-
-Phase 1 intentionally supports manual Run Now jobs only. This module validates an exact
-LifeOS destination, prompt source, and send authorization before constructing or executing a
-single existing desktop-automation command. Scheduling and background recurrence do not live
-here.
-"""
-
+"""Safe manual execution boundary for the LifeOS Automation Command Center."""
 from __future__ import annotations
 
 import os
@@ -13,20 +6,14 @@ import subprocess
 import sys
 import threading
 import time
-from collections import deque
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Literal
 
+from .command_center_store import CommandCenterStore
+
 DestinationKey = Literal[
-    "hub",
-    "main",
-    "engineering",
-    "logistics",
-    "business",
-    "office-leaks",
-    "finance",
-    "wellness",
+    "hub", "main", "engineering", "logistics", "business", "office-leaks", "finance", "wellness"
 ]
 PromptType = Literal["canonical", "custom"]
 ExecutionMode = Literal["draft", "send"]
@@ -85,19 +72,14 @@ def validate_job(job: CommandJob) -> Destination:
     destination = DESTINATIONS.get(job.destination)
     if destination is None:
         raise CommandCenterError("Unknown destination. Exact LifeOS destination required.")
-
     if job.prompt_type not in {"canonical", "custom"}:
         raise CommandCenterError("Prompt type must be canonical or custom.")
-
     if job.mode not in {"draft", "send"}:
         raise CommandCenterError("Execution mode must be draft or send.")
-
     if job.prompt_type == "custom" and not job.custom_prompt.strip():
         raise CommandCenterError("Custom prompt cannot be empty.")
-
     if job.mode == "send" and not job.confirm_send:
         raise CommandCenterError("Send mode requires explicit confirmation.")
-
     return destination
 
 
@@ -111,13 +93,8 @@ def summarize_job(job: CommandJob) -> str:
 def build_command(job: CommandJob, app_root: Path) -> list[str]:
     destination = validate_job(job)
     automation_root = app_root / "automation"
-
     if job.prompt_type == "canonical":
-        command = [
-            sys.executable,
-            str(automation_root / "draft_department_boot.py"),
-            destination.key,
-        ]
+        command = [sys.executable, str(automation_root / "draft_department_boot.py"), destination.key]
     else:
         command = [
             sys.executable,
@@ -126,84 +103,61 @@ def build_command(job: CommandJob, app_root: Path) -> list[str]:
             "--text",
             job.custom_prompt,
         ]
-
     if job.mode == "send":
         command.extend(["--send", "--confirm-send", "SEND"])
-
     return command
 
 
 def run_job(job: CommandJob, app_root: Path, timeout_seconds: int = 120) -> ExecutionResult:
-    """Execute one validated foreground job and return a structured result."""
     started_at = time.time()
     try:
         command = build_command(job, app_root)
     except CommandCenterError as exc:
-        finished_at = time.time()
         return ExecutionResult(
-            status="refused",
-            destination=job.destination,
-            mode=job.mode,
-            prompt_type=job.prompt_type,
-            exit_code=None,
-            started_at=started_at,
-            finished_at=finished_at,
-            stdout="",
-            stderr="",
-            reason=str(exc),
+            "refused", job.destination, job.mode, job.prompt_type, None,
+            started_at, time.time(), "", "", str(exc),
         )
-
-    environment = os.environ.copy()
     try:
         completed = subprocess.run(
             command,
             cwd=app_root,
-            env=environment,
+            env=os.environ.copy(),
             capture_output=True,
             text=True,
             timeout=timeout_seconds,
             check=False,
         )
     except subprocess.TimeoutExpired as exc:
-        finished_at = time.time()
         return ExecutionResult(
-            status="failed",
-            destination=job.destination,
-            mode=job.mode,
-            prompt_type=job.prompt_type,
-            exit_code=None,
-            started_at=started_at,
-            finished_at=finished_at,
-            stdout=exc.stdout or "",
-            stderr=exc.stderr or "",
-            reason=f"Automation timed out after {timeout_seconds} seconds.",
+            "failed", job.destination, job.mode, job.prompt_type, None,
+            started_at, time.time(), exc.stdout or "", exc.stderr or "",
+            f"Automation timed out after {timeout_seconds} seconds.",
         )
-
-    finished_at = time.time()
     succeeded = completed.returncode == 0
     return ExecutionResult(
-        status="succeeded" if succeeded else "failed",
-        destination=job.destination,
-        mode=job.mode,
-        prompt_type=job.prompt_type,
-        exit_code=completed.returncode,
-        started_at=started_at,
-        finished_at=finished_at,
-        stdout=completed.stdout,
-        stderr=completed.stderr,
-        reason="Completed successfully." if succeeded else "Automation process returned an error.",
+        "succeeded" if succeeded else "failed",
+        job.destination,
+        job.mode,
+        job.prompt_type,
+        completed.returncode,
+        started_at,
+        time.time(),
+        completed.stdout,
+        completed.stderr,
+        "Completed successfully." if succeeded else "Automation process returned an error.",
     )
 
 
 class CommandCenterService:
-    """Own the Phase 1 pause switch, one-job lock, and bounded in-memory activity history."""
+    """Own pause state, one-job locking, saved prompts, and durable activity history."""
 
-    def __init__(self, app_root: Path, history_limit: int = 25) -> None:
+    def __init__(self, app_root: Path, database_path: Path | None = None, history_limit: int = 25) -> None:
         self.app_root = app_root
+        self.history_limit = history_limit
+        self.store = CommandCenterStore(database_path or app_root / ".local" / "command_center.sqlite3")
         self._paused = False
         self._state_lock = threading.Lock()
         self._run_lock = threading.Lock()
-        self._history: deque[ExecutionResult] = deque(maxlen=history_limit)
 
     @property
     def paused(self) -> bool:
@@ -223,52 +177,41 @@ class CommandCenterService:
             self._paused = paused
             return self._paused
 
+    def save_prompt(self, name: str, prompt: str) -> dict[str, object]:
+        return self.store.save_prompt(name, prompt)
+
+    def delete_prompt(self, prompt_id: int) -> bool:
+        return self.store.delete_prompt(prompt_id)
+
     def history(self) -> list[dict[str, object]]:
-        with self._state_lock:
-            return [result.to_dict() for result in reversed(self._history)]
+        return self.store.history(self.history_limit)
 
     def status(self) -> dict[str, object]:
         return {
             "paused": self.paused,
             "running": self.running,
             "destinations": [asdict(destination) for destination in DESTINATIONS.values()],
+            "saved_prompts": self.store.list_prompts(),
             "history": self.history(),
         }
+
+    def _record(self, result: ExecutionResult) -> ExecutionResult:
+        self.store.add_history(result.to_dict())
+        return result
 
     def execute(self, job: CommandJob, timeout_seconds: int = 120) -> ExecutionResult:
         started_at = time.time()
         if self.paused:
-            return ExecutionResult(
-                status="refused",
-                destination=job.destination,
-                mode=job.mode,
-                prompt_type=job.prompt_type,
-                exit_code=None,
-                started_at=started_at,
-                finished_at=time.time(),
-                stdout="",
-                stderr="",
-                reason="Automation Command Center is globally paused.",
-            )
-
+            return self._record(ExecutionResult(
+                "refused", job.destination, job.mode, job.prompt_type, None,
+                started_at, time.time(), "", "", "Automation Command Center is globally paused.",
+            ))
         if not self._run_lock.acquire(blocking=False):
-            return ExecutionResult(
-                status="refused",
-                destination=job.destination,
-                mode=job.mode,
-                prompt_type=job.prompt_type,
-                exit_code=None,
-                started_at=started_at,
-                finished_at=time.time(),
-                stdout="",
-                stderr="",
-                reason="Another automation job is already running.",
-            )
-
+            return self._record(ExecutionResult(
+                "refused", job.destination, job.mode, job.prompt_type, None,
+                started_at, time.time(), "", "", "Another automation job is already running.",
+            ))
         try:
-            result = run_job(job, self.app_root, timeout_seconds=timeout_seconds)
-            with self._state_lock:
-                self._history.append(result)
-            return result
+            return self._record(run_job(job, self.app_root, timeout_seconds=timeout_seconds))
         finally:
             self._run_lock.release()
