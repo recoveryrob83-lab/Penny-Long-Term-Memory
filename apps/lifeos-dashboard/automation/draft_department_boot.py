@@ -8,7 +8,7 @@ import io
 import sys
 from dataclasses import dataclass
 
-from open_department_chat import main
+from open_department_chat_group import main
 
 
 GENERIC_LOADING_FAILURE = "observed 'ChatGPT'."
@@ -167,7 +167,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def run_engine_once(forwarded_args: list[str]) -> tuple[int, str]:
-    """Run the generic engine once while preserving its stderr for retry classification."""
+    """Run the Group-based engine once while preserving stderr for diagnostics."""
     captured_stderr = io.StringIO()
     sys.argv = forwarded_args
     with contextlib.redirect_stderr(captured_stderr):
@@ -196,13 +196,5 @@ if __name__ == "__main__":
             "remaining active in the target chat context."
         )
 
-    result, stderr_text = run_engine_once(forwarded_args)
-
-    if result != 0 and GENERIC_LOADING_FAILURE in stderr_text:
-        print(
-            "BOUNDED RETRY: destination remained on the generic ChatGPT loading state. "
-            "Re-invoking the exact department link once."
-        )
-        result, _ = run_engine_once(forwarded_args)
-
+    result, _ = run_engine_once(forwarded_args)
     raise SystemExit(result)
