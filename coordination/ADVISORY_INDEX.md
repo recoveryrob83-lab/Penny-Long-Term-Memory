@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- None.
+- ADV-20260717-040 — Open / Unacknowledged — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Reconcile only the shared/global GitHub memory files that are stale after the live four-source dashboard, guarded GitHub auto-sync validation, and historical PennyOS humble-beginnings notebook note. Preserve source boundaries, keep Gmail and Drive deferred, and do not promote the historical PennyOS framing into a new open loop.
 
 ## Acknowledged / Implemented Advisories
 
