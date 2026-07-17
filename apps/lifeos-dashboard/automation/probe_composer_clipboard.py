@@ -15,18 +15,21 @@ from pywinauto.keyboard import send_keys
 from open_department_chat import (
     APP_TITLE,
     CLIPBOARD_SENTINEL,
+    AutomationStopped,
     Target,
     clipboard_get_text,
     clipboard_set_text,
     current_document_title,
-    find_visible_composer,
     get_chatgpt_window,
     open_exact_chat,
+    wait_for_composer_ready,
 )
 
 
 GENERIC_LOADING_TITLE = "ChatGPT"
 DEFAULT_DESTINATION_TIMEOUT_SECONDS = 15.0
+DEFAULT_READY_TIMEOUT_SECONDS = 20.0
+DEFAULT_STABLE_SECONDS = 1.0
 DESTINATION_POLL_SECONDS = 0.5
 
 
@@ -41,6 +44,18 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=DEFAULT_DESTINATION_TIMEOUT_SECONDS,
         help="Seconds to wait after the one bounded loading-state re-navigation",
+    )
+    parser.add_argument(
+        "--ready-timeout",
+        type=float,
+        default=DEFAULT_READY_TIMEOUT_SECONDS,
+        help="Seconds to wait for a stable, visible, enabled composer",
+    )
+    parser.add_argument(
+        "--stable-seconds",
+        type=float,
+        default=DEFAULT_STABLE_SECONDS,
+        help="Continuous seconds the composer must remain ready before probing",
     )
     return parser.parse_args()
 
@@ -70,13 +85,15 @@ def run_probe(label: str, composer, action) -> int:
 def wait_for_exact_destination(window, expected_title: str, timeout_seconds: float) -> str:
     """Poll visibly for the exact destination and report elapsed time and title changes."""
     started = time.monotonic()
-    deadline = started + timeout_seconds
     last_title: str | None = None
 
     while True:
         elapsed = time.monotonic() - started
         if elapsed >= timeout_seconds:
-            observed = current_document_title(window)
+            try:
+                observed = current_document_title(window)
+            except Exception as exc:
+                observed = f"<UIA read error: {exc}>"
             print(
                 f"WAIT EXPIRED after {elapsed:.1f}s. Last observed title: {observed!r}.",
                 flush=True,
@@ -152,10 +169,22 @@ def main() -> int:
         if not verify_or_recover_destination(window, target, args.timeout):
             return 1
 
-        composer = find_visible_composer(window)
-        if not composer.is_visible() or not composer.is_enabled():
-            print("STOPPED: composer is not visible and enabled.", flush=True)
+        print(
+            f"Waiting up to {args.ready_timeout:.1f}s for a stable composer...",
+            flush=True,
+        )
+        try:
+            composer = wait_for_composer_ready(
+                window,
+                expected_document_title=target.document_title,
+                timeout_seconds=args.ready_timeout,
+                stable_seconds=args.stable_seconds,
+            )
+        except AutomationStopped as exc:
+            print(f"STOPPED: {exc}", flush=True)
             return 1
+
+        print("Composer readiness verified. Beginning read-only copy probe.", flush=True)
 
         results = []
         results.append(
