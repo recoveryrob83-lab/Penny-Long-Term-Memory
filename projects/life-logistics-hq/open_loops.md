@@ -1,6 +1,6 @@
 # Logistics HQ Open Loops
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 
 ## Open
 
@@ -10,7 +10,6 @@ Updated: 2026-07-17
 | Open | Canonical path integrity | Keep `projects/life-logistics-hq/` as the only active Logistics project path across boot files, scripts, prompt libraries, and summaries | The nonexistent `projects/life-logistics/` path was removed from active automation |
 | Open | Role-boundary consistency | Watch for language that assigns daily life, Flow Board operation, or executive-function support to Logistics instead of Main Assistant | Logistics maintains shared infrastructure and longer-horizon coordination |
 | Open | Advisory hygiene | Keep the Advisory Index and source boards consistent and compact when needed | No advisories are currently open |
-| Open | Chat HQ observation | Watch the seven operational HQ chats for routing drift, duplicated responsibility, stale assumptions, connector friction, and model-usage waste | Refine only from observed evidence |
 | Open | Source-system boundaries | Preserve GitHub as durable state, Trello as attention flow, Todoist as commitments, Calendar as timed commitments, Drive as working records, Gmail as communication evidence, and the dashboard as a visibility layer | Avoid duplicate truth surfaces |
 | Open | Desktop automation safety | Preserve exact HQ matching, draft-only default behavior, occupied-composer protection, clipboard verification, explicit send authorization, and stop-on-uncertainty | Validated across all seven HQs; modify only after demonstrated failure or material UI change |
 | Open | Automation Command Center scope | Keep Phase 1 dashboard-integrated and manual Run Now only; verify eight exact destinations, explicit send confirmation, one-job locking, global pause, structured results, and local activity history | Scheduling, recurring jobs, automatic ChatGPT launch, screenshots, notifications, and unattended sends remain deferred |
@@ -19,7 +18,7 @@ Updated: 2026-07-17
 | Open | Longer-horizon Office Leaks logistics | Track cross-project dependencies, recurring operational needs, future visits, document routing, and scaling pressure as the live organic test develops | Immediate execution remains with Main Assistant and Office Leaks HQ |
 | Open | Dashboard adapter restraint | Keep Gmail and Drive adapters deferred until demonstrated operational need | The live dashboard currently uses GitHub, Trello, Todoist, and Calendar private iCal |
 | Parked | Scheduled HQ sync experiments | Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it under a stronger scheduling architecture | Command Center Phase 1 and validated on-demand automation do not authorize unattended scheduling |
-| Parked | Legacy Virtual Assistant folder | Decide later whether `projects/virtual-assistant-business/` remains redirect history, is archived, or is removed | Preserve until references are safely migrated |
+| Parked | Legacy Virtual Assistant folder | Decide later whether `projects/virtual-assistant-business/` remains redirect history, is archived, or is removed | Logistics is the sole open-loop owner because this is repository-path disposition and reference-migration work; Business and System mirrors were removed on 2026-07-18 |
 
 ## Done / Recently Closed
 
