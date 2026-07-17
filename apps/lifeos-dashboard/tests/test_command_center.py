@@ -84,6 +84,47 @@ def test_custom_prompt_cannot_be_blank() -> None:
         validate_job(job)
 
 
+def test_destination_mismatch_requires_explicit_confirmation() -> None:
+    job = CommandJob(
+        destination="logistics",
+        prompt_type="custom",
+        custom_prompt="Boot Engineering HQ.",
+        default_destination="engineering",
+        confirm_destination=False,
+    )
+
+    with pytest.raises(CommandCenterError, match="Destination mismatch requires explicit confirmation"):
+        validate_job(job)
+
+
+def test_confirmed_destination_mismatch_can_build_command() -> None:
+    job = CommandJob(
+        destination="logistics",
+        prompt_type="custom",
+        custom_prompt="Use this intentionally in Logistics HQ.",
+        default_destination="engineering",
+        confirm_destination=True,
+    )
+
+    command = build_command(job, APP_ROOT)
+
+    assert "Logistics HQ" in command
+    assert command[-2:] == ["--text", "Use this intentionally in Logistics HQ."]
+
+
+def test_unknown_default_destination_is_refused() -> None:
+    job = CommandJob(
+        destination="logistics",
+        prompt_type="custom",
+        custom_prompt="Do the thing.",
+        default_destination="unknown",
+        confirm_destination=True,
+    )
+
+    with pytest.raises(CommandCenterError, match="not recognized"):
+        validate_job(job)
+
+
 def test_summary_is_plain_language() -> None:
     job = CommandJob(destination="logistics", prompt_type="canonical")
 
