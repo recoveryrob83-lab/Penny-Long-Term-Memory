@@ -183,6 +183,32 @@ class CommandCenterService:
     def delete_prompt(self, prompt_id: int) -> bool:
         return self.store.delete_prompt(prompt_id)
 
+    def canonical_prompt(self, destination_key: str) -> dict[str, str]:
+        destination = DESTINATIONS.get(destination_key)
+        if destination is None:
+            raise CommandCenterError("Unknown destination. Exact LifeOS destination required.")
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(self.app_root / "automation" / "draft_department_boot.py"),
+                destination.key,
+                "--print-prompt",
+            ],
+            cwd=self.app_root,
+            env=os.environ.copy(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=False,
+        )
+        if completed.returncode != 0:
+            detail = completed.stderr.strip() or "Canonical prompt preview failed."
+            raise CommandCenterError(detail)
+        return {
+            "name": f"{destination.label} canonical boot",
+            "prompt": completed.stdout,
+        }
+
     def history(self) -> list[dict[str, object]]:
         return self.store.history(self.history_limit)
 
