@@ -438,6 +438,8 @@ commandCenter.runButton.addEventListener("click", async () => {
         custom_prompt: prompt,
         mode: send ? "send" : "draft",
         confirm_send: send,
+        default_destination: metadataDefaultDestination(activePromptMetadata()),
+        confirm_destination: commandCenter.confirmDestination.checked,
       }),
     });
     const result = await response.json();
