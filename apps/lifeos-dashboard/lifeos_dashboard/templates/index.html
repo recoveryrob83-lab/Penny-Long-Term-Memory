@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static', path='/tabs.css') }}">
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
   <script defer src="{{ url_for('static', path='/command-center.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/command-scheduler.js') }}"></script>
   <script defer src="{{ url_for('static', path='/tabs.js') }}"></script>
 </head>
 <body>
@@ -68,8 +69,37 @@
             </div>
             <label class="cc-confirm"><input id="cc-confirm-send" type="checkbox">Send live after destination and clipboard verification. Leave unchecked to place a verified draft only.</label>
             <div class="cc-actions"><button id="cc-run" class="primary-button" type="button">Run now</button><button id="cc-pause" class="cc-danger-button" type="button">Pause automation</button></div>
+
+            <section class="cc-schedule-builder" aria-labelledby="cc-schedule-heading">
+              <div class="cc-subheading"><div><p class="eyebrow">TIMED RUNS</p><h3 id="cc-schedule-heading">Schedule this prompt</h3></div><span class="panel-meta">America/Chicago</span></div>
+              <p class="item-meta">A schedule stores a snapshot of the exact prompt, destination, and safety confirmations shown above.</p>
+              <div class="cc-schedule-grid">
+                <label class="cc-field">Schedule name<input id="cc-schedule-name" type="text" placeholder="Nightly Logistics boot"></label>
+                <label class="cc-field">Repeat<select id="cc-schedule-cadence"><option value="once">Once</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
+                <label class="cc-field"><span id="cc-schedule-date-label">Run date</span><input id="cc-schedule-date" type="date"></label>
+                <label class="cc-field">Time<input id="cc-schedule-time" type="time"></label>
+              </div>
+              <fieldset id="cc-weekdays" class="cc-weekdays" hidden>
+                <legend>Run on</legend>
+                <label><input type="checkbox" value="0">Mon</label>
+                <label><input type="checkbox" value="1">Tue</label>
+                <label><input type="checkbox" value="2">Wed</label>
+                <label><input type="checkbox" value="3">Thu</label>
+                <label><input type="checkbox" value="4">Fri</label>
+                <label><input type="checkbox" value="5">Sat</label>
+                <label><input type="checkbox" value="6">Sun</label>
+              </fieldset>
+              <p id="cc-schedule-summary" class="cc-summary">Choose a date and time to create a timed run.</p>
+              <div class="cc-actions">
+                <button id="cc-save-schedule" class="primary-button" type="button">Create schedule</button>
+                <button id="cc-cancel-schedule-edit" class="copy-button" type="button" hidden>Cancel edit</button>
+              </div>
+            </section>
           </div>
-          <div><h3>Persistent automation activity</h3><div id="cc-history" class="cc-history" aria-live="polite"></div></div>
+          <div class="cc-side-stack">
+            <div><div class="cc-subheading"><h3>Scheduled automation</h3><span id="cc-scheduler-status" class="panel-meta">Loading</span></div><div id="cc-schedules" class="cc-history" aria-live="polite"></div></div>
+            <div><h3>Persistent automation activity</h3><div id="cc-history" class="cc-history" aria-live="polite"></div></div>
+          </div>
         </div>
       </section>
     </main>
