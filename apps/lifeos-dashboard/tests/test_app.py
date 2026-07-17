@@ -30,6 +30,17 @@ def test_dashboard_endpoint_returns_eagle_eye_sections() -> None:
     assert payload["commands"]
 
 
+def test_department_inspection_endpoint_exposes_contract() -> None:
+    response = client.get("/api/department-inspection")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["schema_version"] == 1
+    assert payload["available"] is False
+    assert len(payload["scopes"]) == 8
+    assert payload["records"] == []
+
+
 def test_dashboard_home_renders_interface() -> None:
     response = client.get("/")
 
@@ -38,6 +49,8 @@ def test_dashboard_home_renders_interface() -> None:
     assert "Recent LifeOS activity" in response.text
     assert "DURABLE SYSTEM PULSE" in response.text
     assert "Penny commands" in response.text
+    assert "Department Inspection" in response.text
+    assert "DURABLE STATE UNDER GLASS" in response.text
 
 
 def test_command_center_status_exposes_eight_destinations() -> None:
