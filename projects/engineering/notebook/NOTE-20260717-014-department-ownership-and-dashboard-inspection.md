@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Updated: 2026-07-18
 Department: Engineering HQ
-Status: MVP implemented in GitHub / awaiting local runtime validation
+Status: MVP implemented and locally validated / live audit active
 
 ## Trigger
 
@@ -52,7 +52,7 @@ Implementation head before tracking updates:
 
 - `58538624c1bb138d7f8e8be85ac6c6f96be5dddf`
 
-The read-only MVP now includes:
+The read-only MVP includes:
 
 - a normalized repository read model in `lifeos_dashboard/department_inspection.py`;
 - seven canonical department scopes plus System;
@@ -71,28 +71,23 @@ The read-only MVP now includes:
 
 The inspector does not edit, close, merge, reorder, promote, demote, or otherwise mutate GitHub records.
 
-## Current Validation Boundary
+## Local Validation
 
-Connector-side implementation and static verification are complete enough for local testing, but the MVP is not yet browser-validated on Rob's Windows runtime.
+Rob confirmed on 2026-07-18 that the Department Inspection tab works in the local Windows dashboard after guarded synchronization and server restart.
 
-Local validation must confirm:
+This validates the essential runtime path:
 
-1. guarded dashboard refresh pulls the implementation;
-2. the running server is restarted because code reload is disabled;
-3. the Department Inspection tab appears between Overview and Automation;
-4. the endpoint loads the real repository rather than the unavailable sample contract;
-5. record totals and category counts render;
-6. all seven department options plus System appear;
-7. filters and sorting update visible results;
-8. source details expand safely;
-9. Findings expose useful inconsistencies without overwhelming duplicate noise;
-10. Automation and Overview remain intact.
+1. the dashboard pulled the implementation from GitHub;
+2. the restarted FastAPI process loaded the new parser and endpoint;
+3. the Department Inspection tab rendered in the intended position;
+4. the live repository inspection loaded rather than the unavailable fallback state;
+5. the existing Overview and Automation surfaces remained operational enough for normal use.
 
-No dependency changes were introduced, so an editable-package reinstall should not be necessary unless the local environment fails to recognize the new module.
+Detailed classification quality, filter behavior, finding usefulness, and noise levels remain part of the live audit rather than being assumed from the initial successful load.
 
 ## Required Operational Package
 
-After the inspector is validated, formalize clean rules and procedures for:
+Using inspector evidence, formalize clean rules and procedures for:
 
 1. department versus system open-loop ownership;
 2. promotion and demotion thresholds for system-level loops;
@@ -106,13 +101,12 @@ Likely durable output: an Open Loop Ownership and Visibility SOP plus targeted b
 
 ## Remaining Sequence
 
-1. Sync and restart the local dashboard.
-2. Validate the Department Inspection MVP against the real repository.
-3. Record parser defects, classification ambiguity, filter problems, and noisy findings.
-4. Correct the inspector only where real evidence warrants it.
-5. Use the inspector to audit and clean duplicated or misplaced GitHub state.
-6. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using evidence from the inspector.
-7. Confirm no new source-of-truth duplication is introduced.
+1. Review the live Findings view and record useful, noisy, or incorrect classifications.
+2. Correct parser or filter behavior only where real repository evidence warrants it.
+3. Use the inspector to audit and clean duplicated, stale, or misplaced GitHub state.
+4. Formalize the Open Loop Ownership and Visibility SOP and role-routed boot changes using evidence from the inspector.
+5. Reconcile system and department files under the new rules.
+6. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
 
 ## Product Lesson
 
