@@ -44,6 +44,9 @@ class PauseRequest(BaseModel):
 class SavedPromptRequest(BaseModel):
     name: str
     prompt: str
+    default_destination: str | None = None
+    origin_type: str | None = None
+    origin_prompt_key: str | None = None
 
 
 def _cache_path(environment_name: str, filename: str) -> Path:
@@ -135,7 +138,13 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     @application.post("/api/command-center/prompts")
     async def save_command_prompt(request: SavedPromptRequest) -> dict[str, object]:
         try:
-            command_center.save_prompt(request.name, request.prompt)
+            command_center.save_prompt(
+                request.name,
+                request.prompt,
+                default_destination=request.default_destination,
+                origin_type=request.origin_type,
+                origin_prompt_key=request.origin_prompt_key,
+            )
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
         return command_center.status()
@@ -143,7 +152,14 @@ def create_app(source: DashboardSource | None = None) -> FastAPI:
     @application.put("/api/command-center/prompts/{prompt_id}")
     async def update_command_prompt(prompt_id: int, request: SavedPromptRequest) -> dict[str, object]:
         try:
-            updated = command_center.update_prompt(prompt_id, request.name, request.prompt)
+            updated = command_center.update_prompt(
+                prompt_id,
+                request.name,
+                request.prompt,
+                default_destination=request.default_destination,
+                origin_type=request.origin_type,
+                origin_prompt_key=request.origin_prompt_key,
+            )
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
         if updated is None:
