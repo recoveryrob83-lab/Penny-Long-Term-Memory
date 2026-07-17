@@ -1,4 +1,4 @@
-"""Draft or explicitly submit canonical LifeOS department boot prompts."""
+"""Draft or explicitly submit canonical LifeOS HQ boot prompts."""
 from __future__ import annotations
 
 import argparse
@@ -17,12 +17,23 @@ class Department:
     key: str
     chat_title: str
     role_title: str
-    project_folder: str
+    project_folder: str | None
     report_name: str
     related_files_note: str
 
 
 DEPARTMENTS: dict[str, Department] = {
+    "hub": Department(
+        key="hub",
+        chat_title="LifeOS HQ",
+        role_title="LifeOS HQ, the central LifeOS coordination hub",
+        project_folder=None,
+        report_name="LifeOS HQ",
+        related_files_note=(
+            "Read department project files only when current coordination, routing, or a named "
+            "cross-department issue requires them. Do not absorb specialist department judgment."
+        ),
+    ),
     "logistics": Department(
         key="logistics",
         chat_title="Logistics HQ",
@@ -107,7 +118,27 @@ DEPARTMENTS: dict[str, Department] = {
 
 
 def build_prompt(department: Department) -> str:
-    folder = department.project_folder
+    if department.project_folder is None:
+        project_boot = """This is the central hub rather than a specialist department. After the global boot files, read current shared coordination state from:
+
+- memory/01_SESSION_HANDOFF.md
+- memory/04_ACTIVE_PROJECTS.md
+- memory/05_OPEN_LOOPS.md
+- coordination/ADVISORY_INDEX.md when advisory routing or cross-department status is relevant
+
+Use memory/HQ_NAMING_STANDARD.md as the canonical headquarters naming source."""
+    else:
+        folder = department.project_folder
+        project_boot = f"""Then continue into this department's project boot files exactly as specified by the global routing instructions:
+
+- {folder}/SESSION_HANDOFF.md
+- {folder}/DEPARTMENT_IDENTITY.md
+- {folder}/README.md
+- {folder}/status.md when it exists or is maintained
+- {folder}/open_loops.md
+
+Read the Advisory Index when advisory routing or cross-department status is relevant. Read this department's advisory board when advisories need to be created, consumed, verified, or reconciled."""
+
     return f"""@GitHub boot and sync.
 
 You are {department.role_title}.
@@ -121,15 +152,7 @@ memory/STARTUP_BOOT.md
 
 Read all required global boot files in order.
 
-Then continue into this department's project boot files exactly as specified by the global routing instructions:
-
-- {folder}/SESSION_HANDOFF.md
-- {folder}/DEPARTMENT_IDENTITY.md
-- {folder}/README.md
-- {folder}/status.md when it exists or is maintained
-- {folder}/open_loops.md
-
-Read the Advisory Index when advisory routing or cross-department status is relevant. Read this department's advisory board when advisories need to be created, consumed, verified, or reconciled.
+{project_boot}
 
 {department.related_files_note}
 
@@ -148,7 +171,7 @@ After boot, provide a concise {department.report_name} synchronization report in
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Place a canonical department boot prompt in the exact LifeOS chat. "
+            "Place a canonical LifeOS HQ boot prompt in the exact chat. "
             "Draft-only unless --send is explicitly supplied."
         )
     )
