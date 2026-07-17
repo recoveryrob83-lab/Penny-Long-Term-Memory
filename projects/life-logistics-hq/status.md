@@ -18,6 +18,8 @@ Logistics HQ is not Main Assistant. Main Assistant owns daily life, immediate lo
 - Windows desktop department automation is validated across all seven HQs.
 - The LifeOS Dashboard is locally running with GitHub, Trello, Todoist, and Google Calendar private iCal.
 - Guarded GitHub dashboard sync is limited to clean, strictly-behind fast-forward updates.
+- Automation Command Center Phase 1 is planned inside the dashboard as a manual Run Now surface.
+- Scheduling, recurring jobs, and unattended sends remain deferred.
 - Office Leaks is publicly launched and in live organic market testing.
 - Raw Capture and Inventory workers remain active pilots.
 - Engineering HQ Daily Sync remains paused.
@@ -31,12 +33,13 @@ Logistics HQ is not Main Assistant. Main Assistant owns daily life, immediate lo
 - Maintain advisory-index and source-board hygiene.
 - Preserve source-system authority across GitHub, Drive, Trello, Todoist, Calendar, Gmail, and the dashboard.
 - Keep desktop automation safety gates intact and draft-only by default.
+- Preserve Command Center Phase 1 as manual Run Now only until Engineering proves the dashboard-to-runner boundary.
 - Track longer-horizon dependencies without absorbing daily execution.
 
 ## Current Boundaries
 
 - Main Assistant owns daily operations and executive-function support.
-- Engineering owns dashboard and desktop-automation implementation.
+- Engineering owns dashboard, desktop automation, and Automation Command Center implementation.
 - Finance owns detailed money records and concrete financial decisions.
 - Business and Office Leaks own strategy and business-unit execution.
 - Wellness owns health, recovery, energy, and sustainable pacing.
@@ -52,4 +55,4 @@ Logistics HQ is not Main Assistant. Main Assistant owns daily life, immediate lo
 
 ## Best Next Action
 
-Continue normal operations from the now-aligned canonical files. Run another broad audit only after a meaningful cross-project architecture change, a new advisory wave, or demonstrated automation drift.
+Continue normal operations from the aligned canonical files. Watch the Automation Command Center plan for scope drift, especially any attempt to introduce scheduling before Phase 1 manual execution is proven safe.
