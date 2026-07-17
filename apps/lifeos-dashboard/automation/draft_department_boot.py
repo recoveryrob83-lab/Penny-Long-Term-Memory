@@ -1,5 +1,4 @@
 """Draft or explicitly submit canonical LifeOS department boot prompts."""
-
 from __future__ import annotations
 
 import argparse
@@ -9,7 +8,6 @@ import sys
 from dataclasses import dataclass
 
 from open_department_chat_group_verified import main
-
 
 GENERIC_LOADING_FAILURE = "observed 'ChatGPT'."
 
@@ -29,7 +27,7 @@ DEPARTMENTS: dict[str, Department] = {
         key="logistics",
         chat_title="Logistics HQ",
         role_title="Logistics HQ",
-        project_folder="projects/life-logistics",
+        project_folder="projects/life-logistics-hq",
         report_name="Logistics",
         related_files_note=(
             "Read related Main Assistant, Finance, Housing, Recovery Logistics, "
@@ -128,7 +126,7 @@ Then continue into this department's project boot files exactly as specified by 
 - {folder}/SESSION_HANDOFF.md
 - {folder}/DEPARTMENT_IDENTITY.md
 - {folder}/README.md
-- {folder}/status.md
+- {folder}/status.md when it exists or is maintained
 - {folder}/open_loops.md
 
 Read the Advisory Index when advisory routing or cross-department status is relevant. Read this department's advisory board when advisories need to be created, consumed, verified, or reconciled.
