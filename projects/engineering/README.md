@@ -20,6 +20,7 @@ Use Engineering HQ for:
 - Automation design.
 - Desktop-control safety and verification.
 - LifeOS Dashboard architecture and reliability.
+- Automation Command Center architecture.
 - Prompt systems and command interfaces.
 - Testing strategy.
 - Implementation sequencing.
@@ -30,6 +31,7 @@ Use Engineering HQ for:
 
 ## Current Operating Tracks
 
+- Automation Command Center Phase 1 design and implementation, manual Run Now only.
 - Desktop department automation maintenance after successful seven-HQ validation.
 - LifeOS Dashboard observation, optional auto-refresh, guarded Git synchronization, and source-health behavior.
 - Reliable Connector Execution Layer design, including operation-ledger, idempotency, verification, and retry policy.
@@ -68,15 +70,15 @@ The LifeOS Dashboard is locally running on Rob's Windows machine with live read-
 
 Desktop department automation is operational across all seven HQs. It supports exact navigation, one bounded hidden-sidebar expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, draft-only default behavior, explicit `--send` authorization, and stop-on-uncertainty behavior. A watched live send to Main Assistant HQ succeeded.
 
-Canonical automation paths:
+The Automation Command Center is planned inside the existing dashboard. Phase 1 will support eight exact destinations, canonical or custom prompts, draft/send mode, explicit send confirmation, manual Run Now, one-job locking, global pause, structured results, and local activity history. Scheduling is explicitly deferred.
+
+Canonical references:
 
 - `apps/lifeos-dashboard/automation/draft_department_boot.py`
 - `apps/lifeos-dashboard/automation/open_department_chat_group.py`
 - `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
-
-Durable recovery playbook:
-
 - `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
+- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
 
 ## Security Rule
 
@@ -94,4 +96,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current front burner: preserve and observe the validated dashboard and desktop automation, while advancing connector reliability and worker pilots only from real evidence.
+Active department. Current front burner: build Automation Command Center Phase 1 without importing scheduling complexity, while preserving the validated dashboard and desktop-automation safety contract.
