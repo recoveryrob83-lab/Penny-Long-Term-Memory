@@ -38,3 +38,26 @@ def test_dashboard_home_renders_interface() -> None:
     assert "Recent LifeOS activity" in response.text
     assert "DURABLE SYSTEM PULSE" in response.text
     assert "Penny commands" in response.text
+
+
+def test_command_center_status_exposes_eight_destinations() -> None:
+    response = client.get("/api/command-center")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["paused"] is False
+    assert payload["running"] is False
+    assert len(payload["destinations"]) == 8
+    assert any(item["key"] == "hub" and item["label"] == "LifeOS HQ" for item in payload["destinations"])
+
+
+def test_command_center_pause_round_trip() -> None:
+    pause_response = client.post("/api/command-center/pause", json={"paused": True})
+
+    assert pause_response.status_code == 200
+    assert pause_response.json()["paused"] is True
+
+    resume_response = client.post("/api/command-center/pause", json={"paused": False})
+
+    assert resume_response.status_code == 200
+    assert resume_response.json()["paused"] is False
