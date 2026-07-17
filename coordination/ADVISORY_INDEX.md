@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- None.
+- ADV-20260716-038 — Open / Unacknowledged — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Explore a read-mostly LifeOS desktop dashboard window that surfaces high-signal state from Trello, Todoist, Google Calendar, Gmail, and Google Drive while retaining the existing prompt launcher as the primary directly usable component. Penny remains the worker and source systems remain authoritative; no implementation is authorized yet.
 
 ## Acknowledged / Implemented Advisories
 
