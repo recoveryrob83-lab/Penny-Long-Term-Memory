@@ -19,13 +19,21 @@ FastAPI application
 DashboardService
   |
   v
+TrelloFlowDashboardSource
+  |
+  v
 LocalGitHubDashboardSource
   |
-  +--> packaged sample snapshot for unfinished sources
-  +--> local LifeOS checkout for GitHub-backed state
+  v
+SampleDashboardSource
 ```
 
-The adapter overlays live GitHub-backed state onto the packaged sample snapshot. This keeps unfinished source panels useful while allowing one source to become real without redesigning the entire response shape.
+The sources form a fallback chain:
+
+- packaged sample data supplies a complete dashboard shape;
+- the local GitHub adapter replaces GitHub-backed sections;
+- the Trello adapter replaces Flow when local read credentials are configured;
+- each source may fail without blanking unrelated panels.
 
 ## Local GitHub adapter
 
@@ -42,6 +50,41 @@ The application detects the surrounding LifeOS repository automatically. `LIFEOS
 
 If the Git executable is unavailable, markdown-backed sections remain readable and Git command metadata reports a partial state rather than blanking the dashboard.
 
+## Trello Flow adapter
+
+The Trello adapter uses the official REST API with credentials supplied only through the ignored local `.env` file or process environment variables.
+
+Required settings:
+
+- `TRELLO_API_KEY`
+- `TRELLO_API_TOKEN`
+- `TRELLO_BOARD_ID`
+
+The adapter performs read-only requests for:
+
+- board identity;
+- open board lists;
+- open cards and their list, position, description, and URL fields.
+
+It normalizes:
+
+- the first card in `Now`;
+- the first three cards in `Next`;
+- the first three cards in `Waiting`;
+- counts for Now, Next, Waiting, and Captured.
+
+Lane metadata is read from a `Lane:` line in the card description. Waiting reasons prefer a `Blocked by:` line. Trello card order is preserved through the card position field.
+
+### Last-good cache
+
+A successful Trello refresh writes only normalized display data to:
+
+```text
+.local/trello_flow_cache.json
+```
+
+The cache contains no API key or token and is ignored by Git. If a later request fails, the adapter returns the last-good Flow snapshot and marks Trello stale. If no cache exists, sample Flow remains visible and Trello is marked unavailable.
+
 ## Intended multi-source architecture
 
 ```text
@@ -51,17 +94,17 @@ Browser or pywebview desktop window
 FastAPI application
   |
   v
-DashboardService and local cache
+DashboardService and local caches
   |
   +--> Local GitHub read adapter       [implemented]
-  +--> Trello read adapter             [planned]
+  +--> Trello Flow read adapter        [implemented]
   +--> Todoist read adapter            [planned]
   +--> Calendar read adapter           [planned]
   +--> Gmail attention adapter         [planned]
   +--> Drive shortcuts adapter         [planned]
 ```
 
-Each adapter should return normalized data plus source health and freshness metadata. One failed source must not blank the entire dashboard.
+Each adapter returns normalized data plus source health and freshness metadata. One failed source must not blank the entire dashboard.
 
 ## Design principles
 
@@ -80,7 +123,7 @@ Each adapter should return normalized data plus source health and freshness meta
 
 - System bar: refresh state and source warnings.
 - Today: Calendar events and Todoist commitments.
-- Flow: Trello Now, top Next, and selected Waiting state.
+- Flow: live Trello Now, top Next, and selected Waiting state when configured.
 - Attention: lightweight Gmail signals.
 - Working files: pinned or recent Drive links.
 - GitHub pulse: branch, checkout state, advisories, priority open loops, and recent durable commits.
@@ -89,14 +132,14 @@ Each adapter should return normalized data plus source health and freshness meta
 
 ## Adapter contract
 
-A source adapter exposes a stable name and returns one dashboard-shaped dictionary. Later adapters may expose narrower source-specific payloads, but aggregation belongs in the service layer rather than the web routes.
+A source adapter exposes a stable name and returns one dashboard-shaped dictionary. Narrow source adapters are composed as a fallback chain before the payload reaches the service layer.
 
 Adapters must:
 
 - time out rather than hang indefinitely;
 - distinguish unavailable, stale, partial, and healthy states;
 - avoid writes unless a separate explicitly authorized write contract exists;
-- avoid logging secrets;
+- avoid logging or caching secrets;
 - return enough source metadata for the interface to explain what happened.
 
 ## Refresh behavior
@@ -104,11 +147,13 @@ Adapters must:
 The server runs with code reload disabled.
 
 - Repository content changes: pull with GitHub Desktop, then use **Refresh view**.
-- Dashboard code changes: pull, stop the server with `Ctrl+C`, and relaunch it.
+- Trello card changes: use **Refresh view**.
+- `.env` changes: stop the server with `Ctrl+C` and relaunch it.
+- Dashboard code or dependency changes: pull, reinstall the editable package if needed, and relaunch.
 
 ## Cache direction
 
-A small local SQLite cache may be introduced after additional live adapters exist. It should preserve the last verified snapshot per source so a temporary outage produces a clearly marked stale view rather than an empty dashboard.
+Trello establishes the first source-specific local JSON cache. A small SQLite cache may replace or consolidate source caches after more live adapters exist and the shared requirements are understood.
 
 ## Packaging direction
 
