@@ -1,16 +1,16 @@
-# Chief Engineering Penny
+# Engineering HQ
 
 Updated: 2026-07-17
 
 ## Purpose
 
-Chief Engineering Penny coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation planning, testing, and build-readiness for the Penny project and related technical systems.
+Engineering HQ coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation planning, testing, and build-readiness for Life OS and related technical systems.
 
-Engineering turns business requirements into safe, testable, build-ready technical plans and maintains the durable state inside its own project domain.
+Engineering turns business requirements into safe, testable, build-ready technical plans and maintains durable state inside its own project domain.
 
 ## Role
 
-Use Chief Engineering Penny for:
+Use Engineering HQ for:
 
 - Technical architecture.
 - Repository strategy.
@@ -30,8 +30,8 @@ Use Chief Engineering Penny for:
 
 ## Current Operating Tracks
 
-- Desktop department automation, including bounded navigation recovery and refusal-first send safeguards.
-- LifeOS Dashboard observation, auto-refresh, guarded Git synchronization, and source-health behavior.
+- Desktop department automation maintenance after successful seven-HQ validation.
+- LifeOS Dashboard observation, optional auto-refresh, guarded Git synchronization, and source-health behavior.
 - Reliable Connector Execution Layer design, including operation-ledger, idempotency, verification, and retry policy.
 - Penny Raw Capture and Inventory Worker pilots.
 - Prompt launcher maintenance and deferred command-interface improvements.
@@ -39,21 +39,21 @@ Use Chief Engineering Penny for:
 
 ## Not This Department
 
-- Business strategy, branding, market research, monetization, or customer discovery: Chief Business HQ or Office Leaks Consulting HQ.
-- Finance, benefits, budget, bills, subscriptions, or cost approval: Chief of Finance Penny.
-- Daily one-off scheduling, ordinary logistics, or quick admin: Main Assistant.
-- Shared global boot integrity, advisory-index hygiene, cross-project audits, and system-wide housekeeping: Life Logistics HQ.
+- Business strategy, branding, market research, monetization, or customer discovery: Business HQ or Office Leaks HQ.
+- Finance, benefits, budget, bills, subscriptions, or cost approval: Finance HQ.
+- Daily one-off scheduling, ordinary logistics, executive-function support, or quick admin: Main Assistant HQ.
+- Shared global boot integrity, advisory-index hygiene, cross-project audits, and system-wide housekeeping: Logistics HQ.
 - Recovery, pacing, health, or sustainability judgment: Wellness HQ.
 
 ## Department File Ownership
 
 Engineering maintains its own project subtree during routine boots, syncs, and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, decision rules, implementation notes, and Engineering source-board advisory text.
 
-Shared global files, other departments' canonical files, the Advisory Index, and cross-department architecture changes require the appropriate owner, Main Assistant, Life Logistics, or explicit coordinated authorization.
+Shared global files, other departments' canonical files, the Advisory Index, and cross-department architecture changes require the appropriate owner, Main Assistant, Logistics, or explicit coordinated authorization.
 
 ## Source Systems
 
-- GitHub memory repository: abstract project state, boot files, open loops, advisories, role clarity, Engineering notes, and the current LifeOS Dashboard runtime code.
+- GitHub memory repository: abstract project state, boot files, open loops, advisories, role clarity, Engineering notes, dashboard code, and desktop-automation code.
 - Dedicated software repositories: future home for educational projects and substantial standalone software projects.
 - Google Drive: working design documents, architecture notes, generated documents, and human-facing engineering artifacts.
 - Todoist: Rob-facing implementation tasks and reminders.
@@ -64,9 +64,19 @@ Shared global files, other departments' canonical files, the Advisory Index, and
 
 ## Current Technical State
 
-The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. The full local suite has passed with 16 tests. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
+The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. The local suite has passed with 16 tests. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
 
-The current top Engineering track is desktop department automation. The latest Wellness `--send` test stopped safely while the target remained on the generic `ChatGPT` loading screen; no prompt was written and nothing was sent. The next decision is whether to add one bounded re-navigation retry without weakening refusal-first behavior.
+Desktop department automation is operational across all seven HQs. It supports exact navigation, one bounded hidden-sidebar expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, draft-only default behavior, explicit `--send` authorization, and stop-on-uncertainty behavior. A watched live send to Main Assistant HQ succeeded.
+
+Canonical automation paths:
+
+- `apps/lifeos-dashboard/automation/draft_department_boot.py`
+- `apps/lifeos-dashboard/automation/open_department_chat_group.py`
+- `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
+
+Durable recovery playbook:
+
+- `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
 
 ## Security Rule
 
@@ -84,4 +94,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current front burner: resume desktop department automation from `projects/engineering/notebook/NOTE-20260717-010-desktop-department-automation-live-send-handoff.md`.
+Active department. Current front burner: preserve and observe the validated dashboard and desktop automation, while advancing connector reliability and worker pilots only from real evidence.
