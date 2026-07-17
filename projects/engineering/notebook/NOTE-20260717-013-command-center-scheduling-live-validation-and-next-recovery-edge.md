@@ -23,14 +23,16 @@ The dashboard-integrated Automation Command Center now supports:
 - one-time, daily, and weekly schedules in `America/Chicago`;
 - persistent scheduled jobs across dashboard restarts;
 - schedule creation, editing, pause, resume, and deletion;
+- separate Scheduled Jobs and Run History views with independent filters;
 - reuse of the validated desktop automation safety boundary.
 
 Scheduling implementation head: `84b99b138b0c096b8e8067490f602fee309b4720`.
-Reporting and schedule-presentation fix head: `f000686082ca6e3d5ca1b5213bf6ffa83c4d9f6a`.
+Structured failure reporting head: `34ce8052d682daba66138e2b5289af2c3a120aac`.
+Scheduled Jobs / Run History split head: `53e5b57cb5ba5fbe339295cdc3132d1bdb71b585`.
 
 ## Live Validation Evidence
 
-Observed successful live tests on Rob's Windows machine:
+Observed live tests on Rob's Windows machine:
 
 1. One-time custom live send
    - Name: `Hi Penny Test`
@@ -53,7 +55,7 @@ Observed successful live tests on Rob's Windows machine:
    - Another response was actively generating in the mobile chat.
    - The desktop automation navigated to LifeOS HQ and sent the scheduled prompt without interfering with the mobile chat or sending to the wrong destination.
 
-4. Scheduled occupied-composer refusal behind `Show more`
+4. Initial scheduled occupied-composer refusal behind `Show more`
    - Name: `Hi Penny Logistics Failure Test`
    - Destination: Logistics HQ
    - Scheduled: 2026-07-17 15:26 CT
@@ -63,21 +65,33 @@ Observed successful live tests on Rob's Windows machine:
    - No scheduled text was inserted or sent.
    - Result: failed safely / no future run.
 
-The safety behavior passed. The first dashboard report incorrectly labeled the disabled one-time failure as `Paused`, placed it below the active LifeOS schedule without clear ordering semantics, and displayed the generic ChatGPT-unavailable explanation.
+The safety behavior passed. The first dashboard report incorrectly labeled the disabled one-time failure as `Paused`, placed it below the active LifeOS schedule without clear category semantics, and displayed a generic ChatGPT-unavailable explanation.
 
-## Reporting Fix
+5. Structured occupied-composer reporting re-test
+   - Destination: Logistics HQ
+   - Mode / prompt type: send / custom
+   - Completed: 2026-07-17 16:07:12 CT
+   - Result: `failed`
+   - Dashboard reason: `The target composer already contains text. Clear or save that draft, then run the job again.`
+   - The result appeared in Run History while the schedule definition left the default Scheduled Jobs view.
 
-Authorized and implemented after the Logistics test:
+This re-test confirms the complete reporting chain from desktop safety refusal through the scheduler and persistent dashboard history.
 
-- the verified automation shim now captures the base engine output and emits a stable `LIFEOS_RESULT_CODE` marker on failure;
-- occupied-composer failures emit `composer_occupied` plus an explicit preserved-draft message;
+## Reporting and Presentation Fixes
+
+Authorized, implemented, pulled, restarted, and visually confirmed:
+
+- the verified automation shim captures the base engine output and emits a stable `LIFEOS_RESULT_CODE` marker on failure;
+- occupied-composer failures emit `composer_occupied` plus an explicit preserved-draft recovery message;
 - failed or refused one-time schedules display `Failed` rather than `Paused`;
 - successful one-time schedules display `Completed`;
 - manually disabled recurring or future schedules display `Paused`;
-- active schedules sort first by next run;
-- completed and failed schedules sort afterward by most recent activity.
+- Scheduled Jobs and Run History are separate categories;
+- Scheduled Jobs filters support cadence, department, state, and ordering;
+- Run History filters support result, department, mode, and time order;
+- finished one-time definitions are excluded from the default scheduled view but remain available through filters.
 
-Local pull, restart, and visual confirmation remain required because Engineering cannot execute the Windows UI runtime from the connector environment.
+The scheduled occupied-composer safety and structured-reporting validation is complete.
 
 ## Newly Identified Edge Case
 
@@ -117,11 +131,17 @@ After implementation, revalidate in draft mode first across:
 - destination behind `Show more`;
 - occupied composer.
 
-## Next Product/Data Milestone
+## Next Product and Architecture Milestones
 
-The canonical prompt catalog currently exposes primarily the Boot family. The next non-recovery product milestone is to populate the protected canonical prompt database with the approved LifeOS command families and any required structured inputs.
+The newly promoted highest-priority package is documented in:
 
-Likely candidates require authoritative reconciliation before implementation:
+- `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
+
+It will formalize department versus system loop ownership, role-routed boot context, cross-department routing, lifecycle rules, stale-state cleanup, and a new Department Inspection dashboard tab.
+
+The canonical prompt catalog remains the next product/data milestone after or alongside that package. It currently exposes primarily the Boot family and requires authoritative reconciliation before expansion.
+
+Candidate families:
 
 - Boot / Quick Boot / Full Boot;
 - Sync;
@@ -139,7 +159,6 @@ Scheduling is operational but not yet production-ready for fully unattended Wind
 
 Before that label, Engineering still needs evidence and/or implementation for:
 
-- local confirmation of the reporting and ordering patch;
 - dashboard restart and overdue-run behavior;
 - recurring execution across a second real occurrence;
 - collapsed-project recovery;
