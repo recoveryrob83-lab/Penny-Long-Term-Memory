@@ -14,13 +14,27 @@ def source() -> str:
     return SCRIPT_PATH.read_text(encoding="utf-8")
 
 
-def load_function(name: str):
+def function_node(name: str) -> ast.FunctionDef:
     tree = ast.parse(source())
-    function = next(
+    return next(
         node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == name
     )
+
+
+def function_source(name: str) -> str:
+    segment = ast.get_source_segment(source(), function_node(name))
+    assert segment is not None
+    return segment
+
+
+def load_function(name: str):
+    function = function_node(name)
     module = ast.Module(body=[function], type_ignores=[])
-    namespace = {"re": re, "EXPAND_COLLAPSE_COLLAPSED": 0}
+    namespace = {
+        "re": re,
+        "EXPAND_COLLAPSE_COLLAPSED": 0,
+        "EXPAND_COLLAPSE_EXPANDED": 1,
+    }
     exec(compile(module, str(SCRIPT_PATH), "exec"), namespace)
     return namespace[name]
 
@@ -30,18 +44,34 @@ def test_verified_automation_source_compiles() -> None:
 
 
 def test_collapsed_project_recovery_precedes_show_more_recovery() -> None:
-    script = source()
+    script = function_source("open_exact_chat_with_bounded_sidebar_expansion")
 
     project_call = script.index(
         "project_expanded = expand_collapsed_project_once(window, target)"
     )
+    exact_wait = script.index("wait_for_exact_sidebar_link(")
     show_more_call = script.index("show_more = find_sidebar_show_more(window)")
 
-    assert project_call < show_more_call
-    assert "project_chat_region_visible(window, target.project_title)" in script
-    assert "Expanding {target.project_title!r} once" in script
-    assert "Collapsed project expansion did not expose" in script
+    assert project_call < exact_wait < show_more_call
+    assert "PROJECT_EXPANSION_TIMEOUT_SECONDS" in script
     assert "return _original_open_exact_chat(window, target)" in script
+
+
+def test_project_expansion_never_invokes_the_project_row() -> None:
+    script = function_source("expand_project_control_once")
+
+    assert "control.invoke()" not in script
+    assert "no explicit UIA expansion action was available" in script
+    assert "navigate to the wrong chat" in script
+
+
+def test_project_expansion_requires_exact_target_wait_after_unfolding() -> None:
+    script = function_source("expand_collapsed_project_once")
+
+    assert "exact_link.exists(timeout=0.1)" in script
+    assert "is_expanded_state(expand_collapse_state(project))" in script
+    assert "project_chat_region_visible(" in script
+    assert "Exact target link became visible after project expansion." in script
 
 
 def test_project_detection_requires_exact_label_and_collapsed_state() -> None:
@@ -60,6 +90,16 @@ def test_collapsed_state_recognition_rejects_partial_and_unknown_values() -> Non
     assert is_collapsed_state(1) is False
     assert is_collapsed_state("PartiallyExpanded") is False
     assert is_collapsed_state(None) is False
+
+
+def test_expanded_state_recognition_rejects_partial_and_unknown_values() -> None:
+    is_expanded_state = load_function("is_expanded_state")
+
+    assert is_expanded_state(1) is True
+    assert is_expanded_state("ExpandCollapseState_Expanded") is True
+    assert is_expanded_state(0) is False
+    assert is_expanded_state("PartiallyExpanded") is False
+    assert is_expanded_state(None) is False
 
 
 def test_project_labels_remain_exact() -> None:
