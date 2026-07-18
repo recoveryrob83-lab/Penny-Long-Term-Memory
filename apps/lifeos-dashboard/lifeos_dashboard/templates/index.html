@@ -107,7 +107,7 @@
             <div class="cc-fields">
               <label class="cc-field">Prompt source<select id="cc-prompt-type"><option value="canonical">Canonical</option><option value="saved">Saved</option><option value="custom">New custom prompt</option></select></label>
               <label id="cc-prompt-wrap" class="cc-field">Select prompt<select id="cc-prompt-select"><option value="boot">Boot</option></select></label>
-              <label class="cc-field">Destination<select id="cc-destination"><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+              <label class="cc-field">Destination<select id="cc-destination"><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
             </div>
             <label class="cc-field">Prompt name<input id="cc-save-name" type="text" placeholder="Prompt name"></label>
             <label class="cc-field"><span>Prompt text</span><textarea id="cc-custom-prompt" placeholder="Enter the exact prompt to place in the selected chat."></textarea></label>
@@ -134,7 +134,7 @@
               <div class="cc-subheading"><div><p class="eyebrow">TIMED RUNS</p><h3 id="cc-schedule-heading">Schedule this prompt</h3></div><span class="panel-meta">America/Chicago</span></div>
               <p class="item-meta">A schedule stores a snapshot of the exact prompt, destination, and safety confirmations shown above.</p>
               <div class="cc-schedule-grid">
-                <label class="cc-field">Schedule name<input id="cc-schedule-name" type="text" placeholder="Nightly Logistics boot"></label>
+                <label class="cc-field">Schedule name<input id="cc-schedule-name" type="text" placeholder="Nightly Maintenance boot"></label>
                 <label class="cc-field">Repeat<select id="cc-schedule-cadence"><option value="once">Once</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
                 <label class="cc-field"><span id="cc-schedule-date-label">Run date</span><input id="cc-schedule-date" type="date"></label>
                 <label class="cc-field">Time<input id="cc-schedule-time" type="time"></label>
@@ -164,7 +164,7 @@
               </div>
               <div class="cc-filter-grid" aria-label="Scheduled job filters">
                 <label class="cc-filter-field">Cadence<select id="cc-schedule-filter-cadence"><option value="all">All cadences</option><option value="once">Once</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
-                <label class="cc-filter-field">Department<select id="cc-schedule-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+                <label class="cc-filter-field">Department<select id="cc-schedule-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
                 <label class="cc-filter-field">State<select id="cc-schedule-filter-state"><option value="scheduled">Scheduled</option><option value="active">Active only</option><option value="paused">Paused only</option><option value="finished">Finished one-time</option><option value="all">All definitions</option></select></label>
                 <label class="cc-filter-field">Order<select id="cc-schedule-filter-sort"><option value="next">Next run</option><option value="recent">Recently changed</option><option value="name">Name A–Z</option></select></label>
               </div>
@@ -177,7 +177,7 @@
               </div>
               <div class="cc-filter-grid" aria-label="Run history filters">
                 <label class="cc-filter-field">Result<select id="cc-history-filter-status"><option value="all">All results</option><option value="succeeded">Succeeded</option><option value="failed">Failed</option><option value="refused">Refused</option></select></label>
-                <label class="cc-filter-field">Department<select id="cc-history-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Main Assistant HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Logistics HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+                <label class="cc-filter-field">Department<select id="cc-history-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
                 <label class="cc-filter-field">Mode<select id="cc-history-filter-mode"><option value="all">Draft and send</option><option value="draft">Draft</option><option value="send">Send</option></select></label>
                 <label class="cc-filter-field">Order<select id="cc-history-filter-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
               </div>
