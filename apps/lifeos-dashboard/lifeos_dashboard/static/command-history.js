@@ -96,3 +96,136 @@ loadHistory().catch((error) => {
 });
 setInterval(() => loadHistory().catch(() => {}), 15000);
 })();
+
+(() => {
+const DEBUG_CADENCE = "debug_5m";
+const COMPLETION_MARKER = "Debug recurrence test completed after two attempts.";
+const cadence = document.getElementById("cc-schedule-cadence");
+const cadenceFilter = document.getElementById("cc-schedule-filter-cadence");
+const confirmSend = document.getElementById("cc-confirm-send");
+const scheduleName = document.getElementById("cc-schedule-name");
+const scheduleDate = document.getElementById("cc-schedule-date");
+const scheduleTime = document.getElementById("cc-schedule-time");
+const destination = document.getElementById("cc-destination");
+const summary = document.getElementById("cc-schedule-summary");
+const scheduleList = document.getElementById("cc-schedules");
+const saveButton = document.getElementById("cc-save-schedule");
+const cancelButton = document.getElementById("cc-cancel-schedule-edit");
+
+if (!cadence || !cadenceFilter || !confirmSend || !summary || !scheduleList) return;
+
+const destinationLabels = {
+  hub: "LifeOS HQ",
+  main: "Chief of Staff HQ",
+  engineering: "Engineering HQ",
+  logistics: "Life OS Maintenance HQ",
+  business: "Business HQ",
+  "office-leaks": "Office Leaks HQ",
+  finance: "Finance HQ",
+  wellness: "Wellness HQ",
+};
+
+function ensureOption(select, value, label) {
+  if (Array.from(select.options).some((option) => option.value === value)) return;
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = label;
+  select.appendChild(option);
+}
+
+ensureOption(cadence, DEBUG_CADENCE, "Debug: every 5 minutes (2 drafts)");
+ensureOption(cadenceFilter, DEBUG_CADENCE, "Debug: every 5 minutes");
+
+function debugSelected() {
+  return cadence.value === DEBUG_CADENCE;
+}
+
+function syncDebugControls() {
+  const isDebug = debugSelected();
+  if (isDebug) {
+    confirmSend.checked = false;
+    confirmSend.disabled = true;
+    confirmSend.closest("label")?.setAttribute(
+      "title",
+      "Five-minute recurrence tests are always draft-only and stop after two attempts."
+    );
+    const name = scheduleName?.value.trim() || "This prompt";
+    const target = destination?.selectedOptions[0]?.textContent || "the destination";
+    if (scheduleDate?.value && scheduleTime?.value) {
+      summary.textContent = `${name} will place a verified draft in ${target} every 5 minutes beginning ${scheduleDate.value} at ${scheduleTime.value} CT, then stop after 2 attempts.`;
+    }
+    return;
+  }
+  confirmSend.disabled = false;
+  confirmSend.closest("label")?.removeAttribute("title");
+}
+
+let decorating = false;
+let listObserver;
+
+async function decorateDebugSchedules() {
+  if (decorating) return;
+  decorating = true;
+  listObserver.disconnect();
+  try {
+    const response = await fetch("/api/command-center", {cache: "no-store"});
+    if (!response.ok) return;
+    const data = await response.json();
+    (data.scheduled_jobs || [])
+      .filter((schedule) => schedule.cadence === DEBUG_CADENCE)
+      .forEach((schedule) => {
+        const article = scheduleList.querySelector(`[data-schedule-id="${schedule.id}"]`);
+        if (!article) return;
+        const metas = article.querySelectorAll("p.item-meta");
+        const department = destinationLabels[schedule.destination] || schedule.destination;
+        const next = schedule.next_run_at
+          ? new Date(Number(schedule.next_run_at) * 1000).toLocaleString()
+          : "No future run";
+        if (metas[0]) {
+          metas[0].textContent = `${department} · draft · Debug every 5 minutes (2 attempts max) · Next: ${next}`;
+        }
+        const completed = String(schedule.last_reason || "").includes(COMPLETION_MARKER);
+        const badge = article.querySelector(".badge");
+        if (badge) {
+          badge.textContent = completed
+            ? "Completed"
+            : schedule.enabled
+              ? schedule.last_run_at
+                ? "Active · 1/2"
+                : "Active · 0/2"
+              : "Paused";
+        }
+        const toggle = article.querySelector('[data-schedule-action="toggle"]');
+        if (toggle && completed) {
+          toggle.textContent = "Completed";
+          toggle.disabled = true;
+        }
+      });
+  } catch (_) {
+    // The primary scheduler UI remains authoritative when decoration cannot load.
+  } finally {
+    listObserver.observe(scheduleList, {childList: true});
+    decorating = false;
+  }
+}
+
+listObserver = new MutationObserver(() => {
+  decorateDebugSchedules().catch(() => {});
+});
+listObserver.observe(scheduleList, {childList: true});
+
+cadence.addEventListener("change", () => setTimeout(syncDebugControls, 0));
+confirmSend.addEventListener("change", () => {
+  if (debugSelected()) setTimeout(syncDebugControls, 0);
+});
+scheduleList.addEventListener("click", (event) => {
+  if (event.target.closest('[data-schedule-action="edit"]')) {
+    setTimeout(syncDebugControls, 250);
+  }
+});
+saveButton?.addEventListener("click", () => setTimeout(syncDebugControls, 150));
+cancelButton?.addEventListener("click", () => setTimeout(syncDebugControls, 100));
+
+syncDebugControls();
+setTimeout(() => decorateDebugSchedules().catch(() => {}), 100);
+})();
