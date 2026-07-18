@@ -32,9 +32,9 @@ let editingSnapshot = null;
 
 const destinationLabels = {
   hub: "LifeOS HQ",
-  main: "Main Assistant HQ",
+  main: "Chief of Staff HQ",
   engineering: "Engineering HQ",
-  logistics: "Logistics HQ",
+  logistics: "Life OS Maintenance HQ",
   business: "Business HQ",
   "office-leaks": "Office Leaks HQ",
   finance: "Finance HQ",
