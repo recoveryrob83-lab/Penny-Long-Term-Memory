@@ -45,6 +45,20 @@ This supports direct questions such as:
 - "Is Engineering Daily Sync stale?"
 - "When did each active schedule last run?"
 
+## Local Execution Policy
+
+The local scheduler uses the same strict five-minute threshold displayed by the Sheet:
+
+- a job due within the five-minute grace window may execute normally;
+- a job more than five minutes overdue is paused without catch-up execution;
+- pausing an overdue job does not create fake execution history or change Last Run;
+- a failed or nontransiently refused scheduled run pauses immediately;
+- only a successful recurring run advances to its next occurrence;
+- manual Resume recalculates the next due time from the current time and records the definition as rearmed;
+- an expired one-time definition cannot be resumed until its date and time are edited into the future.
+
+The Sheet only reports the resulting state. It does not enforce this policy.
+
 ## Google Sheet
 
 Title: `LifeOS Scheduler Ledger`
@@ -159,5 +173,8 @@ A ledger error is a monitoring failure, not proof that the scheduled job itself 
 8. Create a draft-only test schedule and confirm one new row appears.
 9. Edit or pause the schedule and confirm the same row changes rather than creating another row.
 10. Run the schedule and confirm Last Run, Last Status, Last Reason, Next Due, and Dashboard Updated change on that same row.
-11. Delete the test schedule and confirm its row is cleared.
+11. Delete the test schedule and confirm its row is removed and later rows compact upward.
 12. For an overdue test, stop the dashboard before the due time and confirm Health changes to `OVERDUE` after the five-minute grace period without any worker running.
+13. Restart the dashboard and confirm the overdue definition pauses without launching ChatGPT automation or creating execution history.
+14. Resume a recurring paused definition and confirm Next Due is recalculated into the future with status `rearmed`.
+15. Confirm an expired one-time definition refuses Resume until it is edited to a future date and time.
