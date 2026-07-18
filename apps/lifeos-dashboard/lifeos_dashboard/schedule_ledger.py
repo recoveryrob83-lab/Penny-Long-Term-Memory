@@ -53,6 +53,8 @@ def schedule_state(schedule: dict[str, object]) -> str:
 class ScheduleLedger(Protocol):
     """Small publication boundary used by the Command Center."""
 
+    def compact(self) -> bool: ...
+
     def record_schedule(self, schedule: dict[str, object]) -> bool: ...
 
     def remove_schedule(self, schedule_id: int) -> bool: ...
@@ -62,6 +64,9 @@ class ScheduleLedger(Protocol):
 
 class DisabledScheduleLedger:
     """No-op publication boundary when the Sheet mirror is not configured."""
+
+    def compact(self) -> bool:
+        return False
 
     def record_schedule(self, schedule: dict[str, object]) -> bool:
         return False
@@ -219,6 +224,9 @@ class AppsScriptScheduleLedger:
             self._last_success_at = time.time()
             self._last_error = ""
         return True
+
+    def compact(self) -> bool:
+        return self._safe_write(lambda: self._post({"action": "compact"}))
 
     def record_schedule(self, schedule: dict[str, object]) -> bool:
         return self._safe_write(
