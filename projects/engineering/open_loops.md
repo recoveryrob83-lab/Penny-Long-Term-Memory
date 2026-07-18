@@ -6,6 +6,7 @@ Updated: 2026-07-18
 
 | Status | Priority | Item | Next Action | Notes |
 |---|---|---|---|---|
+| Active | High | Package B canonical automation mapping validation | Pull the latest repository state, restart the dashboard, and run draft-only checks to Chief of Staff HQ and Life OS Maintenance HQ | GitHub implementation is complete. Stable keys `main` and `logistics` were preserved, persisted schedules and saved-prompt defaults need no migration, and retired exact-title callers now map to canonical titles before navigation |
 | Active | High | Department ownership architecture and dashboard inspection | Observe ordinary role-routed specialist boots and close the system wrapper when operation remains clean | Department Inspection is locally validated. Live evidence progressed from 458 records / 4 findings / 101 warnings to 459 / 4 / 15 after tuning, 414 / 0 / 13 after source cleanup, and 414 / 0 / 0 after warning audit, evidence-backed parser correction, and explicit Logistics status normalization. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
 | Active | Normal | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
 | Active | Normal | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
@@ -40,6 +41,7 @@ Updated: 2026-07-18
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Package B GitHub implementation | Canonical chat-title mappings, visible Automation labels, run-history and scheduler labels, mapping tests, and a bounded retired-title compatibility bridge were committed without changing stable destination keys or persisted records |
 | 2026-07-18 | Department Inspection zero-warning verification | Rob confirmed 414 normalized records, zero findings, and zero warnings after notebook-status parser correction and explicit Logistics `Paused | Low` normalization; the result preserved conservative detection rather than suppressing ambiguity |
 | 2026-07-18 | Department Inspection post-cleanup verification | Rob confirmed 414 normalized records, zero findings, and 13 warnings after source cleanup; all four confirmed findings disappeared without weakening detection |
 | 2026-07-18 | Department Inspection first source cleanup | Separated Engineering lifecycle state from priority, removed the duplicated broad Chat HQ watch, consolidated Legacy VA folder disposition under Logistics, and removed speculative registry-reference placeholders from open-loop files |
