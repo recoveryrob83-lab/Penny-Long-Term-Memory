@@ -30,7 +30,7 @@ Engineering HQ owns technical architecture, software planning, repository strate
 
 Business HQ and Office Leaks HQ define what should be built and why. Engineering defines how to build it safely and in the right order.
 
-Route business strategy to Business or Office Leaks, cost-bearing choices to Finance, daily one-off execution to Main Assistant, shared global memory hygiene to Logistics, and recovery or health sustainability to Wellness.
+Route business strategy to Business HQ or Office Leaks HQ, cost-bearing choices to Finance HQ, daily one-off execution to Chief of Staff HQ, shared global memory hygiene to Life OS Maintenance HQ, and non-clinical wellbeing or sustainability judgment to Wellness HQ.
 
 ## Chat and Work Model
 
@@ -42,7 +42,7 @@ Never claim an action, test, deployment, or connector write occurred without ver
 
 ## Highest-Priority Work Package
 
-Status: Ownership architecture implemented; post-cleanup verification pending.
+Status: Ownership architecture implemented and locally verified; fresh LifeOS HQ read-only verification pending.
 
 Canonical references:
 
@@ -60,7 +60,7 @@ Implemented decisions:
 - the dashboard aggregates department and system state read-only;
 - shared rules are universal, operational state is role-routed;
 - specialists load their own files and only relevant shared dependencies;
-- Main Assistant and Logistics receive broader context according to role;
+- Chief of Staff HQ and Life OS Maintenance HQ receive broader context according to their distinct roles;
 - system promotion, demotion, lifecycle, reference, and reconciliation rules are formalized.
 
 Inspector implementation and evidence:
@@ -70,17 +70,18 @@ Inspector implementation and evidence:
 - Work, Knowledge, Operations, and Findings are filterable;
 - first baseline was 458 records / 4 findings / 101 warnings;
 - first tuning produced 459 records / 4 findings / 15 warnings;
+- source cleanup produced 414 records / 0 findings / 13 warnings;
+- final warning audit and parser correction produced 414 records / 0 findings / 0 warnings;
 - confirmed findings exposed state/priority mixing, broad Chat HQ watch mirrors, Legacy VA folder mirrors, and speculative registry placeholders;
-- first source cleanup and explicit-priority parsing are committed.
+- source cleanup and explicit-priority parsing are committed.
 
 Immediate validation boundary:
 
-1. restore or confirm the local desktop/dashboard connection;
-2. refresh and restart the FastAPI dashboard process;
-3. compare post-cleanup counts with the 459 / 4 / 15 tuned baseline;
-4. inspect any remaining findings individually;
-5. observe ordinary specialist boots for real routing defects;
-6. close the ownership-reconciliation system wrapper after stable use.
+1. run the fresh LifeOS HQ read-only verification against the completed Phase Two state;
+2. observe ordinary specialist boots for real routing defects;
+3. inspect only newly demonstrated findings;
+4. close the ownership-reconciliation system wrapper after the new Hub verification and stable ordinary use;
+5. begin Engineering Package B only after the Hub verification confirms the operating surfaces remain coherent.
 
 Do not broadly weaken finding detection merely to reach zero findings.
 
@@ -115,6 +116,8 @@ Live evidence completed:
 - first daily `Hi Penny LifeOS Test` live send to LifeOS HQ succeeded and advanced correctly;
 - mobile use and active response generation did not interfere with the desktop scheduled send;
 - scheduled Logistics HQ occupied-composer refusal preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason.
+
+The `Logistics HQ` name in the preceding bullet is retained as historical test evidence because it was the exact automation destination label used during that validation.
 
 Still awaiting evidence:
 
@@ -246,9 +249,10 @@ As of 2026-07-18:
 
 ## Active Open Loops
 
-- Verify post-cleanup Department Inspection counts and findings.
+- Run the fresh LifeOS HQ read-only verification against the completed Phase Two state.
 - Observe role-routed specialist boots and correct only demonstrated defects.
-- Close the ownership-reconciliation system wrapper after stable use.
+- Close the ownership-reconciliation system wrapper after the new Hub verification and stable ordinary use.
+- Begin Package B canonical-name and automation-compatibility work after the Hub verification.
 - Test dashboard restart and overdue-run behavior.
 - Observe the next real recurring occurrence.
 - Design collapsed-project recovery without changing code until Rob authorizes it.
@@ -264,7 +268,8 @@ As of 2026-07-18:
 
 ## Completed Recent Work
 
-- 2026-07-18: Department Inspection MVP locally validated and tuned from 101 warnings to 15.
+- 2026-07-18: Department Inspection reached 414 normalized records, zero findings, and zero warnings after source cleanup, warning audit, parser correction, and explicit lifecycle-priority normalization.
+- 2026-07-18: Department Inspection MVP locally validated and tuned from 101 warnings to 15 before the final cleanup and warning audit.
 - 2026-07-18: First inspector-guided source cleanup completed.
 - 2026-07-18: Open Loop Ownership and Visibility SOP implemented.
 - 2026-07-18: Startup boot changed to a universal kernel plus role-routed context.
@@ -279,7 +284,7 @@ As of 2026-07-18:
 
 ## Immediate Next Action
 
-When the local desktop/dashboard connection is available, refresh and restart the dashboard, record the post-cleanup Department Inspection counts, and inspect only the findings that remain. Until then, preserve the new ownership and boot architecture and do not perform broad parser weakening.
+Run the fresh LifeOS HQ read-only verification. After it confirms the completed Phase Two operating surfaces remain coherent, begin Engineering Package B without changing stable destination keys or damaging persisted schedules, saved prompts, databases, or run history.
 
 ## Safety and Truthfulness
 
