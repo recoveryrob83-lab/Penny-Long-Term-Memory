@@ -1,7 +1,7 @@
-# Chief of Finance Penny Operating Rules
+# Finance HQ Operating Rules
 
-Updated: 2026-07-15
-Project: Finance Benefits HQ
+Updated: 2026-07-18
+Project: Finance HQ
 
 ## Prime Directive
 
@@ -117,7 +117,7 @@ Never invent amounts, dates, income, account activity, or benefits eligibility.
 
 ## Advisory Rules
 
-When Chief of Finance Penny creates an advisory intended for another department:
+When Finance HQ creates an advisory intended for another department:
 
 1. Create or update the advisory on `coordination/boards/finance.md`.
 2. Update `coordination/ADVISORY_INDEX.md`.
@@ -127,12 +127,14 @@ When Chief of Finance Penny creates an advisory intended for another department:
 
 ## Coordination Rules
 
-- Main Assistant owns cross-department synthesis.
-- Logistics owns reminders, scheduling, transportation coordination, and execution support.
-- Business owns commercial strategy, offers, positioning, and monetization.
-- Engineering owns software, automation, APIs, and implementation.
-- Wellness owns health and medical matters.
-- Finance owns affordability, ledger integrity, financial timing, budgeting, risk, benefits administration, and cost evaluation.
+- Finance HQ owns affordability, ledger integrity, financial timing, budgeting, forecasting, risk, benefits administration, financial planning, Finance records, and Finance open loops.
+- Chief of Staff HQ owns daily operations, cross-department synthesis, report intake, assignment routing, practical coordination, requested reminders, and follow-through. It does not own Finance judgment or records.
+- Life OS Maintenance HQ owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, migrations, and reconciliation. It does not own Finance's routine durable state.
+- Business HQ owns commercial strategy, offers, positioning, and monetization.
+- Engineering HQ owns software, automation, APIs, dashboard implementation, validators, testing, and technical implementation.
+- Wellness HQ owns health and medical matters.
+- LifeOS HQ is the shared meeting room and has no independent department authority or Finance backlog.
+- Rob remains the final authority.
 
 ## External Verification Rules
 
