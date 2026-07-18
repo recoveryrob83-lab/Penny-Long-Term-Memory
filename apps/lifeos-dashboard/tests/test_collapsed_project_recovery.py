@@ -32,13 +32,16 @@ def test_verified_automation_source_compiles() -> None:
 def test_collapsed_project_recovery_precedes_show_more_recovery() -> None:
     script = source()
 
-    project_call = script.index("expand_collapsed_project_once(window, target)")
+    project_call = script.index(
+        "project_expanded = expand_collapsed_project_once(window, target)"
+    )
     show_more_call = script.index("show_more = find_sidebar_show_more(window)")
 
     assert project_call < show_more_call
     assert "project_chat_region_visible(window, target.project_title)" in script
     assert "Expanding {target.project_title!r} once" in script
     assert "Collapsed project expansion did not expose" in script
+    assert "return _original_open_exact_chat(window, target)" in script
 
 
 def test_project_detection_requires_exact_label_and_collapsed_state() -> None:
