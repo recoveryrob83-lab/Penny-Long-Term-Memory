@@ -40,10 +40,10 @@ Example:
 | NOTE-20260716-002 | Facebook Launch and First Lead-Loss Video | 2026-07-16 | Public launch / content / lead-loss offer | Historical launch milestone / active market-test evidence |
 | NOTE-20260709-001 | Friendly Free Consulting Pilots | 2026-07-09 | Pilot clients / portfolio building | Historical pre-governance note / not a current commitment |
 
-## Legacy Notes To Consult When Needed
+## Archived Notes To Consult When Needed
 
-| Note ID | Title | Legacy Path | Status |
+| Note ID | Title | Archive Path | Status |
 |---|---|---|---|
-| NOTE-20260707-001 | HVAC Office Cleanup Beachhead | `projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md` | Historical legacy context |
-| NOTE-20260708-002 | Real-World Lead Leak Example | `projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md` | Historical legacy context |
-| NOTE-20260708-003 | Office Leaks Operating Philosophy | `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md` | Historical foundational note |
+| NOTE-20260707-001 | HVAC Office Cleanup Beachhead | `archive/projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md` | Historical legacy context |
+| NOTE-20260708-002 | Real-World Lead Leak Example | `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md` | Historical legacy context |
+| NOTE-20260708-003 | Office Leaks Operating Philosophy | `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md` | Historical foundational note |
