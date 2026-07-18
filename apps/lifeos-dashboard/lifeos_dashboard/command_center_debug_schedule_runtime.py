@@ -89,6 +89,9 @@ def run_scheduled(
             "reason": reason,
         },
     )
+    ledger = getattr(self, "schedule_ledger", None)
+    if ledger is not None and updated.get("next_run_at") is not None:
+        ledger.record_state(updated, "canceled", reason)
 
 
 def set_schedule_enabled(
