@@ -14,6 +14,7 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 
 - Phase One established the official eight-room authority architecture in the constitutional and shared-system layer.
 - The official department name is Life OS Maintenance HQ; the canonical filesystem path remains `projects/life-logistics-hq/`.
+- Phase Two owner-routed naming, authority, ownership, and pointer repairs are complete across the seven department HQs.
 - The Maintenance subtree has been reconciled to the new identity and authority model under Rob's authorized Phase Two scope.
 - LifeOS HQ is the shared meeting room and does not own an independent backlog.
 - Chief of Staff HQ owns daily operations and Hub coordination.
@@ -24,7 +25,7 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 - Desktop department automation is validated across the seven department HQ chats.
 - The Automation Command Center supports manual and scheduled runs, persistent history, explicit send confirmation, and structured failure reporting.
 - Scheduling exists, but fully unattended Windows production use remains unapproved pending Engineering reliability evidence and Rob's authorization.
-- Current automation labels still use `Main Assistant HQ` and `Logistics HQ` until Engineering performs a separately authorized update.
+- Current automation labels still use `Main Assistant HQ` and `Logistics HQ` until Engineering performs the separately authorized Package B update.
 - Raw Capture and Inventory workers remain active pilots.
 - Engineering HQ Daily Sync remains paused.
 - No advisories are currently open.
@@ -39,7 +40,7 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 - Keep desktop automation and guarded GitHub sync safety gates intact.
 - Preserve the unattended-automation production boundary and the paused Engineering HQ Daily Sync state.
 - Maintain worker routing and pointer hygiene while preserving the worker/department distinction.
-- Route department-local drift rather than silently repairing another department's files.
+- Route newly demonstrated department-local drift rather than silently repairing another department's files without authority.
 - Reconcile the Drive Chief's Manual, canonical Project Instructions, and GitHub implementation when meaningful changes occur.
 
 ## Current Boundaries
@@ -51,7 +52,7 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 - Engineering HQ owns implementation machinery and technical reliability.
 - Finance HQ owns detailed money records and concrete financial decisions.
 - Business HQ and Office Leaks HQ own parent strategy and business-unit execution respectively.
-- Wellness HQ owns wellness, recovery, health planning, and sustainable pacing.
+- Wellness HQ owns non-clinical wellbeing, pacing, routines, self-care, emotional-regulation support, and recovery-support context within scope.
 - Each specialist department maintains its own project subtree.
 
 ## Verification Standard
@@ -66,4 +67,4 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 
 ## Best Next Action
 
-Verify the completed Phase Two commit set, then route any remaining department-local naming drift to the owning departments without opening duplicate system work.
+Support the fresh LifeOS HQ read-only verification, then preserve the completed Phase Two alignment through ordinary audits while Engineering handles Package B automation compatibility work under its separate scope.
