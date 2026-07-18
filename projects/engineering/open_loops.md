@@ -37,7 +37,7 @@ Updated: 2026-07-18
 
 | Closed Date | Item | Notes |
 |---|---|---|
-| 2026-07-18 | Bounded five-minute recurrence runtime validation | Rob confirmed both scheduled draft runs succeeded, the second run occurred on the five-minute repeat, and the bounded schedule completed without a third run |
+| 2026-07-18 | Bounded five-minute recurrence runtime validation | Rob confirmed both scheduled draft runs succeeded and the second run occurred on the five-minute repeat. Final `Completed` / no-future-run state was not separately reported |
 | 2026-07-18 | Bounded five-minute recurrence control implementation | Added a `debug_5m` scheduler cadence with draft-only enforcement, one five-minute repeat, automatic completion after two attempts, completed-test resume refusal, visible 0/2 and 1/2 states, and focused regression coverage without changing the SQLite schema |
 | 2026-07-18 | Clipboard write-verification repair runtime validation | Rob confirmed the repeated overdue draft pasted the full intended text, preserved the prior clipboard value `i`, and recorded `succeeded` in Run History. The repair keeps the prompt on the clipboard through verification and restores the original clipboard afterward |
 | 2026-07-18 | Clipboard race and failure-misclassification diagnosis | Raw execution data proved ChatGPT Classic, Engineering HQ, and the composer were all verified. Clipboard verification copied only the prior one-character value, and the explicit `write_verification_failed` marker was overridden by broad keyword matching. The earlier startup-window diagnosis was rejected |
