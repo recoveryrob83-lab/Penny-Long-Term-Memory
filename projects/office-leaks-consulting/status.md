@@ -1,6 +1,6 @@
-# Office Leaks Consulting HQ Status
+# Office Leaks HQ Status
 
-Updated: 2026-07-16
+Updated: 2026-07-18
 
 ## Status
 
@@ -12,7 +12,7 @@ Revenue-first service launch / live market test.
 
 ## Parent Department
 
-Chief Business HQ.
+Business HQ.
 
 ## Current Priority
 
@@ -22,11 +22,11 @@ Current execution priorities:
 
 1. Observe response to the live Facebook launch package.
 2. Continue the lead-loss content lane with short, practical videos.
-3. Refine the starter offer from real audience and inquiry signals.
+3. Capture real audience and inquiry signals, adjust Office Leaks-owned execution materials within approved strategy, and route parent-level positioning or offer-strategy implications to Business HQ.
 4. Build Office Leak Audit / Lead Leak materials as demand becomes clearer.
 5. Create proposal, diagnostic, and handoff artifacts when a real lead requires them.
-6. Coordinate repeatable delivery method with Engineering.
-7. Coordinate pricing and startup costs with Finance when concrete.
+6. Coordinate repeatable delivery method with Engineering HQ when concrete.
+7. Route cost-bearing decisions, pricing feasibility, startup costs, and paid-promotion affordability to Finance HQ when concrete.
 
 ## Current Business Frame
 
@@ -53,12 +53,14 @@ Current lead message:
 
 ## Current Routing
 
-- Parent strategy and portfolio decisions: Chief Business HQ.
-- Office Leaks execution continuity: Office Leaks Consulting HQ.
-- Daily execution/admin: Main Assistant when routed.
-- Project structure and durable sync: Life Logistics HQ.
-- Finance/tax/budget/pricing implications: Chief of Finance Penny when concrete.
-- Delivery architecture/technical implementation: Chief Engineering Penny when concrete.
+- Parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment: Business HQ.
+- Offers, outreach, sales activity, market tests, delivery design, operating playbooks, customer-facing execution, and Office Leaks durable state: Office Leaks HQ.
+- Coordination, reports, assignment routing, scheduling, reminders, and authorized practical support: Chief of Staff HQ, without ownership transfer.
+- Global GitHub maintenance, governance, boot integrity, audits, shared procedures, and reconciliation: Life OS Maintenance HQ, without ownership of routine Office Leaks state.
+- Finance, tax, affordability, budget, pricing feasibility, and cost-bearing implications: Finance HQ when concrete.
+- Technical implementation, delivery tooling, software, automation, templates, and architecture: Engineering HQ when concrete.
+- Cross-department discussion and synthesis: LifeOS HQ as the shared meeting room, with no independent authority or backlog.
+- Final authority: Rob.
 
 ## Current Note
 
@@ -66,4 +68,4 @@ Launch milestone record:
 
 - `projects/office-leaks-consulting/notebook/NOTE-20260716-002-facebook-launch-and-first-lead-loss-video.md`
 
-The legacy folder `projects/virtual-assistant-business/` remains historical/redirect context. Active Office Leaks state belongs in `projects/office-leaks-consulting/`.
+The legacy folder `projects/virtual-assistant-business/` remains historical/redirect context. Active Office Leaks state belongs in `projects/office-leaks-consulting/`. Archival disposition belongs to Life OS Maintenance HQ under separate authority.
