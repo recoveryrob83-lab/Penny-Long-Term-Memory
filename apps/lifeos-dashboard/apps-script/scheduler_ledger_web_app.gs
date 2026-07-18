@@ -40,6 +40,11 @@ function doPost(event) {
       if (action === 'ping') {
         return successResponse_(spreadsheet, sheetName, action, null);
       }
+      if (action === 'compact') {
+        compactBlankScheduleRows_(sheet);
+        SpreadsheetApp.flush();
+        return successResponse_(spreadsheet, sheetName, action, null);
+      }
       if (action === 'upsert') {
         const rowNumber = upsertSchedule_(sheet, payload);
         SpreadsheetApp.flush();
