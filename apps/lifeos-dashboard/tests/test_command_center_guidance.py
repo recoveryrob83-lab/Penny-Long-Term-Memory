@@ -16,6 +16,20 @@ def test_explains_exact_chat_failure() -> None:
     assert "Open the sidebar" in reason
 
 
+def test_structured_write_failure_beats_incidental_window_text() -> None:
+    stdout = "1. Finding window: ChatGPT Classic\n5. Applying draft policy"
+    stderr = (
+        "STOPPED: Composer clipboard verification timed out. Nothing was sent.\n"
+        "LIFEOS_RESULT_CODE=write_verification_failed"
+    )
+
+    reason = explain_failure(stdout, stderr, 1)
+
+    assert "partially written" in reason
+    assert "Nothing was sent" in reason
+    assert "Open the desktop app" not in reason
+
+
 def test_unknown_failure_stays_safe() -> None:
     reason = explain_failure("", "Something entirely new", 7)
     assert "stopped safely" in reason
