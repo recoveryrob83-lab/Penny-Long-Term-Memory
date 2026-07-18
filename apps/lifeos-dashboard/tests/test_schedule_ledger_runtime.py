@@ -3,35 +3,20 @@ from pathlib import Path
 import pytest
 
 from lifeos_dashboard.command_center import CommandCenterService, ExecutionResult
-from lifeos_dashboard.command_center_debug_schedule_runtime import DEBUG_COMPLETION_MARKER
+from lifeos_dashboard.schedule_ledger import schedule_state
 
 
 class FakeLedger:
     def __init__(self) -> None:
-        self.planned: list[dict[str, object]] = []
-        self.states: list[tuple[dict[str, object], str, str]] = []
-        self.results: list[tuple[dict[str, object], float, dict[str, object]]] = []
+        self.records: list[dict[str, object]] = []
+        self.removed: list[int] = []
 
-    def record_planned(self, schedule: dict[str, object]) -> bool:
-        self.planned.append(dict(schedule))
+    def record_schedule(self, schedule: dict[str, object]) -> bool:
+        self.records.append(dict(schedule))
         return True
 
-    def record_state(
-        self,
-        schedule: dict[str, object],
-        state: str,
-        reason: str,
-    ) -> bool:
-        self.states.append((dict(schedule), state, reason))
-        return True
-
-    def record_result(
-        self,
-        schedule: dict[str, object],
-        due_at: float,
-        result: dict[str, object],
-    ) -> bool:
-        self.results.append((dict(schedule), due_at, dict(result)))
+    def remove_schedule(self, schedule_id: int) -> bool:
+        self.removed.append(schedule_id)
         return True
 
     def status(self) -> dict[str, object]:
@@ -80,24 +65,27 @@ def build_service(tmp_path: Path) -> tuple[CommandCenterService, FakeLedger]:
     return service, ledger
 
 
-def test_schedule_create_and_pause_publish_occurrence_state(tmp_path: Path) -> None:
+def test_schedule_create_pause_and_delete_publish_current_row(tmp_path: Path) -> None:
     service, ledger = build_service(tmp_path)
 
     created = service.create_schedule(schedule_values())
-    service.set_schedule_enabled(int(created["id"]), False)
+    paused = service.set_schedule_enabled(int(created["id"]), False)
+    deleted = service.delete_schedule(int(created["id"]))
 
-    assert ledger.planned[0]["id"] == created["id"]
-    assert ledger.states[-1][1] == "canceled"
-    assert "paused" in ledger.states[-1][2].casefold()
+    assert ledger.records[0]["id"] == created["id"]
+    assert paused is not None
+    assert ledger.records[-1]["enabled"] is False
+    assert deleted is True
+    assert ledger.removed == [int(created["id"])]
 
 
-def test_scheduled_result_and_next_occurrence_are_published(
+def test_scheduled_result_updates_same_schedule_snapshot(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     service, ledger = build_service(tmp_path)
     created = service.create_schedule(schedule_values())
-    ledger.planned.clear()
+    ledger.records.clear()
     schedule = service.store.get_schedule(int(created["id"]))
     assert schedule is not None
     original_due = float(schedule["next_run_at"])
@@ -113,23 +101,19 @@ def test_scheduled_result_and_next_occurrence_are_published(
         stderr="",
         reason="Completed successfully.",
     )
-
-    def execute_and_record(job: object) -> ExecutionResult:
-        service.store.add_history(result.to_dict())
-        return result
-
-    monkeypatch.setattr(service, "execute", execute_and_record)
+    monkeypatch.setattr(service, "execute", lambda job: result)
 
     service._run_scheduled(schedule)
 
-    assert ledger.results[0][1] == original_due
-    assert ledger.results[0][2]["status"] == "succeeded"
-    assert len(ledger.planned) == 1
-    assert float(ledger.planned[0]["next_run_at"]) > original_due
+    latest = ledger.records[-1]
+    assert latest["id"] == created["id"]
+    assert latest["last_status"] == "succeeded"
+    assert latest["last_run_at"] == 101.0
+    assert float(latest["next_run_at"]) > original_due
     assert service.status()["schedule_ledger"]["state"] == "synced"
 
 
-def test_debug_recurrence_cancels_the_unused_third_occurrence(
+def test_debug_recurrence_publishes_final_completed_snapshot(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -141,7 +125,7 @@ def test_debug_recurrence_cancels_the_unused_third_occurrence(
             schedule_time="09:00",
         )
     )
-    ledger.planned.clear()
+    ledger.records.clear()
     results = iter(
         [
             ExecutionResult(
@@ -170,13 +154,7 @@ def test_debug_recurrence_cancels_the_unused_third_occurrence(
             ),
         ]
     )
-
-    def execute_and_record(job: object) -> ExecutionResult:
-        result = next(results)
-        service.store.add_history(result.to_dict())
-        return result
-
-    monkeypatch.setattr(service, "execute", execute_and_record)
+    monkeypatch.setattr(service, "execute", lambda job: next(results))
 
     first = service.store.get_schedule(int(created["id"]))
     assert first is not None
@@ -185,8 +163,7 @@ def test_debug_recurrence_cancels_the_unused_third_occurrence(
     assert second is not None
     service._run_scheduled(second)
 
-    completed = service.store.get_schedule(int(created["id"]))
-    assert completed is not None
-    assert completed["enabled"] is False
-    assert ledger.states[-1][1] == "canceled"
-    assert DEBUG_COMPLETION_MARKER in ledger.states[-1][2]
+    final_snapshot = ledger.records[-1]
+    assert final_snapshot["enabled"] is False
+    assert final_snapshot["next_run_at"] is None
+    assert schedule_state(final_snapshot) == "Completed"
