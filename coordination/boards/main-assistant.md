@@ -5,7 +5,56 @@ Purpose: Canonical advisory text sourced from Chief of Staff HQ, including forma
 
 ## Open Advisories
 
-None.
+### ADV-20260718-041 — Create a global Trello connector write SOP
+
+- Date: 2026-07-18
+- From: Chief of Staff HQ / LifeOS HQ
+- To: Life OS Maintenance HQ
+- Priority: High
+- Status: Open / Routed
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department: Life OS Maintenance HQ
+- Record Class: Global operating SOP request
+- Authoritative Destination: Maintenance-owned global SOP path selected under existing repository ownership rules
+- Lifecycle State: Open / Routed
+- Review Trigger: Maintenance reads this advisory and inspects the verified Trello connector behavior
+- Completion Condition: A global Trello connector SOP is created or an existing global connector SOP is updated, the advisory is acknowledged, and the Advisory Index routing state is reconciled
+
+#### Context
+
+During a LifeOS Hub capture session, Trello card creation and checklist creation succeeded. Checklist-item writes then returned a workspace-authorization error even though the requested items were written successfully after a delay. A later verification read showed that all separately submitted checklist items had landed.
+
+The observed connector behavior creates a false-negative risk: an assistant may treat a successful write as failed, retry in bulk, create duplicates, overwrite useful state, or report an inaccurate outcome.
+
+#### Requested Maintenance Work
+
+Create or update a global Trello connector write SOP that can be inherited by every department permitted to perform Trello writes. The SOP should document at least:
+
+1. Prefer small, bounded Trello writes rather than large multi-part payloads.
+2. For checklist population, submit one checklist item per connector call.
+3. Treat a connector error as inconclusive when prior behavior shows possible delayed success.
+4. After any ambiguous Trello write response, perform a read-back verification against the live card, checklist, or Inbox state before retrying or reporting failure.
+5. Do not duplicate a card, checklist, or checklist item until verification confirms the original write did not land.
+6. Report the verified live state rather than relying solely on the connector receipt.
+7. Preserve source-system boundaries: Trello remains the capture and flow layer, and this SOP must not authorize promotion into GitHub or creation of Rob-facing commitments.
+8. Note that basic Inbox card creation was separately tested and succeeded, isolating the observed defect primarily to checklist-item and some update paths.
+
+#### Verified Reproduction Evidence
+
+- One idea-bundle card was created successfully.
+- Eight checklist groups were created successfully.
+- Initial checklist-item calls returned workspace-permission errors.
+- Live read-back showed delayed successful writes.
+- Fourteen remaining ideas were then submitted as fourteen separate connector calls.
+- Every call reported the same misleading error.
+- Final live read-back verified all sixteen intended checklist items across all eight groups.
+
+#### Boundaries
+
+- Maintenance owns the global SOP and advisory reconciliation.
+- Engineering may later investigate or compensate for connector behavior, but this advisory does not assign implementation work to Engineering.
+- Do not edit department-local files unless needed pointers are explicitly authorized under normal ownership rules.
+- Do not create a duplicate system open loop merely for visibility unless the SOP work genuinely requires durable tracking under the existing operating rules.
 
 ## Acknowledged / Implemented Advisories
 
