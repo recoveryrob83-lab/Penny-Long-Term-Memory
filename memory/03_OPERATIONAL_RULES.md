@@ -5,7 +5,7 @@ Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
 
-This document stores durable operating rules for Rob's Life OS / Life Logistics HQ system.
+This document stores durable operating rules for Rob's Life OS operating system.
 
 These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, ideas, durable-write promotion, advisories, advisory-board lifecycle, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
@@ -136,7 +136,7 @@ Review a board for compaction when it becomes roughly 250–300 lines, completed
 
 Git history is the default archive. Separate archive files are optional and should be created only when discoverability materially requires them.
 
-Life Logistics HQ owns board hygiene and compaction scheduling. Source departments own advisory text accuracy. Target departments report acknowledgement or implementation. Rob remains final authority for major restructuring, archive deletion, and exceptions.
+Life OS Maintenance HQ owns board hygiene and compaction scheduling. Source departments own advisory text accuracy. Target departments report acknowledgement or implementation. Rob remains final authority for major restructuring, archive deletion, and exceptions.
 
 ## Connector Reliability Rules
 
