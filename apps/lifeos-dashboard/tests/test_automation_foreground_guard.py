@@ -43,7 +43,9 @@ def fake_base(window: FakeWindow, events: list[str]) -> ModuleType:
     return base
 
 
-def test_guard_foregrounds_chatgpt_before_click_and_keys(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_guard_foregrounds_for_click_without_refocusing_before_keys(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     api = FakeWin32Gui()
     window = FakeWindow(api, allow_focus=True)
     events: list[str] = []
@@ -53,12 +55,48 @@ def test_guard_foregrounds_chatgpt_before_click_and_keys(monkeypatch: pytest.Mon
     assert runtime.install_base_guard(base) is True
     base.focus_group_text_surface("composer")
     base.send_keys("^a")
+    base.send_keys("^c")
 
-    assert window.focus_attempts >= 2
-    assert events == ["focus:composer", "keys:^a"]
+    assert window.focus_attempts == 1
+    assert events == ["focus:composer", "keys:^a", "keys:^c"]
 
 
-def test_guard_stops_before_keyboard_input_when_foreground_is_refused(
+def test_guard_does_not_refocus_when_chatgpt_is_already_foreground(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    api = FakeWin32Gui()
+    api.foreground = 42
+    window = FakeWindow(api, allow_focus=True)
+    events: list[str] = []
+    base = fake_base(window, events)
+    monkeypatch.setattr(runtime, "win32gui", api)
+
+    runtime.install_base_guard(base)
+    base.focus_group_text_surface("composer")
+    base.send_keys("^v")
+
+    assert window.focus_attempts == 0
+    assert events == ["focus:composer", "keys:^v"]
+
+
+def test_guard_stops_before_keyboard_input_when_foreground_is_lost(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    api = FakeWin32Gui()
+    window = FakeWindow(api, allow_focus=True)
+    events: list[str] = []
+    base = fake_base(window, events)
+    monkeypatch.setattr(runtime, "win32gui", api)
+    runtime.install_base_guard(base)
+
+    with pytest.raises(AutomationStopped, match="lost foreground focus"):
+        base.send_keys("^a")
+
+    assert window.focus_attempts == 0
+    assert events == []
+
+
+def test_guard_stops_before_click_when_foreground_is_refused(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     api = FakeWin32Gui()
@@ -71,7 +109,7 @@ def test_guard_stops_before_keyboard_input_when_foreground_is_refused(
     runtime.install_base_guard(base)
 
     with pytest.raises(AutomationStopped, match="foreground window"):
-        base.send_keys("^a")
+        base.focus_group_text_surface("composer")
 
     assert events == []
 
@@ -79,7 +117,7 @@ def test_guard_stops_before_keyboard_input_when_foreground_is_refused(
 def test_foreground_failure_has_specific_dashboard_guidance() -> None:
     message = runtime.explain_failure(
         "",
-        "STOPPED: ChatGPT Classic could not become the foreground window. No keyboard or mouse input was sent.",
+        "STOPPED: ChatGPT Classic lost foreground focus before keyboard input. No keyboard input was sent.",
         1,
     )
 
