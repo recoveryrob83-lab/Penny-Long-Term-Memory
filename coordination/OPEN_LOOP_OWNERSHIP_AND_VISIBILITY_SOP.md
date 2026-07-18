@@ -36,10 +36,10 @@ Department-owned unfinished work belongs in the owning department's `open_loops.
 
 Examples:
 
-- dashboard parser implementation belongs to Engineering;
-- repository-path migration and archive disposition belong to Logistics;
-- pricing decisions belong to Finance or Business according to the decision being made;
-- wellness routines belong to Wellness;
+- dashboard parser implementation belongs to Engineering HQ;
+- repository-path migration and archive disposition belong to Life OS Maintenance HQ;
+- pricing decisions belong to Finance HQ or Business HQ according to the decision being made;
+- wellness routines belong to Wellness HQ;
 - Office Leaks execution belongs to Office Leaks HQ.
 
 The authoritative department record may be summarized in its `status.md` or `SESSION_HANDOFF.md`, but those summaries must not become competing open-loop ledgers.
@@ -68,7 +68,7 @@ Promote work into `memory/05_OPEN_LOOPS.md` only when at least one of these is t
 2. Two or more departments must each take substantive action or make a decision.
 3. A shared policy, boot rule, source boundary, or architecture contract is changing.
 4. The work represents a system-wide blocker, risk, outage, or integrity problem.
-5. Main Assistant or Logistics must actively coordinate multiple owners through completion.
+5. Chief of Staff HQ or Life OS Maintenance HQ must actively coordinate multiple owners through completion.
 6. Rob explicitly designates the work as system-level.
 
 Mere mentions, awareness, downstream benefit, or a possible future dependency are not enough.
@@ -173,7 +173,7 @@ During a department sync or system audit:
 
 ## Cross-Department Routing
 
-Use an advisory, explicit dependency, routed handoff, or Main/Logistics coordination when another department must know, act, decide, monitor, or accept responsibility.
+Use an advisory, explicit dependency, routed handoff, or Chief of Staff / Life OS Maintenance coordination when another department must know, act, decide, monitor, or accept responsibility.
 
 Do not duplicate an open loop into another department merely to create awareness.
 
@@ -222,13 +222,13 @@ Specialists read:
 
 Specialists do not routinely load the global handoff, all active projects, all system loops, migration state, or unrelated department backlogs.
 
-### Main Assistant
+### Chief of Staff HQ
 
-Main Assistant may read broader shared state when coordinating daily operations, system decisions, cross-department synthesis, or a full hub report.
+Chief of Staff HQ may read broader shared state when coordinating daily operations, system decisions, cross-department synthesis, department reports, assignments, or a full Hub report.
 
-### Logistics
+### Life OS Maintenance HQ
 
-Logistics reads broad system state when maintaining boot integrity, shared infrastructure, advisory hygiene, cross-project audits, migrations, or global reconciliation.
+Life OS Maintenance HQ reads broad system state when maintaining boot integrity, shared governance, advisory hygiene, cross-project audits, migrations, source boundaries, or global reconciliation.
 
 ### Workers
 
@@ -244,20 +244,22 @@ Workers follow their worker boot contract and do not inherit department or syste
 - routes real cross-department dependencies;
 - avoids speculative and duplicated entries.
 
-### Main Assistant
+### Chief of Staff HQ
 
-- coordinates cross-department decisions and daily synthesis;
+- coordinates daily operations, cross-department decisions, reports, assignments, and follow-through;
 - identifies when a system coordination record is warranted;
-- does not become the routine editor of every department backlog.
+- does not become the routine editor or owner of every department backlog.
 
-### Logistics
+### Life OS Maintenance HQ
 
 - maintains global boot and system-loop integrity;
+- maintains shared governance and source-boundary rules;
 - audits ownership collisions and stale mirrors;
 - owns repository-path, migration, archive, and shared-infrastructure work;
-- removes system records that no longer meet the promotion threshold.
+- removes system records that no longer meet the promotion threshold;
+- routes department-local corrections rather than silently taking over local files.
 
-### Engineering
+### Engineering HQ
 
 - maintains the read-only inspector and normalization contract;
 - corrects parser defects from observed evidence;
