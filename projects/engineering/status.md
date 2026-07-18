@@ -4,7 +4,7 @@ Updated: 2026-07-18
 
 ## Current Phase
 
-Active / Automation Naming Compatibility Validation, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Department Inspection Naming Validation, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -74,25 +74,40 @@ Validation still required:
 
 ### Automation Naming Compatibility / Package B
 
-Status: GitHub implementation complete; local Windows runtime validation pending.
+Status: Fully implemented and runtime-validated.
 
-Implemented:
+Validated implementation:
 
 - retained stable internal destination keys `hub`, `main`, `logistics`, `engineering`, `finance`, `business`, `office-leaks`, and `wellness`;
 - changed canonical exact chat targets from `Main Assistant HQ` to `Chief of Staff HQ` and from `Logistics HQ` to `Life OS Maintenance HQ`;
 - updated canonical boot automation, Command Center backend mappings, scheduler display labels, run-history display labels, Automation UI selectors, and mapping tests;
 - added a bounded compatibility translation for retired callers using `Main Assistant HQ`, `Logistics HQ`, or `Life Logistics HQ`;
 - preserved persisted schedule destinations, saved-prompt default destinations, and run-history destinations because those records store stable keys rather than chat titles;
-- deliberately left historical execution evidence unchanged where the retired title was the exact title used at the time.
+- deliberately left historical execution evidence unchanged where the retired title was the exact title used at the time;
+- draft-only canonical automation passed for Chief of Staff HQ and Life OS Maintenance HQ;
+- schedules and run history displayed canonical names without database migration;
+- a retired-title invocation translated to Chief of Staff HQ and preserved exact-destination safety without sending.
+
+### Department Inspection Canonical Labels / Package C
+
+Status: GitHub implementation complete; local dashboard validation pending.
+
+Implemented:
+
+- preserved stable Department Inspection scope IDs `main-assistant` and `logistics`;
+- changed their runtime presentation labels to Chief of Staff HQ and Life OS Maintenance HQ;
+- changed finding-detail labels to the same canonical names;
+- aligned the approved Department Inspection data contract with the canonical labels and current coordination-role language;
+- added a focused regression test proving stable scope IDs return canonical labels;
+- preserved source project paths, historical record text, and the Package B retired-title automation bridge.
 
 Local validation still required:
 
-- pull the latest repository state on Rob's Windows machine;
-- restart the dashboard so Python and browser assets reload;
-- verify canonical prompt previews for `main` and `logistics` use the new role names;
-- run draft-only custom prompts to Chief of Staff HQ and Life OS Maintenance HQ;
-- confirm existing schedules still display under the canonical names without database migration;
-- confirm a legacy-title compatibility invocation is translated to the canonical chat and still preserves exact-destination safety.
+- pull the latest repository state and restart the dashboard;
+- run `pytest tests/test_department_inspection_scope_labels.py` from `apps/lifeos-dashboard`;
+- open Department Inspection and confirm the department filter displays Chief of Staff HQ and Life OS Maintenance HQ;
+- inspect any visible finding detail and confirm canonical department labels are used;
+- confirm record counts, findings, warnings, and source paths remain unchanged apart from display labels.
 
 ### Automation Command Center
 
@@ -124,13 +139,13 @@ Live validation completed:
 - one-time custom live send to Engineering HQ succeeded and completed with no future run;
 - first daily custom live send to LifeOS HQ succeeded and advanced to the next day;
 - active mobile use and response generation in another chat did not interfere with the desktop scheduled send;
-- scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason.
+- scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason;
+- Package B canonical-title and retired-title compatibility paths passed.
 
-The `Logistics HQ` name in the preceding bullet is retained as historical test evidence because it was the exact automation destination label used during that validation.
+The `Logistics HQ` name in the occupied-composer bullet is retained as historical test evidence because it was the exact automation destination label used during that validation.
 
 Current validation still open:
 
-- Package B canonical-title draft validation;
 - overdue-run behavior after dashboard restart;
 - second real occurrence of a recurring job.
 
@@ -259,7 +274,7 @@ Engineering preserves two integrated delivery layers:
 
 ## Current Open Work
 
-- Pull and restart the local dashboard, then perform draft-only Package B validation for Chief of Staff HQ and Life OS Maintenance HQ.
+- Pull and restart the local dashboard, then run the focused Package C test and visual Department Inspection verification.
 - Observe ordinary role-routed specialist boots and correct only demonstrated routing defects.
 - Test overdue one-time behavior after dashboard restart.
 - Observe a second real recurring execution.
@@ -275,6 +290,8 @@ Engineering preserves two integrated delivery layers:
 
 ## Completed Recent Work
 
+- 2026-07-18: Package C Department Inspection canonical labels implemented in runtime policy, finding-detail UI, contract, and regression coverage while preserving stable IDs and paths.
+- 2026-07-18: Package B canonical and retired-title automation paths fully runtime-validated; schedules and history retained canonical labels without migration.
 - 2026-07-18: Package B canonical automation mappings implemented while preserving stable destination keys and persisted Command Center records; legacy chat-title compatibility added for retired callers.
 - 2026-07-18: Fresh LifeOS HQ launched and reported ready for operations after final Maintenance verification and repairs.
 - 2026-07-18: Department Inspection reached 414 normalized records, zero findings, and zero warnings after source cleanup, warning audit, evidence-backed parser correction, and explicit lifecycle-priority normalization.
