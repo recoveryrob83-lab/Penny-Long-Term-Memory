@@ -105,7 +105,8 @@ def set_schedule_enabled(
         and DEBUG_COMPLETION_MARKER in str(schedule.get("last_reason") or "")
     ):
         raise ValueError(
-            "This five-minute recurrence test already completed two attempts. Create a new test schedule."
+            "This five-minute recurrence test already completed two attempts. "
+            "Create a new test schedule."
         )
     return _original_set_schedule_enabled(self, schedule_id, enabled)
 
