@@ -41,9 +41,9 @@ Office Leaks business-unit execution and detailed project records belong in:
 
 - `projects/office-leaks-consulting/`
 
-Legacy context remains at:
+Archived predecessor context remains at:
 
-- `projects/virtual-assistant-business/`
+- `archive/projects/virtual-assistant-business/`
 
 ## Parent / Business-Unit Boundary
 
@@ -97,13 +97,13 @@ Advisory board:
 
 - `coordination/boards/office-leaks.md`
 
-Legacy worker context:
+Archived worker context:
 
-- `projects/virtual-assistant-business/`
+- `archive/projects/virtual-assistant-business/`
 
-Operating philosophy legacy source:
+Operating philosophy historical source:
 
-- `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
 
 Engineering delivery architecture:
 
@@ -153,7 +153,7 @@ For multi-target advisories, track targets in the Advisory Index entry and sourc
 
 - GitHub: abstract Business HQ state, handoff, open loops, status, role clarity, advisory board pointers, and routing notes.
 - `projects/office-leaks-consulting/`: active Office Leaks business-unit HQ.
-- `projects/virtual-assistant-business/`: legacy context and redirect for the former VA worker project.
+- `archive/projects/virtual-assistant-business/`: archived context for the former VA worker project.
 - Google Drive: working records, strategy docs, generated docs, research notes, and business artifacts.
 - Todoist: Rob-facing tasks only.
 - Calendar: meetings, deadlines, and scheduled business work.
