@@ -19,6 +19,21 @@ if not getattr(parser, "_RUNTIME_POLICY_TUNED", False):
     # as generic Markdown decoration corrupted visible source references.
     parser.MARKDOWN_DECORATION = re.compile(r"[`*~]")
 
+    # Scope IDs and project paths are stable compatibility identifiers. Only the
+    # presentation labels change when a department adopts a new canonical name.
+    _canonical_scope_labels = {
+        "main-assistant": "Chief of Staff HQ",
+        "logistics": "Life OS Maintenance HQ",
+    }
+    parser.SCOPES = tuple(
+        (
+            scope_id,
+            _canonical_scope_labels.get(scope_id, label),
+            project_path,
+        )
+        for scope_id, label, project_path in parser.SCOPES
+    )
+
     _original_parse_open_loops = parser.DepartmentInspectionSource._parse_open_loops
     _original_parse_notebook = parser.DepartmentInspectionSource._parse_notebook
     _original_table_record = parser.DepartmentInspectionSource._table_record
