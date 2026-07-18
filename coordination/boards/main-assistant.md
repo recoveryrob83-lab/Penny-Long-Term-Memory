@@ -1,13 +1,15 @@
-# Main Assistant Advisory Board
+# Chief of Staff HQ Advisory Board
 
-Updated: 2026-07-16
-Purpose: Advisories to or from Main Assistant / Daily Operations.
+Updated: 2026-07-18
+Purpose: Canonical advisory text sourced from Chief of Staff HQ, including formal advisories arising from LifeOS HQ meetings. The retained filesystem path remains `coordination/boards/main-assistant.md`.
 
 ## Open Advisories
 
 None.
 
 ## Acknowledged / Implemented Advisories
+
+Historical entries below retain names and wording that were accurate when they were created.
 
 ### ADV-20260716-038 — Explore a read-mostly LifeOS desktop dashboard window
 
@@ -57,7 +59,7 @@ No software implementation was authorized or performed under this advisory. The 
 
 #### Outcome
 
-Rob confirmed that all seven LifeOS department discussion HQ chats are open and ready. The operating model preserves Chat/Work separation, explicit department boundaries, truthful connector reporting, Main Assistant coordination, and Rob's final authority. No separate prompt-design advisory work remains.
+Rob confirmed that all seven LifeOS department discussion HQ chats are open and ready. The operating model preserves Chat/Work separation, explicit department boundaries, connector rules, truthful action reporting, Main Assistant coordination, and Rob's final authority. No separate prompt-design advisory work remains.
 
 ### ADV-20260715-035 — Standardize Rob's friction-aware daily operating pattern
 
@@ -90,8 +92,13 @@ Engineering verified that `memory/06_DAILY_OPERATING_SOP.md` is included in the 
 
 Engineering defined a technology-independent worker contract. Life Logistics implemented the formal worker layer and Penny Raw Capture Worker package under ADV-20260709-030. No separate work remains.
 
-## Notes
+## Current Board Rules
 
-Main Assistant should read `coordination/ADVISORY_INDEX.md` first rather than scanning every board.
-
-This board keeps current open items and a bounded recent completed working set. Git history preserves prior detail removed during compaction.
+- Read `coordination/ADVISORY_INDEX.md` first rather than scanning every board.
+- This retained path is the Chief of Staff HQ source board despite its legacy filename.
+- When an advisory arises from a LifeOS HQ meeting, identify its source as `Chief of Staff HQ / LifeOS HQ`.
+- LifeOS HQ does not maintain a separate advisory board.
+- Keep canonical advisory text here and routing state in the Advisory Index.
+- Do not duplicate advisory text into target boards or matching department open loops merely for visibility.
+- Do not mark an advisory implemented or closed without verified handling.
+- Keep all open advisories in enough detail to act and a bounded recent completed working set. Git history preserves older detail removed during compaction.
