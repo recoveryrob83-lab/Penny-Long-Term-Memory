@@ -51,7 +51,8 @@ GitHub stores pointers, rules, abstract state, and open loops. It does not store
 - Engineering HQ owns software, automation, APIs, dashboard implementation, validators, testing, and technical implementation.
 - Chief of Staff HQ owns daily operations, cross-department synthesis, report intake, assignment routing, practical coordination, and follow-through. It does not own Finance judgment or records.
 - Life OS Maintenance HQ owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, migrations, and reconciliation. It does not own Finance's routine durable state.
-- Wellness HQ owns health and medical matters.
+- Health Medical HQ owns symptoms, diagnosis, treatment, medication, appointments, medical records, clinical decisions, and medical continuity where that domain applies.
+- Wellness HQ owns non-clinical wellbeing, pacing, routines, self-care, emotional-regulation support, and recovery-support context within scope.
 - LifeOS HQ is the shared meeting room. It has no independent backlog or department authority.
 - Rob remains the final authority.
 
