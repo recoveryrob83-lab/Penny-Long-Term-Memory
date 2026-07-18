@@ -8,11 +8,11 @@ Purpose: Define how departments maintain their own durable GitHub state while mi
 
 Each department is responsible for maintaining the GitHub files and sections within its own domain.
 
-The department that owns the working context should normally update the durable record directly rather than routing routine maintenance through Life Logistics HQ.
+The department that owns the working context should normally update the durable record directly rather than routing routine maintenance through Life OS Maintenance HQ.
 
 Short form:
 
-> Departments maintain their own rooms. Main coordinates the building. Logistics maintains the hallways.
+> Departments maintain their own rooms. Chief of Staff coordinates. Life OS Maintenance protects the shared operating system.
 
 ## Companion Governance Rules
 
@@ -29,9 +29,9 @@ Raw ideas normally remain in Trello until they pass the promotion gate. Departme
 
 ## Why This Rule Exists
 
-The ideal architecture would automate cross-department synchronization, advisory consumption, and routine memory maintenance. The current platform does not provide a reliable low-friction way to automate seven department chats and their advisories.
+The ideal architecture would automate cross-department synchronization, advisory consumption, and routine memory maintenance. The current platform does not provide a reliable low-friction way to automate the seven department HQ chats and their advisories.
 
-Routing every routine change through Rob and then through Logistics creates unnecessary switching, delay, and cognitive load. Because each department chat already holds the most current working context for its domain, that department is usually best positioned to detect and correct drift.
+Routing every routine change through Rob and then through Life OS Maintenance HQ creates unnecessary switching, delay, and cognitive load. Because each department chat already holds the most current working context for its domain, that department is usually best positioned to detect and correct drift.
 
 Reality takes priority over architectural purity when the cleaner design makes Rob the manual message bus.
 
@@ -62,35 +62,40 @@ During routine work, syncs, and boots, the department should:
 9. Use explicit canonical lifecycle state and priority rather than combined or improvised labels.
 10. Preserve raw possibilities in Trello until ownership, outcome, next action or review trigger, destination, and authorization are clear.
 
-## Main Assistant Responsibilities
+## Chief of Staff HQ Responsibilities
 
-Main Assistant owns:
+Chief of Staff HQ owns:
 
-- cross-department coordination
-- routing and synthesis
-- shared policies and system-level decisions
-- identifying when a local department change has broader consequences
-- deciding when an advisory or coordinated update is warranted
-- supporting low-friction idea capture without creating accidental commitments
-- helping clarify ownership and destination before promotion
+- daily operations and executive-function support;
+- chairing LifeOS HQ;
+- cross-department coordination and synthesis;
+- routing assignments, decisions, reports, and follow-through;
+- identifying when a local department change has broader consequences;
+- deciding when an advisory or coordinated update is warranted;
+- supporting low-friction idea capture without creating accidental commitments;
+- helping clarify ownership and destination before promotion.
 
-Main should not become the routine editor of every department's internal files or promote every useful idea into system memory.
+Chief of Staff HQ should not become the routine editor of every department's internal files or promote every useful idea into system memory.
 
-## Life Logistics Responsibilities
+## Life OS Maintenance HQ Responsibilities
 
-Life Logistics HQ owns shared operational infrastructure and cross-system hygiene, including:
+Life OS Maintenance HQ owns shared operational infrastructure, governance, and cross-system hygiene, including:
 
-- global boot and routing integrity
-- shared operating procedures
-- advisory index hygiene
-- cross-project audits
-- system open-loop and architecture review
-- detecting conflicts between departments
-- repository-path, migration, archive, and shared-infrastructure work
-- system-wide housekeeping when requested
-- auditing durable-write promotion, source boundaries, duplicate ownership, and canonical tag drift
+- global boot and routing integrity;
+- global handoffs and operating rules;
+- shared operating procedures;
+- advisory-index and board hygiene;
+- cross-project audits and drift detection;
+- system open-loop and architecture review;
+- source-of-truth and ownership enforcement;
+- repository-path, migration, archive, and shared-infrastructure work;
+- system-wide housekeeping when requested and authorized;
+- reconciliation between the Drive Chief's Manual, Project Instructions, and GitHub implementation;
+- auditing durable-write promotion, source boundaries, duplicate ownership, and canonical tag drift.
 
-Logistics is not the default implementation bottleneck for routine department file maintenance.
+Life OS Maintenance HQ is not the default implementation bottleneck for routine department file maintenance.
+
+Maintenance detects department-local drift and routes precise corrections. It does not silently edit another department's files without explicit coordinated-repair authority.
 
 ## Durable Write Threshold
 
@@ -115,11 +120,11 @@ Do not create an advisory for routine maintenance confined to one department.
 
 Use an advisory when:
 
-- another department must act or decide
-- a change affects multiple departments
-- a shared policy or architecture boundary changes
-- a dependency, conflict, risk, or handoff must be durably communicated
-- Rob asks for formal cross-department routing
+- another department must act or decide;
+- a change affects multiple departments;
+- a shared policy or architecture boundary changes;
+- a dependency, conflict, risk, or handoff must be durably communicated;
+- Rob asks for formal cross-department routing.
 
 Routine local edits should remain local.
 
@@ -129,16 +134,16 @@ A department should not casually edit shared or another department's canonical f
 
 When a change touches:
 
-- `memory/STARTUP_BOOT.md`
-- `memory/05_OPEN_LOOPS.md`
-- global operating rules or SOPs
-- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
-- shared coordination files
-- another department's project subtree
-- the Advisory Index
-- system architecture files
+- `memory/STARTUP_BOOT.md`;
+- `memory/05_OPEN_LOOPS.md`;
+- global operating rules or SOPs;
+- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`;
+- shared coordination files;
+- another department's project subtree;
+- the Advisory Index;
+- system architecture files;
 
-route through Main Assistant, Life Logistics, the owning department, or an explicit coordinated action as appropriate.
+route through Chief of Staff HQ, Life OS Maintenance HQ, the owning department, or an explicit coordinated action as appropriate.
 
 System files must not become mirrors of department backlogs. When shared coordination is genuinely needed, use the compact coordination-record rules in `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`.
 
