@@ -1,0 +1,1 @@
+"""Protected canonical prompt catalog."""
