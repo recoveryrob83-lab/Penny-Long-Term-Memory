@@ -7,7 +7,7 @@ Purpose: Track genuinely system-owned unfinished work and operating watches with
 
 | Status | Priority | Item | Lead | Next Action | Completion / Review Condition |
 |---|---|---|---|---|---|
-| Active | Normal | Department ownership and role-routed boot verification | Engineering HQ | Observe ordinary specialist boots after the shared architecture update and inspect only demonstrated defects | Close after role-routed operation remains clean and no system wrapper is needed for local department work |
+| Active | Normal | Department ownership and role-routed boot verification | Engineering HQ | Run the fresh LifeOS HQ read-only verification, then observe ordinary specialist boots and inspect only demonstrated defects | Close after the new Hub verification and ordinary role-routed operation confirm that no system coordination wrapper is still needed |
 | Active | Normal | Idea intake and durable-promotion governance rollout | Chief of Staff HQ and Life OS Maintenance HQ | Apply Trello stages and canonical durable fields in real workflows, then refine only from observed friction | Review after sustained use; do not automate promotion until the human workflow is stable and validated |
 
 Canonical records:
@@ -17,7 +17,7 @@ Canonical records:
 - `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
 - `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
 
-Remaining department-local corrections identified by the audit are not copied here as separate system tasks. They remain owner-routed Phase Two candidates for Finance HQ, Wellness HQ, Business HQ, Office Leaks HQ, and Engineering HQ. Automation labels, prompts, dashboard surfaces, and tests remain Engineering-owned.
+Phase Two owner-routed naming, authority, ownership, and pointer repairs are complete across Chief of Staff HQ, Life OS Maintenance HQ, Engineering HQ, Finance HQ, Business HQ, Office Leaks HQ, and Wellness HQ. Residual documentation and classification drift identified during the 2026-07-18 verification was repaired under Rob's coordinated-repair authority. Automation labels, compatibility mappings, prompts, dashboard surfaces, databases, schedules, and tests remain Engineering-owned Package B work.
 
 ## Current System Operating Watches
 
@@ -25,7 +25,7 @@ Remaining department-local corrections identified by the audit are not copied he
 - **Chief of Staff overload:** Chief of Staff coordinates, routes, receives reports, and follows through. Watch for coordination silently becoming ownership of every department's work.
 - **Maintenance overreach:** Life OS Maintenance audits and protects shared infrastructure. Watch for it silently editing department-local state without coordinated-repair authority.
 - **Engineering governance drift:** Engineering may lead technical system work. Watch for technical control becoming permanent ownership of governance or source records.
-- **Eight-room naming drift:** Preserve one Hub plus seven department HQs. Translate legacy Main Assistant and Logistics labels until the owning files and automation are deliberately updated.
+- **Eight-room naming drift:** Preserve one Hub plus seven department HQs. Current operational documentation uses canonical names; translate only the remaining Engineering-owned automation compatibility labels until Package B is completed.
 - **Department ownership drift:** Use the read-only Department Inspection view to detect department work mirrored globally, duplicated across departments, mixed lifecycle and priority fields, speculative placeholders, stale closed/open conflicts, noncanonical statuses, and ambiguous notebook metadata.
 - **Idea promotion drift:** Watch for raw ideas entering GitHub as accidental commitments, promoted Trello cards becoming competing ledgers, free-form tag synonyms, unowned work, fake urgency, and durable records without next actions or review triggers.
 - **Boot routing integrity:** Confirm LifeOS HQ reads meeting-room state, Chief of Staff receives broad coordination context, Life OS Maintenance receives system-maintenance context, and specialists load only their kernel, local files, and routed dependencies.
@@ -36,6 +36,7 @@ Remaining department-local corrections identified by the audit are not copied he
 
 ## Recently Closed System Work
 
+- 2026-07-18: Reconciled the post-Phase-Two residual drift set across shared, Maintenance, Chief of Staff, Engineering, and Finance operational surfaces; preserved valid historical evidence and stable compatibility keys while removing stale pending-work and legacy-role instructions.
 - 2026-07-18: Verified the deployed ChatGPT Life OS Project Settings text against `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`; Layer Zero matches the canonical paste-ready source, no additional manual deployment is pending, and the eight-room system wrapper was closed while remaining local repairs stayed owner-routed.
 - 2026-07-18: Adopted the official eight-room authority model: LifeOS HQ as meeting room, Chief of Staff HQ as Rob's primary point of contact and Hub chair, and Life OS Maintenance HQ as the renamed global GitHub maintenance and governance department.
 - 2026-07-18: Created `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md` and updated the canonical Project Instructions, boot route, naming standard, command vocabulary, system handoff, active project map, and system loops for Phase One.
