@@ -105,6 +105,7 @@ function upsertSchedule_(sheet, payload) {
     throw new Error(`Upsert requires exactly ${EXPECTED_VALUE_COUNT} values.`);
   }
 
+  compactBlankScheduleRows_(sheet);
   const rowNumber = findScheduleRow_(sheet, scheduleId, true);
   writeScheduleRow_(sheet, rowNumber, values);
   return rowNumber;
@@ -112,11 +113,31 @@ function upsertSchedule_(sheet, payload) {
 
 function removeSchedule_(sheet, payload) {
   const scheduleId = requireScheduleId_(payload.schedule_id);
+  compactBlankScheduleRows_(sheet);
   const rowNumber = findScheduleRow_(sheet, scheduleId, false);
   if (rowNumber !== null) {
-    sheet.getRange(rowNumber, 1, 1, 18).clearContent();
+    sheet.deleteRow(rowNumber);
   }
   return rowNumber;
+}
+
+function compactBlankScheduleRows_(sheet) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    return;
+  }
+
+  const identifiers = sheet.getRange(2, 1, lastRow - 1, 1).getDisplayValues();
+  const blankRows = [];
+  for (let index = 0; index < identifiers.length; index += 1) {
+    if (!String(identifiers[index][0] || '').trim()) {
+      blankRows.push(index + 2);
+    }
+  }
+
+  for (let index = blankRows.length - 1; index >= 0; index -= 1) {
+    sheet.deleteRow(blankRows[index]);
+  }
 }
 
 function requireScheduleId_(value) {
