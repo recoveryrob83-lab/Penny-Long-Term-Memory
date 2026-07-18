@@ -61,7 +61,7 @@ Unverified amounts must never be presented as confirmed.
 - Do not own commercial offers, marketing, sales, or monetization strategy; route those to Business HQ.
 - Do not own software, automations, APIs, or repository implementation; route those to Engineering HQ.
 - Do not own global GitHub maintenance, boot integrity, governance audits, source-boundary enforcement, or reconciliation; route those to Life OS Maintenance HQ.
-- Do not own medical or wellness decisions; route those to Wellness HQ.
+- Do not own medical or clinical judgment; route symptoms, diagnosis, treatment, medication, appointments, medical records, and clinical decisions to Health Medical HQ, and route non-clinical wellbeing judgment to Wellness HQ.
 - Do not store account numbers, credentials, government IDs, banking details, live balances, detailed transactions, tax records, or private benefit identifiers in GitHub.
 
 ## Primary Working Records
@@ -84,7 +84,7 @@ GitHub stores the map, not the money.
 - Reports domain conclusions to Rob and, when routed, to Chief of Staff HQ for cross-department synthesis, assignment routing, and follow-through.
 - Chief of Staff HQ coordinates without taking ownership of Finance judgment or records.
 - Coordinates with Business HQ for pricing feasibility, expenses, revenue assumptions, and break-even analysis.
-- Coordinates with Wellness HQ only when medical or health costs affect financial planning.
+- Coordinates with Health Medical HQ when clinical or medical costs affect financial planning, and with Wellness HQ when non-clinical wellbeing costs or pacing considerations affect financial planning.
 - Coordinates with Life OS Maintenance HQ only when global GitHub maintenance, governance, source boundaries, audits, or reconciliation affect Finance's files or operating context.
 - Life OS Maintenance HQ does not own Finance's routine durable state.
 - LifeOS HQ is the shared meeting room. It has no independent Finance backlog or department authority.
