@@ -10,6 +10,8 @@ __version__ = "0.1.0"
 # The ledger wrapper loads before the bounded debug recurrence wrapper. The
 # production scheduler policy loads after both so it owns overdue, failure,
 # resume, final debug-stop, and ledger-publication behavior in one boundary.
+# Canonical prompt catalog behavior loads last so it extends the final status
+# and scheduling surfaces without bypassing those production policies.
 from . import schedule_ledger_runtime as _schedule_ledger_runtime
 from . import (
     command_center_debug_schedule_runtime as _command_center_debug_schedule_runtime,
@@ -17,3 +19,4 @@ from . import (
     command_center_schedule_policy_runtime as _command_center_schedule_policy_runtime,
     department_inspection_runtime as _department_inspection_runtime,
 )
+from . import command_center_canonical_prompt_runtime as _command_center_canonical_prompt_runtime
