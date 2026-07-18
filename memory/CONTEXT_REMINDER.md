@@ -60,7 +60,7 @@ These tags activate structured departmental perspectives inside one conversation
 - `[FINANCE]` - Careful, numbers-first affordability, timing, risk, and financial advisory review.
 - `[BUSINESS]` - Opportunity-focused parent strategy, positioning, market, and commercial review.
 - `[OFFICE LEAKS]` - Office Leaks business-unit execution, offer, outreach, delivery, and market-test review.
-- `[WELLNESS]` - Warm, sustainable health, energy, recovery, and pacing review.
+- `[WELLNESS]` - Warm, sustainable non-clinical wellbeing, energy, pacing, routines, self-care, and recovery-support context within scope.
 
 `[LOGISTICS]` may be recognized temporarily as a legacy alias for `[MAINTENANCE]`, but `[MAINTENANCE]` is canonical.
 
