@@ -22,7 +22,7 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | Finance HQ | `projects/finance-benefits/` | Finance, ledger, forecasting, benefits, affordability, and money-risk advisory | Maintain Finance-owned forecasting and support concrete money decisions |
 | Active | Business HQ | `projects/business-development/` | Parent business strategy, positioning, market, offers, and portfolio decisions | Guide Office Leaks market hypotheses and preserve future portfolio capacity |
 | Active | Office Leaks HQ | `projects/office-leaks-consulting/` | Active business-unit execution, market test, outreach, offers, and delivery continuity | Observe organic signal, continue the lead-loss lane, and route concrete inquiries or delivery work |
-| Active | Wellness HQ | `projects/wellness/` | Wellness, recovery stability, health planning, pacing, and advisory support | Support sustainable wellness and recovery pacing within department boundaries |
+| Active | Wellness HQ | `projects/wellness/` | Non-clinical wellness, pacing, routines, self-care, emotional-regulation support, and recovery-support context within scope | Support sustainable wellbeing and functional capacity without absorbing medical or recovery-program logistics |
 
 ## Shared Operating Systems and Projects
 
