@@ -38,13 +38,16 @@ When Rob names a department, project, or worker, use that route. Do not broaden 
 Departments, projects, Main Assistant, Logistics, and general LifeOS coordination read these files in order:
 
 1. `memory/STARTUP_BOOT.md`
-2. `memory/00_START_HERE.md`
-3. `memory/CONTEXT_REMINDER.md`
-4. `memory/03_OPERATIONAL_RULES.md`
-5. `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
-6. `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
-7. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
-8. `memory/06_DAILY_OPERATING_SOP.md`
+2. `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`
+3. `memory/00_START_HERE.md`
+4. `memory/CONTEXT_REMINDER.md`
+5. `memory/03_OPERATIONAL_RULES.md`
+6. `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+7. `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
+8. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
+9. `memory/06_DAILY_OPERATING_SOP.md`
+
+ChatGPT Project Instructions are Layer Zero and may already be active before boot. The GitHub copy is the versioned canonical deployment source used to verify, audit, and reconcile the deployed Project Settings text.
 
 The universal kernel defines identity, command meaning, safety, source boundaries, file ownership, open-loop ownership, Chat versus Work usage, and the default daily operating standard.
 
