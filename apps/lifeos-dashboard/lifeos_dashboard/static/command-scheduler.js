@@ -120,7 +120,9 @@ function scheduleState(schedule) {
 }
 
 function isFinishedOneTime(schedule) {
-  return schedule.cadence === "once" && !schedule.next_run_at && Boolean(schedule.last_status);
+  return schedule.cadence === "once"
+    && !schedule.next_run_at
+    && ["succeeded", "failed", "refused"].includes(schedule.last_status);
 }
 
 function matchesStateFilter(schedule) {
@@ -156,7 +158,11 @@ function filteredSchedules() {
     if (sort === "recent") return recentTime(right) - recentTime(left) || Number(right.id) - Number(left.id);
     const leftNext = left.next_run_at ? Number(left.next_run_at) : Number.POSITIVE_INFINITY;
     const rightNext = right.next_run_at ? Number(right.next_run_at) : Number.POSITIVE_INFINITY;
-    return leftNext - rightNext || String(left.name || "").localeCompare(String(right.name || ""));
+    if (leftNext !== rightNext) return leftNext - rightNext;
+    if (!Number.isFinite(leftNext)) {
+      return recentTime(right) - recentTime(left) || Number(right.id) - Number(left.id);
+    }
+    return String(left.name || "").localeCompare(String(right.name || ""));
   });
 }
 
