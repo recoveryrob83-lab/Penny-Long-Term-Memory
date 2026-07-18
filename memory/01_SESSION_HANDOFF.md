@@ -80,7 +80,7 @@ Short form:
 
 > The Hub is the table. Chief of Staff chairs. Departments own their work. Maintenance protects the system. Rob decides.
 
-## Phase One Governance Alignment
+## Phase One and Phase Two Governance Alignment
 
 Adopted by Rob on 2026-07-18:
 
@@ -92,7 +92,7 @@ Adopted by Rob on 2026-07-18:
 - Hub-originated formal advisories use the retained Chief of Staff source-board path `coordination/boards/main-assistant.md` plus the Advisory Index;
 - existing project paths remain unchanged during the naming transition.
 
-Phase One updated the constitutional and shared-system layer. Chief of Staff HQ and Life OS Maintenance HQ have completed their local successor-role repairs. Remaining department-local identity, handoff, status, open-loop, notebook, and procedure corrections stay owner-routed to Finance HQ, Wellness HQ, Business HQ, Office Leaks HQ, or Engineering HQ. Automation labels and code remain Engineering-owned.
+Phase One updated the constitutional and shared-system layer. Phase Two owner-routed naming, authority, ownership, and pointer repairs are complete across Chief of Staff HQ, Life OS Maintenance HQ, Engineering HQ, Finance HQ, Business HQ, Office Leaks HQ, and Wellness HQ. The post-implementation verification identified a small residual set of stale status, present-tense legacy-role, Wellness-scope, and open-loop-classification defects; Rob authorized coordinated repair, and those operational surfaces were reconciled on 2026-07-18. Automation labels, compatibility mappings, prompts, dashboard surfaces, databases, schedules, and tests remain Engineering-owned Package B work.
 
 The deployed ChatGPT Life OS Project Settings copy was verified on 2026-07-18 against the paste-ready section of:
 
@@ -134,7 +134,7 @@ Scheduling is operational but not yet production-ready for fully unattended Wind
 
 Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after the unattended-operation boundary is safe enough.
 
-Current automation labels still use `Main Assistant HQ` and `Logistics HQ`. The Hub Operating Contract translates those legacy labels until Engineering receives authorization to update code, prompts, dashboard labels, and tests.
+Current automation labels still use `Main Assistant HQ` and `Logistics HQ`. The Hub Operating Contract translates those compatibility labels until Engineering completes Package B updates to visible labels, canonical prompts, mappings, dashboard surfaces, and tests while preserving stable keys and persisted state.
 
 ## Chat and Work Architecture
 
@@ -222,9 +222,9 @@ Consolidated or dormant domains remain preserved rather than deleted.
 
 ## Best Next System Actions
 
-1. Route Phase Two department-local naming and authority repairs to Finance HQ, Wellness HQ, Business HQ, Office Leaks HQ, and Engineering HQ without creating duplicate system tasks.
-2. Route automation label, prompt, dashboard, and test updates to Engineering under separate authority.
-3. Verify ordinary role-routed boots after each owning department completes its local repairs.
+1. Launch the fresh LifeOS HQ chat and perform its separate read-only Hub verification against the completed Phase Two state.
+2. Begin Engineering Package B after the new Hub verification, preserving stable destination keys, saved prompts, schedules, databases, and run history.
+3. Observe ordinary role-routed boots and inspect only newly demonstrated defects rather than reopening completed repair packages.
 4. Refresh the Department Inspector after meaningful source changes and inspect any real findings individually.
 
 ## Guiding Principle
