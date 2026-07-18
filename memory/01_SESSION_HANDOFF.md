@@ -92,13 +92,13 @@ Adopted by Rob on 2026-07-18:
 - Hub-originated formal advisories use the retained Chief of Staff source-board path `coordination/boards/main-assistant.md` plus the Advisory Index;
 - existing project paths remain unchanged during the naming transition.
 
-Phase One updates the constitutional and shared-system layer only. Department-local identity, handoff, status, open-loop, notebook, and procedure files remain for owner-routed Phase Two work. Automation labels and code also remain Engineering-owned and are not changed by this phase.
+Phase One updated the constitutional and shared-system layer. Chief of Staff HQ and Life OS Maintenance HQ have completed their local successor-role repairs. Remaining department-local identity, handoff, status, open-loop, notebook, and procedure corrections stay owner-routed to Finance HQ, Wellness HQ, Business HQ, Office Leaks HQ, or Engineering HQ. Automation labels and code remain Engineering-owned.
 
-The canonical GitHub Project Instructions have changed. The deployed ChatGPT Project Settings copy must be manually replaced from the paste-ready section of:
+The deployed ChatGPT Life OS Project Settings copy was verified on 2026-07-18 against the paste-ready section of:
 
 - `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`
 
-Until that manual replacement occurs, governance-sensitive work should notice and disclose the deployment drift rather than pretending the copies match.
+The deployed copy matches the canonical Layer Zero text. No additional manual replacement is pending. Future governance-sensitive work should use the GitHub file as the deployment source and reopen reconciliation only when a demonstrated difference appears.
 
 ## Department Inspection Evidence
 
@@ -222,12 +222,10 @@ Consolidated or dormant domains remain preserved rather than deleted.
 
 ## Best Next System Actions
 
-1. Manually replace the Life OS Project Settings instructions from the canonical paste-ready GitHub section.
-2. Fresh boot LifeOS HQ and verify the meeting-room contract.
-3. Fresh boot Chief of Staff HQ and verify the primary-point-of-contact role.
-4. Authorize and route Phase Two department-local repairs to each owning department.
-5. Route automation label and canonical-prompt updates to Engineering under separate authority.
-6. Refresh the Department Inspector after the source changes and inspect any real findings individually.
+1. Route Phase Two department-local naming and authority repairs to Finance HQ, Wellness HQ, Business HQ, Office Leaks HQ, and Engineering HQ without creating duplicate system tasks.
+2. Route automation label, prompt, dashboard, and test updates to Engineering under separate authority.
+3. Verify ordinary role-routed boots after each owning department completes its local repairs.
+4. Refresh the Department Inspector after meaningful source changes and inspect any real findings individually.
 
 ## Guiding Principle
 
