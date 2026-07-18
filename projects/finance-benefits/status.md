@@ -1,12 +1,12 @@
-# Finance Benefits Status
+# Finance HQ Status
 
-Updated: 2026-07-15
-Project: Chief of Finance Penny / Finance Benefits HQ
+Updated: 2026-07-18
+Project: Finance HQ
 Status: Active
 
 ## Current State
 
-Chief of Finance Penny is active as the finance, ledger, forecasting, budget, bills, income-planning, subscription, cost-review, and benefits department.
+Finance HQ is active as the finance, ledger, forecasting, budget, bills, income-planning, subscription, cost-review, and benefits department.
 
 The working financial record is in Google Drive, not GitHub. GitHub stores only abstract state, rules, pointers, and open loops.
 
@@ -62,9 +62,17 @@ Drive working records:
 3. Reconcile discrepancies before relying on the ledger balance.
 4. Keep forecast activity in a separate view.
 5. Track bills, income, subscriptions, benefits, and paperwork when real inputs exist.
-6. Support Office Leaks pricing and expense decisions when Business defines concrete scope.
-7. Route reminders to Logistics, Todoist, or Calendar only when Rob asks.
+6. Support Office Leaks pricing and expense decisions when Business HQ defines concrete scope.
+7. Route requested reminders, deadlines, transportation coordination, and follow-through through Chief of Staff HQ, Todoist, or Calendar as appropriate.
 8. Keep GitHub free of sensitive financial data.
+
+## Architecture Alignment
+
+- Finance HQ owns financial judgment, budgeting, forecasting, affordability, benefits, financial planning, Finance records, and Finance open loops.
+- Chief of Staff HQ receives reports, coordinates cross-department work, routes assignments, and follows through without owning Finance judgment or records.
+- Life OS Maintenance HQ owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, and reconciliation. It does not own Finance's routine durable state.
+- LifeOS HQ is the shared meeting room and has no independent Finance backlog or department authority.
+- Rob remains the final authority.
 
 ## Guardrail
 
