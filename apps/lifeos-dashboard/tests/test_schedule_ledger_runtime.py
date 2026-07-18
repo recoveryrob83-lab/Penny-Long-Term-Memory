@@ -7,9 +7,10 @@ from lifeos_dashboard.schedule_ledger import schedule_state
 
 
 class FakeLedger:
-    def __init__(self) -> None:
+    def __init__(self, *, remove_success: bool = True) -> None:
         self.records: list[dict[str, object]] = []
         self.removed: list[int] = []
+        self.remove_success = remove_success
 
     def record_schedule(self, schedule: dict[str, object]) -> bool:
         self.records.append(dict(schedule))
@@ -17,7 +18,7 @@ class FakeLedger:
 
     def remove_schedule(self, schedule_id: int) -> bool:
         self.removed.append(schedule_id)
-        return True
+        return self.remove_success
 
     def status(self) -> dict[str, object]:
         return {
@@ -77,6 +78,19 @@ def test_schedule_create_pause_and_delete_publish_current_row(tmp_path: Path) ->
     assert ledger.records[-1]["enabled"] is False
     assert deleted is True
     assert ledger.removed == [int(created["id"])]
+
+
+def test_delete_preserves_local_definition_when_mirror_remove_fails(tmp_path: Path) -> None:
+    service, ledger = build_service(tmp_path)
+    created = service.create_schedule(schedule_values())
+    schedule_id = int(created["id"])
+    ledger.remove_success = False
+
+    deleted = service.delete_schedule(schedule_id)
+
+    assert deleted is False
+    assert ledger.removed == [schedule_id]
+    assert service.store.get_schedule(schedule_id) is not None
 
 
 def test_scheduled_result_updates_same_schedule_snapshot(
