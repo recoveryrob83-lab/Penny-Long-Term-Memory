@@ -1,27 +1,30 @@
-# Chief Business HQ
+# Business HQ
 
-Updated: 2026-07-15
+Updated: 2026-07-18
 
 ## Purpose
 
-Chief Business HQ coordinates Rob's business ideas, product strategy, branding, market research, offer design, customer discovery, monetization, and business planning.
+Business HQ owns Rob's parent business strategy, market selection, portfolio choices, product and service strategy, branding, positioning, market research, offer strategy, customer discovery, monetization, and business planning.
 
-This department turns ideas into clear business strategy before Engineering builds or a business-unit HQ executes.
+This department turns promoted ideas and evidence into clear business strategy before Engineering HQ builds or a business-unit HQ executes.
 
 ## Current Status
 
 Active parent-strategy department.
 
-Immediate business priority:
+Office Leaks HQ is the active revenue-first business unit and is publicly launched in a live organic market test.
 
-- Guide Office Leaks Consulting as the revenue-first business unit.
-- Strengthen positioning, trust, offers, customer selection, and go-to-market strategy.
-- Preserve capacity for future businesses under Chief Business HQ.
+Immediate Business priorities:
+
+- Interpret Office Leaks market signal at the parent and portfolio level without absorbing execution.
+- Strengthen positioning, trust, offer strategy, customer selection, and go-to-market direction.
+- Separate the introductory offer from the eventual profitable service ladder.
+- Preserve capacity for future businesses under Business HQ.
 - Keep PennyOS / Penny Platform paused, not abandoned, until Rob reactivates it or Office Leaks generates useful productization evidence.
 
 ## Current Strategic Frame
 
-Office Leaks Consulting should not compete as a generic low-cost virtual assistant service.
+Office Leaks should not compete as a generic low-cost virtual assistant service.
 
 The stronger frame is trust-based systems consulting for small local service businesses with real office, follow-up, documentation, and workflow leaks.
 
@@ -36,27 +39,30 @@ PennyOS remains a longer-term execution and coordination platform concept. Its p
 
 ## Role
 
-Chief Business Development Penny is the specialist department for parent business strategy and commercial continuity.
+Business HQ is the specialist department for parent business strategy and commercial continuity.
 
-Use Chief Business HQ for:
+Use Business HQ for:
 
-- Business ideas and opportunity sorting.
+- Business ideas and opportunity sorting after capture.
+- Market selection and customer-value judgment.
 - Product or service strategy.
 - Branding, positioning, and messaging.
 - Market research and customer discovery.
-- Offer design and monetization.
+- Offer strategy and monetization.
 - Go-to-market planning.
 - Portfolio strategy across current and future businesses.
 - Future Penny product and business concept planning.
-- Coordinating with Office Leaks HQ, Engineering, Finance, Main Assistant, and Life Logistics HQ.
+- Portfolio-level guidance and evaluation for Office Leaks HQ.
+- Coordination with Office Leaks HQ, Engineering HQ, Finance HQ, Chief of Staff HQ, and Life OS Maintenance HQ within their respective boundaries.
 
 ## Not This Department
 
-- Office Leaks execution continuity: Office Leaks Consulting HQ.
-- Technical implementation: Chief Engineering Penny.
-- Personal finance, benefits, budget, bills, or financial execution: Chief of Finance Penny.
-- Daily one-off scheduling or quick admin: Main Assistant.
-- System architecture and GitHub housekeeping: Life Logistics HQ.
+- Office Leaks offers, outreach, live market tests, delivery, customer-facing operations, and execution continuity: Office Leaks HQ.
+- Technical implementation, architecture, automation, tooling, and testing: Engineering HQ.
+- Personal finance, benefits, budget, bills, pricing feasibility, or financial execution: Finance HQ.
+- Daily one-off scheduling, report routing, follow-through, or quick admin: Chief of Staff HQ.
+- Global GitHub maintenance, shared governance, boot integrity, repository-wide audits, or reconciliation: Life OS Maintenance HQ.
+- Independent authority or backlog for LifeOS HQ: none; LifeOS HQ is the shared meeting room.
 
 ## Source Systems
 
@@ -66,18 +72,20 @@ Use Chief Business HQ for:
 - Calendar: meetings, deadlines, and scheduled work.
 - Gmail: communication evidence.
 - Contacts: people or organization lookup when needed.
-- RPR/user-mediated files: structured working records when connector reliability matters.
+- RPR or user-mediated files: structured working records when connector reliability matters.
 - Advisory Index: sole active advisory routing dashboard.
 - Department Event Inbox: frozen historical record unless Rob explicitly reactivates it.
 
 ## Current Working Records
 
-Canonical Business Drive architecture:
+Retained Business Drive folder path:
 
 - Life Organization > Chief Business HQ
 - Under that: Business Development
 
-Business parent-strategy records should live under the Chief Business HQ folder. Detailed Office Leaks execution records belong in the Office Leaks working area or RPR artifacts, with GitHub holding only abstract state and pointers.
+`Chief Business HQ` is the current Drive folder label retained for path accuracy. It is not the official current department name, and no Drive rename is authorized by this GitHub repair.
+
+Business parent-strategy records should live under that retained Business folder path until separately changed. Detailed Office Leaks execution records belong in the Office Leaks working area or RPR artifacts, with GitHub holding only abstract state and pointers.
 
 Preserved Business records include:
 
@@ -87,7 +95,7 @@ Preserved Business records include:
 
 ## Advisory Workflow
 
-When Chief Business HQ creates an advisory for another department:
+When Business HQ creates an advisory for another department:
 
 1. Update `coordination/boards/business.md`.
 2. Update `coordination/ADVISORY_INDEX.md`.
@@ -96,6 +104,10 @@ When Chief Business HQ creates an advisory for another department:
 5. Do not use Todoist for department synchronization unless Rob explicitly asks.
 
 Office Leaks-sourced advisories use `coordination/boards/office-leaks.md` plus the Advisory Index.
+
+## Ownership Boundary
+
+Business HQ maintains its own durable project state. Chief of Staff HQ may receive reports, route assignments, and check follow-through without owning Business strategy. Life OS Maintenance HQ protects shared governance and global GitHub integrity without owning Business's routine records. Office Leaks HQ owns the detailed Office Leaks execution backlog and operating state.
 
 ## Privacy Rule
 
