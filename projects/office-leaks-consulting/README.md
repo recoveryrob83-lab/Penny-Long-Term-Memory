@@ -1,14 +1,14 @@
-# Office Leaks Consulting HQ
+# Office Leaks HQ
 
-Updated: 2026-07-09
-Parent Department: Chief Business HQ
-Status: Active business-unit HQ / Vice-President-level operating department
+Updated: 2026-07-18
+Parent Department: Business HQ
+Status: Active business-unit HQ / live market test
 
 ## Purpose
 
 Office Leaks Consulting is Rob's active revenue-first business unit for practical systems consulting with small local service businesses.
 
-It grew out of the Virtual Assistant Business worker project, but it is no longer merely a virtual assistant concept. It is now an official business-unit HQ under Chief Business HQ.
+It grew out of the Virtual Assistant Business worker project, but it is no longer merely a virtual assistant concept. It is now operated by Office Leaks HQ as an active business unit under Business HQ's parent-level strategy and portfolio judgment.
 
 Working promise:
 
@@ -23,11 +23,20 @@ Operating philosophy:
 
 ## Relationship To Business HQ
 
-Chief Business HQ remains the parent strategy department across Rob's possible future businesses.
+Business HQ owns parent-level business strategy, market selection, positioning, offer strategy, commercial priorities, portfolio thinking, and business-model decisions.
 
-Office Leaks Consulting HQ is a focused operating/business-unit department under Business HQ. It owns Office Leaks execution continuity, service development, delivery readiness, content/offer artifacts, and business-unit working state.
+Office Leaks HQ owns the active business unit's offers, outreach, sales activity, market tests, delivery design, operating playbooks, customer-facing execution, service development, delivery readiness, and routine durable state.
 
-Business HQ owns parent-level business strategy, portfolio thinking, cross-business decisions, and major positioning/business-model decisions.
+Business HQ may guide, evaluate, prioritize, or make portfolio-level decisions about Office Leaks. It does not duplicate the Office Leaks execution backlog or become the operational owner.
+
+## Coordination Model
+
+- LifeOS HQ is the shared meeting room and has no independent department authority or backlog.
+- Chief of Staff HQ coordinates, receives reports, routes assignments, and checks follow-through without owning Office Leaks strategy, execution, customer work, or records.
+- Life OS Maintenance HQ owns global GitHub maintenance, governance, audits, boot integrity, shared procedures, and reconciliation without owning Office Leaks' routine durable state.
+- Engineering HQ owns technical implementation, software, automation, delivery tooling, templates, and architecture when concrete.
+- Finance HQ owns cost-bearing decisions, affordability, pricing feasibility, startup costs, paid promotion, tool costs, tax set-aside, and financial risk when concrete.
+- Rob remains the final authority.
 
 ## Core Scope
 
@@ -42,11 +51,11 @@ Office Leaks Consulting focuses on:
 
 ## Primary Support Departments
 
-- Chief Business HQ: parent strategy, business model, positioning, portfolio decisions.
-- Chief Engineering Penny: delivery architecture, workflow templates, automation/tooling when concrete.
-- Chief of Finance Penny: pricing, startup costs, tool decisions, revenue tracking, tax set-aside, financial risk.
-- Main Assistant Penny: daily execution, scheduling, reminders, outreach support when routed.
-- Life Logistics HQ: cross-project routing, GitHub scaffold hygiene, boot/sync reliability.
+- Business HQ: parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment.
+- Engineering HQ: technical implementation, delivery architecture, workflow templates, automation, software, and tooling when concrete.
+- Finance HQ: cost-bearing decisions, pricing feasibility, startup costs, paid promotion, tool affordability, revenue tracking, tax set-aside, and financial risk.
+- Chief of Staff HQ: coordination, reports, assignment routing, scheduling, reminders, and authorized practical support without ownership transfer.
+- Life OS Maintenance HQ: global GitHub governance, boot integrity, shared operating infrastructure, audits, and reconciliation.
 
 ## Key References
 
@@ -67,7 +76,7 @@ Finance pointer:
 
 Legacy folder:
 
-- `projects/virtual-assistant-business/` is now legacy/redirect context. Official active state belongs here.
+- `projects/virtual-assistant-business/` is historical/redirect context. Active Office Leaks state belongs here. Its archival disposition is owned by Life OS Maintenance HQ under separate authority.
 
 ## Privacy Rule
 
