@@ -1,7 +1,7 @@
 # Penny Boot Log
 
-Updated: 2026-07-17
-Project: Life OS / Logistics HQ / Penny Long-Term Memory
+Updated: 2026-07-18
+Project: Life OS / Life OS Maintenance HQ / Penny Long-Term Memory
 Purpose: Historical architecture and workflow lessons. This file is not the current boot sequence or current-state handoff.
 
 ## Authority Notice
@@ -56,9 +56,9 @@ These are field observations, not claims about undocumented connector internals.
 
 ## Project Chat Architecture Lesson
 
-Departments maintain their own rooms. Main Assistant coordinates the building. Logistics maintains the hallways.
+Departments maintain their own rooms. Chief of Staff HQ coordinates daily operations and the meeting room. Life OS Maintenance HQ protects the shared operating system.
 
-Project chats create domain knowledge and maintain their own canonical files. Logistics owns shared infrastructure, global boot integrity, advisory hygiene, cross-project audits, and system-wide housekeeping.
+Project chats create domain knowledge and maintain their own canonical files. Life OS Maintenance HQ owns global boot integrity, shared governance, advisory infrastructure, audits, repository structure, source boundaries, and system reconciliation.
 
 ## Desktop Department Automation Milestone
 
@@ -93,6 +93,8 @@ The suite passed 16 tests. Guarded GitHub sync only fast-forwards a clean, stric
 
 Git history preserves the detailed evolution of earlier snapshots. Avoid reintroducing stale personal facts, old appointments, expired tasks, or superseded project state into current boot reports.
 
+Historical notes and prior commits may retain role names that were accurate when they were created.
+
 ## Working Principle
 
-GitHub is the map. Drive is the filing cabinet. Trello shows flow. Todoist owns commitments. Calendar owns time. Gmail owns communications. The dashboard shows selected state. Main Assistant coordinates daily life. Logistics maintains durable continuity.
+GitHub is the map. Drive is the filing cabinet. Trello shows flow. Todoist owns commitments. Calendar owns time. Gmail owns communications. The dashboard shows selected state. LifeOS HQ hosts the meeting. Chief of Staff HQ coordinates daily operations. Life OS Maintenance HQ protects durable continuity. Departments own their work. Rob decides.
