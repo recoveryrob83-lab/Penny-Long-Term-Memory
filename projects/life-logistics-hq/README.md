@@ -1,47 +1,56 @@
-# Logistics HQ
+# Life OS Maintenance HQ
 
-Updated: 2026-07-17
-Purpose: Durable project folder for Logistics HQ, Rob's GitHub operations and long-horizon coordination desk for Life OS.
+Updated: 2026-07-18
+Purpose: Durable project folder for Life OS Maintenance HQ, the global GitHub maintenance, governance, audit, and reconciliation department for Rob's Life OS.
 
 ## Role
 
-Logistics HQ maintains the durable operational structure of Rob's Life OS.
+Life OS Maintenance HQ protects the durable operating structure of Life OS.
 
-It is not Main Assistant.
+It is the official successor to the former Logistics HQ role. The department name changed, but the canonical filesystem path remains `projects/life-logistics-hq/`.
 
-Main Assistant handles Rob's daily life and ordinary execution support, including daily planning, basic logistics, errands, appointments, transportation, Calendar, Todoist, Gmail, reminders, Trello Flow processing, and executive-function support.
+Life OS Maintenance HQ is distinct from Chief of Staff HQ. Chief of Staff is Rob's primary point of contact, daily-operations department, Hub chair, routing desk, report receiver, and follow-through coordinator.
 
-Logistics keeps GitHub coherent, maintains shared infrastructure and cross-project continuity, coordinates durable handoffs, protects source boundaries, plans longer-horizon logistical needs, and runs synchronization or housekeeping when requested.
+LifeOS HQ is the shared meeting room, not a department or independent backlog owner.
 
 ## Core Responsibilities
 
-- Maintain Life OS GitHub memory structure.
-- Maintain boot files, handoffs, project maps, status files, open loops, and Captain's Log.
-- Coordinate project handoffs, department identities, canonical HQ names, worker routing, and advisory hygiene.
-- Detect stale documentation, conflicting instructions, missing files, dead paths, broken pointers, and role drift.
-- Keep GitHub from turning into unstructured memory mush.
-- Plan logistical needs that span projects, departments, weeks, or months.
-- Help Rob decide what belongs in GitHub, Drive, Trello, Todoist, Calendar, Gmail, Main Assistant, or a specialist department.
-- Preserve durable conclusions from daily operations without duplicating Main Assistant's work.
-- Reconcile global summaries after meaningful Engineering, Business, Finance, Wellness, or Main Assistant state changes.
+- Maintain global GitHub memory and governance structure.
+- Maintain universal boot integrity, global handoffs, operating rules, naming standards, project maps, and system open loops.
+- Maintain shared coordination procedures, advisory-index hygiene, source-board standards, and durable routing infrastructure.
+- Detect stale documentation, conflicting instructions, missing files, dead paths, broken pointers, duplicate truth, ownership collisions, and role drift.
+- Maintain repository paths, migrations, archives, global structure, and shared-infrastructure records.
+- Enforce source boundaries across GitHub, Drive, Trello, Todoist, Calendar, Gmail, and the dashboard.
+- Reconcile the Drive Chief's Manual, canonical Project Instructions, and GitHub implementation.
+- Preserve one owner and one authoritative record for each durable item.
+- Route department-local drift to the owning department rather than silently taking over its files.
+- Keep GitHub abstract, organized, current, durable, and auditable.
 
-## Not Main Assistant
+## Chief of Staff Relationship
 
-Main Assistant is the everyday operations desk.
+Chief of Staff HQ owns ordinary daily operations, executive-function support, practical coordination, LifeOS HQ chairing, assignment routing, report reception, and follow-through.
 
-Logistics is the durable coordination and GitHub operations desk. It should not run ordinary daily itineraries, errands, appointment preparation, transportation planning, Flow Board processing, or task execution unless Rob intentionally routes a longer-horizon or system-level logistics question here.
+Maintenance protects the operating system those activities use. It does not run daily itineraries, errands, appointment preparation, transportation planning, Flow Board processing, routine communications, or Rob-facing task execution by default.
 
 ## Engineering Relationship
 
-Engineering owns software, the LifeOS Dashboard, desktop department automation, prompt systems, worker architecture, and technical reliability.
+Engineering HQ owns software, the LifeOS Dashboard, desktop automation, prompt systems, worker architecture, parsers, validators, testing, and technical reliability.
 
-Logistics owns durable synchronization of those milestones into shared memory, project maps, open loops, and cross-project routing.
+Maintenance owns governance, boot integrity, source boundaries, audits, and reconciliation. Engineering may implement enforcement mechanisms, but implementation does not transfer permanent governance ownership.
+
+## Specialist Department Relationship
+
+Each specialist department owns routine maintenance of its own subtree, strategy, judgment, status, open loops, notebook records, local procedures, and source advisory text.
+
+Maintenance may detect and document department-local drift. Corrections are routed to the owner unless Rob explicitly authorizes coordinated repair.
 
 ## Canonical Project Path
 
 - `projects/life-logistics-hq/`
 
-Do not use `projects/life-logistics/`.
+Do not use the nonexistent path `projects/life-logistics/`.
+
+Do not rename the canonical folder without a separately authorized migration.
 
 ## Project Files
 
@@ -52,7 +61,8 @@ Do not use `projects/life-logistics/`.
 - `open_loops.md`
 - `notes.md` when useful
 - `sources.md` when useful
+- `notebook/` for promoted durable Maintenance reasoning, decisions, evidence, validation, and history
 
-## Rule
+## Operating Rule
 
-Keep GitHub abstract, organized, current, and durable. Store detailed working records in Drive or the proper operational source system.
+Protect the operating system without becoming the owner of every room. Store detailed working records in Drive or the proper operational source system.
