@@ -2,8 +2,9 @@
 
 The modern ChatGPT Classic composer applies deterministic presentation transforms when copying a
 pasted prompt. This shim preserves the base engine's exact navigation and safety gates, adds one
-bounded sidebar expansion, and emits a structured result marker for stopped runs so dashboard
-reporting does not have to infer the cause from incidental console text.
+bounded sidebar expansion, translates retired chat titles to their canonical replacements, and
+emits a structured result marker for stopped runs so dashboard reporting does not have to infer
+the cause from incidental console text.
 """
 from __future__ import annotations
 
@@ -18,6 +19,28 @@ import open_department_chat_group as base
 SIDEBAR_EXPANSION_TIMEOUT_SECONDS = 5.0
 SIDEBAR_EXPANSION_POLL_SECONDS = 0.25
 RESULT_MARKER = "LIFEOS_RESULT_CODE="
+
+CHAT_TITLE_ALIASES = {
+    "Main Assistant HQ": "Chief of Staff HQ",
+    "Logistics HQ": "Life OS Maintenance HQ",
+    "Life Logistics HQ": "Life OS Maintenance HQ",
+}
+
+
+def canonical_chat_title(value: str) -> str:
+    """Translate a retired exact title while leaving canonical and unknown titles unchanged."""
+    return CHAT_TITLE_ALIASES.get(value, value)
+
+
+def normalize_cli_chat_title() -> None:
+    """Rewrite only the positional chat-title argument before the exact-navigation engine runs."""
+    if len(sys.argv) < 2:
+        return
+    original = sys.argv[1]
+    canonical = canonical_chat_title(original)
+    if canonical != original:
+        print(f"COMPATIBILITY MAPPING: {original!r} -> {canonical!r}")
+        sys.argv[1] = canonical
 
 
 def compact_non_whitespace(value: str) -> str:
@@ -112,6 +135,7 @@ def main() -> int:
     stdout_buffer = io.StringIO()
     stderr_buffer = io.StringIO()
     with contextlib.redirect_stdout(stdout_buffer), contextlib.redirect_stderr(stderr_buffer):
+        normalize_cli_chat_title()
         exit_code = base.main()
     stdout = stdout_buffer.getvalue()
     stderr = stderr_buffer.getvalue()
