@@ -275,3 +275,81 @@ cancelButton?.addEventListener("click", () => setTimeout(syncDebugControls, 100)
 syncDebugControls();
 setTimeout(() => decorateDebugSchedules().catch(() => {}), 100);
 })();
+
+(() => {
+const COMPLETION_MARKER = "Debug recurrence test completed after two attempts.";
+const scheduleList = document.getElementById("cc-schedules");
+const scheduleCount = document.getElementById("cc-schedule-count");
+const summary = document.getElementById("cc-schedule-summary");
+const listMeta = scheduleCount?.closest(".cc-list-meta");
+
+if (!scheduleList || !scheduleCount || !summary || !listMeta) return;
+
+const button = document.createElement("button");
+button.id = "cc-clear-completed";
+button.className = "cc-danger-button";
+button.type = "button";
+button.hidden = true;
+listMeta.appendChild(button);
+
+let completedSchedules = [];
+let refreshing = false;
+
+function isCompleted(schedule) {
+  if (schedule.enabled || schedule.next_run_at) return false;
+  if (schedule.cadence === "once" && schedule.last_status === "succeeded") return true;
+  return String(schedule.last_reason || "").includes(COMPLETION_MARKER);
+}
+
+async function refreshCompleted() {
+  if (refreshing || button.disabled) return;
+  refreshing = true;
+  try {
+    const response = await fetch("/api/command-center", {cache: "no-store"});
+    if (!response.ok) return;
+    const data = await response.json();
+    completedSchedules = (data.scheduled_jobs || []).filter(isCompleted);
+    button.hidden = completedSchedules.length === 0;
+    button.textContent = `Clear completed (${completedSchedules.length})`;
+    button.title = "Delete completed schedule definitions from the dashboard and Scheduler Ledger. Run history is preserved.";
+  } finally {
+    refreshing = false;
+  }
+}
+
+button.addEventListener("click", async () => {
+  await refreshCompleted();
+  if (completedSchedules.length === 0) return;
+  const confirmed = window.confirm(
+    `Delete ${completedSchedules.length} completed schedule definition${completedSchedules.length === 1 ? "" : "s"}? `
+    + "Their matching Scheduler Ledger rows will also be cleared. Run history will be preserved."
+  );
+  if (!confirmed) return;
+
+  button.disabled = true;
+  let deleted = 0;
+  try {
+    for (const schedule of completedSchedules) {
+      const response = await fetch(`/api/command-center/schedules/${schedule.id}`, {method: "DELETE"});
+      if (!response.ok) {
+        throw new Error(
+          `Cleanup stopped after ${deleted} deletion${deleted === 1 ? "" : "s"}. `
+          + "The next Sheet row was not confirmed cleared, so its local schedule definition was kept."
+        );
+      }
+      deleted += 1;
+      scheduleList.querySelector(`[data-schedule-id="${schedule.id}"]`)?.remove();
+    }
+    summary.textContent = `Cleared ${deleted} completed schedule definition${deleted === 1 ? "" : "s"} from the dashboard and Scheduler Ledger. Run history was preserved.`;
+  } catch (error) {
+    summary.textContent = error.message;
+  } finally {
+    button.disabled = false;
+    completedSchedules = [];
+    await refreshCompleted();
+  }
+});
+
+setTimeout(() => refreshCompleted().catch(() => {}), 250);
+setInterval(() => refreshCompleted().catch(() => {}), 15000);
+})();
