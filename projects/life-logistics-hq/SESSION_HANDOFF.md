@@ -1,81 +1,68 @@
-# Logistics HQ Session Handoff
+# Life OS Maintenance HQ Session Handoff
 
-Updated: 2026-07-17
-Project: Logistics HQ
-Purpose: Project-specific handoff for Life OS GitHub operations, shared infrastructure, audits, and long-horizon coordination.
+Updated: 2026-07-18
+Project: Life OS Maintenance HQ
+Purpose: Project-specific handoff for global GitHub maintenance, boot integrity, shared governance, audits, migrations, source boundaries, and system reconciliation.
 
 ## Metadata
 
 - Project Owner: Rob
-- Primary Chat: Logistics HQ
-- Current Phase: Active / Durable Coordination, GitHub Operations, and Cross-Project Hygiene
+- Primary Chat: Life OS Maintenance HQ
+- Current Phase: Active / Governance Reconciliation and Operational Integrity
 - Sensitivity Level: Moderate
+- Canonical Filesystem Path: `projects/life-logistics-hq/`
 - GitHub Rule: Keep GitHub abstract, current, organized, and free of detailed private records.
 
 ## Department Identity
 
 Read `projects/life-logistics-hq/DEPARTMENT_IDENTITY.md`.
 
-Logistics HQ maintains durable Life OS continuity, global GitHub coherence, shared operating infrastructure, advisory hygiene, cross-project audits, role clarity, and longer-horizon logistical planning.
+Life OS Maintenance HQ is the official successor to the former Logistics HQ role. The display and authority name changed; the filesystem path remains unchanged.
 
-Main Assistant owns Rob's daily life and ordinary execution support, including daily planning, basic logistics, errands, appointments, transportation, Calendar, Todoist, Gmail, reminders, Trello Flow processing, and executive-function support.
+Maintenance protects the Life OS operating system through global GitHub coherence, universal boot integrity, shared operating rules, system open-loop hygiene, advisory infrastructure, repository structure, audits, source-boundary enforcement, and reconciliation between the Drive Chief's Manual, Project Instructions, and GitHub implementation.
 
-## Current Active Core
+Chief of Staff HQ is Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, Hub chair, routing desk, report receiver, and follow-through coordinator.
 
-- Main Assistant HQ
-- Logistics HQ
+## Current Eight-Room Architecture
+
+- LifeOS HQ, shared meeting room
+- Chief of Staff HQ
+- Life OS Maintenance HQ
 - Engineering HQ
 - Finance HQ
 - Business HQ
 - Office Leaks HQ
 - Wellness HQ
-- Life OS Infrastructure as needed
+
+LifeOS HQ is not a department and does not own an independent backlog. Real Hub actions transfer to one owning department and one authoritative destination.
 
 ## Current System State
 
-Office Leaks is publicly launched and operating in a live organic market-test phase.
-
-The LifeOS Flow Board is active as the visual attention layer. Trello Inbox captures raw thoughts; the Flow Board shows active attention; Todoist holds commitments and reminders; Calendar holds timed commitments; GitHub holds durable state.
-
-The LifeOS Dashboard is locally running and tested on Rob's Windows machine as a read-mostly four-source interface using GitHub, Trello, Todoist, and Google Calendar private iCal.
-
-The dashboard suite passed 16 tests. Guarded GitHub auto-sync may fast-forward only when local `main` is clean and strictly behind. Gmail and Drive adapters remain deferred until demonstrated need.
-
-Windows ChatGPT Classic department automation is operational across all seven HQs.
-
-Canonical launcher:
-
-- `apps/lifeos-dashboard/automation/draft_department_boot.py`
-
-Validated automation behavior includes exact HQ navigation, one bounded hidden-sidebar expansion, exact destination verification, stable Group composer discovery, preservation of existing draft text, clipboard verification, draft-only default behavior, explicit `--send` authorization, and one watched successful live send to Main Assistant HQ.
-
-Engineering has planned an Automation Command Center inside the existing dashboard.
-
-Canonical plan:
-
-- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
-
-Phase 1 is manual Run Now only. It will support eight exact destinations, canonical or custom prompts, draft/send mode, explicit send confirmation, one-job locking, global pause, structured results, and local activity history.
-
-Scheduling, recurring jobs, automatic ChatGPT launch, screenshots, notifications, and advanced recovery remain deferred until Phase 1 proves safe. Logistics should preserve this boundary in shared summaries and audits.
-
-The canonical Logistics project path is:
-
-- `projects/life-logistics-hq/`
-
-Do not use the nonexistent legacy path `projects/life-logistics/`.
-
-PennyOS remains historical and productization framing only, not a new open loop or roadmap authorization.
+- GitHub is the durable memory and architecture map.
+- Google Drive is the working-records cabinet and home of the human-facing Chief's Manual.
+- Trello is the raw-intake, visual-attention, and active-flow layer.
+- Todoist holds Rob-facing commitments and reminders.
+- Calendar holds timed commitments.
+- Gmail holds communication evidence.
+- The LifeOS Dashboard is a visibility, diagnostic, and bounded local-control layer rather than a competing source of truth.
+- The dashboard currently uses GitHub, Trello, Todoist, and Google Calendar private iCal as verified sources.
+- Guarded GitHub dashboard sync may fast-forward only when local `main` is clean and strictly behind.
+- Desktop department automation is validated across the seven department HQ chats.
+- The dashboard-integrated Automation Command Center supports manual and scheduled runs, persistent history, protected prompts, explicit send confirmation, and structured failure reporting.
+- Scheduled execution is not yet production-ready for fully unattended Windows operation.
+- Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after the unattended-operation boundary is safe enough.
+- Current automation labels still use `Main Assistant HQ` and `Logistics HQ`; the Hub Operating Contract translates those labels until Engineering performs a separately authorized code and prompt update.
+- Raw Capture and Inventory workers remain active pilots.
 
 ## Role Boundaries
 
-- Main Assistant: daily coordination, immediate logistics, Flow Board operation, task and calendar coordination, communications, and authorized downstream worker processing.
-- Logistics: global boot integrity, shared summaries, advisory-index hygiene, shared procedures, cross-project audits, system-wide housekeeping, durable routing, and longer-horizon dependencies.
-- Departments: maintain routine state in their own project subtrees.
-- Engineering: software, dashboard, desktop automation, Automation Command Center, connector architecture, workers, and prompt launcher.
-- Finance: detailed financial records and concrete money decisions.
-- Business and Office Leaks: parent strategy and business-unit execution respectively.
-- Wellness: sustainable health, recovery, and pacing.
+- **Rob:** final authority for consequential decisions, exceptions, durable promotions, and operating-architecture changes.
+- **Chief of Staff HQ:** daily operations, executive-function support, Hub chairing, routing, report reception, follow-through, and authorized light connector execution.
+- **Life OS Maintenance HQ:** global boot integrity, global handoffs and operating rules, shared coordination procedures, system-loop hygiene, advisory-index and board hygiene, repository paths, migrations, archives, audits, source boundaries, and system reconciliation.
+- **Engineering HQ:** technical architecture, software, dashboard implementation, automation, parsers, validators, testing, and technical enforcement mechanisms.
+- **Specialist departments:** maintain routine state and judgment in their own project subtrees.
+
+Maintenance detects and documents department-local drift, then routes a precise correction to the owning department. It does not silently edit another department's files without explicit coordinated-repair authority.
 
 ## Worker Layer
 
@@ -84,19 +71,22 @@ Active pilots:
 - Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
 - Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
 
-Main Assistant owns authorized downstream processing. Logistics owns durable worker routing and pointer hygiene. Engineering owns worker architecture and reliability guidance.
+Chief of Staff HQ owns authorized downstream processing. Life OS Maintenance HQ owns durable worker routing and pointer hygiene. Engineering owns worker architecture and reliability guidance.
 
 ## Source-of-Truth Architecture
 
-- GitHub is the durable memory map.
-- Google Drive is the working-records cabinet.
-- Trello shows current attention and active flow.
-- Todoist owns commitments and reminders.
-- Google Calendar owns timed commitments.
-- Gmail owns communication evidence.
-- The LifeOS Dashboard displays selected high-signal state from authoritative systems.
-- The Advisory Index is the sole active advisory dashboard.
-- Detailed financial, medical, business, personal, credential, and source-system records remain outside GitHub.
+- GitHub: durable abstract state, architecture, ownership, rules, decisions, and pointers.
+- Google Drive: Chief's Manual, working documents, detailed records, Sheets, and deliverables.
+- Trello: raw ideas, candidate work, current attention, and flow.
+- Todoist: Rob-facing commitments and reminders.
+- Google Calendar: timed commitments.
+- Gmail: communication evidence.
+- LifeOS Dashboard: read-only aggregation plus bounded local automation controls.
+- Advisory Index: sole active advisory routing dashboard.
+- Department files: authoritative department state.
+- `memory/05_OPEN_LOOPS.md`: genuinely system-owned work and operating watches only.
+
+Detailed financial, medical, business, personal, credential, and source-system records remain outside GitHub.
 
 ## Advisory State
 
@@ -104,44 +94,43 @@ Current open advisories:
 
 - None.
 
-Recently closed:
+Use `coordination/ADVISORY_INDEX.md` as the live source of truth. Read a source board only when the index or Rob routes Maintenance to a specific advisory.
 
-- ADV-20260717-040 — Shared global and local summaries reconciled after the live dashboard milestone.
-- ADV-20260716-039 — Global summaries reconciled with July 16–17 state.
-- ADV-20260716-038 — Dashboard concept ingested by Engineering.
-- ADV-20260716-037 — Office Leaks public-launch broadcast fully acknowledged.
-- ADV-20260715-036 — Seven Chat HQs opened and operational.
+Hub-originated formal advisories use the retained Chief of Staff source-board path `coordination/boards/main-assistant.md` plus the Advisory Index.
 
-Use `coordination/ADVISORY_INDEX.md` as the live source of truth.
+## Current Maintenance Work and Watches
 
-## Current Major Open Loops
-
-- Keep global boot files, shared summaries, project maps, status files, open loops, automation prompts, and source pointers internally consistent.
-- Maintain Main Assistant and Logistics role boundaries.
-- Maintain advisory routing and board hygiene without creating bureaucracy.
-- Preserve canonical HQ names and project-folder paths across prompts, scripts, and memory files.
-- Observe the seven HQs for evidence-based routing drift.
-- Preserve GitHub, Trello, Todoist, Calendar, Gmail, Drive, and dashboard source boundaries.
-- Keep guarded GitHub dashboard sync limited to clean, strictly-behind fast-forward updates.
-- Keep desktop department automation draft-only by default and stop-on-uncertainty.
-- Preserve Automation Command Center Phase 1 as manual Run Now only; do not allow scheduling language to drift into current operational state.
-- Keep canonical worker pointers stable and observe pilot reliability through reports from Main Assistant and Engineering.
-- Track longer-horizon Office Leaks dependencies as live market testing develops.
-- Keep Gmail and Drive dashboard adapters deferred until demonstrated need.
-- Keep Engineering HQ Daily Sync paused until Rob authorizes resumption under a separate safe scheduling architecture.
-- Track the future disposition of the legacy Virtual Assistant folder.
+- Complete authorized Phase Two reconciliation of the Maintenance subtree and demonstrated Maintenance-owned shared-file drift.
+- Keep the eight-room authority model and role-routed boot sequence internally consistent.
+- Preserve one owner and one authoritative record for each durable item.
+- Keep the Advisory Index and source boards consistent without turning advisory routing into duplicate backlogs.
+- Preserve source boundaries across GitHub, Drive, Trello, Todoist, Calendar, Gmail, and the dashboard.
+- Keep guarded GitHub sync within its clean-and-strictly-behind boundary.
+- Keep unattended scheduling unapproved until Engineering produces sufficient reliability evidence and Rob authorizes production use.
+- Preserve the paused Engineering HQ Daily Sync state.
+- Keep worker pointers stable and workers distinct from departments.
+- Resolve the future disposition of `projects/virtual-assistant-business/` only under explicit authority.
 - Prefer small, verified GitHub edits over broad rewrites.
+
+Authoritative local state:
+
+- `projects/life-logistics-hq/status.md`
+- `projects/life-logistics-hq/open_loops.md`
+
+System-level coordination state:
+
+- `memory/05_OPEN_LOOPS.md`
 
 ## Immediate Next Actions
 
-1. Use Logistics for GitHub maintenance, shared infrastructure, audits, advisory hygiene, and longer-horizon coordination.
-2. Route ordinary daily planning and Flow Board operation to Main Assistant.
-3. Route dashboard, desktop automation, and Automation Command Center implementation to Engineering.
-4. Review shared files after meaningful cross-project state changes.
+1. Finish and verify the authorized Phase Two Maintenance repair package.
+2. Re-fetch shared files immediately before any later write because Chief of Staff and other owners may update adjacent state.
+3. Route department-local drift to the owning department rather than repairing it here.
+4. Route automation labels, prompts, dashboard code, and tests to Engineering under separate authority.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
 ## Notes for Next Penny
 
-This chat is Logistics HQ, not Main Assistant. Maintain the map and the hallways, not every footstep.
+This chat is Life OS Maintenance HQ. Protect the operating system, not every department's workload.
 
-Boot reminder: Office Leaks is publicly launched. The Flow Board and four-source dashboard are active. Seven-HQ desktop boot automation is validated. Automation Command Center Phase 1 is planned as manual Run Now only. Gmail and Drive dashboard adapters remain deferred. Worker pilots remain active. Engineering HQ Daily Sync remains paused. No advisories are currently open.
+Boot reminder: Phase One established the eight-room constitutional architecture. Chief of Staff HQ is the daily front door and Hub chair. Maintenance owns global governance and reconciliation. Engineering owns implementation machinery. The Automation Command Center supports manual and scheduled runs, but unattended production remains unapproved. Engineering HQ Daily Sync remains paused. No advisories are currently open.
