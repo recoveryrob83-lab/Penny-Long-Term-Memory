@@ -50,8 +50,8 @@ These are enduring department duties, not open loops:
 
 These items are owned elsewhere and are not duplicated as Chief of Staff open loops:
 
-- Life OS Maintenance HQ owns deployed Project Settings reconciliation, shared-governance naming cleanup, boot integrity, audits, and global repository reconciliation.
-- Engineering HQ owns automation labels, prompts, dashboard code, tests, technical reliability, and unattended scheduler validation.
+- Life OS Maintenance HQ owns future Project Settings reconciliation only when a demonstrated divergence appears, plus shared governance, boot integrity, audits, migrations, source boundaries, and global repository reconciliation.
+- Engineering HQ owns Package B automation labels, prompts, compatibility mappings, dashboard code, tests, technical reliability, and unattended scheduler validation.
 - Finance HQ owns forecasting models, account-linked analysis, and financial judgment.
 - Business HQ and Office Leaks HQ own Office Leaks strategy, offers, outreach, delivery, and market-test judgment.
 
@@ -59,6 +59,7 @@ Chief of Staff may track a narrow routed dependency or follow-through condition 
 
 ## Recently Closed or Clarified
 
+- 2026-07-18: Removed the stale implication that deployed Project Settings reconciliation remained pending; the deployed copy matches the canonical Project Instructions and future reconciliation opens only on demonstrated drift.
 - 2026-07-18: Completed the Chief of Staff-owned Phase Two architecture repair across the local handoff, identity, README, status, open loops, notebook framing, and retained advisory-board header and notes.
 - 2026-07-18: Clarified that LifeOS HQ is a separate shared meeting room and Chief of Staff HQ is its chair, not the Hub itself.
 - 2026-07-18: Reclassified routine duties and operating watches so they no longer masquerade as active open loops.
