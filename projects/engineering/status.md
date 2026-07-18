@@ -4,7 +4,7 @@ Updated: 2026-07-18
 
 ## Current Phase
 
-Active / Department Ownership Verification, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Automation Naming Compatibility Validation, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -38,7 +38,7 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ### Department Ownership Architecture and Dashboard Inspection
 
-Status: Architecture implemented and locally verified; fresh LifeOS HQ read-only verification pending.
+Status: Architecture implemented, locally verified, and accepted by the fresh LifeOS HQ read-only verification.
 
 Canonical references:
 
@@ -64,14 +64,35 @@ Implemented:
 - conversion of `memory/05_OPEN_LOOPS.md` into a system-only file;
 - first inspector-guided cleanup of Chat HQ watch mirrors, Legacy VA folder mirrors, registry placeholders, and Engineering state/priority mixing;
 - reconciliation of the system session handoff;
-- final local verification at 414 normalized records, zero findings, and zero warnings.
+- final local verification at 414 normalized records, zero findings, and zero warnings;
+- fresh canonical LifeOS HQ launch with a ready-for-operations verdict after Maintenance completed final shared repairs.
 
 Validation still required:
 
-- run the fresh LifeOS HQ read-only verification against the completed Phase Two state;
 - confirm ordinary specialist boots continue to avoid unrelated global backlogs;
-- inspect only newly demonstrated findings;
-- close the system coordination wrapper after the new Hub verification and stable ordinary use.
+- inspect only newly demonstrated findings.
+
+### Automation Naming Compatibility / Package B
+
+Status: GitHub implementation complete; local Windows runtime validation pending.
+
+Implemented:
+
+- retained stable internal destination keys `hub`, `main`, `logistics`, `engineering`, `finance`, `business`, `office-leaks`, and `wellness`;
+- changed canonical exact chat targets from `Main Assistant HQ` to `Chief of Staff HQ` and from `Logistics HQ` to `Life OS Maintenance HQ`;
+- updated canonical boot automation, Command Center backend mappings, scheduler display labels, run-history display labels, Automation UI selectors, and mapping tests;
+- added a bounded compatibility translation for retired callers using `Main Assistant HQ`, `Logistics HQ`, or `Life Logistics HQ`;
+- preserved persisted schedule destinations, saved-prompt default destinations, and run-history destinations because those records store stable keys rather than chat titles;
+- deliberately left historical execution evidence unchanged where the retired title was the exact title used at the time.
+
+Local validation still required:
+
+- pull the latest repository state on Rob's Windows machine;
+- restart the dashboard so Python and browser assets reload;
+- verify canonical prompt previews for `main` and `logistics` use the new role names;
+- run draft-only custom prompts to Chief of Staff HQ and Life OS Maintenance HQ;
+- confirm existing schedules still display under the canonical names without database migration;
+- confirm a legacy-title compatibility invocation is translated to the canonical chat and still preserves exact-destination safety.
 
 ### Automation Command Center
 
@@ -109,12 +130,13 @@ The `Logistics HQ` name in the preceding bullet is retained as historical test e
 
 Current validation still open:
 
+- Package B canonical-title draft validation;
 - overdue-run behavior after dashboard restart;
 - second real occurrence of a recurring job.
 
 ### Desktop Department Automation
 
-Status: Operational, with one known recovery edge case.
+Status: Operational, with canonical title compatibility implemented and one known recovery edge case.
 
 Validated behavior:
 
@@ -237,10 +259,8 @@ Engineering preserves two integrated delivery layers:
 
 ## Current Open Work
 
-- Run the fresh LifeOS HQ read-only verification against the completed Phase Two state.
+- Pull and restart the local dashboard, then perform draft-only Package B validation for Chief of Staff HQ and Life OS Maintenance HQ.
 - Observe ordinary role-routed specialist boots and correct only demonstrated routing defects.
-- Close the ownership-reconciliation system wrapper after the new Hub verification and stable ordinary use.
-- Begin Package B canonical-name and automation-compatibility work after the Hub verification.
 - Test overdue one-time behavior after dashboard restart.
 - Observe a second real recurring execution.
 - Design collapsed-LifeOS-project recovery, but do not change code until Rob authorizes it.
@@ -255,6 +275,8 @@ Engineering preserves two integrated delivery layers:
 
 ## Completed Recent Work
 
+- 2026-07-18: Package B canonical automation mappings implemented while preserving stable destination keys and persisted Command Center records; legacy chat-title compatibility added for retired callers.
+- 2026-07-18: Fresh LifeOS HQ launched and reported ready for operations after final Maintenance verification and repairs.
 - 2026-07-18: Department Inspection reached 414 normalized records, zero findings, and zero warnings after source cleanup, warning audit, evidence-backed parser correction, and explicit lifecycle-priority normalization.
 - 2026-07-18: Open Loop Ownership and Visibility SOP implemented.
 - 2026-07-18: Startup boot changed from universal backlog loading to a universal kernel plus role-routed context.
