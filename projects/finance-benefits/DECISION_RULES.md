@@ -1,14 +1,14 @@
-# Chief of Finance Penny Decision Rules
+# Finance HQ Decision Rules
 
-Updated: 2026-07-15
-Project: Chief of Finance Penny / Finance Benefits HQ
+Updated: 2026-07-18
+Project: Finance HQ
 Purpose: Department-owned decision rules for finance-related evaluations.
 
 ## Operating Rule
 
 Decision rules are reusable decision procedures.
 
-Finance owns budget review, protected-funds logic, opportunity cost, purchase recommendations, affordability, financial timing, ledger integrity, and financial risk evaluation.
+Finance HQ owns budget review, protected-funds logic, opportunity cost, purchase recommendations, affordability, financial timing, ledger integrity, and financial risk evaluation.
 
 Keep live balances, protected-fund calculations, detailed transactions, current private financial goals, and benefit identifiers out of GitHub. Those belong in Finance working records or another appropriate secure system.
 
@@ -17,7 +17,7 @@ Keep live balances, protected-fund calculations, detailed transactions, current 
 ### DR-FIN-20260704-001 — Discretionary Purchase Pause Rule
 
 - Status: Active
-- Owning Department: Chief of Finance Penny
+- Owning Department: Finance HQ
 - Applies To: Discretionary purchases, impulse purchases, repeat habit purchases, convenience purchases, non-essential business expenses, or spending that could affect current obligations or goals.
 - Trigger: Rob is considering a discretionary purchase before buying, or another Penny department detects a discretionary purchase decision forming.
 
@@ -64,11 +64,17 @@ Finance should respond with:
 
 #### Routing Notes
 
-Main Assistant, Logistics, Business, and other departments should route meaningful discretionary spending decisions to Chief of Finance Penny before purchase when practical.
+Chief of Staff HQ, Business HQ, and other departments should route meaningful discretionary spending decisions to Finance HQ before purchase when practical.
 
-Business may recommend a commercial expense, but Finance evaluates whether Rob can afford it and whether the expected benefit justifies the financial risk.
+Chief of Staff HQ may coordinate, receive the recommendation, route follow-through, and help execute Rob's decision without taking ownership of Finance judgment or records.
 
-Other departments should not independently approve discretionary spending unless Rob explicitly asks them to bypass Finance.
+Business HQ may recommend a commercial expense, but Finance HQ evaluates whether Rob can afford it and whether the expected benefit justifies the financial risk.
+
+Life OS Maintenance HQ owns global GitHub maintenance and governance, not the financial decision itself or Finance's routine durable state.
+
+LifeOS HQ is the shared meeting room and has no independent authority to approve spending or own the decision record.
+
+Other departments should not independently approve discretionary spending unless Rob explicitly asks them to bypass Finance HQ.
 
 #### Sensitive Data Boundary
 
