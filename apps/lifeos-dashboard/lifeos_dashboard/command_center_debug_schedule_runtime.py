@@ -89,9 +89,10 @@ def run_scheduled(
             "reason": reason,
         },
     )
+    final_schedule = self.store.get_schedule(int(schedule["id"]))
     ledger = getattr(self, "schedule_ledger", None)
-    if ledger is not None and updated.get("next_run_at") is not None:
-        ledger.record_state(updated, "canceled", reason)
+    if ledger is not None and final_schedule is not None:
+        ledger.record_schedule(final_schedule)
 
 
 def set_schedule_enabled(
