@@ -53,8 +53,8 @@
   };
 
   const labelByDepartment = {
-    "main-assistant": "Main Assistant HQ",
-    logistics: "Logistics HQ",
+    "main-assistant": "Chief of Staff HQ",
+    logistics: "Life OS Maintenance HQ",
     engineering: "Engineering HQ",
     business: "Business HQ",
     "office-leaks": "Office Leaks HQ",
