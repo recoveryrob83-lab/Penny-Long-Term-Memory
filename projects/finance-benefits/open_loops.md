@@ -5,20 +5,30 @@ Project: Finance HQ
 
 ## Active Open Loops
 
-| ID | Status | Area | Loop | Owner | Next Action |
-|---|---|---|---|---|---|
-| FIN-001 | Open | Checkbook | Maintain the Drive Checkbook Register as the primary working ledger. | Finance HQ | Read before editing, preserve formulas, and verify writes. |
-| FIN-002 | Open | Reconciliation | Resolve the ledger-to-account balance discrepancy after pending transactions settle. | Finance HQ | Compare posted activity, pending items, omissions, duplicates, fees, starting balance, and formula integrity. |
-| FIN-003 | Open | Forecast | Build or review a projected ledger separate from the working ledger. | Finance HQ | Use expected dates, amount, direction, confidence, condition, protected-fund status, and projected balance. |
-| FIN-004 | Open | Budget | Build a simple current budget and allocation plan when verified funds and obligations are available. | Finance HQ | Prioritize essentials, transportation, recovery support, communication, and minimum buffer. |
-| FIN-005 | Open | Bills and Subscriptions | Identify recurring bills, subscriptions, renewals, fees, and payment reminders. | Finance HQ | Review real records and route requested reminders or follow-through through Chief of Staff HQ, Todoist, or Calendar as appropriate. |
-| FIN-006 | Open | Benefits | Track benefits paperwork, notices, deadlines, and research at an abstract level. | Finance HQ | Use official sources, Gmail, or Drive when Rob requests review. |
-| FIN-007 | Open | Income | Track confirmed, pending, estimated, and hypothetical income separately. | Finance HQ | Do not count possible income as available before receipt. |
-| FIN-008 | Open | Privacy | Keep sensitive finance data out of GitHub. | All Pennys | Store only abstract state, rules, and pointers here. |
-| FIN-009 | Open | Office Leaks | Support Office Leaks financial feasibility once offer scope and costs are concrete. | Finance HQ | Business HQ defines scope; Finance evaluates hours, fees, delivery costs, repeatability, follow-on value, and personal cash risk. |
-| FIN-010 | Open | Office Leaks Pricing | Evaluate the experimental low-cost first-task offer for sustainability. | Finance HQ | Business HQ defines scope; Finance models time, fees, costs, and minimum viable price. |
-| FIN-011 | Open | Office Leaks Tool Costs | Evaluate domain, website, email, transportation, branded materials, software, and marketplace costs against bootstrap cash flow. | Finance HQ | Approve only expenses tied credibly to leads, trust, conversion, delivery, or financial accuracy. |
-| FIN-012 | Open | Decision Rule | Apply DR-FIN-20260704-001 to discretionary spending decisions during scarcity. | Finance HQ | Return a clear recommendation and protect higher-priority needs. |
+| ID | Status | Priority | Area | Loop | Owner | Next Action | Completion / Review Condition |
+|---|---|---|---|---|---|---|---|
+| FIN-002 | Active | Normal | Reconciliation | Resolve the ledger-to-account balance discrepancy after pending transactions settle. | Finance HQ | Compare posted activity, pending items, omissions, duplicates, fees, starting balance, and formula integrity. | Close when the working ledger and external available balance are reconciled using explained posted evidence, or review when the remaining pending items finish posting. |
+| FIN-003 | Active | Normal | Forecast | Build or review a projected ledger separate from the working ledger. | Finance HQ | Use expected dates, amount, direction, confidence, condition, protected-fund status, and projected balance. | Close the setup loop when a usable separate forecast view exists and has been verified without contaminating the working ledger; reopen only for a concrete structural defect. |
+| FIN-005 | Active | Normal | Bills and Subscriptions | Identify current recurring bills, subscriptions, renewals, fees, and payment reminders from real records. | Finance HQ | Review available Finance records and route requested reminders or follow-through through Chief of Staff HQ, Todoist, or Calendar as appropriate. | Close when the current list has been reviewed and any real commitments are routed to their natural systems; review again only when new evidence or a renewal appears. |
+
+## Waiting or Conditional Work
+
+| ID | Status | Priority | Area | Resume Trigger | Owner | Next Action After Trigger | Completion / Review Condition |
+|---|---|---|---|---|---|---|---|
+| FIN-004 | Waiting | Normal | Budget | Verified funds and current obligations are available. | Finance HQ | Build a simple current budget and allocation plan that prioritizes essentials, transportation, recovery support, communication, and a minimum viable buffer. | Close when the current allocation plan is usable for the verified period; review when funds or obligations materially change. |
+| FIN-009 | Waiting | Normal | Office Leaks Feasibility | Business HQ or Office Leaks HQ provides concrete offer scope, expected hours, fees, delivery costs, or revenue evidence. | Finance HQ | Evaluate repeatability, follow-on value, affordability, and risk to Rob's personal cash position. | Close when Finance has issued a grounded feasibility recommendation for the defined offer or review when the underlying scope changes. |
+| FIN-010 | Waiting | Normal | Office Leaks Pricing | The introductory offer has concrete scope, expected time, payment method, and material fees or costs. | Finance HQ | Model time, fees, costs, and a minimum viable price. | Close when Finance has issued a pricing-feasibility recommendation; review when scope or cost assumptions change. |
+| FIN-011 | Waiting | Normal | Office Leaks Tool Costs | A concrete domain, website, email, transportation, branded-material, software, marketplace, or paid-promotion expense is proposed. | Finance HQ | Evaluate the expense against bootstrap cash flow and its credible connection to leads, trust, conversion, delivery, or financial accuracy. | Close when Finance approves, delays, or recommends against the specific expense; do not keep a generic tool-cost loop open without a proposal. |
+
+## Standing Responsibilities and Guardrails
+
+These are enduring Finance duties, not unfinished work:
+
+- **FIN-001 Ledger stewardship:** Maintain the Drive Checkbook Register as the primary working ledger; read before editing, preserve formulas, and verify writes.
+- **FIN-006 Benefits intake:** Review benefits paperwork, notices, deadlines, and research when a real notice or request exists; keep GitHub abstract.
+- **FIN-007 Financial classification:** Keep confirmed, pending, estimated, projected, and hypothetical income or money movement clearly separated.
+- **FIN-008 Privacy:** Keep sensitive financial data out of GitHub. Finance HQ owns the local guardrail; all Life OS roles remain bound by the global privacy rules.
+- **FIN-012 Decision rule:** Apply DR-FIN-20260704-001 when a real discretionary-spending decision arises during scarcity.
 
 ## Ownership and Coordination Boundary
 
@@ -27,17 +37,9 @@ Project: Finance HQ
 - Life OS Maintenance HQ owns global GitHub governance and reconciliation, not Finance's routine open loops.
 - LifeOS HQ is the shared meeting room and does not own an independent Finance backlog.
 
-## Waiting or Conditional
-
-- Final posted transaction state for reconciliation.
-- Verified income dates and amounts for forecast entries.
-- Complete current bill and subscription list.
-- Benefits notices or paperwork requiring action.
-- Concrete Office Leaks offer scope, estimated delivery time, payment method, platform fees, or actual revenue and expenses.
-- Concrete website, domain, email, tool, transportation, or marketplace costs.
-
 ## Done or Recently Closed
 
+- 2026-07-18 | Repaired Finance open-loop taxonomy by separating active work, waiting triggers, standing responsibilities, and privacy guardrails; added explicit priority and completion or review conditions without creating duplicate system work.
 - 2026-07-15 | Updated Finance files to the current Advisory Index routing model and removed stale Department Event Inbox instructions.
 - 2026-07-15 | Established the separate forecast-ledger direction as an active Finance workflow.
 - 2026-07-15 | Updated Finance state for current scarcity planning and Office Leaks experimental offer review without storing sensitive amounts.
