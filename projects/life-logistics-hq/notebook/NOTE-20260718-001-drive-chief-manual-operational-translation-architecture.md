@@ -2,9 +2,9 @@
 
 Date: 2026-07-18
 Updated: 2026-07-18
-Department: Logistics HQ
+Department: Life OS Maintenance HQ
 Status: Completed
-Owner: Logistics HQ
+Owner: Life OS Maintenance HQ
 Record Type: Decision
 Authority: Authoritative
 
@@ -18,7 +18,7 @@ The full Drive manual will not be loaded during every boot and will not be mirro
 
 Rob approved the Google Drive document [Life OS Chief's Manual — Language, Authority, and Operating SOP](https://docs.google.com/document/d/1dbQoG1kwsTTRANdAeJcSNKu8fdo2D2cXywiM1AK8GKc/edit) as the human-facing "Basic Text" for Life OS.
 
-The architecture was promoted into durable memory because it governs the upcoming repository audit, future boot behavior, command interpretation, and reconciliation between human intent and machine-operational rules. Rob explicitly authorized this Logistics notebook write.
+The architecture was promoted into durable memory because it governs repository audits, future boot behavior, command interpretation, and reconciliation between human intent and machine-operational rules. Rob explicitly authorized the original notebook write under the department's then-current Logistics identity. Ownership continues under the official successor, Life OS Maintenance HQ.
 
 ## Record
 
@@ -43,10 +43,10 @@ The architecture was promoted into durable memory because it governs the upcomin
    - GitHub may contain a compact reference to the manual, its role, and its last reconciliation state.
    - Explanatory doctrine belongs in Drive; executable rules belong in GitHub.
 
-5. **Logistics owns reconciliation between the two layers.**
-   - When the Chief's Manual changes materially, Logistics audits whether GitHub still implements it correctly.
-   - Logistics records discrepancies and updates global operational files within its authority.
-   - Department-specific corrections are routed to the owning department unless Rob grants explicit coordinated repair authority.
+5. **Life OS Maintenance HQ owns reconciliation between the two layers.**
+   - When the Chief's Manual changes materially, Maintenance audits whether GitHub still implements it correctly.
+   - Maintenance records discrepancies and updates global operational files within its authority.
+   - Department-specific corrections are routed to the owning department unless Rob grants explicit coordinated-repair authority.
 
 6. **The full manual is consulted selectively.**
    - when Rob changes Life OS language or authority;
@@ -72,6 +72,6 @@ The separation therefore preserves both accessibility and operational discipline
 
 ## Operational Consequence
 
-This decision is the architectural basis for the next authorized Life OS repository audit. That audit should make the relationship explicit in global boot, operating, handoff, open-loop, and department files while preserving local department ownership and Logistics audit authority.
+This decision is the architectural basis for Life OS governance audits and reconciliation work. Those audits should make the relationship explicit in global boot, operating, handoff, open-loop, and department files while preserving local department ownership and Life OS Maintenance HQ audit authority.
 
-This notebook record does **not** itself authorize those additional edits. It preserves the approved reasoning and decision only. The broader audit begins under separate authorization from Rob.
+This notebook record does **not** itself authorize additional edits. It preserves the approved reasoning and decision only. Each repair package still requires separate authorization and bounded scope.
