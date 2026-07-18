@@ -11,7 +11,8 @@ __version__ = "0.1.0"
 # production scheduler policy loads after both so it owns overdue, failure,
 # resume, final debug-stop, and ledger-publication behavior in one boundary.
 # Canonical prompt catalog behavior loads last so it extends the final status
-# and scheduling surfaces without bypassing those production policies.
+# and scheduling surfaces without bypassing those production policies. The
+# foreground guard then hardens only physical desktop input and failure guidance.
 from . import schedule_ledger_runtime as _schedule_ledger_runtime
 from . import (
     command_center_debug_schedule_runtime as _command_center_debug_schedule_runtime,
@@ -20,3 +21,4 @@ from . import (
     department_inspection_runtime as _department_inspection_runtime,
 )
 from . import command_center_canonical_prompt_runtime as _command_center_canonical_prompt_runtime
+from . import automation_foreground_guard_runtime as _automation_foreground_guard_runtime
