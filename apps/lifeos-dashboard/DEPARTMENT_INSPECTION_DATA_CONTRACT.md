@@ -30,8 +30,8 @@ The inspector supports seven department scopes plus one system scope.
 
 | Scope ID | Display Label | Scope Type |
 |---|---|---|
-| `main-assistant` | Main Assistant HQ | department |
-| `logistics` | Logistics HQ | department |
+| `main-assistant` | Chief of Staff HQ | department |
+| `logistics` | Life OS Maintenance HQ | department |
 | `engineering` | Engineering HQ | department |
 | `business` | Business HQ | department |
 | `office-leaks` | Office Leaks HQ | department |
@@ -39,7 +39,7 @@ The inspector supports seven department scopes plus one system scope.
 | `wellness` | Wellness HQ | department |
 | `system` | System | system |
 
-Scope IDs are fixed identifiers. Display labels are presentation values.
+Scope IDs are fixed compatibility identifiers. Display labels are canonical presentation values.
 
 ## Normalized Record Envelope
 
@@ -197,7 +197,7 @@ A record may be system-scoped only when at least one condition is true:
 - shared LifeOS architecture or policy changes;
 - no single department can own the work;
 - the matter blocks multiple departments;
-- Main Assistant or Logistics must coordinate it;
+- Chief of Staff HQ or Life OS Maintenance HQ must coordinate it;
 - it represents a genuine system-wide operational risk.
 
 Broad usefulness does not make work system-owned.
