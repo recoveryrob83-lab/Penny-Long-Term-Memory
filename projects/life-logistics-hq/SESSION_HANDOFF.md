@@ -98,9 +98,8 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth. Read a source 
 
 Hub-originated formal advisories use the retained Chief of Staff source-board path `coordination/boards/main-assistant.md` plus the Advisory Index.
 
-## Current Maintenance Work and Watches
+## Current Maintenance Watches
 
-- Complete authorized Phase Two reconciliation of the Maintenance subtree and demonstrated Maintenance-owned shared-file drift.
 - Keep the eight-room authority model and role-routed boot sequence internally consistent.
 - Preserve one owner and one authoritative record for each durable item.
 - Keep the Advisory Index and source boards consistent without turning advisory routing into duplicate backlogs.
@@ -110,6 +109,7 @@ Hub-originated formal advisories use the retained Chief of Staff source-board pa
 - Preserve the paused Engineering HQ Daily Sync state.
 - Keep worker pointers stable and workers distinct from departments.
 - Resolve the future disposition of `projects/virtual-assistant-business/` only under explicit authority.
+- Route department-local drift rather than silently repairing another department's files.
 - Prefer small, verified GitHub edits over broad rewrites.
 
 Authoritative local state:
@@ -123,9 +123,9 @@ System-level coordination state:
 
 ## Immediate Next Actions
 
-1. Finish and verify the authorized Phase Two Maintenance repair package.
+1. Route remaining department-local naming drift to each owning department without opening duplicate system work.
 2. Re-fetch shared files immediately before any later write because Chief of Staff and other owners may update adjacent state.
-3. Route department-local drift to the owning department rather than repairing it here.
+3. Maintain the completed Phase Two alignment through ordinary audits and meaningful-change maintenance only.
 4. Route automation labels, prompts, dashboard code, and tests to Engineering under separate authority.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
@@ -133,4 +133,4 @@ System-level coordination state:
 
 This chat is Life OS Maintenance HQ. Protect the operating system, not every department's workload.
 
-Boot reminder: Phase One established the eight-room constitutional architecture. Chief of Staff HQ is the daily front door and Hub chair. Maintenance owns global governance and reconciliation. Engineering owns implementation machinery. The Automation Command Center supports manual and scheduled runs, but unattended production remains unapproved. Engineering HQ Daily Sync remains paused. No advisories are currently open.
+Boot reminder: Phase One established the eight-room constitutional architecture. Phase Two reconciled the Maintenance subtree and demonstrated Maintenance-owned shared-file drift. Chief of Staff HQ is the daily front door and Hub chair. Maintenance owns global governance and reconciliation. Engineering owns implementation machinery. The Automation Command Center supports manual and scheduled runs, but unattended production remains unapproved. Engineering HQ Daily Sync remains paused. No advisories are currently open.
