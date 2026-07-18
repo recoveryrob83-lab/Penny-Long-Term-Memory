@@ -1,9 +1,31 @@
+import httpx
+
 from lifeos_dashboard.schedule_ledger import (
-    GoogleSheetsScheduleLedger,
+    AppsScriptScheduleLedger,
     google_datetime,
     schedule_state,
     utc_iso,
 )
+
+
+def schedule() -> dict[str, object]:
+    return {
+        "id": 4,
+        "name": "Engineering Daily Sync",
+        "destination": "engineering",
+        "cadence": "daily",
+        "schedule_date": "2099-01-01",
+        "schedule_time": "09:00",
+        "weekdays": [],
+        "timezone": "America/Chicago",
+        "enabled": True,
+        "mode": "draft",
+        "prompt_type": "custom",
+        "next_run_at": 100.0,
+        "last_run_at": 90.0,
+        "last_status": "succeeded",
+        "last_reason": "Completed successfully.",
+    }
 
 
 def test_google_datetime_uses_sheets_serial_date() -> None:
@@ -24,33 +46,83 @@ def test_schedule_state_distinguishes_active_paused_and_completed() -> None:
     ) == "Completed"
 
 
-def test_row_values_include_dynamic_overdue_health_formula() -> None:
-    ledger = GoogleSheetsScheduleLedger("sheet-id")
-    schedule = {
-        "id": 4,
-        "name": "Engineering Daily Sync",
-        "destination": "engineering",
-        "cadence": "daily",
-        "schedule_date": "2099-01-01",
-        "schedule_time": "09:00",
-        "weekdays": [],
-        "timezone": "America/Chicago",
-        "enabled": True,
-        "mode": "draft",
-        "prompt_type": "custom",
-        "next_run_at": 100.0,
-        "last_run_at": 90.0,
-        "last_status": "succeeded",
-        "last_reason": "Completed successfully.",
-    }
+def test_row_values_leave_health_formula_to_bound_script() -> None:
+    ledger = AppsScriptScheduleLedger(
+        "sheet-id",
+        "https://script.example/exec",
+        "secret",
+    )
 
-    row = ledger._row_values(schedule, 2)
+    row = ledger._row_values(schedule())
 
+    assert len(row) == 17
     assert row[0] == 4
     assert row[9] == "Active"
     assert row[12] == google_datetime(100.0)
     assert row[13] == google_datetime(90.0)
-    assert row[17] == (
-        '=IF(J2<>"Active",J2,IF(M2="","No future run",'
-        'IF(M2+TIME(0,5,0)<NOW(),"OVERDUE","On schedule")))'
+
+
+def test_signed_apps_script_upsert_and_redirect_handling(monkeypatch) -> None:
+    captured: dict[str, object] = {}
+
+    def fake_post(
+        url: str,
+        *,
+        json: dict[str, object],
+        timeout: float,
+        follow_redirects: bool,
+    ) -> httpx.Response:
+        captured.update(
+            {
+                "url": url,
+                "json": json,
+                "timeout": timeout,
+                "follow_redirects": follow_redirects,
+            }
+        )
+        return httpx.Response(
+            200,
+            json={
+                "ok": True,
+                "spreadsheet_id": "sheet-id",
+                "sheet_name": "Run Ledger",
+            },
+            request=httpx.Request("POST", url),
+        )
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    ledger = AppsScriptScheduleLedger(
+        "sheet-id",
+        "https://script.example/exec",
+        "secret",
     )
+
+    assert ledger.record_schedule(schedule()) is True
+
+    payload = captured["json"]
+    assert isinstance(payload, dict)
+    assert payload["action"] == "upsert"
+    assert payload["secret"] == "secret"
+    assert len(payload["values"]) == 17
+    assert captured["follow_redirects"] is True
+    assert ledger.status()["state"] == "synced"
+
+
+def test_rejected_apps_script_response_sets_visible_error(monkeypatch) -> None:
+    def fake_post(url: str, **kwargs: object) -> httpx.Response:
+        return httpx.Response(
+            200,
+            json={"ok": False, "error": "Unauthorized ledger request."},
+            request=httpx.Request("POST", url),
+        )
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    ledger = AppsScriptScheduleLedger(
+        "sheet-id",
+        "https://script.example/exec",
+        "secret",
+    )
+
+    assert ledger.record_schedule(schedule()) is False
+    assert ledger.status()["state"] == "error"
+    assert "Unauthorized" in str(ledger.status()["last_error"])
