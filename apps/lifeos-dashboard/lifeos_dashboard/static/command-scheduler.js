@@ -60,7 +60,8 @@ function initializeTime() {
 }
 
 function checkedWeekdays() {
-  return Array.from(ui.weekdays.querySelectorAll('input[type="checkbox"]:checked')).map((item) => Number(item.value));
+  return Array.from(ui.weekdays.querySelectorAll('input[type="checkbox"]:checked'))
+    .map((item) => Number(item.value));
 }
 
 function setCheckedWeekdays(days = []) {
@@ -72,11 +73,15 @@ function setCheckedWeekdays(days = []) {
 
 function selectedSavedPrompt() {
   if (ui.promptType.value !== "saved") return null;
-  return state.saved_prompts.find((item) => String(item.id) === ui.promptSelect.value) || null;
+  return state.saved_prompts.find(
+    (item) => String(item.id) === ui.promptSelect.value,
+  ) || null;
 }
 
 function destinationKeyForLabel(label) {
-  return Array.from(ui.destination.options).find((item) => item.textContent.trim() === label.trim())?.value || null;
+  return Array.from(ui.destination.options).find(
+    (item) => item.textContent.trim() === label.trim(),
+  )?.value || null;
 }
 
 function visibleWarningDefault() {
@@ -88,9 +93,20 @@ function visibleWarningDefault() {
 
 function resolveDefaultDestination() {
   if (ui.promptType.value === "canonical") return null;
-  if (editingSnapshot && editingId !== null) return editingSnapshot.default_destination || ui.destination.value;
-  if (ui.promptType.value === "saved") return selectedSavedPrompt()?.default_destination || ui.destination.value;
+  if (editingSnapshot && editingId !== null) {
+    return editingSnapshot.default_destination || ui.destination.value;
+  }
+  if (ui.promptType.value === "saved") {
+    return selectedSavedPrompt()?.default_destination || ui.destination.value;
+  }
   return visibleWarningDefault() || ui.destination.value;
+}
+
+function canonicalPromptKeyFromSchedule(schedule) {
+  const sourceType = String(schedule.source_type || "");
+  return sourceType.startsWith("canonical:")
+    ? sourceType.slice("canonical:".length) || "boot"
+    : "boot";
 }
 
 function updateSummary() {
@@ -100,7 +116,11 @@ function updateSummary() {
     return;
   }
   const cadence = ui.cadence.value;
-  const repeat = cadence === "once" ? `once on ${ui.date.value}` : cadence === "daily" ? `daily beginning ${ui.date.value}` : `weekly beginning ${ui.date.value}`;
+  const repeat = cadence === "once"
+    ? `once on ${ui.date.value}`
+    : cadence === "daily"
+      ? `daily beginning ${ui.date.value}`
+      : `weekly beginning ${ui.date.value}`;
   const action = ui.confirmSend.checked ? "send live" : "place a verified draft";
   const destination = ui.destination.selectedOptions[0]?.textContent || "the destination";
   ui.summary.textContent = `${name} will ${action} in ${destination} ${repeat} at ${ui.time.value} CT.`;
@@ -154,8 +174,12 @@ function filteredSchedules() {
     .filter(matchesStateFilter);
 
   return rows.sort((left, right) => {
-    if (sort === "name") return String(left.name || "").localeCompare(String(right.name || ""));
-    if (sort === "recent") return recentTime(right) - recentTime(left) || Number(right.id) - Number(left.id);
+    if (sort === "name") {
+      return String(left.name || "").localeCompare(String(right.name || ""));
+    }
+    if (sort === "recent") {
+      return recentTime(right) - recentTime(left) || Number(right.id) - Number(left.id);
+    }
     const leftNext = left.next_run_at ? Number(left.next_run_at) : Number.POSITIVE_INFINITY;
     const rightNext = right.next_run_at ? Number(right.next_run_at) : Number.POSITIVE_INFINITY;
     if (leftNext !== rightNext) return leftNext - rightNext;
@@ -167,8 +191,16 @@ function filteredSchedules() {
 }
 
 function description(schedule) {
-  const next = schedule.next_run_at ? new Date(Number(schedule.next_run_at) * 1000).toLocaleString() : "No future run";
-  const cadence = schedule.cadence === "once" ? "Once" : schedule.cadence === "daily" ? "Daily" : `Weekly (${(schedule.weekdays || []).map((day) => ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][day]).join(", ")})`;
+  const next = schedule.next_run_at
+    ? new Date(Number(schedule.next_run_at) * 1000).toLocaleString()
+    : "No future run";
+  const cadence = schedule.cadence === "once"
+    ? "Once"
+    : schedule.cadence === "daily"
+      ? "Daily"
+      : `Weekly (${(schedule.weekdays || []).map(
+        (day) => ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][day],
+      ).join(", ")})`;
   return `${cadence} at ${schedule.schedule_time} · Next: ${next}`;
 }
 
@@ -204,26 +236,41 @@ async function loadStatus() {
 
 function collectPayload() {
   const source = ui.promptType.value;
-  const custom = source !== "canonical";
+  const canonical = source === "canonical";
   const prompt = ui.promptText.value.trim();
-  if (custom && !prompt) throw new Error(source === "saved" ? "Choose a saved prompt before scheduling." : "Custom prompt cannot be empty.");
+  if (!prompt) {
+    throw new Error(
+      source === "saved"
+        ? "Choose a saved prompt before scheduling."
+        : canonical
+          ? "Canonical prompt text is not loaded yet."
+          : "Custom prompt cannot be empty.",
+    );
+  }
   if (!ui.name.value.trim()) throw new Error("Enter a schedule name.");
   if (!ui.date.value || !ui.time.value) throw new Error("Choose both a schedule date and time.");
   const weekdays = checkedWeekdays();
-  if (ui.cadence.value === "weekly" && weekdays.length === 0) throw new Error("Choose at least one weekday.");
+  if (ui.cadence.value === "weekly" && weekdays.length === 0) {
+    throw new Error("Choose at least one weekday.");
+  }
   const mismatchVisible = ui.destinationWarning && !ui.destinationWarning.hidden;
-  if (mismatchVisible && !ui.confirmDestination.checked) throw new Error("Choose the one-time destination confirmation or make the selected destination the default before scheduling.");
+  if (mismatchVisible && !ui.confirmDestination.checked) {
+    throw new Error(
+      "Choose the one-time destination confirmation or make the selected destination the default before scheduling.",
+    );
+  }
   const saved = selectedSavedPrompt();
+  const canonicalKey = ui.promptSelect.value || "boot";
   return {
     name: ui.name.value.trim(),
     destination: ui.destination.value,
-    prompt_type: custom ? "custom" : "canonical",
-    custom_prompt: custom ? prompt : "",
+    prompt_type: canonical ? "canonical" : "custom",
+    custom_prompt: prompt,
     mode: ui.confirmSend.checked ? "send" : "draft",
     confirm_send: ui.confirmSend.checked,
     default_destination: resolveDefaultDestination(),
     confirm_destination: mismatchVisible ? ui.confirmDestination.checked : false,
-    source_type: source,
+    source_type: canonical ? `canonical:${canonicalKey}` : source,
     source_prompt_id: source === "saved" && saved ? Number(saved.id) : null,
     cadence: ui.cadence.value,
     schedule_date: ui.date.value,
@@ -257,21 +304,33 @@ async function loadIntoEditor(schedule) {
   updateCadenceUi();
   ui.saveButton.textContent = "Save schedule changes";
   ui.cancelEditButton.hidden = false;
-  const savedExists = schedule.source_type === "saved" && state.saved_prompts.some((item) => Number(item.id) === Number(schedule.source_prompt_id));
-  const source = schedule.source_type === "canonical" ? "canonical" : savedExists ? "saved" : "custom";
+
+  const sourceType = String(schedule.source_type || "");
+  const isCanonical = sourceType === "canonical" || sourceType.startsWith("canonical:");
+  const savedExists = sourceType === "saved"
+    && state.saved_prompts.some(
+      (item) => Number(item.id) === Number(schedule.source_prompt_id),
+    );
+  const source = isCanonical ? "canonical" : savedExists ? "saved" : "custom";
   ui.promptType.value = source;
   ui.promptType.dispatchEvent(new Event("change"));
   await wait(80);
-  if (source === "saved") {
+
+  if (source === "canonical") {
+    ui.promptSelect.value = canonicalPromptKeyFromSchedule(schedule);
+    ui.promptSelect.dispatchEvent(new Event("change"));
+    await wait(80);
+  } else if (source === "saved") {
     ui.promptSelect.value = String(schedule.source_prompt_id);
     ui.promptSelect.dispatchEvent(new Event("change"));
     await wait(80);
-  } else if (source === "custom") {
+  } else {
     ui.promptName.value = schedule.name || "Scheduled prompt";
     ui.promptText.value = schedule.custom_prompt || "";
     ui.promptName.dispatchEvent(new Event("input"));
     ui.promptText.dispatchEvent(new Event("input"));
   }
+
   ui.destination.value = schedule.destination;
   ui.destination.dispatchEvent(new Event("change"));
   await wait(80);
@@ -282,8 +341,10 @@ async function loadIntoEditor(schedule) {
   ui.name.focus();
 }
 
-[ui.date, ui.time, ui.destination, ui.confirmSend, ui.confirmDestination].forEach((item) => item.addEventListener("change", updateSummary));
-[ui.filterCadence, ui.filterDestination, ui.filterState, ui.filterSort].forEach((item) => item.addEventListener("change", render));
+[ui.date, ui.time, ui.destination, ui.confirmSend, ui.confirmDestination]
+  .forEach((item) => item.addEventListener("change", updateSummary));
+[ui.filterCadence, ui.filterDestination, ui.filterState, ui.filterSort]
+  .forEach((item) => item.addEventListener("change", render));
 ui.cadence.addEventListener("change", updateCadenceUi);
 ui.name.addEventListener("input", updateSummary);
 ui.weekdays.addEventListener("change", updateSummary);
@@ -292,7 +353,9 @@ ui.saveButton.addEventListener("click", async () => {
   ui.saveButton.disabled = true;
   try {
     const payload = collectPayload();
-    const url = editingId === null ? "/api/command-center/schedules" : `/api/command-center/schedules/${editingId}`;
+    const url = editingId === null
+      ? "/api/command-center/schedules"
+      : `/api/command-center/schedules/${editingId}`;
     const response = await fetch(url, {
       method: editingId === null ? "POST" : "PUT",
       headers: {"Content-Type": "application/json"},
@@ -321,7 +384,9 @@ ui.list.addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-schedule-action]");
   if (!button) return;
   const scheduleId = Number(button.closest("[data-schedule-id]")?.dataset.scheduleId);
-  const schedule = (state.scheduled_jobs || []).find((item) => Number(item.id) === scheduleId);
+  const schedule = (state.scheduled_jobs || []).find(
+    (item) => Number(item.id) === scheduleId,
+  );
   if (!schedule) return;
   const action = button.dataset.scheduleAction;
   button.disabled = true;
@@ -341,7 +406,9 @@ ui.list.addEventListener("click", async (event) => {
     if (!response.ok) throw new Error(data.detail || "Schedule action failed.");
     state = data;
     render();
-    ui.summary.textContent = action === "delete" ? `Deleted timed run: ${schedule.name}` : `${schedule.name} ${schedule.enabled ? "paused" : "resumed"}.`;
+    ui.summary.textContent = action === "delete"
+      ? `Deleted timed run: ${schedule.name}`
+      : `${schedule.name} ${schedule.enabled ? "paused" : "resumed"}.`;
     if (editingId === scheduleId && action === "delete") resetEditor();
   } catch (error) {
     ui.summary.textContent = error.message;
@@ -352,6 +419,8 @@ ui.list.addEventListener("click", async (event) => {
 
 initializeTime();
 updateCadenceUi();
-loadStatus().catch((error) => { ui.summary.textContent = error.message; });
+loadStatus().catch((error) => {
+  ui.summary.textContent = error.message;
+});
 setInterval(() => loadStatus().catch(() => {}), 15000);
 })();
