@@ -1,6 +1,6 @@
 # Engineering HQ
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 
 ## Purpose
 
@@ -31,8 +31,9 @@ Use Engineering HQ for:
 
 ## Current Operating Tracks
 
-- Automation Command Center Phase 1 design and implementation, manual Run Now only.
-- Desktop department automation maintenance after successful seven-HQ validation.
+- Automation Command Center operational validation, compatibility, scheduling safety, and recovery behavior.
+- Desktop department automation maintenance after successful seven-department validation.
+- Canonical prompt catalog expansion and prompt-language reconciliation.
 - LifeOS Dashboard observation, optional auto-refresh, guarded Git synchronization, and source-health behavior.
 - Reliable Connector Execution Layer design, including operation-ledger, idempotency, verification, and retry policy.
 - Penny Raw Capture and Inventory Worker pilots.
@@ -43,15 +44,15 @@ Use Engineering HQ for:
 
 - Business strategy, branding, market research, monetization, or customer discovery: Business HQ or Office Leaks HQ.
 - Finance, benefits, budget, bills, subscriptions, or cost approval: Finance HQ.
-- Daily one-off scheduling, ordinary logistics, executive-function support, or quick admin: Main Assistant HQ.
-- Shared global boot integrity, advisory-index hygiene, cross-project audits, and system-wide housekeeping: Logistics HQ.
+- Daily one-off scheduling, ordinary coordination, executive-function support, or quick administration: Chief of Staff HQ.
+- Shared global boot integrity, advisory-index hygiene, cross-project audits, migrations, and system-wide housekeeping: Life OS Maintenance HQ.
 - Recovery, pacing, health, or sustainability judgment: Wellness HQ.
 
 ## Department File Ownership
 
 Engineering maintains its own project subtree during routine boots, syncs, and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, decision rules, implementation notes, and Engineering source-board advisory text.
 
-Shared global files, other departments' canonical files, the Advisory Index, and cross-department architecture changes require the appropriate owner, Main Assistant, Logistics, or explicit coordinated authorization.
+Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner, Chief of Staff HQ, Life OS Maintenance HQ, or explicit coordinated authorization.
 
 ## Source Systems
 
@@ -66,11 +67,11 @@ Shared global files, other departments' canonical files, the Advisory Index, and
 
 ## Current Technical State
 
-The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. The local suite has passed with 16 tests. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
+The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. The Department Inspection view has been locally verified at 414 normalized records, zero findings, and zero warnings. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
 
-Desktop department automation is operational across all seven HQs. It supports exact navigation, one bounded hidden-sidebar expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, draft-only default behavior, explicit `--send` authorization, and stop-on-uncertainty behavior. A watched live send to Main Assistant HQ succeeded.
+Desktop department automation is operational across all seven department HQ chats. It supports exact navigation, one bounded hidden-sidebar expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, draft-only default behavior, explicit `--send` authorization, and stop-on-uncertainty behavior. Historical live-send validation used the former Main Assistant HQ automation title; current display-name reconciliation is being implemented in bounded packages.
 
-The Automation Command Center is planned inside the existing dashboard. Phase 1 will support eight exact destinations, canonical or custom prompts, draft/send mode, explicit send confirmation, manual Run Now, one-job locking, global pause, structured results, and local activity history. Scheduling is explicitly deferred.
+The Automation Command Center is implemented inside the dashboard. It supports eight exact destinations, canonical, saved, and custom prompts, draft or explicitly confirmed send mode, one-job locking, global pause, structured results, persistent SQLite history, and one-time, daily, and weekly schedules in `America/Chicago`. Scheduling remains operational validation rather than fully unattended-production-ready because restart, overdue-run, repeated recurrence, collapsed-project recovery, scheduler preflight, and missed-run policy remain open.
 
 Canonical references:
 
@@ -79,6 +80,7 @@ Canonical references:
 - `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
 - `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
 - `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
+- `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
 
 ## Security Rule
 
@@ -96,4 +98,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current front burner: build Automation Command Center Phase 1 without importing scheduling complexity, while preserving the validated dashboard and desktop-automation safety contract.
+Active department. Current front burner: reconcile canonical visible names and prompt language, then update automation mappings and compatibility without changing stable destination keys or damaging persisted schedules, saved prompts, or run history.
