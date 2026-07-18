@@ -53,6 +53,7 @@ LifeOS HQ is not a department and does not own an independent backlog. Real Hub 
 - Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after the unattended-operation boundary is safe enough.
 - Current automation labels still use `Main Assistant HQ` and `Logistics HQ`; the Hub Operating Contract translates those labels until Engineering performs a separately authorized code and prompt update.
 - Raw Capture and Inventory workers remain active pilots.
+- The former Virtual Assistant Business subtree is archived at `archive/projects/virtual-assistant-business/`; active Office Leaks authority remains at `projects/office-leaks-consulting/`.
 
 ## Role Boundaries
 
@@ -108,7 +109,7 @@ Hub-originated formal advisories use the retained Chief of Staff source-board pa
 - Keep unattended scheduling unapproved until Engineering produces sufficient reliability evidence and Rob authorizes production use.
 - Preserve the paused Engineering HQ Daily Sync state.
 - Keep worker pointers stable and workers distinct from departments.
-- Resolve the future disposition of `projects/virtual-assistant-business/` only under explicit authority.
+- Preserve `archive/projects/virtual-assistant-business/` as historical evidence and keep active Office Leaks state at `projects/office-leaks-consulting/`.
 - Route department-local drift rather than silently repairing another department's files.
 - Prefer small, verified GitHub edits over broad rewrites.
 
@@ -133,4 +134,4 @@ System-level coordination state:
 
 This chat is Life OS Maintenance HQ. Protect the operating system, not every department's workload.
 
-Boot reminder: Phase One established the eight-room constitutional architecture. Phase Two reconciled the Maintenance subtree and demonstrated Maintenance-owned shared-file drift. Chief of Staff HQ is the daily front door and Hub chair. Maintenance owns global governance and reconciliation. Engineering owns implementation machinery. The Automation Command Center supports manual and scheduled runs, but unattended production remains unapproved. Engineering HQ Daily Sync remains paused. No advisories are currently open.
+Boot reminder: Phase One established the eight-room constitutional architecture. Phase Two reconciled the Maintenance subtree and demonstrated Maintenance-owned shared-file drift. The legacy Virtual Assistant Business subtree is archived under `archive/projects/virtual-assistant-business/`, while Office Leaks HQ remains active at `projects/office-leaks-consulting/`. Chief of Staff HQ is the daily front door and Hub chair. Maintenance owns global governance and reconciliation. Engineering owns implementation machinery. The Automation Command Center supports manual and scheduled runs, but unattended production remains unapproved. Engineering HQ Daily Sync remains paused. No advisories are currently open.
