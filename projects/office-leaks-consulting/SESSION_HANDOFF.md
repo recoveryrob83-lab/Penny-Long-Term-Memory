@@ -88,13 +88,13 @@ Office Leaks has a local notebook hub and leaf index:
 - `projects/office-leaks-consulting/NOTEBOOK.md`
 - `projects/office-leaks-consulting/notebook/README.md`
 
-Key source notes remain preserved in the legacy folder until fully migrated:
+Historical predecessor notes are archived at:
 
-- `projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md`
-- `projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md`
-- `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
 
-Do not delete the legacy folder until Rob explicitly authorizes archival cleanup.
+Treat those archived records as historical evidence, not active authority, open work, or current boot state.
 
 ## Engineering / Delivery Architecture
 
