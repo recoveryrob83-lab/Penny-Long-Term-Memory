@@ -14,7 +14,7 @@ LifeOS HQ is a separate shared meeting room. Chief of Staff chairs it, but the H
 
 ## Current Phase
 
-Operational use, Phase Two role alignment, and evidence-based refinement.
+Operational use, completed Phase Two role alignment, and evidence-based refinement.
 
 The friction-aware Daily Operating SOP is active through the universal boot sequence and should be tested in ordinary daily planning rather than expanded into another layer of bureaucracy.
 
@@ -69,8 +69,8 @@ Departments retain their own durable GitHub ownership and drift-management respo
 
 ## Current Dependencies
 
-- Life OS Maintenance HQ owns manual reconciliation of the deployed ChatGPT Project Settings with the canonical Project Instructions and all shared-governance naming cleanup outside this department.
-- Engineering HQ owns updates to automation labels, canonical prompts, dashboard labels, code, and tests. Current automation labels may still display `Main Assistant HQ` and `Logistics HQ` until that separate work is authorized and completed.
+- Life OS Maintenance HQ owns future reconciliation if the deployed ChatGPT Project Settings diverge from the canonical Project Instructions, plus shared-governance maintenance, boot integrity, audits, migrations, source boundaries, and global repository reconciliation.
+- Engineering HQ owns Package B updates to automation labels, canonical prompts, dashboard labels, compatibility mappings, code, and tests. Current automation labels may still display `Main Assistant HQ` and `Logistics HQ` until that separately authorized work is completed.
 - Engineering HQ owns unattended scheduler validation. Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after the relevant safety boundaries are validated.
 - Business HQ and Office Leaks HQ own Office Leaks strategy, offer design, outreach, delivery, and market-test judgment.
 - Finance HQ owns forecasting models, account-linked analysis, and financial judgment. Account-linked connector work remains isolated in Finance-only chat.
@@ -78,6 +78,8 @@ Departments retain their own durable GitHub ownership and drift-management respo
 ## Current Evidence
 
 - The shared constitutional layer recognizes Chief of Staff HQ as Rob's primary point of contact and LifeOS HQ chair.
+- Phase Two owner-routed repairs are complete across all seven department HQs.
+- The deployed ChatGPT Project Settings copy matches the canonical Project Instructions; no manual replacement is pending.
 - The LifeOS Dashboard is live with four verified source types: GitHub, Trello, Todoist, and Google Calendar private iCal.
 - Guarded GitHub auto-sync is limited to clean, strictly-behind fast-forward updates.
 - Windows desktop boot automation passed draft-mode validation across the seven department HQs and recognizes LifeOS HQ as an eighth exact destination.
