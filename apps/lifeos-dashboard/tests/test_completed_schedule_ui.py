@@ -33,3 +33,19 @@ def test_scheduler_ledger_health_is_visible() -> None:
     assert '"Ledger synced"' in script
     assert '"Ledger error"' in script
     assert "schedule_ledger" in script
+
+
+def test_overdue_one_time_remains_paused_and_visible() -> None:
+    script = (STATIC_ROOT / "command-scheduler.js").read_text(encoding="utf-8")
+
+    assert '["succeeded", "failed", "refused"].includes(schedule.last_status)' in script
+    assert 'Boolean(schedule.last_status)' not in script
+    assert 'return !schedule.enabled && !isFinishedOneTime(schedule);' in script
+
+
+def test_no_future_run_cards_sort_by_recent_change() -> None:
+    script = (STATIC_ROOT / "command-scheduler.js").read_text(encoding="utf-8")
+
+    assert 'if (leftNext !== rightNext) return leftNext - rightNext;' in script
+    assert 'if (!Number.isFinite(leftNext)) {' in script
+    assert 'return recentTime(right) - recentTime(left) || Number(right.id) - Number(left.id);' in script
