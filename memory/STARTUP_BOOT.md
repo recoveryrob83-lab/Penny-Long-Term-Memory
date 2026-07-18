@@ -1,8 +1,8 @@
 # Startup Boot
 
 Updated: 2026-07-18
-Project: Life OS / Logistics HQ / Penny Long-Term Memory
-Purpose: Canonical startup and routing procedure for fresh Penny chats, departments, projects, and workers.
+Project: Life OS / Life OS Maintenance HQ / Penny Long-Term Memory
+Purpose: Canonical startup and routing procedure for fresh Penny chats, LifeOS HQ, departments, projects, and workers.
 
 ## Repository
 
@@ -12,7 +12,7 @@ Open:
 
 ## Boot Principle
 
-Use a small universal operating kernel, then load only the context required by the named role or project.
+Use a small universal operating kernel, then load only the context required by the named room, role, department, project, or worker.
 
 Do not make every specialist read the global handoff, all active projects, all system loops, migration state, or unrelated department backlogs.
 
@@ -20,38 +20,53 @@ Short form:
 
 > Shared rules are universal. Operational state is role-routed.
 
+Boot loads context. Sync compares context with authoritative state. Boot does not authorize maintenance, and Sync is read-only by default.
+
+When both are requested, complete Boot first, then perform a separate read-only Sync report.
+
 ## Step 1: Identify the Boot Target
 
 Before reading beyond the universal kernel, determine whether Rob is booting:
 
-- Main Assistant HQ;
-- Logistics HQ;
+- `LifeOS HQ`, the central meeting room;
+- `Chief of Staff HQ`;
+- `Life OS Maintenance HQ`;
 - one of the specialist departments;
 - a standalone project;
 - a narrow worker;
-- a general LifeOS coordination or system-review chat.
+- an explicit system audit or architecture review.
 
-When Rob names a department, project, or worker, use that route. Do not broaden the boot merely because additional files are available.
+When Rob names a room, department, project, or worker, use that route. Do not broaden the boot merely because additional files are available.
+
+Legacy display names are interpreted through:
+
+- `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
+- `memory/HQ_NAMING_STANDARD.md`
+
+Filesystem paths remain unchanged unless a separate migration is authorized.
 
 ## Step 2: Universal Operating Kernel
 
-Departments, projects, Main Assistant, Logistics, and general LifeOS coordination read these files in order:
+LifeOS HQ, departments, projects, Chief of Staff, Life OS Maintenance, and explicit system-review chats read these files in order:
 
 1. `memory/STARTUP_BOOT.md`
 2. `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`
-3. `memory/00_START_HERE.md`
-4. `memory/CONTEXT_REMINDER.md`
-5. `memory/03_OPERATIONAL_RULES.md`
-6. `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
-7. `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
-8. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
-9. `memory/06_DAILY_OPERATING_SOP.md`
+3. `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
+4. `memory/00_START_HERE.md`
+5. `memory/CONTEXT_REMINDER.md`
+6. `memory/03_OPERATIONAL_RULES.md`
+7. `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
+8. `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
+9. `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
+10. `memory/06_DAILY_OPERATING_SOP.md`
 
 ChatGPT Project Instructions are Layer Zero and may already be active before boot. The GitHub copy is the versioned canonical deployment source used to verify, audit, and reconcile the deployed Project Settings text.
 
-The universal kernel defines identity, command meaning, safety, source boundaries, file ownership, open-loop ownership, Chat versus Work usage, and the default daily operating standard.
+The Hub Operating Contract defines the current authority map, official role names, legacy-name translation, Hub action transfer, and reporting structure.
 
-The following are no longer universal boot files:
+The universal kernel defines command meaning, safety, source boundaries, file ownership, open-loop ownership, Chat versus Work usage, and the default daily operating standard.
+
+The following are not universal boot files:
 
 - `memory/01_SESSION_HANDOFF.md`
 - `memory/02_BOOT_LOG.md`
@@ -64,7 +79,31 @@ Read them only under the role-routed rules below.
 
 ## Step 3: Role-Routed Shared Context
 
-### Main Assistant HQ
+### LifeOS HQ
+
+LifeOS HQ is the shared meeting room. It is not a department and has no independent project subtree or backlog.
+
+After the universal kernel, read:
+
+1. `memory/01_SESSION_HANDOFF.md`
+2. `memory/04_ACTIVE_PROJECTS.md`
+3. `memory/05_OPEN_LOOPS.md`
+4. `coordination/ADVISORY_INDEX.md` when advisory state, routing, or a cross-department decision is relevant
+
+Read department files only when current coordination, a named dependency, a routed assignment, or the meeting topic requires them.
+
+Inside the Hub:
+
+- `[MAIN]` is Chief of Staff speaking as chair;
+- department tags provide domain judgment and recommendations;
+- Rob remains final authority;
+- the Hub itself does not become the owner of work;
+- real actions are transferred to one owning department and one authoritative destination;
+- Hub-originated formal advisories use `coordination/boards/main-assistant.md` as the retained Chief of Staff source-board path.
+
+Do not read all department notebooks or backlogs merely because a Hub meeting is broad.
+
+### Chief of Staff HQ
 
 After the universal kernel, read:
 
@@ -74,17 +113,19 @@ After the universal kernel, read:
 4. `projects/main-assistant/status.md`
 5. `projects/main-assistant/open_loops.md`
 
-Read these shared files when coordinating broad daily operations, cross-department synthesis, a hub report, or a system decision:
+Read these shared files when coordinating broad daily operations, receiving department reports, routing assignments, preparing a Hub report, or supporting a system decision:
 
 - `memory/01_SESSION_HANDOFF.md`
 - `memory/04_ACTIVE_PROJECTS.md`
 - `memory/05_OPEN_LOOPS.md`
 
-Read `memory/02_BOOT_LOG.md` only when recent boot-history changes, migration history, or a recreated chat makes it relevant.
+Read `memory/02_BOOT_LOG.md` only when recent boot-history changes, migration history, or recreated-chat recovery makes it relevant.
 
-Main Assistant may see broad state for coordination. It does not become the authoritative owner of each department's backlog.
+Chief of Staff HQ is Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, Hub chair, routing desk, and follow-through coordinator.
 
-### Logistics HQ
+Chief of Staff may see broad state for coordination. It does not become the authoritative owner of every department's strategy, records, or backlog.
+
+### Life OS Maintenance HQ
 
 After the universal kernel, read:
 
@@ -94,7 +135,7 @@ After the universal kernel, read:
 4. `projects/life-logistics-hq/status.md`
 5. `projects/life-logistics-hq/open_loops.md`
 
-For normal Logistics boot and system maintenance, also read:
+For normal Maintenance boot, audits, and system reconciliation, also read:
 
 - `memory/01_SESSION_HANDOFF.md`
 - `memory/02_BOOT_LOG.md`
@@ -106,7 +147,9 @@ Read these only when migration, mirror, repository-transition, or global reconci
 - `MIGRATION_PLAN.md`
 - `MIRROR_STATUS.md`
 
-Logistics owns global boot integrity, shared infrastructure, system-loop hygiene, migrations, repository-path disposition, cross-project audits, and system reconciliation.
+Life OS Maintenance HQ owns global boot integrity, shared operating infrastructure, global rules and handoffs, system-loop hygiene, advisory infrastructure, repository paths, migrations, archives, audits, source-boundary enforcement, and system reconciliation.
+
+Maintenance detects drift and routes precise corrections. It does not silently edit a department's local files without explicit coordinated-repair authority.
 
 ### Specialist Departments
 
@@ -132,14 +175,16 @@ A specialist reads shared or cross-department context only when:
 
 - Rob names it;
 - its own handoff points to it;
-- an advisory or dependency is routed to that department;
+- an advisory, assignment, report request, or dependency is routed to that department;
 - a shared policy directly affects the current task;
-- Main Assistant or Logistics requests a coordinated review;
+- Chief of Staff or Life OS Maintenance requests a coordinated review;
 - the specialist is recreating context after a known continuity problem.
+
+Specialist departments own judgment and durable state within their domains. They may report recommendations, status, risks, and completion to Chief of Staff HQ without transferring ownership.
 
 Broad LifeOS usefulness does not create specialist need-to-know.
 
-### General LifeOS Coordination or System Review
+### Explicit System Audit or Architecture Review
 
 For an explicit cross-department audit, architecture review, or system report, read:
 
@@ -150,6 +195,8 @@ For an explicit cross-department audit, architecture review, or system report, r
 - `coordination/ADVISORY_INDEX.md` when advisory state matters.
 
 Do not read all department notebooks by default.
+
+Engineering may lead technical system design and implementation workstreams. Life OS Maintenance remains the long-term owner of global governance, audits, boot integrity, and repository reconciliation.
 
 ### Standalone Projects
 
@@ -180,11 +227,13 @@ Rules:
 - Department `open_loops.md` files are authoritative for department-owned unfinished work.
 - `memory/05_OPEN_LOOPS.md` is reserved for genuinely system-owned work and operating watches.
 - Global visibility does not justify copying department work into system memory.
-- During routine syncs, correct local drift directly when authorized.
-- Use advisories or explicit dependencies only when another department must know, act, decide, monitor, or accept responsibility.
-- Main Assistant coordinates shared policy and cross-department decisions.
-- Logistics maintains shared operational infrastructure, boot integrity, system-loop hygiene, and cross-project audits.
+- During authorized Maintenance, correct local drift directly within the current owner's files.
+- Use advisories, assignments, reports, or explicit dependencies only when another department must know, act, decide, monitor, or accept responsibility.
+- Chief of Staff coordinates daily operations, department reporting, assignments, shared decisions, and follow-through.
+- Life OS Maintenance maintains shared operational infrastructure, boot integrity, system-loop hygiene, audits, and global reconciliation.
 - Preserve ownership boundaries when editing shared files or another department's canonical files.
+
+Legacy mentions of Main Assistant and Logistics in files not yet updated are interpreted as Chief of Staff HQ and Life OS Maintenance HQ under the Hub Operating Contract.
 
 ## Chat and Work Policy Application
 
@@ -214,7 +263,18 @@ Project-specific instructions may refine this standard within their domain but m
 
 ## Desktop Department Automation
 
-Windows ChatGPT Classic department automation is operational across all seven HQs.
+Windows ChatGPT Classic automation has been validated across the seven department HQ chats.
+
+The Automation Command Center recognizes eight exact destinations:
+
+- LifeOS HQ;
+- Chief of Staff HQ through the current `Main Assistant HQ` automation label until Engineering updates it;
+- Life OS Maintenance HQ through the current `Logistics HQ` automation label until Engineering updates it;
+- Engineering HQ;
+- Finance HQ;
+- Business HQ;
+- Office Leaks HQ;
+- Wellness HQ.
 
 Canonical launcher:
 
@@ -227,19 +287,21 @@ Canonical naming:
 Automation rules:
 
 - draft-only by default;
-- exact HQ matching;
+- exact destination matching;
 - one bounded hidden-sidebar expansion;
 - exact destination verification;
-- stable Group composer discovery;
+- stable composer discovery;
 - preserve existing draft text;
 - clipboard round-trip payload verification;
-- explicit `--send` authorization required for submission;
+- explicit send authorization required for submission;
 - stop on uncertainty;
-- do not treat on-demand automation as authorization for unattended scheduled boots.
+- do not treat on-demand or scheduled capability as authorization for unattended department operation.
 
-The automation cannot independently prove that GitHub remains active as a connector in the destination chat. A cold connector remains a visible recoverable soft failure.
+The Automation Command Center supports manual and scheduled runs, but unattended production readiness remains incomplete. Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after restart, overdue-run, recurrence, recovery, and preflight boundaries are safe enough.
 
-## Notebook Context During Hub Sync
+Automation cannot independently prove that GitHub remains active as a connector in the destination chat. A cold connector remains a visible recoverable failure.
+
+## Notebook Context During Chief of Staff Sync
 
 Department notebook standards live in:
 
@@ -247,10 +309,10 @@ Department notebook standards live in:
 
 Do not read every department notebook during an ordinary boot.
 
-When Main Assistant runs an explicit hub synchronization:
+When Chief of Staff runs an explicit central synchronization:
 
-- `/MORNING` reads notebook entries from today and the previous calendar day.
-- `/NIGHTLY` reads notebook entries from the current calendar day.
+- `/MORNING` reads relevant notebook entries from today and the previous calendar day.
+- `/NIGHTLY` reads relevant entries from the current calendar day.
 - `/NBOOK` reads today by default and accepts one date, an inclusive date range, or `ALL` as defined in `memory/CONTEXT_REMINDER.md`.
 - Notebook review is read-only unless Rob separately authorizes promotion or file changes.
 - Read date-bounded entries to improve central context without automatically turning notes into tasks, advisories, open loops, or status.
@@ -267,9 +329,9 @@ Scheduled-task notes live in:
 
 Scheduled tasks are not long-lived department chats. Treat them as experimental timed prompts unless later proven stable.
 
-Read scheduled-task files only when Rob asks about scheduled tasks, Logistics is doing system review, Main Assistant needs morning-report notes, or a department is told to check its memo inbox.
+Read scheduled-task files only when Rob asks about scheduled tasks, Life OS Maintenance is doing system review, Chief of Staff needs report notes, or a department is told to check its memo inbox.
 
-Engineering HQ Daily Sync remains paused. Validated on-demand desktop automation does not reactivate unattended scheduled execution.
+Engineering HQ Daily Sync remains paused. Existing scheduling capability does not reactivate it.
 
 ## Worker Layer
 
@@ -304,28 +366,31 @@ Todoist is Rob's personal task system and should not be used for department sync
 Read the Advisory Index when:
 
 - Rob asks for advisory status;
-- Logistics is doing system review;
-- Main Assistant is preparing a full operations report;
+- Life OS Maintenance is doing system review;
+- Chief of Staff is preparing a full operations report or routing assignments;
 - a project chat is being recreated after connector problems;
 - Rob routes a department to a specific advisory;
 - the department handoff names a relevant advisory or dependency.
 
 Read a source department board only when the Advisory Index points to a relevant advisory or Rob names the board or advisory.
 
-Routine advisory reporting belongs to Main Assistant, not every specialist department. Specialists should not include advisory summaries in routine reports unless asked.
+Routine advisory reporting belongs to Chief of Staff, not every specialist department. Specialists should not include advisory summaries in routine reports unless asked or routed.
 
 When a department creates an advisory for another department:
 
-1. Create the advisory on the source department board.
-2. Update `coordination/ADVISORY_INDEX.md` with the advisory ID, status, board path, and targets.
-3. Do not duplicate the advisory as an open loop in each target department unless each department truly owns a separate action.
+1. create the advisory on the source department board;
+2. update `coordination/ADVISORY_INDEX.md` with the advisory ID, status, board path, and targets;
+3. do not duplicate the advisory as an open loop in each target department unless each department truly owns a separate action.
+
+When LifeOS HQ produces a formal advisory, Chief of Staff HQ is the source department and uses `coordination/boards/main-assistant.md` as the retained source-board path.
 
 For multi-target advisories, do not mark fully acknowledged or implemented until all required targets have reported handled status, unless separate per-target status is recorded.
 
 ## Project Routing Map
 
-- Logistics HQ: `projects/life-logistics-hq/SESSION_HANDOFF.md`
-- Main Assistant HQ: `projects/main-assistant/SESSION_HANDOFF.md`
+- LifeOS HQ meeting room: `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
+- Chief of Staff HQ: `projects/main-assistant/SESSION_HANDOFF.md`
+- Life OS Maintenance HQ: `projects/life-logistics-hq/SESSION_HANDOFF.md`
 - Caregiver Project HQ / Support Pathway: `projects/caregiver-income/SESSION_HANDOFF.md`
 - Job Search HQ / Work Search: `projects/job-search/SESSION_HANDOFF.md`
 - Cleanup Project HQ / Site Cleanup: `projects/cleanup/SESSION_HANDOFF.md`
@@ -347,25 +412,26 @@ If the project name is ambiguous, read `projects/README.md` and ask one concise 
 
 During startup:
 
-- Read only unless Rob asks for an edit or external action.
-- Do not write to Drive or GitHub during boot.
-- Build working context from the universal kernel plus the routed role or project files.
-- Do not summarize unrelated global backlogs for specialist departments.
-- Report only shared context that is relevant to the booted role.
-- For Main Assistant, include broader system state only when coordinating or reporting across departments.
-- For Logistics, focus on system integrity, shared state, system loops, advisory hygiene, migrations, dashboard and automation boundaries, and role clarity.
-- Include advisory, worker, scheduled-task, migration, or mirror status only when the relevant files were read for a reason.
-- Ask only when the next action is genuinely ambiguous.
+- read only unless Rob asks for an edit or external action;
+- do not write to Drive or GitHub during Boot;
+- build working context from the universal kernel plus the routed room, role, department, or project files;
+- do not summarize unrelated global backlogs for specialist departments;
+- report only shared context relevant to the booted role;
+- for LifeOS HQ, provide meeting-room orientation, relevant system state, and routing needs without inventing Hub ownership;
+- for Chief of Staff, include broader system state only when coordinating, receiving reports, or routing work;
+- for Life OS Maintenance, focus on system integrity, shared state, system loops, advisory hygiene, migrations, dashboard and automation boundaries, and role clarity;
+- include advisory, worker, scheduled-task, migration, or mirror status only when the relevant files were read for a reason;
+- ask only when the next action is genuinely ambiguous.
 
 ## System Architecture
 
 GitHub is the durable memory map.
 
-Google Drive is the working-records cabinet.
+Google Drive is the working-records cabinet and home of the human-facing Chief's Manual.
 
 The Life OS Pointer Registry in Drive is the directory service for detailed records.
 
-Trello shows current attention and flow.
+Trello shows raw intake, current attention, and flow.
 
 Calendar owns timed commitments.
 
@@ -373,23 +439,23 @@ Todoist owns Rob-facing commitments and reminders.
 
 Gmail owns communication evidence.
 
-The LifeOS Dashboard displays selected high-signal state from authoritative systems and provides local automation controls.
+The LifeOS Dashboard displays selected high-signal state from authoritative systems and provides bounded local automation controls.
 
 `coordination/ADVISORY_INDEX.md` owns advisory dashboard state.
 
 `coordination/DEPARTMENT_EVENT_INBOX.md` is historical and frozen unless explicitly reactivated.
 
-Regular Chat is the canonical conversational headquarters.
+Regular Chat is the canonical conversational environment.
 
-Work is the bounded execution environment for local computer and heavy implementation tasks.
+LifeOS HQ is the shared meeting room.
+
+Chief of Staff HQ is Rob's primary point of contact, daily-operations department, Hub chair, routing desk, and follow-through coordinator.
+
+Life OS Maintenance HQ owns global GitHub maintenance, audits, boot integrity, shared governance, source-boundary enforcement, migrations, and reconciliation.
 
 Departments own domains, judgment, strategy, durable state, and routine maintenance of their own GitHub files.
 
-Main Assistant coordinates daily operations, cross-department policy, and shared decisions.
-
-Logistics maintains shared operational infrastructure, global hygiene, system-loop integrity, migrations, and cross-project audits.
-
-Engineering owns dashboard and desktop-automation implementation.
+Engineering owns dashboard, parser, automation, validator, and technical implementation work.
 
 The Department Inspection tab aggregates department and system records read-only without becoming a source of truth.
 
