@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Updated: 2026-07-18
 Department: Engineering HQ
-Status: MVP locally validated / first inspector-guided cleanup verified / warning review active
+Status: MVP locally validated / source and parser cleanup verified / ordinary boot observation active
 
 ## Trigger
 
@@ -65,7 +65,7 @@ The read-only MVP includes:
 - derived `state_priority_mixed`, `possible_duplicate`, and `stale_mirror` findings;
 - GET `/api/department-inspection`;
 - a Department Inspection tab between Overview and Automation;
-- filters for department, category, record type, state, priority, date range, cross-department status, authority, warnings, search, and sorting;
+- filters for department, category, record type, state, priority, date range, cross-department status, authority, warning status, search, and sorting;
 - reload after the ordinary dashboard refresh completes its guarded GitHub synchronization;
 - parser and endpoint test coverage.
 
@@ -157,9 +157,39 @@ Compared with the tuned pre-cleanup baseline of 459 / 4 / 15:
 - 45 mirrored, duplicated, or low-value normalized records disappeared;
 - all four confirmed structural findings disappeared naturally from source cleanup;
 - warning volume fell slightly again without broad detector weakening;
-- the remaining 13 warnings are now a bounded review queue, not evidence that the cleanup failed.
+- the remaining 13 warnings became a bounded review queue rather than evidence that the cleanup failed.
 
-This is the first end-to-end proof that the inspector can expose structural defects, guide source cleanup, and verify the result without becoming a write-enabled source of truth.
+This was the first end-to-end proof that the inspector could expose structural defects, guide source cleanup, and verify the result without becoming a write-enabled source of truth.
+
+## Warning Audit and Final Clean Verification
+
+Rob used the new Warning Status filter to inspect the bounded queue.
+
+The queue contained:
+
+- ten notebook-status warnings;
+- two Logistics rows using the legacy `Parked` lifecycle value;
+- one warning that cleared when an Engineering tracking note gained an explicit recognized status.
+
+The notebook audit exposed a real parser defect. Connector experiment notes could place an exact `Status: SUCCESS` field under a later `## Result` section, beyond the parser's bounded top-of-document metadata scan. The runtime policy now:
+
+- honors an exact `Status:` field anywhere in a notebook;
+- maps observed success and watched-validation statuses to `Completed`;
+- maps observed deferred statuses to `Waiting`;
+- maps observed raw and open statuses to `Open`;
+- maps blocked statuses to `Blocked`;
+- retains conservative fallback warnings for statuses not supported by evidence;
+- includes regression coverage for the late-status Google Drive experiment.
+
+The two Logistics records were valid paused work encoded with the legacy `Parked` value. Logistics now uses explicit `Status | Priority | Item | Next Action | Notes` columns, with both records set to `Paused | Low`.
+
+After guarded synchronization, Python restart where required, and browser refresh, Rob confirmed:
+
+- 414 normalized records;
+- 0 findings;
+- 0 warnings.
+
+This final zero was achieved through confirmed source corrections and evidence-backed parser behavior, not by suppressing ambiguity or weakening detection.
 
 ## Implemented Operational Package
 
@@ -167,6 +197,8 @@ The ownership and routing architecture is now durable in:
 
 - `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`;
 - `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`;
+- `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`;
+- `memory/03_OPERATIONAL_RULES.md`;
 - `memory/STARTUP_BOOT.md`;
 - `memory/05_OPEN_LOOPS.md`;
 - department-local handoffs, status files, and open-loop files.
@@ -179,18 +211,24 @@ Implemented rules include:
 4. advisory and dependency routing for work that crosses department boundaries;
 5. lifecycle rules for creation, update, pause, closure, and reconciliation;
 6. dashboard aggregation as a read-only visibility layer rather than a mirrored ledger;
-7. stale-state detection and source cleanup through explicit human review.
+7. stale-state detection and source cleanup through explicit human review;
+8. Trello-first raw idea intake and deliberate durable-write promotion;
+9. canonical tag families and structured GitHub lifecycle vocabulary;
+10. separation between abundant ideas, committed work, durable evidence, and shared operating rules.
 
 ## Remaining Sequence
 
-1. Review the remaining 13 warnings and distinguish genuine ambiguity from harmless legacy metadata.
-2. Correct only warnings that reveal a real source or parser defect.
-3. Observe ordinary specialist boots for evidence that the universal-kernel plus role-routed model works in practice.
-4. Keep the system wrapper open only until ordinary use confirms stable routing.
-5. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
+1. Observe ordinary specialist boots for evidence that the universal-kernel plus role-routed model works in practice.
+2. Close the ownership system wrapper when ordinary use confirms stable routing.
+3. Confirm the inspector remains read-only and introduces no new source-of-truth duplication.
+4. Apply the new idea-intake and promotion rules in live Trello and department workflows, refining only from observed friction before automation.
 
-Do not weaken finding detection merely to preserve a zero count, and do not chase zero warnings when a warning truthfully represents ambiguous source material.
+Do not weaken finding detection merely to preserve a zero count. Future warnings should remain visible when they truthfully represent ambiguous source material.
 
 ## Product Lesson
 
-The dashboard is already paying for itself by exposing duplicate state, unnecessary universal context, over-engineering, and work that should remain local. Treat that diagnostic value as a core capability, not an accidental side effect.
+The dashboard paid for itself by exposing duplicate state, unnecessary universal context, inconsistent lifecycle vocabulary, parser blind spots, over-engineering, and work that should remain local.
+
+The deeper governance lesson is that Life OS needs promotion rules as much as storage locations. Trello can absorb abundant ideas without making them commitments. GitHub should receive only ideas that have become owned work, durable evidence, decisions, rules, watches, or milestones.
+
+Treat that diagnostic and governance value as a core capability, not an accidental side effect.
