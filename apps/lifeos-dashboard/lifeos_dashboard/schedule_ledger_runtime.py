@@ -29,9 +29,10 @@ def initialize(
     *args: Any,
     **kwargs: Any,
 ) -> None:
-    """Initialize the local engine first, then attach its best-effort mirror."""
+    """Initialize the local engine first, then attach and compact its mirror."""
     _original_init(self, *args, **kwargs)
     self.schedule_ledger = schedule_ledger_from_environment()
+    self.schedule_ledger.compact()
     for schedule in self.schedules():
         if not self.schedule_ledger.record_schedule(schedule):
             break
