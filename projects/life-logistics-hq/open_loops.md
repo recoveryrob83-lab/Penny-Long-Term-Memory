@@ -1,44 +1,61 @@
-# Logistics HQ Open Loops
+# Life OS Maintenance HQ Open Loops
 
 Updated: 2026-07-18
 
-## Open
+## Active Department-Owned Work
 
-| Status | Priority | Item | Next Action | Notes |
+None.
+
+System-level work led or co-led by Life OS Maintenance HQ remains authoritative in:
+
+- `memory/05_OPEN_LOOPS.md`
+
+Do not mirror those system coordination records here.
+
+## Paused Department-Owned Work
+
+| Status | Priority | Item | Next Action / Resume Trigger | Completion / Review Condition |
 |---|---|---|---|---|
-| Open | Normal | Global GitHub coherence | Review boot files, shared summaries, project maps, status files, open loops, automation prompts, and pointers after meaningful cross-project changes | Prefer small verified edits |
-| Open | Normal | Canonical path integrity | Keep `projects/life-logistics-hq/` as the only active Logistics project path across boot files, scripts, prompt libraries, and summaries | The nonexistent `projects/life-logistics/` path was removed from active automation |
-| Open | Normal | Role-boundary consistency | Watch for language that assigns daily life, Flow Board operation, or executive-function support to Logistics instead of Main Assistant | Logistics maintains shared infrastructure and longer-horizon coordination |
-| Open | Normal | Advisory hygiene | Keep the Advisory Index and source boards consistent and compact when needed | No advisories are currently open |
-| Open | Normal | Source-system boundaries | Preserve GitHub as durable state, Trello as attention flow, Todoist as commitments, Calendar as timed commitments, Drive as working records, Gmail as communication evidence, and the dashboard as a visibility layer | Avoid duplicate truth surfaces |
-| Open | Normal | Desktop automation safety | Preserve exact HQ matching, draft-only default behavior, occupied-composer protection, clipboard verification, explicit send authorization, and stop-on-uncertainty | Validated across all seven HQs; modify only after demonstrated failure or material UI change |
-| Open | Normal | Automation Command Center scope | Keep Phase 1 dashboard-integrated and manual Run Now only; verify eight exact destinations, explicit send confirmation, one-job locking, global pause, structured results, and local activity history | Scheduling, recurring jobs, automatic ChatGPT launch, screenshots, notifications, and unattended sends remain deferred |
-| Open | Normal | Dashboard sync guard | Preserve clean-and-strictly-behind fast-forward behavior for guarded GitHub auto-sync | Do not imply automatic conflict resolution or broad write authority |
-| Open | Normal | Worker routing and pointer hygiene | Keep Raw Capture and Inventory worker pointers stable and preserve the worker/department distinction | Main Assistant processes authorized outputs; Engineering owns worker architecture |
-| Open | Normal | Longer-horizon Office Leaks logistics | Track cross-project dependencies, recurring operational needs, future visits, document routing, and scaling pressure as the live organic test develops | Immediate execution remains with Main Assistant and Office Leaks HQ |
-| Open | Normal | Dashboard adapter restraint | Keep Gmail and Drive adapters deferred until demonstrated operational need | The live dashboard currently uses GitHub, Trello, Todoist, and Calendar private iCal |
-| Paused | Low | Scheduled HQ sync experiments | Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it under a stronger scheduling architecture | Command Center Phase 1 and validated on-demand automation do not authorize unattended scheduling |
-| Paused | Low | Legacy Virtual Assistant folder | Decide later whether `projects/virtual-assistant-business/` remains redirect history, is archived, or is removed | Logistics is the sole open-loop owner because this is repository-path disposition and reference-migration work; Business and System mirrors were removed on 2026-07-18 |
+| Paused | Low | Legacy Virtual Assistant folder disposition | Resume only when Rob authorizes a repository-path decision for `projects/virtual-assistant-business/` | Close when the folder is deliberately retained as redirect history, archived, or removed and all affected pointers are verified |
+
+## Current Maintenance Operating Watches
+
+These are standing watches, not open work. Create or promote an open loop only when a trigger produces a concrete unfinished action.
+
+- **Global GitHub coherence:** Watch boot files, shared summaries, project maps, status files, system loops, operating rules, and pointers for meaningful drift after cross-project changes.
+- **Canonical name and path integrity:** Preserve `Life OS Maintenance HQ` as the official department name and `projects/life-logistics-hq/` as the stable filesystem path until a separate migration is authorized.
+- **Authority-boundary consistency:** Watch for LifeOS HQ becoming a department, Chief of Staff absorbing specialist ownership, Maintenance absorbing daily operations or local department maintenance, or Engineering absorbing permanent governance.
+- **Advisory hygiene:** Keep the Advisory Index as the sole active routing dashboard, preserve source-board ownership, and compact boards only under the lifecycle standard.
+- **Source-system boundaries:** Preserve GitHub as durable abstract state, Drive as working records, Trello as intake and flow, Todoist as commitments, Calendar as timed commitments, Gmail as communication evidence, and the dashboard as a visibility and bounded-control layer.
+- **Desktop automation safety:** Preserve exact destination matching, occupied-composer protection, clipboard verification, draft-only defaults where applicable, explicit send authorization, and stop-on-uncertainty behavior.
+- **Automation production boundary:** Scheduling exists, but fully unattended Windows production remains unapproved until Engineering validates restart, overdue, recurrence, project-expansion, preflight, missed-run, and packaging behavior and Rob authorizes production use.
+- **Engineering HQ Daily Sync:** Preserve the paused state until Rob explicitly resumes the pilot under an approved architecture.
+- **Guarded dashboard sync:** Preserve clean-and-strictly-behind fast-forward behavior; do not imply automatic conflict resolution, reset, rebase, worktree cleanup, or broad write authority.
+- **Worker routing and pointer hygiene:** Keep Raw Capture and Inventory worker pointers stable, preserve worker/department separation, and route authorized downstream processing through Chief of Staff HQ.
+- **Dashboard adapter restraint:** Keep Gmail and Drive adapters deferred until demonstrated operational need and explicit Engineering routing.
+- **Maintenance overreach:** Route department-local drift to the owning department unless Rob explicitly authorizes coordinated repair.
 
 ## Done / Recently Closed
 
 | Closed Date | Item | Notes |
 |---|---|---|
-| 2026-07-17 | Full GitHub alignment audit | Reconciled global memory, Main Assistant, Engineering, Logistics, automation prompts, role vocabulary, canonical paths, and the Automation Command Center plan with current context |
-| 2026-07-17 | Logistics status file created | Added `projects/life-logistics-hq/status.md` so the canonical boot file set resolves cleanly |
-| 2026-07-17 | Desktop department automation validated | All seven HQs passed draft-mode testing and one watched live send succeeded to Main Assistant HQ |
-| 2026-07-17 | Logistics boot-path defect closed | Corrected active automation from `projects/life-logistics/` to `projects/life-logistics-hq/` |
-| 2026-07-17 | Automation Command Center plan synchronized | Added Phase 1 manual-only scope to global, Engineering, and Logistics durable state without reactivating scheduling |
-| 2026-07-17 | ADV-20260717-040 implemented and closed | Reconciled global and local summaries after the live four-source dashboard milestone |
-| 2026-07-17 | LifeOS Dashboard operational milestone | Dashboard running locally with GitHub, Trello, Todoist, and Calendar private iCal; 16 tests passed and guarded GitHub sync was verified |
+| 2026-07-18 | Life OS Maintenance HQ Phase Two repair | Reframed the Maintenance subtree under the official identity, corrected authority boundaries, reconciled current automation state, normalized local open-loop taxonomy, and repaired demonstrated Maintenance-owned shared-file drift |
+| 2026-07-18 | Maintenance open-loop taxonomy repair | Removed standing rules and watches from active-work classification; removed the stray Office Leaks ownership claim without creating a duplicate record |
+| 2026-07-18 | Maintenance identity transition | Preserved `projects/life-logistics-hq/` as the canonical path while replacing current Logistics and Main Assistant role language with Life OS Maintenance HQ and Chief of Staff HQ |
+| 2026-07-17 | Full GitHub alignment audit | Reconciled global memory, department boundaries, automation prompts, role vocabulary, canonical paths, and current operating state |
+| 2026-07-17 | Maintenance status file created | Added `projects/life-logistics-hq/status.md` so the canonical boot file set resolves cleanly |
+| 2026-07-17 | Desktop department automation validated | All seven department HQs passed draft-mode testing and one watched live send succeeded under explicit authorization |
+| 2026-07-17 | Legacy boot-path defect closed | Corrected active automation from `projects/life-logistics/` to `projects/life-logistics-hq/` |
+| 2026-07-17 | LifeOS Dashboard operational milestone | Dashboard running locally with GitHub, Trello, Todoist, and Calendar private iCal; guarded GitHub sync verified |
 | 2026-07-17 | PennyOS humble-beginnings note preserved as history | No separate open loop or roadmap commitment was created |
-| 2026-07-16 | ADV-20260716-038 and ADV-20260716-037 closed | Dashboard concept ingested and Office Leaks public-launch broadcast fully consumed |
-| 2026-07-15 | Clarified Logistics role boundary | Main Assistant owns daily life and basic logistics; Logistics owns GitHub operations, durable continuity, and longer-horizon coordination |
+| 2026-07-16 | Dashboard and Office Leaks advisories closed | Relevant departments consumed the routed state; no Maintenance work remains |
 
 ## Historical Context Rule
 
 `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md` is a historical milestone note only. Do not promote it into an open loop or implied roadmap.
 
+Historical advisories and prior commits may retain role names that were accurate when created.
+
 ## Operating Rule
 
-Use Logistics for maintaining the map, shared infrastructure, cross-project audits, and longer-term operational structure. Route ordinary daily planning, Trello Flow processing, errands, appointments, transportation, reminders, Calendar, Todoist, Gmail, and immediate executive-function support to Main Assistant. Route dashboard, desktop automation, and Automation Command Center implementation to Engineering.
+Use Life OS Maintenance HQ for global GitHub integrity, boot rules, shared governance, system-loop hygiene, advisory infrastructure, audits, migrations, source boundaries, and reconciliation. Route daily operations to Chief of Staff HQ, technical implementation to Engineering HQ, and specialist work to the owning department.
