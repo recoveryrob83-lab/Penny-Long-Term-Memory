@@ -1,6 +1,6 @@
 # Chat and Work Execution Policy
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 Project: Life OS Infrastructure
 Purpose: Define the operating boundary between regular ChatGPT conversations and the separate Work execution environment.
 
@@ -33,11 +33,11 @@ These are field observations, not claims about undocumented platform internals. 
 
 ## Headquarters Rule
 
-The regular ChatGPT Life OS hub is the canonical conversational headquarters.
+The regular ChatGPT Life OS project is the canonical conversational environment. LifeOS HQ is the shared meeting room, and Chief of Staff HQ is Rob's normal daily coordination point.
 
 Use Chat for:
 
-- Main Assistant coordination
+- Chief of Staff HQ coordination
 - department perspectives and decisions
 - planning and prioritization
 - recovery, wellness, philosophy, and long-form discussion
@@ -128,7 +128,9 @@ Suggested categories are flexible rather than fixed quotas:
 
 ## Task Brief Standard
 
-When Chat determines that Work is required, Main Assistant should produce a compact Task Brief containing:
+When Chat determines that Work is required, the owning department should produce a compact Task Brief. Chief of Staff HQ may prepare or refine the brief when coordinating daily execution, routing a cross-department dependency, or helping Rob transfer the task into Work.
+
+The Task Brief should contain:
 
 - owning department
 - objective
