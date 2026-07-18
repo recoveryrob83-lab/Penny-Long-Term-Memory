@@ -1,3 +1,4 @@
+const LEDGER_SPREADSHEET_ID = '1o5Qkzntd5OmKX7Vxix-PbhbuyPigJvss1AkP7Kvb0Q4';
 const DEFAULT_SHEET_NAME = 'Run Ledger';
 const EXPECTED_VALUE_COUNT = 17;
 
@@ -14,14 +15,15 @@ function doPost(event) {
     const payload = parsePayload_(event);
     authorize_(payload);
 
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    if (String(payload.spreadsheet_id || '') !== LEDGER_SPREADSHEET_ID) {
+      throw new Error('Spreadsheet ID mismatch.');
+    }
+
+    const spreadsheet = SpreadsheetApp.openById(LEDGER_SPREADSHEET_ID);
     const sheetName =
       PropertiesService.getScriptProperties().getProperty('LEDGER_SHEET_NAME') ||
       DEFAULT_SHEET_NAME;
 
-    if (String(payload.spreadsheet_id || '') !== spreadsheet.getId()) {
-      throw new Error('Spreadsheet ID mismatch.');
-    }
     if (String(payload.sheet_name || '') !== sheetName) {
       throw new Error('Sheet name mismatch.');
     }
