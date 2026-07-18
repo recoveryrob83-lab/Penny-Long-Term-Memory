@@ -26,7 +26,7 @@ DEPARTMENTS: dict[str, Department] = {
     "hub": Department(
         key="hub",
         chat_title="LifeOS HQ",
-        role_title="LifeOS HQ, the central LifeOS coordination hub",
+        role_title="LifeOS HQ, the shared LifeOS meeting room",
         project_folder=None,
         report_name="LifeOS HQ",
         related_files_note=(
@@ -37,11 +37,11 @@ DEPARTMENTS: dict[str, Department] = {
     "logistics": Department(
         key="logistics",
         chat_title="Logistics HQ",
-        role_title="Logistics HQ",
+        role_title="Life OS Maintenance HQ",
         project_folder="projects/life-logistics-hq",
-        report_name="Logistics",
+        report_name="Life OS Maintenance",
         related_files_note=(
-            "Read related Main Assistant, Finance, Housing, Recovery Logistics, "
+            "Read related Chief of Staff, Finance, Housing, Recovery Logistics, "
             "Wellness, or Engineering files only when the handoff or task requires "
             "cross-project coordination."
         ),
@@ -53,7 +53,7 @@ DEPARTMENTS: dict[str, Department] = {
         project_folder="projects/engineering",
         report_name="Engineering",
         related_files_note=(
-            "Read related Main Assistant, Logistics, Business, Finance, or "
+            "Read related Chief of Staff, Life OS Maintenance, Business, Finance, or "
             "infrastructure files only when the handoff or task requires "
             "cross-project coordination."
         ),
@@ -61,9 +61,9 @@ DEPARTMENTS: dict[str, Department] = {
     "main": Department(
         key="main",
         chat_title="Main Assistant HQ",
-        role_title="Main Assistant HQ",
+        role_title="Chief of Staff HQ",
         project_folder="projects/main-assistant",
-        report_name="Main Assistant",
+        report_name="Chief of Staff",
         related_files_note=(
             "Read related departmental files only when the handoff or task requires "
             "cross-project coordination."
@@ -76,7 +76,7 @@ DEPARTMENTS: dict[str, Department] = {
         project_folder="projects/finance-benefits",
         report_name="Finance",
         related_files_note=(
-            "Read related Main Assistant, Logistics, Housing, Business, or "
+            "Read related Chief of Staff, Life OS Maintenance, Housing, Business, or "
             "Wellness files only when the handoff or task requires cross-project coordination."
         ),
     ),
@@ -87,8 +87,8 @@ DEPARTMENTS: dict[str, Department] = {
         project_folder="projects/business-development",
         report_name="Business",
         related_files_note=(
-            "Read related Main Assistant, Finance, Engineering, Office Leaks, or "
-            "Logistics files only when the handoff or task requires cross-project coordination."
+            "Read related Chief of Staff, Finance, Engineering, Office Leaks, or "
+            "Life OS Maintenance files only when the handoff or task requires cross-project coordination."
         ),
     ),
     "office-leaks": Department(
@@ -98,7 +98,7 @@ DEPARTMENTS: dict[str, Department] = {
         project_folder="projects/office-leaks-consulting",
         report_name="Office Leaks",
         related_files_note=(
-            "Read related Business, Engineering, Finance, or Logistics files only "
+            "Read related Business, Engineering, Finance, or Life OS Maintenance files only "
             "when the handoff or task requires cross-project coordination."
         ),
     ),
@@ -119,14 +119,14 @@ DEPARTMENTS: dict[str, Department] = {
 
 def build_prompt(department: Department) -> str:
     if department.project_folder is None:
-        project_boot = """This is the central hub rather than a specialist department. After the global boot files, read current shared coordination state from:
+        project_boot = """This is the shared meeting room rather than a specialist department. After the global boot files, read current shared coordination state from:
 
 - memory/01_SESSION_HANDOFF.md
 - memory/04_ACTIVE_PROJECTS.md
 - memory/05_OPEN_LOOPS.md
 - coordination/ADVISORY_INDEX.md when advisory routing or cross-department status is relevant
 
-Use memory/HQ_NAMING_STANDARD.md as the canonical headquarters naming source."""
+Use memory/HQ_NAMING_STANDARD.md as the canonical headquarters naming source. Chief of Staff HQ chairs this room, departments retain ownership of their work, and Rob remains the final authority."""
     else:
         folder = department.project_folder
         project_boot = f"""Then continue into this department's project boot files exactly as specified by the global routing instructions:
