@@ -218,6 +218,10 @@ cadence.addEventListener("change", () => setTimeout(syncDebugControls, 0));
 confirmSend.addEventListener("change", () => {
   if (debugSelected()) setTimeout(syncDebugControls, 0);
 });
+[scheduleDate, scheduleTime, destination].forEach((control) => {
+  control?.addEventListener("change", () => setTimeout(syncDebugControls, 0));
+});
+scheduleName?.addEventListener("input", () => setTimeout(syncDebugControls, 0));
 scheduleList.addEventListener("click", (event) => {
   if (event.target.closest('[data-schedule-action="edit"]')) {
     setTimeout(syncDebugControls, 250);
