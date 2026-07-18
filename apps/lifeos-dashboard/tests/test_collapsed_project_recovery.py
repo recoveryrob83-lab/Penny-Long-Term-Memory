@@ -110,3 +110,32 @@ def test_project_labels_remain_exact() -> None:
     assert project_label_matches("Life OS, project, collapsed", "Life OS") is True
     assert project_label_matches("Life OS Archive", "Life OS") is False
     assert project_label_matches("Other Project", "Life OS") is False
+
+
+def test_composer_state_requires_two_matching_fresh_reads() -> None:
+    script = function_source("read_stable_composer_state")
+
+    assert "base.current_document_title(window) != expected_document_title" in script
+    assert "fresh_group = base.find_composer_group(window)" in script
+    assert "observed = base.normalize_text(base.copy_group_text(fresh_group))" in script
+    assert "if previous is not None and observed == previous" in script
+    assert "Composer readiness timed out while confirming stable content" in script
+
+
+def test_place_text_discards_pre_navigation_group_wrapper() -> None:
+    script = function_source("place_text_with_stable_clipboard")
+
+    assert "del group" in script
+    assert "read_stable_composer_state(window, expected_document_title)" in script
+    assert "base.copy_group_text(group)" not in script
+
+
+def test_paste_reacquires_and_focuses_current_destination_composer() -> None:
+    script = function_source("place_text_with_stable_clipboard")
+
+    reacquire = script.index("paste_group = base.find_composer_group(window)")
+    focus = script.index("base.focus_group_text_surface(paste_group)")
+    paste = script.index('base.send_keys("^v", pause=0.10)')
+
+    assert reacquire < focus < paste
+    assert "Active destination changed before paste" in script
