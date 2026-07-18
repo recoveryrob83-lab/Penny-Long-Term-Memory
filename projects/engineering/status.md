@@ -134,18 +134,19 @@ Live validation completed:
 - first daily custom live send to LifeOS HQ succeeded and advanced to the next day;
 - active mobile use and response generation in another chat did not interfere with the desktop scheduled send;
 - scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason;
-- Package B canonical-title and retired-title compatibility paths passed.
+- Package B canonical-title and retired-title compatibility paths passed;
+- a one-time draft schedule persisted while the dashboard was stopped, became overdue, fired exactly once about 15–20 seconds after restart, recorded the downstream failure, disabled itself, and did not retry automatically.
 
 The `Logistics HQ` name in the occupied-composer bullet is retained as historical test evidence because it was the exact automation destination label used during that validation.
 
 Current validation still open:
 
-- overdue-run behavior after dashboard restart;
-- second real occurrence of a recurring job.
+- second real occurrence of a recurring job;
+- production decision on whether failed one-time jobs need an explicit retry control beyond their visible failed state.
 
 ### Desktop Department Automation
 
-Status: Operational, with canonical title compatibility implemented and one known recovery edge case.
+Status: Operational for attended use, with canonical title compatibility implemented and post-restart recovery not yet reliable.
 
 Validated behavior:
 
@@ -161,24 +162,29 @@ Validated behavior:
 - successful live sends through both manual and scheduled paths;
 - structured safe-failure reporting through the dashboard.
 
-Known edge case:
+Known edge cases:
 
-ChatGPT Classic may collapse the LifeOS project folder after application restart or a narrow-window layout. The current automation has not been coded or validated to reopen a collapsed project folder before exact chat navigation.
+- ChatGPT Classic may collapse the LifeOS project folder after application restart or a narrow-window layout;
+- after dashboard restart, an overdue job reported `ChatGPT Classic` unavailable even though the app was open, while Rob observed a stray `i` appear before validation;
+- the current automation has not been coded or validated to reopen a collapsed project folder or robustly reacquire the exact ChatGPT Classic window after restart.
 
 Current workaround:
 
 - keep ChatGPT Classic open;
 - keep the LifeOS project expanded;
 - keep chats available through the normal sidebar / `Show more` path;
-- do not treat post-restart unattended execution as production-safe yet.
+- treat scheduled post-restart execution as diagnostic only, not production-safe;
+- inspect failed one-time jobs and retry manually only after clearing any stray composer text.
 
 Next recovery update, when authorized:
 
-- bounded exact-project detection and one-time expansion;
-- verification that the project chat region became visible;
-- continued exact-chat navigation;
-- safe stop on uncertainty;
-- draft-first revalidation across restart, narrow-window, `Show more`, and occupied-composer cases.
+- reproduce one immediate draft-only run with the dashboard already running;
+- inspect the actual accessible top-level ChatGPT window title before changing selectors;
+- add bounded exact-window reacquisition only when the observed failure supports it;
+- add bounded exact-project detection and one-time expansion;
+- verify that the project chat region became visible;
+- preserve exact-chat navigation and safe stop on uncertainty;
+- revalidate across restart, narrow-window, `Show more`, occupied-composer, and stray-text cases.
 
 ### Canonical Prompt Catalog
 
@@ -269,11 +275,11 @@ Engineering preserves two integrated delivery layers:
 ## Current Open Work
 
 - Observe ordinary role-routed specialist boots and correct only demonstrated routing defects.
-- Test overdue one-time behavior after dashboard restart.
+- Isolate the post-restart ChatGPT Classic reacquisition failure with one immediate draft-only manual run before changing automation selectors.
 - Observe a second real recurring execution.
-- Design collapsed-LifeOS-project recovery, but do not change code until Rob authorizes it.
+- Decide whether failed one-time schedules need an explicit retry control.
 - Populate the protected canonical prompt catalog from authoritative LifeOS commands.
-- Decide missed-run policy and production preflight requirements after evidence.
+- Decide remaining production preflight requirements after evidence.
 - Observe the four-source dashboard during ordinary refresh and real degraded conditions.
 - Pilot Penny Inventory Worker with 2–3 real sale items.
 - Observe Penny Raw Capture Worker in real use.
@@ -283,6 +289,7 @@ Engineering preserves two integrated delivery layers:
 
 ## Completed Recent Work
 
+- 2026-07-18: Overdue one-time scheduler catch-up validated; the persisted job fired once about 15–20 seconds after dashboard restart, recorded its downstream failure, disabled, and did not retry automatically.
 - 2026-07-18: Package C Department Inspection canonical labels passed local dashboard validation and 9 focused tests.
 - 2026-07-18: Package C Department Inspection canonical labels implemented in runtime policy, finding-detail UI, contract, and regression coverage while preserving stable IDs and paths.
 - 2026-07-18: Package B canonical and retired-title automation paths fully runtime-validated; schedules and history retained canonical labels without migration.
@@ -308,7 +315,7 @@ Engineering preserves two integrated delivery layers:
 
 ## Production Boundary
 
-Scheduling is operational but not yet production-ready for fully unattended Windows use. Production readiness still requires evidence or implementation for restart/overdue behavior, repeated recurrence, collapsed-project recovery, scheduler health/preflight, missed-run policy, and potentially Windows startup or service packaging.
+Scheduling persistence and overdue catch-up are operational, but fully unattended Windows use is not production-ready. Production readiness still requires reliable post-restart ChatGPT window and project recovery, repeated recurrence evidence, scheduler health/preflight, a deliberate failed-one-time retry policy, and potentially Windows startup or service packaging.
 
 ## Boundary
 
