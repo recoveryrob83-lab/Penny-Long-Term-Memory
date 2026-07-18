@@ -1,8 +1,9 @@
 """Foreground safety gate for physical ChatGPT automation input.
 
 The UI Automation tree can remain readable while another application owns the
-actual keyboard and mouse. Physical input must therefore verify the ChatGPT
-Classic top-level window is foreground immediately before every click or key.
+actual keyboard and mouse. Composer clicks may bring ChatGPT Classic forward,
+but keyboard input must only verify foreground ownership so it does not steal
+focus back from the composer text surface.
 """
 from __future__ import annotations
 
@@ -29,10 +30,22 @@ def _foreground_handle() -> int:
     return int(win32gui.GetForegroundWindow() or 0)
 
 
-def _require_chatgpt_foreground(base: ModuleType) -> Any:
-    """Focus ChatGPT and prove it owns Windows foreground before physical input."""
+def _chatgpt_window(base: ModuleType) -> Any:
     window = base.get_chatgpt_window()
+    if not getattr(window, "handle", None):
+        raise base.AutomationStopped(
+            "ChatGPT Classic window handle was unavailable. "
+            "No keyboard or mouse input was sent."
+        )
+    return window
+
+
+def _focus_chatgpt_foreground(base: ModuleType) -> Any:
+    """Bring ChatGPT forward for an upcoming composer click and prove ownership."""
+    window = _chatgpt_window(base)
     expected_handle = int(window.handle)
+    if _foreground_handle() == expected_handle:
+        return window
 
     try:
         is_minimized = getattr(window, "is_minimized", None)
@@ -63,6 +76,17 @@ def _require_chatgpt_foreground(base: ModuleType) -> Any:
     )
 
 
+def _verify_chatgpt_foreground(base: ModuleType) -> Any:
+    """Require ChatGPT foreground ownership without changing child-control focus."""
+    window = _chatgpt_window(base)
+    if _foreground_handle() != int(window.handle):
+        raise base.AutomationStopped(
+            "ChatGPT Classic lost foreground focus before keyboard input. "
+            "No keyboard input was sent."
+        )
+    return window
+
+
 def install_base_guard(base: ModuleType) -> bool:
     """Wrap the base automation's physical-input functions exactly once."""
     if getattr(base, _GUARD_FLAG, False):
@@ -72,16 +96,12 @@ def install_base_guard(base: ModuleType) -> bool:
     original_send_keys = base.send_keys
 
     def guarded_focus_group_text_surface(group: Any) -> None:
-        _require_chatgpt_foreground(base)
+        _focus_chatgpt_foreground(base)
         original_focus_group_text_surface(group)
-        if _foreground_handle() != int(base.get_chatgpt_window().handle):
-            raise base.AutomationStopped(
-                "ChatGPT Classic lost foreground focus during composer activation. "
-                "No keyboard input was sent."
-            )
+        _verify_chatgpt_foreground(base)
 
     def guarded_send_keys(*args: Any, **kwargs: Any) -> Any:
-        _require_chatgpt_foreground(base)
+        _verify_chatgpt_foreground(base)
         return original_send_keys(*args, **kwargs)
 
     base.focus_group_text_surface = guarded_focus_group_text_surface
@@ -93,9 +113,13 @@ def install_base_guard(base: ModuleType) -> bool:
 def explain_failure(stdout: str, stderr: str, exit_code: int | None) -> str:
     """Surface foreground refusal as a precise, actionable dashboard message."""
     diagnostic = f"{stderr}\n{stdout}".casefold()
-    if "foreground window" in diagnostic or "lost foreground focus" in diagnostic:
+    if (
+        "foreground window" in diagnostic
+        or "lost foreground focus" in diagnostic
+        or "window handle was unavailable" in diagnostic
+    ):
         return (
-            "ChatGPT Classic could not become the foreground window. "
+            "ChatGPT Classic could not safely retain foreground focus. "
             "Restore or bring ChatGPT Classic forward, then retry. Nothing was pasted or sent."
         )
     return _original_explain_failure(stdout, stderr, exit_code)
