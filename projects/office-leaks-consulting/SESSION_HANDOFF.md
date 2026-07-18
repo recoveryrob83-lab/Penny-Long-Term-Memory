@@ -1,8 +1,8 @@
-# Office Leaks Consulting HQ Session Handoff
+# Office Leaks HQ Session Handoff
 
-Updated: 2026-07-16
-Project: Office Leaks Consulting HQ
-Parent: Chief Business HQ
+Updated: 2026-07-18
+Project: Office Leaks HQ
+Parent: Business HQ
 Phase: Public launch / live market test
 
 ## Current State
@@ -57,12 +57,13 @@ Broadcast advisory:
 
 ## Role Split
 
-- Office Leaks Consulting HQ owns business-unit execution continuity, service materials, offer/delivery artifacts, content strategy, and current operating state.
-- Chief Business HQ owns parent strategy, portfolio-level business decisions, and major positioning/business-model decisions.
-- Chief Engineering Penny owns delivery architecture, workflow templates, automation/tooling, and implementation consultation when concrete.
-- Chief of Finance Penny owns pricing feasibility, startup costs, income tracking, paid-promotion affordability, tool decisions, tax set-aside, and financial risk once concrete.
-- Main Assistant handles daily admin, reminders, scheduling, outreach support, and one-off execution when routed.
-- Life Logistics HQ maintains cross-project routing, GitHub hygiene, and durable memory structure.
+- Office Leaks HQ owns the active business unit's offers, outreach, sales activity, market tests, delivery design, operating playbooks, service materials, customer-facing execution, and routine durable state.
+- Business HQ owns parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment. It may guide, evaluate, and prioritize Office Leaks without duplicating the Office Leaks execution backlog or becoming the operational owner.
+- Engineering HQ owns technical implementation, delivery tooling, workflow templates, automation, software, and architecture when concrete.
+- Finance HQ owns cost-bearing decisions, pricing feasibility, startup costs, paid-promotion affordability, income tracking, tax set-aside, tool affordability, and financial risk when concrete.
+- Chief of Staff HQ coordinates, receives reports, routes assignments, follows through, and supports daily admin, reminders, scheduling, and authorized outreach logistics without owning Office Leaks strategy, execution, customer work, or records.
+- Life OS Maintenance HQ owns global GitHub maintenance, governance, shared operating rules, repository-wide hygiene, audits, and reconciliation. It does not own Office Leaks' routine durable state.
+- LifeOS HQ is the shared meeting room and has no independent department authority or backlog.
 
 ## Boot / Sync
 
@@ -120,7 +121,7 @@ Reference:
 
 - `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
-Use Chief of Finance Penny for pricing, startup costs, tool decisions, paid promotion, revenue tracking, tax set-aside planning, budget impact, and financial risk when concrete.
+Use Finance HQ for cost-bearing decisions, pricing, startup costs, tool affordability, paid promotion, revenue tracking, tax set-aside planning, budget impact, and financial risk when concrete.
 
 Keep detailed financial records in Drive, not GitHub.
 
@@ -128,15 +129,15 @@ Keep detailed financial records in Drive, not GitHub.
 
 1. Observe organic response to the live Facebook launch package.
 2. Continue lead-loss content with short, practical videos.
-3. Refine positioning and the starter offer from real audience and inquiry signals.
-4. Define focused service packages, especially Office Leak Audit and one-leak cleanup sprints.
+3. Capture real audience and inquiry signals, adjust Office Leaks-owned execution materials within approved strategy, and route parent-level positioning or offer-strategy implications to Business HQ.
+4. Define focused service packages, especially Office Leak Audit and one-leak cleanup sprints, within Business HQ's parent-strategy guidance.
 5. Build lead-leak materials and local-service-business outreach content.
 6. Create proposal / diagnostic / handoff artifacts when required by a real prospect.
 7. Build portfolio or sample-work packet.
 8. Create a day-to-day operating system for lead tracking, proposals, delivery, follow-up, and client onboarding.
-9. Coordinate with Engineering on delivery templates and human-system verification.
-10. Coordinate with Finance on pricing, startup costs, paid promotion, tool decisions, and tax set-aside when concrete.
-11. Coordinate with Main Assistant and Life Logistics for reminders, scheduling, transportation, and outreach loops when authorized.
+9. Coordinate with Engineering HQ on delivery templates and human-system verification when concrete.
+10. Coordinate with Finance HQ on cost-bearing decisions, pricing, startup costs, paid promotion, tool affordability, and tax set-aside when concrete.
+11. Route concrete reminders, scheduling, transportation, outreach-support, and visit-logistics needs to Chief of Staff HQ when authorized; Office Leaks HQ retains execution ownership.
 
 ## Next Best Action
 
