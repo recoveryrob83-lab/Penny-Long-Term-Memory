@@ -1,11 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-17
+Updated: 2026-07-18
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-- None.
+- ADV-20260718-041 — Open / Routed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Life OS Maintenance HQ — Create or update a global Trello connector write SOP documenting the verified false-negative checklist-item behavior, one-item-per-call pattern, mandatory live read-back after ambiguous responses, duplicate prevention, truthful reporting, and Trello source-boundary protections.
 
 ## Acknowledged / Implemented Advisories
 
