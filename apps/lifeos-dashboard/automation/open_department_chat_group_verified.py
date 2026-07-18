@@ -20,6 +20,8 @@ from lifeos_dashboard.clipboard_runtime import run_with_restored_clipboard
 SIDEBAR_EXPANSION_TIMEOUT_SECONDS = 5.0
 SIDEBAR_EXPANSION_POLL_SECONDS = 0.25
 PROJECT_EXPANSION_TIMEOUT_SECONDS = 5.0
+COMPOSER_CONTENT_STABILITY_TIMEOUT_SECONDS = 3.0
+COMPOSER_CONTENT_STABILITY_POLL_SECONDS = 0.25
 EXPAND_COLLAPSE_COLLAPSED = 0
 EXPAND_COLLAPSE_EXPANDED = 1
 RESULT_MARKER = "LIFEOS_RESULT_CODE="
@@ -62,6 +64,38 @@ def text_matches_expected(observed: str, expected: str) -> bool:
     return False
 
 
+def read_stable_composer_state(
+    window,
+    expected_document_title: str,
+    timeout_seconds: float = COMPOSER_CONTENT_STABILITY_TIMEOUT_SECONDS,
+):
+    """Reacquire the current composer until two consecutive normalized reads agree."""
+    deadline = time.monotonic() + timeout_seconds
+    previous: str | None = None
+    last_observed = ""
+    while time.monotonic() < deadline:
+        if base.current_document_title(window) != expected_document_title:
+            raise base.AutomationStopped(
+                "Active destination changed while confirming composer state. Nothing was pasted."
+            )
+        try:
+            fresh_group = base.find_composer_group(window)
+            observed = base.normalize_text(base.copy_group_text(fresh_group))
+        except Exception:
+            previous = None
+            time.sleep(COMPOSER_CONTENT_STABILITY_POLL_SECONDS)
+            continue
+        last_observed = observed
+        if previous is not None and observed == previous:
+            return fresh_group, observed
+        previous = observed
+        time.sleep(COMPOSER_CONTENT_STABILITY_POLL_SECONDS)
+    raise base.AutomationStopped(
+        "Composer readiness timed out while confirming stable content after exact navigation. "
+        f"Last observed {len(last_observed)} normalized characters. Nothing was pasted."
+    )
+
+
 def place_text_with_stable_clipboard(
     window,
     group,
@@ -70,19 +104,24 @@ def place_text_with_stable_clipboard(
     replace_existing: bool,
     write_timeout_seconds: float,
 ):
-    """Keep the intended prompt on the clipboard until composer verification finishes."""
-    existing = base.normalize_text(base.copy_group_text(group))
+    """Use a freshly stabilized destination composer, then keep the prompt until verification."""
+    del group  # The pre-navigation wrapper may be stale after project recovery.
+    _, existing = read_stable_composer_state(window, expected_document_title)
     if existing and not replace_existing:
         raise base.AutomationStopped(
             "Composer already contains text. Existing draft was preserved. "
             "Use --replace-existing only when replacement is intentional."
         )
 
-    base.focus_group_text_surface(group)
-    if replace_existing:
-        base.send_keys("^a", pause=0.10)
-
     def paste_and_verify():
+        if base.current_document_title(window) != expected_document_title:
+            raise base.AutomationStopped(
+                "Active destination changed before paste. Nothing was pasted or sent."
+            )
+        paste_group = base.find_composer_group(window)
+        base.focus_group_text_surface(paste_group)
+        if replace_existing:
+            base.send_keys("^a", pause=0.10)
         base.send_keys("^v", pause=0.10)
         return base.wait_for_written_text(
             window,
