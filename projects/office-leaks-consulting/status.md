@@ -68,4 +68,4 @@ Launch milestone record:
 
 - `projects/office-leaks-consulting/notebook/NOTE-20260716-002-facebook-launch-and-first-lead-loss-video.md`
 
-The legacy folder `projects/virtual-assistant-business/` remains historical/redirect context. Active Office Leaks state belongs in `projects/office-leaks-consulting/`. Archival disposition belongs to Life OS Maintenance HQ under separate authority.
+The former Virtual Assistant Business subtree is archived at `archive/projects/virtual-assistant-business/`. Active Office Leaks state belongs only in `projects/office-leaks-consulting/`.

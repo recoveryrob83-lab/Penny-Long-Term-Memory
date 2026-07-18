@@ -14,9 +14,7 @@ Do not mirror those system coordination records here.
 
 ## Paused Department-Owned Work
 
-| Status | Priority | Item | Next Action / Resume Trigger | Completion / Review Condition |
-|---|---|---|---|---|
-| Paused | Low | Legacy Virtual Assistant folder disposition | Resume only when Rob authorizes a repository-path decision for `projects/virtual-assistant-business/` | Close when the folder is deliberately retained as redirect history, archived, or removed and all affected pointers are verified |
+None.
 
 ## Current Maintenance Operating Watches
 
@@ -34,11 +32,13 @@ These are standing watches, not open work. Create or promote an open loop only w
 - **Worker routing and pointer hygiene:** Keep Raw Capture and Inventory worker pointers stable, preserve worker/department separation, and route authorized downstream processing through Chief of Staff HQ.
 - **Dashboard adapter restraint:** Keep Gmail and Drive adapters deferred until demonstrated operational need and explicit Engineering routing.
 - **Maintenance overreach:** Route department-local drift to the owning department unless Rob explicitly authorizes coordinated repair.
+- **Archive integrity:** Preserve `archive/projects/virtual-assistant-business/` as historical context and keep all active Office Leaks authority and execution state in `projects/office-leaks-consulting/`.
 
 ## Done / Recently Closed
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Virtual Assistant Business archival disposition | Moved the legacy subtree to `archive/projects/virtual-assistant-business/`, removed it from the active project tree, updated live pointers, and preserved `projects/office-leaks-consulting/` as the sole active Office Leaks project path |
 | 2026-07-18 | Life OS Maintenance HQ Phase Two repair | Reframed the Maintenance subtree under the official identity, corrected authority boundaries, reconciled current automation state, normalized local open-loop taxonomy, and repaired demonstrated Maintenance-owned shared-file drift |
 | 2026-07-18 | Maintenance open-loop taxonomy repair | Removed standing rules and watches from active-work classification; removed the stray Office Leaks ownership claim without creating a duplicate record |
 | 2026-07-18 | Maintenance identity transition | Preserved `projects/life-logistics-hq/` as the canonical path while replacing current Logistics and Main Assistant role language with Life OS Maintenance HQ and Chief of Staff HQ |
@@ -54,7 +54,7 @@ These are standing watches, not open work. Create or promote an open loop only w
 
 `projects/engineering/notebook/NOTE-20260717-008-pennyos-humble-beginnings.md` is a historical milestone note only. Do not promote it into an open loop or implied roadmap.
 
-Historical advisories and prior commits may retain role names that were accurate when created.
+Historical advisories and prior commits may retain role names and paths that were accurate when created.
 
 ## Operating Rule
 

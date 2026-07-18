@@ -69,7 +69,7 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 
 - Parent department: `projects/business-development/`
 - Business-unit department: `projects/office-leaks-consulting/`
-- Legacy context: `projects/virtual-assistant-business/`
+- Archived predecessor context: `archive/projects/virtual-assistant-business/`
 - Office Leaks advisory board: `coordination/boards/office-leaks.md`
 - Engineering delivery architecture: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
 - Finance working-record pointer: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`

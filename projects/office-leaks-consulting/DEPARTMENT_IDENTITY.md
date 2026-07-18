@@ -90,9 +90,9 @@ Parent strategy:
 
 - `projects/business-development/`
 
-Legacy pointer:
+Archived predecessor context:
 
-- `projects/virtual-assistant-business/`
+- `archive/projects/virtual-assistant-business/`
 
 ## First Response After Sync
 

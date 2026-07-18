@@ -28,6 +28,7 @@ Updated: 2026-07-18
 
 ## Done / Recently Closed
 
+- 2026-07-18: Life OS Maintenance HQ archived the former Virtual Assistant Business subtree at `archive/projects/virtual-assistant-business/`; active Office Leaks authority and work remain in `projects/office-leaks-consulting/`.
 - 2026-07-16: Facebook Page established as the initial Office Leaks landing page.
 - 2026-07-16: Introduction post published.
 - 2026-07-16: Starter offer/ad published and pinned.
@@ -48,5 +49,3 @@ Updated: 2026-07-18
 - Automation-heavy service packages.
 - Future productized templates.
 - Future PennyOS / productization pathway.
-
-The archival disposition of `projects/virtual-assistant-business/` is not an Office Leaks open loop. It belongs to Life OS Maintenance HQ under separate authority.

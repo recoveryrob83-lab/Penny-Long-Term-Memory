@@ -74,9 +74,9 @@ Finance pointer:
 
 - `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
-Legacy folder:
+Archived predecessor context:
 
-- `projects/virtual-assistant-business/` is historical/redirect context. Active Office Leaks state belongs here. Its archival disposition is owned by Life OS Maintenance HQ under separate authority.
+- `archive/projects/virtual-assistant-business/` preserves the former VA worker project. Active Office Leaks state belongs only in `projects/office-leaks-consulting/`.
 
 ## Privacy Rule
 

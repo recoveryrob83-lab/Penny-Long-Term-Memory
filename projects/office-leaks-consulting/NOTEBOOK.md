@@ -22,15 +22,15 @@ Start with the folder index:
 
 - `projects/office-leaks-consulting/notebook/README.md`
 
-## Legacy Note Context
+## Archived Predecessor Context
 
-The former VA worker folder contains historical notes. Their archival disposition belongs to Life OS Maintenance HQ under separate authority:
+The former VA worker records are preserved under:
 
-- `projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md`
-- `projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md`
-- `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260707-001-hvac-office-cleanup-beachhead.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-002-real-world-lead-leak-example.md`
+- `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
 
-These records may retain names that were accurate when written. Treat them as historical evidence, not current authority.
+These records may retain names and open-loop language that were accurate when written. Treat them as historical evidence, not current authority or active work.
 
 ## Notebook Rules
 
