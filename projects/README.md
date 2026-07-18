@@ -29,7 +29,6 @@ Project folder names remain stable filesystem paths and do not need to match dis
 - `finance-benefits/` - Finance HQ
 - `business-development/` - Business HQ
 - `office-leaks-consulting/` - Office Leaks HQ; active business-unit department under Business HQ
-- `virtual-assistant-business/` - legacy redirect context; active Office Leaks state lives in `office-leaks-consulting/`
 - `engineering/` - Engineering HQ
 - `wellness/` - Wellness HQ
 - `recovery-logistics/` - dormant Recovery Logistics history
@@ -37,6 +36,10 @@ Project folder names remain stable filesystem paths and do not need to match dis
 - `life-os-infrastructure/` - shared Life OS infrastructure and policies
 - `health-medical/` - Health Medical HQ
 - `housing-logistics/` - Housing Logistics HQ scaffold
+
+Archived historical project context lives outside the active project tree:
+
+- `archive/projects/virtual-assistant-business/` - historical predecessor and redirect context for Office Leaks HQ; active Office Leaks state lives in `projects/office-leaks-consulting/`
 
 ## Eight Top-Level Rooms
 
