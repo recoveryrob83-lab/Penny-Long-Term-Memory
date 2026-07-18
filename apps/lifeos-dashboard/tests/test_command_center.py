@@ -27,6 +27,8 @@ def test_phase_one_exposes_eight_exact_destinations() -> None:
         "wellness",
     }
     assert DESTINATIONS["hub"].chat_title == "LifeOS HQ"
+    assert DESTINATIONS["main"].chat_title == "Chief of Staff HQ"
+    assert DESTINATIONS["logistics"].chat_title == "Life OS Maintenance HQ"
 
 
 def test_draft_is_default_and_does_not_add_send_flags() -> None:
@@ -101,15 +103,15 @@ def test_confirmed_destination_mismatch_can_build_command() -> None:
     job = CommandJob(
         destination="logistics",
         prompt_type="custom",
-        custom_prompt="Use this intentionally in Logistics HQ.",
+        custom_prompt="Use this intentionally in Life OS Maintenance HQ.",
         default_destination="engineering",
         confirm_destination=True,
     )
 
     command = build_command(job, APP_ROOT)
 
-    assert "Logistics HQ" in command
-    assert command[-2:] == ["--text", "Use this intentionally in Logistics HQ."]
+    assert "Life OS Maintenance HQ" in command
+    assert command[-2:] == ["--text", "Use this intentionally in Life OS Maintenance HQ."]
 
 
 def test_unknown_default_destination_is_refused() -> None:
@@ -129,5 +131,5 @@ def test_summary_is_plain_language() -> None:
     job = CommandJob(destination="logistics", prompt_type="canonical")
 
     assert summarize_job(job) == (
-        "Place as a verified draft the canonical boot prompt in Logistics HQ."
+        "Place as a verified draft the canonical boot prompt in Life OS Maintenance HQ."
     )
