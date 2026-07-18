@@ -1,42 +1,76 @@
 # System Session Handoff
 
 Updated: 2026-07-18
-Project: Life OS / Logistics HQ / Penny Long-Term Memory
-Purpose: System-level baton pass for Main Assistant, Logistics, and explicit cross-department coordination. This file is not a mirror of department backlogs.
+Project: Life OS / Life OS Maintenance HQ / Penny Long-Term Memory
+Purpose: System-level baton pass for LifeOS HQ, Chief of Staff HQ, Life OS Maintenance HQ, and explicit cross-department coordination. This file is not a mirror of department backlogs.
 
 ## Current System State
 
 Life OS is operational with:
 
 - GitHub as the durable memory and architecture map;
-- Google Drive as the working-records cabinet;
-- Trello as the visual attention and active-flow layer;
+- Google Drive as the working-records cabinet and home of the human-facing Chief's Manual;
+- Trello as the raw-intake, visual-attention, and active-flow layer;
 - Todoist as Rob-facing commitments and reminders;
 - Calendar as the timed-commitment layer;
 - Gmail as communication evidence;
 - a locally running LifeOS Dashboard with Overview, Department Inspection, and Automation tabs;
-- seven operational department HQ chats;
+- one central meeting room plus seven department HQ chats;
 - validated Windows desktop automation for drafting or explicitly sending prompts to exact LifeOS destinations;
 - an operational dashboard-integrated Automation Command Center with manual and scheduled runs, persistent history, and safety reporting;
 - workers as narrow operational executors;
-- Main Assistant as daily coordinator and primary conversational hub;
-- Logistics as shared-infrastructure curator, boot maintainer, migration owner, and cross-project auditor.
+- Chief of Staff HQ as Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, Hub chair, routing desk, and follow-through coordinator;
+- Life OS Maintenance HQ as global GitHub maintainer, boot owner, governance auditor, migration owner, and reconciliation authority;
+- Engineering HQ as technical architecture and implementation owner.
 
 GitHub remains abstract. Detailed financial, medical, business, personal, credential, and operational records stay in their owning source systems.
 
+## Official Eight-Room Architecture
+
+LifeOS uses eight top-level rooms:
+
+1. `LifeOS HQ`, the shared meeting room;
+2. `Chief of Staff HQ`;
+3. `Life OS Maintenance HQ`;
+4. `Engineering HQ`;
+5. `Finance HQ`;
+6. `Business HQ`;
+7. `Office Leaks HQ`;
+8. `Wellness HQ`.
+
+LifeOS HQ is not a department and does not own an independent backlog.
+
+Chief of Staff HQ chairs the Hub, receives department reports, routes assignments, integrates recommendations, supports daily life, and checks follow-through.
+
+Departments retain ownership of their domain judgment and durable records.
+
+Life OS Maintenance HQ owns global GitHub maintenance, governance, boot integrity, source boundaries, audits, migrations, shared procedures, and reconciliation.
+
+Canonical contract:
+
+- `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
+
+Canonical naming:
+
+- `memory/HQ_NAMING_STANDARD.md`
+
 ## Ownership and Boot Architecture
 
-Implemented on 2026-07-18:
+Current operating rules:
 
 - department `open_loops.md` files are authoritative for department-owned unfinished work;
-- `memory/05_OPEN_LOOPS.md` is now the System Open Loops file and no longer mirrors department backlogs;
-- a small universal operating kernel replaced universal loading of the global handoff, boot log, active projects, system loops, migration plan, and mirror status;
-- Main Assistant and Logistics receive broader shared context according to role;
-- specialist departments load their own files plus only explicitly relevant advisories, dependencies, shared policies, or routed context;
-- the Department Inspection tab aggregates all seven departments plus System read-only without becoming a source of truth.
+- `memory/05_OPEN_LOOPS.md` is the System Open Loops file and does not mirror department backlogs;
+- the universal operating kernel loads shared rules, including the Project Instructions and Hub Operating Contract;
+- LifeOS HQ reads broad shared coordination state without becoming an owner;
+- Chief of Staff HQ reads broader state when coordinating daily operations, assignments, department reports, or system decisions;
+- Life OS Maintenance HQ reads broad system state for audits, global maintenance, migrations, boot integrity, and reconciliation;
+- specialist departments load their own files plus only relevant advisories, assignments, dependencies, shared policies, or routed context;
+- the Department Inspection tab aggregates seven departments plus System read-only without becoming a source of truth.
 
 Canonical rules:
 
+- `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`
+- `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
 - `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
 - `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
 - `memory/STARTUP_BOOT.md`
@@ -44,60 +78,42 @@ Canonical rules:
 
 Short form:
 
-> Shared rules are universal. Operational state is role-routed. Visibility is not ownership.
+> The Hub is the table. Chief of Staff chairs. Departments own their work. Maintenance protects the system. Rob decides.
 
-## Current System Coordination
+## Phase One Governance Alignment
 
-One active system coordination package remains:
+Adopted by Rob on 2026-07-18:
 
-- Department ownership and role-routed boot reconciliation.
-- Lead: Engineering HQ.
-- Coordination: Logistics HQ and Main Assistant HQ.
-- Canonical record: `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`.
+- Main Assistant's official role name is now `Chief of Staff HQ`;
+- Logistics' official role name is now `Life OS Maintenance HQ`;
+- `LifeOS HQ` is a meeting room rather than an independent department or authority;
+- Chief of Staff HQ is the primary point of contact and receives department reports;
+- actions produced in the Hub transfer to the correct department and authoritative destination;
+- Hub-originated formal advisories use the retained Chief of Staff source-board path `coordination/boards/main-assistant.md` plus the Advisory Index;
+- existing project paths remain unchanged during the naming transition.
 
-Remaining system work:
+Phase One updates the constitutional and shared-system layer only. Department-local identity, handoff, status, open-loop, notebook, and procedure files remain for owner-routed Phase Two work. Automation labels and code also remain Engineering-owned and are not changed by this phase.
 
-1. refresh and restart the local dashboard after the latest parser and source changes;
-2. verify that confirmed duplicate findings disappear and warning counts remain useful;
-3. inspect any remaining findings individually;
-4. reconcile any additional global summaries or boot assumptions exposed by the inspector;
-5. close the system coordination wrapper when ownership and routing remain stable in ordinary use.
+The canonical GitHub Project Instructions have changed. The deployed ChatGPT Project Settings copy must be manually replaced from the paste-ready section of:
 
-Detailed department work belongs in each department's handoff, status, and open-loop files.
+- `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`
+
+Until that manual replacement occurs, governance-sensitive work should notice and disclose the deployment drift rather than pretending the copies match.
 
 ## Department Inspection Evidence
 
 The read-only Department Inspection MVP is locally validated.
 
-First live baseline:
+Evidence progression:
 
-- 458 normalized records;
-- 4 findings;
-- 101 records with warnings.
+- 458 normalized records / 4 findings / 101 warnings;
+- 459 / 4 / 15 after evidence-based parser and presentation tuning;
+- 414 / 0 / 13 after source cleanup;
+- 414 / 0 / 0 after warning audit, notebook-status parser correction, explicit Logistics status normalization, and Rob's live local verification.
 
-After evidence-based parser and presentation tuning:
+The zero-warning result confirms parser-visible structural cleanliness. It does not replace semantic governance audits. The 2026-07-18 architecture audit identified Hub/Main fusion, stale role names, legacy notebook framing, open-loop schema drift, and global summaries lagging actual automation state.
 
-- 459 normalized records;
-- 4 findings;
-- 15 records with warnings.
-
-The remaining findings exposed:
-
-- one Engineering state/priority schema defect;
-- a broad Chat HQ watch duplicated across Engineering, Logistics, and System;
-- Legacy Virtual Assistant folder disposition mirrored across Logistics, Business, and System;
-- speculative registry-reference placeholders in several departments.
-
-Targeted cleanup completed:
-
-- Engineering now separates lifecycle state from priority;
-- the system Chat HQ watch remains while department mirrors were removed;
-- Logistics solely owns Legacy Virtual Assistant folder disposition;
-- Business and System Legacy VA mirrors were removed;
-- speculative registry-reference placeholders were removed;
-- explicit priority-column parsing and test coverage were added.
-
-Local restart verification is still pending because the running Python process must load the parser change.
+Use inspector findings as audit prompts, not automatic verdicts.
 
 ## Dashboard and Automation Boundaries
 
@@ -112,15 +128,19 @@ Verified live sources:
 
 Guarded GitHub auto-sync may fast-forward only when local `main` is clean and strictly behind. It does not resolve conflicts, discard work, rebase, reset, or authorize broad automatic writes.
 
-The Automation Command Center supports exact destinations, protected canonical prompts, saved and custom prompts, draft or explicitly confirmed send mode, one-time/daily/weekly schedules, separate Scheduled Jobs and Run History, and structured failure reporting.
+The Automation Command Center supports eight exact destinations, protected canonical prompts, saved and custom prompts, draft or explicitly confirmed send mode, one-time/daily/weekly schedules, separate Scheduled Jobs and Run History, and structured failure reporting.
 
-Scheduling is operational but not yet production-ready for fully unattended Windows use. Remaining technical evidence and implementation belong to Engineering, including restart/overdue behavior, repeated recurrence, collapsed-project recovery, scheduler preflight, missed-run policy, and possible Windows startup or service packaging.
+Scheduling is operational but not yet production-ready for fully unattended Windows use. Remaining technical evidence and implementation belong to Engineering, including restart and overdue behavior, repeated recurrence, collapsed-project recovery, scheduler preflight, missed-run policy, and possible Windows startup or service packaging.
 
 Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after the unattended-operation boundary is safe enough.
 
+Current automation labels still use `Main Assistant HQ` and `Logistics HQ`. The Hub Operating Contract translates those legacy labels until Engineering receives authorization to update code, prompts, dashboard labels, and tests.
+
 ## Chat and Work Architecture
 
-Regular Chat is the canonical conversational headquarters.
+Regular Chat is the canonical conversational environment.
+
+LifeOS HQ is the shared meeting room. Chief of Staff HQ is the normal daily point of contact.
 
 Use Chat for planning, department coordination, writing, strategy, recovery, philosophy, ordinary reasoning, GitHub synchronization, and light connector work where available.
 
@@ -142,7 +162,7 @@ Calendar holds timed commitments.
 
 GitHub holds durable project state and memory.
 
-Main Assistant owns `/FLOW`, `/FLOW PROCESS`, and `/FLOW NOW` operation.
+Chief of Staff HQ owns `/FLOW`, `/FLOW PROCESS`, and `/FLOW NOW` operation.
 
 Canonical SOP:
 
@@ -155,7 +175,7 @@ Active pilot workers:
 - Penny Raw Capture Worker: `workers/penny-raw-capture/WORKER_BOOT.md`
 - Penny Inventory Worker: `workers/penny-inventory/WORKER_BOOT.md`
 
-Main Assistant owns authorized downstream processing. Engineering owns worker architecture and reliability guidance. Logistics owns durable worker routing and pointer hygiene.
+Chief of Staff HQ owns authorized downstream processing. Engineering owns worker architecture and reliability guidance. Life OS Maintenance HQ owns durable worker routing and pointer hygiene.
 
 Workers do not inherit department or system backlogs unless their contract explicitly requires a pointer.
 
@@ -171,24 +191,28 @@ The Advisory Index is the live source of truth:
 
 Department Event Inbox remains frozen as historical context unless Rob explicitly reactivates it.
 
-## Active Core
+When the Hub needs a formal advisory, Chief of Staff HQ is the source department and uses `coordination/boards/main-assistant.md` plus the Advisory Index.
 
-- Main Assistant HQ
-- Logistics HQ
+## Active Core Rooms
+
+- LifeOS HQ, meeting room
+- Chief of Staff HQ
+- Life OS Maintenance HQ
 - Engineering HQ
 - Finance HQ
 - Business HQ
 - Office Leaks HQ
 - Wellness HQ
-- Life OS Infrastructure as needed
+
+Life OS Infrastructure remains a shared project area used as needed, not an additional top-level department chat.
 
 Consolidated or dormant domains remain preserved rather than deleted.
 
 ## Source Boundaries
 
 - GitHub: durable abstract state, architecture, ownership, pointers, and auditable changes.
-- Drive: working documents, detailed records, and human-facing artifacts.
-- Trello: current attention and flow.
+- Drive: Chief's Manual, working documents, detailed records, and human-facing artifacts.
+- Trello: raw intake, current attention, and flow.
 - Todoist: Rob-facing commitments and reminders.
 - Calendar: timed commitments.
 - Gmail: communication evidence.
@@ -198,13 +222,13 @@ Consolidated or dormant domains remain preserved rather than deleted.
 
 ## Best Next System Actions
 
-- Verify the post-cleanup Department Inspection counts after the desktop connection and local dashboard process are available.
-- Use remaining findings as audit prompts rather than automatic verdicts.
-- Let departments maintain their own state during ordinary work.
-- Let Main Assistant coordinate broad decisions without becoming the editor of every department backlog.
-- Let Logistics maintain boot integrity, system-loop hygiene, migrations, and cross-project audits.
-- Keep system records compact and close the current ownership-reconciliation wrapper once ordinary use proves the routing stable.
+1. Manually replace the Life OS Project Settings instructions from the canonical paste-ready GitHub section.
+2. Fresh boot LifeOS HQ and verify the meeting-room contract.
+3. Fresh boot Chief of Staff HQ and verify the primary-point-of-contact role.
+4. Authorize and route Phase Two department-local repairs to each owning department.
+5. Route automation label and canonical-prompt updates to Engineering under separate authority.
+6. Refresh the Department Inspector after the source changes and inspect any real findings individually.
 
 ## Guiding Principle
 
-GitHub is the map. Drive is the filing cabinet. Trello shows current flow. Calendar owns time. Todoist owns commitments and reminders. Gmail owns communications. The dashboard sees broadly without owning broadly. Departments own their work. Main coordinates. Logistics maintains the hallways.
+GitHub is the map. Drive is the filing cabinet. Trello catches possibility and shows flow. Calendar owns time. Todoist owns commitments and reminders. Gmail owns communications. The dashboard sees broadly without owning broadly. The Hub hosts the meeting. Chief of Staff coordinates. Maintenance protects the operating system. Departments own their work. Rob decides.
