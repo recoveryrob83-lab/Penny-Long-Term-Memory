@@ -1,7 +1,7 @@
 # Office Leaks Finance Pointers
 
-Updated: 2026-07-15
-Project: Chief of Finance Penny / Office Leaks Consulting
+Updated: 2026-07-18
+Project: Finance HQ / Office Leaks Consulting
 Purpose: Abstract GitHub pointer file for Office Leaks finance working records.
 
 ## Rule
@@ -57,7 +57,7 @@ Finance should treat the current price as experimental rather than validated. Be
 - minimum sustainable price
 - impact on Rob's personal cash position
 
-Business owns the offer, narrative, target customer, and sales strategy. Finance owns affordability, pricing feasibility, margin, fee impact, and risk.
+Business HQ owns the offer, narrative, target customer, and sales strategy. Finance HQ owns affordability, pricing feasibility, margin, fee impact, and risk.
 
 ## Current Cost Position
 
@@ -102,7 +102,9 @@ Pricing may favor trust-building, bite-sized offers, but low price alone is not 
 ## Coordination
 
 - Business HQ owns positioning, offers, marketing, customer discovery, service packaging, and monetization strategy.
-- Finance owns pricing feasibility, revenue tracking, expense evaluation, startup costs, tool approvals, tax planning, budget impact, and financial risk.
-- Engineering owns delivery architecture when implementation becomes technical.
-- Logistics owns transportation, scheduling, reminders, and follow-through when requested.
-- Main Assistant owns cross-department synthesis.
+- Finance HQ owns pricing feasibility, revenue tracking, expense evaluation, startup costs, tool approvals, tax planning, budget impact, and financial risk.
+- Engineering HQ owns delivery architecture when implementation becomes technical.
+- Chief of Staff HQ coordinates requested transportation, scheduling, reminders, cross-department synthesis, assignment routing, and follow-through without owning Finance judgment or records.
+- Life OS Maintenance HQ owns global GitHub maintenance, governance, audits, boot integrity, source boundaries, and reconciliation. It does not own Office Leaks finance judgment or Finance's routine durable state.
+- LifeOS HQ is the shared meeting room and has no independent business-unit or Finance backlog.
+- Rob remains the final authority.
