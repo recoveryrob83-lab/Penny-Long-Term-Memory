@@ -109,10 +109,20 @@ const scheduleTime = document.getElementById("cc-schedule-time");
 const destination = document.getElementById("cc-destination");
 const summary = document.getElementById("cc-schedule-summary");
 const scheduleList = document.getElementById("cc-schedules");
+const scheduleCount = document.getElementById("cc-schedule-count");
+const stateFilter = document.getElementById("cc-schedule-filter-state");
 const saveButton = document.getElementById("cc-save-schedule");
 const cancelButton = document.getElementById("cc-cancel-schedule-edit");
 
-if (!cadence || !cadenceFilter || !confirmSend || !summary || !scheduleList) return;
+if (
+  !cadence
+  || !cadenceFilter
+  || !confirmSend
+  || !summary
+  || !scheduleList
+  || !scheduleCount
+  || !stateFilter
+) return;
 
 const destinationLabels = {
   hub: "LifeOS HQ",
@@ -160,6 +170,10 @@ function syncDebugControls() {
   confirmSend.closest("label")?.removeAttribute("title");
 }
 
+function hideCompletedFromUpcoming(completed) {
+  return completed && ["scheduled", "paused"].includes(stateFilter.value);
+}
+
 let decorating = false;
 let listObserver;
 
@@ -176,6 +190,11 @@ async function decorateDebugSchedules() {
       .forEach((schedule) => {
         const article = scheduleList.querySelector(`[data-schedule-id="${schedule.id}"]`);
         if (!article) return;
+        const completed = String(schedule.last_reason || "").includes(COMPLETION_MARKER);
+        if (hideCompletedFromUpcoming(completed)) {
+          article.remove();
+          return;
+        }
         const metas = article.querySelectorAll("p.item-meta");
         const department = destinationLabels[schedule.destination] || schedule.destination;
         const next = schedule.next_run_at
@@ -184,7 +203,6 @@ async function decorateDebugSchedules() {
         if (metas[0]) {
           metas[0].textContent = `${department} · draft · Debug every 5 minutes (2 attempts max) · Next: ${next}`;
         }
-        const completed = String(schedule.last_reason || "").includes(COMPLETION_MARKER);
         const badge = article.querySelector(".badge");
         if (badge) {
           badge.textContent = completed
@@ -201,6 +219,12 @@ async function decorateDebugSchedules() {
           toggle.disabled = true;
         }
       });
+
+    const visibleDefinitions = scheduleList.querySelectorAll("[data-schedule-id]").length;
+    scheduleCount.textContent = `${visibleDefinitions} of ${(data.scheduled_jobs || []).length} definitions`;
+    if (visibleDefinitions === 0 && ["scheduled", "paused"].includes(stateFilter.value)) {
+      scheduleList.innerHTML = '<div class="cc-history-item">No upcoming scheduled jobs match these filters.</div>';
+    }
   } catch (_) {
     // The primary scheduler UI remains authoritative when decoration cannot load.
   } finally {
