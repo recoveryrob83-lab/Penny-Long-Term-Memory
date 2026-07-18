@@ -36,7 +36,7 @@ DEPARTMENTS: dict[str, Department] = {
     ),
     "logistics": Department(
         key="logistics",
-        chat_title="Logistics HQ",
+        chat_title="Life OS Maintenance HQ",
         role_title="Life OS Maintenance HQ",
         project_folder="projects/life-logistics-hq",
         report_name="Life OS Maintenance",
@@ -60,7 +60,7 @@ DEPARTMENTS: dict[str, Department] = {
     ),
     "main": Department(
         key="main",
-        chat_title="Main Assistant HQ",
+        chat_title="Chief of Staff HQ",
         role_title="Chief of Staff HQ",
         project_folder="projects/main-assistant",
         report_name="Chief of Staff",
