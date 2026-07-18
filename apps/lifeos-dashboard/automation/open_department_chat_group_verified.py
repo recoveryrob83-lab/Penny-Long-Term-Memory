@@ -21,6 +21,7 @@ SIDEBAR_EXPANSION_TIMEOUT_SECONDS = 5.0
 SIDEBAR_EXPANSION_POLL_SECONDS = 0.25
 PROJECT_EXPANSION_TIMEOUT_SECONDS = 5.0
 EXPAND_COLLAPSE_COLLAPSED = 0
+EXPAND_COLLAPSE_EXPANDED = 1
 RESULT_MARKER = "LIFEOS_RESULT_CODE="
 
 CHAT_TITLE_ALIASES = {
@@ -159,6 +160,19 @@ def is_collapsed_state(value) -> bool:
         return False
 
 
+def is_expanded_state(value) -> bool:
+    """Recognize only the explicit UIA expanded state."""
+    if value is None:
+        return False
+    if isinstance(value, str):
+        normalized = re.sub(r"[^a-z]", "", value.casefold())
+        return normalized.endswith("expanded") and "partially" not in normalized
+    try:
+        return int(value) == EXPAND_COLLAPSE_EXPANDED
+    except (TypeError, ValueError):
+        return False
+
+
 def project_label_matches(observed: str, project_title: str) -> bool:
     """Accept only exact accessibility labels for the requested project."""
     clean = observed.strip()
@@ -210,8 +224,19 @@ def project_chat_region_visible(window, project_title: str) -> bool:
     return False
 
 
+def wait_for_exact_sidebar_link(window, target, timeout_seconds: float) -> bool:
+    """Wait for the exact target link without navigating to any substitute chat."""
+    deadline = time.monotonic() + timeout_seconds
+    while time.monotonic() < deadline:
+        exact_link = window.child_window(title=target.link_title, control_type="Hyperlink")
+        if exact_link.exists(timeout=0.1):
+            return True
+        time.sleep(SIDEBAR_EXPANSION_POLL_SECONDS)
+    return False
+
+
 def expand_project_control_once(control) -> None:
-    """Use one explicit UIA expansion action after collapsed state was verified."""
+    """Use only the explicit UIA ExpandPattern after collapsed state was verified."""
     expand = getattr(control, "expand", None)
     if callable(expand):
         expand()
@@ -222,11 +247,14 @@ def expand_project_control_once(control) -> None:
         if callable(expand_method):
             expand_method()
             return
-    control.invoke()
+    raise base.AutomationStopped(
+        "Exact project was collapsed, but no explicit UIA expansion action was available. "
+        "The project row was not invoked because that can navigate to the wrong chat."
+    )
 
 
 def expand_collapsed_project_once(window, target) -> bool:
-    """Expand the exact folded project once and verify that its chat region becomes visible."""
+    """Expand the exact folded project once and verify its project region became available."""
     project = find_collapsed_project_control(window, target.project_title)
     if project is None:
         return False
@@ -239,7 +267,12 @@ def expand_collapsed_project_once(window, target) -> bool:
     deadline = time.monotonic() + PROJECT_EXPANSION_TIMEOUT_SECONDS
     while time.monotonic() < deadline:
         exact_link = window.child_window(title=target.link_title, control_type="Hyperlink")
-        if exact_link.exists(timeout=0.1) or project_chat_region_visible(window, target.project_title):
+        if exact_link.exists(timeout=0.1):
+            print("   Exact target link became visible after project expansion.")
+            return True
+        if is_expanded_state(expand_collapse_state(project)) and project_chat_region_visible(
+            window, target.project_title
+        ):
             print("   Project chat region became visible after one exact expansion.")
             return True
         time.sleep(SIDEBAR_EXPANSION_POLL_SECONDS)
@@ -258,10 +291,10 @@ def open_exact_chat_with_bounded_sidebar_expansion(window, target) -> bool:
         return _original_open_exact_chat(window, target)
 
     project_expanded = expand_collapsed_project_once(window, target)
-    if project_expanded:
-        exact_link = window.child_window(title=target.link_title, control_type="Hyperlink")
-        if exact_link.exists(timeout=0.5):
-            return _original_open_exact_chat(window, target)
+    if project_expanded and wait_for_exact_sidebar_link(
+        window, target, PROJECT_EXPANSION_TIMEOUT_SECONDS
+    ):
+        return _original_open_exact_chat(window, target)
 
     show_more = find_sidebar_show_more(window)
     if show_more is None:
@@ -274,13 +307,9 @@ def open_exact_chat_with_bounded_sidebar_expansion(window, target) -> bool:
     print("   SIDEBAR EXPANSION: exact chat link is hidden. Invoking Show more once.")
     window.set_focus()
     show_more.invoke()
-    deadline = time.monotonic() + SIDEBAR_EXPANSION_TIMEOUT_SECONDS
-    while time.monotonic() < deadline:
-        exact_link = window.child_window(title=target.link_title, control_type="Hyperlink")
-        if exact_link.exists(timeout=0.1):
-            print("   Exact chat link became available after one sidebar expansion.")
-            return _original_open_exact_chat(window, target)
-        time.sleep(SIDEBAR_EXPANSION_POLL_SECONDS)
+    if wait_for_exact_sidebar_link(window, target, SIDEBAR_EXPANSION_TIMEOUT_SECONDS):
+        print("   Exact chat link became available after one sidebar expansion.")
+        return _original_open_exact_chat(window, target)
     raise base.AutomationStopped(
         "Exact chat link did not become available after bounded project/sidebar recovery: "
         f"{target.link_title!r}"
@@ -298,6 +327,7 @@ def classify_result(output: str) -> str:
         or "destination verification failed" in diagnostic
         or "project expansion" in diagnostic
         or "project chat region" in diagnostic
+        or "explicit uia expansion action" in diagnostic
     ):
         return "destination_unverified"
     if "clipboard verification" in diagnostic:
