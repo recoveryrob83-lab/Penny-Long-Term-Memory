@@ -1,30 +1,31 @@
-# Chief Business HQ Status
+# Business HQ Status
 
-Updated: 2026-07-15
+Updated: 2026-07-18
 
 ## Current Phase
 
-Active / Parent Strategy for Office Leaks Consulting
+Active / Parent Strategy and Portfolio Guidance
 
 ## Summary
 
-Chief Business HQ is the parent strategy department for Rob's business portfolio.
+Business HQ is the parent strategy department for Rob's business portfolio.
 
-Office Leaks Consulting is the active revenue-first business-unit HQ under Chief Business HQ. It focuses on trust-based systems consulting for small local service businesses with office, follow-up, documentation, lead-handling, and workflow leaks.
+Office Leaks HQ is the active revenue-first business-unit department. It is publicly launched in a live organic market test and owns its offers, outreach, market testing, delivery, and customer-facing operations.
 
 PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform concept and potential future productization path that may benefit from Office Leaks service-market evidence.
 
 ## Immediate Commercial State
 
-Current working development includes:
+Current parent-level strategic state includes:
 
-- A low-friction introductory offer built around one small, clearly scoped admin or marketing cleanup task.
-- A working first-task price hypothesis of $20; this is not final pricing and requires Finance review before being treated as durable.
-- A simple landing-page direction using `OfficeLeaksConsulting@gmail.com` as the launch contact.
-- A stronger emerging messaging direction centered on costly follow-up failures and lost leads rather than broad generic task help.
-- A trust problem that must be solved through specificity, proof, transparent process, bounded scope, or a credible sample before broad promotion.
+- Office Leaks is publicly operating and gathering organic market signal.
+- A low-friction introductory offer remains under strategic pressure test.
+- The working first-task price hypothesis of $20 is not final pricing and requires Finance HQ review before being treated as durable.
+- A stronger messaging direction centers on costly follow-up failures and lost leads rather than broad generic task help.
+- The trust problem remains unresolved at the parent-strategy level and must be addressed through specificity, proof, transparent process, bounded scope, credible samples, or another defensible trust mechanism.
+- Business HQ should interpret market signal, customer fit, offer logic, and portfolio implications without managing Office Leaks content cadence, outreach activity, delivery, or customer operations.
 
-Detailed copy and execution artifacts belong in Office Leaks HQ or Drive/RPR. GitHub stores only this abstract strategic state.
+Detailed copy, launch metrics, outreach records, inquiries, customer evidence, and execution artifacts belong in Office Leaks HQ or Drive/RPR. GitHub stores only abstract strategic state.
 
 ## Current Operating Rule
 
@@ -39,22 +40,23 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 ## Current Focus
 
 - Guide Office Leaks parent strategy without absorbing Office Leaks execution continuity.
-- Pressure-test the introductory offer before expanding collateral.
+- Interpret the live organic market test at the market, offer, and portfolio level.
+- Pressure-test the introductory offer before major expansion.
 - Decide whether the entry offer is a general cleanup task, a lead-leak diagnostic, or a narrowly defined bridge between the two.
 - Define the first target customer segment and avoid positioning toward all small businesses at once.
 - Build a trust mechanism that answers why a stranger should choose Rob.
 - Separate the introductory offer from the eventual profitable service ladder.
 - Define major positioning versus generic virtual assistants or generic consultants.
 - Clarify Rob's strengths, constraints, credibility assets, and positioning.
-- Coordinate with Office Leaks HQ on lead-loss stories, outreach, landing materials, offers, and proposal strategy.
-- Coordinate with Finance before treating pricing, startup costs, revenue assumptions, taxes, or tool costs as final.
-- Coordinate with Engineering on delivery architecture, templates, adoption verification, and human-system playbook elements.
-- Coordinate with Life Logistics on project file hygiene and handoff clarity.
+- Evaluate the lead-loss thesis and other Office Leaks market hypotheses without owning detailed content production or outreach execution.
+- Coordinate with Finance HQ before treating pricing, startup costs, revenue assumptions, taxes, benefits interactions, or tool costs as final.
+- Coordinate with Engineering HQ on delivery architecture, templates, adoption verification, and human-system playbook elements when concrete.
+- Maintain Business-owned files locally; route global GitHub maintenance, shared governance, boot integrity, or repository-wide reconciliation to Life OS Maintenance HQ.
 - Preserve PennyOS / Penny Platform as paused, not the current execution priority.
 
 ## Current Working Hypotheses
 
-- Rob should not compete as a generic low-cost VA.
+- Rob should not compete as a generic low-cost virtual assistant.
 - Stronger positioning is Office Leaks Consulting: practical systems consulting for local service businesses with real workflow leaks.
 - A concrete costly problem, such as a lost lead caused by failed follow-up, creates stronger attention than a broad list of administrative tasks.
 - The $20 offer may work as a trust-building entry point, but price alone does not answer why the buyer should trust the service.
@@ -72,22 +74,26 @@ Do not use Todoist for department synchronization unless Rob explicitly asks.
 - Engineering delivery architecture: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
 - Finance working-record pointer: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
-Canonical Business Drive architecture:
+Retained Business Drive folder path:
 
 - Life Organization > Chief Business HQ
 - Under that: Business Development
 
+`Chief Business HQ` is retained here only as the actual Drive folder label. It is not the current official department name, and this GitHub repair does not authorize a Drive rename.
+
 ## Coordination Notes
 
-- Office Leaks Consulting HQ owns detailed service plans, marketing materials, offers, proposals, customer research, sample packets, and lead/proposal/client workflow.
-- Main Assistant handles one-off scheduling and daily execution.
-- Chief Engineering Penny handles delivery architecture, templates, implementation, automation, and workflow tooling when concrete.
-- Chief of Finance Penny owns pricing feasibility, budget impact, income and expense tracking, taxes, benefits interaction, and financial risk once money becomes concrete.
-- Life Logistics HQ handles cross-project coordination, GitHub housekeeping, scaffold hygiene, and durable routing.
+- Office Leaks HQ owns detailed service plans, marketing materials, offers, outreach, live market tests, proposals, customer research, sample packets, delivery, and lead/proposal/client workflow.
+- Business HQ may guide, evaluate, and make portfolio-level decisions about Office Leaks without copying its execution backlog.
+- Chief of Staff HQ handles one-off scheduling and daily coordination, receives reports, routes assignments, and checks follow-through without owning Business strategy or records.
+- Engineering HQ handles delivery architecture, templates, implementation, automation, and workflow tooling when concrete.
+- Finance HQ owns pricing feasibility, budget impact, income and expense tracking, taxes, benefits interaction, and financial risk once money becomes concrete.
+- Life OS Maintenance HQ handles global GitHub maintenance, shared governance, boot integrity, audits, source-boundary enforcement, and reconciliation. Business HQ maintains its own routine durable state.
+- LifeOS HQ is the shared meeting room and has no independent authority or backlog.
 
 ## Advisory Status
 
-No open advisories are currently directed to Chief Business HQ.
+No open advisories are currently directed to Business HQ.
 
 The Advisory Index may contain open advisories for other departments. Future Business HQ advisories should update the Business advisory board and central Advisory Index only. Future Office Leaks-sourced advisories should update the Office Leaks board and central Advisory Index.
 
@@ -95,4 +101,4 @@ Do not update Department Event Inbox unless Rob explicitly reactivates it.
 
 ## Boundary
 
-Chief Business HQ defines parent business direction. It does not own technical implementation, finance execution, daily admin execution, or Office Leaks business-unit execution continuity.
+Business HQ is one of the seven department HQs in the one-Hub-plus-seven-departments architecture. It defines parent business direction and maintains Business-owned durable state. It does not own technical implementation, finance execution, daily coordination, global GitHub maintenance, or Office Leaks business-unit execution continuity. LifeOS HQ is the shared meeting room, not a department.
