@@ -15,6 +15,7 @@ import sys
 import time
 
 import open_department_chat_group as base
+from lifeos_dashboard.clipboard_runtime import run_with_restored_clipboard
 
 SIDEBAR_EXPANSION_TIMEOUT_SECONDS = 5.0
 SIDEBAR_EXPANSION_POLL_SECONDS = 0.25
@@ -56,6 +57,43 @@ def text_matches_expected(observed: str, expected: str) -> bool:
     if expected_compact.startswith("@GitHub"):
         return observed_compact == expected_compact[1:]
     return False
+
+
+def place_text_with_stable_clipboard(
+    window,
+    group,
+    expected_document_title: str,
+    text: str,
+    replace_existing: bool,
+    write_timeout_seconds: float,
+):
+    """Keep the intended prompt on the clipboard until composer verification finishes."""
+    existing = base.normalize_text(base.copy_group_text(group))
+    if existing and not replace_existing:
+        raise base.AutomationStopped(
+            "Composer already contains text. Existing draft was preserved. "
+            "Use --replace-existing only when replacement is intentional."
+        )
+
+    base.focus_group_text_surface(group)
+    if replace_existing:
+        base.send_keys("^a", pause=0.10)
+
+    def paste_and_verify():
+        base.send_keys("^v", pause=0.10)
+        return base.wait_for_written_text(
+            window,
+            expected_document_title=expected_document_title,
+            expected_text=text,
+            timeout_seconds=write_timeout_seconds,
+        )
+
+    return run_with_restored_clipboard(
+        text,
+        base.clipboard_get_text,
+        base.clipboard_set_text,
+        paste_and_verify,
+    )
 
 
 _original_open_exact_chat = base.open_exact_chat
@@ -152,6 +190,7 @@ def main() -> int:
 
 
 base.text_matches_expected = text_matches_expected
+base.place_text = place_text_with_stable_clipboard
 base.open_exact_chat = open_exact_chat_with_bounded_sidebar_expansion
 
 
