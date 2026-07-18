@@ -72,10 +72,17 @@ def delete_schedule(
     self: command_center.CommandCenterService,
     schedule_id: int,
 ) -> bool:
-    deleted = _original_delete_schedule(self, schedule_id)
-    if deleted:
-        _ledger(self).remove_schedule(schedule_id)
-    return deleted
+    """Clear a configured mirror row before deleting its local definition.
+
+    Schedule execution remains independent from the Sheet, but an explicit delete
+    should not knowingly leave a stale cloud row. When the mirror is configured and
+    cannot confirm removal, preserve the local definition so the action can be retried.
+    """
+    ledger = _ledger(self)
+    ledger_status = ledger.status()
+    if bool(ledger_status.get("configured")) and not ledger.remove_schedule(schedule_id):
+        return False
+    return _original_delete_schedule(self, schedule_id)
 
 
 def run_scheduled(
