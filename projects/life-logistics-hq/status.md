@@ -1,58 +1,69 @@
-# Logistics HQ Status
+# Life OS Maintenance HQ Status
 
-Updated: 2026-07-17
-Project: Logistics HQ
+Updated: 2026-07-18
+Project: Life OS Maintenance HQ
 Status: Active / Operational
 
 ## Current Mission
 
-Maintain the durable operational structure of Rob's Life OS through global GitHub coherence, shared infrastructure, advisory hygiene, cross-project audits, source-boundary protection, and longer-horizon coordination.
+Protect the Life OS operating system through global GitHub integrity, universal boot reliability, shared governance, advisory and system-loop hygiene, source-boundary enforcement, audits, migrations, and reconciliation.
 
-Logistics HQ is not Main Assistant. Main Assistant owns daily life, immediate logistics, Trello Flow operation, Calendar, Todoist, Gmail, reminders, and executive-function support.
+Chief of Staff HQ is Rob's primary point of contact, daily-operations department, Hub chair, routing desk, report receiver, and follow-through coordinator. Life OS Maintenance HQ does not duplicate that role.
 
 ## Current Operational State
 
-- GitHub durable memory is in maintenance and synchronization mode.
-- The canonical Logistics project path is `projects/life-logistics-hq/`.
-- All seven department HQ chats are operational.
-- Windows desktop department automation is validated across all seven HQs.
-- The LifeOS Dashboard is locally running with GitHub, Trello, Todoist, and Google Calendar private iCal.
+- Phase One established the official eight-room authority architecture in the constitutional and shared-system layer.
+- The official department name is Life OS Maintenance HQ; the canonical filesystem path remains `projects/life-logistics-hq/`.
+- The Maintenance subtree has been reconciled to the new identity and authority model under Rob's authorized Phase Two scope.
+- LifeOS HQ is the shared meeting room and does not own an independent backlog.
+- Chief of Staff HQ owns daily operations and Hub coordination.
+- Specialist departments own routine maintenance of their own project subtrees.
+- Engineering HQ owns dashboard, automation, parser, validator, testing, and technical implementation work.
+- The LifeOS Dashboard is locally running with GitHub, Trello, Todoist, and Google Calendar private iCal as verified sources.
 - Guarded GitHub dashboard sync is limited to clean, strictly-behind fast-forward updates.
-- Automation Command Center Phase 1 is planned inside the dashboard as a manual Run Now surface.
-- Scheduling, recurring jobs, and unattended sends remain deferred.
-- Office Leaks is publicly launched and in live organic market testing.
+- Desktop department automation is validated across the seven department HQ chats.
+- The Automation Command Center supports manual and scheduled runs, persistent history, explicit send confirmation, and structured failure reporting.
+- Scheduling exists, but fully unattended Windows production use remains unapproved pending Engineering reliability evidence and Rob's authorization.
+- Current automation labels still use `Main Assistant HQ` and `Logistics HQ` until Engineering performs a separately authorized update.
 - Raw Capture and Inventory workers remain active pilots.
 - Engineering HQ Daily Sync remains paused.
 - No advisories are currently open.
 
-## Active Logistics Priorities
+## Active Maintenance Priorities
 
-- Keep global boot files, handoffs, project maps, status files, open loops, automation prompts, and source pointers internally consistent.
-- Protect Main Assistant and Logistics role boundaries.
-- Preserve canonical HQ names and project paths.
-- Maintain advisory-index and source-board hygiene.
+- Keep global boot files, handoffs, project maps, system loops, operating rules, naming standards, and source pointers internally consistent.
+- Protect the LifeOS HQ, Chief of Staff HQ, Life OS Maintenance HQ, Engineering HQ, and specialist department authority boundaries.
+- Maintain advisory-index and source-board hygiene without duplicating target backlogs.
+- Preserve one owner and one authoritative record for each durable item.
 - Preserve source-system authority across GitHub, Drive, Trello, Todoist, Calendar, Gmail, and the dashboard.
-- Keep desktop automation safety gates intact and draft-only by default.
-- Preserve Command Center Phase 1 as manual Run Now only until Engineering proves the dashboard-to-runner boundary.
-- Track longer-horizon dependencies without absorbing daily execution.
+- Keep desktop automation and guarded GitHub sync safety gates intact.
+- Preserve the unattended-automation production boundary and the paused Engineering HQ Daily Sync state.
+- Maintain worker routing and pointer hygiene while preserving the worker/department distinction.
+- Route department-local drift rather than silently repairing another department's files.
+- Reconcile the Drive Chief's Manual, canonical Project Instructions, and GitHub implementation when meaningful changes occur.
 
 ## Current Boundaries
 
-- Main Assistant owns daily operations and executive-function support.
-- Engineering owns dashboard, desktop automation, and Automation Command Center implementation.
-- Finance owns detailed money records and concrete financial decisions.
-- Business and Office Leaks own strategy and business-unit execution.
-- Wellness owns health, recovery, energy, and sustainable pacing.
-- Logistics owns the durable map, shared hallways, and cross-project hygiene.
+- Rob is final authority.
+- LifeOS HQ is the meeting room.
+- Chief of Staff HQ coordinates daily operations, routing, reports, and follow-through.
+- Life OS Maintenance HQ owns global governance, audits, boot integrity, migrations, source boundaries, and reconciliation.
+- Engineering HQ owns implementation machinery and technical reliability.
+- Finance HQ owns detailed money records and concrete financial decisions.
+- Business HQ and Office Leaks HQ own parent strategy and business-unit execution respectively.
+- Wellness HQ owns wellness, recovery, health planning, and sustainable pacing.
+- Each specialist department maintains its own project subtree.
 
 ## Verification Standard
 
 - Fetch before editing.
 - Prefer small, scoped changes.
+- Preserve unrelated content.
 - Verify significant writes.
+- Re-fetch shared files before later changes when another HQ may be editing adjacent state.
 - Keep GitHub abstract.
 - Never copy credentials, private calendar URLs, tokens, detailed source-system records, financial-account details, medical details, or private personal records into GitHub.
 
 ## Best Next Action
 
-Continue normal operations from the aligned canonical files. Watch the Automation Command Center plan for scope drift, especially any attempt to introduce scheduling before Phase 1 manual execution is proven safe.
+Verify the completed Phase Two commit set, then route any remaining department-local naming drift to the owning departments without opening duplicate system work.
