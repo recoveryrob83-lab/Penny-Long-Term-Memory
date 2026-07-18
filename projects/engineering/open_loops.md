@@ -6,7 +6,6 @@ Updated: 2026-07-18
 
 | Status | Priority | Item | Next Action | Notes |
 |---|---|---|---|---|
-| Active | High | Package C Department Inspection naming validation | Pull the latest repository state, restart the dashboard, run the focused scope-label test, and verify Department Inspection displays Chief of Staff HQ and Life OS Maintenance HQ | API presentation labels, finding-detail labels, regression coverage, and the approved data contract are aligned. Stable scope IDs, filesystem paths, historical evidence, and the Package B alias bridge remain unchanged |
 | Active | High | Department ownership architecture and dashboard inspection | Observe ordinary role-routed specialist boots and close the system wrapper when operation remains clean | Department Inspection is locally validated. Live evidence progressed from 458 records / 4 findings / 101 warnings to 459 / 4 / 15 after tuning, 414 / 0 / 13 after source cleanup, and 414 / 0 / 0 after warning audit, evidence-backed parser correction, and explicit Logistics status normalization. Approved schema: `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`. Canonical note: `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
 | Active | Normal | Collapsed LifeOS project-folder recovery | Design bounded exact-project detection and one-time expansion, but do not change code until Rob authorizes it | ChatGPT Classic may collapse the project after restart or narrow-window layout. Current workaround is to leave the app open with the LifeOS project expanded |
 | Active | Normal | Canonical prompt catalog | Reconcile authoritative command definitions and populate the protected canonical registry | Current catalog primarily exposes Boot. Candidate families: Boot variants, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, Consume Advisory |
@@ -41,6 +40,7 @@ Updated: 2026-07-18
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-18 | Package C Department Inspection naming validation | Rob confirmed the dashboard displayed Chief of Staff HQ and Life OS Maintenance HQ correctly, and the focused Department Inspection suite completed with 9 passing tests |
 | 2026-07-18 | Package B retired-title compatibility runtime validation | Rob confirmed a draft-only invocation using `Main Assistant HQ` translated to Chief of Staff HQ and preserved exact-destination verification without sending |
 | 2026-07-18 | Package B canonical target runtime validation | Rob confirmed draft-only automation passed for Chief of Staff HQ and Life OS Maintenance HQ; existing schedules and run history displayed the correct canonical names with stable destination keys and no persisted-record migration |
 | 2026-07-18 | Package B GitHub implementation | Canonical chat-title mappings, visible Automation labels, run-history and scheduler labels, mapping tests, and a bounded retired-title compatibility bridge were committed without changing stable destination keys or persisted records |
