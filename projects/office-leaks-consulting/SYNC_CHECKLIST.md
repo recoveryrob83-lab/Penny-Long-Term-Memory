@@ -18,7 +18,7 @@ Purpose: Lightweight checklist for Office Leaks Sync, morning boot, nightly revi
 - Engineering delivery layer: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
 - Finance pointer: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 - Notebook index: `projects/office-leaks-consulting/notebook/README.md`
-- Legacy VA folder only when historical evidence is needed: `projects/virtual-assistant-business/`
+- Archived VA history only when historical evidence is needed: `archive/projects/virtual-assistant-business/`
 
 Do not load another department's broad backlog merely for visibility.
 
@@ -31,7 +31,7 @@ Do not load another department's broad backlog merely for visibility.
 5. Has Finance HQ updated a cost-bearing, affordability, pricing-feasibility, startup-cost, revenue, paid-promotion, or tax dependency that Office Leaks must consume?
 6. Has Chief of Staff HQ routed a concrete assignment, report request, scheduling need, reminder, or practical support item that affects Office Leaks execution?
 7. Has Life OS Maintenance HQ routed a specific governance, boot, source-boundary, audit, or repository-reconciliation dependency?
-8. Are old `virtual-assistant-business` references being used as current Office Leaks authority rather than historical evidence?
+8. Are archived `virtual-assistant-business` records being used as current Office Leaks authority rather than historical evidence?
 9. Is Office Leaks work duplicated in Business, System, Chief of Staff, Maintenance, Engineering, Finance, or another department merely for visibility?
 10. Is LifeOS HQ being described as a department, independent authority, or backlog owner?
 11. Are any open advisories actually addressed to Office Leaks HQ or does another department need to act, decide, monitor, or accept responsibility?
