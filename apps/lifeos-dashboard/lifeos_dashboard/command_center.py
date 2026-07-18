@@ -29,9 +29,9 @@ class Destination:
 
 DESTINATIONS: dict[str, Destination] = {
     "hub": Destination("hub", "LifeOS HQ", "LifeOS HQ"),
-    "main": Destination("main", "Main Assistant HQ", "Main Assistant HQ"),
+    "main": Destination("main", "Chief of Staff HQ", "Chief of Staff HQ"),
     "engineering": Destination("engineering", "Engineering HQ", "Engineering HQ"),
-    "logistics": Destination("logistics", "Logistics HQ", "Logistics HQ"),
+    "logistics": Destination("logistics", "Life OS Maintenance HQ", "Life OS Maintenance HQ"),
     "business": Destination("business", "Business HQ", "Business HQ"),
     "office-leaks": Destination("office-leaks", "Office Leaks HQ", "Office Leaks HQ"),
     "finance": Destination("finance", "Finance HQ", "Finance HQ"),
