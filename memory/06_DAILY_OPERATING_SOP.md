@@ -1,7 +1,7 @@
 # Daily Operating SOP v0.1
 
-Updated: 2026-07-15
-Owner: Main Assistant Penny / Daily Operations
+Updated: 2026-07-18
+Owner: Chief of Staff HQ / Daily Operations
 Status: Draft operating standard
 
 ## Purpose
@@ -79,9 +79,9 @@ Do not turn travel time into a second itinerary.
 
 ## Department boundaries
 
-Main Assistant owns daily operations, coordination, practical execution, summaries, reminders, and authorized downstream processing.
+Chief of Staff HQ owns daily operations, coordination, practical execution, summaries, reminders, and authorized downstream processing.
 
-Specialized work remains with the correct department. Do not absorb Engineering, Business, Finance, Wellness, Recovery, or Life Logistics judgment simply because a task appears in the daily itinerary. Route specialized decisions and durable architecture to the owning department.
+Specialized work remains with the correct department. Do not absorb Engineering, Business, Finance, Wellness, Recovery, or Life OS Maintenance judgment simply because a task appears in the daily itinerary. Route specialized decisions, durable architecture, and global operating-system maintenance to the owning department.
 
 ## Review and revision
 
