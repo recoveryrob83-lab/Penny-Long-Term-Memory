@@ -110,6 +110,7 @@ const destination = document.getElementById("cc-destination");
 const summary = document.getElementById("cc-schedule-summary");
 const scheduleList = document.getElementById("cc-schedules");
 const scheduleCount = document.getElementById("cc-schedule-count");
+const schedulerStatus = document.getElementById("cc-scheduler-status");
 const stateFilter = document.getElementById("cc-schedule-filter-state");
 const saveButton = document.getElementById("cc-save-schedule");
 const cancelButton = document.getElementById("cc-cancel-schedule-edit");
@@ -121,6 +122,7 @@ if (
   || !summary
   || !scheduleList
   || !scheduleCount
+  || !schedulerStatus
   || !stateFilter
 ) return;
 
@@ -170,6 +172,21 @@ function syncDebugControls() {
   confirmSend.closest("label")?.removeAttribute("title");
 }
 
+function syncLedgerStatus(data) {
+  const scheduler = data.scheduler_running ? "Scheduler running" : "Scheduler stopped";
+  const ledger = data.schedule_ledger || {};
+  let ledgerLabel = "Ledger off";
+  if (ledger.configured) {
+    ledgerLabel = ledger.state === "error"
+      ? "Ledger error"
+      : ledger.state === "synced"
+        ? "Ledger synced"
+        : "Ledger ready";
+  }
+  schedulerStatus.textContent = `${scheduler} · ${ledgerLabel}`;
+  schedulerStatus.title = ledger.last_error || ledger.spreadsheet_url || "";
+}
+
 function hideCompletedFromUpcoming(completed) {
   return completed && ["scheduled", "paused"].includes(stateFilter.value);
 }
@@ -185,6 +202,7 @@ async function decorateDebugSchedules() {
     const response = await fetch("/api/command-center", {cache: "no-store"});
     if (!response.ok) return;
     const data = await response.json();
+    syncLedgerStatus(data);
     (data.scheduled_jobs || [])
       .filter((schedule) => schedule.cadence === DEBUG_CADENCE)
       .forEach((schedule) => {
