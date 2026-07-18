@@ -4,7 +4,7 @@ Updated: 2026-07-18
 
 ## Current Phase
 
-Active / Department Inspection Naming Validation, Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Automation Command Center Operational Validation, Desktop Automation Recovery, Canonical Prompt Catalog, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -90,24 +90,18 @@ Validated implementation:
 
 ### Department Inspection Canonical Labels / Package C
 
-Status: GitHub implementation complete; local dashboard validation pending.
+Status: Fully implemented and locally validated.
 
-Implemented:
+Validated implementation:
 
 - preserved stable Department Inspection scope IDs `main-assistant` and `logistics`;
 - changed their runtime presentation labels to Chief of Staff HQ and Life OS Maintenance HQ;
 - changed finding-detail labels to the same canonical names;
 - aligned the approved Department Inspection data contract with the canonical labels and current coordination-role language;
 - added a focused regression test proving stable scope IDs return canonical labels;
-- preserved source project paths, historical record text, and the Package B retired-title automation bridge.
-
-Local validation still required:
-
-- pull the latest repository state and restart the dashboard;
-- run `pytest tests/test_department_inspection_scope_labels.py` from `apps/lifeos-dashboard`;
-- open Department Inspection and confirm the department filter displays Chief of Staff HQ and Life OS Maintenance HQ;
-- inspect any visible finding detail and confirm canonical department labels are used;
-- confirm record counts, findings, warnings, and source paths remain unchanged apart from display labels.
+- preserved source project paths, historical record text, and the Package B retired-title automation bridge;
+- local dashboard displayed Chief of Staff HQ and Life OS Maintenance HQ correctly;
+- the Department Inspection test set completed with 9 passing tests.
 
 ### Automation Command Center
 
@@ -274,7 +268,6 @@ Engineering preserves two integrated delivery layers:
 
 ## Current Open Work
 
-- Pull and restart the local dashboard, then run the focused Package C test and visual Department Inspection verification.
 - Observe ordinary role-routed specialist boots and correct only demonstrated routing defects.
 - Test overdue one-time behavior after dashboard restart.
 - Observe a second real recurring execution.
@@ -290,6 +283,7 @@ Engineering preserves two integrated delivery layers:
 
 ## Completed Recent Work
 
+- 2026-07-18: Package C Department Inspection canonical labels passed local dashboard validation and 9 focused tests.
 - 2026-07-18: Package C Department Inspection canonical labels implemented in runtime policy, finding-detail UI, contract, and regression coverage while preserving stable IDs and paths.
 - 2026-07-18: Package B canonical and retired-title automation paths fully runtime-validated; schedules and history retained canonical labels without migration.
 - 2026-07-18: Package B canonical automation mappings implemented while preserving stable destination keys and persisted Command Center records; legacy chat-title compatibility added for retired callers.
