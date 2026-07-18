@@ -135,7 +135,9 @@ Live validation completed:
 - active mobile use and response generation in another chat did not interfere with the desktop scheduled send;
 - scheduled occupied-composer refusal in Logistics HQ preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason;
 - Package B canonical-title and retired-title compatibility paths passed;
-- a one-time draft schedule persisted while the dashboard was stopped, became overdue, fired exactly once about 15–20 seconds after restart, recorded the downstream failure, disabled itself, and did not retry automatically.
+- a one-time draft schedule persisted while the dashboard was stopped, became overdue, fired exactly once about 15–20 seconds after restart, recorded its result, disabled itself, and did not retry automatically;
+- the first overdue attempt exposed a clipboard-lifetime race and a misleading failure classification;
+- after the bounded repair, the repeated overdue draft pasted the complete intended text, preserved the prior clipboard value `i`, recorded `succeeded`, and executed only once.
 
 The `Logistics HQ` name in the occupied-composer bullet is retained as historical test evidence because it was the exact automation destination label used during that validation.
 
@@ -146,7 +148,7 @@ Current validation still open:
 
 ### Desktop Department Automation
 
-Status: Operational for attended use, with canonical title compatibility implemented and post-restart recovery not yet reliable.
+Status: Operational for attended use and validated overdue restart execution when ChatGPT Classic is open and the LifeOS project remains accessible.
 
 Validated behavior:
 
@@ -156,35 +158,35 @@ Validated behavior:
 - stable Group composer discovery;
 - occupied-composer preservation in direct and scheduled testing;
 - clipboard round-trip verification;
+- intended prompt retention on the clipboard until write verification completes;
+- restoration of the prior clipboard value after verification;
+- structured result-code guidance preferred over broad diagnostic keyword matching;
 - draft-only default;
 - explicit send requirement;
 - stop on uncertainty;
 - successful live sends through both manual and scheduled paths;
+- successful clipboard-safe overdue draft execution after dashboard restart;
 - structured safe-failure reporting through the dashboard.
 
-Known edge cases:
+Known edge case:
 
 - ChatGPT Classic may collapse the LifeOS project folder after application restart or a narrow-window layout;
-- after dashboard restart, an overdue job reported `ChatGPT Classic` unavailable even though the app was open, while Rob observed a stray `i` appear before validation;
-- the current automation has not been coded or validated to reopen a collapsed project folder or robustly reacquire the exact ChatGPT Classic window after restart.
+- the current automation has not been coded or validated to reopen a collapsed project folder before exact chat navigation.
 
-Current workaround:
+Current operating boundary:
 
 - keep ChatGPT Classic open;
 - keep the LifeOS project expanded;
 - keep chats available through the normal sidebar / `Show more` path;
-- treat scheduled post-restart execution as diagnostic only, not production-safe;
-- inspect failed one-time jobs and retry manually only after clearing any stray composer text.
+- scheduled post-restart execution is validated under those conditions;
+- do not treat collapsed-project recovery as production-safe until it is implemented and validated.
 
 Next recovery update, when authorized:
 
-- reproduce one immediate draft-only run with the dashboard already running;
-- inspect the actual accessible top-level ChatGPT window title before changing selectors;
-- add bounded exact-window reacquisition only when the observed failure supports it;
 - add bounded exact-project detection and one-time expansion;
 - verify that the project chat region became visible;
 - preserve exact-chat navigation and safe stop on uncertainty;
-- revalidate across restart, narrow-window, `Show more`, occupied-composer, and stray-text cases.
+- revalidate across restart, narrow-window, `Show more`, and occupied-composer cases.
 
 ### Canonical Prompt Catalog
 
@@ -275,7 +277,6 @@ Engineering preserves two integrated delivery layers:
 ## Current Open Work
 
 - Observe ordinary role-routed specialist boots and correct only demonstrated routing defects.
-- Isolate the post-restart ChatGPT Classic reacquisition failure with one immediate draft-only manual run before changing automation selectors.
 - Observe a second real recurring execution.
 - Decide whether failed one-time schedules need an explicit retry control.
 - Populate the protected canonical prompt catalog from authoritative LifeOS commands.
@@ -289,7 +290,8 @@ Engineering preserves two integrated delivery layers:
 
 ## Completed Recent Work
 
-- 2026-07-18: Overdue one-time scheduler catch-up validated; the persisted job fired once about 15–20 seconds after dashboard restart, recorded its downstream failure, disabled, and did not retry automatically.
+- 2026-07-18: Clipboard-lifetime and result-classification repairs passed live Windows validation; the full overdue draft was pasted, the prior clipboard value `i` was restored, and Run History recorded success.
+- 2026-07-18: Overdue one-time scheduler catch-up validated; the persisted job fired once about 15–20 seconds after dashboard restart, recorded its downstream result, disabled, and did not retry automatically.
 - 2026-07-18: Package C Department Inspection canonical labels passed local dashboard validation and 9 focused tests.
 - 2026-07-18: Package C Department Inspection canonical labels implemented in runtime policy, finding-detail UI, contract, and regression coverage while preserving stable IDs and paths.
 - 2026-07-18: Package B canonical and retired-title automation paths fully runtime-validated; schedules and history retained canonical labels without migration.
@@ -315,7 +317,7 @@ Engineering preserves two integrated delivery layers:
 
 ## Production Boundary
 
-Scheduling persistence and overdue catch-up are operational, but fully unattended Windows use is not production-ready. Production readiness still requires reliable post-restart ChatGPT window and project recovery, repeated recurrence evidence, scheduler health/preflight, a deliberate failed-one-time retry policy, and potentially Windows startup or service packaging.
+Scheduling persistence, overdue catch-up, and clipboard-safe post-restart execution are operational when ChatGPT Classic is open and the LifeOS project is accessible. Fully unattended Windows use is not yet production-ready. Production readiness still requires collapsed-project recovery, repeated recurrence evidence, scheduler health/preflight, a deliberate failed-one-time retry policy, and potentially Windows startup or service packaging.
 
 ## Boundary
 
