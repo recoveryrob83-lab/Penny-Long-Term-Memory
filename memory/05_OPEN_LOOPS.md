@@ -7,7 +7,6 @@ Purpose: Track genuinely system-owned unfinished work and operating watches with
 
 | Status | Priority | Item | Lead | Next Action | Completion / Review Condition |
 |---|---|---|---|---|---|
-| Active | High | Eight-room authority and boot alignment | Life OS Maintenance HQ | Manually reconcile the deployed Project Settings copy, then fresh boot LifeOS HQ and Chief of Staff HQ against the new contract | Close the system wrapper after the deployed Layer Zero, Hub route, official names, and ordinary role routing remain consistent |
 | Active | Normal | Department ownership and role-routed boot verification | Engineering HQ | Observe ordinary specialist boots after the shared architecture update and inspect only demonstrated defects | Close after role-routed operation remains clean and no system wrapper is needed for local department work |
 | Active | Normal | Idea intake and durable-promotion governance rollout | Chief of Staff HQ and Life OS Maintenance HQ | Apply Trello stages and canonical durable fields in real workflows, then refine only from observed friction | Review after sustained use; do not automate promotion until the human workflow is stable and validated |
 
@@ -18,7 +17,7 @@ Canonical records:
 - `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
 - `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
 
-Department-local corrections identified by the audit are not copied here as separate system tasks. They remain owner-routed Phase Two candidates until Rob authorizes that package.
+Remaining department-local corrections identified by the audit are not copied here as separate system tasks. They remain owner-routed Phase Two candidates for Finance HQ, Wellness HQ, Business HQ, Office Leaks HQ, and Engineering HQ. Automation labels, prompts, dashboard surfaces, and tests remain Engineering-owned.
 
 ## Current System Operating Watches
 
@@ -37,6 +36,7 @@ Department-local corrections identified by the audit are not copied here as sepa
 
 ## Recently Closed System Work
 
+- 2026-07-18: Verified the deployed ChatGPT Life OS Project Settings text against `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md`; Layer Zero matches the canonical paste-ready source, no additional manual deployment is pending, and the eight-room system wrapper was closed while remaining local repairs stayed owner-routed.
 - 2026-07-18: Adopted the official eight-room authority model: LifeOS HQ as meeting room, Chief of Staff HQ as Rob's primary point of contact and Hub chair, and Life OS Maintenance HQ as the renamed global GitHub maintenance and governance department.
 - 2026-07-18: Created `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md` and updated the canonical Project Instructions, boot route, naming standard, command vocabulary, system handoff, active project map, and system loops for Phase One.
 - 2026-07-18: Department Inspection reached 414 normalized records, zero findings, and zero warnings after inspector-guided source cleanup, notebook-status parser correction, explicit Logistics status and priority normalization, and live local verification by Rob.
