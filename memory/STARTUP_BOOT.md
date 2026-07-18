@@ -233,7 +233,7 @@ Rules:
 - Life OS Maintenance maintains shared operational infrastructure, boot integrity, system-loop hygiene, audits, and global reconciliation.
 - Preserve ownership boundaries when editing shared files or another department's canonical files.
 
-Legacy mentions of Main Assistant and Logistics in files not yet updated are interpreted as Chief of Staff HQ and Life OS Maintenance HQ under the Hub Operating Contract.
+Phase Two owner-routed documentation and authority repairs are complete. Legacy mentions of Main Assistant and Logistics are interpreted only when preserved as dated historical evidence or required by Engineering-owned automation compatibility labels; current operational instructions use Chief of Staff HQ and Life OS Maintenance HQ.
 
 ## Chat and Work Policy Application
 
@@ -397,7 +397,7 @@ For multi-target advisories, do not mark fully acknowledged or implemented until
 - Finance HQ: `projects/finance-benefits/SESSION_HANDOFF.md`
 - Business HQ: `projects/business-development/SESSION_HANDOFF.md`
 - Office Leaks HQ: `projects/office-leaks-consulting/SESSION_HANDOFF.md`
-- Legacy Virtual Assistant Business: `projects/virtual-assistant-business/SESSION_HANDOFF.md` redirects to Office Leaks and is historical only.
+- Archived Virtual Assistant Business: `archive/projects/virtual-assistant-business/ARCHIVE_NOTICE.md`; consult only for historical context. Active Office Leaks work routes to `projects/office-leaks-consulting/`.
 - Engineering HQ: `projects/engineering/SESSION_HANDOFF.md`
 - Wellness HQ: `projects/wellness/SESSION_HANDOFF.md`
 - Recovery Logistics / Daily Anchors: `projects/recovery-logistics/SESSION_HANDOFF.md`
