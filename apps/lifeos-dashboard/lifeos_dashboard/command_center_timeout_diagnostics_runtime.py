@@ -6,6 +6,7 @@ import json
 import os
 import subprocess
 import time
+import traceback
 from pathlib import Path
 
 from . import command_center
@@ -121,6 +122,38 @@ def _timeout_reason(
     )
 
 
+def _unexpected_failure(
+    job: command_center.CommandJob,
+    started_at: float,
+    trace: list[str],
+    *,
+    event: str,
+    exc: Exception,
+) -> command_center.ExecutionResult:
+    stderr = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+    trace.append(
+        _backend_event(
+            event,
+            exception_type=type(exc).__name__,
+            exception_message=str(exc),
+            stderr_characters=len(stderr),
+        )
+    )
+    return command_center.ExecutionResult(
+        "failed",
+        job.destination,
+        job.mode,
+        job.prompt_type,
+        None,
+        started_at,
+        time.time(),
+        "\n".join(trace) + "\n",
+        stderr,
+        "The automation backend raised an unexpected exception. Nothing was sent. "
+        "Open Automation Logs for the complete traceback before retrying.",
+    )
+
+
 def run_job(
     job: command_center.CommandJob,
     app_root: Path,
@@ -152,6 +185,14 @@ def run_job(
             "\n".join(trace) + "\n",
             "",
             str(exc),
+        )
+    except Exception as exc:
+        return _unexpected_failure(
+            job,
+            started_at,
+            trace,
+            event="command_build_exception",
+            exc=exc,
         )
 
     trace.append(
@@ -198,6 +239,14 @@ def run_job(
             stdout,
             stderr,
             _timeout_reason(stdout, stderr, timeout_seconds=timeout_seconds),
+        )
+    except Exception as exc:
+        return _unexpected_failure(
+            job,
+            started_at,
+            trace,
+            event="subprocess_exception",
+            exc=exc,
         )
 
     child_stdout = completed.stdout or ""
