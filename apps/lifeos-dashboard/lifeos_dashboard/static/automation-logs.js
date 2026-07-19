@@ -29,6 +29,7 @@ const destinationLabels = {
 };
 
 let history = [];
+let historySignature = "";
 let requestToken = 0;
 let expandAll = false;
 
@@ -115,8 +116,23 @@ function fact(label, value) {
   return `<div class="automation-log-fact"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`;
 }
 
-function render() {
+function captureDetailState() {
+  const state = new Map();
+  ui.list.querySelectorAll("details[data-detail-key]").forEach((details) => {
+    state.set(details.getAttribute("data-detail-key"), details.open);
+  });
+  return state;
+}
+
+function detailOpen(previous, key, defaultValue, override) {
+  if (override !== null) return override;
+  if (expandAll) return true;
+  return previous.has(key) ? previous.get(key) : defaultValue;
+}
+
+function render(openOverride = null) {
   const rows = filteredHistory();
+  const previousDetails = captureDetailState();
   ui.count.textContent = `${rows.length} of ${history.length} runs`;
   ui.expand.textContent = expandAll ? "Collapse all" : "Expand all";
 
@@ -138,9 +154,16 @@ function render() {
     const backendSummary = events.length
       ? events.map((event) => event.event || "event").join(" → ")
       : "No structured backend events (legacy run)";
-    const open = expandAll ? " open" : "";
+    const runKey = `run:${runId}`;
+    const stdoutKey = `${runKey}:stdout`;
+    const stderrKey = `${runKey}:stderr`;
+    const open = detailOpen(previousDetails, runKey, false, openOverride) ? " open" : "";
+    const stdoutOpen = detailOpen(previousDetails, stdoutKey, true, openOverride) ? " open" : "";
+    const stderrOpen = detailOpen(previousDetails, stderrKey, Boolean(entry.stderr), openOverride)
+      ? " open"
+      : "";
 
-    return `<details class="automation-log-entry" data-log-index="${index}"${open}>
+    return `<details class="automation-log-entry" data-log-index="${index}" data-detail-key="${escapeHtml(runKey)}"${open}>
       <summary>
         <div class="automation-log-title">
           <strong>${escapeHtml(department)} · ${escapeHtml(entry.status || "unknown")}</strong>
@@ -161,11 +184,11 @@ function render() {
         </div>
         <p class="automation-log-reason">${escapeHtml(entry.reason || "No reason recorded.")}</p>
         <div class="automation-log-fact"><span>Backend event path</span><strong>${escapeHtml(backendSummary)}</strong></div>
-        <details class="automation-log-stream" open>
+        <details class="automation-log-stream" data-detail-key="${escapeHtml(stdoutKey)}"${stdoutOpen}>
           <summary>Complete stdout (${String(entry.stdout || "").length} characters)</summary>
           <pre>${escapeHtml(entry.stdout || "<empty>")}</pre>
         </details>
-        <details class="automation-log-stream"${entry.stderr ? " open" : ""}>
+        <details class="automation-log-stream" data-detail-key="${escapeHtml(stderrKey)}"${stderrOpen}>
           <summary>Complete stderr (${String(entry.stderr || "").length} characters)</summary>
           <pre>${escapeHtml(entry.stderr || "<empty>")}</pre>
         </details>
@@ -199,9 +222,13 @@ async function loadLogs(showLoading = false) {
   if (!response.ok) throw new Error(`Automation logs returned ${response.status}.`);
   const data = await response.json();
   if (token !== requestToken) return;
-  history = data.history || [];
+  const nextHistory = data.history || [];
+  const nextSignature = JSON.stringify(nextHistory);
+  const changed = nextSignature !== historySignature;
+  history = nextHistory;
+  historySignature = nextSignature;
   ui.state.textContent = data.running ? "Run active" : "Ready";
-  render();
+  if (changed || showLoading) render();
 }
 
 [ui.result, ui.destination, ui.trigger, ui.sort].forEach((control) => {
@@ -216,7 +243,7 @@ ui.refresh.addEventListener("click", () => {
 });
 ui.expand.addEventListener("click", () => {
   expandAll = !expandAll;
-  render();
+  render(expandAll);
 });
 ui.list.addEventListener("click", async (event) => {
   const button = event.target.closest("[data-copy-log]");
