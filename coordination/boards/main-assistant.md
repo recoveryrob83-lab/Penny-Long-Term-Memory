@@ -5,7 +5,119 @@ Purpose: Canonical advisory text sourced from Chief of Staff HQ, including forma
 
 ## Open Advisories
 
-None.
+### ADV-20260718-042 — Move automated prompt verification from composer transport to receiving workers
+
+- Date: 2026-07-18
+- From: Chief of Staff HQ / LifeOS HQ
+- To: Engineering HQ
+- Priority: High
+- Status: Open / Routed
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department: Engineering HQ
+- Record Class: Automation architecture implementation request
+- Authorization: Rob-approved bounded Engineering implementation
+- Related Work: Package C migration, dashboard automation, prompt database, and event-driven automation
+- Completion Condition: The automation layer reliably delivers and logs a recognized envelope without exact semantic text matching; receiving workers validate the canonical prompt, parameters, authority, and scope; the worker returns one of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`; and Engineering provides test or run-log evidence that the flow avoids duplicate execution and silent scope expansion.
+
+#### Context
+
+The current desktop automation successfully pastes and sends prompts to the composer, but exact composer-side copy verification produces false failures because the observed text may contain extra characters, UI artifacts, line-ending differences, or other transport noise. Rob has directly observed successful delivery while the automation reports failure. Repeated attempts to make the composer certify exact semantic integrity have consumed roughly eight hours and placed responsibility in the wrong layer.
+
+The new architecture separates transport verification from semantic verification:
+
+- the automation layer is the courier and verifies bounded delivery;
+- the receiving department is the worker and verifies meaning, legitimacy, scope, ownership, and authority;
+- the source department later verifies completed work and reports the outcome.
+
+#### Required Transport-Layer Behavior
+
+The automation layer should:
+
+1. deliver one recognizable automation envelope to the intended department;
+2. require only a minimum viable payload and recognizable start/end boundaries rather than exact full-text equality;
+3. attach a durable `run_id`, `prompt_id`, prompt version, source, target, authorization class, advisory or approval reference when required, parameters, and checksums;
+4. log the delivery attempt, send action, observed composer state, retry count, and transport result;
+5. prevent duplicate delivery by correlating retries to the same `run_id`;
+6. avoid interpreting, editing, approving, silently truncating, or discarding the requested work;
+7. treat character counts and copied composer text as diagnostic evidence rather than the semantic safety gate.
+
+The automation layer may verify that the envelope is present, addressed, and delivered once. It should not decide whether the enclosed work is semantically correct or authorized.
+
+#### Proposed Automation Wrapper
+
+```text
+<<<LIFEOS_AUTOMATION>>>
+run_id: RUN-YYYYMMDD-NNNN
+prompt_id: DEPARTMENT_ACTION_ID
+prompt_version: N
+canonical_prompt_checksum: SHA256:...
+source: CHIEF_OF_STAFF_HQ
+target: ENGINEERING_HQ
+authorization: READ_ONLY | BOUNDED_WRITE | APPROVAL_REQUIRED
+advisory_id: ADV-YYYYMMDD-NNN
+params_json: {...}
+params_checksum: SHA256:...
+<<<END_LIFEOS_AUTOMATION>>>
+```
+
+The exact serialization may be refined by Engineering, but the envelope must remain machine-readable, versioned, correlated to one run, and sufficiently small to survive the composer transport path reliably.
+
+#### Required Receiver-Side Validation
+
+An automation wrapper is a warning label and routing hint, not proof of authority. The receiving worker should:
+
+1. recognize and parse the wrapper;
+2. verify that `prompt_id` and `prompt_version` exist in the canonical prompt database;
+3. load the canonical prompt from the prompt database rather than trusting a long pasted prompt body when prompt-ID invocation is available;
+4. normalize and verify the canonical prompt checksum and parameter checksum;
+5. validate parameters against the prompt schema;
+6. confirm that the stated source may issue that class of request;
+7. confirm that the target department owns the work;
+8. confirm that the requested action matches the authorization class, advisory, approval record, SOPs, and source-system boundaries;
+9. ignore harmless transport noise outside the recognized envelope while refusing unexpected text that changes scope, destination, permanence, permissions, or requested actions;
+10. preserve the `run_id` in all execution, closure, escalation, and reporting records.
+
+#### Receiver Decision Tree
+
+The receiving worker must choose one explicit outcome:
+
+**IMPLEMENT**
+
+Use when the wrapper is recognized, checksums and parameters validate, the prompt exists, ownership and authorization are correct, and the requested scope is fully workable. Execute the bounded work and report completion with evidence tied to the `run_id`.
+
+**ELEVATE_FOR_APPROVAL**
+
+Use when the request is legitimate but requires broader authority, a human judgment, a source conflict resolution, a new durable-write decision, unexpected financial or privacy exposure, or any other approval not already present. Do not perform the unapproved portion. Report the exact decision required.
+
+**REPORT_AND_HOLD**
+
+Use when the prompt ID is unknown, a checksum or required parameter fails, the target does not own the work, the request conflicts with SOPs or source boundaries, the envelope appears corrupted, the authorization record is missing, or unexpected instructions materially alter the canonical request. Perform no write. Report the failure reason and wait for correction or verification.
+
+For read-only work, Engineering may define a narrower tolerance for harmless formatting noise. For write work, unexpected scope-changing instructions must stop the run rather than being interpreted as “close enough.”
+
+#### Logging and Verification Requirements
+
+The run log should preserve at minimum:
+
+- `run_id`, `prompt_id`, and prompt version;
+- source, target, authorization class, and advisory or approval reference;
+- expected and observed envelope markers;
+- expected and observed checksums;
+- expected and observed character counts as diagnostics;
+- delivery timestamp and send-action result;
+- retry count and duplicate-suppression result;
+- receiver decision: `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`;
+- execution evidence, escalation reason, or hold reason;
+- final source-verification state when the larger event loop is implemented.
+
+#### Boundaries
+
+- Do not make exact composer-text equality a release blocker.
+- Do not use minimum character count alone as proof of semantic integrity.
+- Do not let the transport layer silently reinterpret or discard work.
+- Do not let an automation wrapper bypass department ownership, SOPs, advisory approval, durable-write gates, or source-system boundaries.
+- Do not create a competing prompt source outside the canonical prompt database.
+- Do not mark this advisory implemented or closed until Engineering verifies the new flow with current test or run-log evidence.
 
 ## Acknowledged / Implemented Advisories
 
