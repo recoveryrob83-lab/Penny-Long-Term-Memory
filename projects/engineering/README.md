@@ -1,6 +1,6 @@
 # Engineering HQ
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 
 ## Purpose
 
@@ -22,6 +22,7 @@ Use Engineering HQ for:
 - LifeOS Dashboard architecture and reliability.
 - Automation Command Center architecture.
 - Prompt systems and command interfaces.
+- Technical Worker routing, receiver validation, runtime enforcement, and reliability.
 - Testing strategy.
 - Implementation sequencing.
 - Build-risk analysis.
@@ -31,7 +32,10 @@ Use Engineering HQ for:
 
 ## Current Operating Tracks
 
-- Package D canonical prompt catalog and healthy-state post-paste verification.
+- Package D operations-procedure and Worker-runtime implementation under the canonical shared execution and Worker contracts.
+- Worker routing registry, stable Worker IDs, exact-title resolution, receiver state, revision deduplication, verification queues, wake suppression, and technical rollover.
+- Receiver-side execution-envelope and semantic validation under ADV-20260718-042.
+- Canonical prompt catalog and healthy-state post-paste verification as a preserved transport-validation subphase, not the full Package D definition.
 - Desktop department automation maintenance under exact-navigation and stop-on-uncertainty rules.
 - LifeOS Dashboard observation, optional auto-refresh, guarded Git synchronization, and source-health behavior.
 - Reliable Connector Execution Layer design, including operation-ledger, idempotency, verification, and retry policy.
@@ -44,7 +48,7 @@ Use Engineering HQ for:
 - Business strategy, branding, market research, monetization, or customer discovery: Business HQ or Office Leaks HQ.
 - Finance, benefits, budget, bills, subscriptions, or cost approval: Finance HQ.
 - Daily one-off scheduling, ordinary coordination, executive-function support, or quick administration: Chief of Staff HQ.
-- Shared global boot integrity, advisory-index hygiene, cross-project audits, migrations, and system-wide housekeeping: Life OS Maintenance HQ.
+- Shared global boot integrity, advisory-index hygiene, cross-project audits, migrations, canonical Worker governance, and system-wide housekeeping: Life OS Maintenance HQ.
 - Recovery, pacing, health, or sustainability judgment: Wellness HQ.
 
 ## Department File Ownership
@@ -74,16 +78,24 @@ Desktop department automation supports exact destination navigation, bounded pro
 
 The Automation Command Center supports eight exact destinations, canonical, saved, and custom prompts, persistent schedules and run history, validated pause-on-failure and restart policy, Scheduler Ledger synchronization, and bounded cleanup controls.
 
-Package D is the current front burner. The protected canonical catalog contains Boot, Quick Boot, Fresh / Full Boot, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, and Consume Advisory. Catalog behavior and automated tests pass. In a healthy ChatGPT Classic state, the exact destination opens, the composer receives focus, and the complete canonical prompt visibly pastes without being sent, but strict clipboard and accessible-text verification still report a false failure. In a degraded spinning-loading state, the composer never becomes usable; those runs are app-readiness failures rather than write-verification evidence.
+The canonical shared architecture now lives in:
 
-The next valid diagnostic is one healthy visible paste left untouched in the composer, followed by:
+- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- `coordination/WORKER_EXECUTION_CONTRACT.md`
 
-`py .\automation\probe_composer_group_clipboard.py "LifeOS HQ"`
+Package D is the current front burner. Its current purpose is to implement the technical machinery required by those procedures: routing registry, stable Worker identity, exact-title transport, execution envelopes, receiver validation, revision and duplicate state, verification queues, wake suppression, lifecycle transitions, operation-ledger evidence, and safe Worker rename or rollover behavior. Engineering implements the machinery; Life OS Maintenance owns the canonical governance contracts and profile convention.
 
-Do not broaden timeouts, add alternate paste or focus mechanisms, weaken verification, add another witness, start Package E, or expand the automation surface before that evidence is inspected.
+ADV-20260718-042 remains the authoritative open advisory for receiver-side semantic validation. It is one component of the broader Package D implementation rather than a duplicate package.
+
+The protected canonical prompt catalog and Automation Logs remain valuable transport infrastructure. Catalog behavior and automated tests pass, while healthy-state post-paste verification still has an unresolved false-negative. That defect remains a bounded transport-validation subphase. It is not the sole definition or gate for the broader operations-procedure implementation.
+
+Do not broaden timeouts, add alternate paste or focus mechanisms, weaken verification, add another witness, begin Package E, or expand unrelated automation surfaces without direct evidence and a clear dependency on the current implementation plan.
 
 Canonical references:
 
+- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- `coordination/WORKER_EXECUTION_CONTRACT.md`
+- `coordination/ADVISORY_INDEX.md`
 - `apps/lifeos-dashboard/automation/draft_department_boot.py`
 - `apps/lifeos-dashboard/automation/open_department_chat_group.py`
 - `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
@@ -109,4 +121,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current front burner: close Package D through one evidence-led healthy-state composer probe, then validate one manual canonical draft and one fresh scheduled canonical draft. Package E and the proposed persistent Pause All Automation header control remain deferred until that gate passes.
+Active department. Current front burner: turn the new execution and Worker procedures into a build-ready Engineering implementation sequence, beginning with the routing registry and execution-envelope / receiver-state contracts. Preserve canonical prompt verification as a transport subphase, keep ADV-20260718-042 as the authoritative receiver-validation component, and defer Package E or unrelated expansion.
