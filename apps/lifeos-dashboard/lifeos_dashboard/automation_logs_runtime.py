@@ -1,8 +1,9 @@
 """Authoritative detailed logging policy for Automation Command Center runs.
 
 Execution history remains the single durable record. This runtime adds stable run
-identifiers, manual-versus-scheduled context, safe prompt fingerprints, and a larger
-inspection window without logging prompt contents, environment variables, or secrets.
+identifiers, manual-versus-scheduled context, and safe prompt fingerprints without
+logging prompt contents, environment variables, or secrets. The existing recent-history
+window remains bounded so ordinary dashboard polling does not haul the full log archive.
 """
 from __future__ import annotations
 
@@ -11,12 +12,10 @@ import json
 import threading
 import uuid
 from dataclasses import replace
-from typing import Any
 
 from . import command_center
 from .command_center_store import CommandCenterStore
 
-AUTOMATION_LOG_HISTORY_LIMIT = 250
 _CONTEXT_PREFIX = "LIFEOS_RUN_CONTEXT="
 _CONTEXT = threading.local()
 _STORE_HISTORY_FLAG = "_lifeos_automation_log_history_installed"
@@ -93,7 +92,7 @@ def _annotate_result(result: command_center.ExecutionResult) -> command_center.E
 
 
 def _history_with_ids(self: CommandCenterStore, limit: int = 25) -> list[dict[str, object]]:
-    """Return existing execution-history rows with their stable local record IDs."""
+    """Return the requested recent execution rows with stable local record IDs."""
     with self._connect() as connection:  # noqa: SLF001 - same-package persistence extension
         rows = connection.execute(
             """
@@ -120,10 +119,6 @@ def install_service_logging() -> bool:
 
     original_execute = command_center.CommandCenterService.execute
     original_run_scheduled = command_center.CommandCenterService._run_scheduled
-
-    def history(self: command_center.CommandCenterService) -> list[dict[str, object]]:
-        limit = max(int(self.history_limit), AUTOMATION_LOG_HISTORY_LIMIT)
-        return self.store.history(limit)
 
     def record(
         self: command_center.CommandCenterService,
@@ -178,7 +173,6 @@ def install_service_logging() -> bool:
             else:
                 _CONTEXT.value = previous
 
-    command_center.CommandCenterService.history = history
     command_center.CommandCenterService._record = record
     command_center.CommandCenterService.execute = execute
     command_center.CommandCenterService._run_scheduled = run_scheduled
