@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import asdict, dataclass
-from typing import Literal, Mapping, Sequence
+from typing import Literal, Mapping, Sequence, cast
 
 DeploymentState = Literal["enabled", "paused", "retired"]
 RouteAvailability = Literal["available", "unavailable", "ambiguous", "unknown"]
@@ -89,7 +89,9 @@ class WorkerRegistryEntry:
                 values.get("specialization", "general"), "specialization"
             ),
             role=_required_text(values.get("role", "worker"), "role"),
-            deployment_state=str(values.get("deployment_state", "enabled")),  # type: ignore[arg-type]
+            deployment_state=cast(
+                DeploymentState, str(values.get("deployment_state", "enabled"))
+            ),
         )
 
     def to_dict(self) -> dict[str, object]:
@@ -179,7 +181,9 @@ class ExecutionEnvelope:
             authorization_source=_required_text(
                 values.get("authorization_source"), "authorization_source"
             ),
-            verification_mode=str(values.get("verification_mode")),  # type: ignore[arg-type]
+            verification_mode=cast(
+                VerificationMode, str(values.get("verification_mode"))
+            ),
         )
 
     def to_dict(self) -> dict[str, object]:
