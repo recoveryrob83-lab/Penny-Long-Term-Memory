@@ -106,7 +106,6 @@ owning_department: office_leaks
 role: worker
 specialization: general
 profile_version: 1
-status: active
 ---
 ```
 
@@ -117,8 +116,9 @@ Required metadata:
 - `owning_department`;
 - `role: worker`;
 - persistent specialization or `general`;
-- `profile_version`;
-- current profile lifecycle state.
+- `profile_version`.
+
+The department-owned profile records stable identity and authority only. Deployment state, route availability, pause state, active or retired routing, current chat resolution, and runtime health belong to the Engineering-owned routing registry and runtime state. Do not add a profile lifecycle or deployment-status field as a competing ledger.
 
 Required Markdown sections:
 
@@ -417,6 +417,8 @@ Engineering HQ:
 - exact-title lookup;
 - zero-match and duplicate-match failure behavior;
 - stable-ID transport;
+- deployment state and route availability;
+- pause state and current chat resolution;
 - persistent receiver state;
 - revision deduplication;
 - verification queues;
