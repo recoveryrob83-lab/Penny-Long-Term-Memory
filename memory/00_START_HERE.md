@@ -1,6 +1,6 @@
 # Start Here
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 Project: Penny Long-Term Memory / Life OS
 Purpose: Orientation file for future Penny sessions using GitHub as the durable memory layer.
 
@@ -16,7 +16,7 @@ Use GitHub for:
 - operating rules and contracts;
 - active project maps;
 - committed open loops;
-- worker contracts and canonical resource pointers;
+- Worker contracts, department-owned Worker profiles, and canonical resource pointers;
 - strategy and implementation workflow files;
 - auditable state changes.
 
@@ -31,7 +31,7 @@ Use Google Drive for:
 
 ## Boot Authority
 
-`memory/STARTUP_BOOT.md` is the single canonical department, Hub, project, and worker boot sequence.
+`memory/STARTUP_BOOT.md` is the single canonical Department HQ, Hub, project, and Worker boot sequence.
 
 ChatGPT Project Instructions are Layer Zero. Their canonical deployment source is:
 
@@ -70,16 +70,27 @@ Filesystem paths may retain legacy names until a separate migration is authorize
 
 ## Department / Worker Distinction
 
-Departments and HQs own domains, judgment, strategy, durable state, and routed decisions.
+Department HQs own domains, judgment, strategy, durable state, approvals, Worker authority, and routed decisions.
 
-Workers perform narrow, repeatable operations under stable contracts.
+Workers perform narrow, already-authorized operations under one owning department and the canonical shared contracts.
 
-Worker root:
+Canonical Worker rules live in:
+
+- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- `coordination/WORKER_EXECUTION_CONTRACT.md`
+
+New department-owned Worker profiles live at:
+
+- `projects/<department>/workers/<profile>.md`
+
+Workers follow the Worker branch in `memory/STARTUP_BOOT.md`. They do not automatically read the full department boot, history, notebooks, backlog, or unrelated open loops.
+
+The root files below are compatibility surfaces for the two grandfathered pilot packages only:
 
 - `workers/README.md`
 - `workers/WORKER_STANDARD.md`
 
-Workers do not automatically read the full department boot. Use the worker route in `memory/STARTUP_BOOT.md` when Rob names a worker.
+Do not create new top-level Worker packages by analogy. Deployment state, route availability, pause state, and current chat resolution belong to the Engineering-owned routing registry and runtime rather than the department-owned profile.
 
 ## Connector Recovery Rule
 
