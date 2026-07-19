@@ -48,3 +48,14 @@ def test_logs_ui_has_filters_and_readable_stream_layout() -> None:
     assert ".automation-log-stream pre" in css_source
     assert "max-height: 32rem" in css_source
     assert "white-space: pre-wrap" in css_source
+
+
+def test_logs_ui_preserves_open_details_and_avoids_unchanged_rerenders() -> None:
+    source = LOGS_PATH.read_text(encoding="utf-8")
+
+    assert "function captureDetailState()" in source
+    assert 'details[data-detail-key]' in source
+    assert "function detailOpen(" in source
+    assert "historySignature" in source
+    assert "const changed = nextSignature !== historySignature" in source
+    assert "if (changed || showLoading) render();" in source
