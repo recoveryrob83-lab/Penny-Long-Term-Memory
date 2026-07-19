@@ -1,9 +1,10 @@
 """Foreground safety gate for physical ChatGPT automation input.
 
 The UI Automation tree can remain readable while another application owns the
-actual keyboard and mouse. Composer clicks may bring ChatGPT Classic forward,
-but keyboard input verifies a cached top-level window handle so it never runs a
-fresh UI Automation search between composer activation and paste.
+actual keyboard and mouse. Composer clicks use the already-resolved composer's
+top-level parent window, then keyboard input verifies only the cached native
+window handle. No fresh global UI Automation search occurs between navigation,
+composer activation, and paste.
 """
 from __future__ import annotations
 
@@ -42,11 +43,19 @@ def _foreground_handle() -> int:
     return int(win32gui.GetForegroundWindow() or 0)
 
 
-def _chatgpt_window(base: ModuleType) -> Any:
-    window = base.get_chatgpt_window()
-    if not getattr(window, "handle", None):
+def _window_from_group(base: ModuleType, group: Any) -> Any:
+    """Resolve the existing composer's top-level window without a global UIA search."""
+    try:
+        parent_getter = getattr(group, "top_level_parent", None)
+        window = parent_getter() if callable(parent_getter) else None
+    except Exception as exc:
         raise base.AutomationStopped(
-            "ChatGPT Classic window handle was unavailable. "
+            "ChatGPT Classic top-level composer window could not be resolved. "
+            "No keyboard or mouse input was sent."
+        ) from exc
+    if window is None or not getattr(window, "handle", None):
+        raise base.AutomationStopped(
+            "ChatGPT Classic window handle was unavailable from the destination composer. "
             "No keyboard or mouse input was sent."
         )
     setattr(base, _HANDLE_ATTR, int(window.handle))
@@ -55,14 +64,17 @@ def _chatgpt_window(base: ModuleType) -> Any:
 
 def _expected_handle(base: ModuleType) -> int:
     handle = int(getattr(base, _HANDLE_ATTR, 0) or 0)
-    if handle:
-        return handle
-    return int(_chatgpt_window(base).handle)
+    if not handle:
+        raise base.AutomationStopped(
+            "ChatGPT Classic foreground handle was not established before keyboard input. "
+            "No keyboard input was sent."
+        )
+    return handle
 
 
-def _focus_chatgpt_foreground(base: ModuleType) -> Any:
-    """Bring ChatGPT forward for an upcoming composer click and cache its handle."""
-    window = _chatgpt_window(base)
+def _focus_chatgpt_foreground(base: ModuleType, group: Any) -> Any:
+    """Bring the composer's existing top-level window forward and cache its handle."""
+    window = _window_from_group(base, group)
     expected_handle = int(window.handle)
     if _foreground_handle() == expected_handle:
         _trace("foreground_verified")
@@ -100,7 +112,7 @@ def _focus_chatgpt_foreground(base: ModuleType) -> Any:
 
 
 def _verify_chatgpt_foreground(base: ModuleType) -> int:
-    """Require cached ChatGPT foreground ownership without a fresh UIA lookup."""
+    """Require cached ChatGPT foreground ownership without any UIA lookup."""
     expected_handle = _expected_handle(base)
     if _foreground_handle() != expected_handle:
         raise base.AutomationStopped(
@@ -129,7 +141,7 @@ def install_base_guard(base: ModuleType) -> bool:
     original_send_keys = base.send_keys
 
     def guarded_focus_group_text_surface(group: Any) -> None:
-        _focus_chatgpt_foreground(base)
+        _focus_chatgpt_foreground(base, group)
         _trace("composer_activation_start")
         original_focus_group_text_surface(group)
         _verify_chatgpt_foreground(base)
@@ -151,8 +163,10 @@ def explain_failure(stdout: str, stderr: str, exit_code: int | None) -> str:
     diagnostic = f"{stderr}\n{stdout}".casefold()
     if (
         "foreground window" in diagnostic
+        or "foreground handle" in diagnostic
         or "lost foreground focus" in diagnostic
         or "window handle was unavailable" in diagnostic
+        or "top-level composer window" in diagnostic
     ):
         return (
             "ChatGPT Classic could not safely retain foreground focus. "
