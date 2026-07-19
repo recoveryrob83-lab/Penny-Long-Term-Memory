@@ -56,6 +56,9 @@ def test_logs_ui_preserves_open_details_and_avoids_unchanged_rerenders() -> None
     assert "function captureDetailState()" in source
     assert 'details[data-detail-key]' in source
     assert "function detailOpen(" in source
+    assert 'typeof override === "boolean"' in source
     assert "historySignature" in source
     assert "const changed = nextSignature !== historySignature" in source
     assert "if (changed || showLoading) render();" in source
+    assert 'control.addEventListener("change", () => render())' in source
+    assert 'ui.search.addEventListener("input", () => render())' in source
