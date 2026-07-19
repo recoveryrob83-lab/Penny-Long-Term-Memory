@@ -8,7 +8,7 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Package D Worker Runtime and Receiver Validation
+- Current Phase: Active / Package D Receiver Validation and Controlled Outcomes
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center history, Engineering advisory board, Advisory Index, and other source systems only when explicitly required
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -46,7 +46,7 @@ Never claim an action, test, deployment, or connector write occurred without cur
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active.
+Status: Active. Slices 1–4 are implemented and locally validated. Slice 5 receiver semantics and controlled outcomes are next.
 
 Canonical implementation packet:
 
@@ -58,7 +58,7 @@ Canonical governance and authorization references:
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 - ADV-20260718-042 on `coordination/boards/main-assistant.md`
 
-Implemented slices:
+Implemented and locally validated slices:
 
 1. Worker contracts and validation:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime.py`
@@ -74,7 +74,7 @@ Implemented slices:
    - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
    - `apps/lifeos-dashboard/tests/test_worker_command_center.py`
 
-Current source capabilities:
+Current capabilities:
 
 - stable Worker IDs and exact visible titles;
 - department profile pointers with Engineering-owned deployment state kept outside profiles;
@@ -92,17 +92,21 @@ Current source capabilities:
 
 Validation state:
 
-- Rob reported the Slice 1–3 focused tests and full dashboard suite passed locally.
-- Slice 4 adds 11 focused tests and awaits Rob's focused and full local validation.
-- No real Worker profile, registry entry, route, UI, or recurring Worker authority schedule has been created.
+- the four focused Worker-runtime files passed with `36 passed`;
+- the first full suite reached `172 passed` with two guidance-string assertion failures;
+- Engineering repaired only the `Open Automation Logs` and `Nothing was sent` wording contracts;
+- both focused regressions passed;
+- Rob reported the final full suite passed with `174 passed, 9 warnings in 173.76s`;
+- no real Worker profile, registry entry, route, UI, or recurring Worker authority schedule has been created.
 
 Next valid Engineering action:
 
-1. run the four focused Worker-runtime test files;
-2. run the full dashboard suite;
-3. if both pass, begin Slice 5 receiver-side profile, authority, scope, parameter, verification-mode, and duplicate validation;
+1. implement Slice 5 receiver-side profile, authority, scope, parameter, source-reference, verification-mode, and duplicate validation;
+2. resolve the department-owned profile referenced by the registry without copying authority text into runtime state;
+3. distinguish transport completion from receiver acceptance;
 4. persist exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
-5. keep Worker UI and real profile activation deferred until the synthetic pilot.
+5. accept the task revision only after semantic validation succeeds;
+6. keep Worker UI and real profile activation deferred until the synthetic pilot.
 
 ## Composer Boundary
 
@@ -114,9 +118,9 @@ Full-text equality, repeated selection, character-range comparison, multiple wit
 
 ## Automation Command Center Boundary
 
-The established HQ scheduler and attended automation remain operationally validated.
+The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend execution path is locally validated through Slice 4.
 
-Slice 4 adds backend Worker execution only. It does not:
+Slice 4 does not:
 
 - change existing HQ destinations or prompt behavior;
 - add Worker dashboard UI;
@@ -142,7 +146,7 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - Monitor ADV-20260719-044 and observe corrected role-routed boots before closing the department-ownership wrapper.
 - Observe four-source dashboard behavior during ordinary use.
 - Continue Raw Capture and Inventory pilots only as grandfathered evidence sources.
-- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the new envelope and evidence model.
+- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the new envelope, evidence, and controlled-outcome model.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
