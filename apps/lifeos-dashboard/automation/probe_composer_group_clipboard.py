@@ -1,8 +1,8 @@
 """Read-only clipboard probe for the ChatGPT Classic composer group.
 
-Anchors on the persistent composer-plus button, locates the enclosing bottom composer Group,
-clicks a safe text-surface point, and tests global Ctrl+A/Ctrl+C. The script preserves the
-user's clipboard, never writes text, and never submits.
+Reuses the production composer Group selector, clicks the same safe text-surface point,
+and tests global Ctrl+A/Ctrl+C. The script preserves the user's clipboard, never writes
+text, and never submits.
 """
 
 from __future__ import annotations
@@ -12,6 +12,8 @@ import time
 
 from pywinauto.keyboard import send_keys
 
+import open_department_chat_group as production_group
+from lifeos_dashboard import automation_write_verification_runtime as _write_verification_runtime
 from open_department_chat import (
     APP_TITLE,
     CLIPBOARD_SENTINEL,
@@ -30,7 +32,7 @@ DESTINATION_POLL_SECONDS = 0.5
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Probe clipboard reads from the Group-based ChatGPT composer shell."
+        description="Probe clipboard reads from the production Group-based composer shell."
     )
     parser.add_argument("chat_title", help="Exact active chat title, such as Wellness HQ")
     parser.add_argument("--project", default="Life OS")
@@ -125,32 +127,8 @@ def verify_or_recover_destination(window, target: Target, timeout_seconds: float
 
 
 def find_composer_group(window):
-    """Find the smallest visible Group enclosing the persistent composer-plus button."""
-    anchor = window.child_window(auto_id="composer-plus-btn", control_type="Button")
-    if not anchor.exists(timeout=2):
-        raise RuntimeError("Visible composer-plus button was not found.")
-
-    anchor_wrapper = anchor.wrapper_object()
-    anchor_rect = anchor_wrapper.rectangle()
-    candidates = []
-
-    for control in window.descendants():
-        if control.element_info.control_type != "Group":
-            continue
-        rect = control.rectangle()
-        if not control.is_visible() or not control.is_enabled():
-            continue
-        if rect.left <= anchor_rect.left and rect.right >= anchor_rect.right:
-            if rect.top <= anchor_rect.top and rect.bottom >= anchor_rect.bottom:
-                candidates.append(control)
-
-    if not candidates:
-        raise RuntimeError("No visible Group enclosing the composer-plus button was found.")
-
-    return min(
-        candidates,
-        key=lambda control: control.rectangle().width() * control.rectangle().height(),
-    )
+    """Use the exact production selector installed by the write-verification runtime."""
+    return production_group.find_composer_group(window)
 
 
 def main() -> int:
