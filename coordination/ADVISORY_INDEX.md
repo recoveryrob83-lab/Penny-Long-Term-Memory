@@ -5,6 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
+- ADV-20260719-044 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: Life OS Maintenance HQ — Reconcile residual Worker-filesystem and continuity drift after the canonical protocol implementation: correct `memory/00_START_HERE.md`, global and Maintenance handoffs/status/watch state, architecture history, and the Worker-profile schema so shared protocols remain in `coordination/`, new profiles live under `projects/<department>/workers/`, root `workers/` stays compatibility-only, and deployment state lives in the Engineering routing registry rather than department profiles. Verification Mode: IMMEDIATE_HQ. Completion requires current read-back evidence and no specialist-profile or Engineering-runtime changes.
 - ADV-20260718-042 — OPEN — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Engineering HQ — Implement receiver-side semantic validation for automated prompts: the composer transport should deliver and log a machine-readable wrapper without exact full-text equality; Engineering should add run IDs, prompt IDs and versions, canonical-prompt and parameter checksums, prompt-database lookup, ownership and authorization checks, duplicate suppression, and an explicit Worker decision tree of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`. Completion requires current test or run-log evidence and no silent scope expansion.
 
 ## Acknowledged / Implemented Advisories
