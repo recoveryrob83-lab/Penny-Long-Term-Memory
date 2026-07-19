@@ -125,7 +125,7 @@ function captureDetailState() {
 }
 
 function detailOpen(previous, key, defaultValue, override) {
-  if (override !== null) return override;
+  if (typeof override === "boolean") return override;
   if (expandAll) return true;
   return previous.has(key) ? previous.get(key) : defaultValue;
 }
@@ -232,9 +232,9 @@ async function loadLogs(showLoading = false) {
 }
 
 [ui.result, ui.destination, ui.trigger, ui.sort].forEach((control) => {
-  control.addEventListener("change", render);
+  control.addEventListener("change", () => render());
 });
-ui.search.addEventListener("input", render);
+ui.search.addEventListener("input", () => render());
 ui.refresh.addEventListener("click", () => {
   loadLogs(true).catch((error) => {
     ui.state.textContent = "Error";
