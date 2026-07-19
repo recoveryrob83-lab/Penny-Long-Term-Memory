@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260718-042 — Open / Routed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Engineering HQ — Implement receiver-side semantic validation for automated prompts: the composer transport should deliver and log a machine-readable wrapper without exact full-text equality; Engineering should add run IDs, prompt IDs and versions, canonical-prompt and parameter checksums, prompt-database lookup, ownership and authorization checks, duplicate suppression, and an explicit worker decision tree of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`. Completion requires current test or run-log evidence and no silent scope expansion.
 
 ## Acknowledged / Implemented Advisories
 
