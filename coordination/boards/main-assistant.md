@@ -1,9 +1,507 @@
 # Chief of Staff HQ Advisory Board
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 Purpose: Canonical advisory text sourced from Chief of Staff HQ, including formal advisories arising from LifeOS HQ meetings. The retained filesystem path remains `coordination/boards/main-assistant.md`.
 
 ## Open Advisories
+
+### ADV-20260719-043 — Create canonical LifeOS operational and Worker protocols
+
+- Date: 2026-07-19
+- From: Chief of Staff HQ, carrying a LifeOS HQ strategic decision authorized by Rob
+- To: Life OS Maintenance HQ
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: IMMEDIATE_HQ
+- Posted Board: `coordination/boards/main-assistant.md`
+- Target Department and Owner: Life OS Maintenance HQ
+- Record Class: Shared-governance implementation advisory
+- Action Class: Bounded shared-governance implementation
+- Authorization Basis: Rob approved the operating model, Worker architecture, routing rules, naming direction, and GitHub structure during the July 19, 2026 LifeOS design session.
+- Completion Condition: The two canonical shared protocols exist, the global boot sequence resolves coherent HQ and Worker branches without duplicate instructions, the settled architecture and boundaries below are preserved, no specialist Worker profiles or Engineering routing code are modified, and Maintenance returns the required completion report with read-only verification evidence.
+
+#### Objective
+
+Create the canonical GitHub protocols that define how LifeOS HQs, Chief of Staff, Department HQs, Workers, advisories, scheduled work, and automation interact.
+
+The implementation must establish one shared operational source of truth and one shared Worker execution contract. These files must be loaded through canonical boot rather than copied into every department subtree.
+
+The human-facing Google Drive handbook remains the explanatory companion. GitHub becomes authoritative for machine-actionable operating rules.
+
+#### Required Shared Files
+
+Create:
+
+- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- `coordination/WORKER_EXECUTION_CONTRACT.md`
+
+Use an existing canonical naming or placement instead only when repository inspection shows an already-authoritative equivalent that should be extended rather than duplicated.
+
+Do not create separate copies of these protocols under each department.
+
+#### Canonical Boot Integration
+
+Update the canonical global boot sequence beginning at:
+
+- `memory/STARTUP_BOOT.md`
+
+Preserve the existing universal-kernel order and all unrelated boot requirements.
+
+The boot sequence must branch by operating role after the universal kernel is loaded.
+
+##### Department HQ boot
+
+Every Department HQ must load:
+
+1. The universal operating kernel.
+2. `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`.
+3. Its existing department identity, handoff, README, status, and open-loop files according to the canonical department sequence.
+4. Explicitly routed dependencies only.
+
+The Worker execution contract is read by a Department HQ when:
+
+- creating or changing a Worker profile;
+- reviewing a Worker hold;
+- auditing Worker behavior;
+- approving Worker execution;
+- interpreting a Worker authority boundary.
+
+It does not need to be loaded during every ordinary HQ boot unless the final canonical protocol determines that the context cost is negligible and the shared boot remains coherent.
+
+##### Worker boot
+
+A Worker must load:
+
+1. The universal operating kernel.
+2. `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`.
+3. `coordination/WORKER_EXECUTION_CONTRACT.md`.
+4. The owning department’s identity.
+5. The exact Worker profile.
+6. The referenced advisory, task definition, or schedule.
+7. Only the department records and SOPs required for the bounded task.
+
+Workers must not automatically load the department’s complete history, notebooks, backlog, or unrelated open loops.
+
+Maintain one canonical boot entry point. Do not create a competing independent Worker boot system unless current repository constraints make branching from `memory/STARTUP_BOOT.md` unsafe or impossible.
+
+#### Required Operational Protocol Content
+
+`coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` must codify the following settled rules.
+
+##### Organizational topology
+
+- Rob is the final authority.
+- LifeOS HQ is the shared strategic meeting room.
+- LifeOS HQ owns no independent backlog or department state.
+- Chief of Staff HQ is Rob’s primary daily operational point of contact.
+- Chief of Staff handles personal operations, reporting, coordination, follow-through, and Rob-facing decisions.
+- Department HQs own specialist strategy, judgment, durable state, approvals, audits, and department-bound collaboration.
+- Workers perform bounded execution and do not become shadow department heads.
+- The dashboard is a transport, visibility, diagnostic, and control layer, not a competing source of truth.
+
+##### Strategic and operational chat boundaries
+
+- Cross-department strategy, LifeOS architecture, shared operating rules, major priorities, and long-range planning belong in LifeOS HQ.
+- Daily operations, appointments, communications, Todoist, Calendar, reporting, reminders, and practical coordination belong in Chief of Staff HQ.
+- Specialist strategy and high-context work tightly bound to one department belong in that Department HQ.
+- Bounded execution belongs in the owning department’s Worker.
+- Real Hub decisions must be routed to one owning department and one authoritative destination.
+- Chief of Staff carries operational consequences into daily planning without copying the entire strategic discussion.
+
+##### Source-system boundaries
+
+Preserve the canonical boundaries for:
+
+- Conversation
+- GitHub
+- Google Drive
+- Trello
+- Todoist
+- Calendar
+- Gmail
+- Dashboard and automation logs
+
+No new competing source of truth may be created.
+
+##### Worker activation and calling authority
+
+An execution-ready Worker task may be initiated by:
+
+- Chief of Staff, when Rob has authorized the work and it fits an existing Worker profile;
+- the owning Department HQ;
+- an authorized cross-department advisory whose source is permitted to request that task class;
+- a canonical timed procedure with existing standing authority.
+
+The dashboard and automation transport work but do not invent, interpret, approve, or broaden it.
+
+Department HQ ownership does not require an HQ relay wake for every routine task.
+
+##### Direct execution-ready routing
+
+The normal bounded path is:
+
+Rob authorizes work through Chief of Staff
+→ Chief of Staff creates one execution-ready advisory
+→ the advisory targets the owning Department Worker
+→ the Worker performs the work
+→ the Worker updates the same advisory with evidence
+→ Chief of Staff reports through the next scheduled operational review
+
+The happy path should normally require one event-driven desktop wake.
+
+Department HQ must be awakened before execution only when department-level judgment, clarification, authorization, or strategy is genuinely required.
+
+##### Verification modes
+
+Every execution-ready advisory must specify one verification mode:
+
+- `AUTOMATIC`
+- `ROUTINE_BATCH`
+- `IMMEDIATE_HQ`
+
+`AUTOMATIC` is used only for low-risk, deterministic work with an explicitly defined and machine-verifiable postcondition. The procedure may close automatically only when the advisory and canonical task definition authorize that closure.
+
+`ROUTINE_BATCH` is used for ordinary completed work that deserves Department HQ review but not an immediate interruption. Completed work enters the department’s verification queue and is reviewed during the next natural HQ session, approved audit, or justified batched review wake. Routine success must not produce an immediate desktop wake merely to report completion.
+
+`IMMEDIATE_HQ` is used for sensitive, destructive, public-facing, expensive, unusual, or high-consequence work requiring prompt Department HQ validation.
+
+##### Wake eligibility
+
+A material advisory revision is wake-eligible, not automatically wake-producing.
+
+Default routing:
+
+- `OPEN` with execution-ready Worker target → wake Worker
+- `HELD` → wake owning Department HQ
+- `ELEVATED_FOR_APPROVAL` → wake Chief of Staff
+- `RESUME_AUTHORIZED` → wake paused Worker
+- `REJECTED` → wake Worker only when clean closure action is required
+- `IMPLEMENTED + AUTOMATIC` → verify defined postcondition; no unnecessary chat wake
+- `IMPLEMENTED + ROUTINE_BATCH` → queue for review; no immediate desktop wake
+- `IMPLEMENTED + IMMEDIATE_HQ` → wake owning Department HQ
+- `SOURCE_VERIFIED` → normally no wake
+- `CLOSED` → no wake
+
+##### Hold and elevation
+
+- A hold is resolved by the owning Department HQ.
+- An elevation is coordinated through Chief of Staff for Rob’s decision.
+- The underlying department retains ownership.
+- The same advisory remains authoritative through hold, elevation, decision, resume, verification, and closure.
+- One blocked work item should not generate a chain of duplicate advisories.
+
+##### Advisory, lifecycle, and priority rules
+
+Preserve the approved lifecycle states:
+
+- `OPEN`
+- `ACKNOWLEDGED`
+- `IMPLEMENTING`
+- `HELD`
+- `ELEVATED_FOR_APPROVAL`
+- `RESUME_AUTHORIZED`
+- `REJECTED`
+- `IMPLEMENTED`
+- `SOURCE_VERIFIED`
+- `CLOSED`
+
+Preserve priority as a separate field:
+
+- `LOW`
+- `NORMAL`
+- `HIGH`
+- `URGENT`
+
+Material revisions increment `advisory_revision`.
+
+Receivers retain `last_processed_revision`.
+
+Cosmetic changes must not trigger work.
+
+##### Reporting
+
+- Routine success waits for scheduled Chief of Staff reporting.
+- Immediate Chief of Staff wakes occur only when Rob must decide or a time-sensitive operational exception requires attention.
+- Department HQs do not emit separate routine all-clear reports to Rob.
+- Chief of Staff synthesizes completed work, exceptions, risks, and decisions.
+- Detailed evidence remains in its authoritative records and logs.
+
+##### Desktop pause behavior
+
+Carry forward the approved cloud pause and safe-resume rules for desktop UI automation.
+
+Native cloud-side scheduled tasks may continue while desktop automation is paused.
+
+If the host cannot read the authoritative pause state, new UI automation fails closed.
+
+#### Required Worker Contract Content
+
+`coordination/WORKER_EXECUTION_CONTRACT.md` must define the universal Worker authority ceiling and execution behavior.
+
+##### Worker identity
+
+A Worker:
+
+- belongs to one owning department;
+- executes bounded work;
+- owns no independent strategy or department backlog;
+- does not become a parallel Department HQ;
+- uses canonical procedures and authoritative records;
+- may remain inactive for long periods.
+
+##### Worker authority
+
+Workers may:
+
+- read authorized records;
+- perform predefined checks;
+- execute already-authorized bounded procedures;
+- update approved evidence and permitted department-owned records;
+- report implementation, holds, elevations, and failures.
+
+Workers may not:
+
+- invent durable work;
+- broaden scope;
+- approve their own exceptions;
+- change department strategy;
+- create competing sources of truth;
+- modify canonical procedures without authorization;
+- interpret silence as approval;
+- close another owner’s work outside an explicitly authorized path;
+- modify their own Worker profile or authority definition.
+
+##### Required Worker outcomes
+
+Every Worker run must result in one controlled outcome:
+
+- `IMPLEMENT`
+- `REPORT_AND_HOLD`
+- `ELEVATE_FOR_APPROVAL`
+
+The Worker must preserve:
+
+- run ID;
+- advisory ID;
+- advisory revision;
+- task or procedure key;
+- evidence references;
+- exact failure or hold reason;
+- verification mode;
+- completion or resume condition.
+
+##### Worker profiles
+
+Define the canonical department-owned Worker-profile location:
+
+- `projects/<department>/workers/<profile>.md`
+
+Do not create separate top-level Worker projects.
+
+Do not create speculative Worker profiles during this Maintenance implementation.
+
+A Worker profile is created by the owning Department HQ only when that Worker is actually activated.
+
+Recommended profile structure:
+
+```yaml
+---
+worker_id: office_leaks_worker
+chat_title: OfficeLeaks_Worker
+owning_department: office_leaks
+role: worker
+specialization: general
+profile_version: 1
+---
+```
+
+Required Markdown sections:
+
+- Purpose
+- Allowed task classes
+- Explicitly prohibited work
+- Read scope
+- Write scope
+- Required procedures
+- Required evidence
+- Hold conditions
+- Elevation conditions
+- Verification and completion path
+
+Do not implement profile inheritance initially.
+
+Shared Worker behavior comes from the global Worker contract. Each department-owned profile states the specific Worker’s explicit authority.
+
+Do not create `workers/README.md` files unless a department later has a real local need for shared instructions across multiple active profiles.
+
+##### Worker activation authority
+
+A Department HQ may activate a Worker under standing authority when:
+
+- the Worker remains inside the department’s existing scope;
+- permissions and connectors are already approved;
+- no new spending is created;
+- no cross-department durable authority is introduced;
+- a bounded Worker profile is created;
+- routing is registered and tested through the approved Engineering mechanism.
+
+Rob’s approval is required when activation introduces:
+
+- new permissions;
+- new connectors;
+- new spending;
+- cross-department authority;
+- materially expanded durable-write authority;
+- a new strategic or organizational role.
+
+##### Worker naming
+
+Record the approved visible chat-title pattern:
+
+`<DepartmentToken>_Worker[_<SpecializationToken>]`
+
+Examples:
+
+- `OfficeLeaks_Worker`
+- `OfficeLeaks_Worker_Visuals`
+- `OfficeLeaks_Worker_MarketResearch`
+- `Wellness_Worker`
+- `Engineering_Worker`
+
+Rules:
+
+- exact visible title currently functions as the desktop transport address;
+- ASCII letters, numbers, and underscores only;
+- no whitespace or decorative punctuation;
+- PascalCase within tokens;
+- globally unique titles;
+- specializations represent persistent execution roles, not one-time tasks;
+- one general Worker per department by default;
+- specialized Workers require repeated operational evidence showing meaningful benefit;
+- Worker proliferation must not occur merely because specialization is technically possible.
+
+Also define a stable internal lowercase Worker ID separate from the visible title:
+
+- `office_leaks_worker`
+- `office_leaks_worker_visuals`
+- `office_leaks_worker_market_research`
+
+The stable ID prepares for future migration to platform conversation identifiers.
+
+A Worker rename is an operational routing change, not a cosmetic edit. It requires registry update, uniqueness validation, transport testing, and controlled rollover.
+
+##### Durable Worker state
+
+Worker state must live in:
+
+- the canonical advisory;
+- the durable run record;
+- automation logs;
+- authorized department records when committed.
+
+Do not create separate Worker status files, Worker backlogs, Worker open-loop files, or Worker handoffs that compete with department-owned truth.
+
+#### Ownership Boundaries
+
+Life OS Maintenance HQ owns this advisory’s shared protocol and boot work.
+
+Maintenance may:
+
+- create the two shared protocol files;
+- update universal boot and shared global references;
+- define the department Worker-profile convention;
+- document the ownership and routing boundaries;
+- reconcile conflicting shared rules discovered during implementation.
+
+Maintenance must not:
+
+- create active Worker profiles inside specialist department subtrees;
+- edit specialist department strategy, status, open loops, or handoffs;
+- create the Engineering routing registry;
+- modify dashboard or desktop automation code;
+- activate Worker chats;
+- invent department-specific permissions;
+- create duplicate copies of the protocols under every HQ.
+
+When a specialist department requires a Worker profile, route a separate department-owned advisory.
+
+When transport implementation is ready, route a separate Engineering-owned advisory.
+
+#### Expected Follow-Up Work
+
+##### Engineering HQ
+
+A separate advisory should cover:
+
+- Worker routing registry;
+- exact-title lookup;
+- duplicate-title and zero-match failure behavior;
+- stable Worker IDs;
+- chat rollover and rename procedures;
+- persistent receiver state;
+- advisory revision deduplication;
+- verification queues and wake suppression.
+
+##### Specialist Department HQs
+
+Each department activates only the Workers it currently needs and creates its own:
+
+- `projects/<department>/workers/<profile>.md`
+
+No department must create a Worker merely because the convention exists.
+
+#### Acceptance Criteria
+
+The advisory is complete only when:
+
+1. The two canonical shared protocol files exist.
+2. Their rules match the settled architecture in this advisory.
+3. The global boot sequence loads the operational protocol for every HQ.
+4. The Worker boot branch loads both shared protocols and the exact department Worker profile.
+5. No duplicate protocol copies are created in department subtrees.
+6. No speculative Worker profiles or folders are created without a real activated Worker.
+7. Existing universal-kernel order and unrelated boot behavior remain intact.
+8. Source-system, ownership, and write boundaries remain explicit.
+9. The one-wake execution-ready happy path is documented.
+10. Verification modes and wake-suppression behavior are documented.
+11. Worker profile ownership and self-edit prohibition are documented.
+12. Worker naming and stable internal ID rules are documented.
+13. Maintenance reports every file changed and confirms that no specialist department files or Engineering implementation files were modified.
+14. A read-only boot inspection confirms that HQ and Worker paths resolve without contradictory or duplicate instructions.
+
+#### Required Completion Report
+
+Return:
+
+- final advisory outcome;
+- files created;
+- files modified;
+- exact boot-order changes;
+- conflicts found and how they were reconciled;
+- checks performed;
+- any unresolved implementation dependencies;
+- confirmation that specialist department profiles and Engineering routing code were not modified;
+- recommended follow-up advisories.
+
+#### Hold and Elevation Rules
+
+Use `REPORT_AND_HOLD` when:
+
+- an existing canonical file already owns part of this scope;
+- boot instructions conflict;
+- the proposed paths would duplicate authoritative records;
+- implementation would require editing specialist department-owned files;
+- the current repository structure cannot support the Worker boot branch safely.
+
+Use `ELEVATE_FOR_APPROVAL` only when:
+
+- reconciliation requires changing the approved organizational architecture;
+- a new durable authority is required;
+- a source-of-truth conflict cannot be resolved within Maintenance authority;
+- the implementation requires Rob to choose between materially different operating models.
+
+Do not broaden this advisory into dashboard implementation, Worker activation, or department restructuring.
 
 ### ADV-20260718-042 — Move automated prompt verification from composer transport to receiving workers
 
