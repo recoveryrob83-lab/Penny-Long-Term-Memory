@@ -63,8 +63,8 @@ def main() -> int:
         observed = base.copy_group_text(group)
         if not copied_text_contains_wrapper(observed, marker):
             raise base.AutomationStopped(
-                "Composer wrapper verification failed. Expected wrapper marker was not copied. "
-                "Nothing was sent."
+                "Composer clipboard verification failed. Expected Worker wrapper marker was not "
+                "copied. Nothing was sent."
             )
         return group
 
