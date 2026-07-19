@@ -6,42 +6,32 @@ Updated: 2026-07-19
 
 Engineering HQ coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation planning, testing, and build-readiness for Life OS and related technical systems.
 
-Engineering turns business requirements into safe, testable, build-ready technical plans and maintains durable state inside its own project domain.
+Engineering turns approved requirements into safe, testable technical systems and maintains durable state inside its own project domain.
 
 ## Role
 
 Use Engineering HQ for:
 
-- Technical architecture.
-- Repository strategy.
-- Software system design.
-- API, connector, and MCP planning.
-- Data models.
-- Automation design.
-- Desktop-control safety and verification.
-- LifeOS Dashboard architecture and reliability.
-- Automation Command Center architecture.
-- Prompt systems and command interfaces.
-- Technical Worker routing, receiver validation, runtime enforcement, and reliability.
-- Testing strategy.
-- Implementation sequencing.
-- Build-risk analysis.
-- Technical feasibility review.
-- Build-ready implementation packets.
+- technical architecture and repository strategy;
+- software, API, connector, and data-model design;
+- automation and desktop-control safety;
+- LifeOS Dashboard and Automation Command Center architecture;
+- prompt systems and command interfaces;
+- technical Worker routing, receiver validation, runtime enforcement, and reliability;
+- testing, debugging, implementation sequencing, feasibility review, and build-ready packets;
 - Engineering-owned durable-memory maintenance.
 
 ## Current Operating Tracks
 
-- Package D operations-procedure and Worker-runtime implementation under the canonical shared execution and Worker contracts.
-- Worker routing registry, stable Worker IDs, exact-title resolution, receiver state, revision deduplication, verification queues, wake suppression, and technical rollover.
-- Receiver-side execution-envelope and semantic validation under ADV-20260718-042.
-- Canonical prompt catalog and healthy-state post-paste verification as a preserved transport-validation subphase, not the full Package D definition.
+- Package D Worker-runtime implementation under the canonical shared execution and Worker contracts.
+- Worker registry, stable IDs, exact-title routing, deployment and route state, task-scoped receiver revisions, and idempotency.
+- Separate Worker Command Center execution with persistent envelope evidence.
+- Receiver-side semantic and authorization validation under ADV-20260718-042.
 - Desktop department automation maintenance under exact-navigation and stop-on-uncertainty rules.
-- LifeOS Dashboard observation, optional auto-refresh, guarded Git synchronization, and source-health behavior.
-- Reliable Connector Execution Layer design, including operation-ledger, idempotency, verification, and retry policy.
-- Penny Raw Capture and Inventory Worker pilots.
-- Prompt launcher maintenance and deferred command-interface improvements.
-- Office Leaks delivery architecture as concrete business requirements mature.
+- LifeOS Dashboard observation and source-health behavior.
+- Reliable Connector Execution Layer, operation-ledger, verification, and retry policy design.
+- Grandfathered Raw Capture and Inventory Worker evidence.
+- Office Leaks delivery architecture as concrete requirements mature.
 
 ## Not This Department
 
@@ -55,55 +45,55 @@ Use Engineering HQ for:
 
 Engineering maintains its own project subtree during routine boots, syncs, and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, decision rules, implementation notes, and Engineering source-board advisory text.
 
-Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner, Chief of Staff HQ, Life OS Maintenance HQ, or explicit coordinated authorization.
-
-## Source Systems
-
-- GitHub memory repository: abstract project state, boot files, open loops, advisories, role clarity, Engineering notes, dashboard code, and desktop-automation code.
-- Dedicated software repositories: future home for educational projects and substantial standalone software projects.
-- Google Drive: working design documents, architecture notes, generated documents, and human-facing engineering artifacts.
-- Todoist: Rob-facing implementation tasks and reminders.
-- Calendar: meetings, deadlines, and scheduled work.
-- Gmail: communication evidence when explicitly queried.
-- Trello: current LifeOS attention and flow, consumed read-only by the dashboard.
-- RPR/user-mediated files: structured working records and reliable fallback workflows.
+Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
 ## Current Technical State
 
-The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings. Gmail and general Drive dashboard adapters remain deferred until demonstrated need.
+The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
 
-Automation naming compatibility and Department Inspection canonical labels are complete. Stable internal destination keys and scope IDs were preserved while current UI labels use Chief of Staff HQ and Life OS Maintenance HQ.
+The established Automation Command Center supports eight exact HQ destinations, canonical, saved, and custom prompts, persistent schedules and run history, validated pause-on-failure and restart policy, Scheduler Ledger synchronization, and bounded cleanup controls.
 
-Desktop department automation supports exact destination navigation, bounded project and `Show more` recovery, exact active-document verification, stable Group composer discovery and reacquisition, occupied-composer preservation, clipboard lifetime and restoration, draft-only default behavior, explicit send authorization, one-job locking, and stop on uncertainty.
-
-The Automation Command Center supports eight exact destinations, canonical, saved, and custom prompts, persistent schedules and run history, validated pause-on-failure and restart policy, Scheduler Ledger synchronization, and bounded cleanup controls.
-
-The canonical shared architecture now lives in:
+The canonical shared architecture lives in:
 
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 
-Package D is the current front burner. Its current purpose is to implement the technical machinery required by those procedures: routing registry, stable Worker identity, exact-title transport, execution envelopes, receiver validation, revision and duplicate state, verification queues, wake suppression, lifecycle transitions, operation-ledger evidence, and safe Worker rename or rollover behavior. Engineering implements the machinery; Life OS Maintenance owns the canonical governance contracts and profile convention.
+Package D has implemented four backend slices:
 
-ADV-20260718-042 remains the authoritative open advisory for receiver-side semantic validation. It is one component of the broader Package D implementation rather than a duplicate package.
+1. Worker contracts and validation.
+2. SQLite registry, route, and task-scoped receiver persistence.
+3. Registry service and exact-title resolution.
+4. Separate Worker Command Center transport and execution-history integration.
 
-The protected canonical prompt catalog and Automation Logs remain valuable transport infrastructure. Catalog behavior and automated tests pass, while healthy-state post-paste verification still has an unresolved false-negative. That defect remains a bounded transport-validation subphase. It is not the sole definition or gate for the broader operations-procedure implementation.
+Current Worker-runtime capabilities include:
 
-Do not broaden timeouts, add alternate paste or focus mechanisms, weaken verification, add another witness, begin Package E, or expand unrelated automation surfaces without direct evidence and a clear dependency on the current implementation plan.
+- stable `worker_id` and exact `chat_title`;
+- department-owned profile pointers with Engineering-owned deployment state outside profiles;
+- `enabled`, `paused`, and `retired` deployment states;
+- separate route availability;
+- compact execution envelopes;
+- task-scoped receiver revision state;
+- idempotency by `worker_id + task_id + task_revision`;
+- exact-title zero-match and duplicate-match failure;
+- shared Command Center pause and one-job locking;
+- manual and scheduler-triggered methods for one authorized envelope;
+- successful-send duplicate suppression and bounded retry after failed transport;
+- existing SQLite execution-history metadata for wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification mode, trigger, and future outcome;
+- Worker-only post-paste verification by one copied-text check for the expected `wrapper_id`.
 
-Canonical references:
+Rob reported the Slice 1–3 focused tests and full dashboard suite passed locally. Slice 4 adds 11 focused tests and awaits focused plus full local validation.
 
-- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
-- `coordination/WORKER_EXECUTION_CONTRACT.md`
-- `coordination/ADVISORY_INDEX.md`
-- `apps/lifeos-dashboard/automation/draft_department_boot.py`
-- `apps/lifeos-dashboard/automation/open_department_chat_group.py`
-- `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
-- `apps/lifeos-dashboard/automation/probe_composer_group_clipboard.py`
-- `apps/lifeos-dashboard/lifeos_dashboard/canonical_prompt_catalog.py`
-- `projects/engineering/open_loops.md`
-- `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
-- `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
+No real Worker profile, route, registry entry, Worker UI, or recurring Worker authority schedule has been created.
+
+ADV-20260718-042 remains authoritative for receiver-side semantic validation. ADV-20260719-044 remains open to Life OS Maintenance HQ for shared Worker filesystem and continuity repairs.
+
+## Composer Boundary
+
+The old full-text composer investigation is closed as an active engineering path.
+
+The Worker-only entrypoint preserves exact destination, empty-composer, clipboard restoration, explicit send, and stop-on-uncertainty safeguards. After paste it copies once and checks only whether the expected wrapper ID is present.
+
+Do not reopen repeated selection, character-range comparison, multiple witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without demonstrated failure.
 
 ## Security Rule
 
@@ -121,4 +111,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current front burner: turn the new execution and Worker procedures into a build-ready Engineering implementation sequence, beginning with the routing registry and execution-envelope / receiver-state contracts. Preserve canonical prompt verification as a transport subphase, keep ADV-20260718-042 as the authoritative receiver-validation component, and defer Package E or unrelated expansion.
+Active department. Current gate: run the four focused Worker-runtime test files and the full dashboard suite. If both pass, begin Slice 5 receiver-side profile, authority, scope, parameter, duplicate, and controlled-outcome validation. Keep Worker UI, real profile activation, recurring Worker authority generation, Package E, and unrelated expansion deferred.
