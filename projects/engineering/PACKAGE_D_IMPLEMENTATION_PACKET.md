@@ -95,11 +95,11 @@ No fuzzy Worker-title routing is permitted.
 
 ### Composer witness
 
-The future minimal composer write witness is:
+The Worker-only composer witness is:
 
-- copy composer text once;
+- preserve exact destination, empty-composer, clipboard-restoration, explicit-send, and stop-on-uncertainty safeguards;
+- after paste, copy the composer once;
 - confirm the copied text contains the expected `wrapper_id`;
-- send only when normal destination, empty-composer, and explicit-send safeguards also pass;
 - otherwise fail closed.
 
 Full-text equality, repeated composer selection, character-range comparison, and multiple write witnesses are not part of v1.
@@ -108,7 +108,7 @@ Full-text equality, repeated composer selection, character-range comparison, and
 
 ### Slice 1: Contracts and validation
 
-Status: Implemented in source, pending full repository validation.
+Status: Implemented and locally validated.
 
 Files:
 
@@ -126,7 +126,7 @@ Provides:
 
 ### Slice 2: SQLite persistence
 
-Status: Core persistence implemented in source, pending full repository validation. Execution-history linkage remains for Slice 4.
+Status: Core persistence implemented and locally validated. Execution-history linkage is implemented in Slice 4.
 
 Files:
 
@@ -150,7 +150,7 @@ The store:
 
 ### Slice 3: Registry service
 
-Status: Implemented in source, pending full repository validation.
+Status: Implemented and locally validated.
 
 Files:
 
@@ -170,27 +170,44 @@ Provides:
 
 No department profile is created or modified by the registry service.
 
-### Current test evidence
+### Validation evidence through Slice 3
 
-The combined isolated contract, persistence, and service suite passed 25 tests.
-
-The full repository suite was not run because the active execution container could not clone GitHub. Rob's local dashboard checkout remains the required source for the focused and full test pass before runtime integration is treated as validated.
+The combined focused contract, persistence, and service suite contains 25 tests. Rob reported that the requested focused Worker-runtime tests and full dashboard suite passed in the local dashboard checkout before Slice 4 began.
 
 ### Slice 4: Execution-envelope integration
 
-Integrate envelopes into manual and scheduled Command Center execution without removing existing HQ destinations.
+Status: Backend implementation complete in source, pending Rob's focused and full local validation.
 
-Required behavior:
+Files:
 
-- preserve one `wrapper_id` and `run_id` per attempt;
-- preserve the authoritative task and revision;
-- validate authorization and target identity before transport;
-- suppress stale and duplicate revisions;
-- fail closed on missing, ambiguous, paused, retired, or unauthorized routes;
-- associate wrapper, run, task, revision, and idempotency evidence with execution history;
-- preserve existing HQ prompt behavior while adding a separate Worker execution path.
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_command_center.py`;
+- `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`;
+- `apps/lifeos-dashboard/tests/test_worker_command_center.py`.
 
-The old composer-verification investigation remains paused. When Worker send integration requires a write witness, use only the expected `wrapper_id` check plus existing exact-destination, empty-composer, and explicit-send safeguards.
+Provides:
+
+- a separate `WorkerCommandJob` and `WorkerExecutionResult` path without changing ordinary HQ jobs;
+- compact rendered prompts containing one machine-readable execution wrapper line;
+- exact registered Worker title transport;
+- shared Command Center pause state and one-job lock;
+- manual and scheduler-triggered execution methods for one already-authorized envelope;
+- pre-transport registry, deployment, route, receiver-revision, and duplicate checks;
+- successful-send suppression by `worker_id + task_id + task_revision`;
+- bounded retry after failed transport because failed sends do not create successful idempotency evidence;
+- nullable Worker metadata columns in the existing SQLite `execution_history` table;
+- persisted wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification-mode, trigger, and future controlled-outcome fields;
+- legacy HQ execution-history compatibility;
+- a Worker-only automation entrypoint that copies the composer once after paste and checks only the expected wrapper marker.
+
+Current boundary:
+
+- no Worker profile, registry entry, or real route is created by this slice;
+- no Worker UI or dashboard controls are added;
+- no recurring Worker authority schedule is introduced;
+- `execute_scheduled` accepts one already-authorized execution-ready envelope from a scheduler caller;
+- receiver acceptance and canonical Worker outcomes remain Slice 5;
+- `controlled_outcome` remains null until a receiver result is processed;
+- existing HQ destinations, prompts, schedules, and verification behavior remain unchanged.
 
 ### Slice 5: Receiver validation and outcomes
 
@@ -240,6 +257,7 @@ This packet does not authorize:
 - fuzzy title matching;
 - autonomous authority expansion;
 - a new queue service;
+- recurring Worker authority generation in v1;
 - Package E;
 - unrelated dashboard expansion;
 - reopening the abandoned full-text composer-verification investigation.
@@ -258,4 +276,12 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Run the three focused Worker-runtime test files and the full dashboard suite in Rob's local checkout. If they pass, begin Slice 4 by adding a separate Worker execution path to the Command Center and extending execution-history evidence with wrapper, Worker, task, revision, and verification metadata.
+Run:
+
+`python -m pytest -q tests/test_worker_runtime.py tests/test_worker_runtime_store.py tests/test_worker_runtime_service.py tests/test_worker_command_center.py`
+
+Then run:
+
+`python -m pytest -q`
+
+If both pass, begin Slice 5 by implementing receiver-side profile and authorization validation plus the three controlled outcomes, while keeping Worker UI and real profile activation deferred.
