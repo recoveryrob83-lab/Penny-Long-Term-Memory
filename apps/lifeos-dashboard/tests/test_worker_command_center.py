@@ -1,5 +1,6 @@
 import importlib.util
 import threading
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -209,13 +210,11 @@ def test_failed_send_does_not_block_bounded_retry(
         result = successful_result(worker_job, trigger=trigger)
         if status == "succeeded":
             return result
-        return WorkerExecutionResult(
-            **{
-                **result.to_dict(),
-                "status": "failed",
-                "exit_code": 1,
-                "reason": "Transport stopped safely.",
-            }
+        return replace(
+            result,
+            status="failed",
+            exit_code=1,
+            reason="Transport stopped safely.",
         )
 
     monkeypatch.setattr(
