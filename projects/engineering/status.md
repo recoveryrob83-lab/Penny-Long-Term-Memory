@@ -18,6 +18,7 @@ Engineering owns the technical implementation of the new execution architecture:
 
 - GitHub: durable architecture, project state, dashboard code, automation code, and Engineering records.
 - `projects/engineering/open_loops.md`: authoritative unfinished Engineering work and detailed completion ledger.
+- `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md`: authoritative Package D build sequence and v1 technical decisions.
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`: canonical shared execution governance, owned by Life OS Maintenance HQ.
 - `coordination/WORKER_EXECUTION_CONTRACT.md`: canonical Worker authority and profile convention, owned by Life OS Maintenance HQ.
 - SQLite Command Center execution history: authoritative local automation-run record.
@@ -32,64 +33,65 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active. The canonical LifeOS execution and Worker protocols are now in place. Engineering is translating them into build-ready schemas, runtime state, transport behavior, validation logic, tests, and dashboard controls.
+Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has begun implementing the smallest runtime required to enforce them.
 
-Current implementation scope:
+Implemented source slices:
 
-- Worker routing registry with stable `worker_id`, exact visible `chat_title`, department, profile path, role, and Engineering-owned deployment state;
-- exact-title resolution with fail-closed zero-match and duplicate-match behavior;
-- machine-readable execution envelopes and receiver-side semantic validation under ADV-20260718-042;
-- prompt ID, prompt version, canonical checksum, parameter schema, authorization, ownership, and source-boundary validation;
-- persistent `run_id`, advisory revision, receiver state, and duplicate suppression;
-- direct one-wake execution-ready routing;
-- verification modes, routine verification queues, immediate-HQ routing, and wake suppression;
-- hold, elevation, resume, rejection, implementation, source-verification, and closure transitions;
-- operation-ledger evidence tied to the authoritative advisory or task;
-- safe Worker rename, title change, and rollover behavior;
-- technical enforcement without moving policy ownership into Engineering or the dashboard.
+1. Contracts and validation:
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime.py`
+   - `apps/lifeos-dashboard/tests/test_worker_runtime.py`
+2. SQLite persistence:
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_store.py`
+   - `apps/lifeos-dashboard/tests/test_worker_runtime_store.py`
+3. Registry service:
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_service.py`
+   - `apps/lifeos-dashboard/tests/test_worker_runtime_service.py`
+
+Current capabilities in source:
+
+- stable `worker_id`, exact `chat_title`, department, profile path, profile version, specialization, role, and Engineering-owned deployment state;
+- `enabled`, `paused`, and `retired` deployment states;
+- separate `available`, `unavailable`, `ambiguous`, and `unknown` route observation;
+- department-owned profile-path enforcement;
+- compact execution envelopes with wrapper, run, Worker, task, revision, procedure, authorization, and verification fields;
+- idempotency keyed by `worker_id + task_id + task_revision`;
+- exact-title zero-match and duplicate-match failure;
+- task-scoped receiver state so unrelated advisory revisions cannot suppress one another;
+- atomic stale-revision and duplicate suppression;
+- route and deployment checks before acceptance;
+- wrapper-ID composer witness helper;
+- thin service methods for registration, lookup, deployment changes, route updates, validation, and acceptance.
+
+Test evidence:
+
+- 25 focused tests passed in an isolated execution environment.
+- The full dashboard suite has not yet been run because the active execution container could not clone GitHub.
+- Rob's local dashboard checkout remains the required validation surface before runtime integration is treated as complete.
 
 ADV-20260718-042 remains open and authoritative for receiver-side semantic validation. It is a component of Package D and should not be duplicated.
 
 Required next implementation step:
 
-1. Turn the two canonical protocols and ADV-20260718-042 into a sequenced Engineering implementation packet.
-2. Define the routing-registry schema and ownership boundary, keeping deployment state out of department profiles.
-3. Define the execution envelope, receiver-state, advisory-revision, and idempotency contracts.
-4. Map existing Command Center, scheduler, execution-history, and Automation Logs components onto the new lifecycle and verification model.
-5. Specify focused tests before modifying runtime behavior.
+1. Run the three focused Worker-runtime test files in Rob's local checkout.
+2. Run the full dashboard test suite.
+3. If both pass, implement Slice 4 as a separate Worker execution path in the Command Center.
+4. Extend execution-history evidence with `wrapper_id`, `run_id`, `worker_id`, task ID and revision, idempotency key, verification mode, and controlled outcome fields.
+5. Preserve existing HQ destinations and prompt behavior while Worker routing is added separately.
 
-### Canonical Prompt Transport Validation Subphase
+### Canonical Prompt Transport Verification
 
-The prior Package D prompt-catalog work remains preserved as a bounded transport and evidence subphase rather than the definition of the entire package.
+Status: Paused by Rob.
 
-Implemented:
+Do not resume the prior composer investigation. The historical catalog, selector, and Automation Logs work remains useful infrastructure, but full-text equality, repeated selection, character-range comparison, and multiple write witnesses are not part of v1.
 
-- protected catalog definitions for Boot, Quick Boot, Fresh / Full Boot, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, and Consume Advisory;
-- read-only canonical entries with editable saved copies;
-- destination-aware rendering and canonical schedule snapshots;
-- foreground-safety guard;
-- timeout-stage diagnostics and server-offline UI guard;
-- strict failure-message precision and dual-witness write verification;
-- production and probe use the same full-containment composer Group selector;
-- dedicated Automation Logs tab backed by the existing SQLite execution-history table;
-- stable run IDs and manual-versus-scheduled context;
-- safe prompt length and fingerprint metadata without duplicating prompt bodies;
-- backend event paths, complete captured child stdout/stderr, durations, result codes, and unexpected-exception tracebacks;
-- copyable complete run diagnostics and filters by result, department, trigger, order, and search;
-- stage-specific timeout messages that distinguish app readiness, composer readiness, and post-paste verification.
+When Worker send integration requires a composer witness:
 
-Current evidence:
+- copy the composer text once;
+- confirm it contains the expected `wrapper_id`;
+- retain exact destination, empty-composer, and explicit-send safeguards;
+- otherwise fail closed.
 
-- the exact destination opens;
-- the composer receives focus;
-- the complete 341-character canonical prompt visibly pastes;
-- nothing is sent;
-- verification visibly selects and clears the full draft repeatedly;
-- the aligned read-only probe copies all 341 characters after the run;
-- the automated verifier still reports failure;
-- spinning-loading runs are app-readiness failures and do not count as write-verification evidence.
-
-This defect remains open. Do not broaden timeouts, add alternate paste mechanisms, use Alt+Tab or coordinate hacks, weaken verification, or add another witness without direct evidence. It is not the sole gate for unrelated Package D architecture work, but changes that depend on trustworthy composer delivery must preserve this unresolved boundary.
+This paused subphase does not gate registry, persistence, service, schema, or non-composer Command Center work.
 
 ### Completed Foundation
 
@@ -105,7 +107,7 @@ The following foundation is complete and should not be reopened without new evid
 
 ### Automation Command Center
 
-Status: Implemented for the established scheduler and attended-automation contract. It is now the primary technical surface to extend for the new operations procedures. The prompt transport false-negative and broader procedure-runtime implementation remain open.
+Status: Implemented for the established scheduler and attended-automation contract. It is the technical surface to extend for Worker execution after local validation of the new runtime modules.
 
 Capabilities:
 
@@ -125,7 +127,7 @@ Automation Logs uses the same durable execution-history rows as Run History. It 
 
 ### Desktop Department and Worker Automation
 
-Status: Operational for attended HQ use and validated recovery under the established safety contract. Worker title routing and execution-state behavior remain to be implemented under the new protocols.
+Status: Operational for attended HQ use and validated recovery under the established safety contract. Worker execution is not yet integrated into the Command Center runtime.
 
 Safety contract:
 
@@ -170,36 +172,38 @@ Current boundaries:
 
 ## Other Active Tracks
 
-- Route the confirmed shared-file and Worker-pointer drift to Life OS Maintenance HQ through a separate Engineering-origin advisory.
+- Monitor ADV-20260719-044 while Life OS Maintenance repairs shared Worker pointers, profile-state ambiguity, global and Maintenance handoffs, and architecture history.
 - Observe ordinary role-routed specialist boots and inspect demonstrated defects, including role identity and source-board selection.
 - Observe four-source dashboard behavior during ordinary use and genuine degraded conditions.
 - Pilot Penny Inventory Worker with 2–3 real items.
 - Observe Penny Raw Capture Worker in real use.
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline aligned with the Worker run model.
-- Draft the operation-ledger schema and connector-health policy.
+- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
 ## Recent Milestones
 
-- 2026-07-19: Canonical shared execution and Worker protocols adopted; Engineering read-only Sync identified stale Package D framing, corrected Engineering ownership language, preserved prompt verification as a transport subphase, and established operations-procedure runtime implementation as the current front burner.
+- 2026-07-19: Package D implementation packet created and Slices 1–3 committed: Worker contracts, exact-title and envelope validation, separate SQLite registry/route/receiver persistence, task-scoped revision suppression, registry service, and 25 focused isolated tests passing.
+- 2026-07-19: Rob ended the full-text composer-verification investigation; future Worker send verification uses one copied-text check for the expected wrapper ID plus existing destination, empty-composer, and send-authorization safeguards.
+- 2026-07-19: ADV-20260719-044 issued from Engineering HQ to Life OS Maintenance HQ for shared Worker filesystem, pointer, profile-state, handoff, watch, and architecture-history reconciliation.
+- 2026-07-19: Canonical shared execution and Worker protocols adopted; Engineering read-only Sync established operations-procedure runtime implementation as the current front burner.
 - 2026-07-19: Ordinary chat operation exposed a role-identity failure in which Engineering HQ identified itself as Business HQ and nearly selected the wrong advisory source board; the incident remains validation evidence under the department-ownership architecture loop.
-- 2026-07-18: Dedicated Automation Logs tab and authoritative execution telemetry implemented, including stable run IDs, safe context, backend events, complete captured stdout/stderr, copyable records, useful timeout guidance, and exception trace capture; local validation remains pending.
-- 2026-07-18: Production and read-only probe composer selectors aligned; focused selector and write-verification suite passed with 8 tests.
-- 2026-07-18: Healthy automation repeatedly pasted and selected the full 341-character canonical draft; the aligned read-only probe copied all 341 characters after the run, isolating the remaining failure to in-run verification behavior.
+- 2026-07-18: Dedicated Automation Logs tab and authoritative execution telemetry implemented, including stable run IDs, safe context, backend events, complete captured stdout/stderr, copyable records, useful timeout guidance, and exception trace capture.
 - 2026-07-18: Scheduler production policy, failed-run pause, Resume rearm, stale one-time restart behavior, ledger health, recurrence, cleanup, and collapsed-project recovery passed runtime validation.
 - 2026-07-18: Package C canonical Department Inspection labels passed local dashboard validation and focused tests.
 - 2026-07-18: Package B canonical automation mappings and retired-title compatibility passed runtime validation while preserving stable keys and persisted records.
 - 2026-07-18: Department Inspection reached 414 normalized records, zero findings, and zero warnings.
 
-Detailed state, priorities, and completion evidence remain authoritative in `projects/engineering/open_loops.md` and referenced Engineering notebook records.
+Detailed state, priorities, and completion evidence remain authoritative in `projects/engineering/open_loops.md` and the Package D implementation packet.
 
 ## Production Boundary
 
 - ChatGPT Classic must be available and responsive for UI automation.
 - Failed scheduled runs pause according to the validated policy rather than retrying blindly.
 - Engineering HQ Daily Sync remains paused by deliberate operating choice until Rob explicitly resumes it.
-- Do not begin Package E or unrelated automation-surface expansion while the current procedure-runtime implementation sequence and unresolved transport evidence remain active.
+- Do not begin Package E or unrelated automation-surface expansion while Package D runtime integration remains active.
+- Do not activate a speculative real Worker before the synthetic end-to-end pilot passes.
 - Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
 
 ## Boundary
