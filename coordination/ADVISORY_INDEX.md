@@ -1,10 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-18
+Updated: 2026-07-19
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
+- ADV-20260719-043 — OPEN — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Life OS Maintenance HQ — Create the canonical shared LifeOS execution and communication protocol and universal Worker execution contract; integrate coherent Department HQ and Worker branches into `memory/STARTUP_BOOT.md`; preserve universal-kernel order, source-system boundaries, ownership, lifecycle and priority separation, one-wake routing, verification modes, wake suppression, Worker authority ceilings, department-owned profile conventions, naming and stable Worker IDs; do not create speculative Worker profiles, modify specialist department files, or implement Engineering routing code. Verification mode: `IMMEDIATE_HQ`.
 - ADV-20260718-042 — Open / Routed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Engineering HQ — Implement receiver-side semantic validation for automated prompts: the composer transport should deliver and log a machine-readable wrapper without exact full-text equality; Engineering should add run IDs, prompt IDs and versions, canonical-prompt and parameter checksums, prompt-database lookup, ownership and authorization checks, duplicate suppression, and an explicit worker decision tree of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`. Completion requires current test or run-log evidence and no silent scope expansion.
 
 ## Acknowledged / Implemented Advisories
