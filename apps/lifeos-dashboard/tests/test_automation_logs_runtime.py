@@ -65,7 +65,7 @@ def test_manual_run_gets_stable_safe_context_and_history_id(
     assert stored[0]["stdout"] == result.stdout
 
 
-def test_history_surface_expands_to_diagnostic_window(
+def test_shared_status_window_stays_bounded_while_store_keeps_all_rows(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -89,10 +89,12 @@ def test_history_surface_expands_to_diagnostic_window(
             )
         )
 
-    rows = service.history()
+    shared_rows = service.history()
+    durable_rows = service.store.history(10)
 
-    assert len(rows) == 3
-    assert [row["id"] for row in rows] == [3, 2, 1]
+    assert len(shared_rows) == 1
+    assert shared_rows[0]["id"] == 3
+    assert [row["id"] for row in durable_rows] == [3, 2, 1]
 
 
 def test_scheduled_context_records_schedule_without_prompt_body() -> None:
