@@ -33,9 +33,9 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has implemented the first four bounded backend slices required to enforce them.
+Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has implemented and locally validated the first four bounded backend slices required to enforce them. Slice 5 receiver semantics and controlled outcomes are now the front burner.
 
-Implemented source slices:
+Implemented and locally validated source slices:
 
 1. Contracts and validation:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime.py`
@@ -51,7 +51,7 @@ Implemented source slices:
    - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
    - `apps/lifeos-dashboard/tests/test_worker_command_center.py`
 
-Current capabilities in source:
+Current capabilities:
 
 - stable `worker_id`, exact `chat_title`, department, profile path, profile version, specialization, role, and Engineering-owned deployment state;
 - `enabled`, `paused`, and `retired` deployment states;
@@ -72,30 +72,33 @@ Current capabilities in source:
 - persisted wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification-mode, trigger, and future outcome fields;
 - Worker-only exact-title transport using one copied-text check for the expected wrapper ID after paste.
 
-Test evidence:
+Validation evidence:
 
-- The combined Slice 1–3 focused suite contains 25 tests.
-- Rob reported that the requested Slice 1–3 focused tests and full dashboard suite passed in the local checkout.
-- Slice 4 adds 11 focused tests and is pending Rob's focused and full local validation.
-- No runtime integration is treated as fully validated until those new tests and the full suite pass.
+- the four focused Worker-runtime files passed with `36 passed`;
+- the first full regression run reached `172 passed` with two narrow guidance-string assertion failures;
+- Engineering repaired only the required `Open Automation Logs` and `Nothing was sent` wording contracts;
+- both focused regression tests passed;
+- Rob reported the final full dashboard suite passed with `174 passed, 9 warnings in 173.76s`;
+- Slice 4 is locally validated with no remaining functional regression.
 
 ADV-20260718-042 remains open and authoritative for receiver-side semantic validation. It is a component of Package D and should not be duplicated.
 
 Required next implementation step:
 
-1. Run the four focused Worker-runtime test files.
-2. Run the full dashboard test suite.
-3. If both pass, implement Slice 5 receiver-side profile, authority, scope, parameter, duplicate, and verification-mode validation.
-4. Persist exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`.
-5. Keep Worker UI, real profile activation, recurring Worker authority generation, and Package E deferred.
+1. implement Slice 5 receiver-side profile, authority, scope, parameter, source-reference, verification-mode, and duplicate validation;
+2. resolve the department-owned profile referenced by the registry without copying its authority into runtime state;
+3. distinguish transport completion from receiver acceptance;
+4. persist exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
+5. accept the task revision only after semantic validation succeeds;
+6. keep Worker UI, real profile activation, recurring Worker authority generation, and Package E deferred.
 
 ### Canonical Prompt Transport Verification
 
-Status: General investigation paused by Rob. Worker-only wrapper verification is implemented in source.
+Status: General investigation paused by Rob. Worker-only wrapper verification is implemented and locally test-validated.
 
 Do not resume the prior general composer investigation. The historical catalog, selector, and Automation Logs work remains useful infrastructure, but full-text equality, repeated selection, character-range comparison, and multiple write witnesses are not part of v1.
 
-The Worker-only path now:
+The Worker-only path:
 
 - retains exact destination, empty-composer, clipboard-restoration, explicit-send, and stop-on-uncertainty safeguards;
 - copies the composer once after paste;
@@ -118,7 +121,7 @@ The following foundation is complete and should not be reopened without new evid
 
 ### Automation Command Center
 
-Status: Implemented for the established scheduler and attended-HQ automation contract. A separate Worker backend execution path is now implemented in source and pending local validation.
+Status: Implemented for the established scheduler and attended-HQ automation contract. The separate Worker backend execution path is locally validated through Slice 4.
 
 Existing HQ capabilities remain:
 
@@ -140,7 +143,7 @@ Automation Logs uses the same durable execution-history rows as Run History. Sli
 
 ### Desktop Department and Worker Automation
 
-Status: Operational for attended HQ use and validated recovery under the established safety contract. The Worker-only exact-title entrypoint is implemented in source and pending test validation.
+Status: Operational for attended HQ use and validated recovery under the established safety contract. The Worker-only exact-title entrypoint is locally test-validated and awaits the synthetic end-to-end pilot before live activation.
 
 Safety contract:
 
@@ -183,7 +186,7 @@ Current boundaries:
 - Automation Logs is post-run evidence, not a live streaming console;
 - fully unattended Windows operation is not assumed merely because scheduling works;
 - the dashboard may transport and display authorized state but may not invent, approve, prioritize, or broaden work;
-- no Worker dashboard surface is authorized before backend validation and the synthetic pilot.
+- no Worker dashboard surface is authorized before receiver validation and the synthetic pilot.
 
 ## Other Active Tracks
 
@@ -193,13 +196,14 @@ Current boundaries:
 - Pilot Penny Inventory Worker with 2–3 real items.
 - Observe Penny Raw Capture Worker in real use.
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline aligned with the Worker run model.
-- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope and execution-history evidence.
+- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope, execution-history evidence, and controlled outcomes.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
 ## Recent Milestones
 
-- 2026-07-19: Package D Slice 4 committed: separate Worker Command Center jobs/results, exact-title envelope transport, shared pause and one-job locking, manual and scheduler-triggered methods, successful-send idempotency suppression, existing execution-history metadata, and Worker-only one-copy wrapper verification. Eleven focused tests await local validation.
+- 2026-07-19: Package D Slice 4 locally validated: 36 focused Worker-runtime tests passed; after two narrow guidance-string repairs, the complete dashboard suite passed with 174 tests and 9 warnings in 173.76 seconds.
+- 2026-07-19: Package D Slice 4 committed: separate Worker Command Center jobs/results, exact-title envelope transport, shared pause and one-job locking, manual and scheduler-triggered methods, successful-send idempotency suppression, existing execution-history metadata, and Worker-only one-copy wrapper verification.
 - 2026-07-19: Rob reported the Slice 1–3 focused Worker tests and full dashboard suite passed locally.
 - 2026-07-19: Package D implementation packet created and Slices 1–3 committed: Worker contracts, exact-title and envelope validation, separate SQLite registry/route/receiver persistence, task-scoped revision suppression, and registry service.
 - 2026-07-19: Rob ended the full-text composer-verification investigation; Worker send verification uses one copied-text check for the expected wrapper ID plus existing destination, empty-composer, and send-authorization safeguards.
