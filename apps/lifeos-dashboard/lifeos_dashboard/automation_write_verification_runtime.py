@@ -1,8 +1,9 @@
-"""Strict dual-witness verification for ChatGPT composer writes.
+"""Strict composer selection and dual-witness verification for ChatGPT writes.
 
-Clipboard copy remains available, but a complete accessible UIA value from the
-already-verified composer may also prove the draft was written. Both witnesses
-must pass the automation engine's exact text comparison policy.
+The production selector requires the chosen Group to contain the entire persistent
+composer-plus button rectangle. Clipboard copy remains available, but a complete
+accessible UIA value from the already-verified composer may also prove the draft
+was written. Both witnesses must pass the automation engine's exact text policy.
 """
 from __future__ import annotations
 
@@ -13,7 +14,8 @@ from typing import Any, Iterable
 
 _UIA_CONTROL_TYPES = {"Edit", "Document"}
 _CLIPBOARD_RETRY_SECONDS = 1.0
-_INSTALL_FLAG = "_lifeos_dual_write_verification_installed"
+_SELECTOR_INSTALL_FLAG = "_lifeos_strict_composer_group_selector_installed"
+_VERIFICATION_INSTALL_FLAG = "_lifeos_dual_write_verification_installed"
 
 
 def _control_type(control: Any) -> str:
@@ -28,6 +30,67 @@ def _visible(control: Any) -> bool:
         return bool(control.is_visible())
     except Exception:
         return False
+
+
+def _enabled(control: Any) -> bool:
+    try:
+        return bool(control.is_enabled())
+    except Exception:
+        return False
+
+
+def _rectangle_fully_contains(outer: Any, inner: Any) -> bool:
+    """Return true only when every edge of the inner rectangle is inside outer."""
+    return (
+        outer.left <= inner.left
+        and outer.right >= inner.right
+        and outer.top <= inner.top
+        and outer.bottom >= inner.bottom
+    )
+
+
+def strict_composer_group(base: ModuleType, window: Any) -> Any:
+    """Find the smallest visible enabled Group containing the full plus-button rectangle."""
+    anchor = window.child_window(auto_id="composer-plus-btn", control_type="Button")
+    if not anchor.exists(timeout=2):
+        raise base.AutomationStopped("Persistent composer plus button was not found.")
+
+    anchor_rect = anchor.wrapper_object().rectangle()
+    candidates = []
+    for control in window.descendants():
+        if _control_type(control) != "Group":
+            continue
+        if not _visible(control) or not _enabled(control):
+            continue
+        try:
+            rect = control.rectangle()
+        except Exception:
+            continue
+        if _rectangle_fully_contains(rect, anchor_rect):
+            candidates.append(control)
+
+    if not candidates:
+        raise base.AutomationStopped(
+            "No visible Group fully enclosing the composer plus button was found."
+        )
+
+    return min(
+        candidates,
+        key=lambda control: control.rectangle().width() * control.rectangle().height(),
+    )
+
+
+def install_base_composer_group_selector(base: ModuleType) -> bool:
+    """Install the strict production selector once without changing other safety gates."""
+    if getattr(base, _SELECTOR_INSTALL_FLAG, False):
+        return False
+
+    def find_composer_group(window: Any) -> Any:
+        return strict_composer_group(base, window)
+
+    base.find_composer_group = find_composer_group
+    setattr(base, _SELECTOR_INSTALL_FLAG, True)
+    return True
 
 
 def _text_pattern_value(control: Any) -> str:
@@ -95,8 +158,8 @@ def _best_length(base: ModuleType, values: Iterable[str]) -> int:
 
 
 def install_base_write_verification(base: ModuleType) -> bool:
-    """Replace write verification once while preserving all navigation and send gates."""
-    if getattr(base, _INSTALL_FLAG, False):
+    """Replace write verification once while preserving navigation and send gates."""
+    if getattr(base, _VERIFICATION_INSTALL_FLAG, False):
         return False
 
     def wait_for_written_text(
@@ -156,10 +219,11 @@ def install_base_write_verification(base: ModuleType) -> bool:
         )
 
     base.wait_for_written_text = wait_for_written_text
-    setattr(base, _INSTALL_FLAG, True)
+    setattr(base, _VERIFICATION_INSTALL_FLAG, True)
     return True
 
 
 _base = sys.modules.get("open_department_chat_group")
 if isinstance(_base, ModuleType):
+    install_base_composer_group_selector(_base)
     install_base_write_verification(_base)
