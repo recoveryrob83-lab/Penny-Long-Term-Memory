@@ -107,7 +107,7 @@ def _timeout_reason(
         label = _STAGE_LABELS.get(stage or "", (stage or "unknown stage").replace("_", " "))
         return (
             f"The automation reached post-paste verification but exceeded {timeout_seconds}s while "
-            f"{label}. The draft may be present; nothing was sent. {captured} "
+            f"{label}. The draft may be present. Nothing was sent. {captured} "
             "Open Automation Logs for the complete backend trace before retrying."
         )
     if stage:
