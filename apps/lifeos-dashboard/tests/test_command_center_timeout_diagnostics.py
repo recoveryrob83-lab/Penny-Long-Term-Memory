@@ -111,3 +111,22 @@ def test_backend_command_trace_redacts_custom_prompt(monkeypatch: pytest.MonkeyP
     assert "<redacted prompt length=" in result.stdout
     assert "worker output" in result.stdout
     assert '"event":"subprocess_complete"' in result.stdout
+
+
+def test_unexpected_subprocess_exception_becomes_a_logged_failed_run(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(command_center, "build_command", lambda job, app_root: ["python", "worker.py"])
+
+    def raise_os_error(*args, **kwargs):
+        raise OSError("Windows refused to launch the child process")
+
+    monkeypatch.setattr(runtime.subprocess, "run", raise_os_error)
+    result = runtime.run_job(job(), Path("C:/LifeOS/apps/lifeos-dashboard"))
+
+    assert result.status == "failed"
+    assert "unexpected exception" in result.reason
+    assert "Open Automation Logs" in result.reason
+    assert "OSError" in result.stderr
+    assert "Windows refused to launch" in result.stderr
+    assert '"event":"subprocess_exception"' in result.stdout
