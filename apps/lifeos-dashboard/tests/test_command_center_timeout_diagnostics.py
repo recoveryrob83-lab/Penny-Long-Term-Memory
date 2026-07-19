@@ -19,7 +19,7 @@ def test_timeout_reports_last_physical_input_stage(monkeypatch: pytest.MonkeyPat
         raise subprocess.TimeoutExpired(
             cmd=["python", "worker.py"],
             timeout=120,
-            stdout=b"",
+            output=b"",
             stderr=b"LIFEOS_STAGE=foreground_verified\nLIFEOS_STAGE=composer_activation_start\n",
         )
 
