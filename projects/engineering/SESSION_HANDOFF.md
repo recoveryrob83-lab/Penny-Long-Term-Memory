@@ -8,7 +8,7 @@ Purpose: Project-specific handoff for software architecture, prompt systems, wor
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Department Ownership Verification, Automation Operational Validation, Desktop Recovery, Canonical Prompt Catalog, Connector Reliability, Worker Pilots, and Delivery Architecture
+- Current Phase: Active / Package D Canonical Prompt Catalog Live Validation, Desktop Automation Verification, Dashboard Observation, Connector Reliability, Worker Pilots, and Delivery Architecture
 - Primary Systems: GitHub, Google Drive, Trello, Todoist, Calendar, Gmail as needed, RPR/user-mediated files, Engineering advisory board, Advisory Index
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, financial account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -19,10 +19,11 @@ Purpose: Project-specific handoff for software architecture, prompt systems, wor
 2. Read this handoff.
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
-5. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
-6. Read a source board only when the index points to a relevant advisory or Rob names it.
-7. Do not load the global handoff, all active projects, or system loops during an ordinary Engineering boot unless the current task is explicitly system-level.
-8. Keep connector work small, explicit, and verifiable.
+5. Treat `projects/engineering/open_loops.md` as authoritative for unfinished Engineering work.
+6. Read current Engineering notebook records only when referenced by the handoff, status, open loops, or active work.
+7. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
+8. Do not load the global handoff, all active projects, or system loops during an ordinary Engineering boot unless the current task is explicitly system-level.
+9. Keep connector work small, explicit, and verifiable.
 
 ## Department Role
 
@@ -42,57 +43,79 @@ Never claim an action, test, deployment, or connector write occurred without ver
 
 ## Highest-Priority Work Package
 
-Status: Ownership architecture implemented and locally verified; fresh LifeOS HQ read-only verification pending.
+### Package D: Canonical Prompt Catalog and Live Write Verification
+
+Status: Active. Catalog implementation and automated tests pass; healthy live post-paste verification remains unresolved.
 
 Canonical references:
 
-- `projects/engineering/notebook/NOTE-20260717-014-department-ownership-and-dashboard-inspection.md`
-- `apps/lifeos-dashboard/DEPARTMENT_INSPECTION_DATA_CONTRACT.md`
-- `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
-- `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
-- `memory/STARTUP_BOOT.md`
+- `projects/engineering/open_loops.md`
+- `apps/lifeos-dashboard/lifeos_dashboard/canonical_prompt_catalog.py`
+- `apps/lifeos-dashboard/automation/probe_composer_group_clipboard.py`
+- `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
+- `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
 
-Implemented decisions:
+Implemented and tested:
 
-- department `open_loops.md` files are authoritative for department-owned work;
-- `memory/05_OPEN_LOOPS.md` is system-only;
-- global visibility does not justify mirrored department records;
-- the dashboard aggregates department and system state read-only;
-- shared rules are universal, operational state is role-routed;
-- specialists load their own files and only relevant shared dependencies;
-- Chief of Staff HQ and Life OS Maintenance HQ receive broader context according to their distinct roles;
-- system promotion, demotion, lifecycle, reference, and reconciliation rules are formalized.
+- protected canonical prompt definitions for Boot, Quick Boot, Fresh / Full Boot, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, and Consume Advisory;
+- read-only canonical entries with editable saved copies;
+- destination-aware rendering and schedule snapshots;
+- foreground-safety guard;
+- timeout-stage diagnostics;
+- server-offline UI guard;
+- strict failure-message precision;
+- strict dual-witness write verification;
+- full Package D UI behavior test suite passing;
+- focused 15-test foreground, failure-precision, timeout-diagnostic, server-availability, and dual-witness suite passing.
 
-Inspector implementation and evidence:
+Exact live-validation state:
 
-- Department Inspection tab is locally validated;
-- seven departments plus System are normalized;
-- Work, Knowledge, Operations, and Findings are filterable;
-- first baseline was 458 records / 4 findings / 101 warnings;
-- first tuning produced 459 records / 4 findings / 15 warnings;
-- source cleanup produced 414 records / 0 findings / 13 warnings;
-- final warning audit and parser correction produced 414 records / 0 findings / 0 warnings;
-- confirmed findings exposed state/priority mixing, broad Chat HQ watch mirrors, Legacy VA folder mirrors, and speculative registry placeholders;
-- source cleanup and explicit-priority parsing are committed.
+1. Healthy ChatGPT Classic state:
+   - the exact destination opens;
+   - the composer receives focus;
+   - the full canonical prompt visibly pastes;
+   - nothing is sent;
+   - post-paste verification falsely fails through both clipboard and accessible-text witnesses.
+2. Degraded ChatGPT Classic state:
+   - the destination remains on the spinning loading state;
+   - the composer never becomes usable;
+   - this is app-readiness failure evidence, not valid write-verification evidence.
 
-Immediate validation boundary:
+Current diagnostic boundary:
 
-1. run the fresh LifeOS HQ read-only verification against the completed Phase Two state;
-2. observe ordinary specialist boots for real routing defects;
-3. inspect only newly demonstrated findings;
-4. close the ownership-reconciliation system wrapper after the new Hub verification and stable ordinary use;
-5. begin Engineering Package B only after the Hub verification confirms the operating surfaces remain coherent.
+- do not rerun automation while ChatGPT Classic is visibly lagging or stuck loading;
+- do not add broader timeouts, alternate paste mechanisms, Alt+Tab behavior, coordinate hacks, weaker verification, or a third witness without direct evidence;
+- do not start Package E until Package D closes;
+- keep the proposed persistent Pause All Automation header control deferred until Package D passes one healthy manual canonical draft and one fresh scheduled canonical draft.
 
-Do not broadly weaken finding detection merely to reach zero findings.
+Next valid diagnostic action:
+
+1. obtain one healthy live run where the full canonical draft visibly pastes;
+2. leave the draft untouched in the composer;
+3. run:
+
+   `py .\automation\probe_composer_group_clipboard.py "LifeOS HQ"`
+
+4. inspect the complete terminal output before proposing another verification patch;
+5. after a successful repair, validate one manual canonical draft and one fresh scheduled canonical draft before closing Package D.
+
+## Completed Foundation
+
+The following foundation is complete and should not be reopened without new evidence:
+
+- department ownership architecture and read-only Department Inspection;
+- fresh LifeOS HQ verification of the role-routed operating model;
+- Package B canonical automation names and retired-title compatibility while preserving stable destination keys;
+- Package C Department Inspection canonical labels while preserving stable scope IDs and filesystem paths;
+- collapsed LifeOS project recovery;
+- scheduler persistence, recurrence, overdue visibility, pause-on-failure behavior, restart policy, ledger synchronization, and cleanup controls;
+- exact destination navigation, occupied-composer preservation, clipboard lifetime and restoration, explicit send authorization, one-job locking, and stop on uncertainty.
+
+Detailed completion evidence remains in `projects/engineering/open_loops.md` and the referenced Engineering notebook records.
 
 ## Automation Command Center
 
-Status: Implemented and in live operational validation.
-
-Canonical references:
-
-- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
-- `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
+Status: Implemented and operationally validated for its established scheduling and recovery policy. Package D live write-verification validation remains open.
 
 Current implementation includes:
 
@@ -105,80 +128,49 @@ Current implementation includes:
 - global pause;
 - structured results and exact failure reasons;
 - persistent SQLite activity history;
-- one-time, daily, and weekly schedules in `America/Chicago`;
+- one-time, daily, weekly, and bounded five-minute debug schedules in `America/Chicago`;
 - persistent scheduled jobs across dashboard restarts;
-- schedule create, edit, pause, resume, and delete;
-- separate Scheduled Jobs and Run History categories with independent filters.
+- schedule create, edit, pause, resume, run, cleanup, and delete controls;
+- separate Scheduled Jobs and Run History categories with independent filters;
+- no-billing Scheduler Ledger synchronization through the bound Apps Script endpoint.
 
-Live evidence completed:
-
-- one-time `Hi Penny Test` live send to Engineering HQ succeeded and completed with no future run;
-- first daily `Hi Penny LifeOS Test` live send to LifeOS HQ succeeded and advanced correctly;
-- mobile use and active response generation did not interfere with the desktop scheduled send;
-- scheduled Logistics HQ occupied-composer refusal preserved the existing draft, sent nothing, recorded `failed`, and displayed the explicit recovery reason.
-
-The `Logistics HQ` name in the preceding bullet is retained as historical test evidence because it was the exact automation destination label used during that validation.
-
-Still awaiting evidence:
-
-- restart and overdue one-time behavior;
-- second real occurrence of a recurring schedule.
+Historical tests using retired display labels remain historical evidence only. Current runtime presentation uses canonical HQ names while stable internal keys remain unchanged.
 
 ## Desktop Department Automation
 
-Status: Operational with one known recovery edge case.
+Status: Operational for attended use and validated recovery under the current safety contract. Package D has exposed a remaining false-negative write-verification defect after a visibly successful canonical paste.
 
 Canonical implementation:
 
 - launcher: `apps/lifeos-dashboard/automation/draft_department_boot.py`
 - production engine: `apps/lifeos-dashboard/automation/open_department_chat_group.py`
 - verification shim: `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
+- canonical catalog: `apps/lifeos-dashboard/lifeos_dashboard/canonical_prompt_catalog.py`
+- read-only probe: `apps/lifeos-dashboard/automation/probe_composer_group_clipboard.py`
 - naming standard: `memory/HQ_NAMING_STANDARD.md`
-
-Validated behavior:
-
-- exact sidebar chat-link matching;
-- one bounded `Show more` expansion;
-- exact active-document verification;
-- stable Group composer discovery;
-- occupied-composer preservation in direct and scheduled tests;
-- clipboard round-trip verification;
-- canonical prompt insertion;
-- draft-only default behavior;
-- explicit send requirement;
-- stop on uncertainty;
-- successful manual and scheduled live sends;
-- structured safe-failure reporting through the scheduler and dashboard.
 
 Safety contract:
 
-- never use arbitrary fuzzy matching;
-- never overwrite an occupied composer without explicit replacement authorization;
-- never submit without destination, readiness, content, and send gates passing;
-- never blind-retry after uncertain send state.
-
-Known edge case:
-
-ChatGPT Classic may collapse the LifeOS project folder after application restart or when the window is narrowed. The current engine handles `Show more` inside an expanded project, but it has not been coded or validated to reopen a collapsed LifeOS project folder.
-
-Current workaround:
-
-- keep ChatGPT Classic open;
-- keep the LifeOS project expanded;
-- keep chats available through the normal sidebar / `Show more` path;
-- do not treat execution after restart or major resize as unattended-production-safe.
-
-Do not change the recovery code until Rob explicitly authorizes the bounded exact-project expansion update.
+- exact destination matching only;
+- bounded exact project and `Show more` recovery;
+- exact active-document verification;
+- stable Group composer discovery and reacquisition;
+- preserve an occupied composer;
+- preserve clipboard lifetime through verification and restore the prior value afterward;
+- explicit send authorization;
+- one job at a time;
+- stop on uncertainty;
+- never blind-retry after uncertain state.
 
 ## Canonical Prompt Catalog
 
-Status: Active product/data milestone.
+Status: Implemented. Live verification is the remaining Package D gate.
 
-The Command Center currently exposes primarily the Boot canonical family. Populate the protected canonical prompt registry from authoritative LifeOS command definitions while preserving read-only canonical behavior and editable saved copies.
+Protected families:
 
-Candidate families:
-
-- Boot / Quick Boot / Full Boot;
+- Boot;
+- Quick Boot;
+- Fresh / Full Boot;
 - Sync;
 - Nightly;
 - Advisory;
@@ -186,57 +178,57 @@ Candidate families:
 - Read Advisory;
 - Consume Advisory.
 
+`memory/CONTEXT_REMINDER.md` remains the canonical command vocabulary. The executable catalog is a protected runtime representation, not a competing governance source.
+
 ## LifeOS Dashboard
 
 Canonical application path:
 
 - `apps/lifeos-dashboard/`
 
-The dashboard is locally running and validated on Rob's Windows machine.
-
 Verified live sources:
 
-- GitHub
-- Trello
-- Todoist
-- Google Calendar private iCal
+- GitHub;
+- Trello;
+- Todoist;
+- Google Calendar private iCal.
 
 Current tabs:
 
-- Overview
-- Department Inspection
-- Automation
+- Overview;
+- Department Inspection;
+- Automation.
 
 Current boundaries:
 
 - Windows timezone support uses `tzdata`;
 - guarded GitHub sync is limited to clean, strictly-behind fast-forward updates;
 - Trello, Todoist, and Calendar remain independent read-only adapters with cache behavior;
-- Gmail and Drive adapters remain deferred until demonstrated need;
-- the dashboard is a visibility and local-control layer, not a replacement source of truth;
+- Gmail and general Drive adapters remain deferred until demonstrated need;
+- the dashboard is a visibility and bounded local-control layer, not a replacement source of truth;
 - Department Inspection does not edit, merge, close, promote, demote, or create advisories automatically.
 
-## Production Readiness
+## Production Boundary
 
-Scheduling is operational but not yet production-ready for fully unattended Windows use.
+The established scheduler policy and recovery behavior are live-validated. Fully unattended Windows operation is not assumed merely because scheduling works.
 
-Remaining evidence or implementation:
+Current boundary:
 
-- overdue-run behavior after dashboard restart;
-- repeated recurrence across a second real occurrence;
-- collapsed-project recovery;
-- scheduler health and preflight visibility;
-- explicit missed-run policy;
-- potential execution-window controls;
-- Windows startup, desktop shell, or service packaging if sustained use requires it.
-
-Engineering HQ Daily Sync remains paused until Rob explicitly resumes it after these unattended-operation boundaries are safe enough.
+- ChatGPT Classic must be available and responsive for UI automation;
+- failed scheduled runs pause according to the validated policy rather than retrying blindly;
+- Engineering HQ Daily Sync remains paused until Rob explicitly resumes it;
+- Package D must close before Package E or additional automation surface expansion begins;
+- Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
 
 ## Other Active Tracks
 
-- Reliable Connector Execution Layer: operation ledger, connector health, idempotency, verification, bounded retries, degraded modes, and recovery paths.
-- Worker architecture: Raw Capture and Inventory workers need real operational evidence before more workers are proposed.
-- Office Leaks delivery architecture: preserve mechanical and human-system implementation layers as concrete requirements mature.
+- Observe ordinary role-routed specialist boots and inspect only demonstrated defects.
+- Observe four-source dashboard behavior during ordinary use and genuine degraded conditions.
+- Pilot Penny Inventory Worker with 2–3 real items.
+- Observe Penny Raw Capture Worker in real use.
+- Turn the Reliable Connector Execution Layer design note into an implementation packet outline.
+- Draft the operation-ledger schema and connector-health policy.
+- Continue Office Leaks delivery architecture as concrete requirements mature.
 
 ## Advisory State
 
@@ -247,44 +239,9 @@ As of 2026-07-18:
 - ADV-20260716-039 is implemented / acknowledged / closed.
 - ADV-20260716-038 is acknowledged / ingested / closed.
 
-## Active Open Loops
-
-- Run the fresh LifeOS HQ read-only verification against the completed Phase Two state.
-- Observe role-routed specialist boots and correct only demonstrated defects.
-- Close the ownership-reconciliation system wrapper after the new Hub verification and stable ordinary use.
-- Begin Package B canonical-name and automation-compatibility work after the Hub verification.
-- Test dashboard restart and overdue-run behavior.
-- Observe the next real recurring occurrence.
-- Design collapsed-project recovery without changing code until Rob authorizes it.
-- Populate the protected canonical prompt catalog.
-- Define missed-run policy and production preflight requirements.
-- Maintain desktop automation safety and revalidate after material UI changes or observed failures.
-- Observe four-source dashboard behavior during ordinary use and real degraded conditions.
-- Pilot Penny Inventory Worker with 2–3 real items.
-- Observe Penny Raw Capture Worker in real use.
-- Draft the Reliable Connector Execution Layer implementation packet and operation-ledger schema.
-- Continue Office Leaks delivery architecture as requirements mature.
-- Keep Engineering HQ Daily Sync paused until explicitly resumed.
-
-## Completed Recent Work
-
-- 2026-07-18: Department Inspection reached 414 normalized records, zero findings, and zero warnings after source cleanup, warning audit, parser correction, and explicit lifecycle-priority normalization.
-- 2026-07-18: Department Inspection MVP locally validated and tuned from 101 warnings to 15 before the final cleanup and warning audit.
-- 2026-07-18: First inspector-guided source cleanup completed.
-- 2026-07-18: Open Loop Ownership and Visibility SOP implemented.
-- 2026-07-18: Startup boot changed to a universal kernel plus role-routed context.
-- 2026-07-18: System open loops and system handoff reconciled under the new ownership rules.
-- 2026-07-17: Scheduled occupied-composer refusal and structured dashboard reporting passed end to end.
-- 2026-07-17: Scheduled Jobs and Run History were separated with independent filters.
-- 2026-07-17: Manual Automation Command Center path implemented and live-validated.
-- 2026-07-17: Saved prompt lifecycle, default destinations, mismatch safeguards, and delete behavior validated.
-- 2026-07-17: Persistent one-time, daily, and weekly scheduling implemented.
-- 2026-07-17: Desktop automation validated across all seven HQs.
-- 2026-07-17: Guarded GitHub auto-sync and four-source dashboard operation validated.
-
 ## Immediate Next Action
 
-Run the fresh LifeOS HQ read-only verification. After it confirms the completed Phase Two operating surfaces remain coherent, begin Engineering Package B without changing stable destination keys or damaging persisted schedules, saved prompts, databases, or run history.
+Wait for a healthy and responsive ChatGPT Classic state. Obtain one visible full canonical draft paste, leave the draft in place, run the existing read-only composer clipboard probe for `LifeOS HQ`, and inspect the complete terminal output before changing verification behavior.
 
 ## Safety and Truthfulness
 
