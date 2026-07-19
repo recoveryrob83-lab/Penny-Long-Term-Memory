@@ -2,8 +2,8 @@
 
 The UI Automation tree can remain readable while another application owns the
 actual keyboard and mouse. Composer clicks may bring ChatGPT Classic forward,
-but keyboard input must only verify foreground ownership so it does not steal
-focus back from the composer text surface.
+but keyboard input verifies a cached top-level window handle so it never runs a
+fresh UI Automation search between composer activation and paste.
 """
 from __future__ import annotations
 
@@ -23,6 +23,7 @@ except ImportError:  # pragma: no cover - exercised only outside Windows.
 FOREGROUND_TIMEOUT_SECONDS = 2.0
 FOREGROUND_POLL_SECONDS = 0.05
 _GUARD_FLAG = "_lifeos_foreground_guard_installed"
+_HANDLE_ATTR = "_lifeos_chatgpt_foreground_handle"
 _STAGE_PREFIX = "LIFEOS_STAGE="
 
 
@@ -48,11 +49,19 @@ def _chatgpt_window(base: ModuleType) -> Any:
             "ChatGPT Classic window handle was unavailable. "
             "No keyboard or mouse input was sent."
         )
+    setattr(base, _HANDLE_ATTR, int(window.handle))
     return window
 
 
+def _expected_handle(base: ModuleType) -> int:
+    handle = int(getattr(base, _HANDLE_ATTR, 0) or 0)
+    if handle:
+        return handle
+    return int(_chatgpt_window(base).handle)
+
+
 def _focus_chatgpt_foreground(base: ModuleType) -> Any:
-    """Bring ChatGPT forward for an upcoming composer click and prove ownership."""
+    """Bring ChatGPT forward for an upcoming composer click and cache its handle."""
     window = _chatgpt_window(base)
     expected_handle = int(window.handle)
     if _foreground_handle() == expected_handle:
@@ -90,15 +99,15 @@ def _focus_chatgpt_foreground(base: ModuleType) -> Any:
     )
 
 
-def _verify_chatgpt_foreground(base: ModuleType) -> Any:
-    """Require ChatGPT foreground ownership without changing child-control focus."""
-    window = _chatgpt_window(base)
-    if _foreground_handle() != int(window.handle):
+def _verify_chatgpt_foreground(base: ModuleType) -> int:
+    """Require cached ChatGPT foreground ownership without a fresh UIA lookup."""
+    expected_handle = _expected_handle(base)
+    if _foreground_handle() != expected_handle:
         raise base.AutomationStopped(
             "ChatGPT Classic lost foreground focus before keyboard input. "
             "No keyboard input was sent."
         )
-    return window
+    return expected_handle
 
 
 def _keyboard_stage(args: tuple[Any, ...]) -> str:
