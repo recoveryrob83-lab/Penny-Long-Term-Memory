@@ -33,19 +33,23 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has begun implementing the smallest runtime required to enforce them.
+Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has implemented the first four bounded backend slices required to enforce them.
 
 Implemented source slices:
 
 1. Contracts and validation:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime.py`
    - `apps/lifeos-dashboard/tests/test_worker_runtime.py`
-2. SQLite persistence:
+2. SQLite registry, route, and receiver persistence:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_store.py`
    - `apps/lifeos-dashboard/tests/test_worker_runtime_store.py`
 3. Registry service:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_service.py`
    - `apps/lifeos-dashboard/tests/test_worker_runtime_service.py`
+4. Command Center execution-envelope integration:
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_command_center.py`
+   - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
+   - `apps/lifeos-dashboard/tests/test_worker_command_center.py`
 
 Current capabilities in source:
 
@@ -59,39 +63,46 @@ Current capabilities in source:
 - task-scoped receiver state so unrelated advisory revisions cannot suppress one another;
 - atomic stale-revision and duplicate suppression;
 - route and deployment checks before acceptance;
-- wrapper-ID composer witness helper;
-- thin service methods for registration, lookup, deployment changes, route updates, validation, and acceptance.
+- thin service methods for registration, lookup, deployment changes, route updates, validation, and acceptance;
+- a separate Worker Command Center job and result path that leaves ordinary HQ jobs unchanged;
+- shared Command Center pause and one-job locking;
+- manual and scheduler-triggered execution methods for one already-authorized envelope;
+- successful-send suppression by idempotency key while failed sends remain eligible for bounded retry;
+- nullable Worker metadata in the existing execution-history table;
+- persisted wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification-mode, trigger, and future outcome fields;
+- Worker-only exact-title transport using one copied-text check for the expected wrapper ID after paste.
 
 Test evidence:
 
-- 25 focused tests passed in an isolated execution environment.
-- The full dashboard suite has not yet been run because the active execution container could not clone GitHub.
-- Rob's local dashboard checkout remains the required validation surface before runtime integration is treated as complete.
+- The combined Slice 1–3 focused suite contains 25 tests.
+- Rob reported that the requested Slice 1–3 focused tests and full dashboard suite passed in the local checkout.
+- Slice 4 adds 11 focused tests and is pending Rob's focused and full local validation.
+- No runtime integration is treated as fully validated until those new tests and the full suite pass.
 
 ADV-20260718-042 remains open and authoritative for receiver-side semantic validation. It is a component of Package D and should not be duplicated.
 
 Required next implementation step:
 
-1. Run the three focused Worker-runtime test files in Rob's local checkout.
+1. Run the four focused Worker-runtime test files.
 2. Run the full dashboard test suite.
-3. If both pass, implement Slice 4 as a separate Worker execution path in the Command Center.
-4. Extend execution-history evidence with `wrapper_id`, `run_id`, `worker_id`, task ID and revision, idempotency key, verification mode, and controlled outcome fields.
-5. Preserve existing HQ destinations and prompt behavior while Worker routing is added separately.
+3. If both pass, implement Slice 5 receiver-side profile, authority, scope, parameter, duplicate, and verification-mode validation.
+4. Persist exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`.
+5. Keep Worker UI, real profile activation, recurring Worker authority generation, and Package E deferred.
 
 ### Canonical Prompt Transport Verification
 
-Status: Paused by Rob.
+Status: General investigation paused by Rob. Worker-only wrapper verification is implemented in source.
 
-Do not resume the prior composer investigation. The historical catalog, selector, and Automation Logs work remains useful infrastructure, but full-text equality, repeated selection, character-range comparison, and multiple write witnesses are not part of v1.
+Do not resume the prior general composer investigation. The historical catalog, selector, and Automation Logs work remains useful infrastructure, but full-text equality, repeated selection, character-range comparison, and multiple write witnesses are not part of v1.
 
-When Worker send integration requires a composer witness:
+The Worker-only path now:
 
-- copy the composer text once;
-- confirm it contains the expected `wrapper_id`;
-- retain exact destination, empty-composer, and explicit-send safeguards;
-- otherwise fail closed.
+- retains exact destination, empty-composer, clipboard-restoration, explicit-send, and stop-on-uncertainty safeguards;
+- copies the composer once after paste;
+- confirms the copied text contains the expected `wrapper_id`;
+- otherwise fails closed.
 
-This paused subphase does not gate registry, persistence, service, schema, or non-composer Command Center work.
+This boundary does not authorize further composer experimentation without demonstrated failure.
 
 ### Completed Foundation
 
@@ -107,9 +118,9 @@ The following foundation is complete and should not be reopened without new evid
 
 ### Automation Command Center
 
-Status: Implemented for the established scheduler and attended-automation contract. It is the technical surface to extend for Worker execution after local validation of the new runtime modules.
+Status: Implemented for the established scheduler and attended-HQ automation contract. A separate Worker backend execution path is now implemented in source and pending local validation.
 
-Capabilities:
+Existing HQ capabilities remain:
 
 - eight exact HQ destinations;
 - canonical, saved, and custom prompt sources;
@@ -123,11 +134,13 @@ Capabilities:
 - separate Scheduled Jobs, Run History, and Automation Logs views;
 - secret-protected no-billing Scheduler Ledger synchronization through the bound Apps Script endpoint.
 
-Automation Logs uses the same durable execution-history rows as Run History. It records complete captured child process streams and safe backend metadata. It does not create a second log database, record environment variables, or copy prompt bodies into diagnostic metadata. The dashboard payload remains bounded to the configured recent-history window so log visibility does not overload normal polling.
+Worker integration currently adds backend services only. It does not add Worker UI, create schedules, create profiles, register a real Worker, or alter existing HQ prompt behavior. The scheduler adapter accepts one already-authorized execution-ready envelope; recurring Worker authority generation remains out of scope.
+
+Automation Logs uses the same durable execution-history rows as Run History. Slice 4 adds nullable Worker metadata to that existing table. Display and verification filtering for those fields remains Slice 6.
 
 ### Desktop Department and Worker Automation
 
-Status: Operational for attended HQ use and validated recovery under the established safety contract. Worker execution is not yet integrated into the Command Center runtime.
+Status: Operational for attended HQ use and validated recovery under the established safety contract. The Worker-only exact-title entrypoint is implemented in source and pending test validation.
 
 Safety contract:
 
@@ -140,7 +153,8 @@ Safety contract:
 - one job at a time;
 - stop on uncertainty;
 - never blind-retry after an uncertain state;
-- fail closed on missing, ambiguous, duplicate, stale, paused, or unauthorized targets.
+- fail closed on missing, ambiguous, duplicate, stale, paused, or unauthorized targets;
+- verify Worker writes only by the expected wrapper marker after one post-paste copy.
 
 ### LifeOS Dashboard
 
@@ -168,7 +182,8 @@ Current boundaries:
 - Department Inspection remains read-only;
 - Automation Logs is post-run evidence, not a live streaming console;
 - fully unattended Windows operation is not assumed merely because scheduling works;
-- the dashboard may transport and display authorized state but may not invent, approve, prioritize, or broaden work.
+- the dashboard may transport and display authorized state but may not invent, approve, prioritize, or broaden work;
+- no Worker dashboard surface is authorized before backend validation and the synthetic pilot.
 
 ## Other Active Tracks
 
@@ -178,14 +193,16 @@ Current boundaries:
 - Pilot Penny Inventory Worker with 2–3 real items.
 - Observe Penny Raw Capture Worker in real use.
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline aligned with the Worker run model.
-- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope.
+- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope and execution-history evidence.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
 ## Recent Milestones
 
-- 2026-07-19: Package D implementation packet created and Slices 1–3 committed: Worker contracts, exact-title and envelope validation, separate SQLite registry/route/receiver persistence, task-scoped revision suppression, registry service, and 25 focused isolated tests passing.
-- 2026-07-19: Rob ended the full-text composer-verification investigation; future Worker send verification uses one copied-text check for the expected wrapper ID plus existing destination, empty-composer, and send-authorization safeguards.
+- 2026-07-19: Package D Slice 4 committed: separate Worker Command Center jobs/results, exact-title envelope transport, shared pause and one-job locking, manual and scheduler-triggered methods, successful-send idempotency suppression, existing execution-history metadata, and Worker-only one-copy wrapper verification. Eleven focused tests await local validation.
+- 2026-07-19: Rob reported the Slice 1–3 focused Worker tests and full dashboard suite passed locally.
+- 2026-07-19: Package D implementation packet created and Slices 1–3 committed: Worker contracts, exact-title and envelope validation, separate SQLite registry/route/receiver persistence, task-scoped revision suppression, and registry service.
+- 2026-07-19: Rob ended the full-text composer-verification investigation; Worker send verification uses one copied-text check for the expected wrapper ID plus existing destination, empty-composer, and send-authorization safeguards.
 - 2026-07-19: ADV-20260719-044 issued from Engineering HQ to Life OS Maintenance HQ for shared Worker filesystem, pointer, profile-state, handoff, watch, and architecture-history reconciliation.
 - 2026-07-19: Canonical shared execution and Worker protocols adopted; Engineering read-only Sync established operations-procedure runtime implementation as the current front burner.
 - 2026-07-19: Ordinary chat operation exposed a role-identity failure in which Engineering HQ identified itself as Business HQ and nearly selected the wrong advisory source board; the incident remains validation evidence under the department-ownership architecture loop.
@@ -204,6 +221,7 @@ Detailed state, priorities, and completion evidence remain authoritative in `pro
 - Engineering HQ Daily Sync remains paused by deliberate operating choice until Rob explicitly resumes it.
 - Do not begin Package E or unrelated automation-surface expansion while Package D runtime integration remains active.
 - Do not activate a speculative real Worker before the synthetic end-to-end pilot passes.
+- Do not create recurring Worker authority schedules until a correct task-generation model is separately approved.
 - Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
 
 ## Boundary
