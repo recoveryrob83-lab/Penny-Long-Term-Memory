@@ -31,9 +31,8 @@ Use Engineering HQ for:
 
 ## Current Operating Tracks
 
-- Automation Command Center operational validation, compatibility, scheduling safety, and recovery behavior.
-- Desktop department automation maintenance after successful seven-department validation.
-- Canonical prompt catalog expansion and prompt-language reconciliation.
+- Package D canonical prompt catalog and healthy-state post-paste verification.
+- Desktop department automation maintenance under exact-navigation and stop-on-uncertainty rules.
 - LifeOS Dashboard observation, optional auto-refresh, guarded Git synchronization, and source-health behavior.
 - Reliable Connector Execution Layer design, including operation-ledger, idempotency, verification, and retry policy.
 - Penny Raw Capture and Inventory Worker pilots.
@@ -67,19 +66,31 @@ Shared global files, other departments' canonical files, the Advisory Index, and
 
 ## Current Technical State
 
-The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. The Department Inspection view has been locally verified at 414 normalized records, zero findings, and zero warnings. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
+The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings. Gmail and general Drive dashboard adapters remain deferred until demonstrated need.
 
-Desktop department automation is operational across all seven department HQ chats. It supports exact navigation, one bounded hidden-sidebar expansion, exact active-document verification, stable Group composer discovery, existing-draft preservation, clipboard round-trip verification, draft-only default behavior, explicit `--send` authorization, and stop-on-uncertainty behavior. Historical live-send validation used the former Main Assistant HQ automation title; current display-name reconciliation is being implemented in bounded packages.
+Automation naming compatibility and Department Inspection canonical labels are complete. Stable internal destination keys and scope IDs were preserved while current UI labels use Chief of Staff HQ and Life OS Maintenance HQ.
 
-The Automation Command Center is implemented inside the dashboard. It supports eight exact destinations, canonical, saved, and custom prompts, draft or explicitly confirmed send mode, one-job locking, global pause, structured results, persistent SQLite history, and one-time, daily, and weekly schedules in `America/Chicago`. Scheduling remains operational validation rather than fully unattended-production-ready because restart, overdue-run, repeated recurrence, collapsed-project recovery, scheduler preflight, and missed-run policy remain open.
+Desktop department automation supports exact destination navigation, bounded project and `Show more` recovery, exact active-document verification, stable Group composer discovery and reacquisition, occupied-composer preservation, clipboard lifetime and restoration, draft-only default behavior, explicit send authorization, one-job locking, and stop on uncertainty.
+
+The Automation Command Center supports eight exact destinations, canonical, saved, and custom prompts, persistent schedules and run history, validated pause-on-failure and restart policy, Scheduler Ledger synchronization, and bounded cleanup controls.
+
+Package D is the current front burner. The protected canonical catalog contains Boot, Quick Boot, Fresh / Full Boot, Sync, Nightly, Advisory, Sync Advisory, Read Advisory, and Consume Advisory. Catalog behavior and automated tests pass. In a healthy ChatGPT Classic state, the exact destination opens, the composer receives focus, and the complete canonical prompt visibly pastes without being sent, but strict clipboard and accessible-text verification still report a false failure. In a degraded spinning-loading state, the composer never becomes usable; those runs are app-readiness failures rather than write-verification evidence.
+
+The next valid diagnostic is one healthy visible paste left untouched in the composer, followed by:
+
+`py .\automation\probe_composer_group_clipboard.py "LifeOS HQ"`
+
+Do not broaden timeouts, add alternate paste or focus mechanisms, weaken verification, add another witness, start Package E, or expand the automation surface before that evidence is inspected.
 
 Canonical references:
 
 - `apps/lifeos-dashboard/automation/draft_department_boot.py`
 - `apps/lifeos-dashboard/automation/open_department_chat_group.py`
 - `apps/lifeos-dashboard/automation/open_department_chat_group_verified.py`
+- `apps/lifeos-dashboard/automation/probe_composer_group_clipboard.py`
+- `apps/lifeos-dashboard/lifeos_dashboard/canonical_prompt_catalog.py`
+- `projects/engineering/open_loops.md`
 - `projects/engineering/notebook/NOTE-20260717-011-chatgpt-ui-automation-lessons-and-recovery-playbook.md`
-- `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md`
 - `projects/engineering/notebook/NOTE-20260717-013-command-center-scheduling-live-validation-and-next-recovery-edge.md`
 
 ## Security Rule
@@ -98,4 +109,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current front burner: reconcile canonical visible names and prompt language, then update automation mappings and compatibility without changing stable destination keys or damaging persisted schedules, saved prompts, or run history.
+Active department. Current front burner: close Package D through one evidence-led healthy-state composer probe, then validate one manual canonical draft and one fresh scheduled canonical draft. Package E and the proposed persistent Pause All Automation header control remain deferred until that gate passes.
