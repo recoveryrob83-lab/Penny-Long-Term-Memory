@@ -7,6 +7,7 @@ focus back from the composer text surface.
 """
 from __future__ import annotations
 
+import os
 import sys
 import time
 from types import ModuleType
@@ -22,6 +23,16 @@ except ImportError:  # pragma: no cover - exercised only outside Windows.
 FOREGROUND_TIMEOUT_SECONDS = 2.0
 FOREGROUND_POLL_SECONDS = 0.05
 _GUARD_FLAG = "_lifeos_foreground_guard_installed"
+_STAGE_PREFIX = "LIFEOS_STAGE="
+
+
+def _trace(stage: str) -> None:
+    """Write one immediate non-sensitive stage marker outside redirected buffers."""
+    payload = f"{_STAGE_PREFIX}{stage}\n".encode("utf-8", errors="replace")
+    try:
+        os.write(sys.__stderr__.fileno(), payload)
+    except Exception:
+        pass
 
 
 def _foreground_handle() -> int:
@@ -45,8 +56,10 @@ def _focus_chatgpt_foreground(base: ModuleType) -> Any:
     window = _chatgpt_window(base)
     expected_handle = int(window.handle)
     if _foreground_handle() == expected_handle:
+        _trace("foreground_verified")
         return window
 
+    _trace("foreground_request")
     try:
         is_minimized = getattr(window, "is_minimized", None)
         if callable(is_minimized) and is_minimized():
@@ -67,6 +80,7 @@ def _focus_chatgpt_foreground(base: ModuleType) -> Any:
     deadline = time.monotonic() + FOREGROUND_TIMEOUT_SECONDS
     while time.monotonic() < deadline:
         if _foreground_handle() == expected_handle:
+            _trace("foreground_verified")
             return window
         time.sleep(FOREGROUND_POLL_SECONDS)
 
@@ -87,6 +101,16 @@ def _verify_chatgpt_foreground(base: ModuleType) -> Any:
     return window
 
 
+def _keyboard_stage(args: tuple[Any, ...]) -> str:
+    keys = str(args[0]) if args else ""
+    return {
+        "^a": "keyboard_select_all_start",
+        "^c": "keyboard_copy_start",
+        "^v": "keyboard_paste_start",
+        "{RIGHT}": "keyboard_right_start",
+    }.get(keys, "keyboard_other_start")
+
+
 def install_base_guard(base: ModuleType) -> bool:
     """Wrap the base automation's physical-input functions exactly once."""
     if getattr(base, _GUARD_FLAG, False):
@@ -97,11 +121,14 @@ def install_base_guard(base: ModuleType) -> bool:
 
     def guarded_focus_group_text_surface(group: Any) -> None:
         _focus_chatgpt_foreground(base)
+        _trace("composer_activation_start")
         original_focus_group_text_surface(group)
         _verify_chatgpt_foreground(base)
+        _trace("composer_activation_verified")
 
     def guarded_send_keys(*args: Any, **kwargs: Any) -> Any:
         _verify_chatgpt_foreground(base)
+        _trace(_keyboard_stage(args))
         return original_send_keys(*args, **kwargs)
 
     base.focus_group_text_surface = guarded_focus_group_text_surface
