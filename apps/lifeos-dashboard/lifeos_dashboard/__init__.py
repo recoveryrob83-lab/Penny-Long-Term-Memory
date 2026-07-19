@@ -17,3 +17,4 @@ from . import automation_foreground_guard_runtime as _automation_foreground_guar
 from . import automation_write_verification_runtime as _automation_write_verification_runtime
 from . import command_center_timeout_diagnostics_runtime as _command_center_timeout_diagnostics_runtime
 from . import command_center_failure_precision_runtime as _command_center_failure_precision_runtime
+from . import automation_logs_runtime as _automation_logs_runtime
