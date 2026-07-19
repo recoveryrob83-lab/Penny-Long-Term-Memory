@@ -126,7 +126,7 @@ Provides:
 
 ### Slice 2: SQLite persistence
 
-Status: Core persistence implemented and locally validated. Execution-history linkage is implemented in Slice 4.
+Status: Core persistence implemented and locally validated. Execution-history linkage is implemented and validated in Slice 4.
 
 Files:
 
@@ -176,7 +176,7 @@ The combined focused contract, persistence, and service suite contains 25 tests.
 
 ### Slice 4: Execution-envelope integration
 
-Status: Backend implementation complete in source, pending Rob's focused and full local validation.
+Status: Implemented and locally validated.
 
 Files:
 
@@ -199,6 +199,15 @@ Provides:
 - legacy HQ execution-history compatibility;
 - a Worker-only automation entrypoint that copies the composer once after paste and checks only the expected wrapper marker.
 
+Validation evidence:
+
+- four focused Worker-runtime files passed with `36 passed`;
+- the first full regression run reached `172 passed` with two pre-existing guidance-string assertion failures;
+- Engineering repaired only those wording contracts: `Open Automation Logs` and `Nothing was sent`;
+- both focused regression tests then passed;
+- Rob reported the final full dashboard suite passed with `174 passed, 9 warnings in 173.76s`;
+- no functional Slice 4 regression remained.
+
 Current boundary:
 
 - no Worker profile, registry entry, or real route is created by this slice;
@@ -210,6 +219,8 @@ Current boundary:
 - existing HQ destinations, prompts, schedules, and verification behavior remain unchanged.
 
 ### Slice 5: Receiver validation and outcomes
+
+Status: Next implementation slice.
 
 Validate at the receiving Worker boundary:
 
@@ -226,6 +237,8 @@ The Worker returns exactly one canonical outcome:
 - `IMPLEMENT`;
 - `REPORT_AND_HOLD`;
 - `ELEVATE_FOR_APPROVAL`.
+
+Slice 5 must persist receiver acceptance only after semantic validation passes and must not convert transport success into implementation success.
 
 ### Slice 6: Verification views
 
@@ -276,12 +289,11 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Run:
+Implement Slice 5 as a bounded receiver-validation layer that:
 
-`python -m pytest -q tests/test_worker_runtime.py tests/test_worker_runtime_store.py tests/test_worker_runtime_service.py tests/test_worker_command_center.py`
-
-Then run:
-
-`python -m pytest -q`
-
-If both pass, begin Slice 5 by implementing receiver-side profile and authorization validation plus the three controlled outcomes, while keeping Worker UI and real profile activation deferred.
+1. resolves the department-owned profile referenced by the registry without copying its authority into runtime state;
+2. validates profile version, task class, read scope, write scope, required parameters, source references, and verification mode;
+3. distinguishes transport completion from receiver acceptance;
+4. persists exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
+5. accepts the task revision only after semantic validation succeeds;
+6. keeps Worker UI, real profile activation, recurring authority generation, and Package E deferred.
