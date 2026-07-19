@@ -17,6 +17,7 @@ from . import command_center
 from .command_center_store import CommandCenterStore
 
 _CONTEXT_PREFIX = "LIFEOS_RUN_CONTEXT="
+_BACKEND_PREFIX = "LIFEOS_BACKEND="
 _CONTEXT = threading.local()
 _STORE_HISTORY_FLAG = "_lifeos_automation_log_history_installed"
 _SERVICE_LOGGING_FLAG = "_lifeos_automation_logging_installed"
@@ -85,10 +86,24 @@ def _context_line(result: command_center.ExecutionResult) -> str:
     return _CONTEXT_PREFIX + json.dumps(context, sort_keys=True, separators=(",", ":"))
 
 
+def _service_result_line(result: command_center.ExecutionResult) -> str:
+    payload = {
+        "event": "service_result_recorded",
+        "timestamp": round(result.finished_at, 3),
+        "status": result.status,
+        "exit_code": result.exit_code,
+        "stdout_characters_before_record": len(result.stdout),
+        "stderr_characters": len(result.stderr),
+    }
+    return _BACKEND_PREFIX + json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+
 def _annotate_result(result: command_center.ExecutionResult) -> command_center.ExecutionResult:
-    line = _context_line(result)
-    stdout = f"{line}\n{result.stdout}" if result.stdout else line
-    return replace(result, stdout=stdout)
+    sections = [_context_line(result)]
+    if result.stdout:
+        sections.append(result.stdout.rstrip("\n"))
+    sections.append(_service_result_line(result))
+    return replace(result, stdout="\n".join(sections) + "\n")
 
 
 def _history_with_ids(self: CommandCenterStore, limit: int = 25) -> list[dict[str, object]]:
