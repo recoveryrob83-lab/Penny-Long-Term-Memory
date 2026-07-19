@@ -28,7 +28,7 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 - The Automation Command Center supports manual and scheduled runs, persistent history, explicit send confirmation, and structured failure reporting.
 - Scheduling exists, but fully unattended Windows production use remains unapproved pending Engineering reliability evidence and Rob's authorization.
 - Engineering HQ Daily Sync remains paused.
-- ADV-20260719-044 is the bounded Maintenance reconciliation that aligns shared orientation, continuity, profile schema, Maintenance state, and architecture history with the canonical Worker model. It creates no parallel backlog and closes after current read-back verification.
+- ADV-20260719-044 completed the bounded reconciliation of shared orientation, continuity, profile schema, Maintenance state, standing watches, and architecture history with the canonical Worker model. No parallel backlog, specialist profile, or Engineering runtime change was created.
 
 ## Active Maintenance Priorities
 
@@ -69,4 +69,4 @@ Chief of Staff HQ is Rob's primary point of contact, daily-operations department
 
 ## Best Next Action
 
-Complete and verify ADV-20260719-044, then preserve the canonical HQ and Worker architecture through ordinary audits while Engineering handles ADV-20260718-042 and the routing-runtime implementation under its separate authority.
+Preserve the canonical HQ and Worker architecture through ordinary audits while Engineering handles ADV-20260718-042 and the routing-runtime implementation under its separate authority.
