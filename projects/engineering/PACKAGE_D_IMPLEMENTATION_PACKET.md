@@ -124,31 +124,57 @@ Provides:
 - stale-revision and duplicate suppression checks;
 - wrapper-ID composer witness helper.
 
-Focused isolated evidence: 11 tests passed. The full repository suite was not run because the active execution container could not clone GitHub. Rob's local dashboard environment remains the required source for the complete test pass.
-
 ### Slice 2: SQLite persistence
 
-Add small durable tables or equivalent migrations for:
+Status: Core persistence implemented in source, pending full repository validation. Execution-history linkage remains for Slice 4.
+
+Files:
+
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_store.py`;
+- `apps/lifeos-dashboard/tests/test_worker_runtime_store.py`.
+
+Provides separate SQLite tables for:
 
 - Worker registry configuration;
 - Worker route state;
-- receiver state keyed by `worker_id` plus `task_id`;
-- wrapper, run, and idempotency evidence associated with execution history.
+- receiver state keyed by `worker_id` plus `task_id`.
 
-Do not overload saved prompts or scheduled-job definitions with Worker authority.
+The store:
+
+- keeps deployment and route availability separate;
+- enforces unique Worker IDs, chat titles, and profile paths;
+- requires a registered Worker before route or receiver state can be written;
+- atomically accepts only newer task revisions;
+- records the accepted `run_id` without allowing a retry ID to recreate authority;
+- does not overload saved prompts or scheduled-job definitions with Worker authority.
 
 ### Slice 3: Registry service
 
-Add service methods for:
+Status: Implemented in source, pending full repository validation.
 
-- listing registered Workers;
-- registering or updating one authorized Worker entry;
-- pausing and retiring routes;
-- exact-title and stable-ID resolution;
-- duplicate-title detection;
-- profile-path and version validation.
+Files:
+
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_service.py`;
+- `apps/lifeos-dashboard/tests/test_worker_runtime_service.py`.
+
+Provides:
+
+- registration of one already-authorized Worker entry;
+- registry listing and stable-ID lookup;
+- exact-title resolution;
+- controlled `enabled`, `paused`, and `retired` deployment changes;
+- route-state updates;
+- fail-closed unknown-route behavior;
+- envelope validation without mutation;
+- validated atomic envelope acceptance.
 
 No department profile is created or modified by the registry service.
+
+### Current test evidence
+
+The combined isolated contract, persistence, and service suite passed 25 tests.
+
+The full repository suite was not run because the active execution container could not clone GitHub. Rob's local dashboard checkout remains the required source for the focused and full test pass before runtime integration is treated as validated.
 
 ### Slice 4: Execution-envelope integration
 
@@ -160,7 +186,11 @@ Required behavior:
 - preserve the authoritative task and revision;
 - validate authorization and target identity before transport;
 - suppress stale and duplicate revisions;
-- fail closed on missing, ambiguous, paused, retired, or unauthorized routes.
+- fail closed on missing, ambiguous, paused, retired, or unauthorized routes;
+- associate wrapper, run, task, revision, and idempotency evidence with execution history;
+- preserve existing HQ prompt behavior while adding a separate Worker execution path.
+
+The old composer-verification investigation remains paused. When Worker send integration requires a write witness, use only the expected `wrapper_id` check plus existing exact-destination, empty-composer, and explicit-send safeguards.
 
 ### Slice 5: Receiver validation and outcomes
 
@@ -228,4 +258,4 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Run the new focused tests in Rob's local dashboard checkout, then implement Slice 2 by extending `CommandCenterStore` with minimal Worker registry, route-state, and task-scoped receiver-state persistence.
+Run the three focused Worker-runtime test files and the full dashboard suite in Rob's local checkout. If they pass, begin Slice 4 by adding a separate Worker execution path to the Command Center and extending execution-history evidence with wrapper, Worker, task, revision, and verification metadata.
