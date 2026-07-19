@@ -55,8 +55,8 @@ def _write_verification_message(stdout: str, stderr: str) -> str:
     )
     message = (
         "The prompt reached the composer, but post-paste verification could not confirm the draft. "
-        "The draft may be present; nothing was sent. Leave the composer untouched and open "
-        "Automation Logs before retrying."
+        "The draft may be present; nothing was sent. Leave the composer untouched. "
+        "Open Automation Logs before retrying."
     )
     return f"{message} Detail: {detail}" if detail else message
 
