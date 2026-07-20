@@ -71,7 +71,11 @@ class WorkerReceiverStore:
     def _require_one_history_row(connection: sqlite3.Connection, run_id: str) -> sqlite3.Row:
         rows = connection.execute(
             """
-            SELECT id, controlled_outcome, receiver_accepted_at
+            SELECT id, status, destination, mode, prompt_type,
+                   wrapper_id, run_id, worker_id, task_id, task_revision,
+                   procedure_id, procedure_version, authorization_source,
+                   idempotency_key, verification_mode, controlled_outcome,
+                   receiver_accepted_at
             FROM execution_history WHERE run_id = ?
             """,
             (run_id,),
@@ -81,6 +85,49 @@ class WorkerReceiverStore:
         if len(rows) > 1:
             raise WorkerRuntimeError("Receiver found ambiguous duplicate transport-history rows.")
         return rows[0]
+
+    @staticmethod
+    def _validate_transport_row(
+        row: sqlite3.Row, assignment: ReceiverAssignment
+    ) -> sqlite3.Row:
+        envelope = assignment.envelope
+        errors: list[str] = []
+        if str(row["status"] or "") != "succeeded":
+            errors.append("transport status is not succeeded")
+        if str(row["mode"] or "") != "send":
+            errors.append("transport mode is not send")
+        if str(row["prompt_type"] or "") != "worker":
+            errors.append("transport prompt type is not worker")
+        expected = {
+            "wrapper_id": envelope.wrapper_id,
+            "run_id": envelope.run_id,
+            "worker_id": envelope.worker_id,
+            "task_id": envelope.task_id,
+            "task_revision": envelope.task_revision,
+            "procedure_id": envelope.procedure_id,
+            "procedure_version": envelope.procedure_version,
+            "authorization_source": envelope.authorization_source,
+            "idempotency_key": envelope.idempotency_key,
+            "verification_mode": envelope.verification_mode,
+        }
+        for field_name, expected_value in expected.items():
+            observed = row[field_name]
+            if field_name in {"task_revision", "procedure_version"}:
+                matches = observed is not None and int(observed) == int(expected_value)
+            else:
+                matches = str(observed or "") == str(expected_value)
+            if not matches:
+                errors.append(f"transport {field_name} does not match the assignment")
+        if errors:
+            raise WorkerRuntimeError("Transport history failed receiver validation: " + "; ".join(errors) + ".")
+        return row
+
+    def validate_transport(self, assignment: ReceiverAssignment) -> None:
+        """Require one successful send row whose wrapper metadata exactly matches."""
+
+        with self._connect() as connection:
+            row = self._require_one_history_row(connection, assignment.envelope.run_id)
+            self._validate_transport_row(row, assignment)
 
     @staticmethod
     def _metadata_values(
@@ -108,7 +155,10 @@ class WorkerReceiverStore:
         if outcome not in {"REPORT_AND_HOLD", "ELEVATE_FOR_APPROVAL"}:
             raise WorkerRuntimeError("Preflight may record only a hold or elevation.")
         with self._connect() as connection:
-            row = self._require_one_history_row(connection, assignment.envelope.run_id)
+            row = self._validate_transport_row(
+                self._require_one_history_row(connection, assignment.envelope.run_id),
+                assignment,
+            )
             if row["controlled_outcome"] is not None:
                 raise WorkerRuntimeError("This run already has a controlled outcome.")
             connection.execute(
@@ -144,7 +194,9 @@ class WorkerReceiverStore:
         accepted_at = time.time()
         envelope = assignment.envelope
         with self._connect() as connection:
-            history_row = self._require_one_history_row(connection, envelope.run_id)
+            history_row = self._validate_transport_row(
+                self._require_one_history_row(connection, envelope.run_id), assignment
+            )
             if history_row["controlled_outcome"] is not None:
                 raise WorkerRuntimeError("This run already has a controlled outcome.")
             if history_row["receiver_accepted_at"] is not None:
@@ -208,7 +260,10 @@ class WorkerReceiverStore:
         if outcome not in ALLOWED_OUTCOMES:
             raise WorkerRuntimeError("Controlled outcome is invalid.")
         with self._connect() as connection:
-            row = self._require_one_history_row(connection, assignment.envelope.run_id)
+            row = self._validate_transport_row(
+                self._require_one_history_row(connection, assignment.envelope.run_id),
+                assignment,
+            )
             if row["receiver_accepted_at"] is None:
                 raise WorkerRuntimeError("Receiver outcome requires an accepted run.")
             if row["controlled_outcome"] is not None:
