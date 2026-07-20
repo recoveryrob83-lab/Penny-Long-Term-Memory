@@ -295,22 +295,70 @@ Current boundary:
 - no real Worker was registered or activated;
 - no Worker UI or dashboard control was added;
 - no recurring Worker authority schedule was created;
-- no second run or outcome ledger was created;
-- verification queues and wake suppression remain Slice 6.
+- no second run or outcome ledger was created.
 
-### Slice 6: Verification views
+### Slice 6: Verification views and wake suppression
 
-Status: Next implementation slice.
+Status: Implemented in source, pending Rob's focused and full local validation.
 
-Reuse existing SQLite execution history and Automation Logs where practical.
+Files:
 
-A separate queue service is not required for v1. A filtered persisted verification state is sufficient:
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_verification.py`;
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_verification_runtime.py`;
+- `apps/lifeos-dashboard/lifeos_dashboard/__init__.py`;
+- `apps/lifeos-dashboard/lifeos_dashboard/static/tabs.js`;
+- `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.js`;
+- `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.css`;
+- `apps/lifeos-dashboard/tests/test_worker_verification.py`;
+- `apps/lifeos-dashboard/tests/test_worker_verification_runtime.py`;
+- `apps/lifeos-dashboard/tests/test_automation_logs_ui.py`.
 
-- `pending`;
-- `verified`;
-- `rejected`.
+Architecture:
 
-Slice 6 will map controlled outcomes and verification modes onto queue eligibility and wake suppression without creating a competing authority record.
+- the existing `execution_history` row remains the sole durable run, evidence, outcome, and verification record;
+- no second queue table, queue service, or wake ledger is created;
+- receiver machine-evidence state remains separate from Department HQ review state;
+- verification state is exposed as `pending`, `verified`, or `rejected`;
+- the existing Command Center status payload is enriched with a bounded Worker verification summary and records rather than adding another API family;
+- Automation Logs remains read-only and now renders Worker identity, task revision, controlled outcome, verification mode, verification state, review route, wake target, and wake reason;
+- an internal review method may mark `ROUTINE_BATCH` or `IMMEDIATE_HQ` implementation evidence `verified` or `rejected` in the same history row;
+- `AUTOMATIC` verification may not be manually overridden and must come from the machine postcondition evidence;
+- canonical `SOURCE_VERIFIED` or `CLOSED` state may be supplied by the authoritative caller to suppress further wakes without copying lifecycle truth into the run table.
+
+Wake and queue mapping:
+
+- `IMPLEMENT` plus verified `AUTOMATIC`: wake suppressed;
+- `IMPLEMENT` plus unverified `AUTOMATIC`: fail-safe owning Department HQ wake;
+- `IMPLEMENT` plus pending `ROUTINE_BATCH`: department review queue, no immediate desktop wake;
+- verified `ROUTINE_BATCH`: queue removed and wake suppressed;
+- pending `IMMEDIATE_HQ`: owning Department HQ wake;
+- verified `IMMEDIATE_HQ`: repeat wake suppressed;
+- `REPORT_AND_HOLD`: rejected verification state and owning Department HQ wake;
+- `ELEVATE_FOR_APPROVAL`: rejected verification state and Chief of Staff HQ wake for Rob's decision;
+- canonical `SOURCE_VERIFIED` or `CLOSED`: further wake suppressed.
+
+Dashboard view:
+
+- Worker outcome, pending, verified, rejected, and wake-required counters;
+- Worker-verification and wake-routing filters;
+- Worker and task facts inside the existing Automation Logs cards;
+- searchable and copyable outcome, verification, queue, and wake evidence;
+- no approval, review, send, or mutation controls.
+
+Validation status:
+
+- source and test files were read back from GitHub;
+- the assistant container could not reach GitHub, so no repository-local test run was performed there;
+- Rob's focused and complete local test runs remain the validation gate.
+
+Current boundary:
+
+- no real wake is emitted by Slice 6; it derives eligibility, target, and suppression only;
+- no general Worker dashboard control surface is added;
+- no Worker profile, real registry entry, or real route is created;
+- no recurring Worker authority schedule is created;
+- no canonical advisory lifecycle state is duplicated into SQLite;
+- Slice 7 remains the synthetic end-to-end pilot.
 
 ### Slice 7: End-to-end pilot
 
@@ -351,14 +399,12 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Implement Slice 6 as a filtered verification-state and wake-suppression layer over the existing `execution_history` table:
+Run the focused Slice 6 suite:
 
-1. expose `pending`, `verified`, and `rejected` receiver verification states without creating a second queue ledger;
-2. map `IMPLEMENT` plus `AUTOMATIC` to machine-postcondition verification and suppress unnecessary wakes when verified;
-3. map `IMPLEMENT` plus `ROUTINE_BATCH` to the department review queue without an immediate desktop wake;
-4. map `IMPLEMENT` plus `IMMEDIATE_HQ` to an owning-department wake;
-5. map `REPORT_AND_HOLD` to an owning-department wake;
-6. map `ELEVATE_FOR_APPROVAL` to a Chief of Staff wake for Rob's decision;
-7. keep `SOURCE_VERIFIED` and `CLOSED` wake-suppressed;
-8. preserve the existing execution-history row as the sole durable run and verification record;
-9. keep Worker UI, real profile activation, recurring authority generation, and Package E deferred.
+`python -m pytest -q tests\test_worker_verification.py tests\test_worker_verification_runtime.py tests\test_automation_logs_ui.py`
+
+Then run the complete dashboard regression suite:
+
+`python -m pytest -q tests`
+
+If both pass, record Slice 6 as locally validated and begin Slice 7 with one synthetic registry entry and fake route. Do not activate a real Worker, create a real profile, emit a real wake, or add recurring Worker authority.
