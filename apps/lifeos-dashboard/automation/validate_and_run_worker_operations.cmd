@@ -27,6 +27,9 @@ if errorlevel 1 (
 )
 
 echo.
-echo Validation passed. Launching LifeOS Dashboard...
+echo Validation passed. Launching LifeOS Dashboard without opening another browser profile...
+set LIFEOS_OPEN_BROWSER=0
+echo Open this address in a new tab of the current Edge window:
+echo http://127.0.0.1:8765
 ".venv\Scripts\python.exe" run_dashboard.py
 exit /b %ERRORLEVEL%
