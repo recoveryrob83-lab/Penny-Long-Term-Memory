@@ -74,7 +74,7 @@ The compact execution wrapper contains:
 - `authorization_source`;
 - `verification_mode`.
 
-The envelope is a routing and validation wrapper, not a replacement copy of the advisory, profile, procedure, or source records.
+The envelope is a routing and validation wrapper, not a replacement copy of the advisory, profile, procedure, or source records. Its JSON representation is intentionally machine-readable so exact fields can be validated through transport and receiver acceptance.
 
 ### Idempotency
 
@@ -328,9 +328,43 @@ Validation evidence:
 - full dashboard suite: `222 passed, 9 warnings in 238.78s`;
 - no Slice 7 functional regression remained.
 
+## Bounded Synthetic Desktop Transport Receipt
+
+Status: Live validated by Rob on 2026-07-19.
+
+Files:
+
+- `apps/lifeos-dashboard/automation/run_synthetic_worker_desktop_pilot.py`;
+- `apps/lifeos-dashboard/tests/test_synthetic_worker_desktop_pilot.py`;
+- existing verified transport entrypoint `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`.
+
+Bounded construction:
+
+- fixed visible title `Synthetic_Worker_Pilot` inside the `Life OS` project;
+- disposable `synthetic_desktop_worker` identity inside the wrapper only;
+- unique synthetic wrapper, run, and task IDs;
+- explicit instruction forbidding file, connector, calendar, email, task, dashboard, external-system, or durable-record action;
+- draft-only default;
+- send requires both `--send` and `--confirm-send SYNTHETIC_SEND`;
+- launcher creates no profile, registry entry, route record, schedule, wake, or durable authority.
+
+Live evidence:
+
+- exact target resolved: `Synthetic_Worker_Pilot, chat in project Life OS`;
+- exact active document verified: `Life OS - Synthetic_Worker_Pilot`;
+- stable enabled Group composer verified;
+- wrapper `SYNTH-DESKTOP-WRAP-1784515664-0de7866901` pasted and copied once for marker verification;
+- submission occurred only after explicit confirmation;
+- terminal reported `Message submitted after explicit confirmation and clipboard verification.`;
+- machine receipt reported `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`;
+- Worker returned the exact required acknowledgement: `SYNTHETIC_WRAPPER_RECEIVED SYNTH-DESKTOP-WRAP-1784515664-0de7866901`;
+- no real Worker authority was created.
+
+The clean control run occurred after Rob removed an unrelated Business-oriented project source and refreshed ChatGPT Classic. The source anomaly remains captured in Trello for possible future investigation and is not duplicated here as a separate GitHub open loop.
+
 ## First Runtime Milestone Receipt
 
-Package D reached its first runtime milestone on 2026-07-19.
+Package D reached its first backend runtime milestone on 2026-07-19 and subsequently validated the physical ChatGPT Classic transport seam.
 
 Completion conditions satisfied:
 
@@ -342,7 +376,8 @@ Completion conditions satisfied:
 - receiver validation returns one controlled outcome;
 - verification and wake decisions derive from the same durable history row;
 - focused and full repository tests pass;
-- one synthetic end-to-end run is verified without activating a speculative real Worker.
+- one synthetic backend end-to-end run is verified without activating a speculative real Worker;
+- one bounded live desktop wrapper traversed exact UI navigation, composer verification, explicit send, and exact semantic acknowledgement without creating durable authority.
 
 ## Current Boundary
 
@@ -359,15 +394,14 @@ Package D does not authorize:
 - migration of grandfathered Worker packages;
 - reopening the abandoned full-text composer investigation.
 
-Test success proves backend readiness. It does not create operational authority.
+Backend and desktop transport success prove technical readiness. They do not create operational authority.
 
 ## Next Decision
 
 Rob must separately decide one of these bounded paths:
 
-1. stop at the validated backend milestone and gather evidence from existing grandfathered pilots;
-2. authorize one synthetic desktop-route exercise using a disposable visible title and no durable real-world authority;
-3. select one candidate department-owned Worker for a profile and activation review.
+1. stop at the validated backend-and-desktop milestone and gather evidence from existing grandfathered pilots;
+2. select at most one candidate department-owned Worker for a separately authorized profile and activation review.
 
 Before any real Worker write, establish:
 
