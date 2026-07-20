@@ -1,10 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
+- ADV-20260720-046 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: Engineering HQ — Run the first bounded live Engineering Worker read-only verification against the Package D implementation packet under Immediate HQ review.
 - ADV-20260718-042 — OPEN — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Engineering HQ — Implement receiver-side semantic validation for automated prompts: the composer transport should deliver and log a machine-readable wrapper without exact full-text equality; Engineering should add run IDs, prompt IDs and versions, canonical-prompt and parameter checksums, prompt-database lookup, ownership and authorization checks, duplicate suppression, and an explicit Worker decision tree of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`. Completion requires current test or run-log evidence and no silent scope expansion.
 
 ## Acknowledged / Implemented Advisories

@@ -1,12 +1,51 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
 
-None.
+### ADV-20260720-046 — Verify Package D operational pilot requirements
+
+- Date: 2026-07-20
+- From: Engineering HQ
+- To: Engineering Worker
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: IMMEDIATE_HQ
+- Target Department and Owner: Engineering HQ
+- Target Worker ID: `engineering_worker`
+- Record Class: Bounded Engineering read-only verification
+- Task Class: `engineering_read_only_verification`
+- Authorization Class: `READ_ONLY`
+- Authorization Source: `ROB_APPROVED_LIVE_WORKER_PILOT_20260720`
+- Procedure ID: `engineering_worker_read_only_verification`
+- Procedure Version: 1
+- Procedure Path: `projects/engineering/procedures/engineering_worker_read_only_verification.md`
+- Worker Profile Path: `projects/engineering/workers/engineering_worker.md`
+- Requested Action: Read the exact Package D implementation packet and answer only the bounded verification questions.
+- Parameters JSON: `{"targets":["projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"],"verification_questions":["Does the packet identify one bounded operational ChatGPT Worker flow as the remaining useful proof?","Does the packet permit a synthetic or narrowly department-owned pilot without creating broad Worker authority?","Does the packet require one bounded operational procedure before the pilot?"]}`
+- Source References JSON: `["projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","projects/engineering/workers/engineering_worker.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md"]`
+- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","coordination/boards/engineering.md","projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"]`
+- Requested Write Scopes JSON: `[]`
+- Requested Tools JSON: `["GitHub"]`
+- Completion Condition: Every exact target is read, all three verification questions are answered or explicitly marked unverifiable, required run-linked evidence is reported, and no writes or external actions occur.
+- Review Condition: Engineering HQ performs immediate review of the Worker outcome and transport evidence.
+- Closure Authority: Engineering HQ only. Closure is not delegated to the Worker.
+
+#### Assignment
+
+Perform revision 1 using only the named procedure and authorized sources.
+
+Return exactly one controlled outcome:
+
+- `IMPLEMENT` when the bounded inspection completes with the required evidence;
+- `REPORT_AND_HOLD` when validation or safe inspection cannot continue;
+- `ELEVATE_FOR_APPROVAL` only when broader authority or a Rob decision is required.
+
+Do not edit or close this advisory. Do not modify the Advisory Index. Do not perform any write or external action.
 
 ## Recently Acknowledged / Implemented Advisories
 
