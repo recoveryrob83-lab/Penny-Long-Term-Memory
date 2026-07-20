@@ -4,9 +4,9 @@ Updated: 2026-07-19
 
 ## Purpose
 
-Engineering HQ coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation planning, testing, and build-readiness for Life OS and related technical systems.
+Engineering HQ coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation sequencing, testing, debugging, and build-readiness for Life OS and related technical systems.
 
-Engineering turns approved requirements into safe, testable technical systems and maintains durable state inside its own project domain.
+Engineering turns approved requirements into safe, testable machinery and maintains durable state inside its own project domain.
 
 ## Role
 
@@ -17,21 +17,11 @@ Use Engineering HQ for:
 - automation and desktop-control safety;
 - LifeOS Dashboard and Automation Command Center architecture;
 - prompt systems and command interfaces;
-- technical Worker routing, receiver validation, runtime enforcement, and reliability;
+- technical Worker routing, receiver validation, runtime enforcement, evidence, and reliability;
 - testing, debugging, implementation sequencing, feasibility review, and build-ready packets;
 - Engineering-owned durable-memory maintenance.
 
-## Current Operating Tracks
-
-- Package D Worker-runtime implementation under the canonical shared execution and Worker contracts.
-- Worker registry, stable IDs, exact-title routing, deployment and route state, task-scoped receiver revisions, and idempotency.
-- Separate Worker Command Center execution with persistent envelope evidence.
-- Receiver-side semantic and authorization validation under ADV-20260718-042.
-- Desktop department automation maintenance under exact-navigation and stop-on-uncertainty rules.
-- LifeOS Dashboard observation and source-health behavior.
-- Reliable Connector Execution Layer, operation-ledger, verification, and retry policy design.
-- Grandfathered Raw Capture and Inventory Worker evidence.
-- Office Leaks delivery architecture as concrete requirements mature.
+Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, or another department's records.
 
 ## Not This Department
 
@@ -43,57 +33,72 @@ Use Engineering HQ for:
 
 ## Department File Ownership
 
-Engineering maintains its own project subtree during routine boots, syncs, and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, decision rules, implementation notes, and Engineering source-board advisory text.
+Engineering maintains its own project subtree during authorized maintenance and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, implementation packets, decision records, and Engineering source-board advisory text.
 
 Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
 ## Current Technical State
 
-The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Guarded GitHub synchronization permits only clean, strictly-behind fast-forward updates. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
+The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
 
 The established Automation Command Center supports eight exact HQ destinations, canonical, saved, and custom prompts, persistent schedules and run history, validated pause-on-failure and restart policy, Scheduler Ledger synchronization, and bounded cleanup controls.
 
-The canonical shared architecture lives in:
+Canonical shared architecture lives in:
 
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 
-Package D has implemented four backend slices:
+Package D has implemented and locally validated seven slices:
 
 1. Worker contracts and validation.
-2. SQLite registry, route, and task-scoped receiver persistence.
+2. SQLite Worker registry, route state, and task-scoped receiver persistence.
 3. Registry service and exact-title resolution.
 4. Separate Worker Command Center transport and execution-history integration.
+5. Receiver semantic validation and controlled outcomes.
+6. Verification views, queue derivation, and wake suppression.
+7. Disposable synthetic end-to-end backend pilot with transport-integrity hardening.
+
+A separate bounded synthetic desktop pilot also passed exact ChatGPT Classic navigation, wrapper-marker verification, explicit submission, receipt generation, and exact acknowledgement without creating durable authority.
 
 Current Worker-runtime capabilities include:
 
-- stable `worker_id` and exact `chat_title`;
-- department-owned profile pointers with Engineering-owned deployment state outside profiles;
-- `enabled`, `paused`, and `retired` deployment states;
-- separate route availability;
-- compact execution envelopes;
-- task-scoped receiver revision state;
-- idempotency by `worker_id + task_id + task_revision`;
+- stable Worker IDs and exact visible titles;
+- department-owned profile pointers with Engineering-owned deployment state kept outside profiles;
+- separate deployment and route-availability state;
+- compact machine-readable execution envelopes;
+- task-scoped receiver revision state and idempotency;
 - exact-title zero-match and duplicate-match failure;
 - shared Command Center pause and one-job locking;
-- manual and scheduler-triggered methods for one authorized envelope;
-- successful-send duplicate suppression and bounded retry after failed transport;
-- existing SQLite execution-history metadata for wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification mode, trigger, and future outcome;
-- Worker-only post-paste verification by one copied-text check for the expected `wrapper_id`.
+- manual and scheduler-triggered transport for one already-authorized envelope;
+- successful-send duplicate suppression with bounded retry after failed transport;
+- exact successful-transport metadata validation before receiver acceptance;
+- semantic checks for profile identity, ownership, caller authority, procedure identity and checksum, parameters, sources, scopes, tools, verification mode, and revision freshness;
+- exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
+- same-row evidence, Department HQ review, verification state, queue derivation, and wake suppression;
+- read-only Automation Logs visibility without a second ledger.
 
-Rob reported the Slice 1–3 focused tests and full dashboard suite passed locally. Slice 4 adds 11 focused tests and awaits focused plus full local validation.
+Validation evidence currently recorded in the Package D packet includes a focused Slice 7 and receiver suite of 32 passing tests and a complete dashboard regression suite of 222 passing tests with 9 warnings. The live desktop pilot reported `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`.
 
-No real Worker profile, route, registry entry, Worker UI, or recurring Worker authority schedule has been created.
+No real Worker profile, registry entry, route, wake, Worker control surface, or recurring Worker authority schedule has been created.
 
-ADV-20260718-042 remains authoritative for receiver-side semantic validation. ADV-20260719-044 remains open to Life OS Maintenance HQ for shared Worker filesystem and continuity repairs.
+## Current Decision Boundary
+
+ADV-20260718-042 remains open and authoritative for receiver-side semantic validation and controlled outcomes. A read-only Engineering verification found the implementation substantially complete but identified two remaining closure gaps:
+
+1. a production receiver-ingress path that parses transported evidence and independently resolves the authoritative Worker profile, canonical procedure, and task source instead of receiving preconstructed authoritative objects from its caller;
+2. one joined bounded proof connecting physical desktop transport to receiver acceptance, controlled outcome, evidence, and verification.
+
+Rob has not yet selected the next implementation slice. Receiver ingress and canonical resolution is the leading Engineering recommendation, while the human-readable envelope summary remains a separate smaller production-readability follow-up.
+
+ADV-20260719-044 is closed, implemented, and source verified. Engineering no longer monitors Maintenance implementation of that advisory. The remaining department-ownership action is ordinary observation of corrected role-routed boots and demonstrated defects.
 
 ## Composer Boundary
 
-The old full-text composer investigation is closed as an active engineering path.
+The general full-text composer investigation is paused and must not be reopened without demonstrated failure.
 
-The Worker-only entrypoint preserves exact destination, empty-composer, clipboard restoration, explicit send, and stop-on-uncertainty safeguards. After paste it copies once and checks only whether the expected wrapper ID is present.
+The Worker-only entrypoint preserves exact destination, empty-composer protection, clipboard restoration, explicit send, one-job locking, and stop-on-uncertainty safeguards. After paste it copies once and checks only whether the expected wrapper ID is present.
 
-Do not reopen repeated selection, character-range comparison, multiple witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without demonstrated failure.
+Do not resume repeated selection, character-range comparison, multiple witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without demonstrated failure.
 
 ## Security Rule
 
@@ -111,4 +116,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Current gate: run the four focused Worker-runtime test files and the full dashboard suite. If both pass, begin Slice 5 receiver-side profile, authority, scope, parameter, duplicate, and controlled-outcome validation. Keep Worker UI, real profile activation, recurring Worker authority generation, Package E, and unrelated expansion deferred.
+Active department. Package D's backend and desktop milestone is complete, ADV-042 remains open pending receiver-ingress integration and joined validation, and Rob's next bounded implementation-goal decision is pending. Real Worker activation, recurring Worker authority generation, Package E, and unrelated expansion remain deferred.
