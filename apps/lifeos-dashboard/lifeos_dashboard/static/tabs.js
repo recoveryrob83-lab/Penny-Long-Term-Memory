@@ -33,13 +33,22 @@ const ensureAutomationLogsSurface = () => {
               <span id="automation-log-count" class="panel-meta"></span>
             </div>
           </div>
-          <p class="item-meta">Full run metadata, backend event path, stdout, and stderr from the authoritative Command Center execution history. Prompt bodies and environment secrets are not copied into diagnostic metadata.</p>
+          <p class="item-meta">Full run metadata, backend event path, stdout, and stderr from the authoritative Command Center execution history. Worker verification and wake routing are derived from the same run rows. Prompt bodies and environment secrets are not copied into diagnostic metadata.</p>
+          <div class="automation-verification-summary" aria-label="Worker verification summary">
+            <div class="automation-verification-card"><span>Worker outcomes</span><strong id="automation-worker-total">0</strong></div>
+            <div class="automation-verification-card"><span>Pending review</span><strong id="automation-worker-pending">0</strong></div>
+            <div class="automation-verification-card"><span>Verified</span><strong id="automation-worker-verified">0</strong></div>
+            <div class="automation-verification-card"><span>Rejected / held</span><strong id="automation-worker-rejected">0</strong></div>
+            <div class="automation-verification-card"><span>Wake required</span><strong id="automation-worker-wakes">0</strong></div>
+          </div>
           <div class="automation-log-toolbar" aria-label="Automation log filters">
             <label class="cc-filter-field">Result<select id="automation-log-filter-result"><option value="all">All results</option><option value="succeeded">Succeeded</option><option value="failed">Failed</option><option value="refused">Refused</option></select></label>
             <label class="cc-filter-field">Department<select id="automation-log-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
             <label class="cc-filter-field">Trigger<select id="automation-log-filter-trigger"><option value="all">Manual and scheduled</option><option value="manual">Manual</option><option value="scheduled">Scheduled</option><option value="unknown">Legacy / unstructured</option></select></label>
+            <label class="cc-filter-field">Worker verification<select id="automation-log-filter-worker-state"><option value="all">All runs</option><option value="not-worker">Non-Worker runs</option><option value="pending">Pending</option><option value="verified">Verified</option><option value="rejected">Rejected / held</option></select></label>
+            <label class="cc-filter-field">Wake routing<select id="automation-log-filter-wake"><option value="all">All wake states</option><option value="required">Wake required</option><option value="queued">Routine queue</option><option value="suppressed">Wake suppressed</option></select></label>
             <label class="cc-filter-field">Order<select id="automation-log-filter-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
-            <label class="cc-filter-field">Search<input id="automation-log-filter-search" type="search" placeholder="Stages, errors, run ID, output..."></label>
+            <label class="cc-filter-field">Search<input id="automation-log-filter-search" type="search" placeholder="Stages, errors, run ID, Worker, outcome..."></label>
             <div class="automation-log-actions">
               <button id="automation-log-refresh" class="primary-button" type="button">Refresh logs</button>
               <button id="automation-log-expand" class="copy-button" type="button">Expand all</button>
