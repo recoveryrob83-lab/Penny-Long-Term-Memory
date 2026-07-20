@@ -35,7 +35,7 @@ class WorkerReceiverService:
             status=status, reasons=tuple(reasons)
         )  # type: ignore[arg-type]
 
-    def evaluate(
+    def _evaluate_after_transport(
         self,
         assignment: ReceiverAssignment,
         profile: WorkerAuthorityProfile,
@@ -59,13 +59,29 @@ class WorkerReceiverService:
             return self._decision("REPORT_AND_HOLD", *semantic_errors)
         return self._decision("READY", "Semantic receiver validation passed.")
 
+    def evaluate(
+        self,
+        assignment: ReceiverAssignment,
+        profile: WorkerAuthorityProfile,
+        procedure: CanonicalProcedureSpec,
+    ) -> ReceiverPreflightResult:
+        try:
+            self.store.validate_transport(assignment)
+        except WorkerRuntimeError as exc:
+            return self._decision("REPORT_AND_HOLD", str(exc))
+        return self._evaluate_after_transport(assignment, profile, procedure)
+
     def receive(
         self,
         assignment: ReceiverAssignment,
         profile: WorkerAuthorityProfile,
         procedure: CanonicalProcedureSpec,
     ) -> ReceiverPreflightResult:
-        decision = self.evaluate(assignment, profile, procedure)
+        try:
+            self.store.validate_transport(assignment)
+        except WorkerRuntimeError as exc:
+            return self._decision("REPORT_AND_HOLD", str(exc))
+        decision = self._evaluate_after_transport(assignment, profile, procedure)
         if decision.status != "READY":
             self.store.record_terminal_preflight(
                 assignment,
@@ -77,11 +93,7 @@ class WorkerReceiverService:
         try:
             accepted_at = self.store.accept(assignment, profile)
         except WorkerRuntimeError as exc:
-            hold = self._decision("REPORT_AND_HOLD", str(exc))
-            self.store.record_terminal_preflight(
-                assignment, profile, "REPORT_AND_HOLD", str(exc)
-            )
-            return hold
+            return self._decision("REPORT_AND_HOLD", str(exc))
         return ReceiverPreflightResult(
             status="READY",
             reasons=decision.reasons,
