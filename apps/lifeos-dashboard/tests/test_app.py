@@ -51,6 +51,15 @@ def test_dashboard_home_renders_interface() -> None:
     assert "Penny commands" in response.text
     assert "Department Inspection" in response.text
     assert "DURABLE STATE UNDER GLASS" in response.text
+    assert "Worker Operations" in response.text
+    assert "Courier self-test" in response.text
+
+
+def test_worker_operations_requires_real_local_repository_mode() -> None:
+    response = client.get("/api/worker-operations")
+
+    assert response.status_code == 503
+    assert "local LifeOS repository checkout" in response.json()["detail"]
 
 
 def test_command_center_status_exposes_eight_destinations() -> None:
