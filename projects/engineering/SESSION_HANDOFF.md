@@ -8,7 +8,7 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Package D Milestone Complete and Worker Activation Decision Gate
+- Current Phase: Active / Package D Backend and Desktop Milestone Complete and Worker Activation Decision Gate
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center history, Engineering advisory board, Advisory Index, and other source systems only when explicitly required
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -46,7 +46,7 @@ Never claim an action, test, deployment, or connector write occurred without cur
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: First runtime milestone complete. Slices 1–7 are implemented and locally validated. The next valid action is a separate activation decision, not automatic Worker deployment.
+Status: Backend and physical desktop transport milestone complete. Slices 1–7 are implemented and locally validated, and one bounded synthetic wrapper passed through ChatGPT Classic with exact acknowledgement. The next valid action is a separate activation decision, not automatic Worker deployment.
 
 Canonical implementation packet:
 
@@ -91,6 +91,12 @@ Implemented and locally validated slices:
    - `apps/lifeos-dashboard/tests/test_worker_end_to_end_pilot.py`
    - exact transport-history validation in `worker_receiver.py` and `worker_receiver_store.py`
 
+Bounded desktop validation:
+
+- `apps/lifeos-dashboard/automation/run_synthetic_worker_desktop_pilot.py`
+- `apps/lifeos-dashboard/tests/test_synthetic_worker_desktop_pilot.py`
+- existing exact-title Worker transport in `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
+
 Current capabilities:
 
 - stable Worker IDs and exact visible titles;
@@ -98,7 +104,7 @@ Current capabilities:
 - `enabled`, `paused`, and `retired` deployment states;
 - separate route availability;
 - exact-title zero-match and duplicate-match failure;
-- compact execution envelopes;
+- compact JSON execution envelopes;
 - task-scoped receiver revisions;
 - idempotency by `worker_id + task_id + task_revision`;
 - separate manual and scheduler-triggered Worker execution methods;
@@ -114,7 +120,8 @@ Current capabilities:
 - queue eligibility, wake targeting, and wake suppression derived from the same execution-history row;
 - read-only Automation Logs counters, filters, Worker facts, and wake evidence;
 - no real wake emission or dashboard mutation controls;
-- a disposable synthetic integration harness proving the backend pipeline without durable real-world authority.
+- a disposable synthetic integration harness proving the backend pipeline without durable real-world authority;
+- a successful bounded live wrapper proving exact ChatGPT Classic navigation, stable composer verification, explicit send, receipt generation, and exact acknowledgement.
 
 Validation state:
 
@@ -130,24 +137,27 @@ Validation state:
 - the focused Slice 7 end-to-end pilot and receiver suite passed with `32 passed`;
 - Rob reported the complete dashboard suite passed with `222 passed, 9 warnings in 238.78s`;
 - Slices 1–7 are locally validated with no remaining functional regression;
+- Rob reported live desktop receipt `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`;
+- the synthetic Worker returned exact acknowledgement `SYNTHETIC_WRAPPER_RECEIVED SYNTH-DESKTOP-WRAP-1784515664-0de7866901`;
 - no real Worker profile, registry entry, route, wake, UI mutation control, or recurring Worker authority schedule has been created.
 
-Synthetic pilot proof:
+Synthetic proof:
 
 - zero and duplicate exact-title resolution fail closed;
 - paused deployment and unavailable route refuse before transport;
 - missing wrapper witness fails transport and cannot consume authority;
 - corrupted persisted transport metadata fails receiver validation;
 - unauthorized scope records `REPORT_AND_HOLD` without revision consumption;
-- one successful run traverses transport, `READY`, `IMPLEMENT`, evidence persistence, routine verification review, and wake suppression in one row;
+- one successful backend run traverses transport, `READY`, `IMPLEMENT`, evidence persistence, routine verification review, and wake suppression in one row;
 - retry with a new `run_id` cannot re-execute the accepted revision;
 - a second controlled outcome is refused;
-- temporary databases and fixtures isolate all synthetic state.
+- temporary databases and fixtures isolate backend synthetic state;
+- the live desktop wrapper traversed exact UI transport and semantic acknowledgement without durable authority.
 
 Next valid Engineering action:
 
-1. present Rob with the activation decision, including whether a bounded synthetic desktop-route exercise adds enough evidence to justify its complexity;
-2. do not perform that desktop exercise without explicit scope and a disposable visible title;
+1. stop at the validated backend-and-desktop milestone and gather evidence from the grandfathered pilots; or
+2. select at most one candidate department-owned Worker for a separately authorized profile and activation review;
 3. do not create a real Worker profile, registry entry, route, wake, or schedule without separate authorization from Rob and the owning department;
 4. if a real candidate is considered, establish its record class, owner, authoritative profile path, lifecycle state, priority, task class, scopes, verification mode, review condition, and why GitHub is correct before any durable write;
 5. keep recurring Worker authority generation and Package E deferred.
@@ -162,7 +172,7 @@ Full-text equality, repeated selection, character-range comparison, multiple wit
 
 ## Automation Command Center Boundary
 
-The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend, receiver, verification, and synthetic integration paths are locally validated through Slice 7.
+The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend, receiver, verification, synthetic integration, and bounded desktop transport paths are validated.
 
 Package D does not:
 
@@ -173,11 +183,11 @@ Package D does not:
 - create recurring Worker authority schedules;
 - create a second run, outcome, queue, wake, or verification ledger;
 - emit a real wake;
-- authorize a real Worker merely because tests passed.
+- authorize a real Worker merely because tests or a synthetic desktop transport passed.
 
 The scheduler adapter accepts one already-authorized execution-ready envelope. Correct recurring authority generation requires a separate approved model and is not inferred from ordinary recurrence.
 
-A synthetic desktop route may be exercised only under a new bounded authorization. Any real profile and activation remain department-owned durable decisions.
+Any real profile and activation remain department-owned durable decisions.
 
 ## Advisory State
 
@@ -194,7 +204,7 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - Monitor ADV-20260719-044 and observe corrected role-routed boots before closing the department-ownership wrapper.
 - Observe four-source dashboard behavior during ordinary use.
 - Continue Raw Capture and Inventory pilots only as grandfathered evidence sources.
-- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the validated envelope, evidence, controlled-outcome, verification-state, wake-suppression, and transport-integrity model.
+- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the validated envelope, evidence, controlled-outcome, verification-state, wake-suppression, transport-integrity, and desktop-receipt model.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
@@ -202,8 +212,8 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 
 - ChatGPT Classic must be responsive for UI automation.
 - Failed scheduled runs pause rather than retry blindly.
-- Package D validation does not authorize a real Worker, profile, route, wake, recurring authority schedule, or Package E.
-- Any desktop synthetic exercise or real activation requires a separate bounded decision.
+- Package D backend and desktop validation do not authorize a real Worker, profile, route, wake, recurring authority schedule, or Package E.
+- Any real activation requires a separate bounded decision and source-owned profile authority.
 - Do not create recurring Worker authority schedules without an approved task-generation model.
 - Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
 
