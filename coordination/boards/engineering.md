@@ -6,50 +6,51 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
 
+## Recently Acknowledged / Implemented Advisories
+
+
 ### ADV-20260720-046 — Verify Package D operational pilot requirements
 
 - Date: 2026-07-20
 - From: Engineering HQ
 - To: Engineering Worker
-- Lifecycle State: OPEN
+- Lifecycle State: CLOSED
 - Priority: NORMAL
 - Advisory Revision: 2
 - Verification Mode: IMMEDIATE_HQ
+- Controlled Outcome: IMPLEMENT
+- Acknowledged: 2026-07-20
+- Implemented: 2026-07-20
+- Source Verified: 2026-07-20
+- Closed: 2026-07-20
+- Posted Board: `coordination/boards/engineering.md`
 - Target Department and Owner: Engineering HQ
 - Target Worker ID: `engineering_worker`
 - Record Class: Bounded Engineering read-only verification
-- Task Class: `engineering_read_only_verification`
-- Authorization Class: `READ_ONLY`
+- Procedure: `engineering_worker_read_only_verification`, version 1
 - Authorization Source: `ROB_APPROVED_LIVE_WORKER_PILOT_20260720`
-- Procedure ID: `engineering_worker_read_only_verification`
-- Procedure Version: 1
-- Procedure Path: `projects/engineering/procedures/engineering_worker_read_only_verification.md`
-- Worker Profile Path: `projects/engineering/workers/engineering_worker.md`
-- Requested Action: Read the exact Package D implementation packet and answer only the bounded verification questions.
-- Parameters JSON: `{"targets":["projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"],"verification_questions":["Does the packet identify one bounded operational ChatGPT Worker flow as the remaining useful proof?","Does the packet permit a synthetic or narrowly department-owned pilot without creating broad Worker authority?","Does the packet require one bounded operational procedure before the pilot?"]}`
-- Source References JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"]`
-- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"]`
-- Requested Write Scopes JSON: `[]`
-- Requested Tools JSON: `["GitHub"]`
-- Completion Condition: Every exact target is read, all three verification questions are answered or explicitly marked unverifiable, required run-linked evidence is reported, and no writes or external actions occur.
-- Review Condition: Engineering HQ performs immediate review of the Worker outcome and transport evidence.
-- Closure Authority: Engineering HQ only. Closure is not delegated to the Worker.
+- Final Wrapper ID: `WAKE-ADV-20260720-046-R2`
+- Final Run ID: `RUN-ADV-20260720-046-R2`
 - Prior Revision Outcome: `REPORT_AND_HOLD`
 - Prior Run ID: `RUN-ADV-20260720-046-R1`
-- Revision Note: Revision 2 explicitly authorizes the complete universal Worker boot chain required by `memory/STARTUP_BOOT.md`. Revision 1 was accepted and held because its requested read scopes omitted required boot-kernel sources.
+- Receiver Repair Commit: `8cfa874`
+- Revision 2 Authorization Commit: `e231360`
 
-#### Assignment
+#### Outcome
 
-Perform revision 2 using only the named procedure and authorized sources.
-Return exactly one controlled outcome:
+The first live Engineering Worker advisory pilot completed successfully.
 
-- `IMPLEMENT` when the bounded inspection completes with the required evidence;
-- `REPORT_AND_HOLD` when validation or safe inspection cannot continue;
-- `ELEVATE_FOR_APPROVAL` only when broader authority or a Rob decision is required.
+Revision 1 reached the correct Worker room and completed the bounded inspection, but receiver reconciliation recorded `REPORT_AND_HOLD` because the advisory's explicit read scope omitted required universal boot sources.
 
-Do not edit or close this advisory. Do not modify the Advisory Index. Do not perform any write or external action.
+The pilot also exposed a receiver defect in which a safe draft and successful send sharing one deterministic run ID were treated as ambiguous competing transport rows. Engineering repaired that defect in commit `8cfa874` and added regression coverage; the focused receiver and end-to-end suite passed with 33 tests.
 
-## Recently Acknowledged / Implemented Advisories
+Revision 2 explicitly authorized the complete required boot chain. The Worker loaded the canonical sources, validated the newer revision and authority envelope, read the exact Package D target, answered all three bounded questions, performed no writes or external actions, and returned `IMPLEMENT`.
+
+The existing runtime record then preserved the exact evidence, accepted revision 2, recorded `IMPLEMENT`, and received verified `IMMEDIATE_HQ` review from Engineering HQ. Receiver state now records revision 2 as the latest processed revision and suppresses further verification wakes.
+
+This closure creates no recurring Worker authority, broader read or write scope, new lifecycle record, second evidence ledger, or autonomous execution authority.
+
+`ADV-20260718-042` remains open under its own source owner and lifecycle. This closure does not close it or authorize Package E.
 
 ### ADV-20260719-044 — Reconcile Worker filesystem, shared pointers, and Maintenance continuity
 
