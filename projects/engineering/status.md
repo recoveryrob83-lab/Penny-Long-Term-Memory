@@ -4,7 +4,7 @@ Updated: 2026-07-19
 
 ## Current Phase
 
-Active / Package D Verification Views and Wake Suppression, Desktop Automation Reliability, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
+Active / Package D Synthetic End-to-End Pilot, Desktop Automation Reliability, Dashboard Observation, Connector Reliability, Worker Pilots, Prompt Systems, and Office Leaks Delivery Architecture
 
 ## Summary
 
@@ -21,7 +21,7 @@ Engineering owns the technical implementation of the new execution architecture:
 - `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md`: authoritative Package D build sequence and v1 technical decisions.
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`: canonical shared execution governance, owned by Life OS Maintenance HQ.
 - `coordination/WORKER_EXECUTION_CONTRACT.md`: canonical Worker authority and profile convention, owned by Life OS Maintenance HQ.
-- SQLite Command Center execution history: authoritative local automation-run and receiver-outcome record.
+- SQLite Command Center execution history: authoritative local automation-run, receiver-outcome, evidence, and verification record.
 - Automation Logs and Run History: dashboard views over that same execution history, not competing log stores.
 - `memory/05_OPEN_LOOPS.md`: genuinely system-owned work and operating watches only.
 - Trello, Todoist, Calendar, Gmail, and Drive retain their established source roles.
@@ -33,7 +33,7 @@ Never store secrets, credentials, tokens, API keys, private calendar URLs, finan
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has implemented and locally validated the first five bounded backend slices required to enforce them. Slice 6 verification views, queue filtering, and wake suppression are now the front burner.
+Status: Active. The canonical LifeOS execution and Worker protocols are in place. Engineering has implemented and locally validated the first six bounded backend slices required to enforce them. Slice 7 is now the synthetic end-to-end pilot.
 
 Implemented and locally validated source slices:
 
@@ -55,6 +55,15 @@ Implemented and locally validated source slices:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_store.py`
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver.py`
    - `apps/lifeos-dashboard/tests/test_worker_receiver.py`
+6. Verification views and wake suppression:
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_verification.py`
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_verification_runtime.py`
+   - `apps/lifeos-dashboard/lifeos_dashboard/static/tabs.js`
+   - `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.js`
+   - `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.css`
+   - `apps/lifeos-dashboard/tests/test_worker_verification.py`
+   - `apps/lifeos-dashboard/tests/test_worker_verification_runtime.py`
+   - `apps/lifeos-dashboard/tests/test_automation_logs_ui.py`
 
 Current capabilities:
 
@@ -74,12 +83,16 @@ Current capabilities:
 - manual and scheduler-triggered execution methods for one already-authorized envelope;
 - successful-send suppression by idempotency key while failed sends remain eligible for bounded retry;
 - nullable Worker metadata in the existing execution-history table;
-- persisted wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification-mode, trigger, and controlled-outcome fields;
+- persisted wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification-mode, trigger, controlled-outcome, and verification-review fields;
 - Worker-only exact-title transport using one copied-text check for the expected wrapper ID after paste;
 - semantic receiver preflight that validates profile identity, owning department, exact caller authority, canonical procedure and checksum, parameter schema and checksum, source references, requested scopes, approved tools, verification mode, pause state, and revision freshness;
 - atomic receiver acceptance only after semantic validation succeeds;
 - evidence-backed finalization that distinguishes transport success, accepted work, completed work, verified work, partial work, holds, and approval elevations;
-- exactly one persisted controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`.
+- exactly one persisted controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
+- derived `pending`, `verified`, and `rejected` verification states without a competing queue table or service;
+- separate machine-evidence and Department HQ review semantics in the same history row;
+- queue eligibility, wake target, and wake suppression derived without emitting a real wake;
+- read-only Automation Logs counters, filters, Worker facts, outcome evidence, and wake reasoning.
 
 Validation evidence:
 
@@ -89,21 +102,23 @@ Validation evidence:
 - both focused regressions passed;
 - the Slice 4 full dashboard suite passed with `174 passed, 9 warnings in 173.76s`;
 - the focused Slice 5 receiver suite passed with `22 passed`;
-- Rob reported the complete dashboard regression suite passed with `196 passed, 9 warnings in 191.97s`;
-- Slices 1–5 are locally validated with no remaining functional regression.
+- the Slice 5 full dashboard suite passed with `196 passed, 9 warnings in 191.97s`;
+- the focused Slice 6 Worker verification/runtime/Automation Logs suite passed with `20 passed`;
+- Rob reported the complete dashboard regression suite passed with `212 passed, 9 warnings in 198.41s`;
+- Slices 1–6 are locally validated with no remaining functional regression.
 
 ADV-20260718-042 remains open and authoritative until its source owner verifies the implemented receiver behavior and current evidence. Engineering must not duplicate or self-close it.
 
 Required next implementation step:
 
-1. implement Slice 6 as filtered verification-state views over the existing `execution_history` table;
-2. expose `pending`, `verified`, and `rejected` without creating a second queue ledger;
-3. map controlled outcomes and verification modes to queue eligibility and wake suppression;
-4. suppress unnecessary wakes for verified `AUTOMATIC`, `SOURCE_VERIFIED`, and `CLOSED` states;
-5. queue `ROUTINE_BATCH` implementation for department review without an immediate desktop wake;
-6. wake the owning Department HQ for `IMMEDIATE_HQ` implementation and `REPORT_AND_HOLD`;
-7. wake Chief of Staff HQ for `ELEVATE_FOR_APPROVAL`;
-8. keep Worker UI, real profile activation, recurring Worker authority generation, and Package E deferred.
+1. implement Slice 7 as one synthetic end-to-end pilot harness using temporary databases and synthetic fixtures only;
+2. create one synthetic registry entry, fake exact-title route, synthetic profile, canonical procedure, task, and execution envelope;
+3. use a fake transport adapter first rather than a real Worker chat;
+4. prove fail-closed zero-match, duplicate-title, paused, stale-revision, wrapper-mismatch, unauthorized-scope, and duplicate-retry paths;
+5. prove one successful transport record becomes `READY`, then exactly one `IMPLEMENT` outcome with persistent evidence and the expected verification/wake view;
+6. prove a new retry `run_id` cannot recreate authority or re-execute the accepted task revision;
+7. keep synthetic state isolated and disposable;
+8. keep real Worker activation, real profiles, real routes, real wake emission, recurring Worker authority generation, and Package E deferred.
 
 ### Canonical Prompt Transport Verification
 
@@ -134,7 +149,7 @@ The following foundation is complete and should not be reopened without new evid
 
 ### Automation Command Center
 
-Status: Implemented for the established scheduler and attended-HQ automation contract. The separate Worker backend execution and receiver paths are locally validated through Slice 5.
+Status: Implemented for the established scheduler and attended-HQ automation contract. The separate Worker backend execution, receiver, and verification paths are locally validated through Slice 6.
 
 Existing HQ capabilities remain:
 
@@ -150,9 +165,9 @@ Existing HQ capabilities remain:
 - separate Scheduled Jobs, Run History, and Automation Logs views;
 - secret-protected no-billing Scheduler Ledger synchronization through the bound Apps Script endpoint.
 
-Worker integration currently adds backend services only. It does not add Worker UI, create schedules, create profiles, register a real Worker, or alter existing HQ prompt behavior. The scheduler adapter accepts one already-authorized execution-ready envelope; recurring Worker authority generation remains out of scope.
+Worker integration currently adds backend services and a read-only evidence view only. It does not add Worker execution controls, create schedules, create profiles, register a real Worker, emit a real wake, or alter existing HQ prompt behavior. The scheduler adapter accepts one already-authorized execution-ready envelope; recurring Worker authority generation remains out of scope.
 
-Automation Logs uses the same durable execution-history rows as Run History. Slices 4 and 5 add nullable Worker transport, receiver, evidence, verification, and controlled-outcome metadata to that existing table. Display and queue filtering for those fields remains Slice 6.
+Automation Logs uses the same durable execution-history rows as Run History. Slices 4–6 add nullable Worker transport, receiver, evidence, outcome, review, verification, queue, and wake-decision metadata or derived fields to that existing record. No second queue or wake ledger exists.
 
 ### Desktop Department and Worker Automation
 
@@ -200,7 +215,7 @@ Current boundaries:
 - fully unattended Windows operation is not assumed merely because scheduling works;
 - the dashboard may transport and display authorized state but may not invent, approve, prioritize, or broaden work;
 - no general Worker dashboard control surface is authorized before the synthetic pilot;
-- Slice 6 may add filtered verification views over existing evidence but not a competing authority or queue record.
+- Slice 6 added read-only filtered verification and wake-decision views over existing evidence, not a competing authority or queue record.
 
 ## Other Active Tracks
 
@@ -210,12 +225,14 @@ Current boundaries:
 - Pilot Penny Inventory Worker with 2–3 real items.
 - Observe Penny Raw Capture Worker in real use.
 - Turn the Reliable Connector Execution Layer design note into an implementation packet outline aligned with the Worker run model.
-- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope, execution-history evidence, controlled outcomes, and verification states.
+- Draft the broader operation-ledger schema and connector-health policy around the new execution envelope, execution-history evidence, controlled outcomes, verification states, and wake suppression.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
 ## Recent Milestones
 
+- 2026-07-19: Package D Slice 6 locally validated: 20 focused Worker verification/runtime/Automation Logs tests passed and the complete dashboard suite passed with 212 tests and 9 warnings in 198.41 seconds.
+- 2026-07-19: Package D Slice 6 committed: same-row verification state, Department HQ review semantics, queue and wake derivation, Command Center status enrichment, and read-only Automation Logs visibility.
 - 2026-07-19: Package D Slice 5 locally validated: 22 focused receiver tests passed and the complete dashboard suite passed with 196 tests and 9 warnings in 191.97 seconds.
 - 2026-07-19: Package D Slice 5 committed: semantic receiver preflight, atomic revision acceptance, existing-history evidence persistence, and controlled outcome finalization.
 - 2026-07-19: Package D Slice 4 locally validated: 36 focused Worker-runtime tests passed; after two narrow guidance-string repairs, the complete dashboard suite passed with 174 tests and 9 warnings in 173.76 seconds.
