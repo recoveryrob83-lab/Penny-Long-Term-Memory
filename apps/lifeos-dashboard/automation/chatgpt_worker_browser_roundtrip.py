@@ -33,18 +33,19 @@ class BrowserRoundTripUncertain(BrowserRoundTripError):
 
 @dataclass(frozen=True)
 class BrowserRoundTripRequest:
-    worker_url: str
     worker_chat_title: str
     project_title: str
     prompt_text: str
     request_marker: str
     response_marker: str
+    worker_url: str | None = None
     cdp_endpoint: str = DEFAULT_CDP_ENDPOINT
     timeout_seconds: int = 300
     return_url: str | None = None
 
     def __post_init__(self) -> None:
-        object.__setattr__(self, "worker_url", normalize_chatgpt_url(self.worker_url))
+        if self.worker_url is not None:
+            object.__setattr__(self, "worker_url", normalize_chatgpt_url(self.worker_url))
         if self.return_url is not None:
             object.__setattr__(self, "return_url", normalize_chatgpt_url(self.return_url))
         for field_name in (
@@ -138,9 +139,7 @@ def _wait_for_idle_composer(page, *, timeout_ms: int):
     return prompt
 
 
-def _verify_worker_identity(page, request: BrowserRoundTripRequest, *, timeout_ms: int) -> None:
-    if normalize_chatgpt_url(page.url) != request.worker_url:
-        raise BrowserRoundTripError("Exact Worker conversation URL was not reached.")
+def _worker_link(page, request: BrowserRoundTripRequest, *, timeout_ms: int):
     label = f"{request.worker_chat_title}, chat in project {request.project_title}"
     worker_link = page.locator(f'a[aria-label={json.dumps(label)}]')
     worker_link.wait_for(state="attached", timeout=timeout_ms)
@@ -149,8 +148,29 @@ def _verify_worker_identity(page, request: BrowserRoundTripRequest, *, timeout_m
             "Expected exactly one exact Worker sidebar link; "
             f"found {worker_link.count()}."
         )
-    absolute_href = str(worker_link.evaluate("element => element.href"))
-    if normalize_chatgpt_url(absolute_href) != request.worker_url:
+    return worker_link
+
+
+def _resolve_worker_url(page, request: BrowserRoundTripRequest, *, timeout_ms: int) -> str:
+    worker_link = _worker_link(page, request, timeout_ms=timeout_ms)
+    observed = normalize_chatgpt_url(str(worker_link.evaluate("element => element.href")))
+    if request.worker_url is not None and observed != request.worker_url:
+        raise BrowserRoundTripError("Worker sidebar link points to an unexpected conversation.")
+    return request.worker_url or observed
+
+
+def _verify_worker_identity(
+    page,
+    request: BrowserRoundTripRequest,
+    *,
+    worker_url: str,
+    timeout_ms: int,
+) -> None:
+    if normalize_chatgpt_url(page.url) != worker_url:
+        raise BrowserRoundTripError("Exact Worker conversation URL was not reached.")
+    worker_link = _worker_link(page, request, timeout_ms=timeout_ms)
+    absolute_href = normalize_chatgpt_url(str(worker_link.evaluate("element => element.href")))
+    if absolute_href != worker_url:
         raise BrowserRoundTripError("Worker sidebar link points to an unexpected conversation.")
 
 
@@ -201,6 +221,7 @@ def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
     playwright = sync_playwright().start()
     page = None
     source_url = ""
+    worker_url = ""
     baseline_turns = 0
     sent = False
     captured = False
@@ -216,12 +237,22 @@ def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
         source_url = request.return_url or normalize_chatgpt_url(page.url)
         source_prompt = _wait_for_idle_composer(page, timeout_ms=min(timeout_ms, 60_000))
         del source_prompt
+        worker_url = _resolve_worker_url(
+            page,
+            request,
+            timeout_ms=min(timeout_ms, 120_000),
+        )
 
-        if normalize_chatgpt_url(page.url) != request.worker_url:
-            page.goto(request.worker_url, wait_until="domcontentloaded", timeout=timeout_ms)
-        page.wait_for_url(request.worker_url, timeout=timeout_ms)
+        if normalize_chatgpt_url(page.url) != worker_url:
+            page.goto(worker_url, wait_until="domcontentloaded", timeout=timeout_ms)
+        page.wait_for_url(worker_url, timeout=timeout_ms)
         prompt = _wait_for_idle_composer(page, timeout_ms=min(timeout_ms, 120_000))
-        _verify_worker_identity(page, request, timeout_ms=min(timeout_ms, 120_000))
+        _verify_worker_identity(
+            page,
+            request,
+            worker_url=worker_url,
+            timeout_ms=min(timeout_ms, 120_000),
+        )
 
         turns = page.locator(TURN_XPATH)
         baseline_turns = turns.count()
@@ -281,7 +312,7 @@ def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
 
         return BrowserRoundTripReceipt(
             status="succeeded",
-            worker_url=request.worker_url,
+            worker_url=worker_url,
             return_url=source_url,
             request_marker=request.request_marker,
             response_marker=request.response_marker,
@@ -315,7 +346,7 @@ def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--worker-url", required=True)
+    parser.add_argument("--worker-url")
     parser.add_argument("--worker-chat-title", required=True)
     parser.add_argument("--project-title", default="Life OS")
     parser.add_argument("--text", required=True)
