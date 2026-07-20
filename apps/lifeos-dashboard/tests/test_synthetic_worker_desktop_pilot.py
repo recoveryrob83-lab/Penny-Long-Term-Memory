@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -14,6 +15,7 @@ SCRIPT = (
 SPEC = importlib.util.spec_from_file_location("synthetic_worker_desktop_pilot", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 pilot = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = pilot
 SPEC.loader.exec_module(pilot)
 
 APP_ROOT = Path("C:/LifeOS/apps/lifeos-dashboard")
