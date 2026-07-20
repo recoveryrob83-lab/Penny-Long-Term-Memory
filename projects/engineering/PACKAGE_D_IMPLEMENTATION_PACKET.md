@@ -218,7 +218,7 @@ Current boundary:
 
 ### Slice 5: Receiver validation and outcomes
 
-Status: Implemented in source, pending Rob's focused and full local validation.
+Status: Implemented and locally validated.
 
 Files:
 
@@ -284,8 +284,9 @@ Persistence added to the existing execution-history row:
 
 Validation evidence:
 
-- 22 focused receiver tests passed in an isolated harness;
-- Rob's local focused test and complete repository regression remain required before Slice 5 is treated as validated.
+- the focused receiver suite passed with `22 passed`;
+- Rob reported the complete dashboard regression suite passed with `196 passed, 9 warnings in 191.97s`;
+- no Slice 5 functional regression remained.
 
 Current boundary:
 
@@ -298,6 +299,8 @@ Current boundary:
 - verification queues and wake suppression remain Slice 6.
 
 ### Slice 6: Verification views
+
+Status: Next implementation slice.
 
 Reuse existing SQLite execution history and Automation Logs where practical.
 
@@ -348,12 +351,14 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Run the focused Slice 5 receiver suite:
+Implement Slice 6 as a filtered verification-state and wake-suppression layer over the existing `execution_history` table:
 
-`python -m pytest -q tests\test_worker_receiver.py`
-
-Then run the complete dashboard regression suite:
-
-`python -m pytest -q tests`
-
-If both pass, record Slice 5 as locally validated and begin Slice 6 verification-state views, queue filtering, and wake suppression using the existing execution-history table. Keep Worker UI, real profile activation, recurring authority generation, and Package E deferred.
+1. expose `pending`, `verified`, and `rejected` receiver verification states without creating a second queue ledger;
+2. map `IMPLEMENT` plus `AUTOMATIC` to machine-postcondition verification and suppress unnecessary wakes when verified;
+3. map `IMPLEMENT` plus `ROUTINE_BATCH` to the department review queue without an immediate desktop wake;
+4. map `IMPLEMENT` plus `IMMEDIATE_HQ` to an owning-department wake;
+5. map `REPORT_AND_HOLD` to an owning-department wake;
+6. map `ELEVATE_FOR_APPROVAL` to a Chief of Staff wake for Rob's decision;
+7. keep `SOURCE_VERIFIED` and `CLOSED` wake-suppressed;
+8. preserve the existing execution-history row as the sole durable run and verification record;
+9. keep Worker UI, real profile activation, recurring authority generation, and Package E deferred.
