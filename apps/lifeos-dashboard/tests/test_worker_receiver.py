@@ -411,3 +411,44 @@ def test_second_outcome_for_same_run_is_refused(tmp_path: Path) -> None:
 
     with pytest.raises(WorkerRuntimeError, match="already has a controlled outcome"):
         service.finalize(active, profile(), evidence)
+
+
+def test_calling_source_must_be_authorized_for_exact_task_class(tmp_path: Path) -> None:
+    restricted = profile(
+        calling_source_task_classes={"Chief of Staff HQ": ("different_task",)}
+    )
+    service = receiver(tmp_path)
+
+    result = service.receive(assignment(), restricted, procedure())
+
+    assert result.status == "REPORT_AND_HOLD"
+    assert "may not request this task class" in " ".join(result.reasons)
+
+
+def test_approval_reference_must_be_in_authoritative_sources(tmp_path: Path) -> None:
+    active = assignment(
+        requests_new_authority=True,
+        approval_reference="ROB-APPROVAL-1",
+    )
+    service = receiver(tmp_path, active)
+
+    result = service.receive(active, profile(), procedure())
+
+    assert result.status == "REPORT_AND_HOLD"
+    assert "Approval reference" in " ".join(result.reasons)
+
+
+def test_unknown_and_wrong_type_parameters_report_hold(tmp_path: Path) -> None:
+    params = {"lead_id": 7, "archive": True, "surprise": "scope drift"}
+    active = assignment(
+        parameters=params,
+        parameters_checksum=checksum_parameters(params),
+    )
+    service = receiver(tmp_path, active)
+
+    result = service.receive(active, profile(), procedure())
+
+    assert result.status == "REPORT_AND_HOLD"
+    reasons = " ".join(result.reasons)
+    assert "Unknown parameters" in reasons
+    assert "must be string" in reasons
