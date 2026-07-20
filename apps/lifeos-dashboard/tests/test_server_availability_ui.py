@@ -11,8 +11,8 @@ def test_server_guard_loads_before_dashboard_clients() -> None:
 
     guard_index = template.index("server-availability.js")
     assert guard_index < template.index("app.js")
-    assert guard_index < template.index("command-center.js")
-    assert guard_index < template.index("command-scheduler.js")
+    assert guard_index < template.index("worker-operations.js")
+    assert guard_index < template.index("department-inspection.js")
 
 
 def test_server_guard_wraps_fetch_and_surfaces_actionable_message() -> None:
@@ -21,8 +21,7 @@ def test_server_guard_wraps_fetch_and_surfaces_actionable_message() -> None:
     assert "window.fetch = async" in script
     assert "LifeOSServerUnavailableError" in script
     assert "Dashboard server is unavailable. Restart the server, then reload this page." in script
-    assert 'setText("cc-summary", SERVER_UNAVAILABLE_MESSAGE)' in script
-    assert 'setText("cc-schedule-summary", SERVER_UNAVAILABLE_MESSAGE)' in script
-    assert 'setText("cc-status", "Server offline")' in script
-    assert 'setText("cc-scheduler-status", "Server offline")' in script
+    assert 'setText("wo-status", "Server offline")' in script
+    assert 'setText("wo-browser-state", "Unavailable")' in script
+    assert 'setText("wo-run-state", SERVER_UNAVAILABLE_MESSAGE)' in script
     assert 'toast.classList.add("visible")' in script
