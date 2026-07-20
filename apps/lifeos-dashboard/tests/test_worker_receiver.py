@@ -1,4 +1,5 @@
 import sqlite3
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -452,3 +453,50 @@ def test_unknown_and_wrong_type_parameters_report_hold(tmp_path: Path) -> None:
     reasons = " ".join(result.reasons)
     assert "Unknown parameters" in reasons
     assert "must be string" in reasons
+
+
+def test_draft_and_send_with_same_run_id_selects_successful_send(
+    tmp_path: Path,
+) -> None:
+    active = assignment()
+    database = tmp_path / "command-center.sqlite3"
+
+    runtime = WorkerRuntimeService(database)
+    runtime.register_worker(registry_entry())
+    runtime.set_route_state("office_leaks_worker", "available")
+
+    history = WorkerExecutionHistoryStore(database)
+    send_result = transport_result(active.envelope)
+    history.record(replace(send_result, mode="draft"))
+    history.record(send_result)
+
+    service = WorkerReceiverService(database)
+    result = service.receive(active, profile(), procedure())
+
+    assert result.status == "READY"
+
+    state = service.runtime.store.receiver_state(
+        "office_leaks_worker",
+        "ADV-1",
+    )
+    assert state is not None
+    assert state.last_processed_revision == 1
+    assert state.last_run_id == "RUN-1"
+
+    with sqlite3.connect(database) as connection:
+        connection.row_factory = sqlite3.Row
+        rows = connection.execute(
+            """
+            SELECT mode, receiver_accepted_at
+            FROM execution_history
+            WHERE run_id = ?
+            ORDER BY id
+            """,
+            ("RUN-1",),
+        ).fetchall()
+
+    assert len(rows) == 2
+    assert rows[0]["mode"] == "draft"
+    assert rows[0]["receiver_accepted_at"] is None
+    assert rows[1]["mode"] == "send"
+    assert rows[1]["receiver_accepted_at"] is not None

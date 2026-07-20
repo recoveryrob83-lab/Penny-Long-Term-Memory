@@ -68,7 +68,17 @@ class WorkerReceiverStore:
                     )
 
     @staticmethod
-    def _require_one_history_row(connection: sqlite3.Connection, run_id: str) -> sqlite3.Row:
+    def _require_one_history_row(
+        connection: sqlite3.Connection,
+        run_id: str,
+    ) -> sqlite3.Row:
+        """Select the unique authoritative Worker send for one run.
+
+        Draft inspection rows are transport diagnostics, not competing
+        receiver-ingress records. Failed send attempts remain available for
+        precise validation when no successful send exists.
+        """
+
         rows = connection.execute(
             """
             SELECT id, status, destination, mode, prompt_type,
@@ -76,15 +86,41 @@ class WorkerReceiverStore:
                    procedure_id, procedure_version, authorization_source,
                    idempotency_key, verification_mode, controlled_outcome,
                    receiver_accepted_at
-            FROM execution_history WHERE run_id = ?
+            FROM execution_history
+            WHERE run_id = ?
+              AND mode = 'send'
+              AND prompt_type = 'worker'
+            ORDER BY id
             """,
             (run_id,),
         ).fetchall()
+
         if not rows:
-            raise WorkerRuntimeError("Receiver requires one existing transport-history row.")
-        if len(rows) > 1:
-            raise WorkerRuntimeError("Receiver found ambiguous duplicate transport-history rows.")
-        return rows[0]
+            raise WorkerRuntimeError(
+                "Receiver requires one existing Worker send transport-history row."
+            )
+
+        successful = [
+            row for row in rows
+            if str(row["status"] or "") == "succeeded"
+        ]
+
+        if len(successful) == 1:
+            return successful[0]
+
+        if len(successful) > 1:
+            raise WorkerRuntimeError(
+                "Receiver found ambiguous duplicate successful Worker send "
+                "transport-history rows."
+            )
+
+        if len(rows) == 1:
+            return rows[0]
+
+        raise WorkerRuntimeError(
+            "Receiver found multiple unsuccessful Worker send attempts and "
+            "no unique successful transport-history row."
+        )
 
     @staticmethod
     def _validate_transport_row(
