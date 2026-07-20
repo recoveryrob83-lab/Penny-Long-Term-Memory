@@ -1,6 +1,6 @@
 # Package D Implementation Packet
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 Owner: Engineering HQ
 Lifecycle State: Active
 Priority: Normal
@@ -8,18 +8,66 @@ Record Class: Engineering implementation packet
 
 ## Objective
 
-Implement the smallest reliable technical runtime required by:
+Implement the smallest reliable combination of operational procedure and technical infrastructure required by:
 
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`;
 - `coordination/WORKER_EXECUTION_CONTRACT.md`;
 - ADV-20260718-042;
 - Rob's approved v1 routing and verification decisions.
 
-Engineering owns the machinery. Life OS Maintenance HQ owns canonical shared governance contracts and the profile convention. Department HQs own Worker profiles and authority.
+Engineering owns the machinery. Life OS Maintenance HQ owns canonical shared governance contracts and the profile convention. Department HQs own Worker profiles, procedures, authority, and domain judgment.
 
-Package D is not complete merely because backend components and desktop transport work independently. Closure requires a production receiver-ingress path, authoritative source resolution, joined bounded evidence, and source-owner verification of ADV-20260718-042.
+## Canonical Worker Model
 
-## V1 Design Decisions
+A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
+
+The operational chain is:
+
+1. a Department HQ or approved calling source authorizes one bounded assignment;
+2. technical infrastructure transports a recognizable envelope to the exact Worker chat and records delivery evidence;
+3. the Worker reads its department-owned profile and the named canonical procedure, prompt, task, advisory, or source record from GitHub;
+4. the Worker validates identity, version, parameters, caller authority, ownership, scope, tools, procedures, and source boundaries;
+5. the Worker performs only authorized work or refuses and reports the reason;
+6. the Worker returns exactly one controlled outcome with run-linked evidence;
+7. the owning Department HQ reviews the result and retains domain ownership.
+
+Python, desktop automation, SQLite, and the dashboard are courier, routing, safety, duplicate-suppression, evidence, and visibility infrastructure. They are not the Worker.
+
+Machine validation may provide useful defense in depth. It must not replace or silently assume the Worker’s operational source reading, judgment, refusal behavior, or Department HQ review.
+
+## ADV-20260718-042 Interpretation
+
+The advisory explicitly separates transport from receiver responsibility.
+
+### Automation-layer responsibility
+
+The automation layer must:
+
+- deliver one recognizable bounded envelope to the intended destination;
+- preserve correlation and transport evidence;
+- log source, target, prompt or procedure identity, version, authorization reference, parameters, checksums, attempts, send action, retry count, and result;
+- prevent duplicate delivery or execution under the approved idempotency model;
+- avoid interpreting, editing, approving, truncating, or broadening the requested work;
+- treat composer text and character counts as diagnostics rather than semantic proof.
+
+### Receiving-Worker responsibility
+
+The specialized ChatGPT Worker must:
+
+- recognize and parse the envelope;
+- resolve the named canonical prompt or procedure and its version from GitHub;
+- load its department-owned profile and relevant authoritative task or advisory source;
+- validate parameters and checksums where applicable;
+- confirm that the caller may request the task class;
+- confirm that the owning department owns the work;
+- confirm authorization, approvals, procedures, and source-system boundaries;
+- ignore harmless transport noise while refusing changes to scope, destination, permanence, permissions, or requested actions;
+- preserve run, task or advisory, Worker, and profile identifiers in evidence;
+- return `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`.
+
+The earlier Engineering conclusion that Package D required a new autonomous Python receiver-ingress and canonical-resolution service overinterpreted the technical runtime. That is not currently a required closure condition.
+
+## V1 Technical Design Decisions
 
 ### Stable registry configuration
 
@@ -53,7 +101,7 @@ Worker route state contains:
 - last-seen time when available;
 - pause reason when applicable.
 
-Allowed route-availability values:
+Allowed route values:
 
 - `available`;
 - `unavailable`;
@@ -76,7 +124,7 @@ The compact execution wrapper contains:
 - `authorization_source`;
 - `verification_mode`.
 
-The envelope is a routing and validation wrapper, not a replacement copy of the advisory, profile, procedure, or source records. Its JSON representation is the sole authoritative machine transport representation.
+The envelope is a routing and validation wrapper, not a replacement copy of the profile, procedure, advisory, task, or source record. Its JSON representation is the authoritative machine transport representation.
 
 ### Idempotency
 
@@ -106,9 +154,9 @@ The Worker-only composer witness is:
 
 Full-text equality, repeated composer selection, character-range comparison, and multiple write witnesses are not part of v1.
 
-### Receiver transport integrity
+### Transport-history integrity
 
-Receiver acceptance requires exactly one existing transport-history row for the envelope `run_id`.
+The technical receiver model requires exactly one existing successful transport-history row for the envelope `run_id` before backend acceptance.
 
 That row must prove:
 
@@ -122,7 +170,7 @@ Transport success is not inferred from a run ID alone.
 
 ### One durable execution record
 
-The existing `execution_history` row remains the sole durable transport, receiver, outcome, evidence, and verification record.
+The existing `execution_history` row remains the sole durable transport, outcome, evidence, and verification record for the technical runtime.
 
 Package D must not create a second:
 
@@ -134,7 +182,7 @@ Package D must not create a second:
 
 Views and wake decisions derive from the same row.
 
-## Implementation Sequence
+## Implemented Technical Slices
 
 ### Slice 1: Contracts and validation
 
@@ -145,14 +193,7 @@ Files:
 - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime.py`;
 - `apps/lifeos-dashboard/tests/test_worker_runtime.py`.
 
-Provides:
-
-- registry-entry validation;
-- route-state and receiver-state contracts;
-- compact execution-envelope validation;
-- exact-title resolution;
-- stale-revision and duplicate suppression checks;
-- wrapper-ID composer witness helper.
+Provides registry-entry validation, route and receiver contracts, compact envelope validation, exact-title resolution, stale-revision and duplicate checks, and the wrapper-ID composer witness helper.
 
 ### Slice 2: SQLite persistence
 
@@ -163,9 +204,7 @@ Files:
 - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_store.py`;
 - `apps/lifeos-dashboard/tests/test_worker_runtime_store.py`.
 
-Provides separate SQLite tables for Worker registry configuration, route state, and receiver state keyed by `worker_id` plus `task_id`.
-
-The store keeps deployment and route availability separate, enforces unique identities and paths, requires registration before state writes, and atomically accepts only newer task revisions.
+Provides separate registry, route, and task-scoped receiver state while preserving stable authority outside the runtime database.
 
 ### Slice 3: Registry service
 
@@ -176,7 +215,7 @@ Files:
 - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_service.py`;
 - `apps/lifeos-dashboard/tests/test_worker_runtime_service.py`.
 
-Provides registration of one already-authorized Worker entry, registry lookup, exact-title resolution, controlled deployment changes, route updates, fail-closed unknown-route behavior, envelope validation without mutation, and atomic envelope acceptance.
+Provides registration of one already-authorized Worker entry, registry lookup, exact-title resolution, controlled deployment changes, route updates, fail-closed unknown-route behavior, envelope validation, and atomic revision acceptance.
 
 No department profile is created or modified by the registry service.
 
@@ -190,18 +229,7 @@ Files:
 - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`;
 - `apps/lifeos-dashboard/tests/test_worker_command_center.py`.
 
-Provides:
-
-- separate Worker Command Center jobs and results without changing ordinary HQ jobs;
-- compact machine-readable wrapper prompts;
-- exact registered-title transport;
-- shared pause state and one-job lock;
-- manual and scheduler-triggered execution for one already-authorized envelope;
-- successful-send suppression by idempotency key;
-- bounded retry after failed transport;
-- nullable Worker metadata in the existing `execution_history` table;
-- legacy HQ history compatibility;
-- Worker-only one-copy wrapper-marker verification.
+Provides separate Worker jobs and results, compact wrapper transport, exact registered-title delivery, shared pause and one-job locking, manual and scheduler-triggered transport for one already-authorized envelope, successful-send suppression, bounded retry after failed transport, execution-history metadata, and one-copy wrapper-marker verification.
 
 Validation evidence:
 
@@ -210,7 +238,7 @@ Validation evidence:
 
 ### Slice 5: Receiver validation and controlled outcomes
 
-Status: Implemented and locally validated.
+Status: Implemented and locally validated as technical infrastructure and a testable semantic contract.
 
 Files:
 
@@ -219,25 +247,9 @@ Files:
 - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver.py`;
 - `apps/lifeos-dashboard/tests/test_worker_receiver.py`.
 
-Architecture:
+Provides semantic preflight, atomic revision acceptance, transport-history matching, procedure and parameter checks, scope and tool enforcement, evidence-backed finalization, and exactly one controlled outcome.
 
-- semantic preflight is separate from execution outcome finalization;
-- a valid wrapper becomes `READY`, not `IMPLEMENT`;
-- receiver acceptance consumes the task revision only after transport and semantic validation succeed;
-- acceptance and revision consumption are atomic with the existing transport-history row;
-- invalid preflight records `REPORT_AND_HOLD` or `ELEVATE_FOR_APPROVAL` without consuming the revision;
-- finalization records exactly one controlled outcome in the same row;
-- transport success never becomes implementation success by implication.
-
-Preflight validates identity, department ownership, caller authority, procedure identity and checksum, task class, parameters, source references, requested scopes, approved tools, verification mode, deployment, route, pause, revision freshness, and caller-reported material transport drift.
-
-Finalization validates completion, evidence, external-action truthfulness, actual scopes and tools, machine postconditions, and newly discovered approval needs.
-
-Controlled outcomes:
-
-- `IMPLEMENT`;
-- `REPORT_AND_HOLD`;
-- `ELEVATE_FOR_APPROVAL`.
+The Python receiver models the required validation semantics and provides defense in depth. It is not itself the specialized ChatGPT Worker and does not establish that every canonical source must be independently resolved by Python before Worker operation.
 
 Validation evidence:
 
@@ -248,35 +260,14 @@ Validation evidence:
 
 Status: Implemented and locally validated.
 
-Files:
+Files include:
 
 - `apps/lifeos-dashboard/lifeos_dashboard/worker_verification.py`;
 - `apps/lifeos-dashboard/lifeos_dashboard/worker_verification_runtime.py`;
-- `apps/lifeos-dashboard/lifeos_dashboard/static/tabs.js`;
-- `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.js`;
-- `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.css`;
+- Automation Logs frontend files;
 - related focused tests.
 
-Architecture:
-
-- the existing `execution_history` row remains the sole durable run, evidence, outcome, and verification record;
-- machine-evidence state remains separate from Department HQ review state;
-- verification state is exposed as `pending`, `verified`, or `rejected`;
-- the existing Command Center status payload is enriched rather than creating another API family;
-- Automation Logs remains read-only;
-- `AUTOMATIC` verification cannot be manually overridden;
-- canonical source lifecycle state may suppress further wakes without duplicating lifecycle truth into SQLite.
-
-Wake and queue mapping:
-
-- verified `AUTOMATIC`: wake suppressed;
-- unverified `AUTOMATIC`: owning Department HQ wake;
-- pending `ROUTINE_BATCH`: department review queue, no immediate wake;
-- verified `ROUTINE_BATCH`: queue removed and wake suppressed;
-- pending `IMMEDIATE_HQ`: owning Department HQ wake;
-- verified `IMMEDIATE_HQ`: repeat wake suppressed;
-- `REPORT_AND_HOLD`: owning Department HQ wake;
-- `ELEVATE_FOR_APPROVAL`: Chief of Staff HQ wake for Rob's decision.
+Provides same-row verification state, separate machine-evidence and Department HQ review semantics, derived queues and wake decisions, read-only Automation Logs visibility, and no competing ledger.
 
 Validation evidence:
 
@@ -291,37 +282,14 @@ Files:
 
 - `apps/lifeos-dashboard/tests/test_worker_end_to_end_pilot.py`;
 - transport-integrity hardening in `worker_receiver.py` and `worker_receiver_store.py`;
-- receiver regression coverage in `test_worker_receiver.py`.
+- receiver regression coverage.
 
-Pilot construction:
-
-- one synthetic Worker registry entry;
-- one fake exact-title route;
-- one synthetic authority profile;
-- one synthetic canonical procedure;
-- one synthetic task and execution envelope;
-- one injected fake transport adapter;
-- temporary SQLite databases and disposable fixtures only.
-
-Pilot proof:
-
-- zero and duplicate exact-title matches fail closed;
-- paused deployment and unavailable route refuse before transport;
-- missing wrapper witness fails transport and cannot consume a revision;
-- corrupted successful transport metadata fails receiver validation;
-- unauthorized scope records `REPORT_AND_HOLD` without consuming a revision;
-- one successful transport becomes `READY`, then exactly one `IMPLEMENT` with same-row evidence and verification review;
-- pending routine work enters the review queue without an immediate wake;
-- verified routine work leaves the queue and suppresses repeat wakes;
-- retry with a new `run_id` cannot re-execute the accepted task revision;
-- a second controlled outcome is refused;
-- no synthetic state survives outside temporary fixtures.
+The disposable backend pilot proved exact-title failure behavior, pause and route refusal, missing-witness failure, corrupted-history rejection, unauthorized-scope hold, one successful `READY` to `IMPLEMENT` flow, verification review, duplicate suppression, second-outcome refusal, and temporary-only test state.
 
 Validation evidence:
 
 - focused pilot plus receiver regression suite: `32 passed`;
-- full dashboard suite: `222 passed, 9 warnings in 238.78s`;
-- no Slice 7 functional regression remained.
+- full dashboard suite: `222 passed, 9 warnings in 238.78s`.
 
 ## Bounded Synthetic Desktop Transport Receipt
 
@@ -333,64 +301,69 @@ Files:
 - `apps/lifeos-dashboard/tests/test_synthetic_worker_desktop_pilot.py`;
 - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`.
 
-Bounded construction:
-
-- fixed visible title `Synthetic_Worker_Pilot` inside the `Life OS` project;
-- disposable `synthetic_desktop_worker` identity inside the wrapper only;
-- unique synthetic wrapper, run, and task IDs;
-- explicit instruction forbidding file, connector, calendar, email, task, dashboard, external-system, or durable-record action;
-- draft-only default;
-- send requires explicit synthetic confirmation;
-- launcher creates no profile, registry entry, route record, schedule, wake, or durable authority.
-
 Live evidence:
 
-- exact target resolved and active document verified;
+- exact target and active document verified;
 - stable Group composer verified;
 - wrapper `SYNTH-DESKTOP-WRAP-1784515664-0de7866901` pasted and copied once for marker verification;
 - submission occurred only after explicit confirmation;
-- machine receipt reported `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`;
+- receipt reported `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`;
 - Worker returned exact acknowledgement `SYNTHETIC_WRAPPER_RECEIVED SYNTH-DESKTOP-WRAP-1784515664-0de7866901`;
 - no real Worker authority was created.
 
-## ADV-20260718-042 Verification Review
+## Remaining Operational Validation
 
-Status: Read-only Engineering review complete. Advisory remains OPEN under its source owner.
+ADV-20260718-042 remains OPEN under its source owner.
 
-Implemented evidence satisfies the component-level requirements for:
+The technical component evidence is substantial. The remaining useful proof is one bounded operational ChatGPT Worker flow demonstrating that the receiving Worker itself:
 
-- recognizable machine-readable wrapper transport;
-- persisted envelope identity and checksums;
-- exact successful-send transport validation;
-- profile, ownership, caller, task-class, procedure, parameter, scope, tool, and verification-mode enforcement;
-- duplicate and stale-revision suppression;
-- controlled outcomes;
-- same-row evidence and verification review.
+1. recognizes the envelope;
+2. reads its department-owned profile from GitHub;
+3. resolves the named canonical prompt or procedure and authoritative task or advisory source;
+4. validates version, parameters, caller authority, ownership, scope, tools, procedures, and source boundaries;
+5. refuses unknown, corrupted, unauthorized, ownership-conflicted, or scope-expanding work;
+6. returns exactly one `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD` outcome;
+7. reports evidence tied to the run, Worker, profile, task or advisory, and procedure;
+8. permits Department HQ and run-history verification;
+9. preserves duplicate suppression and prevents silent scope expansion.
 
-Two closure gaps remain.
+This proof may use a synthetic or narrowly department-owned case. It must not create broad Worker authority merely to demonstrate the procedure.
 
-### Gap 1: Receiver ingress and canonical resolution
+## Operational Worker Procedure Requirements
 
-The current receiver service validates supplied `ReceiverAssignment`, `WorkerAuthorityProfile`, and `CanonicalProcedureSpec` objects. The production path does not yet demonstrate that it:
+Before the pilot, define one bounded procedure covering:
 
-1. parses transported or persisted wrapper evidence;
-2. resolves the registered Worker;
-3. loads the department-owned authoritative profile;
-4. resolves the canonical procedure by ID and version;
-5. resolves the authoritative task or advisory source and parameters;
-6. constructs `ReceiverAssignment` internally;
-7. derives material transport drift instead of trusting a caller-supplied Boolean;
-8. invokes the existing semantic receiver only after those resolutions succeed.
+- envelope recognition and minimum required fields;
+- exact GitHub profile and procedure source paths;
+- canonical source-loading order;
+- checksum or version validation where applicable;
+- caller and task-class authorization checks;
+- department ownership checks;
+- allowed read and write scopes;
+- approved tools and connector boundaries;
+- durable-write gate handling;
+- refusal and escalation conditions;
+- duplicate and stale-revision handling;
+- controlled outcome format;
+- evidence and verification report format;
+- Department HQ review and closure condition.
 
-The ingress layer must resolve authority but never invent or duplicate it.
+The procedure should point to canonical records rather than copying their full content into another source.
 
-### Gap 2: Joined physical end-to-end proof
+## Optional Python Hardening
 
-The backend pilot validates the complete receiver and verification pipeline using injected transport. The physical desktop pilot validates actual ChatGPT Classic transport and acknowledgement but intentionally performs no receiver acceptance or controlled outcome.
+A Python canonical source resolver or deeper automated ingress layer is deferred.
 
-Package D still needs one bounded, non-authoritative proof connecting:
+It should be considered only if a bounded operational pilot demonstrates a concrete need, such as:
 
-physical transport -> persisted transport evidence -> authoritative resolution -> receiver acceptance -> one controlled outcome -> evidence persistence -> verification review.
+- repeated failure to load the correct canonical source;
+- unsafe ambiguity between versions or profile paths;
+- inability to prevent duplicate execution with existing controls;
+- unacceptable risk of scope expansion;
+- a volume or reliability threshold that makes operational validation brittle;
+- a requirement for fully unattended execution that Rob separately authorizes.
+
+Any such implementation must remain infrastructure. It must not acquire domain ownership, invent authority, duplicate canonical truth, or replace Department HQ judgment.
 
 ## Planned Human-Readable Envelope Follow-up
 
@@ -419,9 +392,10 @@ Package D does not authorize:
 - Package E;
 - autonomous authority expansion;
 - migration of grandfathered Worker packages;
-- reopening the paused general full-text composer investigation.
+- reopening the paused general full-text composer investigation;
+- turning Python infrastructure into an autonomous department worker.
 
-Backend and desktop transport success prove substantial technical readiness. They do not create operational authority or complete the receiver-ingress seam.
+Technical success proves infrastructure readiness. It does not create operational authority.
 
 ## Next Decision
 
@@ -429,11 +403,12 @@ Rob must separately select one bounded next implementation goal.
 
 Engineering recommendation:
 
-1. receiver ingress and canonical resolution;
-2. joined bounded end-to-end validation;
-3. human-readable envelope summary, either as a small follow-up after ingress or immediately before the first real activation;
-4. source-owner verification and closure review for ADV-20260718-042;
-5. only then consider at most one department-owned Worker for separately authorized profile and activation review.
+1. define the operational Worker execution procedure and canonical GitHub source-resolution contract;
+2. conduct one bounded synthetic or narrowly department-owned ChatGPT Worker pilot;
+3. present the evidence for source-owner verification and closure review of ADV-20260718-042;
+4. add the human-readable envelope summary before the first real Worker activation;
+5. add deeper Python source-resolution enforcement only after demonstrated need;
+6. only then consider at most one department-owned Worker for separately authorized profile and activation review.
 
 Before any real Worker write, establish:
 
@@ -450,4 +425,4 @@ Before any real Worker write, establish:
 - why GitHub is the correct system;
 - the statement or standing rule authorizing the write.
 
-No real profile, registry entry, route, wake, recurring authority schedule, Package E work, or next implementation slice may proceed from this packet alone.
+No real profile, registry entry, route, wake, recurring authority schedule, Package E work, optional Python hardening, or next implementation slice may proceed from this packet alone.
