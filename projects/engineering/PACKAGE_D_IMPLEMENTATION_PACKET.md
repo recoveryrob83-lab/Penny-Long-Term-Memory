@@ -2,7 +2,7 @@
 
 Updated: 2026-07-19
 Owner: Engineering HQ
-Lifecycle State: Active
+Lifecycle State: Decision Gate
 Priority: Normal
 Record Class: Engineering implementation packet
 
@@ -104,6 +104,20 @@ The Worker-only composer witness is:
 
 Full-text equality, repeated composer selection, character-range comparison, and multiple write witnesses are not part of v1.
 
+### Receiver transport integrity
+
+Receiver acceptance requires exactly one existing transport-history row for the envelope `run_id`.
+
+That row must prove:
+
+- `status = succeeded`;
+- `mode = send`;
+- `prompt_type = worker`;
+- exact matching `wrapper_id`;
+- exact matching Worker, task, revision, procedure, authorization source, idempotency key, and verification mode.
+
+Transport success is not inferred from a run ID alone.
+
 ## Implementation Sequence
 
 ### Slice 1: Contracts and validation
@@ -126,7 +140,7 @@ Provides:
 
 ### Slice 2: SQLite persistence
 
-Status: Core persistence implemented and locally validated. Execution-history linkage is implemented and validated in Slice 4.
+Status: Implemented and locally validated.
 
 Files:
 
@@ -139,14 +153,7 @@ Provides separate SQLite tables for:
 - Worker route state;
 - receiver state keyed by `worker_id` plus `task_id`.
 
-The store:
-
-- keeps deployment and route availability separate;
-- enforces unique Worker IDs, chat titles, and profile paths;
-- requires a registered Worker before route or receiver state can be written;
-- atomically accepts only newer task revisions;
-- records the accepted `run_id` without allowing a retry ID to recreate authority;
-- does not overload saved prompts or scheduled-job definitions with Worker authority.
+The store keeps deployment and route availability separate, enforces unique identities and paths, requires registration before state writes, atomically accepts only newer task revisions, and does not overload saved prompts or schedules with Worker authority.
 
 ### Slice 3: Registry service
 
@@ -162,17 +169,13 @@ Provides:
 - registration of one already-authorized Worker entry;
 - registry listing and stable-ID lookup;
 - exact-title resolution;
-- controlled `enabled`, `paused`, and `retired` deployment changes;
+- controlled deployment-state changes;
 - route-state updates;
 - fail-closed unknown-route behavior;
 - envelope validation without mutation;
 - validated atomic envelope acceptance.
 
 No department profile is created or modified by the registry service.
-
-### Validation evidence through Slice 3
-
-The combined focused contract, persistence, and service suite contains 25 tests. Rob reported that the requested focused Worker-runtime tests and full dashboard suite passed in the local dashboard checkout before Slice 4 began.
 
 ### Slice 4: Execution-envelope integration
 
@@ -186,37 +189,24 @@ Files:
 
 Provides:
 
-- a separate `WorkerCommandJob` and `WorkerExecutionResult` path without changing ordinary HQ jobs;
-- compact rendered prompts containing one machine-readable execution wrapper line;
-- exact registered Worker title transport;
-- shared Command Center pause state and one-job lock;
-- manual and scheduler-triggered execution methods for one already-authorized envelope;
-- pre-transport registry, deployment, route, receiver-revision, and duplicate checks;
-- successful-send suppression by `worker_id + task_id + task_revision`;
-- bounded retry after failed transport because failed sends do not create successful idempotency evidence;
-- nullable Worker metadata columns in the existing SQLite `execution_history` table;
-- persisted wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification-mode, trigger, and future controlled-outcome fields;
-- legacy HQ execution-history compatibility;
-- a Worker-only automation entrypoint that copies the composer once after paste and checks only the expected wrapper marker.
+- separate Worker Command Center jobs and results without changing ordinary HQ jobs;
+- compact machine-readable wrapper prompts;
+- exact registered-title transport;
+- shared pause state and one-job lock;
+- manual and scheduler-triggered execution for one already-authorized envelope;
+- successful-send suppression by idempotency key;
+- bounded retry after failed transport;
+- nullable Worker metadata in the existing `execution_history` table;
+- legacy HQ history compatibility;
+- Worker-only one-copy wrapper-marker verification.
 
 Validation evidence:
 
-- four focused Worker-runtime files passed with `36 passed`;
-- the first full regression run reached `172 passed` with two pre-existing guidance-string assertion failures;
-- Engineering repaired only those wording contracts: `Open Automation Logs` and `Nothing was sent`;
-- both focused regression tests then passed;
-- Rob reported the final full dashboard suite passed with `174 passed, 9 warnings in 173.76s`;
-- no functional Slice 4 regression remained.
+- focused Worker-runtime suite: `36 passed`;
+- two narrow guidance-string regressions were repaired;
+- final full suite: `174 passed, 9 warnings in 173.76s`.
 
-Current boundary:
-
-- no Worker profile, registry entry, or real route is created by this slice;
-- no Worker UI or dashboard controls are added;
-- no recurring Worker authority schedule is introduced;
-- `execute_scheduled` accepts one already-authorized execution-ready envelope from a scheduler caller;
-- existing HQ destinations, prompts, schedules, and verification behavior remain unchanged.
-
-### Slice 5: Receiver validation and outcomes
+### Slice 5: Receiver validation and controlled outcomes
 
 Status: Implemented and locally validated.
 
@@ -231,71 +221,26 @@ Architecture:
 
 - semantic preflight is separate from execution outcome finalization;
 - a valid wrapper becomes `READY`, not `IMPLEMENT`;
-- receiver acceptance consumes the task revision only after semantic validation succeeds;
+- receiver acceptance consumes the task revision only after transport and semantic validation succeed;
 - acceptance and revision consumption are atomic with the existing transport-history row;
-- invalid preflight records either `REPORT_AND_HOLD` or `ELEVATE_FOR_APPROVAL` without consuming the revision;
-- finalization records exactly one controlled outcome in the same `execution_history` row;
+- invalid preflight records `REPORT_AND_HOLD` or `ELEVATE_FOR_APPROVAL` without consuming the revision;
+- finalization records exactly one controlled outcome in the same row;
 - transport success never becomes implementation success by implication.
 
-Preflight validates:
+Preflight validates identity, department ownership, caller authority, procedure identity and checksum, task class, parameters, source references, requested scopes, approved tools, verification mode, deployment, route, pause, revision freshness, and material transport drift.
 
-- registered Worker ID, profile Worker ID, profile version, owning department, and target department;
-- exact canonical procedure ID, version, task class, and checksum;
-- exact caller-to-task-class authority;
-- allowed and prohibited task classes;
-- authorization class and approval references;
-- parameter checksum, required fields, unknown fields, and parameter types;
-- authoritative source references;
-- requested read and write scopes;
-- profile-approved and procedure-approved tools;
-- exact verification mode;
-- deployment, route, pause, stale-revision, and duplicate state;
-- material transport text that changes scope, destination, permanence, permissions, or requested action.
-
-Finalization validates:
-
-- actual completion state;
-- required evidence references;
-- truthful external-action verification;
-- actual read and write scopes against both assignment and profile authority;
-- actual tools against the authorized assignment;
-- `AUTOMATIC` machine-verifiable postconditions;
-- newly discovered authority or approval requirements.
+Finalization validates completion, evidence, external-action truthfulness, actual scopes and tools, machine postconditions, and newly discovered approval needs.
 
 Controlled outcomes:
 
-- `IMPLEMENT` only when bounded work completed and required evidence was recorded;
-- `REPORT_AND_HOLD` for invalid authority, partial or failed work, missing evidence, unavailable verification, scope or tool expansion, stale delivery, or unresolved conflicts;
-- `ELEVATE_FOR_APPROVAL` when Rob must authorize new authority, spending, connectors, cross-department scope, a material exception, or newly discovered approval-bearing work.
-
-Persistence added to the existing execution-history row:
-
-- profile version and owning department;
-- task class and authorization class;
-- procedure and parameter checksums;
-- source references;
-- requested and actual scopes;
-- accepted timestamp and receiver reason;
-- completion and verification states;
-- evidence references;
-- actual tools;
-- external-action verification;
-- final controlled outcome.
+- `IMPLEMENT`;
+- `REPORT_AND_HOLD`;
+- `ELEVATE_FOR_APPROVAL`.
 
 Validation evidence:
 
-- the focused receiver suite passed with `22 passed`;
-- Rob reported the complete dashboard regression suite passed with `196 passed, 9 warnings in 191.97s`;
-- no Slice 5 functional regression remained.
-
-Current boundary:
-
-- normalized profile authority is supplied as an input to the receiver; no competing profile parser or authority source was invented;
-- no department Worker profile or folder was created;
-- no real Worker was registered or activated;
-- no Worker UI or dashboard control was added;
-- no recurring Worker authority schedule was created;
-- no second run or outcome ledger was created.
+- focused receiver suite: `22 passed`;
+- full suite: `196 passed, 9 warnings in 191.97s`.
 
 ### Slice 6: Verification views and wake suppression
 
@@ -317,98 +262,126 @@ Architecture:
 
 - the existing `execution_history` row remains the sole durable run, evidence, outcome, and verification record;
 - no second queue table, queue service, or wake ledger is created;
-- receiver machine-evidence state remains separate from Department HQ review state;
+- machine-evidence state remains separate from Department HQ review state;
 - verification state is exposed as `pending`, `verified`, or `rejected`;
-- the existing Command Center status payload is enriched with a bounded Worker verification summary and records rather than adding another API family;
-- Automation Logs remains read-only and now renders Worker identity, task revision, controlled outcome, verification mode, verification state, review route, wake target, and wake reason;
-- an internal review method may mark `ROUTINE_BATCH` or `IMMEDIATE_HQ` implementation evidence `verified` or `rejected` in the same history row;
-- `AUTOMATIC` verification may not be manually overridden and must come from the machine postcondition evidence;
-- canonical `SOURCE_VERIFIED` or `CLOSED` state may be supplied by the authoritative caller to suppress further wakes without copying lifecycle truth into the run table.
+- the existing Command Center status payload is enriched rather than creating another API family;
+- Automation Logs remains read-only;
+- `AUTOMATIC` verification cannot be manually overridden;
+- canonical `SOURCE_VERIFIED` or `CLOSED` state may suppress further wakes without duplicating lifecycle truth into SQLite.
 
 Wake and queue mapping:
 
-- `IMPLEMENT` plus verified `AUTOMATIC`: wake suppressed;
-- `IMPLEMENT` plus unverified `AUTOMATIC`: fail-safe owning Department HQ wake;
-- `IMPLEMENT` plus pending `ROUTINE_BATCH`: department review queue, no immediate desktop wake;
+- verified `AUTOMATIC`: wake suppressed;
+- unverified `AUTOMATIC`: owning Department HQ wake;
+- pending `ROUTINE_BATCH`: department review queue, no immediate wake;
 - verified `ROUTINE_BATCH`: queue removed and wake suppressed;
 - pending `IMMEDIATE_HQ`: owning Department HQ wake;
 - verified `IMMEDIATE_HQ`: repeat wake suppressed;
-- `REPORT_AND_HOLD`: rejected verification state and owning Department HQ wake;
-- `ELEVATE_FOR_APPROVAL`: rejected verification state and Chief of Staff HQ wake for Rob's decision;
-- canonical `SOURCE_VERIFIED` or `CLOSED`: further wake suppressed.
-
-Dashboard view:
-
-- Worker outcome, pending, verified, rejected, and wake-required counters;
-- Worker-verification and wake-routing filters;
-- Worker and task facts inside the existing Automation Logs cards;
-- searchable and copyable outcome, verification, queue, and wake evidence;
-- no approval, review, send, or mutation controls.
+- `REPORT_AND_HOLD`: owning Department HQ wake;
+- `ELEVATE_FOR_APPROVAL`: Chief of Staff HQ wake for Rob's decision.
 
 Validation evidence:
 
-- the focused Worker verification, runtime, and Automation Logs suite passed with `20 passed`;
-- Rob reported the complete dashboard regression suite passed with `212 passed, 9 warnings in 198.41s`;
-- no Slice 6 functional regression remained.
+- focused verification/runtime/Automation Logs suite: `20 passed`;
+- full suite: `212 passed, 9 warnings in 198.41s`.
 
-Current boundary:
+### Slice 7: Synthetic end-to-end pilot
 
-- no real wake is emitted by Slice 6; it derives eligibility, target, and suppression only;
-- no general Worker dashboard control surface is added;
-- no Worker profile, real registry entry, or real route is created;
-- no recurring Worker authority schedule is created;
-- no canonical advisory lifecycle state is duplicated into SQLite.
+Status: Implemented and locally validated.
 
-### Slice 7: End-to-end pilot
+Files:
 
-Status: Next implementation slice.
+- `apps/lifeos-dashboard/tests/test_worker_end_to_end_pilot.py`;
+- transport-integrity hardening in `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver.py`;
+- transport-integrity hardening in `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_store.py`;
+- receiver regression coverage in `apps/lifeos-dashboard/tests/test_worker_receiver.py`.
 
-Before activating a new real department Worker:
+Pilot construction:
 
-1. create one synthetic registry entry and fake route only inside the pilot harness;
-2. use a synthetic department profile, canonical procedure, task, and execution envelope;
-3. prove zero-match, duplicate-match, paused, stale-revision, wrapper-mismatch, semantic-validation, and verification-routing failures;
-4. prove one successful bounded run from transport record through receiver acceptance, controlled outcome, verification view, and persistent evidence;
-5. verify no duplicate run occurs on retry;
-6. remove or isolate all synthetic runtime state after the pilot;
-7. only then consider one department-owned profile under the canonical contract.
+- one synthetic Worker registry entry;
+- one fake exact-title route;
+- one synthetic authority profile;
+- one synthetic canonical procedure;
+- one synthetic task and execution envelope;
+- one injected fake transport adapter;
+- temporary SQLite databases and disposable fixtures only.
 
-## Out of Scope
+Pilot proof:
 
-This packet does not authorize:
+- zero exact-title match fails closed;
+- duplicate exact-title match fails closed;
+- paused deployment refuses before transport;
+- unavailable route refuses before transport;
+- missing wrapper witness fails transport and cannot consume a revision;
+- corrupted successful transport metadata fails receiver validation;
+- unauthorized scope records `REPORT_AND_HOLD` without consuming a revision;
+- one successful transport becomes `READY`, then exactly one `IMPLEMENT` outcome with same-row evidence and verification review;
+- pending routine work enters the review queue without an immediate wake;
+- verified routine work leaves the queue and suppresses repeat wakes;
+- retry with a new `run_id` cannot re-execute the accepted task revision;
+- a second controlled outcome is refused;
+- no synthetic state survives outside temporary test fixtures.
 
-- creating speculative Worker profiles or folders;
-- migrating the grandfathered Raw Capture or Inventory packages;
-- changing canonical governance contracts;
-- fuzzy title matching;
-- autonomous authority expansion;
-- a new queue service;
-- recurring Worker authority generation in v1;
-- Package E;
-- unrelated dashboard expansion;
-- reopening the abandoned full-text composer-verification investigation.
+Validation evidence:
 
-## Completion Conditions
+- focused pilot plus receiver regression suite: `32 passed`;
+- full dashboard suite: `222 passed, 9 warnings in 238.78s`;
+- no Slice 7 functional regression remained.
 
-Package D reaches its first runtime milestone when:
+## First Runtime Milestone Receipt
 
-- the registry and envelope schemas are persisted;
-- one exact Worker route can be resolved safely;
+Package D reached its first runtime milestone on 2026-07-19.
+
+Completion conditions satisfied:
+
+- registry and envelope schemas are persisted;
+- exact Worker routes resolve safely and fail closed on zero or duplicate matches;
 - stale and duplicate revisions are suppressed;
 - the wrapper ID is preserved through transport evidence;
+- receiver acceptance verifies the complete successful-send transport row;
 - receiver validation returns one controlled outcome;
+- verification and wake decisions derive from the same durable history row;
 - focused and full repository tests pass;
 - one synthetic end-to-end run is verified without activating a speculative real Worker.
 
-## Next Action
+## Current Boundary
 
-Implement Slice 7 as a synthetic end-to-end pilot harness that exercises the already-validated Slices 1–6 together without creating durable real-world authority:
+Package D does not authorize:
 
-1. build one synthetic Worker registry entry, fake exact-title route, synthetic profile, canonical procedure, and synthetic task;
-2. use a fake transport adapter for deterministic backend tests before any desktop UI exercise;
-3. prove fail-closed zero-match, duplicate-title, paused, stale-revision, wrapper-mismatch, and unauthorized-scope paths;
-4. prove one successful transport record becomes `READY`, then exactly one `IMPLEMENT` outcome with persistent evidence and the expected verification/wake view;
-5. prove a retry with a new `run_id` cannot re-execute the same `worker_id + task_id + task_revision`;
-6. keep all synthetic state inside temporary test databases and fixtures;
-7. after focused and full tests pass, decide separately whether a single synthetic desktop route is necessary before any real Worker activation;
-8. do not create a real profile, registry entry, route, wake, recurring authority schedule, or Package E work.
+- a real Worker profile or folder;
+- a real registry entry or route;
+- a real desktop wake;
+- a recurring Worker authority schedule;
+- a general Worker dashboard control surface;
+- a second run, outcome, queue, wake, or verification ledger;
+- Package E;
+- autonomous authority expansion;
+- migration of grandfathered Worker packages;
+- reopening the abandoned full-text composer investigation.
+
+Test success proves backend readiness. It does not create operational authority.
+
+## Next Decision
+
+Rob must separately decide one of these bounded paths:
+
+1. stop at the validated backend milestone and gather evidence from existing grandfathered pilots;
+2. authorize one synthetic desktop-route exercise using a disposable visible title and no durable real-world authority;
+3. select one candidate department-owned Worker for a profile and activation review.
+
+Before any real Worker write, establish:
+
+- record class;
+- one owner;
+- authoritative department-owned profile path;
+- lifecycle state and priority as separate fields;
+- allowed task class;
+- read and write scopes;
+- approved tools;
+- verification mode;
+- smallest useful next action;
+- completion, rejection, and review conditions;
+- why GitHub is the correct system;
+- the statement or standing rule authorizing the write.
+
+No real profile, registry entry, route, wake, recurring authority schedule, or Package E work may proceed from this packet alone.
