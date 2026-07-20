@@ -24,6 +24,8 @@ from .adapters import (
 from .command_center import CommandCenterError, CommandCenterService, CommandJob
 from .department_inspection import DepartmentInspectionSource
 from .service import DashboardService
+from .worker_operations import WorkerOperationsService
+from .worker_runtime import WorkerRuntimeError
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 APP_ROOT = PACKAGE_ROOT.parent
@@ -73,6 +75,24 @@ class ScheduledJobRequest(BaseModel):
 
 class ScheduleEnabledRequest(BaseModel):
     enabled: bool
+
+
+class WorkerAdvisoryRunRequest(BaseModel):
+    advisory_id: str
+    confirm_send: bool = False
+    timeout_seconds: int = Field(default=600, ge=60, le=900)
+
+
+class WorkerCourierSelfTestRequest(BaseModel):
+    confirm_send: bool = False
+    timeout_seconds: int = Field(default=300, ge=60, le=900)
+
+
+class WorkerReviewRequest(BaseModel):
+    run_id: str
+    state: str
+    actor: str = "Engineering HQ"
+    reason: str
 
 
 def _cache_path(environment_name: str, filename: str) -> Path:
@@ -136,8 +156,14 @@ def create_app(
         APP_ROOT,
         database_path=_cache_path("COMMAND_CENTER_DATABASE_PATH", "command_center.sqlite3"),
     )
+    repository_root = _repository_root() if source is None else None
+    worker_operations = (
+        WorkerOperationsService(command_center, repository_root)
+        if repository_root is not None
+        else None
+    )
     department_inspection = inspection_source or DepartmentInspectionSource(
-        _repository_root() if source is None else None
+        repository_root if source is None else None
     )
     application = FastAPI(
         title="LifeOS Dashboard",
@@ -146,6 +172,7 @@ def create_app(
     )
     application.state.dashboard_service = service
     application.state.command_center = command_center
+    application.state.worker_operations = worker_operations
     application.state.department_inspection = department_inspection
     application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
     templates = Jinja2Templates(directory=PACKAGE_ROOT / "templates")
@@ -182,6 +209,68 @@ def create_app(
     @application.get("/api/command-center")
     async def command_center_status() -> dict[str, object]:
         return command_center.status()
+
+    @application.get("/api/worker-operations")
+    async def worker_operations_status() -> dict[str, object]:
+        if worker_operations is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker Operations requires a local LifeOS repository checkout.",
+            )
+        return await run_in_threadpool(worker_operations.status)
+
+    @application.post("/api/worker-operations/run")
+    async def run_worker_advisory(request: WorkerAdvisoryRunRequest) -> dict[str, object]:
+        if worker_operations is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker Operations requires a local LifeOS repository checkout.",
+            )
+        try:
+            return await run_in_threadpool(
+                worker_operations.run_advisory,
+                request.advisory_id,
+                confirm_send=request.confirm_send,
+                timeout_seconds=request.timeout_seconds,
+            )
+        except WorkerRuntimeError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    @application.post("/api/worker-operations/self-test")
+    async def worker_courier_self_test(
+        request: WorkerCourierSelfTestRequest,
+    ) -> dict[str, object]:
+        if worker_operations is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker Operations requires a local LifeOS repository checkout.",
+            )
+        try:
+            return await run_in_threadpool(
+                worker_operations.courier_self_test,
+                confirm_send=request.confirm_send,
+                timeout_seconds=request.timeout_seconds,
+            )
+        except WorkerRuntimeError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    @application.post("/api/worker-operations/review")
+    async def review_worker_run(request: WorkerReviewRequest) -> dict[str, object]:
+        if worker_operations is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker Operations requires a local LifeOS repository checkout.",
+            )
+        try:
+            return await run_in_threadpool(
+                worker_operations.review,
+                request.run_id,
+                request.state,
+                actor=request.actor,
+                reason=request.reason,
+            )
+        except WorkerRuntimeError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @application.get("/api/command-center/canonical-prompt/{destination}")
     async def canonical_prompt_preview(destination: str) -> dict[str, str]:
