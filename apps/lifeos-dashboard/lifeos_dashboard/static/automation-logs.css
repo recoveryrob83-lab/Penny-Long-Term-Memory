@@ -6,6 +6,37 @@
   min-width: 0;
 }
 
+.automation-verification-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+.automation-verification-card {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 10px;
+  background: rgba(14, 116, 144, 0.1);
+}
+
+.automation-verification-card span,
+.automation-verification-card strong {
+  display: block;
+}
+
+.automation-verification-card span {
+  color: var(--muted, #94a3b8);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.automation-verification-card strong {
+  margin-top: 0.3rem;
+  font-size: 1.25rem;
+}
+
 .automation-log-toolbar {
   display: grid;
   grid-template-columns: repeat(5, minmax(130px, 1fr));
@@ -82,26 +113,36 @@
   gap: 0.6rem;
 }
 
-.automation-log-fact {
+.automation-log-fact,
+.automation-log-wake {
   padding: 0.65rem 0.75rem;
   border: 1px solid rgba(148, 163, 184, 0.24);
   border-radius: 9px;
   background: rgba(2, 6, 23, 0.48);
 }
 
+.automation-log-wake {
+  border-color: rgba(251, 191, 36, 0.28);
+  background: rgba(120, 53, 15, 0.12);
+}
+
 .automation-log-fact span,
-.automation-log-fact strong {
+.automation-log-fact strong,
+.automation-log-wake span,
+.automation-log-wake strong {
   display: block;
 }
 
-.automation-log-fact span {
+.automation-log-fact span,
+.automation-log-wake span {
   color: var(--muted, #94a3b8);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
-.automation-log-fact strong {
+.automation-log-fact strong,
+.automation-log-wake strong {
   margin-top: 0.25rem;
   font-size: 0.9rem;
   overflow-wrap: anywhere;
@@ -153,6 +194,7 @@
 }
 
 @media (max-width: 900px) {
+  .automation-verification-summary,
   .automation-log-toolbar {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -164,5 +206,11 @@
   .automation-log-actions {
     grid-column: 1 / -1;
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .automation-verification-summary {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
