@@ -8,7 +8,7 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Package D Receiver Validation and Controlled Outcomes
+- Current Phase: Active / Package D Verification Views and Wake Suppression
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center history, Engineering advisory board, Advisory Index, and other source systems only when explicitly required
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -46,7 +46,7 @@ Never claim an action, test, deployment, or connector write occurred without cur
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active. Slices 1–4 are implemented and locally validated. Slice 5 receiver semantics and controlled outcomes are next.
+Status: Active. Slices 1–5 are implemented and locally validated. Slice 6 verification views, queue filtering, and wake suppression are next.
 
 Canonical implementation packet:
 
@@ -73,6 +73,11 @@ Implemented and locally validated slices:
    - `apps/lifeos-dashboard/lifeos_dashboard/worker_command_center.py`
    - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
    - `apps/lifeos-dashboard/tests/test_worker_command_center.py`
+5. Worker receiver validation and controlled outcomes:
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_models.py`
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_store.py`
+   - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver.py`
+   - `apps/lifeos-dashboard/tests/test_worker_receiver.py`
 
 Current capabilities:
 
@@ -87,26 +92,33 @@ Current capabilities:
 - separate manual and scheduler-triggered Worker execution methods;
 - shared Command Center pause and one-job lock;
 - successful-send duplicate suppression while failed transport remains eligible for bounded retry;
-- existing execution-history linkage for wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification mode, trigger, and future controlled outcome;
-- one-copy Worker composer verification by expected `wrapper_id` only.
+- existing execution-history linkage for wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification mode, trigger, receiver evidence, and controlled outcome;
+- one-copy Worker composer verification by expected `wrapper_id` only;
+- semantic receiver validation for profile identity/version, owning department, exact calling authority, procedure/version/checksum, parameters, sources, scopes, tools, verification mode, pause state, and revision freshness;
+- atomic receiver acceptance only after semantic validation succeeds;
+- evidence-backed finalization with exactly one `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL` outcome.
 
 Validation state:
 
 - the four focused Worker-runtime files passed with `36 passed`;
-- the first full suite reached `172 passed` with two guidance-string assertion failures;
+- the first Slice 4 full suite reached `172 passed` with two guidance-string assertion failures;
 - Engineering repaired only the `Open Automation Logs` and `Nothing was sent` wording contracts;
 - both focused regressions passed;
-- Rob reported the final full suite passed with `174 passed, 9 warnings in 173.76s`;
+- the Slice 4 full suite passed with `174 passed, 9 warnings in 173.76s`;
+- the focused Slice 5 receiver suite passed with `22 passed`;
+- Rob reported the complete dashboard suite passed with `196 passed, 9 warnings in 191.97s`;
 - no real Worker profile, registry entry, route, UI, or recurring Worker authority schedule has been created.
 
 Next valid Engineering action:
 
-1. implement Slice 5 receiver-side profile, authority, scope, parameter, source-reference, verification-mode, and duplicate validation;
-2. resolve the department-owned profile referenced by the registry without copying authority text into runtime state;
-3. distinguish transport completion from receiver acceptance;
-4. persist exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
-5. accept the task revision only after semantic validation succeeds;
-6. keep Worker UI and real profile activation deferred until the synthetic pilot.
+1. implement Slice 6 verification-state views over the existing `execution_history` table;
+2. expose `pending`, `verified`, and `rejected` without creating a separate queue service;
+3. map controlled outcomes and verification modes to queue eligibility and wake suppression;
+4. suppress unnecessary wakes for verified `AUTOMATIC`, `SOURCE_VERIFIED`, and `CLOSED` states;
+5. queue `ROUTINE_BATCH` implementation for department review without an immediate desktop wake;
+6. wake the owning Department HQ for `IMMEDIATE_HQ` implementation and `REPORT_AND_HOLD`;
+7. wake Chief of Staff HQ for `ELEVATE_FOR_APPROVAL`;
+8. keep Worker UI, real profile activation, recurring authority generation, and Package E deferred.
 
 ## Composer Boundary
 
@@ -118,24 +130,26 @@ Full-text equality, repeated selection, character-range comparison, multiple wit
 
 ## Automation Command Center Boundary
 
-The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend execution path is locally validated through Slice 4.
+The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend execution and receiver paths are locally validated through Slice 5.
 
-Slice 4 does not:
+Slices 4 and 5 do not:
 
 - change existing HQ destinations or prompt behavior;
-- add Worker dashboard UI;
+- add general Worker dashboard controls;
 - create real Worker registry entries;
 - create department profiles;
 - create recurring Worker authority schedules;
-- process receiver outcomes yet.
+- create a second run, outcome, or verification ledger.
 
 The scheduler adapter accepts one already-authorized execution-ready envelope. Correct recurring authority generation requires a separate approved model and is not inferred from ordinary recurrence.
+
+Slice 6 may add filtered verification views and wake decisions derived from existing execution-history evidence. It may not create authority, interpret an unapproved task, or introduce a competing queue source.
 
 ## Advisory State
 
 As of 2026-07-19:
 
-- ADV-20260718-042 is OPEN and authoritative for receiver-side semantic validation and controlled Worker outcomes.
+- ADV-20260718-042 is OPEN and authoritative for receiver-side semantic validation and controlled Worker outcomes. Engineering implementation and local tests now exist; source verification and lifecycle changes remain with the advisory owner.
 - ADV-20260719-043 is CLOSED after Life OS Maintenance created the canonical execution and Worker protocols.
 - ADV-20260719-044 is OPEN on `coordination/boards/engineering.md`, targeted to Life OS Maintenance HQ for shared Worker filesystem, pointer, profile-state, handoff, watch, and architecture-history reconciliation.
 
@@ -146,7 +160,7 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - Monitor ADV-20260719-044 and observe corrected role-routed boots before closing the department-ownership wrapper.
 - Observe four-source dashboard behavior during ordinary use.
 - Continue Raw Capture and Inventory pilots only as grandfathered evidence sources.
-- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the new envelope, evidence, and controlled-outcome model.
+- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the new envelope, evidence, controlled-outcome, and verification-state model.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
