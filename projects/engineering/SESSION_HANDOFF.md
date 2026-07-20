@@ -8,7 +8,7 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Package D Synthetic End-to-End Pilot
+- Current Phase: Active / Package D Milestone Complete and Worker Activation Decision Gate
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center history, Engineering advisory board, Advisory Index, and other source systems only when explicitly required
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
@@ -20,7 +20,7 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
 5. Treat `projects/engineering/open_loops.md` as authoritative for unfinished Engineering work.
-6. Read `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md` when Package D is in scope.
+6. Read `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md` when Package D or Worker activation is in scope.
 7. Read `coordination/WORKER_EXECUTION_CONTRACT.md` and `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` when Worker routing, authority, or execution behavior is in scope.
 8. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
 9. Read current Engineering notebook records only when directly referenced by active work.
@@ -46,7 +46,7 @@ Never claim an action, test, deployment, or connector write occurred without cur
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Active. Slices 1–6 are implemented and locally validated. Slice 7 is the synthetic end-to-end pilot.
+Status: First runtime milestone complete. Slices 1–7 are implemented and locally validated. The next valid action is a separate activation decision, not automatic Worker deployment.
 
 Canonical implementation packet:
 
@@ -87,6 +87,9 @@ Implemented and locally validated slices:
    - `apps/lifeos-dashboard/tests/test_worker_verification.py`
    - `apps/lifeos-dashboard/tests/test_worker_verification_runtime.py`
    - `apps/lifeos-dashboard/tests/test_automation_logs_ui.py`
+7. Synthetic end-to-end pilot:
+   - `apps/lifeos-dashboard/tests/test_worker_end_to_end_pilot.py`
+   - exact transport-history validation in `worker_receiver.py` and `worker_receiver_store.py`
 
 Current capabilities:
 
@@ -103,13 +106,15 @@ Current capabilities:
 - successful-send duplicate suppression while failed transport remains eligible for bounded retry;
 - existing execution-history linkage for wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification mode, trigger, receiver evidence, controlled outcome, and verification review;
 - one-copy Worker composer verification by expected `wrapper_id` only;
+- receiver acceptance requiring exactly one successful Worker send with exact matching transport-envelope metadata;
 - semantic receiver validation for profile identity/version, owning department, exact calling authority, procedure/version/checksum, parameters, sources, scopes, tools, verification mode, pause state, and revision freshness;
-- atomic receiver acceptance only after semantic validation succeeds;
+- atomic receiver acceptance only after transport and semantic validation both succeed;
 - evidence-backed finalization with exactly one `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL` outcome;
 - derived `pending`, `verified`, and `rejected` verification states without a second queue ledger;
 - queue eligibility, wake targeting, and wake suppression derived from the same execution-history row;
 - read-only Automation Logs counters, filters, Worker facts, and wake evidence;
-- no real wake emission or dashboard mutation controls.
+- no real wake emission or dashboard mutation controls;
+- a disposable synthetic integration harness proving the backend pipeline without durable real-world authority.
 
 Validation state:
 
@@ -121,19 +126,31 @@ Validation state:
 - the focused Slice 5 receiver suite passed with `22 passed`;
 - the Slice 5 full suite passed with `196 passed, 9 warnings in 191.97s`;
 - the focused Slice 6 verification/runtime/Automation Logs suite passed with `20 passed`;
-- Rob reported the complete dashboard suite passed with `212 passed, 9 warnings in 198.41s`;
+- the Slice 6 full suite passed with `212 passed, 9 warnings in 198.41s`;
+- the focused Slice 7 end-to-end pilot and receiver suite passed with `32 passed`;
+- Rob reported the complete dashboard suite passed with `222 passed, 9 warnings in 238.78s`;
+- Slices 1–7 are locally validated with no remaining functional regression;
 - no real Worker profile, registry entry, route, wake, UI mutation control, or recurring Worker authority schedule has been created.
+
+Synthetic pilot proof:
+
+- zero and duplicate exact-title resolution fail closed;
+- paused deployment and unavailable route refuse before transport;
+- missing wrapper witness fails transport and cannot consume authority;
+- corrupted persisted transport metadata fails receiver validation;
+- unauthorized scope records `REPORT_AND_HOLD` without revision consumption;
+- one successful run traverses transport, `READY`, `IMPLEMENT`, evidence persistence, routine verification review, and wake suppression in one row;
+- retry with a new `run_id` cannot re-execute the accepted revision;
+- a second controlled outcome is refused;
+- temporary databases and fixtures isolate all synthetic state.
 
 Next valid Engineering action:
 
-1. implement one synthetic end-to-end pilot harness using a temporary database and synthetic fixtures only;
-2. create one synthetic registry entry, fake exact-title route, synthetic profile, canonical procedure, task, and execution envelope;
-3. use a fake transport adapter first, not a real Worker chat;
-4. prove zero-match, duplicate-title, paused, stale-revision, wrapper-mismatch, unauthorized-scope, and duplicate-retry failures;
-5. prove one successful transport record becomes `READY`, then exactly one `IMPLEMENT` outcome with persistent evidence and the expected verification/wake view;
-6. prove a retry with a new `run_id` cannot re-execute the same task revision;
-7. keep all synthetic state isolated and disposable;
-8. do not activate a real Worker or create a real profile, route, wake, recurring authority schedule, or Package E work.
+1. present Rob with the activation decision, including whether a bounded synthetic desktop-route exercise adds enough evidence to justify its complexity;
+2. do not perform that desktop exercise without explicit scope and a disposable visible title;
+3. do not create a real Worker profile, registry entry, route, wake, or schedule without separate authorization from Rob and the owning department;
+4. if a real candidate is considered, establish its record class, owner, authoritative profile path, lifecycle state, priority, task class, scopes, verification mode, review condition, and why GitHub is correct before any durable write;
+5. keep recurring Worker authority generation and Package E deferred.
 
 ## Composer Boundary
 
@@ -145,21 +162,22 @@ Full-text equality, repeated selection, character-range comparison, multiple wit
 
 ## Automation Command Center Boundary
 
-The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend, receiver, and verification paths are locally validated through Slice 6.
+The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend, receiver, verification, and synthetic integration paths are locally validated through Slice 7.
 
-Slices 4–6 do not:
+Package D does not:
 
 - change existing HQ destinations or prompt behavior;
-- add general Worker dashboard controls;
+- add general Worker execution controls;
 - create real Worker registry entries;
 - create department profiles;
 - create recurring Worker authority schedules;
 - create a second run, outcome, queue, wake, or verification ledger;
-- emit a real wake.
+- emit a real wake;
+- authorize a real Worker merely because tests passed.
 
 The scheduler adapter accepts one already-authorized execution-ready envelope. Correct recurring authority generation requires a separate approved model and is not inferred from ordinary recurrence.
 
-Slice 7 may create synthetic fixtures, a fake route, and temporary test records only. It may not create durable real-world authority or activate a Worker.
+A synthetic desktop route may be exercised only under a new bounded authorization. Any real profile and activation remain department-owned durable decisions.
 
 ## Advisory State
 
@@ -176,7 +194,7 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - Monitor ADV-20260719-044 and observe corrected role-routed boots before closing the department-ownership wrapper.
 - Observe four-source dashboard behavior during ordinary use.
 - Continue Raw Capture and Inventory pilots only as grandfathered evidence sources.
-- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the new envelope, evidence, controlled-outcome, verification-state, and wake-suppression model.
+- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the validated envelope, evidence, controlled-outcome, verification-state, wake-suppression, and transport-integrity model.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
@@ -184,9 +202,9 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 
 - ChatGPT Classic must be responsive for UI automation.
 - Failed scheduled runs pause rather than retry blindly.
-- Do not activate a speculative real Worker before the synthetic end-to-end pilot passes.
+- Package D validation does not authorize a real Worker, profile, route, wake, recurring authority schedule, or Package E.
+- Any desktop synthetic exercise or real activation requires a separate bounded decision.
 - Do not create recurring Worker authority schedules without an approved task-generation model.
-- Do not begin Package E or unrelated automation expansion while Package D remains active.
 - Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
 
 ## Safety and Truthfulness
