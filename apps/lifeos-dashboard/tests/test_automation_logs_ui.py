@@ -38,6 +38,8 @@ def test_logs_ui_has_filters_and_readable_stream_layout() -> None:
         "automation-log-filter-result",
         "automation-log-filter-destination",
         "automation-log-filter-trigger",
+        "automation-log-filter-worker-state",
+        "automation-log-filter-wake",
         "automation-log-filter-sort",
         "automation-log-filter-search",
         "automation-log-refresh",
@@ -62,3 +64,27 @@ def test_logs_ui_preserves_open_details_and_avoids_unchanged_rerenders() -> None
     assert "if (changed || showLoading) render();" in source
     assert 'control.addEventListener("change", () => render())' in source
     assert 'ui.search.addEventListener("input", () => render())' in source
+
+
+def test_logs_ui_renders_worker_verification_and_wake_routing() -> None:
+    tabs_source = TABS_PATH.read_text(encoding="utf-8")
+    source = LOGS_PATH.read_text(encoding="utf-8")
+    css_source = CSS_PATH.read_text(encoding="utf-8")
+
+    for element_id in (
+        "automation-worker-total",
+        "automation-worker-pending",
+        "automation-worker-verified",
+        "automation-worker-rejected",
+        "automation-worker-wakes",
+    ):
+        assert element_id in tabs_source
+
+    assert "data.worker_verification" in source
+    assert "verificationByHistoryId" in source
+    assert "controlled_outcome" in source
+    assert "verification_state" in source
+    assert "wake_disposition" in source
+    assert "queue_eligible" in source
+    assert ".automation-verification-summary" in css_source
+    assert ".automation-log-wake" in css_source
