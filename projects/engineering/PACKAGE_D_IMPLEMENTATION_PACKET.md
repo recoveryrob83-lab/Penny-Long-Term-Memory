@@ -299,7 +299,7 @@ Current boundary:
 
 ### Slice 6: Verification views and wake suppression
 
-Status: Implemented in source, pending Rob's focused and full local validation.
+Status: Implemented and locally validated.
 
 Files:
 
@@ -345,11 +345,11 @@ Dashboard view:
 - searchable and copyable outcome, verification, queue, and wake evidence;
 - no approval, review, send, or mutation controls.
 
-Validation status:
+Validation evidence:
 
-- source and test files were read back from GitHub;
-- the assistant container could not reach GitHub, so no repository-local test run was performed there;
-- Rob's focused and complete local test runs remain the validation gate.
+- the focused Worker verification, runtime, and Automation Logs suite passed with `20 passed`;
+- Rob reported the complete dashboard regression suite passed with `212 passed, 9 warnings in 198.41s`;
+- no Slice 6 functional regression remained.
 
 Current boundary:
 
@@ -357,18 +357,21 @@ Current boundary:
 - no general Worker dashboard control surface is added;
 - no Worker profile, real registry entry, or real route is created;
 - no recurring Worker authority schedule is created;
-- no canonical advisory lifecycle state is duplicated into SQLite;
-- Slice 7 remains the synthetic end-to-end pilot.
+- no canonical advisory lifecycle state is duplicated into SQLite.
 
 ### Slice 7: End-to-end pilot
 
+Status: Next implementation slice.
+
 Before activating a new real department Worker:
 
-1. test one synthetic registry entry and fake route;
-2. prove zero-match, duplicate-match, paused, stale-revision, and wrapper-mismatch failures;
-3. prove one successful bounded run through persistent evidence;
-4. verify no duplicate run occurs on retry;
-5. only then activate one department-owned profile under the canonical contract.
+1. create one synthetic registry entry and fake route only inside the pilot harness;
+2. use a synthetic department profile, canonical procedure, task, and execution envelope;
+3. prove zero-match, duplicate-match, paused, stale-revision, wrapper-mismatch, semantic-validation, and verification-routing failures;
+4. prove one successful bounded run from transport record through receiver acceptance, controlled outcome, verification view, and persistent evidence;
+5. verify no duplicate run occurs on retry;
+6. remove or isolate all synthetic runtime state after the pilot;
+7. only then consider one department-owned profile under the canonical contract.
 
 ## Out of Scope
 
@@ -399,12 +402,13 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Run the focused Slice 6 suite:
+Implement Slice 7 as a synthetic end-to-end pilot harness that exercises the already-validated Slices 1–6 together without creating durable real-world authority:
 
-`python -m pytest -q tests\test_worker_verification.py tests\test_worker_verification_runtime.py tests\test_automation_logs_ui.py`
-
-Then run the complete dashboard regression suite:
-
-`python -m pytest -q tests`
-
-If both pass, record Slice 6 as locally validated and begin Slice 7 with one synthetic registry entry and fake route. Do not activate a real Worker, create a real profile, emit a real wake, or add recurring Worker authority.
+1. build one synthetic Worker registry entry, fake exact-title route, synthetic profile, canonical procedure, and synthetic task;
+2. use a fake transport adapter for deterministic backend tests before any desktop UI exercise;
+3. prove fail-closed zero-match, duplicate-title, paused, stale-revision, wrapper-mismatch, and unauthorized-scope paths;
+4. prove one successful transport record becomes `READY`, then exactly one `IMPLEMENT` outcome with persistent evidence and the expected verification/wake view;
+5. prove a retry with a new `run_id` cannot re-execute the same `worker_id + task_id + task_revision`;
+6. keep all synthetic state inside temporary test databases and fixtures;
+7. after focused and full tests pass, decide separately whether a single synthetic desktop route is necessary before any real Worker activation;
+8. do not create a real profile, registry entry, route, wake, recurring authority schedule, or Package E work.
