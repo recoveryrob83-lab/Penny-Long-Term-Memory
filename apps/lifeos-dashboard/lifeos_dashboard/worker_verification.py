@@ -16,6 +16,7 @@ ReviewRoute = Literal["none", "routine_batch", "immediate_hq", "automatic"]
 
 _ALLOWED_OUTCOMES = {"IMPLEMENT", "REPORT_AND_HOLD", "ELEVATE_FOR_APPROVAL"}
 _ALLOWED_MODES = {"AUTOMATIC", "ROUTINE_BATCH", "IMMEDIATE_HQ"}
+_ALLOWED_QUEUE_STATES = {"pending", "verified", "rejected"}
 _TERMINAL_WAKE_SUPPRESSION_STATES = {"SOURCE_VERIFIED", "CLOSED"}
 
 
@@ -27,18 +28,24 @@ def _required_text(value: object, field_name: str) -> str:
 
 
 def verification_state(values: Mapping[str, object]) -> VerificationQueueState:
-    """Derive the canonical queue state from persisted receiver evidence."""
+    """Derive review state without confusing machine evidence with HQ review."""
 
     outcome = _required_text(values.get("controlled_outcome"), "controlled_outcome")
     if outcome not in _ALLOWED_OUTCOMES:
         raise WorkerRuntimeError("Worker controlled outcome is invalid.")
-    observed = str(values.get("receiver_verification_state") or "").strip().casefold()
+    explicit = str(values.get("worker_verification_state") or "").strip().casefold()
+    if explicit:
+        if explicit not in _ALLOWED_QUEUE_STATES:
+            raise WorkerRuntimeError("Persisted Worker verification state is invalid.")
+        return cast(VerificationQueueState, explicit)
     if outcome != "IMPLEMENT":
         return "rejected"
-    if observed == "verified":
+    mode = _required_text(values.get("verification_mode"), "verification_mode")
+    receiver_evidence = str(
+        values.get("receiver_verification_state") or ""
+    ).strip().casefold()
+    if mode == "AUTOMATIC" and receiver_evidence == "verified":
         return "verified"
-    if observed == "rejected":
-        return "rejected"
     return "pending"
 
 
@@ -54,6 +61,7 @@ class WorkerVerificationRecord:
     owning_department: str
     controlled_outcome: str
     verification_mode: str
+    receiver_evidence_state: str
     verification_state: VerificationQueueState
     review_route: ReviewRoute
     queue_eligible: bool
@@ -119,7 +127,7 @@ def _wake_decision(
             owning_department,
             "Department review rejected the implementation evidence.",
         )
-    if mode == "IMMEDIATE_HQ":
+    if mode == "IMMEDIATE_HQ" and state == "pending":
         return (
             "owning_department_hq",
             owning_department,
@@ -176,6 +184,7 @@ def record_from_row(
         owning_department=owning_department,
         controlled_outcome=outcome,
         verification_mode=mode,
+        receiver_evidence_state=str(values.get("receiver_verification_state") or ""),
         verification_state=state,
         review_route=route,
         queue_eligible=route == "routine_batch" and state == "pending",
@@ -185,18 +194,18 @@ def record_from_row(
         receiver_reason=str(values.get("receiver_reason") or ""),
         finished_at=float(values.get("finished_at") or 0.0),
         verification_updated_at=(
-            float(values["receiver_verification_updated_at"])
-            if values.get("receiver_verification_updated_at") is not None
+            float(values["worker_verification_updated_at"])
+            if values.get("worker_verification_updated_at") is not None
             else None
         ),
         verification_actor=(
-            str(values["receiver_verification_actor"])
-            if values.get("receiver_verification_actor") is not None
+            str(values["worker_verification_actor"])
+            if values.get("worker_verification_actor") is not None
             else None
         ),
         verification_reason=(
-            str(values["receiver_verification_reason"])
-            if values.get("receiver_verification_reason") is not None
+            str(values["worker_verification_reason"])
+            if values.get("worker_verification_reason") is not None
             else None
         ),
     )
@@ -206,9 +215,10 @@ class WorkerVerificationStore:
     """Expose and review Worker verification without a second queue ledger."""
 
     _COLUMNS = {
-        "receiver_verification_updated_at": "REAL",
-        "receiver_verification_actor": "TEXT",
-        "receiver_verification_reason": "TEXT",
+        "worker_verification_state": "TEXT",
+        "worker_verification_updated_at": "REAL",
+        "worker_verification_actor": "TEXT",
+        "worker_verification_reason": "TEXT",
     }
 
     def __init__(self, database_path: Path) -> None:
@@ -239,8 +249,8 @@ class WorkerVerificationStore:
             SELECT id, run_id, worker_id, task_id, task_revision,
                    owning_department, controlled_outcome, verification_mode,
                    receiver_verification_state, receiver_reason, finished_at,
-                   receiver_verification_updated_at, receiver_verification_actor,
-                   receiver_verification_reason
+                   worker_verification_state, worker_verification_updated_at,
+                   worker_verification_actor, worker_verification_reason
             FROM execution_history
             WHERE worker_id IS NOT NULL AND controlled_outcome IS NOT NULL
         """
@@ -304,10 +314,10 @@ class WorkerVerificationStore:
             connection.execute(
                 """
                 UPDATE execution_history SET
-                    receiver_verification_state = ?,
-                    receiver_verification_updated_at = ?,
-                    receiver_verification_actor = ?,
-                    receiver_verification_reason = ?
+                    worker_verification_state = ?,
+                    worker_verification_updated_at = ?,
+                    worker_verification_actor = ?,
+                    worker_verification_reason = ?
                 WHERE id = ?
                 """,
                 (state, updated_at, clean_actor, clean_reason, current.history_id),
