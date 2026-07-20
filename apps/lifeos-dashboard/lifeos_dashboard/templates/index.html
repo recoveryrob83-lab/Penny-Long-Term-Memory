@@ -7,14 +7,12 @@
   <title>LifeOS Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/github.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', path='/command-center.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='/worker-operations.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/department-inspection.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/tabs.css') }}">
   <script defer src="{{ url_for('static', path='/server-availability.js') }}"></script>
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
-  <script defer src="{{ url_for('static', path='/command-center.js') }}"></script>
-  <script defer src="{{ url_for('static', path='/command-scheduler.js') }}"></script>
-  <script defer src="{{ url_for('static', path='/command-history.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/worker-operations.js') }}"></script>
   <script defer src="{{ url_for('static', path='/department-inspection.js') }}"></script>
   <script defer src="{{ url_for('static', path='/tabs.js') }}"></script>
 </head>
@@ -30,7 +28,7 @@
   <nav class="dashboard-tabs" role="tablist" aria-label="LifeOS dashboard sections">
     <button class="dashboard-tab active" type="button" role="tab" aria-selected="true" data-tab-target="overview">Overview</button>
     <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-tab-target="departments">Department Inspection</button>
-    <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-tab-target="automation">Automation</button>
+    <button class="dashboard-tab" type="button" role="tab" aria-selected="false" data-tab-target="automation">Worker Operations</button>
   </nav>
   <section class="tab-page" data-tab-panel="overview" role="tabpanel">
     <main class="dashboard-grid">
@@ -100,92 +98,43 @@
     </main>
   </section>
   <section class="tab-page automation-page" data-tab-panel="automation" role="tabpanel" hidden>
-    <main class="dashboard-grid">
-      <section class="panel command-center-panel" aria-labelledby="command-center-heading">
-        <div class="section-heading"><div><p class="eyebrow">DESKTOP AUTOMATION</p><h2 id="command-center-heading">Automation Command Center</h2></div><span id="cc-status" class="mode-badge">Loading</span></div>
-        <div class="cc-layout">
-          <div class="cc-form">
-            <div class="cc-fields">
-              <label class="cc-field">Prompt source<select id="cc-prompt-type"><option value="canonical">Canonical</option><option value="saved">Saved</option><option value="custom">New custom prompt</option></select></label>
-              <label id="cc-prompt-wrap" class="cc-field">Select prompt<select id="cc-prompt-select"><option value="boot">Boot</option></select></label>
-              <label class="cc-field">Destination<select id="cc-destination"><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
-            </div>
-            <label class="cc-field">Prompt name<input id="cc-save-name" type="text" placeholder="Prompt name"></label>
-            <label class="cc-field"><span>Prompt text</span><textarea id="cc-custom-prompt" placeholder="Enter the exact prompt to place in the selected chat."></textarea></label>
-            <div id="cc-canonical-controls" class="cc-save-controls">
-              <button id="cc-duplicate-prompt" class="copy-button" type="button">Duplicate as saved prompt</button>
-            </div>
-            <div id="cc-save-controls" class="cc-save-controls" hidden>
-              <button id="cc-save-prompt" class="copy-button" type="button">Save prompt</button>
-              <button id="cc-update-prompt" class="copy-button" type="button" hidden>Save changes</button>
-              <button id="cc-delete-prompt" class="cc-danger-button" type="button" hidden>Delete selected</button>
-            </div>
-            <p id="cc-summary" class="cc-summary">Preparing Command Center...</p>
-            <div id="cc-destination-warning" class="cc-destination-warning" hidden>
-              <p id="cc-destination-warning-text"></p>
-              <div class="cc-destination-options">
-                <label class="cc-confirm cc-mismatch-confirm"><input id="cc-confirm-destination" type="checkbox"><span id="cc-confirm-destination-text">Use this destination for this run only.</span></label>
-                <button id="cc-make-destination-default" class="copy-button" type="button">Make selected destination the default</button>
-              </div>
-            </div>
-            <label class="cc-confirm"><input id="cc-confirm-send" type="checkbox">Send live after destination and clipboard verification. Leave unchecked to place a verified draft only.</label>
-            <div class="cc-actions"><button id="cc-run" class="primary-button" type="button">Run now</button><button id="cc-pause" class="cc-danger-button" type="button">Pause automation</button></div>
-
-            <section class="cc-schedule-builder" aria-labelledby="cc-schedule-heading">
-              <div class="cc-subheading"><div><p class="eyebrow">TIMED RUNS</p><h3 id="cc-schedule-heading">Schedule this prompt</h3></div><span class="panel-meta">America/Chicago</span></div>
-              <p class="item-meta">A schedule stores a snapshot of the exact prompt, destination, and safety confirmations shown above.</p>
-              <div class="cc-schedule-grid">
-                <label class="cc-field">Schedule name<input id="cc-schedule-name" type="text" placeholder="Nightly Maintenance boot"></label>
-                <label class="cc-field">Repeat<select id="cc-schedule-cadence"><option value="once">Once</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
-                <label class="cc-field"><span id="cc-schedule-date-label">Run date</span><input id="cc-schedule-date" type="date"></label>
-                <label class="cc-field">Time<input id="cc-schedule-time" type="time"></label>
-              </div>
-              <fieldset id="cc-weekdays" class="cc-weekdays" hidden>
-                <legend>Run on</legend>
-                <label><input type="checkbox" value="0">Mon</label>
-                <label><input type="checkbox" value="1">Tue</label>
-                <label><input type="checkbox" value="2">Wed</label>
-                <label><input type="checkbox" value="3">Thu</label>
-                <label><input type="checkbox" value="4">Fri</label>
-                <label><input type="checkbox" value="5">Sat</label>
-                <label><input type="checkbox" value="6">Sun</label>
-              </fieldset>
-              <p id="cc-schedule-summary" class="cc-summary">Choose a date and time to create a timed run.</p>
-              <div class="cc-actions">
-                <button id="cc-save-schedule" class="primary-button" type="button">Create schedule</button>
-                <button id="cc-cancel-schedule-edit" class="copy-button" type="button" hidden>Cancel edit</button>
-              </div>
-            </section>
-          </div>
-          <div class="cc-side-stack">
-            <section class="cc-list-panel" aria-labelledby="cc-scheduled-jobs-heading">
-              <div class="cc-subheading">
-                <div><p class="eyebrow">UPCOMING</p><h3 id="cc-scheduled-jobs-heading">Scheduled jobs</h3></div>
-                <div class="cc-list-meta"><span id="cc-scheduler-status" class="panel-meta">Loading</span><span id="cc-schedule-count" class="panel-meta"></span></div>
-              </div>
-              <div class="cc-filter-grid" aria-label="Scheduled job filters">
-                <label class="cc-filter-field">Cadence<select id="cc-schedule-filter-cadence"><option value="all">All cadences</option><option value="once">Once</option><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
-                <label class="cc-filter-field">Department<select id="cc-schedule-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
-                <label class="cc-filter-field">State<select id="cc-schedule-filter-state"><option value="scheduled">Scheduled</option><option value="active">Active only</option><option value="paused">Paused only</option><option value="finished">Finished one-time</option><option value="all">All definitions</option></select></label>
-                <label class="cc-filter-field">Order<select id="cc-schedule-filter-sort"><option value="next">Next run</option><option value="recent">Recently changed</option><option value="name">Name A–Z</option></select></label>
-              </div>
-              <div id="cc-schedules" class="cc-history" aria-live="polite"></div>
-            </section>
-            <section class="cc-list-panel" aria-labelledby="cc-run-history-heading">
-              <div class="cc-subheading">
-                <div><p class="eyebrow">EXECUTION RECORD</p><h3 id="cc-run-history-heading">Run history</h3></div>
-                <span id="cc-history-count" class="panel-meta"></span>
-              </div>
-              <div class="cc-filter-grid" aria-label="Run history filters">
-                <label class="cc-filter-field">Result<select id="cc-history-filter-status"><option value="all">All results</option><option value="succeeded">Succeeded</option><option value="failed">Failed</option><option value="refused">Refused</option></select></label>
-                <label class="cc-filter-field">Department<select id="cc-history-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
-                <label class="cc-filter-field">Mode<select id="cc-history-filter-mode"><option value="all">Draft and send</option><option value="draft">Draft</option><option value="send">Send</option></select></label>
-                <label class="cc-filter-field">Order<select id="cc-history-filter-sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label>
-              </div>
-              <div id="cc-history" class="cc-history" aria-live="polite"></div>
-            </section>
-          </div>
+    <main class="dashboard-grid worker-ops-grid">
+      <section class="panel worker-ops-panel" aria-labelledby="worker-ops-heading">
+        <div class="section-heading worker-ops-heading">
+          <div><p class="eyebrow">BOUNDED EXECUTION</p><h2 id="worker-ops-heading">Worker Operations</h2></div>
+          <div class="worker-ops-heading-actions"><span id="wo-status" class="mode-badge">Loading</span><button id="wo-refresh" class="copy-button" type="button">Refresh</button></div>
         </div>
+        <p class="worker-ops-intro">Canonical advisories are the assignment source. The browser is only the courier. Receiver and HQ review remain separate from transport.</p>
+        <div class="worker-ops-metrics" aria-label="Worker Operations health">
+          <article class="worker-metric"><span>Browser bridge</span><strong id="wo-browser-state">Checking</strong><small id="wo-browser-detail">Loopback CDP</small></article>
+          <article class="worker-metric"><span>Execution gate</span><strong id="wo-gate-state">Checking</strong><small>Shared pause and one-job lock</small></article>
+          <article class="worker-metric"><span>Open Worker advisories</span><strong id="wo-advisory-count">0</strong><small>Canonical Advisory Index</small></article>
+          <article class="worker-metric"><span>HQ reviews pending</span><strong id="wo-review-count">0</strong><small>Existing execution rows</small></article>
+        </div>
+        <div class="worker-ops-layout">
+          <section class="worker-console" aria-labelledby="worker-console-heading">
+            <div class="worker-subheading"><div><p class="eyebrow">DISPATCH</p><h3 id="worker-console-heading">Canonical advisory run</h3></div><span id="wo-selected-priority" class="worker-pill">No selection</span></div>
+            <label class="worker-field">Execution-ready advisory<select id="wo-advisory-select"><option value="">Choose an advisory</option></select></label>
+            <article id="wo-advisory-detail" class="worker-advisory-detail"><p>No execution-ready Worker advisory selected.</p></article>
+            <label class="worker-confirm"><input id="wo-confirm-send" type="checkbox"><span>I authorize one live send of this exact advisory revision through the one-tab browser courier.</span></label>
+            <div class="worker-actions"><button id="wo-run" class="primary-button" type="button" disabled>Run selected advisory</button><button id="wo-pause" class="worker-danger-button" type="button">Pause automation</button></div>
+            <section class="worker-self-test" aria-labelledby="worker-self-test-heading">
+              <div><p class="eyebrow">NO DURABLE WORK</p><h4 id="worker-self-test-heading">Courier self-test</h4><p>Send one synthetic zero-authority wrapper, capture its acknowledgement, and return to HQ.</p></div>
+              <label class="worker-confirm worker-self-test-confirm"><input id="wo-confirm-self-test" type="checkbox"><span>I authorize one synthetic browser round trip.</span></label>
+              <button id="wo-self-test" class="copy-button" type="button" disabled>Test courier</button>
+            </section>
+            <div id="wo-run-state" class="worker-run-state" role="status" aria-live="polite">Waiting for a bounded assignment.</div>
+            <details class="worker-legacy-note"><summary>Legacy automation retained for rollback</summary><p id="wo-legacy-detail">Loading legacy state...</p></details>
+          </section>
+          <aside class="worker-side-stack">
+            <section class="worker-list-panel" aria-labelledby="worker-routes-heading"><div class="worker-subheading"><div><p class="eyebrow">ROUTES</p><h3 id="worker-routes-heading">Registered Workers</h3></div><span id="wo-worker-count" class="panel-meta"></span></div><div id="wo-workers" class="worker-card-list"></div></section>
+            <section class="worker-list-panel" aria-labelledby="worker-review-heading"><div class="worker-subheading"><div><p class="eyebrow">JUDGMENT STAYS HERE</p><h3 id="worker-review-heading">HQ review queue</h3></div><span id="wo-review-meta" class="panel-meta"></span></div><div id="wo-reviews" class="worker-card-list"></div></section>
+          </aside>
+        </div>
+      </section>
+      <section class="panel worker-history-panel" aria-labelledby="worker-history-heading">
+        <div class="section-heading"><div><p class="eyebrow">ONE ROW, COMPLETE EVIDENCE</p><h2 id="worker-history-heading">Worker execution history</h2></div><span id="wo-history-count" class="panel-meta"></span></div>
+        <div id="wo-history" class="worker-history-list" aria-live="polite"></div>
       </section>
     </main>
   </section>
