@@ -62,6 +62,14 @@ def test_worker_operations_requires_real_local_repository_mode() -> None:
     assert "local LifeOS repository checkout" in response.json()["detail"]
 
 
+def test_legacy_scheduler_is_dormant_by_default(monkeypatch) -> None:
+    monkeypatch.delenv("LIFEOS_LEGACY_SCHEDULER_ENABLED", raising=False)
+    application = create_app(sample_source)
+
+    with TestClient(application):
+        assert application.state.command_center.scheduler_running is False
+
+
 def test_command_center_status_exposes_eight_destinations() -> None:
     response = client.get("/api/command-center")
 
