@@ -13,7 +13,7 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 - To: Engineering Worker
 - Lifecycle State: OPEN
 - Priority: NORMAL
-- Advisory Revision: 1
+- Advisory Revision: 2
 - Verification Mode: IMMEDIATE_HQ
 - Target Department and Owner: Engineering HQ
 - Target Worker ID: `engineering_worker`
@@ -27,18 +27,20 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 - Worker Profile Path: `projects/engineering/workers/engineering_worker.md`
 - Requested Action: Read the exact Package D implementation packet and answer only the bounded verification questions.
 - Parameters JSON: `{"targets":["projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"],"verification_questions":["Does the packet identify one bounded operational ChatGPT Worker flow as the remaining useful proof?","Does the packet permit a synthetic or narrowly department-owned pilot without creating broad Worker authority?","Does the packet require one bounded operational procedure before the pilot?"]}`
-- Source References JSON: `["projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","projects/engineering/workers/engineering_worker.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md"]`
-- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","coordination/boards/engineering.md","projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"]`
+- Source References JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"]`
+- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_read_only_verification.md","projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md"]`
 - Requested Write Scopes JSON: `[]`
 - Requested Tools JSON: `["GitHub"]`
 - Completion Condition: Every exact target is read, all three verification questions are answered or explicitly marked unverifiable, required run-linked evidence is reported, and no writes or external actions occur.
 - Review Condition: Engineering HQ performs immediate review of the Worker outcome and transport evidence.
 - Closure Authority: Engineering HQ only. Closure is not delegated to the Worker.
+- Prior Revision Outcome: `REPORT_AND_HOLD`
+- Prior Run ID: `RUN-ADV-20260720-046-R1`
+- Revision Note: Revision 2 explicitly authorizes the complete universal Worker boot chain required by `memory/STARTUP_BOOT.md`. Revision 1 was accepted and held because its requested read scopes omitted required boot-kernel sources.
 
 #### Assignment
 
-Perform revision 1 using only the named procedure and authorized sources.
-
+Perform revision 2 using only the named procedure and authorized sources.
 Return exactly one controlled outcome:
 
 - `IMPLEMENT` when the bounded inspection completes with the required evidence;
