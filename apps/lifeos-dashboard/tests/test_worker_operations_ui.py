@@ -34,5 +34,7 @@ def test_worker_operations_assets_expose_bounded_controls() -> None:
     assert "/api/command-center/pause" in script
     assert "confirm_send: true" in script
     assert "Receiver:" in script
+    assert "Courier self-test succeeded." in script
+    assert "No durable authority was created." in script
     assert ".worker-ops-layout" in style
     assert ".worker-history-item" in style
