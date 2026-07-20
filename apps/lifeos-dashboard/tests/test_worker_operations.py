@@ -1,4 +1,5 @@
 import json
+import sqlite3
 import subprocess
 import time
 from pathlib import Path
@@ -172,8 +173,19 @@ def test_browser_evidence_updates_existing_execution_row(tmp_path: Path) -> None
         ),
     )
 
-    rows = evidence_store.history()
-    assert len(rows) == 1
-    assert rows[0]["worker_reported_outcome"] == "IMPLEMENT"
-    assert rows[0]["assistant_turn_id"] == "conversation-turn-21"
-    assert rows[0]["controlled_outcome"] is None
+    with sqlite3.connect(database) as connection:
+        connection.row_factory = sqlite3.Row
+        row = connection.execute(
+            """
+            SELECT worker_reported_outcome, assistant_turn_id,
+                   browser_receipt_json, controlled_outcome
+            FROM execution_history WHERE run_id = ?
+            """,
+            (result.run_id,),
+        ).fetchone()
+
+    assert row is not None
+    assert row["worker_reported_outcome"] == "IMPLEMENT"
+    assert row["assistant_turn_id"] == "conversation-turn-21"
+    assert row["browser_receipt_json"] == '{"status":"succeeded"}'
+    assert row["controlled_outcome"] is None
