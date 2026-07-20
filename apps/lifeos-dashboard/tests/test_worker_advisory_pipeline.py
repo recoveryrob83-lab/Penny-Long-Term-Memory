@@ -1,3 +1,4 @@
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -69,19 +70,52 @@ class FakeCenter:
         del timeout_seconds
         self.calls.append((job, trigger))
         key = job.envelope.idempotency_key
+        now = time.time()
         if key in self.seen:
             return WorkerExecutionResult(
                 status="refused",
                 destination="Engineering_Worker",
                 mode=job.mode,
+                exit_code=None,
+                started_at=now,
+                finished_at=time.time(),
+                stdout="",
+                stderr="",
                 reason="This Worker task revision already has a successful send record.",
+                trigger=trigger,
+                wrapper_id=job.envelope.wrapper_id,
+                run_id=job.envelope.run_id,
+                worker_id=job.envelope.worker_id,
+                task_id=job.envelope.task_id,
+                task_revision=job.envelope.task_revision,
+                procedure_id=job.envelope.procedure_id,
+                procedure_version=job.envelope.procedure_version,
+                authorization_source=job.envelope.authorization_source,
+                idempotency_key=job.envelope.idempotency_key,
+                verification_mode=job.envelope.verification_mode,
             )
         self.seen.add(key)
         return WorkerExecutionResult(
             status="succeeded",
             destination="Engineering_Worker",
             mode=job.mode,
+            exit_code=0,
+            started_at=now,
+            finished_at=time.time(),
+            stdout="Synthetic wrapper witness.",
+            stderr="",
             reason="Synthetic reference-only wake delivered.",
+            trigger=trigger,
+            wrapper_id=job.envelope.wrapper_id,
+            run_id=job.envelope.run_id,
+            worker_id=job.envelope.worker_id,
+            task_id=job.envelope.task_id,
+            task_revision=job.envelope.task_revision,
+            procedure_id=job.envelope.procedure_id,
+            procedure_version=job.envelope.procedure_version,
+            authorization_source=job.envelope.authorization_source,
+            idempotency_key=job.envelope.idempotency_key,
+            verification_mode=job.envelope.verification_mode,
         )
 
 
