@@ -289,8 +289,12 @@ if (workerOps.status) {
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || "Courier self-test failed.");
       const receipt = data.receipt || {};
+      const turn = receipt.assistant_turn_id || "a captured assistant response";
+      const zeroAuthority = receipt.durable_authority_created === false
+        ? "No durable authority was created."
+        : "Durable-authority status was not verified.";
       setRunMessage(
-        `Courier returned to HQ with ${receipt.assistant_turn_id || "a captured response"}.`,
+        `Courier self-test succeeded. Worker response captured at ${turn}. Returned to HQ successfully. ${zeroAuthority}`,
         "good",
       );
       workerOps.confirmSelfTest.checked = false;
