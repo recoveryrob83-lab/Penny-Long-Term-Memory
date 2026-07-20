@@ -9,10 +9,17 @@ const ui = {
   result: document.getElementById("automation-log-filter-result"),
   destination: document.getElementById("automation-log-filter-destination"),
   trigger: document.getElementById("automation-log-filter-trigger"),
+  workerState: document.getElementById("automation-log-filter-worker-state"),
+  wake: document.getElementById("automation-log-filter-wake"),
   sort: document.getElementById("automation-log-filter-sort"),
   search: document.getElementById("automation-log-filter-search"),
   refresh: document.getElementById("automation-log-refresh"),
   expand: document.getElementById("automation-log-expand"),
+  workerTotal: document.getElementById("automation-worker-total"),
+  workerPending: document.getElementById("automation-worker-pending"),
+  workerVerified: document.getElementById("automation-worker-verified"),
+  workerRejected: document.getElementById("automation-worker-rejected"),
+  workerWakes: document.getElementById("automation-worker-wakes"),
 };
 
 if (!ui.list) return;
@@ -28,7 +35,20 @@ const destinationLabels = {
   wellness: "Wellness HQ",
 };
 
+const departmentKeys = {
+  "main-assistant": "main",
+  engineering: "engineering",
+  "life-logistics-hq": "logistics",
+  "business-development": "business",
+  "office-leaks-consulting": "office-leaks",
+  finance: "finance",
+  wellness: "wellness",
+};
+
 let history = [];
+let verificationRecords = [];
+let verificationSummary = {};
+let verificationByHistoryId = new Map();
 let historySignature = "";
 let requestToken = 0;
 let expandAll = false;
@@ -61,6 +81,10 @@ function backendEvents(entry) {
   return parsePrefixedJson(entry.stdout, BACKEND_PREFIX);
 }
 
+function workerRecord(entry) {
+  return verificationByHistoryId.get(Number(entry.id)) || null;
+}
+
 function eventTime(entry) {
   return Number(entry.finished_at || entry.started_at || 0);
 }
@@ -71,11 +95,21 @@ function duration(entry, context) {
   return Math.max(0, Number(entry.finished_at || 0) - Number(entry.started_at || 0));
 }
 
+function runId(entry, context, worker) {
+  return worker?.run_id || context.run_id || `legacy-record-${entry.id ?? "unknown"}`;
+}
+
+function effectiveDestination(entry, worker) {
+  if (!worker) return entry.destination || "unknown";
+  return departmentKeys[worker.owning_department] || worker.owning_department;
+}
+
 function combinedLog(entry) {
   const context = runContext(entry);
+  const worker = workerRecord(entry);
   const lines = [
     `record_id=${entry.id ?? "unknown"}`,
-    `run_id=${context.run_id || "unknown"}`,
+    `run_id=${runId(entry, context, worker)}`,
     `status=${entry.status || "unknown"}`,
     `destination=${entry.destination || "unknown"}`,
     `mode=${entry.mode || "unknown"}`,
@@ -84,13 +118,30 @@ function combinedLog(entry) {
     `started_at=${entry.started_at ?? "unknown"}`,
     `finished_at=${entry.finished_at ?? "unknown"}`,
     `reason=${entry.reason || ""}`,
+  ];
+  if (worker) {
+    lines.push(
+      `worker_id=${worker.worker_id}`,
+      `task_id=${worker.task_id}`,
+      `task_revision=${worker.task_revision}`,
+      `owning_department=${worker.owning_department}`,
+      `controlled_outcome=${worker.controlled_outcome}`,
+      `verification_mode=${worker.verification_mode}`,
+      `verification_state=${worker.verification_state}`,
+      `review_route=${worker.review_route}`,
+      `wake_disposition=${worker.wake_disposition}`,
+      `wake_target=${worker.wake_target || "none"}`,
+      `wake_reason=${worker.wake_reason || ""}`,
+    );
+  }
+  lines.push(
     "",
     "===== STDOUT =====",
     entry.stdout || "<empty>",
     "",
     "===== STDERR =====",
     entry.stderr || "<empty>",
-  ];
+  );
   return lines.join("\n");
 }
 
@@ -98,15 +149,36 @@ function filteredHistory() {
   const result = ui.result.value;
   const destination = ui.destination.value;
   const trigger = ui.trigger.value;
+  const workerState = ui.workerState.value;
+  const wake = ui.wake.value;
   const query = ui.search.value.trim().toLocaleLowerCase();
   const direction = ui.sort.value === "oldest" ? 1 : -1;
 
   return history
     .filter((entry) => result === "all" || entry.status === result)
-    .filter((entry) => destination === "all" || entry.destination === destination)
+    .filter((entry) => {
+      if (destination === "all") return true;
+      return effectiveDestination(entry, workerRecord(entry)) === destination;
+    })
     .filter((entry) => {
       if (trigger === "all") return true;
-      return String(runContext(entry).trigger || "unknown") === trigger;
+      const worker = workerRecord(entry);
+      const observed = String(runContext(entry).trigger || (worker ? "unknown" : "unknown"));
+      return observed === trigger;
+    })
+    .filter((entry) => {
+      if (workerState === "all") return true;
+      const worker = workerRecord(entry);
+      if (workerState === "not-worker") return !worker;
+      return worker?.verification_state === workerState;
+    })
+    .filter((entry) => {
+      if (wake === "all") return true;
+      const worker = workerRecord(entry);
+      if (!worker) return false;
+      if (wake === "required") return Boolean(worker.wake_required);
+      if (wake === "queued") return Boolean(worker.queue_eligible);
+      return !worker.wake_required;
     })
     .filter((entry) => !query || combinedLog(entry).toLocaleLowerCase().includes(query))
     .sort((left, right) => direction * (eventTime(left) - eventTime(right)));
@@ -130,31 +202,62 @@ function detailOpen(previous, key, defaultValue, override) {
   return previous.has(key) ? previous.get(key) : defaultValue;
 }
 
+function renderVerificationSummary() {
+  ui.workerTotal.textContent = verificationSummary.total ?? 0;
+  ui.workerPending.textContent = verificationSummary.pending ?? 0;
+  ui.workerVerified.textContent = verificationSummary.verified ?? 0;
+  ui.workerRejected.textContent = verificationSummary.rejected ?? 0;
+  ui.workerWakes.textContent = verificationSummary.wake_required ?? 0;
+}
+
+function workerFacts(worker) {
+  if (!worker) return "";
+  const wake = worker.wake_required
+    ? `${worker.wake_disposition} → ${worker.wake_target || "unresolved"}`
+    : worker.queue_eligible
+      ? "Routine queue · no immediate wake"
+      : "Suppressed";
+  return [
+    fact("Worker", worker.worker_id),
+    fact("Task", `${worker.task_id} · rev ${worker.task_revision}`),
+    fact("Outcome", worker.controlled_outcome),
+    fact("Verification", `${worker.verification_state} · ${worker.verification_mode}`),
+    fact("Review route", worker.review_route),
+    fact("Wake", wake),
+  ].join("");
+}
+
 function render(openOverride = null) {
   const rows = filteredHistory();
   const previousDetails = captureDetailState();
   ui.count.textContent = `${rows.length} of ${history.length} runs`;
   ui.expand.textContent = expandAll ? "Collapse all" : "Expand all";
+  renderVerificationSummary();
 
   ui.list.innerHTML = rows.map((entry, index) => {
     const context = runContext(entry);
+    const worker = workerRecord(entry);
     const events = backendEvents(entry);
     const timestamp = eventTime(entry)
       ? new Date(eventTime(entry) * 1000).toLocaleString()
       : "Time unavailable";
-    const department = destinationLabels[entry.destination] || entry.destination || "Unknown";
-    const runId = context.run_id || `legacy-record-${entry.id ?? index}`;
-    const trigger = context.trigger || "legacy";
+    const destinationKey = effectiveDestination(entry, worker);
+    const department = worker?.owning_department
+      || destinationLabels[destinationKey]
+      || entry.destination
+      || "Unknown";
+    const identity = runId(entry, context, worker);
+    const trigger = context.trigger || (worker ? "worker" : "legacy");
     const schedule = context.schedule_name
       ? `${context.schedule_name} (#${context.schedule_id ?? "?"})`
       : "Not scheduled";
     const promptFingerprint = context.prompt_length == null
-      ? "Canonical / protected"
+      ? worker ? "Worker wrapper / protected" : "Canonical / protected"
       : `${context.prompt_length} chars · ${context.prompt_sha256 || "hash unavailable"}`;
     const backendSummary = events.length
       ? events.map((event) => event.event || "event").join(" → ")
-      : "No structured backend events (legacy run)";
-    const runKey = `run:${runId}`;
+      : "No structured backend events (legacy or Worker transport run)";
+    const runKey = `run:${identity}`;
     const stdoutKey = `${runKey}:stdout`;
     const stderrKey = `${runKey}:stderr`;
     const open = detailOpen(previousDetails, runKey, false, openOverride) ? " open" : "";
@@ -162,27 +265,32 @@ function render(openOverride = null) {
     const stderrOpen = detailOpen(previousDetails, stderrKey, Boolean(entry.stderr), openOverride)
       ? " open"
       : "";
+    const badge = worker
+      ? `${worker.controlled_outcome} · ${worker.verification_state}`
+      : entry.exit_code == null ? "no exit code" : `exit ${entry.exit_code}`;
 
     return `<details class="automation-log-entry" data-log-index="${index}" data-detail-key="${escapeHtml(runKey)}"${open}>
       <summary>
         <div class="automation-log-title">
           <strong>${escapeHtml(department)} · ${escapeHtml(entry.status || "unknown")}</strong>
-          <span>${escapeHtml(timestamp)} · ${escapeHtml(trigger)} · ${escapeHtml(entry.mode || "unknown")} · ${escapeHtml(runId)}</span>
+          <span>${escapeHtml(timestamp)} · ${escapeHtml(trigger)} · ${escapeHtml(entry.mode || "unknown")} · ${escapeHtml(identity)}</span>
         </div>
-        <span class="badge">${escapeHtml(entry.exit_code == null ? "no exit code" : `exit ${entry.exit_code}`)}</span>
+        <span class="badge">${escapeHtml(badge)}</span>
       </summary>
       <div class="automation-log-body">
         <div class="automation-log-facts">
           ${fact("Record", entry.id ?? "legacy")}
-          ${fact("Run ID", runId)}
+          ${fact("Run ID", identity)}
           ${fact("Trigger", trigger)}
           ${fact("Schedule", schedule)}
           ${fact("Duration", `${duration(entry, context).toFixed(3)}s`)}
           ${fact("Timeout", context.timeout_seconds ? `${context.timeout_seconds}s` : "Unknown")}
           ${fact("Prompt", promptFingerprint)}
           ${fact("Streams", `${String(entry.stdout || "").length} stdout · ${String(entry.stderr || "").length} stderr chars`)}
+          ${workerFacts(worker)}
         </div>
-        <p class="automation-log-reason">${escapeHtml(entry.reason || "No reason recorded.")}</p>
+        <p class="automation-log-reason">${escapeHtml(worker?.receiver_reason || entry.reason || "No reason recorded.")}</p>
+        ${worker ? `<div class="automation-log-wake"><span>Wake decision</span><strong>${escapeHtml(worker.wake_reason || "No wake reason recorded.")}</strong></div>` : ""}
         <div class="automation-log-fact"><span>Backend event path</span><strong>${escapeHtml(backendSummary)}</strong></div>
         <details class="automation-log-stream" data-detail-key="${escapeHtml(stdoutKey)}"${stdoutOpen}>
           <summary>Complete stdout (${String(entry.stdout || "").length} characters)</summary>
@@ -223,15 +331,25 @@ async function loadLogs(showLoading = false) {
   const data = await response.json();
   if (token !== requestToken) return;
   const nextHistory = data.history || [];
-  const nextSignature = JSON.stringify(nextHistory);
+  const workerVerification = data.worker_verification || {summary: {}, records: []};
+  const nextVerificationRecords = workerVerification.records || [];
+  const nextSignature = JSON.stringify({
+    history: nextHistory,
+    verification: workerVerification,
+  });
   const changed = nextSignature !== historySignature;
   history = nextHistory;
+  verificationRecords = nextVerificationRecords;
+  verificationSummary = workerVerification.summary || {};
+  verificationByHistoryId = new Map(
+    verificationRecords.map((record) => [Number(record.history_id), record]),
+  );
   historySignature = nextSignature;
   ui.state.textContent = data.running ? "Run active" : "Ready";
   if (changed || showLoading) render();
 }
 
-[ui.result, ui.destination, ui.trigger, ui.sort].forEach((control) => {
+[ui.result, ui.destination, ui.trigger, ui.workerState, ui.wake, ui.sort].forEach((control) => {
   control.addEventListener("change", () => render());
 });
 ui.search.addEventListener("input", () => render());
