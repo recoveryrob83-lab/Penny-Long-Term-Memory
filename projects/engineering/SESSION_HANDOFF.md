@@ -173,4 +173,4 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 
 ## Next Valid Action
 
-Reconcile current Engineering records, then have Rob select one bounded next implementation goal. Engineering recommends receiver ingress and canonical resolution before envelope readability or real Worker activation, but no implementation is authorized merely by this handoff.
+Have Rob select one bounded next implementation goal. Engineering recommends receiver ingress and canonical resolution before envelope readability or real Worker activation, but no implementation is authorized merely by this handoff.
