@@ -1,6 +1,6 @@
 # Engineering HQ
 
-Updated: 2026-07-19
+Updated: 2026-07-20
 
 ## Purpose
 
@@ -17,11 +17,23 @@ Use Engineering HQ for:
 - automation and desktop-control safety;
 - LifeOS Dashboard and Automation Command Center architecture;
 - prompt systems and command interfaces;
-- technical Worker routing, receiver validation, runtime enforcement, evidence, and reliability;
+- technical Worker routing, transport, logging, duplicate suppression, evidence, and reliability;
 - testing, debugging, implementation sequencing, feasibility review, and build-ready packets;
 - Engineering-owned durable-memory maintenance.
 
-Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, or another department's records.
+Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, another department's records, or the Worker’s domain judgment.
+
+## Canonical Worker Model
+
+A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
+
+- The Department HQ owns the Worker profile, procedures, authority, and domain judgment.
+- GitHub holds the canonical profile, procedures, task state, and durable evidence.
+- The Worker chat reads those sources, validates the bounded assignment, performs authorized work, and returns one controlled outcome with evidence.
+- Department HQ reviews the result and retains ownership.
+- Python, desktop automation, SQLite, and the dashboard provide courier, routing, safety, logging, duplicate-suppression, and visibility infrastructure.
+
+Python is not the Worker. Machine-side validation may provide defense in depth, but it does not replace the ChatGPT Worker’s operational source reading, judgment, refusal behavior, or Department HQ review.
 
 ## Not This Department
 
@@ -48,7 +60,7 @@ Canonical shared architecture lives in:
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 
-Package D has implemented and locally validated seven slices:
+Package D has implemented and locally validated seven technical slices:
 
 1. Worker contracts and validation.
 2. SQLite Worker registry, route state, and task-scoped receiver persistence.
@@ -58,39 +70,28 @@ Package D has implemented and locally validated seven slices:
 6. Verification views, queue derivation, and wake suppression.
 7. Disposable synthetic end-to-end backend pilot with transport-integrity hardening.
 
-A separate bounded synthetic desktop pilot also passed exact ChatGPT Classic navigation, wrapper-marker verification, explicit submission, receipt generation, and exact acknowledgement without creating durable authority.
+A separate bounded synthetic desktop pilot passed exact ChatGPT Classic navigation, wrapper-marker verification, explicit submission, receipt generation, and exact acknowledgement without creating durable authority.
 
-Current Worker-runtime capabilities include:
-
-- stable Worker IDs and exact visible titles;
-- department-owned profile pointers with Engineering-owned deployment state kept outside profiles;
-- separate deployment and route-availability state;
-- compact machine-readable execution envelopes;
-- task-scoped receiver revision state and idempotency;
-- exact-title zero-match and duplicate-match failure;
-- shared Command Center pause and one-job locking;
-- manual and scheduler-triggered transport for one already-authorized envelope;
-- successful-send duplicate suppression with bounded retry after failed transport;
-- exact successful-transport metadata validation before receiver acceptance;
-- semantic checks for profile identity, ownership, caller authority, procedure identity and checksum, parameters, sources, scopes, tools, verification mode, and revision freshness;
-- exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
-- same-row evidence, Department HQ review, verification state, queue derivation, and wake suppression;
-- read-only Automation Logs visibility without a second ledger.
-
-Validation evidence currently recorded in the Package D packet includes a focused Slice 7 and receiver suite of 32 passing tests and a complete dashboard regression suite of 222 passing tests with 9 warnings. The live desktop pilot reported `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`.
+Validation evidence recorded in the Package D packet includes a focused Slice 7 and receiver suite of 32 passing tests, a complete dashboard regression suite of 222 passing tests with 9 warnings, and a successful bounded desktop receipt with `durable_authority_created: false`.
 
 No real Worker profile, registry entry, route, wake, Worker control surface, or recurring Worker authority schedule has been created.
 
 ## Current Decision Boundary
 
-ADV-20260718-042 remains open and authoritative for receiver-side semantic validation and controlled outcomes. A read-only Engineering verification found the implementation substantially complete but identified two remaining closure gaps:
+ADV-20260718-042 states that the automation layer is the courier and the receiving Worker validates canonical prompt or procedure, parameters, authority, ownership, scope, and source boundaries.
 
-1. a production receiver-ingress path that parses transported evidence and independently resolves the authoritative Worker profile, canonical procedure, and task source instead of receiving preconstructed authoritative objects from its caller;
-2. one joined bounded proof connecting physical desktop transport to receiver acceptance, controlled outcome, evidence, and verification.
+For Life OS, that receiving Worker is the specialized ChatGPT Worker room. The earlier Engineering recommendation for a mandatory Python receiver-ingress and canonical-resolution service overinterpreted the machine-runtime layer and is withdrawn as a presumed next requirement.
 
-Rob has not yet selected the next implementation slice. Receiver ingress and canonical resolution is the leading Engineering recommendation, while the human-readable envelope summary remains a separate smaller production-readability follow-up.
+The next implementation goal remains unselected. Engineering’s current recommendation is:
 
-ADV-20260719-044 is closed, implemented, and source verified. Engineering no longer monitors Maintenance implementation of that advisory. The remaining department-ownership action is ordinary observation of corrected role-routed boots and demonstrated defects.
+1. define the operational Worker execution procedure and canonical GitHub source-resolution contract;
+2. run one bounded ChatGPT Worker pilot;
+3. verify controlled outcomes, refusal of unauthorized expansion, duplicate suppression, evidence, and Department HQ review;
+4. add deeper Python source resolution only if the pilot demonstrates a concrete need.
+
+The human-readable envelope summary remains a separate small production-readability follow-up before the first real Worker activation.
+
+ADV-20260719-044 is closed, implemented, and source verified. Engineering no longer monitors Maintenance implementation of that advisory.
 
 ## Composer Boundary
 
@@ -116,4 +117,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D's backend and desktop milestone is complete, ADV-042 remains open pending receiver-ingress integration and joined validation, and Rob's next bounded implementation-goal decision is pending. Real Worker activation, recurring Worker authority generation, Package E, and unrelated expansion remain deferred.
+Active department. Package D's technical backend and desktop milestone is complete. ADV-042 remains open pending bounded operational ChatGPT Worker evidence and source-owner review. Rob's next implementation-goal decision is pending. Real Worker activation, recurring Worker authority generation, Package E, and unrelated expansion remain deferred.
