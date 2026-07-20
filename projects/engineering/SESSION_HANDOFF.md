@@ -8,8 +8,8 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Package D Backend and Desktop Milestone Complete and Worker Activation Decision Gate
-- Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center history, Engineering advisory board, Advisory Index, and other source systems only when explicitly required
+- Current Phase: Active / Package D Backend and Desktop Milestone Complete / ADV-042 Receiver-Ingress Gap Identified / Next Implementation-Goal Decision Pending
+- Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center history, Engineering advisory board, Advisory Index when needed, and other source systems only when explicitly required
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
 
@@ -20,7 +20,7 @@ Purpose: Current handoff for technical architecture, Package D Worker-runtime im
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
 5. Treat `projects/engineering/open_loops.md` as authoritative for unfinished Engineering work.
-6. Read `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md` when Package D or Worker activation is in scope.
+6. Read `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md` when Package D, ADV-20260718-042, or Worker activation is in scope.
 7. Read `coordination/WORKER_EXECUTION_CONTRACT.md` and `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` when Worker routing, authority, or execution behavior is in scope.
 8. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
 9. Read current Engineering notebook records only when directly referenced by active work.
@@ -42,11 +42,14 @@ Use Work for substantial coding, local terminal work, full test execution, deskt
 
 Never claim an action, test, deployment, or connector write occurred without current evidence.
 
-## Highest-Priority Work Package
+## Primary Current Work Package
 
 ### Package D: Operations-Procedure and Worker-Runtime Implementation
 
-Status: Backend and physical desktop transport milestone complete. Slices 1–7 are implemented and locally validated, and one bounded synthetic wrapper passed through ChatGPT Classic with exact acknowledgement. The next valid action is a separate activation decision, not automatic Worker deployment.
+Lifecycle State: Active
+Priority: Normal
+
+Status: Backend and physical desktop transport milestone complete. Slices 1–7 are implemented and locally validated, and one bounded synthetic wrapper passed through ChatGPT Classic with exact acknowledgement. ADV-20260718-042 remains open because a read-only Engineering verification identified a receiver-ingress integration gap and a missing joined physical end-to-end proof.
 
 Canonical implementation packet:
 
@@ -58,109 +61,67 @@ Canonical governance and authorization references:
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 - ADV-20260718-042 on `coordination/boards/main-assistant.md`
 
-Implemented and locally validated slices:
+Implemented slices:
 
-1. Worker contracts and validation:
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime.py`
-   - `apps/lifeos-dashboard/tests/test_worker_runtime.py`
-2. Worker registry, route, and task-scoped receiver persistence:
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_store.py`
-   - `apps/lifeos-dashboard/tests/test_worker_runtime_store.py`
-3. Worker registry service:
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_runtime_service.py`
-   - `apps/lifeos-dashboard/tests/test_worker_runtime_service.py`
-4. Worker Command Center execution path:
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_command_center.py`
-   - `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
-   - `apps/lifeos-dashboard/tests/test_worker_command_center.py`
-5. Worker receiver validation and controlled outcomes:
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_models.py`
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_store.py`
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver.py`
-   - `apps/lifeos-dashboard/tests/test_worker_receiver.py`
-6. Worker verification views and wake suppression:
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_verification.py`
-   - `apps/lifeos-dashboard/lifeos_dashboard/worker_verification_runtime.py`
-   - `apps/lifeos-dashboard/lifeos_dashboard/static/tabs.js`
-   - `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.js`
-   - `apps/lifeos-dashboard/lifeos_dashboard/static/automation-logs.css`
-   - `apps/lifeos-dashboard/tests/test_worker_verification.py`
-   - `apps/lifeos-dashboard/tests/test_worker_verification_runtime.py`
-   - `apps/lifeos-dashboard/tests/test_automation_logs_ui.py`
-7. Synthetic end-to-end pilot:
-   - `apps/lifeos-dashboard/tests/test_worker_end_to_end_pilot.py`
-   - exact transport-history validation in `worker_receiver.py` and `worker_receiver_store.py`
+1. Worker contracts and validation.
+2. Worker registry, route, and task-scoped receiver persistence.
+3. Worker registry service.
+4. Separate Worker Command Center execution path.
+5. Receiver semantic validation and controlled outcomes.
+6. Verification views, queue derivation, and wake suppression.
+7. Disposable synthetic end-to-end backend pilot with transport-integrity hardening.
 
 Bounded desktop validation:
 
 - `apps/lifeos-dashboard/automation/run_synthetic_worker_desktop_pilot.py`
 - `apps/lifeos-dashboard/tests/test_synthetic_worker_desktop_pilot.py`
-- existing exact-title Worker transport in `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
+- exact-title Worker transport in `apps/lifeos-dashboard/automation/open_worker_chat_group_verified.py`
 
 Current capabilities:
 
 - stable Worker IDs and exact visible titles;
-- department profile pointers with Engineering-owned deployment state kept outside profiles;
-- `enabled`, `paused`, and `retired` deployment states;
+- department profile pointers with Engineering-owned deployment state outside profiles;
 - separate route availability;
-- exact-title zero-match and duplicate-match failure;
 - compact JSON execution envelopes;
-- task-scoped receiver revisions;
-- idempotency by `worker_id + task_id + task_revision`;
-- separate manual and scheduler-triggered Worker execution methods;
+- task-scoped receiver revisions and idempotency;
 - shared Command Center pause and one-job lock;
-- successful-send duplicate suppression while failed transport remains eligible for bounded retry;
-- existing execution-history linkage for wrapper, run, Worker, task, revision, procedure, authorization, idempotency, verification mode, trigger, receiver evidence, controlled outcome, and verification review;
-- one-copy Worker composer verification by expected `wrapper_id` only;
-- receiver acceptance requiring exactly one successful Worker send with exact matching transport-envelope metadata;
-- semantic receiver validation for profile identity/version, owning department, exact calling authority, procedure/version/checksum, parameters, sources, scopes, tools, verification mode, pause state, and revision freshness;
-- atomic receiver acceptance only after transport and semantic validation both succeed;
-- evidence-backed finalization with exactly one `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL` outcome;
-- derived `pending`, `verified`, and `rejected` verification states without a second queue ledger;
-- queue eligibility, wake targeting, and wake suppression derived from the same execution-history row;
-- read-only Automation Logs counters, filters, Worker facts, and wake evidence;
-- no real wake emission or dashboard mutation controls;
-- a disposable synthetic integration harness proving the backend pipeline without durable real-world authority;
-- a successful bounded live wrapper proving exact ChatGPT Classic navigation, stable composer verification, explicit send, receipt generation, and exact acknowledgement.
+- successful-send duplicate suppression with bounded retry after failed transport;
+- one-copy Worker composer verification by expected `wrapper_id`;
+- receiver acceptance requiring one exact successful Worker transport row;
+- semantic validation for profile identity, ownership, caller authority, procedure and parameter checksums, source references, scopes, tools, verification mode, and revision freshness;
+- atomic receiver acceptance after transport and semantic validation;
+- exactly one evidence-backed `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL` outcome;
+- same-row verification review, queue derivation, wake targeting, and wake suppression;
+- read-only Automation Logs visibility;
+- no real wake emission or Worker mutation controls.
 
 Validation state:
 
-- the four focused Worker-runtime files passed with `36 passed`;
-- the first Slice 4 full suite reached `172 passed` with two guidance-string assertion failures;
-- Engineering repaired only the `Open Automation Logs` and `Nothing was sent` wording contracts;
-- both focused regressions passed;
-- the Slice 4 full suite passed with `174 passed, 9 warnings in 173.76s`;
-- the focused Slice 5 receiver suite passed with `22 passed`;
-- the Slice 5 full suite passed with `196 passed, 9 warnings in 191.97s`;
-- the focused Slice 6 verification/runtime/Automation Logs suite passed with `20 passed`;
-- the Slice 6 full suite passed with `212 passed, 9 warnings in 198.41s`;
-- the focused Slice 7 end-to-end pilot and receiver suite passed with `32 passed`;
-- Rob reported the complete dashboard suite passed with `222 passed, 9 warnings in 238.78s`;
-- Slices 1–7 are locally validated with no remaining functional regression;
-- Rob reported live desktop receipt `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`;
-- the synthetic Worker returned exact acknowledgement `SYNTHETIC_WRAPPER_RECEIVED SYNTH-DESKTOP-WRAP-1784515664-0de7866901`;
-- no real Worker profile, registry entry, route, wake, UI mutation control, or recurring Worker authority schedule has been created.
+- focused Slice 7 and receiver suite: `32 passed`;
+- complete dashboard regression suite reported by Rob: `222 passed, 9 warnings in 238.78s`;
+- live desktop receipt reported `status: succeeded`, `mode: send`, `exit_code: 0`, and `durable_authority_created: false`;
+- exact acknowledgement: `SYNTHETIC_WRAPPER_RECEIVED SYNTH-DESKTOP-WRAP-1784515664-0de7866901`;
+- no real Worker profile, registry entry, route, wake, UI mutation control, or recurring Worker authority schedule was created.
 
-Synthetic proof:
+## ADV-042 Verification Finding
 
-- zero and duplicate exact-title resolution fail closed;
-- paused deployment and unavailable route refuse before transport;
-- missing wrapper witness fails transport and cannot consume authority;
-- corrupted persisted transport metadata fails receiver validation;
-- unauthorized scope records `REPORT_AND_HOLD` without revision consumption;
-- one successful backend run traverses transport, `READY`, `IMPLEMENT`, evidence persistence, routine verification review, and wake suppression in one row;
-- retry with a new `run_id` cannot re-execute the accepted revision;
-- a second controlled outcome is refused;
-- temporary databases and fixtures isolate backend synthetic state;
-- the live desktop wrapper traversed exact UI transport and semantic acknowledgement without durable authority.
+Engineering completed a separate read-only verification against ADV-20260718-042.
 
-Next valid Engineering action:
+Substantial implementation is present, including transport metadata validation, semantic preflight, checksum and schema validation, ownership and scope enforcement, duplicate suppression, controlled outcomes, evidence persistence, and verification review.
 
-1. stop at the validated backend-and-desktop milestone and gather evidence from the grandfathered pilots; or
-2. select at most one candidate department-owned Worker for a separately authorized profile and activation review;
-3. do not create a real Worker profile, registry entry, route, wake, or schedule without separate authorization from Rob and the owning department;
-4. if a real candidate is considered, establish its record class, owner, authoritative profile path, lifecycle state, priority, task class, scopes, verification mode, review condition, and why GitHub is correct before any durable write;
-5. keep recurring Worker authority generation and Package E deferred.
+Two closure gaps remain:
+
+1. Production receiver ingress and canonical resolution: the runtime does not yet demonstrate a path that parses transported wrapper evidence and independently resolves the authoritative Worker profile, canonical procedure, and task source before constructing `ReceiverAssignment`.
+2. Joined physical end-to-end proof: the backend pilot uses injected transport, while the physical desktop pilot intentionally stops after transport and acknowledgement. One bounded proof has not yet joined physical transport to receiver acceptance, outcome, evidence, and verification.
+
+Recommended implementation order, subject to Rob's decision:
+
+1. receiver ingress and canonical resolution;
+2. human-readable display-only envelope summary;
+3. source-owner verification of ADV-042 and Package D closure review;
+4. only then consider one separately authorized real Worker activation.
+
+This recommendation is not itself activation authority or a selected implementation goal.
 
 ## Planned Production Readability Follow-up
 
@@ -172,50 +133,29 @@ The summary must:
 - show Worker, task and revision, procedure and version, authorization source, verification mode, wrapper ID, run ID, and bounded instruction in plain language;
 - remain display-only and non-authoritative;
 - have no independent edit path, parser, persistence record, or lifecycle state;
-- be covered by focused tests proving field parity and preventing drift between machine and human views.
-
-Do not replace JSON with prose alone. The objective is human debugging readability without creating duplicate truth.
+- be covered by focused field-parity tests.
 
 ## Composer Boundary
 
 The general full-text composer investigation is paused by Rob and must not be reopened without demonstrated failure.
 
-The Worker-only path preserves exact destination, empty-composer, clipboard-restoration, explicit-send, one-job, and stop-on-uncertainty safeguards. After paste it copies once and checks only whether the expected `wrapper_id` is present.
+The Worker-only path preserves exact destination, empty-composer protection, clipboard restoration, explicit send, one-job locking, and stop-on-uncertainty safeguards. After paste it copies once and checks only whether the expected `wrapper_id` is present.
 
 Full-text equality, repeated selection, character-range comparison, multiple witnesses, alternate paste mechanisms, focus hacks, and broader timeout experiments are out of scope.
-
-## Automation Command Center Boundary
-
-The established HQ scheduler and attended automation remain operationally validated. The separate Worker backend, receiver, verification, synthetic integration, and bounded desktop transport paths are validated.
-
-Package D does not:
-
-- change existing HQ destinations or prompt behavior;
-- add general Worker execution controls;
-- create real Worker registry entries;
-- create department profiles;
-- create recurring Worker authority schedules;
-- create a second run, outcome, queue, wake, or verification ledger;
-- emit a real wake;
-- authorize a real Worker merely because tests or a synthetic desktop transport passed.
-
-The scheduler adapter accepts one already-authorized execution-ready envelope. Correct recurring authority generation requires a separate approved model and is not inferred from ordinary recurrence.
-
-Any real profile and activation remain department-owned durable decisions.
 
 ## Advisory State
 
 As of 2026-07-19:
 
-- ADV-20260718-042 is OPEN and authoritative for receiver-side semantic validation and controlled Worker outcomes. Engineering implementation and local tests now exist; source verification and lifecycle changes remain with the advisory owner.
+- ADV-20260718-042 is OPEN and authoritative for receiver-side semantic validation and controlled Worker outcomes. Engineering implementation is substantial, but source verification and lifecycle changes remain with the advisory owner after the identified gaps are resolved.
 - ADV-20260719-043 is CLOSED after Life OS Maintenance created the canonical execution and Worker protocols.
-- ADV-20260719-044 is OPEN on `coordination/boards/engineering.md`, targeted to Life OS Maintenance HQ for shared Worker filesystem, pointer, profile-state, handoff, watch, and architecture-history reconciliation.
+- ADV-20260719-044 is CLOSED, implemented, and source verified after Life OS Maintenance reconciled shared Worker filesystem, pointer, profile-state, handoff, watch, and architecture-history drift.
 
 Do not duplicate these advisories or create parallel open-loop wrappers.
 
 ## Other Active Tracks
 
-- Monitor ADV-20260719-044 and observe corrected role-routed boots before closing the department-ownership wrapper.
+- Observe corrected role-routed specialist boots and inspect demonstrated defects. Do not continue monitoring ADV-20260719-044 implementation.
 - Observe four-source dashboard behavior during ordinary use.
 - Continue Raw Capture and Inventory pilots only as grandfathered evidence sources.
 - Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the validated envelope, evidence, controlled-outcome, verification-state, wake-suppression, transport-integrity, and desktop-receipt model.
@@ -230,3 +170,7 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - Any real activation requires a separate bounded decision and source-owned profile authority.
 - Do not create recurring Worker authority schedules without an approved task-generation model.
 - Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
+
+## Next Valid Action
+
+Reconcile current Engineering records, then have Rob select one bounded next implementation goal. Engineering recommends receiver ingress and canonical resolution before envelope readability or real Worker activation, but no implementation is authorized merely by this handoff.
