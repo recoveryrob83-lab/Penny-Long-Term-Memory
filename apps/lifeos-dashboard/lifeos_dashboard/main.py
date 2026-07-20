@@ -151,7 +151,11 @@ def create_app(
 ) -> FastAPI:
     active_source = source or build_default_source()
     service = DashboardService(active_source)
-    scheduler_enabled = source is None if start_scheduler is None else start_scheduler
+    scheduler_enabled = (
+        _environment_flag("LIFEOS_LEGACY_SCHEDULER_ENABLED", False)
+        if start_scheduler is None
+        else start_scheduler
+    )
     command_center = CommandCenterService(
         APP_ROOT,
         database_path=_cache_path("COMMAND_CENTER_DATABASE_PATH", "command_center.sqlite3"),
