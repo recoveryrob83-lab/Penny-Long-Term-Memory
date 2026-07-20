@@ -21,11 +21,12 @@ def row(**overrides: object) -> dict[str, object]:
         "controlled_outcome": "IMPLEMENT",
         "verification_mode": "ROUTINE_BATCH",
         "receiver_verification_state": "pending",
+        "worker_verification_state": None,
         "receiver_reason": "Authorized work completed.",
         "finished_at": 10.0,
-        "receiver_verification_updated_at": None,
-        "receiver_verification_actor": None,
-        "receiver_verification_reason": None,
+        "worker_verification_updated_at": None,
+        "worker_verification_actor": None,
+        "worker_verification_reason": None,
     }
     values.update(overrides)
     return values
@@ -80,9 +81,20 @@ def test_verified_automatic_work_suppresses_wake() -> None:
         row(verification_mode="AUTOMATIC", receiver_verification_state="verified")
     )
 
+    assert record.receiver_evidence_state == "verified"
     assert record.verification_state == "verified"
     assert record.review_route == "automatic"
     assert record.wake_disposition == "suppressed"
+
+
+def test_receiver_evidence_does_not_replace_immediate_hq_review() -> None:
+    record = record_from_row(
+        row(verification_mode="IMMEDIATE_HQ", receiver_verification_state="verified")
+    )
+
+    assert record.receiver_evidence_state == "verified"
+    assert record.verification_state == "pending"
+    assert record.wake_required is True
 
 
 def test_unverified_automatic_work_fails_safe_to_department_hq() -> None:
@@ -185,13 +197,32 @@ def test_routine_review_updates_same_history_row(tmp_path: Path) -> None:
 
     assert reviewed.verification_state == "verified"
     assert reviewed.queue_eligible is False
+    assert reviewed.wake_required is False
     assert reviewed.verification_actor == "Office Leaks HQ"
     assert reviewed.verification_reason == "Evidence read back successfully."
     with sqlite3.connect(database) as connection:
         stored = connection.execute(
-            "SELECT receiver_verification_state FROM execution_history WHERE run_id = 'RUN-1'"
+            "SELECT worker_verification_state FROM execution_history WHERE run_id = 'RUN-1'"
         ).fetchone()
     assert stored == ("verified",)
+
+
+def test_immediate_hq_review_suppresses_repeat_wake(tmp_path: Path) -> None:
+    database = tmp_path / "command-center.sqlite3"
+    service = insert_run(database, verification_mode="IMMEDIATE_HQ")
+    before = service.store.record("RUN-1")
+    assert before is not None
+    assert before.wake_required is True
+
+    reviewed = service.review(
+        "RUN-1",
+        "verified",
+        actor="Office Leaks HQ",
+        reason="Immediate review completed.",
+    )
+
+    assert reviewed.verification_state == "verified"
+    assert reviewed.wake_required is False
 
 
 def test_review_cannot_override_automatic_machine_verification(tmp_path: Path) -> None:
