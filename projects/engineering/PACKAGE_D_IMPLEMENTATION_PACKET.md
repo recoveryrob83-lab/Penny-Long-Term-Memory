@@ -214,31 +214,88 @@ Current boundary:
 - no Worker UI or dashboard controls are added;
 - no recurring Worker authority schedule is introduced;
 - `execute_scheduled` accepts one already-authorized execution-ready envelope from a scheduler caller;
-- receiver acceptance and canonical Worker outcomes remain Slice 5;
-- `controlled_outcome` remains null until a receiver result is processed;
 - existing HQ destinations, prompts, schedules, and verification behavior remain unchanged.
 
 ### Slice 5: Receiver validation and outcomes
 
-Status: Next implementation slice.
+Status: Implemented in source, pending Rob's focused and full local validation.
 
-Validate at the receiving Worker boundary:
+Files:
 
-- correct Worker ID;
-- current profile version;
-- allowed task class;
-- permitted read and write scope;
-- required parameters and source references;
-- verification mode;
-- pause and duplicate state.
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_models.py`;
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver_store.py`;
+- `apps/lifeos-dashboard/lifeos_dashboard/worker_receiver.py`;
+- `apps/lifeos-dashboard/tests/test_worker_receiver.py`.
 
-The Worker returns exactly one canonical outcome:
+Architecture:
 
-- `IMPLEMENT`;
-- `REPORT_AND_HOLD`;
-- `ELEVATE_FOR_APPROVAL`.
+- semantic preflight is separate from execution outcome finalization;
+- a valid wrapper becomes `READY`, not `IMPLEMENT`;
+- receiver acceptance consumes the task revision only after semantic validation succeeds;
+- acceptance and revision consumption are atomic with the existing transport-history row;
+- invalid preflight records either `REPORT_AND_HOLD` or `ELEVATE_FOR_APPROVAL` without consuming the revision;
+- finalization records exactly one controlled outcome in the same `execution_history` row;
+- transport success never becomes implementation success by implication.
 
-Slice 5 must persist receiver acceptance only after semantic validation passes and must not convert transport success into implementation success.
+Preflight validates:
+
+- registered Worker ID, profile Worker ID, profile version, owning department, and target department;
+- exact canonical procedure ID, version, task class, and checksum;
+- exact caller-to-task-class authority;
+- allowed and prohibited task classes;
+- authorization class and approval references;
+- parameter checksum, required fields, unknown fields, and parameter types;
+- authoritative source references;
+- requested read and write scopes;
+- profile-approved and procedure-approved tools;
+- exact verification mode;
+- deployment, route, pause, stale-revision, and duplicate state;
+- material transport text that changes scope, destination, permanence, permissions, or requested action.
+
+Finalization validates:
+
+- actual completion state;
+- required evidence references;
+- truthful external-action verification;
+- actual read and write scopes against both assignment and profile authority;
+- actual tools against the authorized assignment;
+- `AUTOMATIC` machine-verifiable postconditions;
+- newly discovered authority or approval requirements.
+
+Controlled outcomes:
+
+- `IMPLEMENT` only when bounded work completed and required evidence was recorded;
+- `REPORT_AND_HOLD` for invalid authority, partial or failed work, missing evidence, unavailable verification, scope or tool expansion, stale delivery, or unresolved conflicts;
+- `ELEVATE_FOR_APPROVAL` when Rob must authorize new authority, spending, connectors, cross-department scope, a material exception, or newly discovered approval-bearing work.
+
+Persistence added to the existing execution-history row:
+
+- profile version and owning department;
+- task class and authorization class;
+- procedure and parameter checksums;
+- source references;
+- requested and actual scopes;
+- accepted timestamp and receiver reason;
+- completion and verification states;
+- evidence references;
+- actual tools;
+- external-action verification;
+- final controlled outcome.
+
+Validation evidence:
+
+- 22 focused receiver tests passed in an isolated harness;
+- Rob's local focused test and complete repository regression remain required before Slice 5 is treated as validated.
+
+Current boundary:
+
+- normalized profile authority is supplied as an input to the receiver; no competing profile parser or authority source was invented;
+- no department Worker profile or folder was created;
+- no real Worker was registered or activated;
+- no Worker UI or dashboard control was added;
+- no recurring Worker authority schedule was created;
+- no second run or outcome ledger was created;
+- verification queues and wake suppression remain Slice 6.
 
 ### Slice 6: Verification views
 
@@ -249,6 +306,8 @@ A separate queue service is not required for v1. A filtered persisted verificati
 - `pending`;
 - `verified`;
 - `rejected`.
+
+Slice 6 will map controlled outcomes and verification modes onto queue eligibility and wake suppression without creating a competing authority record.
 
 ### Slice 7: End-to-end pilot
 
@@ -289,11 +348,12 @@ Package D reaches its first runtime milestone when:
 
 ## Next Action
 
-Implement Slice 5 as a bounded receiver-validation layer that:
+Run the focused Slice 5 receiver suite:
 
-1. resolves the department-owned profile referenced by the registry without copying its authority into runtime state;
-2. validates profile version, task class, read scope, write scope, required parameters, source references, and verification mode;
-3. distinguishes transport completion from receiver acceptance;
-4. persists exactly one controlled outcome: `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL`;
-5. accepts the task revision only after semantic validation succeeds;
-6. keeps Worker UI, real profile activation, recurring authority generation, and Package E deferred.
+`python -m pytest -q tests\test_worker_receiver.py`
+
+Then run the complete dashboard regression suite:
+
+`python -m pytest -q tests`
+
+If both pass, record Slice 5 as locally validated and begin Slice 6 verification-state views, queue filtering, and wake suppression using the existing execution-history table. Keep Worker UI, real profile activation, recurring authority generation, and Package E deferred.
