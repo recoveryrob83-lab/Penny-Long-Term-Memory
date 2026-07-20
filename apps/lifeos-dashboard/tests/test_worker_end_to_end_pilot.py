@@ -380,7 +380,8 @@ def test_successful_pilot_reaches_verified_same_row_evidence(
     assert len(rows) == 1
     assert rows[0]["controlled_outcome"] == "IMPLEMENT"
     assert rows[0]["receiver_evidence_json"] == '["synthetic://evidence/SYNTH-RUN-1"]'
-    assert rows[0]["receiver_verification_state"] == "verified"
+    assert rows[0]["receiver_verification_state"] == "pending"
+    assert rows[0]["worker_verification_state"] == "verified"
 
 
 def test_duplicate_retry_with_new_run_id_never_reaches_transport(
