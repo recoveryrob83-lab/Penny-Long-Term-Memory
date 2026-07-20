@@ -20,6 +20,10 @@
 
   const markServerUnavailable = () => {
     document.body.dataset.lifeosServer = "unavailable";
+    setText("wo-status", "Server offline");
+    setText("wo-browser-state", "Unavailable");
+    setText("wo-gate-state", "Unavailable");
+    setText("wo-run-state", SERVER_UNAVAILABLE_MESSAGE);
     setText("cc-status", "Server offline");
     setText("cc-scheduler-status", "Server offline");
     setText("cc-summary", SERVER_UNAVAILABLE_MESSAGE);
