@@ -162,6 +162,20 @@ Next valid Engineering action:
 4. if a real candidate is considered, establish its record class, owner, authoritative profile path, lifecycle state, priority, task class, scopes, verification mode, review condition, and why GitHub is correct before any durable write;
 5. keep recurring Worker authority generation and Package E deferred.
 
+## Planned Production Readability Follow-up
+
+Before the first real Worker activation, preserve the compact JSON envelope as the sole authoritative machine representation and add a generated human-readable summary beside it.
+
+The summary must:
+
+- derive every displayed field from the same `ExecutionEnvelope` object used to render JSON;
+- show Worker, task and revision, procedure and version, authorization source, verification mode, wrapper ID, run ID, and bounded instruction in plain language;
+- remain display-only and non-authoritative;
+- have no independent edit path, parser, persistence record, or lifecycle state;
+- be covered by focused tests proving field parity and preventing drift between machine and human views.
+
+Do not replace JSON with prose alone. The objective is human debugging readability without creating duplicate truth.
+
 ## Composer Boundary
 
 The general full-text composer investigation is paused by Rob and must not be reopened without demonstrated failure.
@@ -216,11 +230,3 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - Any real activation requires a separate bounded decision and source-owned profile authority.
 - Do not create recurring Worker authority schedules without an approved task-generation model.
 - Windows startup, desktop shell, service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
-
-## Safety and Truthfulness
-
-- Prefer small, verifiable operations.
-- Fetch before editing and verify after writing.
-- Preserve unrelated content and source boundaries.
-- Never commit secrets or private account data.
-- Never claim local runtime success without Rob's confirmation.
