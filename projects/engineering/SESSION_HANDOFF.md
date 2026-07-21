@@ -1,15 +1,15 @@
 # Engineering HQ Session Handoff
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 Project: Engineering HQ
-Purpose: Current handoff for technical architecture, Package E Worker Operations and Receiver Integration, browser automation, connector reliability, the LifeOS Dashboard, and bounded Worker execution infrastructure.
+Purpose: Current handoff for technical architecture, reshaped Package E Worker dispatch and verification, browser automation, connector reliability, the LifeOS Dashboard, and bounded Worker execution infrastructure.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Engineering HQ
-- Current Phase: Active / Package D Closed / Package E Slice 1 Live Validated / Slice 2 Receiver Integration Next
-- Primary Systems: GitHub, ChatGPT Department and Worker rooms, local LifeOS Dashboard, SQLite Command Center execution history, Engineering advisory board, Advisory Index when needed, and other source systems only when explicitly required
+- Current Phase: Active / Package D Closed / Package E Reshaped / Dispatch-Only Courier Next
+- Primary Systems: GitHub, ChatGPT Department and Worker rooms, local LifeOS Dashboard, SQLite Command Center `execution_history`, Engineering advisory board, Advisory Index when needed, and other source systems only when explicitly required
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files.
 
@@ -20,9 +20,9 @@ Purpose: Current handoff for technical architecture, Package E Worker Operations
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
 5. Treat `projects/engineering/open_loops.md` as authoritative for unfinished Engineering work.
-6. Read `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md` whenever Worker Operations, browser courier, response capture, receiver integration, HQ review, unattended orchestration, or legacy automation retirement is in scope.
-7. Read `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md` only when Package D history, its runtime design, validation evidence, or closeout is directly relevant.
-8. Read `coordination/WORKER_EXECUTION_CONTRACT.md` and `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` when Worker routing, authority, or execution behavior is in scope.
+6. Read `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md` whenever Worker dispatch, result outbox, report ingestion, repair wakes, HQ verification, Rob validation, Chief of Staff consumption, browser courier, or unattended orchestration is in scope.
+7. Read `projects/engineering/PACKAGE_D_IMPLEMENTATION_PACKET.md` only when Package D history, runtime design, validation evidence, or closeout is directly relevant.
+8. Read `coordination/WORKER_EXECUTION_CONTRACT.md` and `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` when Worker routing, authority, reporting, verification, or execution behavior is in scope.
 9. Read `coordination/ADVISORY_INDEX.md` only when advisory routing or cross-department status is relevant.
 10. Read current Engineering notebook records only when directly referenced by active work.
 11. Keep connector and browser work small, explicit, fail-closed, and verifiable.
@@ -31,7 +31,7 @@ Purpose: Current handoff for technical architecture, Package E Worker Operations
 
 Engineering HQ owns technical architecture, software planning, repository strategy, automation design, prompt systems, APIs and connectors, data models, testing, debugging, implementation sequencing, build-readiness, and truthful verification.
 
-Engineering does not own canonical shared Worker governance, global boot coherence, profile conventions, another department’s Worker authority, source-owner advisory lifecycle, or domain judgment. Life OS Maintenance HQ owns shared governance surfaces. Departments own Worker profiles, procedures, judgment, and authority. Engineering owns technical routing, transport, logging, duplicate suppression, response capture, verification mechanics, runtime evidence, tests, and reliability infrastructure.
+Engineering does not own canonical shared Worker governance, global boot coherence, another department's Worker authority, source-owner advisory lifecycle, or domain judgment. Life OS Maintenance HQ owns shared governance surfaces. Departments own Worker profiles, procedures, judgment, and authority. Engineering owns technical routing, transport, logging, duplicate suppression, result ingestion, verification mechanics, runtime evidence, tests, and reliability infrastructure.
 
 Route business strategy to Business HQ or Office Leaks HQ, cost-bearing choices to Finance HQ, daily one-off execution to Chief of Staff HQ, shared governance and global memory hygiene to Life OS Maintenance HQ, and wellbeing or sustainability judgment to Wellness HQ.
 
@@ -39,17 +39,23 @@ Route business strategy to Business HQ or Office Leaks HQ, cost-bearing choices 
 
 A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
 
-The operating model is:
+The operating model is now:
 
-- the Department HQ owns the Worker profile, authority, procedures, and domain judgment;
-- GitHub holds the canonical profile, approved procedures, task or advisory state, and durable evidence;
-- the Worker chat receives a bounded envelope, reads required canonical GitHub sources, validates the request, performs only authorized work, and returns one controlled outcome with evidence;
-- browser and Python infrastructure preserve exact delivery, correlation, response capture, duplicate suppression, and evidence;
-- the receiver independently validates the assignment and evidence before accepting a controlled outcome;
-- the Department HQ performs required review and retains ownership;
-- the source owner retains advisory lifecycle and closure authority.
+- the Department HQ owns the Worker profile, authority, procedures, holds, and domain judgment;
+- GitHub holds canonical profiles, approved procedures, task or advisory state, and immutable result and review evidence;
+- SQLite `execution_history` remains the sole operational runtime ledger;
+- the browser courier wakes a Worker or owning HQ, proves submission, returns immediately, and never waits for completion;
+- the Worker performs the bounded work and writes one immutable schema-valid report attempt to its deterministic result folder under narrow create-only authority;
+- a deterministic local ingester validates the report and correlates it to the canonical assignment and existing runtime state;
+- malformed reports trigger bounded report-repair wakes without re-executing the work;
+- a schema-valid report triggers owning-HQ review according to verification mode;
+- Department HQ verifies report integrity, authority compliance, evidence, and work where possible;
+- work that HQ cannot independently verify follows an explicit Rob-validation path;
+- only signed HQ or Rob results become ready for later Chief of Staff consumption;
+- the courier never wakes Chief of Staff;
+- source owners retain advisory lifecycle and closure authority.
 
-Python and browser automation are not the Worker. A Worker-reported outcome is evidence, not accepted authority.
+Python and browser automation are not the Worker. A Worker-reported outcome is evidence, not accepted authority. A GitHub outbox artifact is evidence, not a competing runtime ledger.
 
 ## Chat and Work Model
 
@@ -57,11 +63,11 @@ Use regular Chat for architecture, planning, GitHub synchronization, prompt and 
 
 Use Work for substantial coding, local terminal work, full test execution, browser control, packaging, or complex artifacts.
 
-Never claim an action, test, deployment, browser round trip, or connector write occurred without current evidence.
+Never claim an action, test, deployment, browser round trip, connector write, report ingestion, or verification occurred without current evidence.
 
 ## Primary Current Work Package
 
-### Package E: Worker Operations and Receiver Integration
+### Package E: Worker Dispatch, Result Outbox, HQ Verification, and CoS Consumption
 
 Lifecycle State: Active
 Priority: Normal
@@ -72,51 +78,68 @@ Canonical packet:
 
 Objective:
 
-Complete the bridge from an already-authorized canonical Worker assignment through one-tab browser dispatch, correlated response capture, semantic receiver validation, one same-row controlled outcome, and Department HQ review without Rob manually carrying text or evidence between rooms.
+Complete a nonblocking operational chain from an already-authorized canonical assignment to a signed Department HQ result available for scheduled Chief of Staff consumption without Rob manually carrying prompts, reports, or evidence between rooms.
 
-### Slice 1: One-Tab Courier and Worker Operations Cockpit
+### Implemented Foundation
 
-Status: Implemented and live validated.
+Status: Implemented foundation / Transitional architecture.
 
 Current implementation includes:
 
-- exact Engineering HQ source-chat preservation;
-- exact `Engineering_Worker` URL and title verification;
+- exact Engineering HQ and `Engineering_Worker` URL and title verification;
+- Worker-conversation hydration checks;
 - empty-composer and no-generation preflight;
-- one-tab navigation to the Worker and return to the exact source URL;
-- correlated request and response markers;
-- captured assistant response and turn ID;
+- one-tab browser navigation and return;
+- correlated request markers;
 - zero-authority courier self-test;
 - Worker Operations dashboard health, dispatch, route, history, and review visibility;
+- shared pause and one-job execution gate;
 - legacy prompt-and-scheduler UI removed from view;
 - legacy definitions preserved for rollback;
 - legacy scheduler dormant by default.
 
-Live evidence reported by Rob:
+The current courier still contains response-waiting and assistant-response capture from the superseded round-trip design. That code is transitional and must not be treated as the final Package E architecture.
 
-- `SYNTH-BROWSER-WRAP-1784575398-7e1b422eac`;
-- `SYNTH-BROWSER-RUN-1784575398-7e1b422eac`;
-- exact acknowledgement captured at `conversation-turn-27`;
-- `returned_to_source: true`;
-- `durable_authority_created: false`;
-- dashboard self-test returned to HQ with `conversation-turn-29`.
+### Architecture Evidence From ADV-20260720-047
 
-### Slice 2: Captured Response to Semantic Receiver Integration
+Revision 1 exposed a Worker-room hydration race. Engineering added a stable-history readiness gate.
 
-Status: Next valid action.
+Revision 2 reached the Worker and the Worker completed the assignment, but the courier stopped after submission uncertainty while waiting for response capture. The Worker later produced a strong human-readable report. Its machine line used a string-valued `profile_version` because the generated template showed a quoted placeholder.
 
-Implement the smallest bounded bridge that:
+This evidence supports the new separation:
 
-1. stores captured response evidence on the existing execution row;
-2. parses one Worker-reported controlled outcome without accepting it automatically;
-3. loads or reconstructs the canonical receiver assignment from the advisory, profile, and procedure;
-4. validates exact transport history, identity, revision, parameters, authority, scopes, tools, and procedure;
-5. accepts only a newer valid revision;
-6. creates `ExecutionEvidence` only from verifiable report content;
-7. records exactly one same-row controlled outcome;
-8. sends `IMMEDIATE_HQ` work to the existing review path;
-9. preserves source-owner closure authority;
-10. holds safely on missing, conflicting, stale, duplicate, unauthorized, or unverifiable evidence.
+- courier dispatch;
+- Worker execution;
+- immutable result outbox;
+- deterministic ingestion and repair;
+- Department HQ validation;
+- Rob validation when required;
+- later scheduled Chief of Staff consumption.
+
+Do not blind-retry revision 2. It is preserved as architecture-discovery evidence, not accepted Package E completion proof.
+
+### Next Valid Action: Slice 2 Dispatch-Only Courier
+
+Convert the courier so it:
+
+1. reaches and verifies the exact Worker room;
+2. waits for stable hydration;
+3. sends one correlated assignment;
+4. proves the correlated user turn exists;
+5. records `DISPATCH_SUBMITTED` on the existing runtime state;
+6. returns immediately to the source HQ;
+7. releases the shared browser gate;
+8. performs no response waiting, response scraping, or assistant-turn interpretation.
+
+Completion requires a live bounded dispatch that frees the courier while the Worker remains independently active.
+
+### Later Package E Slices
+
+- Slice 3: Engineering-only immutable Worker result-outbox pilot and narrow create-only reporting authority.
+- Slice 4: deterministic result ingester, schema rejection artifacts, report-repair wakes, and duplicate suppression.
+- Slice 5: owning-HQ wakes and immutable HQ verification receipts.
+- Slice 6: Rob-validation path and real end-to-end proof through `READY_FOR_COS`.
+- Slice 7: separately authorized read-only Chief of Staff scheduled consumption and unattended local operation.
 
 ## Package D Closeout
 
@@ -125,7 +148,7 @@ Implement the smallest bounded bridge that:
 Lifecycle State: Closed
 Closed: 2026-07-20
 
-Package D’s seven technical slices, synthetic backend pilot, desktop transport proof, Engineering Worker profile and route, canonical read-only procedure, and first live operational advisory pilot are complete.
+Package D's seven technical slices, synthetic backend pilot, desktop transport proof, Engineering Worker profile and route, canonical read-only procedure, and first live operational advisory pilot are complete.
 
 Canonical historical packet:
 
@@ -144,65 +167,39 @@ Primary closeout evidence:
 
 `ADV-20260718-042` remains open under its source owner. Package D closure does not change its lifecycle.
 
-## Package E Boundary
+## Package E Boundaries
 
 Package E may build the technical orchestration path. It must not:
 
 - invent or broaden authority;
 - select priorities or create assignments;
-- modify another department’s files;
+- modify another department's files;
 - modify shared governance without coordinated authority;
-- create a second run, response, outcome, verification, wake, or queue ledger;
-- treat browser success as semantic acceptance;
+- grant every Worker standing GitHub write authority;
+- create a second runtime, response, outcome, verification, wake, queue, or consumption ledger;
+- treat dispatch, a Worker report, or an outbox file as accepted authority;
 - auto-verify `IMMEDIATE_HQ` work;
+- auto-validate work that requires Rob's observation;
+- let the courier wake Chief of Staff;
 - auto-close advisories;
 - control arbitrary browser tabs;
 - blind-retry uncertain sends;
 - create recurring Worker authority without an approved task-generation model.
 
+Cross-department result-outbox adoption requires Life OS Maintenance HQ review of the shared contract and explicit owning-department profile or procedure authority.
+
 ## Human-Readable Envelope Requirement
 
-Before ordinary real Worker activation beyond pilots, add a display-only human-readable summary beside the canonical JSON envelope.
+Before ordinary real Worker activation beyond bounded pilots, retain a display-only human-readable summary beside the canonical JSON envelope.
 
 The summary must derive all fields from the same `ExecutionEnvelope`, remain non-authoritative, have no independent edit or parse path, and be covered by parity tests.
-
-## Browser and Composer Boundary
-
-The preferred Package E path is the one-tab Edge/CDP courier.
-
-Required safeguards:
-
-- exact canonical source and Worker URLs;
-- exactly one controlled page context;
-- empty composer before navigation;
-- no active response generation;
-- preserved source URL;
-- exact Worker title and project verification;
-- bounded wrapper and correlation markers;
-- stable captured response;
-- verified return to source;
-- disconnect after completion;
-- stop before send or preserve forensic state after uncertain send status.
-
-The general full-text composer investigation remains paused. Do not resume repeated selection, character-range comparison, dual witnesses, focus hacks, or broad timeout experiments without demonstrated failure.
-
-## Advisory State
-
-As of 2026-07-20:
-
-- `ADV-20260720-046` is CLOSED with revision 2 `IMPLEMENT`, same-row receiver evidence, and verified `IMMEDIATE_HQ` review.
-- `ADV-20260718-042` remains OPEN under the Chief of Staff source board. Engineering may provide Package E evidence but may not close it.
-- `ADV-20260719-043` is CLOSED after Life OS Maintenance created the canonical execution and Worker protocols.
-- `ADV-20260719-044` is CLOSED, implemented, and source verified after Life OS Maintenance reconciled Worker filesystem and continuity drift.
-
-Do not duplicate these advisories or create parallel open-loop wrappers.
 
 ## Other Active Tracks
 
 - Observe corrected role-routed specialist boots and inspect demonstrated defects.
 - Observe four-source dashboard behavior during ordinary use.
 - Continue Raw Capture and Inventory pilots only as grandfathered evidence sources.
-- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the validated envelope, evidence, controlled-outcome, verification-state, wake-suppression, transport-integrity, and browser-receipt model.
+- Align the Reliable Connector Execution Layer, operation ledger, and connector-health policy with the validated envelope, evidence, controlled-outcome, verification-state, wake-suppression, transport-integrity, result-outbox, and HQ-review model.
 - Continue Office Leaks delivery architecture as concrete requirements mature.
 - Keep Engineering HQ Daily Sync paused until Rob explicitly resumes it.
 
@@ -212,12 +209,15 @@ Do not duplicate these advisories or create parallel open-loop wrappers.
 - The dashboard server must remain running for the Worker Operations UI.
 - Failed or uncertain sends must not be retried blindly.
 - Existing Python validation is technical infrastructure and defense in depth, not autonomous domain ownership.
-- Worker-reported outcomes remain evidence until receiver validation.
-- `IMMEDIATE_HQ` results remain pending until Engineering HQ review.
-- Receiver or HQ review does not close source advisories.
+- Worker-reported outcomes remain evidence until deterministic ingestion and receiver validation.
+- `IMMEDIATE_HQ` results remain pending until Department HQ review.
+- Work not independently verifiable by HQ requires explicit Rob validation.
+- Receiver, HQ review, or Rob validation does not close source advisories automatically.
+- The courier never wakes Chief of Staff.
 - Additional Worker activation requires separate bounded authority and a source-owned profile.
+- Scheduled Chief of Staff consumption requires separate explicit activation after the end-to-end chain is proven.
 - Windows service packaging, richer notifications, and broader recovery remain deferred until demonstrated need.
 
 ## Next Valid Action
 
-Implement Package E Slice 2 under `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`: captured Worker response to semantic receiver validation, one same-row controlled outcome, and existing HQ review, with focused failure-path tests and no automatic advisory closure.
+Implement Package E Slice 2 under `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`: convert the one-tab browser courier to dispatch-only wake transport that proves submission, returns immediately, frees the courier, and records `DISPATCH_SUBMITTED` without waiting for Worker output.
