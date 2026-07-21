@@ -24,7 +24,7 @@ def test_worker_operations_replaces_legacy_automation_surface() -> None:
     assert "command-scheduler.js" not in html
 
 
-def test_worker_operations_assets_expose_bounded_controls() -> None:
+def test_worker_operations_assets_expose_dispatch_only_controls() -> None:
     script = SCRIPT.read_text(encoding="utf-8")
     style = STYLE.read_text(encoding="utf-8")
 
@@ -33,8 +33,10 @@ def test_worker_operations_assets_expose_bounded_controls() -> None:
     assert "/api/worker-operations/self-test" in script
     assert "/api/command-center/pause" in script
     assert "confirm_send: true" in script
-    assert "Receiver:" in script
-    assert "Courier self-test succeeded." in script
+    assert "Dispatch:" in script
+    assert "Result:" in script
+    assert "Wake submitted at" in script
     assert "No durable authority was created." in script
+    assert "Worker response captured" not in script
     assert ".worker-ops-layout" in style
     assert ".worker-history-item" in style
