@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lifeos://schemas/worker-hq-review/v1",
+  "title": "Life OS Worker HQ Review v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "artifact_type",
+    "attempt",
+    "run_id",
+    "worker_id",
+    "reviewing_hq",
+    "report_path",
+    "review_state",
+    "report_integrity_state",
+    "authority_compliance_state",
+    "work_verification_state",
+    "evidence_checked",
+    "reason",
+    "ready_for_consumption",
+    "requires_rob_validation"
+  ],
+  "properties": {
+    "schema_id": {"const": "lifeos_worker_hq_review"},
+    "schema_version": {"type": "integer", "const": 1},
+    "artifact_type": {"const": "hq_review"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "worker_id": {"type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"},
+    "reviewing_hq": {"type": "string", "minLength": 1},
+    "report_path": {"type": "string", "minLength": 1},
+    "review_state": {"enum": ["VERIFIED", "REJECTED", "REPAIR_REQUIRED", "ROB_VALIDATION_REQUIRED"]},
+    "report_integrity_state": {"enum": ["valid", "invalid", "unavailable"]},
+    "authority_compliance_state": {"enum": ["compliant", "noncompliant", "unavailable"]},
+    "work_verification_state": {"enum": ["verified", "rejected", "unavailable"]},
+    "evidence_checked": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "reason": {"type": "string", "minLength": 1},
+    "ready_for_consumption": {"type": "boolean"},
+    "requires_rob_validation": {"type": "boolean"}
+  }
+}
