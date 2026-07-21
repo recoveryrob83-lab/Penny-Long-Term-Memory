@@ -6,6 +6,55 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
 
+### ADV-20260720-047 — Validate Package E Slice 2 response reconciliation
+
+- Date: 2026-07-20
+- From: Engineering HQ
+- To: Engineering Worker
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: IMMEDIATE_HQ
+- Target Department and Owner: Engineering HQ
+- Target Worker ID: `engineering_worker`
+- Record Class: Bounded Engineering read-only response-bridge validation
+- Task Class: `engineering_read_only_verification`
+- Authorization Class: `READ_ONLY`
+- Authorization Source: `ENGINEERING_HQ_PACKAGE_E_SLICE2_VALIDATION_20260720`
+- Procedure ID: `engineering_worker_response_bridge_validation`
+- Procedure Version: 1
+- Procedure Path: `projects/engineering/procedures/engineering_worker_response_bridge_validation.md`
+- Procedure Checksum: `SHA256:6aa8d313e082f4942ea58abdabfc8ce09c5046341d35b088181a157386143108`
+- Worker Profile Path: `projects/engineering/workers/engineering_worker.md`
+- Requested Action: Read the exact Package E implementation packet, answer only the three bounded verification questions, and return the required structured Worker report for receiver reconciliation.
+- Parameters JSON: `{"targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],"verification_questions":["Does the Package E packet state that Slice 2 connects a captured Worker response to semantic receiver validation and a same-row controlled outcome?","Does the packet preserve separate Engineering HQ review for IMMEDIATE_HQ work?","Does the packet prohibit automatic advisory closure and a competing runtime ledger?"]}`
+- Parameters Checksum: `SHA256:b6f54f4dc0b6d405cd544cb54b651987fdd736746c01e9e010b557a038372cc2`
+- Source References JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_response_bridge_validation.md","projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]`
+- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_response_bridge_validation.md","projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]`
+- Requested Write Scopes JSON: `[]`
+- Requested Tools JSON: `["GitHub"]`
+- Requests New Authority: false
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: false
+- Requests Material Exception: false
+- Transport Scope Change Detected: false
+- Completion Condition: Every exact source is read, all three verification questions are answered or explicitly marked unverifiable, exactly one valid `LIFEOS_WORKER_REPORT` line is returned, required run-linked evidence is reported, and no writes or external actions occur.
+- Review Condition: Engineering HQ confirms one same-row receiver outcome, report consistency, and pending `IMMEDIATE_HQ` review through Worker Operations.
+- Closure Authority: Engineering HQ only. Closure is not delegated to the Worker or automation.
+
+#### Assignment
+
+Perform revision 1 using only the named procedure and authorized sources.
+
+Return a human-readable finding plus exactly one compact `LIFEOS_WORKER_REPORT=` JSON line as required by the procedure. Return exactly one controlled outcome:
+
+- `IMPLEMENT` when the bounded inspection completes with required evidence;
+- `REPORT_AND_HOLD` when validation, source loading, report construction, or safe inspection cannot continue;
+- `ELEVATE_FOR_APPROVAL` only when broader authority or a Rob decision is required.
+
+Do not edit or close this advisory. Do not modify the Advisory Index. Do not run code or tests. Do not perform any write, connector action, desktop action, or external-system action.
+
 ## Recently Acknowledged / Implemented Advisories
 
 
@@ -126,7 +175,7 @@ ADV-20260718-042 remains the authoritative Engineering advisory for receiver-sid
 - Closed: 2026-07-17
 - Target Department: Life Logistics HQ
 
-Life Logistics reconciled the requested shared summaries and local continuity after the four-source dashboard milestone. GitHub, Trello, Todoist, and Google Calendar private iCal were recorded as verified sources; guarded clean-and-strictly-behind GitHub sync was preserved; Gmail and Drive adapters remained deferred; and the PennyOS humble-beginnings note remained historical only.
+Life Logistics reconciled the requested shared summaries and local continuity after the live four-source LifeOS Dashboard milestone. GitHub, Trello, Todoist, and Google Calendar private iCal were recorded as verified sources; guarded clean-and-strictly-behind GitHub sync was preserved; Gmail and Drive adapters deferred; and the PennyOS humble-beginnings note remained historical only.
 
 ### ADV-20260716-039 — Reconcile stale global LifeOS summaries after July 16 changes
 
@@ -137,7 +186,7 @@ Life Logistics reconciled the requested shared summaries and local continuity af
 - Closed: 2026-07-17
 - Target Department: Life Logistics HQ
 
-Life Logistics reconciled shared state for the Office Leaks public launch, Trello Flow Board adoption, closed advisories, dashboard concept, prompt-launcher repairs, and deferred enhancements.
+Life Logistics reconciled shared state for the Office Leaks public launch, Trello Flow Board adoption, closed advisories, dashboard concept, prompt-launcher repairs, and deferred launcher enhancements.
 
 ### ADV-20260714-034 — Sync expanded Life OS shortcut set and prompt-launcher database
 
@@ -146,7 +195,7 @@ Life Logistics reconciled shared state for the Office Leaks public launch, Trell
 - Acknowledged: 2026-07-14
 - Closed: 2026-07-14
 
-Life Logistics ingested the expanded shortcut set. `memory/CONTEXT_REMINDER.md` remains canonical, and the launcher prompt library remains a secondary interface.
+Life Logistics ingested the expanded shortcut set. Canonical vocabulary remains in `memory/CONTEXT_REMINDER.md`, and the launcher prompt library remains a secondary interface.
 
 ### ADV-20260710-032 — Create Penny Inventory Worker boot package
 
