@@ -22,6 +22,7 @@ echo Validating Worker Operations and Package E receiver integration...
   tests\test_worker_profile_resolution.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
+  tests\test_worker_browser_readiness.py ^
   tests\test_synthetic_worker_browser_pilot.py
 if errorlevel 1 (
   echo.
