@@ -21,6 +21,8 @@ PROMPT_SELECTOR = "#prompt-textarea"
 SEND_SELECTOR = 'button[data-testid="send-button"]'
 STOP_SELECTOR = 'button[data-testid="stop-button"]'
 TURN_XPATH = "xpath=//*[@data-testid and starts-with(@data-testid,'conversation-turn-')]"
+WORKER_READY_STABLE_SECONDS = 4.0
+WORKER_READY_POLL_SECONDS = 0.5
 
 
 class BrowserRoundTripError(RuntimeError):
@@ -174,6 +176,102 @@ def _verify_worker_identity(
         raise BrowserRoundTripError("Worker sidebar link points to an unexpected conversation.")
 
 
+def _worker_history_snapshot(page) -> tuple[int, str, str]:
+    """Return a stable identity witness for the currently rendered conversation history."""
+
+    try:
+        turns = page.locator(TURN_XPATH)
+        count = turns.count()
+        if count < 1:
+            return (count, "", "")
+        last_turn = turns.last
+        if not last_turn.is_visible():
+            return (count, "", "")
+        turn_id = str(last_turn.get_attribute("data-testid") or "")
+        text = " ".join(last_turn.inner_text().split())
+        return (count, turn_id, text)
+    except Exception:
+        return (0, "", "")
+
+
+def _wait_for_worker_conversation_ready(
+    page,
+    request: BrowserRoundTripRequest,
+    *,
+    worker_url: str,
+    timeout_ms: int,
+    stable_seconds: float = WORKER_READY_STABLE_SECONDS,
+):
+    """Wait for the exact Worker room, history, and composer to finish hydrating."""
+
+    deadline = time.monotonic() + (timeout_ms / 1000)
+    last_snapshot: tuple[int, str, str] | None = None
+    stable_since: float | None = None
+    last_observation = "Worker conversation history has not loaded."
+
+    while time.monotonic() < deadline:
+        try:
+            if normalize_chatgpt_url(page.url) != worker_url:
+                raise BrowserRoundTripError("Exact Worker conversation URL is not active yet.")
+            prompt = page.locator(PROMPT_SELECTOR)
+            if prompt.count() != 1 or not prompt.first.is_visible():
+                raise BrowserRoundTripError("Worker composer is not stably visible yet.")
+            if _visible(page.locator(STOP_SELECTOR)):
+                raise BrowserRoundTripError("Worker conversation is still generating.")
+            if _composer_text(prompt):
+                raise BrowserRoundTripError(
+                    "Worker composer contains an unsent draft. It was preserved."
+                )
+
+            ready_state = str(page.evaluate("document.readyState"))
+            snapshot = _worker_history_snapshot(page)
+            history_ready = snapshot[0] >= 1 and bool(snapshot[1] and snapshot[2])
+            if ready_state == "complete" and history_ready:
+                if snapshot == last_snapshot:
+                    if stable_since is None:
+                        stable_since = time.monotonic()
+                    if time.monotonic() - stable_since >= stable_seconds:
+                        remaining_ms = max(
+                            1, min(10_000, int((deadline - time.monotonic()) * 1000))
+                        )
+                        _verify_worker_identity(
+                            page,
+                            request,
+                            worker_url=worker_url,
+                            timeout_ms=remaining_ms,
+                        )
+                        return prompt, snapshot[0]
+                else:
+                    last_snapshot = snapshot
+                    stable_since = None
+                last_observation = (
+                    f"Worker history is present but not stable yet: {snapshot[0]} turns."
+                )
+            else:
+                last_snapshot = None
+                stable_since = None
+                last_observation = (
+                    f"Worker room not hydrated: readyState={ready_state}, "
+                    f"turns={snapshot[0]}."
+                )
+        except BrowserRoundTripError as exc:
+            if "unsent draft" in str(exc):
+                raise
+            last_snapshot = None
+            stable_since = None
+            last_observation = str(exc)
+        except Exception as exc:
+            last_snapshot = None
+            stable_since = None
+            last_observation = str(exc)
+        time.sleep(WORKER_READY_POLL_SECONDS)
+
+    raise BrowserRoundTripError(
+        "Exact Worker conversation did not finish loading before the readiness timeout. "
+        f"Nothing was sent. Last observation: {last_observation}"
+    )
+
+
 def _turn_for_role_marker(page, *, role: str, marker: str, timeout_ms: int):
     role_node = page.locator(f'[data-message-author-role="{role}"]').filter(has_text=marker).last
     role_node.wait_for(state="visible", timeout=timeout_ms)
@@ -246,8 +344,7 @@ def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
         if normalize_chatgpt_url(page.url) != worker_url:
             page.goto(worker_url, wait_until="domcontentloaded", timeout=timeout_ms)
         page.wait_for_url(worker_url, timeout=timeout_ms)
-        prompt = _wait_for_idle_composer(page, timeout_ms=min(timeout_ms, 120_000))
-        _verify_worker_identity(
+        prompt, baseline_turns = _wait_for_worker_conversation_ready(
             page,
             request,
             worker_url=worker_url,
@@ -255,12 +352,39 @@ def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
         )
 
         turns = page.locator(TURN_XPATH)
-        baseline_turns = turns.count()
         prompt.fill(request.prompt_text)
         if request.request_marker not in _composer_text(prompt):
             prompt.fill("")
             raise BrowserRoundTripError(
                 "Composer witness did not contain the request marker. Draft was cleared."
+            )
+
+        time.sleep(0.75)
+        if normalize_chatgpt_url(page.url) != worker_url:
+            prompt.fill("")
+            raise BrowserRoundTripError(
+                "Worker conversation changed while preparing the prompt. Draft was cleared."
+            )
+        _verify_worker_identity(
+            page,
+            request,
+            worker_url=worker_url,
+            timeout_ms=min(timeout_ms, 10_000),
+        )
+        if turns.count() != baseline_turns:
+            prompt.fill("")
+            raise BrowserRoundTripError(
+                "Worker conversation history changed before Send. Draft was cleared; nothing was sent."
+            )
+        if _visible(page.locator(STOP_SELECTOR)):
+            prompt.fill("")
+            raise BrowserRoundTripError(
+                "Worker began generating before Send. Draft was cleared; nothing was sent."
+            )
+        if request.request_marker not in _composer_text(prompt):
+            prompt.fill("")
+            raise BrowserRoundTripError(
+                "Composer witness changed before Send. Draft was cleared; nothing was sent."
             )
 
         send = page.locator(SEND_SELECTOR)
