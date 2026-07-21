@@ -52,9 +52,8 @@ def test_real_profile_keeps_shared_sources_read_only() -> None:
     assert "coordination" not in profile.write_scope_prefixes
 
 
-def test_wake_instruction_requires_exactly_one_machine_report() -> None:
+def test_dispatch_wake_does_not_install_superseded_chat_report_contract() -> None:
     instruction = build_wake_job(advisory()).instruction
 
-    assert WORKER_REPORT_PREFIX in instruction
-    assert "evidence only" in instruction
-    assert "do not report `verified`" in instruction
+    assert WORKER_REPORT_PREFIX not in instruction
+    assert "Package E response contract" not in instruction
