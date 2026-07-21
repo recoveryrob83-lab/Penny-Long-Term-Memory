@@ -8,14 +8,24 @@ import pytest
 AUTOMATION = Path(__file__).parents[1] / "automation"
 if str(AUTOMATION) not in sys.path:
     sys.path.insert(0, str(AUTOMATION))
-TRANSPORT_SCRIPT = AUTOMATION / "chatgpt_worker_browser_dispatch.py"
-TRANSPORT_SPEC = importlib.util.spec_from_file_location(
-    "chatgpt_worker_browser_dispatch_readiness", TRANSPORT_SCRIPT
+
+ROUNDTRIP_SCRIPT = AUTOMATION / "chatgpt_worker_browser_roundtrip.py"
+ROUNDTRIP_SPEC = importlib.util.spec_from_file_location(
+    "chatgpt_worker_browser_roundtrip_readiness", ROUNDTRIP_SCRIPT
 )
-assert TRANSPORT_SPEC is not None and TRANSPORT_SPEC.loader is not None
-transport = importlib.util.module_from_spec(TRANSPORT_SPEC)
-sys.modules[TRANSPORT_SPEC.name] = transport
-TRANSPORT_SPEC.loader.exec_module(transport)
+assert ROUNDTRIP_SPEC is not None and ROUNDTRIP_SPEC.loader is not None
+hydration = importlib.util.module_from_spec(ROUNDTRIP_SPEC)
+sys.modules[ROUNDTRIP_SPEC.name] = hydration
+ROUNDTRIP_SPEC.loader.exec_module(hydration)
+
+DISPATCH_SCRIPT = AUTOMATION / "chatgpt_worker_browser_dispatch.py"
+DISPATCH_SPEC = importlib.util.spec_from_file_location(
+    "chatgpt_worker_browser_dispatch_readiness", DISPATCH_SCRIPT
+)
+assert DISPATCH_SPEC is not None and DISPATCH_SPEC.loader is not None
+dispatch = importlib.util.module_from_spec(DISPATCH_SPEC)
+sys.modules[DISPATCH_SPEC.name] = dispatch
+DISPATCH_SPEC.loader.exec_module(dispatch)
 
 
 class FakePrompt:
@@ -79,11 +89,11 @@ class FakePage:
         self.turns = SequencedTurns(counts)
 
     def locator(self, selector: str):
-        if selector == transport.PROMPT_SELECTOR:
+        if selector == hydration.PROMPT_SELECTOR:
             return self.prompt
-        if selector == transport.STOP_SELECTOR:
+        if selector == hydration.STOP_SELECTOR:
             return EmptyLocator()
-        if selector == transport.TURN_XPATH:
+        if selector == hydration.TURN_XPATH:
             return self.turns
         raise AssertionError(f"Unexpected selector: {selector}")
 
@@ -93,7 +103,7 @@ class FakePage:
 
 
 def request(worker_url: str) -> object:
-    return transport.BrowserRoundTripRequest(
+    return hydration.BrowserRoundTripRequest(
         worker_url=worker_url,
         worker_chat_title="Engineering_Worker",
         project_title="Life OS",
@@ -108,10 +118,10 @@ def test_worker_readiness_waits_for_loaded_history(
 ) -> None:
     worker_url = "https://chatgpt.com/g/project/c/worker"
     page = FakePage(worker_url, [0, 2, 2])
-    monkeypatch.setattr(transport, "_verify_worker_identity", lambda *args, **kwargs: None)
-    monkeypatch.setattr(transport.time, "sleep", lambda seconds: None)
+    monkeypatch.setattr(hydration, "_verify_worker_identity", lambda *args, **kwargs: None)
+    monkeypatch.setattr(hydration.time, "sleep", lambda seconds: None)
 
-    prompt, baseline_turns = transport._wait_for_worker_conversation_ready(
+    prompt, baseline_turns = hydration._wait_for_worker_conversation_ready(
         page,
         request(worker_url),
         worker_url=worker_url,
@@ -128,7 +138,7 @@ def test_worker_history_snapshot_requires_visible_nonempty_turn() -> None:
     worker_url = "https://chatgpt.com/g/project/c/worker"
     page = FakePage(worker_url, [1])
 
-    assert transport._worker_history_snapshot(page) == (
+    assert hydration._worker_history_snapshot(page) == (
         1,
         "conversation-turn-9",
         "Existing Worker history",
@@ -136,7 +146,7 @@ def test_worker_history_snapshot_requires_visible_nonempty_turn() -> None:
 
 
 def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
-    script = TRANSPORT_SCRIPT.read_text(encoding="utf-8")
+    script = DISPATCH_SCRIPT.read_text(encoding="utf-8")
     run_body = script.split("def run_dispatch", 1)[1]
 
     readiness = run_body.index("prompt, baseline_turns = _wait_for_worker_conversation_ready")
