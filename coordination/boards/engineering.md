@@ -13,7 +13,7 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 - To: Engineering Worker
 - Lifecycle State: OPEN
 - Priority: NORMAL
-- Advisory Revision: 1
+- Advisory Revision: 2
 - Verification Mode: IMMEDIATE_HQ
 - Target Department and Owner: Engineering HQ
 - Target Worker ID: `engineering_worker`
@@ -42,10 +42,14 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 - Completion Condition: Every exact source is read, all three verification questions are answered or explicitly marked unverifiable, exactly one valid `LIFEOS_WORKER_REPORT` line is returned, required run-linked evidence is reported, and no writes or external actions occur.
 - Review Condition: Engineering HQ confirms one same-row receiver outcome, report consistency, and pending `IMMEDIATE_HQ` review through Worker Operations.
 - Closure Authority: Engineering HQ only. Closure is not delegated to the Worker or automation.
+- Prior Revision Transport State: FAILED_BEFORE_WORKER_RECEIPT
+- Prior Run ID: `RUN-ADV-20260720-047-R1`
+- Browser Readiness Repair Commit: `d69fecdf0eb6b73ab59c74885bd32d5ee9a66cc1`
+- Revision Note: Revision 1 exposed a browser hydration race. The exact Worker route and composer shell appeared before the Engineering Worker conversation history finished loading, so the prompt was not retained by the Worker room. Rob directly observed that no Worker prompt arrived. Revision 2 preserves identical authority and scope while using a new deterministic run ID after the readiness repair.
 
 #### Assignment
 
-Perform revision 1 using only the named procedure and authorized sources.
+Perform revision 2 using only the named procedure and authorized sources.
 
 Return a human-readable finding plus exactly one compact `LIFEOS_WORKER_REPORT=` JSON line as required by the procedure. Return exactly one controlled outcome:
 
