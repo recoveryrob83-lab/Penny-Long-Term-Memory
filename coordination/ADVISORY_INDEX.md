@@ -1,10 +1,11 @@
 # Advisory Index
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
+- ADV-20260721-048 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: Engineering HQ — Validate Package E Slice 3 with one bounded Engineering Worker run: read four exact Engineering-owned contract sources, answer three verification questions, and create exactly one immutable schema-valid report at `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`. The substantive work is read-only; `BOUNDED_WRITE` authorizes only that create-only current-run artifact. No overwrite, re-execution, scope expansion, advisory closure, external action, or broader authority is authorized.
 - ADV-20260720-047 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: Engineering HQ — Validate Package E Slice 2 with one bounded read-only Engineering Worker run: read the exact Package E packet, answer three boundary questions, return exactly one structured `LIFEOS_WORKER_REPORT`, reconcile one same-row controlled outcome, and leave `IMMEDIATE_HQ` review pending. No writes, external actions, advisory closure, or broader authority are authorized.
 - ADV-20260718-042 — OPEN — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Engineering HQ — Implement receiver-side semantic validation for automated prompts: the composer transport should deliver and log a machine-readable wrapper without exact full-text equality; Engineering should add run IDs, prompt IDs and versions, canonical-prompt and parameter checksums, prompt-database lookup, ownership and authorization checks, duplicate suppression, and an explicit Worker decision tree of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`. Completion requires current test or run-log evidence and no silent scope expansion.
 
@@ -23,7 +24,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 - ADV-20260715-035 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Daily Operating SOP integrated into global boot flow and inherited by department boots.
 - ADV-20260714-034 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Expanded connector-tagged shortcuts ingested; canonical vocabulary remains in `memory/CONTEXT_REMINDER.md`; launcher JSON treated as secondary; no duplicate definitions found.
 - ADV-20260713-033 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/life-os.md` — Target Department: Life Logistics HQ — Shortcut rollout ingested; `/BOOT`, `/ADVISE`, `/ADVISORY`, and `/SYNCADVISORY` approved for active use under existing routing and read-only constraints.
-- ADV-20260710-032 — Implemented / Acknowledged / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Canonical Penny Inventory Worker package created, For Sale Inventory resource verified, worker registry and boot routing updated.
+- ADV-20260710-032 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Canonical Penny Inventory Worker package created, For Sale Inventory resource verified, worker registry and boot routing updated.
 - ADV-20260710-031 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Advisory Board Lifecycle Standard created, high-use boards reviewed, and Engineering board compacted with Git history preserving prior detail.
 - ADV-20260709-030 — Implemented / Closed — Posted Board: `coordination/boards/engineering.md` — Target Department: Life Logistics HQ — Formal Life OS worker layer, shared worker standard, Penny Raw Capture Worker package, canonical Sheet pointer, and worker boot routing created.
 - ADV-20260709-029 — Closed / Implemented Through ADV-20260709-030 — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Chief Engineering Penny — Engineering completed rapid-capture worker architecture; Life Logistics implemented the resulting worker package. No separate work remains.
