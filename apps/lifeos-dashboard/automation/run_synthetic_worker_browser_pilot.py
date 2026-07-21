@@ -1,4 +1,4 @@
-"""Run one zero-authority Engineering Worker browser round-trip pilot."""
+"""Run one zero-authority Engineering Worker browser dispatch pilot."""
 from __future__ import annotations
 
 import argparse
@@ -8,11 +8,11 @@ import time
 import uuid
 from dataclasses import dataclass
 
+from chatgpt_worker_browser_dispatch import run_dispatch
 from chatgpt_worker_browser_roundtrip import (
     BrowserRoundTripError,
     BrowserRoundTripRequest,
     BrowserRoundTripUncertain,
-    run_round_trip,
 )
 from lifeos_dashboard.worker_command_center import render_worker_prompt
 from lifeos_dashboard.worker_runtime import ExecutionEnvelope
@@ -111,7 +111,7 @@ def build_plan(
         project_title=PROJECT_TITLE,
         prompt_text=prompt_text,
         request_marker=envelope.wrapper_id,
-        response_marker=expected_ack,
+        response_marker=envelope.run_id,
         cdp_endpoint=cdp_endpoint,
         timeout_seconds=timeout_seconds,
     )
@@ -157,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     try:
-        receipt = run_round_trip(plan.request)
+        receipt = run_dispatch(plan.request)
     except BrowserRoundTripUncertain as exc:
         print(f"STOPPED_AFTER_SEND: {exc}", file=sys.stderr)
         return 3
@@ -167,16 +167,16 @@ def main(argv: list[str] | None = None) -> int:
 
     payload = {
         "status": "succeeded",
+        "dispatch_state": "DISPATCH_SUBMITTED",
         "wrapper_id": plan.envelope.wrapper_id,
         "run_id": plan.envelope.run_id,
         "task_id": plan.envelope.task_id,
         "expected_ack": plan.expected_ack,
-        "captured_response": receipt.response_text,
-        "assistant_turn_id": receipt.assistant_turn_id,
+        "user_turn_id": receipt.user_turn_id,
         "returned_to_source": receipt.returned_to_source,
         "durable_authority_created": False,
     }
-    print("SYNTHETIC_BROWSER_ROUNDTRIP_OK")
+    print("SYNTHETIC_BROWSER_DISPATCH_OK")
     print(f"{RECEIPT_PREFIX}{json.dumps(payload, sort_keys=True, ensure_ascii=False)}")
     return 0
 
