@@ -1,19 +1,24 @@
 """Convert canonical execution-ready advisories into reference-only Worker wake jobs.
 
 The Advisory Index is the routing dashboard. Source boards remain authoritative. This module
-checks only the minimum machine-readable wake schema, then passes a reference-only job to the
-existing Worker Command Center. It does not interpret the assignment, create authority, update
-advisory lifecycle, or close work.
+checks the machine-readable wake schema, validates optional Package E result-contract metadata,
+and passes a reference-only job to the Worker Command Center. It does not create authority,
+update advisory lifecycle, or close work.
 """
 from __future__ import annotations
 
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Protocol, cast
 
 from .worker_command_center import WorkerCommandJob, WorkerExecutionResult
+from .worker_result_contract import (
+    ResultSubmissionContract,
+    WorkerResultContractError,
+    render_result_submission_instruction,
+)
 from .worker_runtime import ExecutionEnvelope, VerificationMode, WorkerRuntimeError
 
 _INDEX_OPEN_PATTERN = re.compile(
@@ -46,6 +51,19 @@ _REQUIRED_FIELDS = (
     "Requested Write Scopes JSON",
     "Requested Tools JSON",
     "Completion Condition",
+)
+_RESULT_FIELDS = (
+    "Result Contract ID",
+    "Result Contract Version",
+    "Result Submission Procedure ID",
+    "Result Submission Procedure Version",
+    "Result Owning Department",
+    "Result Attempt",
+    "Result Path",
+    "Result Create Only",
+    "Result Overwrite Allowed",
+    "Result Work Reexecution Authorized",
+    "Result Scope Expansion Authorized",
 )
 
 
@@ -83,6 +101,12 @@ class ExecutionReadyAdvisory:
     verification_mode: VerificationMode
     lifecycle_state: str
     priority: str
+    parameters: dict[str, object] = field(default_factory=dict)
+    source_references: tuple[str, ...] = ()
+    requested_read_scopes: tuple[str, ...] = ()
+    requested_write_scopes: tuple[str, ...] = ()
+    requested_tools: tuple[str, ...] = ()
+    result_contract: ResultSubmissionContract | None = None
 
     @property
     def wrapper_id(self) -> str:
@@ -128,6 +152,15 @@ def _positive_int(value: str, field_name: str) -> int:
     if parsed < 1:
         raise WorkerRuntimeError(f"{field_name} must be a positive integer.")
     return parsed
+
+
+def _boolean(value: str, field_name: str) -> bool:
+    clean = _clean_inline(value).lower()
+    if clean == "true":
+        return True
+    if clean == "false":
+        return False
+    raise WorkerRuntimeError(f"{field_name} must be true or false.")
 
 
 def _parse_json_field(value: str, field_name: str, expected_type: type) -> object:
@@ -179,6 +212,68 @@ def _metadata(section: str) -> dict[str, str]:
     }
 
 
+def _parse_result_contract(
+    fields: dict[str, str],
+    *,
+    advisory_id: str,
+    advisory_revision: int,
+    worker_id: str,
+    authorization_class: str,
+    requested_write_scopes: tuple[str, ...],
+    requested_tools: tuple[str, ...],
+) -> ResultSubmissionContract | None:
+    present = [field_name for field_name in _RESULT_FIELDS if fields.get(field_name, "").strip()]
+    if not present:
+        return None
+    missing = [field_name for field_name in _RESULT_FIELDS if not fields.get(field_name, "").strip()]
+    if missing:
+        raise WorkerRuntimeError(f"Result submission contract is missing fields: {missing}")
+
+    try:
+        contract = ResultSubmissionContract(
+            contract_id=fields["Result Contract ID"].strip(),
+            contract_version=_positive_int(
+                fields["Result Contract Version"], "Result Contract Version"
+            ),
+            submission_procedure_id=fields["Result Submission Procedure ID"].strip(),
+            submission_procedure_version=_positive_int(
+                fields["Result Submission Procedure Version"],
+                "Result Submission Procedure Version",
+            ),
+            owning_department=fields["Result Owning Department"].strip(),
+            worker_id=worker_id,
+            run_id=f"RUN-{advisory_id}-R{advisory_revision}",
+            attempt=_positive_int(fields["Result Attempt"], "Result Attempt"),
+            result_path=fields["Result Path"].strip(),
+            create_only=_boolean(fields["Result Create Only"], "Result Create Only"),
+            overwrite_allowed=_boolean(
+                fields["Result Overwrite Allowed"], "Result Overwrite Allowed"
+            ),
+            work_reexecution_authorized=_boolean(
+                fields["Result Work Reexecution Authorized"],
+                "Result Work Reexecution Authorized",
+            ),
+            scope_expansion_authorized=_boolean(
+                fields["Result Scope Expansion Authorized"],
+                "Result Scope Expansion Authorized",
+            ),
+        )
+    except WorkerResultContractError as exc:
+        raise WorkerRuntimeError(str(exc)) from exc
+
+    if authorization_class != "BOUNDED_WRITE":
+        raise WorkerRuntimeError(
+            "A durable Worker result artifact requires Authorization Class BOUNDED_WRITE."
+        )
+    if contract.result_path not in requested_write_scopes:
+        raise WorkerRuntimeError(
+            "Requested Write Scopes JSON must include the exact deterministic Result Path."
+        )
+    if "GitHub" not in requested_tools:
+        raise WorkerRuntimeError("Worker result submission requires GitHub in Requested Tools JSON.")
+    return contract
+
+
 def parse_execution_ready_advisory(
     board_text: str,
     index_record: AdvisoryIndexRecord,
@@ -190,7 +285,7 @@ def parse_execution_ready_advisory(
     target_worker_id = fields.get("Target Worker ID", "").strip()
     if not target_worker_id:
         return None
-    missing = [field for field in _REQUIRED_FIELDS if not fields.get(field, "").strip()]
+    missing = [field_name for field_name in _REQUIRED_FIELDS if not fields.get(field_name, "").strip()]
     if missing:
         raise WorkerRuntimeError(
             f"Execution-ready advisory {index_record.advisory_id} is missing fields: {missing}"
@@ -221,11 +316,41 @@ def parse_execution_ready_advisory(
     if authorization_class not in _ALLOWED_AUTHORIZATION_CLASSES:
         raise WorkerRuntimeError("Authorization Class is invalid.")
 
-    _parse_json_field(fields["Parameters JSON"], "Parameters JSON", dict)
-    _parse_json_field(fields["Source References JSON"], "Source References JSON", list)
-    _parse_json_field(fields["Requested Read Scopes JSON"], "Requested Read Scopes JSON", list)
-    _parse_json_field(fields["Requested Write Scopes JSON"], "Requested Write Scopes JSON", list)
-    _parse_json_field(fields["Requested Tools JSON"], "Requested Tools JSON", list)
+    parameters = cast(
+        dict[str, object], _parse_json_field(fields["Parameters JSON"], "Parameters JSON", dict)
+    )
+    source_references = tuple(
+        cast(list[str], _parse_json_field(fields["Source References JSON"], "Source References JSON", list))
+    )
+    requested_read_scopes = tuple(
+        cast(
+            list[str],
+            _parse_json_field(
+                fields["Requested Read Scopes JSON"], "Requested Read Scopes JSON", list
+            ),
+        )
+    )
+    requested_write_scopes = tuple(
+        cast(
+            list[str],
+            _parse_json_field(
+                fields["Requested Write Scopes JSON"], "Requested Write Scopes JSON", list
+            ),
+        )
+    )
+    requested_tools = tuple(
+        cast(list[str], _parse_json_field(fields["Requested Tools JSON"], "Requested Tools JSON", list))
+    )
+    advisory_revision = _positive_int(fields["Advisory Revision"], "Advisory Revision")
+    result_contract = _parse_result_contract(
+        fields,
+        advisory_id=index_record.advisory_id,
+        advisory_revision=advisory_revision,
+        worker_id=target_worker_id,
+        authorization_class=authorization_class,
+        requested_write_scopes=requested_write_scopes,
+        requested_tools=requested_tools,
+    )
 
     return ExecutionReadyAdvisory(
         advisory_id=index_record.advisory_id,
@@ -233,7 +358,7 @@ def parse_execution_ready_advisory(
         board_path=index_record.board_path,
         target_department=source_department,
         target_worker_id=target_worker_id,
-        advisory_revision=_positive_int(fields["Advisory Revision"], "Advisory Revision"),
+        advisory_revision=advisory_revision,
         task_class=fields["Task Class"].strip(),
         authorization_class=authorization_class,
         procedure_id=fields["Procedure ID"].strip(),
@@ -242,13 +367,19 @@ def parse_execution_ready_advisory(
         verification_mode=cast(VerificationMode, verification),
         lifecycle_state=lifecycle,
         priority=priority,
+        parameters=parameters,
+        source_references=source_references,
+        requested_read_scopes=requested_read_scopes,
+        requested_write_scopes=requested_write_scopes,
+        requested_tools=requested_tools,
+        result_contract=result_contract,
     )
 
 
 def render_reference_only_instruction(advisory: ExecutionReadyAdvisory) -> str:
     """Render a wake instruction that points to canonical truth without copying the task."""
 
-    return (
+    instruction = (
         f"Wake for canonical advisory {advisory.advisory_id}, revision "
         f"{advisory.advisory_revision}, posted at `{advisory.board_path}`.\n\n"
         "Do not execute from this transport text. Load the canonical Worker boot path, your exact "
@@ -256,12 +387,13 @@ def render_reference_only_instruction(advisory: ExecutionReadyAdvisory) -> str:
         "ownership, task class, procedure, parameters, scopes, tools, verification mode, "
         "pause state, and duplicate state before accepting it. If valid, consume only this "
         "revision, perform only the bounded work in the advisory, preserve run-linked evidence, "
-        "update the same authoritative "
-        "advisory or run record only as authorized, and return exactly one controlled outcome: "
-        "IMPLEMENT, REPORT_AND_HOLD, or ELEVATE_FOR_APPROVAL. Do not close the advisory unless the "
-        "canonical advisory explicitly delegates closure and its verification condition is "
-        "satisfied."
+        "and return exactly one controlled outcome: IMPLEMENT, REPORT_AND_HOLD, or "
+        "ELEVATE_FOR_APPROVAL. Do not close the advisory unless the canonical advisory explicitly "
+        "delegates closure and its verification condition is satisfied."
     )
+    if advisory.result_contract is not None:
+        instruction += render_result_submission_instruction(advisory.result_contract)
+    return instruction
 
 
 def build_wake_job(
