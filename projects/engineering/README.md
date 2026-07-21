@@ -1,6 +1,6 @@
 # Engineering HQ
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 
 ## Purpose
 
@@ -17,23 +17,31 @@ Use Engineering HQ for:
 - automation and desktop-control safety;
 - LifeOS Dashboard and Automation Command Center architecture;
 - prompt systems and command interfaces;
-- technical Worker routing, transport, logging, duplicate suppression, evidence, and reliability;
+- technical Worker routing, transport, logging, duplicate suppression, result ingestion, evidence, and reliability;
 - testing, debugging, implementation sequencing, feasibility review, and build-ready packets;
 - Engineering-owned durable-memory maintenance.
 
-Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, another department's records, or the Worker’s domain judgment.
+Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, another department's records, source-owner advisory lifecycle, or domain judgment.
 
 ## Canonical Worker Model
 
 A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
 
-- The Department HQ owns the Worker profile, procedures, authority, and domain judgment.
-- GitHub holds the canonical profile, procedures, task state, and durable evidence.
-- The Worker chat reads those sources, validates the bounded assignment, performs authorized work, and returns one controlled outcome with evidence.
-- Department HQ reviews the result and retains ownership.
-- Python, desktop automation, SQLite, and the dashboard provide courier, routing, safety, logging, duplicate-suppression, and visibility infrastructure.
+- The Department HQ owns the Worker profile, procedures, authority, holds, verification, and domain judgment.
+- GitHub holds canonical profiles, procedures, task state, and immutable result and review evidence.
+- SQLite `execution_history` remains the sole operational runtime ledger.
+- The browser courier wakes an authorized Worker or owning HQ, proves submission, returns immediately, and never waits for completion.
+- The Worker performs bounded work and writes one immutable schema-valid report attempt under exact narrow reporting authority.
+- A deterministic ingester validates the report, updates existing runtime state, and requests report repair when needed without re-executing the work.
+- Department HQ reviews report integrity, authority compliance, evidence, and the actual work where possible.
+- Work unavailable to HQ inspection requires explicit Rob validation.
+- Signed HQ or Rob results become available for later scheduled Chief of Staff consumption.
+- The courier never wakes Chief of Staff.
+- Source owners retain advisory lifecycle and closure authority.
 
-Python is not the Worker. Machine-side validation may provide defense in depth, but it does not replace the ChatGPT Worker’s operational source reading, judgment, refusal behavior, or Department HQ review.
+Python, browser automation, SQLite, and the dashboard provide routing, safety, logging, duplicate suppression, ingestion, verification mechanics, and visibility. They are not the Worker and do not replace Department HQ judgment.
+
+A GitHub Worker result outbox is immutable evidence, not a competing runtime ledger.
 
 ## Not This Department
 
@@ -49,61 +57,54 @@ Engineering maintains its own project subtree during authorized maintenance and 
 
 Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
+Package E may pilot a Worker result outbox under Engineering-owned paths. It may not silently grant universal Worker write authority. Shared adoption requires Life OS Maintenance HQ review and explicit authorization by each owning department.
+
 ## Current Technical State
 
 The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
-
-The established Automation Command Center supports eight exact HQ destinations, canonical, saved, and custom prompts, persistent schedules and run history, validated pause-on-failure and restart policy, Scheduler Ledger synchronization, and bounded cleanup controls.
 
 Canonical shared architecture lives in:
 
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 
-Package D has implemented and locally validated seven technical slices:
+Package D is closed after implementing and validating the technical Worker registry, routing, transport, receiver, verification, duplicate-suppression, and synthetic pilot foundation.
 
-1. Worker contracts and validation.
-2. SQLite Worker registry, route state, and task-scoped receiver persistence.
-3. Registry service and exact-title resolution.
-4. Separate Worker Command Center transport and execution-history integration.
-5. Receiver semantic validation and controlled outcomes.
-6. Verification views, queue derivation, and wake suppression.
-7. Disposable synthetic end-to-end backend pilot with transport-integrity hardening.
+Package E is active and authoritative at:
 
-A separate bounded synthetic desktop pilot passed exact ChatGPT Classic navigation, wrapper-marker verification, explicit submission, receipt generation, and exact acknowledgement without creating durable authority.
+- `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-Validation evidence recorded in the Package D packet includes a focused Slice 7 and receiver suite of 32 passing tests, a complete dashboard regression suite of 222 passing tests with 9 warnings, and a successful bounded desktop receipt with `durable_authority_created: false`.
+The initial Package E one-tab courier and Worker Operations cockpit are an implemented transitional foundation. Live pilots demonstrated exact destination routing, hydration protection, and zero-authority transport, but also exposed the architectural cost of waiting for Worker responses in the browser.
 
-No real Worker profile, registry entry, route, wake, Worker control surface, or recurring Worker authority schedule has been created.
+The production direction is now:
+
+1. dispatch-only courier wake;
+2. immediate return and browser-gate release;
+3. immutable Worker result artifact;
+4. deterministic ingestion and report repair;
+5. owning-HQ wake and verification receipt;
+6. Rob validation when HQ cannot independently inspect the work;
+7. signed result ready for later Chief of Staff consumption.
+
+The current courier still contains response-waiting and assistant-response capture from the superseded round-trip design. It is transitional and must be refactored before further real Package E proof.
 
 ## Current Decision Boundary
 
-ADV-20260718-042 states that the automation layer is the courier and the receiving Worker validates canonical prompt or procedure, parameters, authority, ownership, scope, and source boundaries.
+The next valid implementation is Package E Slice 2: convert the one-tab courier into dispatch-only transport that proves the correlated user turn, records `DISPATCH_SUBMITTED`, returns immediately, and frees the courier while the Worker executes independently.
 
-For Life OS, that receiving Worker is the specialized ChatGPT Worker room. The earlier Engineering recommendation for a mandatory Python receiver-ingress and canonical-resolution service overinterpreted the machine-runtime layer and is withdrawn as a presumed next requirement.
+Later slices add an Engineering-only result-outbox pilot, deterministic ingester and report repair, owning-HQ verification, Rob validation, and a separately authorized read-only Chief of Staff scheduled-consumption task.
 
-The next implementation goal remains unselected. Engineering’s current recommendation is:
-
-1. define the operational Worker execution procedure and canonical GitHub source-resolution contract;
-2. run one bounded ChatGPT Worker pilot;
-3. verify controlled outcomes, refusal of unauthorized expansion, duplicate suppression, evidence, and Department HQ review;
-4. add deeper Python source resolution only if the pilot demonstrates a concrete need.
-
-The human-readable envelope summary remains a separate small production-readability follow-up before the first real Worker activation.
-
-ADV-20260719-044 is closed, implemented, and source verified. Engineering no longer monitors Maintenance implementation of that advisory.
+Cross-department rollout, scheduled-task activation, shared Worker-contract changes, new Worker authority, and advisory closure remain separate decisions.
 
 ## Composer Boundary
 
 The general full-text composer investigation is paused and must not be reopened without demonstrated failure.
 
-The Worker-only entrypoint preserves exact destination, empty-composer protection, clipboard restoration, explicit send, one-job locking, and stop-on-uncertainty safeguards. After paste it copies once and checks only whether the expected wrapper ID is present.
-
-Do not resume repeated selection, character-range comparison, multiple witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without demonstrated failure.
+The Worker-only entrypoint preserves exact destination, hydration checks, empty-composer protection, explicit send, one-job locking, and stop-on-uncertainty safeguards. The dispatch-only redesign must not reintroduce repeated selection, character-range comparison, dual witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without evidence.
 
 ## Security Rule
 
-Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, private user data, or sensitive implementation details in Life OS GitHub memory.
+Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, private user data, or sensitive implementation details in Life OS GitHub memory or Worker result artifacts.
 
 Use ignored local environment files or the appropriate secure source system for operational credentials.
 
@@ -117,4 +118,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D's technical backend and desktop milestone is complete. ADV-042 remains open pending bounded operational ChatGPT Worker evidence and source-owner review. Rob's next implementation-goal decision is pending. Real Worker activation, recurring Worker authority generation, Package E, and unrelated expansion remain deferred.
+Active department. Package D is closed. Package E has been reshaped around nonblocking dispatch, immutable result evidence, deterministic ingestion and repair, Department HQ verification, explicit Rob validation where necessary, and later scheduled Chief of Staff consumption. The next implementation action is the dispatch-only courier conversion.
