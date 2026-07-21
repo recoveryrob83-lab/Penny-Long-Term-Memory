@@ -6,9 +6,11 @@ import pytest
 
 
 AUTOMATION = Path(__file__).parents[1] / "automation"
-TRANSPORT_SCRIPT = AUTOMATION / "chatgpt_worker_browser_roundtrip.py"
+if str(AUTOMATION) not in sys.path:
+    sys.path.insert(0, str(AUTOMATION))
+TRANSPORT_SCRIPT = AUTOMATION / "chatgpt_worker_browser_dispatch.py"
 TRANSPORT_SPEC = importlib.util.spec_from_file_location(
-    "chatgpt_worker_browser_roundtrip_readiness", TRANSPORT_SCRIPT
+    "chatgpt_worker_browser_dispatch_readiness", TRANSPORT_SCRIPT
 )
 assert TRANSPORT_SPEC is not None and TRANSPORT_SPEC.loader is not None
 transport = importlib.util.module_from_spec(TRANSPORT_SPEC)
@@ -133,15 +135,18 @@ def test_worker_history_snapshot_requires_visible_nonempty_turn() -> None:
     )
 
 
-def test_run_round_trip_gates_send_after_stable_worker_history() -> None:
+def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
     script = TRANSPORT_SCRIPT.read_text(encoding="utf-8")
-    run_body = script.split("def run_round_trip", 1)[1]
+    run_body = script.split("def run_dispatch", 1)[1]
 
     readiness = run_body.index("prompt, baseline_turns = _wait_for_worker_conversation_ready")
     fill = run_body.index("prompt.fill(request.prompt_text)")
     unchanged_history = run_body.index("if turns.count() != baseline_turns")
     click = run_body.index("send.click()")
+    user_turn = run_body.index('role="user"')
+    return_to_source = run_body.index("page.goto(source_url")
 
-    assert readiness < fill < unchanged_history < click
-    assert "WORKER_READY_STABLE_SECONDS = 4.0" in script
-    assert "Nothing was sent. Last observation" in script
+    assert readiness < fill < unchanged_history < click < user_turn < return_to_source
+    assert 'role="assistant"' not in run_body
+    assert "_wait_for_stable_turn" not in run_body
+    assert "without waiting for Worker output" in script
