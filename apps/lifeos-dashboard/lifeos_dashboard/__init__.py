@@ -19,3 +19,4 @@ from . import command_center_timeout_diagnostics_runtime as _command_center_time
 from . import command_center_failure_precision_runtime as _command_center_failure_precision_runtime
 from . import automation_logs_runtime as _automation_logs_runtime
 from . import worker_verification_runtime as _worker_verification_runtime
+from . import worker_response_receiver_runtime as _worker_response_receiver_runtime
