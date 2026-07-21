@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lifeos://schemas/worker-rob-validation/v1",
+  "title": "Life OS Worker Rob Validation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "artifact_type",
+    "attempt",
+    "run_id",
+    "worker_id",
+    "validator",
+    "validation_state",
+    "observation",
+    "evidence_references",
+    "ready_for_consumption"
+  ],
+  "properties": {
+    "schema_id": {"const": "lifeos_worker_rob_validation"},
+    "schema_version": {"type": "integer", "const": 1},
+    "artifact_type": {"const": "rob_validation"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "worker_id": {"type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"},
+    "validator": {"const": "Rob"},
+    "validation_state": {"enum": ["VERIFIED", "REJECTED"]},
+    "observation": {"type": "string", "minLength": 1},
+    "evidence_references": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "ready_for_consumption": {"type": "boolean"}
+  }
+}
