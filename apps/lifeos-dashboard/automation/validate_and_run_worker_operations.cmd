@@ -13,10 +13,11 @@ echo Updating the local dashboard environment...
 if errorlevel 1 exit /b %ERRORLEVEL%
 
 echo.
-echo Validating the Worker Operations rebuild...
+echo Validating Worker Operations and Package E receiver integration...
 ".venv\Scripts\python.exe" -m pytest -q ^
   tests\test_app.py ^
   tests\test_worker_operations.py ^
+  tests\test_worker_response_receiver.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
   tests\test_synthetic_worker_browser_pilot.py
