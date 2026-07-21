@@ -32,14 +32,13 @@ role: worker
 specialization: general
 profile_version: 1
 receiver_allowed_task_classes_json: ["engineering_read_only_verification"]
-receiver_read_scope_prefixes_json: ["projects/engineering", "apps/lifeos-dashboard",
-  "memory", "coordination"]
-receiver_write_scope_prefixes_json: ["projects/engineering", "apps/lifeos-dashboard"]
+receiver_read_scope_prefixes_json: ["projects/engineering","apps/lifeos-dashboard","memory","coordination"]
+receiver_write_scope_prefixes_json: ["projects/engineering","apps/lifeos-dashboard"]
 receiver_approved_tools_json: ["GitHub"]
 receiver_calling_source_task_classes_json: {"ROB-TEST":["engineering_read_only_verification"]}
 receiver_allowed_verification_modes_json: ["IMMEDIATE_HQ"]
 receiver_prohibited_task_classes_json: []
-receiver_department_labels_json: ["engineering", "Engineering HQ"]
+receiver_department_labels_json: ["engineering","Engineering HQ"]
 ---
 
 # Engineering Worker Profile
@@ -87,6 +86,11 @@ def board_text(revision: int = 1, *, procedure_checksum: str | None = None) -> s
         "verification_questions": ["Is Slice 2 bounded and receiver-owned?"],
     }
     checksum = procedure_checksum or sha256_text(PROCEDURE)
+    sources = [
+        "coordination/boards/engineering.md",
+        "projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md",
+    ]
+    read_scopes = ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]
     return f"""# Engineering Advisory Board
 
 ### ADV-TEST — Verify Package E receiver integration
@@ -105,9 +109,8 @@ def board_text(revision: int = 1, *, procedure_checksum: str | None = None) -> s
 - Authorization Source: `ROB-TEST`
 - Parameters JSON: `{json.dumps(params, separators=(",", ":"))}`
 - Parameters Checksum: `{checksum_parameters(params)}`
-- Source References JSON: `["coordination/boards/engineering.md",
-  "projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]`
-- Requested Read Scopes JSON: `["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]`
+- Source References JSON: `{json.dumps(sources, separators=(",", ":"))}`
+- Requested Read Scopes JSON: `{json.dumps(read_scopes, separators=(",", ":"))}`
 - Requested Write Scopes JSON: `[]`
 - Requested Tools JSON: `["GitHub"]`
 - Completion Condition: Return one evidence-backed report for Immediate HQ review.
