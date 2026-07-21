@@ -1,10 +1,78 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
+
+### ADV-20260721-048 — Validate Package E Slice 3 immutable result outbox
+
+- Date: 2026-07-21
+- From: Engineering HQ
+- To: Engineering Worker
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: IMMEDIATE_HQ
+- Target Department and Owner: Engineering HQ
+- Target Worker ID: `engineering_worker`
+- Record Class: Bounded Engineering read-only verification with one create-only result artifact
+- Task Class: `engineering_read_only_verification`
+- Authorization Class: `BOUNDED_WRITE`
+- Authorization Source: `ENGINEERING_HQ_PACKAGE_E_SLICE3_LIVE_OUTBOX_PILOT_20260721`
+- Procedure ID: `engineering_worker_result_outbox_validation`
+- Procedure Version: 1
+- Procedure Path: `projects/engineering/procedures/engineering_worker_result_outbox_validation.md`
+- Procedure Blob SHA: `08cacdca9c9afc280b034757faa02f0131ed7951`
+- Result Submission Procedure Path: `projects/engineering/procedures/engineering_worker_result_submission.md`
+- Result Submission Procedure Blob SHA: `2faed99249ee268c7bc746104d5e1319428c6bb6`
+- Worker Profile Path: `projects/engineering/workers/engineering_worker.md`
+- Requested Action: Read the four exact Engineering-owned targets, answer only the three bounded verification questions, and create exactly one immutable schema-valid Worker report at the exact current-run result path.
+- Parameters JSON: `{"targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md","projects/engineering/procedures/engineering_worker_result_submission.md","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json"],"verification_questions":["Does the Package E packet preserve a dispatch-only courier that returns immediately and leaves Worker result collection to the immutable outbox path?","Does the result-submission procedure authorize only one create-only current-run report artifact while prohibiting overwrite, re-execution, scope expansion, and advisory lifecycle change?","Do the canonical report schema and examples preserve integer and boolean JSON types correctly, including integer profile and revision fields and pending HQ verification?"]}`
+- Parameters Checksum: `SHA256:8c4212803f3b7e1f3bbe62eeb20ebe6d4f0674a4204da361c9bb23dcbe27e899`
+- Source References JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_result_outbox_validation.md","projects/engineering/procedures/engineering_worker_result_submission.md","projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json"]`
+- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_result_outbox_validation.md","projects/engineering/procedures/engineering_worker_result_submission.md","projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json"]`
+- Requested Write Scopes JSON: `["projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json"]`
+- Requested Tools JSON: `["GitHub"]`
+- Result Contract ID: `lifeos_worker_result`
+- Result Contract Version: 1
+- Result Submission Procedure ID: `engineering_worker_result_submission`
+- Result Submission Procedure Version: 1
+- Result Owning Department: `engineering`
+- Result Attempt: 1
+- Result Path: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`
+- Result Create Only: true
+- Result Overwrite Allowed: false
+- Result Work Reexecution Authorized: false
+- Result Scope Expansion Authorized: false
+- Requests New Authority: false
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: false
+- Requests Material Exception: false
+- Transport Scope Change Detected: false
+- Completion Condition: Every exact target is read, all three questions are answered or explicitly marked unverifiable, exactly one schema-valid immutable `report-001.json` is created at the authorized result path, creation is read back with commit, blob, path, and checksum evidence when available, no other write or external action occurs, and Engineering HQ review remains pending.
+- Review Condition: Engineering HQ validates report integrity, assignment correlation, authority compliance, source evidence, and the actual inspected claims after deterministic ingestion becomes available. Until Slice 4 exists, this advisory proves dispatch and immutable report creation only; it is not accepted as a fully ingested or HQ-signed result.
+- Closure Authority: Engineering HQ only. Closure is not delegated to the Worker, courier, result artifact, dashboard, or automation.
+
+#### Assignment
+
+Perform revision 1 using only the named validation and result-submission procedures and the exact authorized scopes.
+
+The substantive verification is read-only. The only durable write authorized by this advisory is creation of:
+
+`projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`
+
+Before creating it, confirm the path does not already exist. Create it once, read it back, and preserve exact evidence. Do not place the machine report only in chat.
+
+Return exactly one controlled outcome in the result artifact:
+
+- `IMPLEMENT` when the bounded inspection and immutable report creation complete with required evidence;
+- `REPORT_AND_HOLD` when validation, source loading, inspection, existing-file state, schema construction, creation, or read-back cannot continue safely;
+- `ELEVATE_FOR_APPROVAL` only when broader authority or a Rob decision is genuinely required.
+
+Do not edit or close this advisory. Do not modify the Advisory Index, Package E packet, procedures, schemas, examples, profile, status, open loops, runtime database, or any other file. Do not run code or tests. Do not perform desktop automation, connector actions beyond the exact GitHub reads and create-only report write, external-system actions, overwrite, deletion, work re-execution, or scope expansion.
 
 ### ADV-20260720-047 — Validate Package E Slice 2 response reconciliation
 
