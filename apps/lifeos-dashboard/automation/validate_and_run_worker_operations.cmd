@@ -13,13 +13,14 @@ echo Updating the local dashboard environment...
 if errorlevel 1 exit /b %ERRORLEVEL%
 
 echo.
-echo Validating Worker Operations and Package E dispatch-only integration...
+echo Validating Worker Operations and Package E result-outbox contracts...
 ".venv\Scripts\python.exe" -m pytest -q ^
   tests\test_app.py ^
   tests\test_worker_operations.py ^
   tests\test_worker_response_receiver.py ^
   tests\test_worker_response_runtime.py ^
   tests\test_worker_profile_resolution.py ^
+  tests\test_worker_result_contract.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
   tests\test_worker_browser_readiness.py ^
