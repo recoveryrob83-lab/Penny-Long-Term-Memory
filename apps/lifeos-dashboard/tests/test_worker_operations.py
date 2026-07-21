@@ -10,10 +10,12 @@ from lifeos_dashboard.worker_command_center import (
     WorkerCommandJob,
     WorkerExecutionHistoryStore,
 )
+from lifeos_dashboard.worker_dispatch_runtime import (
+    BrowserDispatchEvidence,
+    parse_browser_dispatch_receipt,
+)
 from lifeos_dashboard.worker_operations import (
-    BrowserTransportEvidence,
     BrowserWorkerEvidenceStore,
-    parse_browser_receipt,
     parse_reported_outcome,
     parse_synthetic_receipt,
     run_worker_browser_transport,
@@ -58,7 +60,7 @@ def job() -> WorkerCommandJob:
     )
 
 
-def test_reported_outcome_is_evidence_not_invented() -> None:
+def test_reported_outcome_parser_remains_historical_evidence_only() -> None:
     assert parse_reported_outcome("CONTROLLED_OUTCOME: IMPLEMENT") == "IMPLEMENT"
     assert parse_reported_outcome("Controlled Outcome - REPORT_AND_HOLD") == "REPORT_AND_HOLD"
     assert parse_reported_outcome("No final outcome marker") is None
@@ -67,26 +69,30 @@ def test_reported_outcome_is_evidence_not_invented() -> None:
     ) is None
 
 
-def test_browser_receipt_requires_one_valid_payload() -> None:
+def test_dispatch_receipt_requires_one_valid_payload() -> None:
     payload = {
+        "status": "submitted",
         "request_marker": "WAKE-ADV-TEST-R1",
-        "response_marker": "RUN-ADV-TEST-R1",
+        "run_id": "RUN-ADV-TEST-R1",
+        "submission_confirmed": True,
+        "user_turn_id": "conversation-turn-20",
     }
-    stdout = "BROWSER_ROUNDTRIP_OK\nLIFEOS_BROWSER_ROUNDTRIP_RECEIPT=" + json.dumps(payload)
-    assert parse_browser_receipt(stdout) == payload
+    stdout = "BROWSER_DISPATCH_OK\nLIFEOS_BROWSER_DISPATCH_RECEIPT=" + json.dumps(payload)
+    assert parse_browser_dispatch_receipt(stdout) == payload
 
     with pytest.raises(WorkerRuntimeError, match="exactly one"):
-        parse_browser_receipt("BROWSER_ROUNDTRIP_OK")
+        parse_browser_dispatch_receipt("BROWSER_DISPATCH_OK")
 
 
 def test_synthetic_receipt_requires_explicit_zero_authority() -> None:
     payload = {
         "status": "succeeded",
+        "dispatch_state": "DISPATCH_SUBMITTED",
         "durable_authority_created": False,
         "returned_to_source": True,
     }
     stdout = (
-        "SYNTHETIC_BROWSER_ROUNDTRIP_OK\n"
+        "SYNTHETIC_BROWSER_DISPATCH_OK\n"
         "LIFEOS_SYNTHETIC_BROWSER_RECEIPT=" + json.dumps(payload)
     )
     assert parse_synthetic_receipt(stdout) == payload
@@ -97,31 +103,27 @@ def test_synthetic_receipt_requires_explicit_zero_authority() -> None:
         parse_synthetic_receipt(unsafe)
 
 
-def test_browser_transport_captures_response_and_turn_evidence(
+def test_browser_transport_submits_without_waiting_for_worker_response(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     receipt = {
-        "status": "succeeded",
+        "status": "submitted",
         "worker_url": "https://chatgpt.com/g/project/c/worker",
         "return_url": "https://chatgpt.com/g/project/c/hq",
         "request_marker": "WAKE-ADV-TEST-R1",
-        "response_marker": "RUN-ADV-TEST-R1",
+        "run_id": "RUN-ADV-TEST-R1",
         "baseline_turns": 5,
-        "final_turns": 7,
+        "final_turns": 6,
         "user_turn_id": "conversation-turn-20",
-        "assistant_turn_id": "conversation-turn-21",
-        "response_text": (
-            "Run ID: RUN-ADV-TEST-R1\n"
-            "Required evidence present.\n"
-            "CONTROLLED_OUTCOME: IMPLEMENT"
-        ),
+        "submission_confirmed": True,
         "returned_to_source": True,
+        "return_error": None,
         "submission_uncertain": False,
     }
-    stdout = "BROWSER_ROUNDTRIP_OK\nLIFEOS_BROWSER_ROUNDTRIP_RECEIPT=" + json.dumps(receipt)
+    stdout = "BROWSER_DISPATCH_OK\nLIFEOS_BROWSER_DISPATCH_RECEIPT=" + json.dumps(receipt)
     monkeypatch.setattr(
-        "lifeos_dashboard.worker_operations.subprocess.run",
+        "lifeos_dashboard.worker_dispatch_runtime.subprocess.run",
         lambda *args, **kwargs: subprocess.CompletedProcess(
             args=args[0], returncode=0, stdout=stdout, stderr=""
         ),
@@ -137,19 +139,21 @@ def test_browser_transport_captures_response_and_turn_evidence(
 
     assert result.status == "succeeded"
     assert result.run_id == "RUN-ADV-TEST-R1"
-    assert "CONTROLLED_OUTCOME: IMPLEMENT" in result.stdout
-    assert evidence.reported_outcome == "IMPLEMENT"
-    assert evidence.assistant_turn_id == "conversation-turn-21"
-    assert evidence.browser_receipt_json is not None
+    assert result.stdout == ""
+    assert "Worker result remains pending" in result.reason
+    assert evidence.dispatch_state == "DISPATCH_SUBMITTED"
+    assert evidence.user_turn_id == "conversation-turn-20"
+    assert evidence.returned_to_source is True
+    assert "assistant_turn_id" not in evidence.__dict__
     assert result.controlled_outcome is None
 
 
-def test_browser_evidence_updates_existing_execution_row(tmp_path: Path) -> None:
+def test_dispatch_evidence_updates_existing_execution_row(tmp_path: Path) -> None:
     database = tmp_path / "command_center.sqlite3"
     history = WorkerExecutionHistoryStore(database)
     now = time.time()
     active_job = job()
-    result = run_result = __import__(
+    result = __import__(
         "lifeos_dashboard.worker_operations", fromlist=["_base_result"]
     )._base_result(
         active_job,
@@ -158,18 +162,19 @@ def test_browser_evidence_updates_existing_execution_row(tmp_path: Path) -> None
         status="succeeded",
         exit_code=0,
         started_at=now,
-        stdout="CONTROLLED_OUTCOME: IMPLEMENT",
+        stdout="",
         stderr="",
-        reason="Captured.",
+        reason="Dispatched.",
     )
-    history.record(run_result)
+    history.record(result)
     evidence_store = BrowserWorkerEvidenceStore(database)
     evidence_store.attach(
         result.run_id,
-        BrowserTransportEvidence(
-            reported_outcome="IMPLEMENT",
-            assistant_turn_id="conversation-turn-21",
-            browser_receipt_json='{"status":"succeeded"}',
+        BrowserDispatchEvidence(
+            dispatch_state="DISPATCH_SUBMITTED",
+            user_turn_id="conversation-turn-20",
+            dispatch_receipt_json='{"status":"submitted"}',
+            returned_to_source=True,
         ),
     )
 
@@ -177,15 +182,38 @@ def test_browser_evidence_updates_existing_execution_row(tmp_path: Path) -> None
         connection.row_factory = sqlite3.Row
         row = connection.execute(
             """
-            SELECT worker_reported_outcome, assistant_turn_id,
-                   browser_receipt_json, controlled_outcome
+            SELECT dispatch_state, user_turn_id, dispatch_receipt_json,
+                   returned_to_source, controlled_outcome
             FROM execution_history WHERE run_id = ?
             """,
             (result.run_id,),
         ).fetchone()
 
     assert row is not None
-    assert row["worker_reported_outcome"] == "IMPLEMENT"
-    assert row["assistant_turn_id"] == "conversation-turn-21"
-    assert row["browser_receipt_json"] == '{"status":"succeeded"}'
+    assert row["dispatch_state"] == "DISPATCH_SUBMITTED"
+    assert row["user_turn_id"] == "conversation-turn-20"
+    assert row["dispatch_receipt_json"] == '{"status":"submitted"}'
+    assert row["returned_to_source"] == 1
     assert row["controlled_outcome"] is None
+
+
+def test_submission_uncertainty_blocks_duplicate_send(tmp_path: Path) -> None:
+    database = tmp_path / "command_center.sqlite3"
+    history = WorkerExecutionHistoryStore(database)
+    active_job = job()
+    uncertain = __import__(
+        "lifeos_dashboard.worker_operations", fromlist=["_base_result"]
+    )._base_result(
+        active_job,
+        "Engineering_Worker",
+        trigger="manual",
+        status="failed",
+        exit_code=3,
+        started_at=time.time(),
+        stdout="",
+        stderr="STOPPED_AFTER_SEND: correlated turn could not be proven",
+        reason="Inspect the Worker chat and do not retry blindly.",
+    )
+    history.record(uncertain)
+
+    assert history.successful_send_exists(active_job.envelope.idempotency_key) is True
