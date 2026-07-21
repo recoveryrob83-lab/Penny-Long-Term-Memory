@@ -5,6 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
+- ADV-20260720-047 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: Engineering HQ — Validate Package E Slice 2 with one bounded read-only Engineering Worker run: read the exact Package E packet, answer three boundary questions, return exactly one structured `LIFEOS_WORKER_REPORT`, reconcile one same-row controlled outcome, and leave `IMMEDIATE_HQ` review pending. No writes, external actions, advisory closure, or broader authority are authorized.
 - ADV-20260718-042 — OPEN — Posted Board: `coordination/boards/main-assistant.md` — Target Department: Engineering HQ — Implement receiver-side semantic validation for automated prompts: the composer transport should deliver and log a machine-readable wrapper without exact full-text equality; Engineering should add run IDs, prompt IDs and versions, canonical-prompt and parameter checksums, prompt-database lookup, ownership and authorization checks, duplicate suppression, and an explicit Worker decision tree of `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`. Completion requires current test or run-log evidence and no silent scope expansion.
 
 ## Acknowledged / Implemented Advisories
