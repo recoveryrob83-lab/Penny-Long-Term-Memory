@@ -18,6 +18,7 @@ echo Validating Worker Operations and Package E receiver integration...
   tests\test_app.py ^
   tests\test_worker_operations.py ^
   tests\test_worker_response_receiver.py ^
+  tests\test_worker_response_runtime.py ^
   tests\test_worker_profile_resolution.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
