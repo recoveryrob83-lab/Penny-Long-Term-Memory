@@ -43,13 +43,13 @@ if (workerOps.status) {
 
   const woBadgeClass = (value) => {
     const clean = String(value || "unknown").toLowerCase();
-    if (["succeeded", "verified", "available", "implement", "ready"].includes(clean)) {
+    if (["succeeded", "verified", "available", "implement", "ready", "dispatch_submitted"].includes(clean)) {
       return "worker-badge-good";
     }
     if (["failed", "rejected", "unavailable", "report_and_hold"].includes(clean)) {
       return "worker-badge-bad";
     }
-    if (["pending", "running", "ambiguous", "elevate_for_approval"].includes(clean)) {
+    if (["pending", "running", "ambiguous", "elevate_for_approval", "result_pending"].includes(clean)) {
       return "worker-badge-warn";
     }
     return "worker-badge-neutral";
@@ -83,8 +83,7 @@ if (workerOps.status) {
     workerOps.status.className = `mode-badge ${data.paused ? "wo-paused" : data.running ? "wo-running" : "wo-ready"}`;
     workerOps.pause.textContent = data.paused ? "Resume automation" : "Pause automation";
     workerOps.advisoryCount.textContent = String((data.advisories || []).length);
-    const pending = Number(data.verification?.summary?.pending || 0);
-    workerOps.reviewCount.textContent = String(pending);
+    workerOps.reviewCount.textContent = String(Number(data.verification?.summary?.pending || 0));
   }
 
   function renderAdvisories(data) {
@@ -144,7 +143,7 @@ if (workerOps.status) {
         <div class="worker-card-header"><strong>${woEscape(item.task_id)} · r${woEscape(item.task_revision)}</strong><span class="worker-badge ${woBadgeClass(item.verification_state)}">${woEscape(item.verification_state)}</span></div>
         <p>${woEscape(item.worker_id)} reported ${woEscape(item.controlled_outcome)}</p>
         <p class="worker-card-meta">${woEscape(item.verification_mode)} · ${woEscape(item.wake_reason || item.receiver_reason)}</p>
-        ${canReview ? `<label class="worker-review-reason">Review reason<input type="text" data-review-reason placeholder="What evidence did HQ verify?"></label><div class="worker-review-actions"><button type="button" data-review-state="verified">Verify</button><button type="button" data-review-state="rejected">Reject</button></div>` : ""}
+        ${canReview ? '<label class="worker-review-reason">Review reason<input type="text" data-review-reason placeholder="What evidence did HQ verify?"></label><div class="worker-review-actions"><button type="button" data-review-state="verified">Verify</button><button type="button" data-review-state="rejected">Reject</button></div>' : ""}
       </article>`;
     }).join("") || '<p class="worker-empty">No Worker runs currently require HQ review.</p>';
   }
@@ -153,14 +152,14 @@ if (workerOps.status) {
     const rows = data.history || [];
     workerOps.historyCount.textContent = `${rows.length} runs shown`;
     workerOps.history.innerHTML = rows.map((item) => {
-      const reported = item.worker_reported_outcome || "Not parsed";
-      const accepted = item.controlled_outcome || "Receiver pending";
-      const detail = item.stdout || item.stderr || item.reason || "No response text recorded.";
+      const dispatch = item.dispatch_state || (item.assistant_turn_id ? "LEGACY_RESPONSE_CAPTURED" : "Not submitted");
+      const resultState = item.controlled_outcome || item.worker_reported_outcome || (dispatch === "DISPATCH_SUBMITTED" ? "RESULT_PENDING" : "Not available");
+      const detail = item.stdout || item.stderr || item.reason || "No additional run detail recorded.";
       return `<article class="worker-history-item">
         <div class="worker-card-header"><strong>${woEscape(item.task_id || item.run_id)}</strong><span class="worker-badge ${woBadgeClass(item.status)}">${woEscape(item.status)}</span></div>
         <div class="worker-history-meta"><span>${woEscape(item.worker_id)}</span><span>r${woEscape(item.task_revision)}</span><span>${woEscape(woDate(item.finished_at))}</span></div>
-        <div class="worker-history-outcomes"><span>Worker report: <b>${woEscape(reported)}</b></span><span>Receiver: <b>${woEscape(accepted)}</b></span></div>
-        <details><summary>Run evidence</summary><p><b>Run:</b> ${woEscape(item.run_id)}</p><p><b>Wrapper:</b> ${woEscape(item.wrapper_id)}</p><p><b>Assistant turn:</b> ${woEscape(item.assistant_turn_id || "Not captured")}</p><pre>${woEscape(detail)}</pre></details>
+        <div class="worker-history-outcomes"><span>Dispatch: <b>${woEscape(dispatch)}</b></span><span>Result: <b>${woEscape(resultState)}</b></span></div>
+        <details><summary>Run evidence</summary><p><b>Run:</b> ${woEscape(item.run_id)}</p><p><b>Wrapper:</b> ${woEscape(item.wrapper_id)}</p><p><b>User turn:</b> ${woEscape(item.user_turn_id || "Not recorded")}</p><p><b>Returned to HQ:</b> ${item.returned_to_source ? "yes" : "not verified"}</p><pre>${woEscape(detail)}</pre></details>
       </article>`;
     }).join("") || '<p class="worker-empty">No Worker execution rows have been recorded.</p>';
   }
@@ -215,7 +214,6 @@ if (workerOps.status) {
     renderAdvisories(workerOpsData || {});
     updateRunAvailability();
   });
-
   workerOps.confirmSend.addEventListener("change", updateRunAvailability);
   workerOps.confirmSelfTest.addEventListener("change", updateRunAvailability);
   workerOps.refresh.addEventListener("click", () => loadWorkerOperations());
@@ -243,22 +241,18 @@ if (workerOps.status) {
     if (!advisory || !workerOps.confirmSend.checked) return;
     workerOpsBusy = true;
     updateRunAvailability();
-    workerOps.run.textContent = "Worker running...";
-    setRunMessage(`Dispatching ${advisory.advisory_id} revision ${advisory.revision}. Leave the ChatGPT tab untouched until it returns.`, "warn");
+    workerOps.run.textContent = "Dispatching...";
+    setRunMessage(`Waking ${advisory.worker_id} for ${advisory.advisory_id} revision ${advisory.revision}. Leave the ChatGPT tab untouched until the courier returns.`, "warn");
     try {
       const response = await fetch("/api/worker-operations/run", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          advisory_id: advisory.advisory_id,
-          confirm_send: true,
-          timeout_seconds: 600,
-        }),
+        body: JSON.stringify({advisory_id: advisory.advisory_id, confirm_send: true, timeout_seconds: 600}),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || "Worker dispatch failed.");
       const result = data.result || {};
-      setRunMessage(result.reason || `Run ${data.run_id} completed.`, result.status === "succeeded" ? "good" : "bad");
+      setRunMessage(result.reason || `Dispatch ${data.run_id} completed.`, result.status === "succeeded" ? "good" : "bad");
       workerOps.confirmSend.checked = false;
       renderWorkerOperations(data.status || await (await fetch("/api/worker-operations")).json());
     } catch (error) {
@@ -276,10 +270,7 @@ if (workerOps.status) {
     workerOpsBusy = true;
     updateRunAvailability();
     workerOps.selfTest.textContent = "Testing courier...";
-    setRunMessage(
-      "Sending one zero-authority wrapper. Leave the ChatGPT tab untouched until it returns.",
-      "warn",
-    );
+    setRunMessage("Sending one zero-authority wake. Leave the ChatGPT tab untouched until the courier returns.", "warn");
     try {
       const response = await fetch("/api/worker-operations/self-test", {
         method: "POST",
@@ -289,14 +280,12 @@ if (workerOps.status) {
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || "Courier self-test failed.");
       const receipt = data.receipt || {};
-      const turn = receipt.assistant_turn_id || "a captured assistant response";
+      const turn = receipt.user_turn_id || "an unnumbered user turn";
       const zeroAuthority = receipt.durable_authority_created === false
         ? "No durable authority was created."
         : "Durable-authority status was not verified.";
-      setRunMessage(
-        `Courier self-test succeeded. Worker response captured at ${turn}. Returned to HQ successfully. ${zeroAuthority}`,
-        "good",
-      );
+      const returned = receipt.returned_to_source ? "Returned to HQ successfully." : "HQ return was not verified.";
+      setRunMessage(`Courier self-test succeeded. Wake submitted at ${turn}. ${returned} ${zeroAuthority}`, receipt.returned_to_source ? "good" : "warn");
       workerOps.confirmSelfTest.checked = false;
       renderWorkerOperations(data.operations);
     } catch (error) {
@@ -324,12 +313,7 @@ if (workerOps.status) {
       const response = await fetch("/api/worker-operations/review", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          run_id: card.dataset.runId,
-          state: button.dataset.reviewState,
-          actor: "Engineering HQ",
-          reason,
-        }),
+        body: JSON.stringify({run_id: card.dataset.runId, state: button.dataset.reviewState, actor: "Engineering HQ", reason}),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || "HQ review failed.");
