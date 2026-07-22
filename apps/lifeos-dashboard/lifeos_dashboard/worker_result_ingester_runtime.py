@@ -4,18 +4,12 @@ from __future__ import annotations
 from pathlib import Path
 
 from . import worker_operations
-from .worker_advisory_pipeline import ExecutionReadyAdvisory
 from .worker_result_ingester import WorkerResultIngester
 from .worker_result_repair import WorkerResultRepairCoordinator
 from .worker_runtime import WorkerRuntimeError
 
 _INSTALL_FLAG = "_lifeos_worker_result_ingester_runtime_installed"
 _SERVICE_FLAG = "_lifeos_worker_result_ingester_service_installed"
-
-# Execution-ready advisories use ``advisory_id`` as the canonical task ID in their envelope.
-# Keep one read-only alias for repair-wake rendering without introducing another identifier.
-if not hasattr(ExecutionReadyAdvisory, "task_id"):
-    setattr(ExecutionReadyAdvisory, "task_id", property(lambda self: self.advisory_id))
 
 
 def _install_service() -> None:
