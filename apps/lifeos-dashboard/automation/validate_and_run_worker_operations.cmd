@@ -24,6 +24,7 @@ echo Validating Worker Operations and Package E result-outbox contracts...
   tests\test_worker_result_ingester.py ^
   tests\test_worker_result_ingester_history.py ^
   tests\test_worker_result_repair.py ^
+  tests\test_worker_hq_review.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
   tests\test_worker_browser_readiness.py ^
