@@ -130,6 +130,21 @@ class TimeoutAfterCommitPage(ReturnPage):
         raise RuntimeError("navigation timeout after commit")
 
 
+class CorrelatedTurn:
+    def get_attribute(self, name: str) -> str:
+        assert name == "data-testid"
+        return "conversation-turn-42"
+
+
+class VirtualizedHistoryPage:
+    def __init__(self, rendered_turns: int) -> None:
+        self.turns = SequencedTurns([rendered_turns])
+
+    def locator(self, selector: str):
+        assert selector == hydration.TURN_XPATH
+        return self.turns
+
+
 def request(worker_url: str) -> object:
     return hydration.BrowserRoundTripRequest(
         worker_url=worker_url,
@@ -173,6 +188,26 @@ def test_worker_history_snapshot_requires_visible_nonempty_turn() -> None:
     )
 
 
+def test_correlated_turn_id_survives_rendered_history_virtualization(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    page = VirtualizedHistoryPage(rendered_turns=1)
+    monkeypatch.setattr(
+        dispatch,
+        "_turn_for_role_marker",
+        lambda *args, **kwargs: CorrelatedTurn(),
+    )
+
+    user_turn_id, rendered_turns = dispatch._confirm_correlated_user_turn(
+        page,
+        marker="SYNTH-BROWSER-WRAP-TEST",
+        timeout_ms=1_000,
+    )
+
+    assert user_turn_id == "conversation-turn-42"
+    assert rendered_turns == 1
+
+
 def test_source_return_proves_exact_normalized_url_without_requiring_idle_composer(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -214,7 +249,7 @@ def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
     fill = run_body.index("prompt.fill(request.prompt_text)")
     unchanged_history = run_body.index("if turns.count() != baseline_turns")
     click = run_body.index("send.click()")
-    user_turn = run_body.index('role="user"')
+    user_turn = run_body.index("_confirm_correlated_user_turn(")
     return_to_source = run_body.index("_return_to_source_conversation(")
 
     assert readiness < fill < unchanged_history < click < user_turn < return_to_source
@@ -224,6 +259,8 @@ def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
 
     post_send = run_body.split("send.click()", 1)[1]
     assert "submission_confirmed = True" in post_send
+    assert "_confirm_correlated_user_turn(" in post_send
+    assert "final_turns < baseline_turns + 1" not in post_send
     assert "_return_to_source_conversation(" in post_send
     assert "_wait_for_idle_composer(page" not in post_send
     assert "returned_to_source=False" in post_send
