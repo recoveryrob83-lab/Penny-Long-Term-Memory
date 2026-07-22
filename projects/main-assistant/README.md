@@ -1,6 +1,6 @@
 # Chief of Staff HQ
 
-Updated: 2026-07-18
+Updated: 2026-07-22
 Project: Chief of Staff HQ / Daily Operations
 Purpose: Durable project folder for Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, LifeOS HQ chair, routing desk, and follow-through coordinator.
 
@@ -74,6 +74,50 @@ Chief of Staff is the primary downstream consumer of Penny Raw Capture Worker an
 
 Keep inventory capture separate from pricing, bundling, listing copy, sale strategy, and publication.
 
+## Personal Inventory Pilot
+
+Personal inventory is currently a lightweight Chief of Staff capability, not a Finance subdepartment and not a new independent department.
+
+The first pilot scope is expendable items whose unexpected absence creates immediate daily friction, especially:
+
+- bus passes, ride credits, or other transportation access;
+- deodorant, soap, toothpaste, and similar hygiene basics;
+- laundry detergent and other essential household consumables;
+- routine over-the-counter or first-aid supplies when Rob chooses to include them.
+
+Use the smallest useful record:
+
+- item;
+- amount or status remaining;
+- restock threshold;
+- estimated replacement cost;
+- optional location or note only when it changes the next action.
+
+Chief of Staff owns operational stock awareness and restock preparation. Finance owns affordability, cash timing, spending analysis, and financial prioritization when those questions arise.
+
+Do not track every use, create GitHub records for individual possessions, or expand into clothing and durable goods until ordinary use demonstrates enough value to justify the maintenance cost.
+
+## Context Layers and Chat Replacement
+
+Life OS uses layered context rather than treating one conversation as the whole memory system:
+
+1. GitHub holds canonical durable operating truth.
+2. Shared project sources hold role-neutral context.
+3. Chat-specific handbooks or artifacts provide noncanonical role-specific orientation.
+4. Conversation holds temporary reasoning and working context.
+
+The Chief of Staff chat handbook is a context mirror, not a competing source of truth. It accelerates replacement-chat orientation but does not abolish canonical Boot, targeted current-source reads, focused Sync, or verification before consequential action.
+
+Use targeted refresh when only a current source state is needed. Use focused Sync when drift is suspected. Use full Boot for a replacement chat, deep recovery, major conflict, or when the current operating frame cannot be trusted.
+
+## Automation Transport Boundary
+
+Engineering HQ owns department-chat transport architecture, browser or desktop automation, selectors, validation, recovery behavior, duplicate protection, and technical evidence.
+
+Rob has directed Engineering toward browser DOM-based transport rather than relying on brittle desktop-app visual automation. Chief of Staff should treat that as the current Engineering direction, not as completed capability, until Engineering reports end-to-end evidence covering transport, receiver validation, bounded execution, evidence return, duplicate prevention, and failure recovery.
+
+Chief of Staff may receive and synthesize verified Engineering reports but does not own implementation or declare transport complete from optimism alone.
+
 ## Source Systems
 
 - GitHub: durable abstract state, boot, handoff, open loops, and advisory routing.
@@ -108,7 +152,7 @@ The human-facing working folder retains its existing legacy name during the nami
 - Location: Life Organization / Main Assistant
 - URL: https://drive.google.com/drive/folders/1YHAvkqOJIRR9ZA7EEHA30aiI_fHJYXIl
 
-This GitHub repair does not rename or modify the Drive folder.
+This GitHub update does not rename or modify the Drive folder.
 
 ## Privacy Rule
 
