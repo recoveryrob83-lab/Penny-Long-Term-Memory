@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -21,18 +22,23 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def _resolved_path(explicit: str | None, environment_name: str, fallback: Path) -> Path:
+    selected = explicit or os.getenv(environment_name)
+    return Path(selected).expanduser().resolve() if selected else fallback.resolve()
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     app_root = Path(__file__).resolve().parents[1]
-    repository_root = (
-        Path(args.repository_root).expanduser().resolve()
-        if args.repository_root
-        else app_root.parents[1]
+    repository_root = _resolved_path(
+        args.repository_root,
+        "LIFEOS_REPOSITORY_ROOT",
+        app_root.parents[1],
     )
-    database_path = (
-        Path(args.database_path).expanduser().resolve()
-        if args.database_path
-        else app_root / ".local" / "command_center.sqlite3"
+    database_path = _resolved_path(
+        args.database_path,
+        "COMMAND_CENTER_DATABASE_PATH",
+        app_root / ".local" / "command_center.sqlite3",
     )
     try:
         command_center = CommandCenterService(app_root, database_path=database_path)
