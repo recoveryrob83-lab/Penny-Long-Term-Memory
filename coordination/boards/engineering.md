@@ -74,6 +74,25 @@ Return exactly one controlled outcome in the result artifact:
 
 Do not edit or close this advisory. Do not modify the Advisory Index, Package E packet, procedures, schemas, examples, profile, status, open loops, runtime database, or any other file. Do not run code or tests. Do not perform desktop automation, connector actions beyond the exact GitHub reads and create-only report write, external-system actions, overwrite, deletion, work re-execution, or scope expansion.
 
+#### Live Observation and Evidence — 2026-07-21
+
+- The dispatch reached `Engineering_Worker`, and the Worker continued independently until completion.
+- The browser courier did not return the controlled tab to Engineering HQ after the successful wake.
+- The successful dispatch must not be retried merely because browser restoration failed.
+- The Worker created exactly one immutable artifact at `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`.
+- Creation commit: `fbe75f13bc1b3a2dd35815e0d145c25da8695e22`.
+- Read-back blob SHA: `f218d63519d38352b8aee4a790ed20807b1bebee`.
+- Stored controlled outcome: `IMPLEMENT`.
+- Stored verification state: `pending`.
+- Stored numeric and boolean fields use the correct JSON types.
+- The commit created only the authorized report artifact.
+- No advisory lifecycle change, overwrite, deletion, work re-execution, scope expansion, or external-system action occurred.
+- Rob observed the successful package outbox in the live Worker Operations dashboard.
+- Manual read-only Engineering inspection confirmed the artifact identity, path, commit scope, blob SHA, typed fields, and pending-review state.
+- The Worker could not provide a separate canonical SHA-256 content checksum through its authorized GitHub connector; the future deterministic ingester should calculate it from stored content.
+- Deterministic ingestion, same-row receiver acceptance, formal `IMMEDIATE_HQ` signoff, and advisory closure have not occurred.
+- Current instruction: preserve the existing run and artifact, do not resend revision 1, repair the courier return-to-source defect, then implement Slice 4 ingestion against this report.
+
 ### ADV-20260720-047 — Validate Package E Slice 2 response reconciliation
 
 - Date: 2026-07-20
@@ -129,7 +148,6 @@ Do not edit or close this advisory. Do not modify the Advisory Index. Do not run
 
 ## Recently Acknowledged / Implemented Advisories
 
-
 ### ADV-20260720-046 — Verify Package D operational pilot requirements
 
 - Date: 2026-07-20
@@ -165,7 +183,7 @@ Revision 1 reached the correct Worker room and completed the bounded inspection,
 
 The pilot also exposed a receiver defect in which a safe draft and successful send sharing one deterministic run ID were treated as ambiguous competing transport rows. Engineering repaired that defect in commit `8cfa874` and added regression coverage; the focused receiver and end-to-end suite passed with 33 tests.
 
-Revision 2 explicitly authorized the complete required boot chain. The Worker loaded the canonical sources, validated the newer revision and authority envelope, read the exact Package D target, answered all three bounded questions, performed no writes or external actions, and returned `IMPLEMENT`.
+Revision 2 explicitly authorized the complete boot chain. The Worker loaded the canonical sources, validated the newer revision and authority envelope, read the exact Package D target, answered all three bounded questions, performed no writes or external actions, and returned `IMPLEMENT`.
 
 The existing runtime record then preserved the exact evidence, accepted revision 2, recorded `IMPLEMENT`, and received verified `IMMEDIATE_HQ` review from Engineering HQ. Receiver state now records revision 2 as the latest processed revision and suppresses further verification wakes.
 
