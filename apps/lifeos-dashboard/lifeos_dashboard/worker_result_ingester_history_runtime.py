@@ -47,7 +47,6 @@ def _install_history_reconciliation() -> None:
 
     original_ingest = ingester_class.ingest
 
-    @staticmethod
     def _require_history_row(
         connection: sqlite3.Connection,
         advisory: worker_result_ingester.ExecutionReadyAdvisory,
@@ -83,17 +82,7 @@ def _install_history_reconciliation() -> None:
             + statuses
         )
 
-    @classmethod
     def _validate_history_row(
-        cls,
-        row: sqlite3.Row,
-        advisory: worker_result_ingester.ExecutionReadyAdvisory,
-    ) -> None:
-        errors: list[str] = []
-        for field_name, expected in cls._expected_identity(advisory):
-            del field_name, expected
-
-    def _validate_history_row_impl(
         cls,
         row: sqlite3.Row,
         advisory: worker_result_ingester.ExecutionReadyAdvisory,
@@ -140,8 +129,8 @@ def _install_history_reconciliation() -> None:
                 )
         return receipt
 
-    ingester_class._require_history_row = _require_history_row
-    ingester_class._validate_history_row = classmethod(_validate_history_row_impl)
+    ingester_class._require_history_row = staticmethod(_require_history_row)
+    ingester_class._validate_history_row = classmethod(_validate_history_row)
     ingester_class.ingest = ingest
     setattr(ingester_class, _INSTALL_FLAG, True)
 
