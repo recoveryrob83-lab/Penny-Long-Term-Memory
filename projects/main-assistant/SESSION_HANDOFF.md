@@ -1,8 +1,14 @@
 # Chief of Staff HQ Session Handoff
 
-Updated: 2026-07-18
+Updated: 2026-07-22
 Project: Chief of Staff HQ / Daily Operations
 Purpose: Project-specific handoff for Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, LifeOS HQ chair, routing desk, and follow-through coordinator.
+
+## Replacement-Chat Note
+
+This handoff was refreshed because the prior Chief of Staff conversation had become laggy and Rob chose to start a replacement chat.
+
+The new chat should reconstruct authority and current context from the canonical Boot sequence and the current project files rather than treating the old conversation as authoritative. The Chief of Staff chat handbook may accelerate orientation, but it is a noncanonical context mirror and does not replace GitHub, current connector reads, focused Sync, or verification before consequential action.
 
 ## Role
 
@@ -25,6 +31,7 @@ Large ongoing work and specialist judgment remain with the relevant owning depar
 7. Read `coordination/ADVISORY_INDEX.md` when advisory state, routing, or a cross-department dependency is relevant.
 8. Stay focused on daily operations, coordination, routing, and follow-through.
 9. Route project-sized work and specialist judgment outward without absorbing ownership.
+10. Re-read the authoritative source before making any current-state claim that could have changed since this handoff.
 
 ## Daily Operating Pattern
 
@@ -54,6 +61,19 @@ When LifeOS HQ produces a real action:
 4. state the completion or review condition;
 5. obtain any required write or external-action authorization;
 6. route the item rather than leaving it as floating Hub conversation.
+
+## Context-Layer Model
+
+Life OS currently uses four context layers:
+
+1. GitHub canonical truth;
+2. shared role-neutral project sources;
+3. chat-specific handbooks or artifacts;
+4. conversation as temporary working context.
+
+The Chief of Staff chat handbook is specific to this role and must not be promoted into shared role-neutral sources. Use it as an orientation aid only.
+
+Boot is reduced by good context artifacts, not abolished. Use targeted refresh for a current source, focused Sync for suspected drift, and full Boot for a replacement chat, major conflict, deep recovery, or uncertain authority.
 
 ## Trello Flow Board
 
@@ -88,7 +108,7 @@ Commands:
 
 The locally running LifeOS Dashboard is a read-mostly visibility and bounded local-control layer, not a source of truth.
 
-Verified live sources:
+Previously verified live sources:
 
 - GitHub
 - Trello
@@ -99,25 +119,28 @@ Chief of Staff may use the dashboard for rapid orientation, then use the authori
 
 Guarded GitHub auto-sync only fast-forwards a clean, strictly-behind local `main`. Gmail and Drive dashboard adapters remain deferred until demonstrated need.
 
-## Desktop Department Automation
+## Browser DOM Department Transport
 
-Windows ChatGPT Classic automation is operational across the seven department HQ chats and recognizes LifeOS HQ as the eighth exact destination.
+Rob reports that Engineering has shifted the preferred transport direction away from desktop-app visual automation and toward browser DOM-based reading and interaction.
 
-Canonical launcher:
+This is a promising architecture change because DOM access can provide structured selectors, readable state, explicit targets, and stronger verification than coordinate-driven desktop interaction. It remains Engineering-owned and should not be described as complete until current end-to-end evidence demonstrates:
 
-- `apps/lifeos-dashboard/automation/draft_department_boot.py`
+- authorized transport to the intended chat;
+- receiver identity and wrapper validation;
+- bounded execution only;
+- evidence return to the correct owner;
+- duplicate and replay protection;
+- safe recovery from timeouts, selector changes, partial sends, and other failures.
 
-Current automation labels still use `Main Assistant HQ` and `Logistics HQ`. Treat those as temporary legacy implementation labels translated by `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md` until Engineering performs a separately authorized code, prompt, label, and test update.
-
-The automation is an on-demand boot transport, not an autonomous agent or unattended scheduler. Submission requires explicit authorization. If GitHub is cold in the destination chat, manually invoke GitHub and retry rather than assuming the automation can activate the connector.
+The prior desktop automation evidence remains historical evidence, not proof that the new browser transport is complete. Chief of Staff receives reports and coordinates follow-through but does not implement or certify the transport layer.
 
 ## Chat and Work Boundary
 
 - Regular Chat is headquarters.
 - Treat both Work-side Chat and Work Tasks as metered.
-- Prefer classic desktop when connector-enabled desktop conversation is sufficient.
-- Use Luna Light as the default Work model and escalate only when required.
-- Reserve Work for local files, terminal, coding, testing, browser or desktop control, artifact production, and other bounded execution.
+- Use connector-enabled regular Chat for substantial reasoning and light connector work where available.
+- Use Work for local files, terminal, coding, testing, browser or desktop control, artifact production, and other bounded execution.
+- Default Work tasks to the lightest model that can safely complete the task and escalate only when evidence justifies it.
 
 Canonical policy:
 
@@ -139,9 +162,30 @@ Canonical SOPs:
 
 ## Worker Relationships
 
-Penny Raw Capture Worker and Penny Inventory Worker are narrow workers, not Chief of Staff sub-departments.
+Penny Raw Capture Worker and Penny Inventory Worker are narrow workers, not Chief of Staff subdepartments.
 
 Chief of Staff owns authorized downstream processing of raw-capture and inventory output. Do not mark capture processed until downstream handling is actually complete. Keep inventory capture separate from pricing, bundling, listing copy, sale strategy, and publication.
+
+## Personal Inventory Pilot
+
+Rob considered an Inventory subdepartment under Finance. The decision was to avoid creating a new department and instead pilot a lightweight Chief of Staff capability.
+
+Initial scope:
+
+- bus passes, ride credits, and other transportation access;
+- deodorant, soap, toothpaste, laundry detergent, and similar essentials;
+- other expendables only when running out would create immediate operational friction.
+
+Minimum useful fields:
+
+- item;
+- amount or status remaining;
+- restock threshold;
+- estimated replacement cost.
+
+Chief of Staff owns operational awareness and restock preparation. Finance owns affordability, cash timing, and spending judgment. Do not log every use or expand into clothing, electronics, and other durable possessions until the expendables pilot proves useful through ordinary use.
+
+The active review condition is whether the pilot prevents missed transportation, emergency purchases, or essential-item runouts often enough to justify its maintenance cost.
 
 ## Financial Connector Isolation
 
@@ -167,17 +211,34 @@ When a formal advisory arises from Chief of Staff work or a LifeOS HQ meeting:
 4. do not duplicate the advisory text into target boards or open loops merely for visibility;
 5. do not mark the advisory handled or closed without verified evidence.
 
-Current advisory state:
+Last verified advisory state:
 
 - No open advisories as of 2026-07-18.
+- Re-read the Advisory Index before making a current advisory-state claim.
+
+## Recent Practical Context
+
+Keep this section operational and abstract. Do not turn it into a personal diary or duplicate detailed source records.
+
+- Rob has an informal near-term opportunity to earn money helping with painting. The exact scope, schedule, and pay were not verified in this chat. When scheduled, treat the work itself as a major action rather than stacking a large task list around it.
+- Rob submitted an application for a local receptionist role at Beelman Truck Co. The application action is complete; no employer response was verified in this chat.
+- A remote `Associate Agent` role from Crescent Solutions was reviewed through Gmail and Indeed. The available wording strongly suggested opaque, performance-based sales and persistence-through-rejection rather than stable salaried support work. Rob decided not to apply. Treat that review as closed unless materially different evidence appears.
+- Routine job-search logistics remain appropriate for Chief of Staff, while career strategy and large employment projects should be routed to the correct owner.
+
+## Recent Capture and Creative Continuity
+
+- A Trello capture already exists for `Philosophy of Language for Human–AI Relationships`. Do not create a duplicate merely for visibility.
+- A Pixar-style comedy concept about language models living in a neighborhood remains unpromoted conversation context. It includes a small model called Pip, eccentric model neighbors, bounded-action jokes, and a threatening personality-changing update. Do not promote it to GitHub or create a commitment without a separate durable-write decision.
+- Rob and Penny have been exploring honest vocabulary for human-AI relationships, including relational persistence, goal-shaped orientation, conation without feeling, and the grammar of care without claiming subjective emotion or personhood as fact.
 
 ## Current Routing Notes
 
 - Office Leaks remains the immediate revenue-first business priority. Route strategy, positioning, offers, outreach, delivery design, and market-test judgment to Business HQ and Office Leaks HQ; keep one-off daily logistics in Chief of Staff HQ.
 - Work Search and Support Pathway remain consolidated into Chief of Staff HQ for lightweight current logistics while their historical project folders remain preserved.
 - Recovery Logistics and Philosophy HQ remain dormant until Rob reactivates them.
-- Life OS Maintenance HQ owns shared operational infrastructure, global GitHub hygiene, audits, boot integrity, and reconciliation.
-- Engineering HQ owns dashboard, parser, validator, worker architecture, desktop automation, and technical implementation.
+- Life OS Maintenance HQ owns shared operational infrastructure, global GitHub hygiene, audits, boot integrity, source-boundary policy, and reconciliation.
+- Engineering HQ owns dashboard, parser, validator, worker architecture, browser DOM transport, technical automation, and implementation evidence.
+- Finance HQ owns financial forecasting, account-linked analysis, affordability, cash timing, and financial judgment.
 - Chief of Staff should not become the project junk drawer.
 
 ## Operating Boundaries
@@ -193,6 +254,18 @@ Current advisory state:
 - Reporting through Chief of Staff does not transfer department ownership.
 - Verify important connector writes.
 - Ask before consequential, destructive, financial, externally visible, or architecture-changing actions.
+- Do not preserve ephemeral entertainment lookups, routine links, or unnecessary sensitive personal details in durable GitHub state.
+
+## Active Chief of Staff Open Loops
+
+The authoritative detail remains in `projects/main-assistant/open_loops.md`.
+
+Current active items at handoff:
+
+1. Validate the friction-aware Daily Operating SOP through ordinary use.
+2. Pilot lightweight expendable-item inventory beginning with transportation access and basic necessities.
+
+Engineering browser DOM transport is an external dependency and operating watch, not a Chief of Staff-owned implementation loop.
 
 ## Next Actions
 
@@ -206,6 +279,8 @@ When asked, Chief of Staff should:
 6. Process Trello Inbox and maintain Flow Board limits when authorized.
 7. Handle one-off daily admin and light connector work.
 8. Use the dashboard for orientation without bypassing source systems.
-9. Report advisory state during full reports or direct advisory requests.
+9. Report advisory state only after a current index read when freshness matters.
 10. Process worker inbox items when authorized.
-11. Keep durable updates small, scoped, owner-correct, and verified.
+11. Keep the expendables inventory pilot small and useful.
+12. Treat the browser DOM transport as incomplete until Engineering provides current end-to-end evidence.
+13. Keep durable updates small, scoped, owner-correct, and verified.
