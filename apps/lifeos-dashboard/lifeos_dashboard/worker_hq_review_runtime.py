@@ -9,12 +9,42 @@ from .worker_hq_review import (
     WorkerHqReviewIngestionReceipt,
     WorkerHqReviewService,
 )
-from .worker_result_contract import artifact_checksum, artifact_path, validate_artifact
+from .worker_result_contract import artifact_path, validate_artifact
 from .worker_runtime import WorkerRuntimeError
 
 _INSTALL_FLAG = "_lifeos_worker_hq_review_runtime_installed"
 _SERVICE_FLAG = "_lifeos_worker_hq_review_service_installed"
 _DUPLICATE_FLAG = "_lifeos_worker_hq_review_duplicate_patch_installed"
+_SEMANTICS_FLAG = "_lifeos_worker_hq_review_semantics_patch_installed"
+
+
+def _install_review_semantics() -> None:
+    service_class = WorkerHqReviewService
+    if getattr(service_class, _SEMANTICS_FLAG, False):
+        return
+    original_validate = service_class._validate_review_semantics
+
+    def validate(payload: dict[str, object]) -> None:
+        original_validate(payload)
+        state = str(payload.get("review_state") or "")
+        integrity = str(payload.get("report_integrity_state") or "")
+        authority = str(payload.get("authority_compliance_state") or "")
+        work = str(payload.get("work_verification_state") or "")
+        if state == "REJECTED" and not (
+            integrity == "invalid" or authority == "noncompliant" or work == "rejected"
+        ):
+            raise WorkerRuntimeError(
+                "REJECTED HQ receipt must identify an invalid, noncompliant, or rejected dimension."
+            )
+        if state == "REPAIR_REQUIRED" and (
+            integrity == "valid" and authority == "compliant" and work == "verified"
+        ):
+            raise WorkerRuntimeError(
+                "REPAIR_REQUIRED HQ receipt cannot claim every review dimension is verified."
+            )
+
+    service_class._validate_review_semantics = staticmethod(validate)
+    setattr(service_class, _SEMANTICS_FLAG, True)
 
 
 def _install_duplicate_receipt_suppression() -> None:
@@ -45,10 +75,15 @@ def _install_duplicate_receipt_suppression() -> None:
         if not isinstance(payload, dict):
             raise WorkerRuntimeError("Previously ingested HQ review receipt has the wrong shape.")
         validate_artifact("hq_review", payload)
-        checksum = artifact_checksum(payload)
+        self._validate_review_semantics(payload)  # noqa: SLF001
+        commit_sha, blob_sha, checksum = self._git_review_evidence(  # noqa: SLF001
+            review_path, payload
+        )
         if (
             str(row["hq_review_path"] or "") != review_path
             or str(row["hq_review_checksum"] or "") != checksum
+            or str(row["hq_review_commit_sha"] or "") != commit_sha
+            or str(row["hq_review_blob_sha"] or "") != blob_sha
             or existing_state != str(payload.get("review_state") or "")
         ):
             raise WorkerRuntimeError("A conflicting immutable HQ review is already ingested.")
@@ -59,8 +94,8 @@ def _install_duplicate_receipt_suppression() -> None:
             review_state=existing_state,
             review_path=review_path,
             review_checksum=checksum,
-            review_commit_sha=str(row["hq_review_commit_sha"]),
-            review_blob_sha=str(row["hq_review_blob_sha"]),
+            review_commit_sha=commit_sha,
+            review_blob_sha=blob_sha,
             result_state=str(row["result_state"]),
             ready_for_consumption=bool(row["ready_for_consumption"]),
             requires_rob_validation=bool(row["requires_rob_validation"]),
@@ -130,6 +165,7 @@ def install_worker_hq_review_runtime() -> bool:
 
     if getattr(worker_operations, _INSTALL_FLAG, False):
         return False
+    _install_review_semantics()
     _install_duplicate_receipt_suppression()
     _install_service()
     setattr(worker_operations, _INSTALL_FLAG, True)
