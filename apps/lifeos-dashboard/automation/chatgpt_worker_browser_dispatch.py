@@ -151,6 +151,31 @@ def _return_to_source_conversation(page, *, source_url: str, timeout_ms: int) ->
         raise
 
 
+def _confirm_correlated_user_turn(page, *, marker: str, timeout_ms: int) -> tuple[str, int]:
+    """Return stable correlated-turn evidence plus a nonauthoritative rendered-count diagnostic.
+
+    ChatGPT may virtualize or rerender conversation history after Send. The exact visible user turn
+    containing the unique wrapper marker and its stable turn ID are the submission proof. The total
+    number of currently rendered turns is retained only as diagnostic evidence and must not veto
+    that stronger correlation.
+    """
+
+    user_turn = _turn_for_role_marker(
+        page,
+        role="user",
+        marker=marker,
+        timeout_ms=timeout_ms,
+    )
+    user_turn_id = str(user_turn.get_attribute("data-testid") or "")
+    if not user_turn_id:
+        raise BrowserRoundTripUncertain(
+            "Submission occurred, but the correlated user turn had no stable turn ID. "
+            "Inspect the Worker chat before any retry."
+        )
+    rendered_turns = page.locator(TURN_XPATH).count()
+    return user_turn_id, rendered_turns
+
+
 def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
     """Submit one exact Worker wake and return without waiting for Worker output."""
 
@@ -244,24 +269,11 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
             1,
             min(30_000, int((deadline - time.monotonic()) * 1000)),
         )
-        user_turn = _turn_for_role_marker(
+        user_turn_id, final_turns = _confirm_correlated_user_turn(
             page,
-            role="user",
             marker=request.request_marker,
             timeout_ms=remaining_ms,
         )
-        user_turn_id = str(user_turn.get_attribute("data-testid") or "")
-        if not user_turn_id:
-            raise BrowserRoundTripUncertain(
-                "Submission occurred, but the correlated user turn had no stable turn ID. "
-                "Inspect the Worker chat before any retry."
-            )
-        final_turns = turns.count()
-        if final_turns < baseline_turns + 1:
-            raise BrowserRoundTripUncertain(
-                "Submission occurred, but the correlated user turn was not preserved in history. "
-                "Inspect the Worker chat before any retry."
-            )
         submission_confirmed = True
 
         try:
