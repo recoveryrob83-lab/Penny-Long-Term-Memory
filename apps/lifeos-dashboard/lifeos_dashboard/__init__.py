@@ -21,3 +21,4 @@ from . import automation_logs_runtime as _automation_logs_runtime
 from . import worker_verification_runtime as _worker_verification_runtime
 from . import worker_response_receiver_runtime as _worker_response_receiver_runtime
 from . import worker_dispatch_runtime as _worker_dispatch_runtime
+from . import worker_result_ingester_runtime as _worker_result_ingester_runtime
