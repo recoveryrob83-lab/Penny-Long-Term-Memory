@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from . import worker_operations
@@ -16,6 +17,31 @@ _INSTALL_FLAG = "_lifeos_worker_hq_review_runtime_installed"
 _SERVICE_FLAG = "_lifeos_worker_hq_review_service_installed"
 _DUPLICATE_FLAG = "_lifeos_worker_hq_review_duplicate_patch_installed"
 _SEMANTICS_FLAG = "_lifeos_worker_hq_review_semantics_patch_installed"
+_WAKE_FLAG = "_lifeos_worker_hq_review_wake_procedure_patch_installed"
+_REVIEW_PROCEDURE_PATH = (
+    "projects/engineering/procedures/engineering_hq_worker_review_receipt.md"
+)
+
+
+def _install_wake_procedure_pointer() -> None:
+    service_class = WorkerHqReviewService
+    if getattr(service_class, _WAKE_FLAG, False):
+        return
+    original_build = service_class.build_wake
+
+    def build_wake(self: WorkerHqReviewService, run_id: str):
+        wake = original_build(self, run_id)
+        return replace(
+            wake,
+            instruction=(
+                wake.instruction
+                + f" Follow the canonical Engineering HQ review procedure at "
+                f"`{_REVIEW_PROCEDURE_PATH}`."
+            ),
+        )
+
+    service_class.build_wake = build_wake
+    setattr(service_class, _WAKE_FLAG, True)
 
 
 def _install_review_semantics() -> None:
@@ -165,6 +191,7 @@ def install_worker_hq_review_runtime() -> bool:
 
     if getattr(worker_operations, _INSTALL_FLAG, False):
         return False
+    _install_wake_procedure_pointer()
     _install_review_semantics()
     _install_duplicate_receipt_suppression()
     _install_service()
