@@ -16,6 +16,7 @@ from dataclasses import asdict, dataclass
 
 from chatgpt_worker_browser_roundtrip import (
     DEFAULT_CDP_ENDPOINT,
+    PROMPT_SELECTOR,
     SEND_CONFIRMATION,
     SEND_SELECTOR,
     STOP_SELECTOR,
@@ -35,6 +36,7 @@ from chatgpt_worker_browser_roundtrip import (
 )
 
 RECEIPT_PREFIX = "LIFEOS_BROWSER_DISPATCH_RECEIPT="
+SOURCE_RETURN_POLL_SECONDS = 0.25
 
 
 @dataclass(frozen=True)
@@ -83,6 +85,70 @@ def _receipt(
         return_error=return_error,
         submission_uncertain=False,
     )
+
+
+def _wait_for_source_conversation_ready(page, *, source_url: str, timeout_ms: int) -> None:
+    """Prove the exact source room and composer are rendered without requiring idleness.
+
+    Return-to-source is a navigation postcondition. A preserved draft or an active generation in
+    the source room may block a later dispatch preflight, but it must not erase proof that the
+    controlled tab returned to the exact source conversation.
+    """
+
+    deadline = time.monotonic() + (timeout_ms / 1000)
+    last_observation = "Source conversation has not rendered."
+    while time.monotonic() < deadline:
+        try:
+            observed_url = normalize_chatgpt_url(page.url)
+            if observed_url != source_url:
+                last_observation = (
+                    "Exact source conversation URL is not active yet: "
+                    f"observed={observed_url}."
+                )
+            else:
+                prompt = page.locator(PROMPT_SELECTOR)
+                count = prompt.count()
+                if count == 1 and prompt.first.is_visible():
+                    return
+                last_observation = f"Source composer is not stably visible yet: count={count}."
+        except Exception as exc:
+            last_observation = str(exc)
+        time.sleep(SOURCE_RETURN_POLL_SECONDS)
+
+    raise BrowserRoundTripError(
+        "Exact source conversation did not finish rendering before the return timeout. "
+        f"Last observation: {last_observation}"
+    )
+
+
+def _return_to_source_conversation(page, *, source_url: str, timeout_ms: int) -> None:
+    """Navigate back once, then prove exact normalized URL and source-room hydration."""
+
+    navigation_error: str | None = None
+    if normalize_chatgpt_url(page.url) != source_url:
+        try:
+            page.goto(
+                source_url,
+                wait_until="commit",
+                timeout=min(timeout_ms, 60_000),
+            )
+        except Exception as exc:
+            # A navigation timeout can race with a successful committed navigation. Verify the
+            # actual final room before classifying the return as failed.
+            navigation_error = str(exc)
+
+    try:
+        _wait_for_source_conversation_ready(
+            page,
+            source_url=source_url,
+            timeout_ms=timeout_ms,
+        )
+    except BrowserRoundTripError as exc:
+        if navigation_error:
+            raise BrowserRoundTripError(
+                f"{exc} Navigation attempt also reported: {navigation_error}"
+            ) from exc
+        raise
 
 
 def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
@@ -199,10 +265,11 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
         submission_confirmed = True
 
         try:
-            if normalize_chatgpt_url(page.url) != source_url:
-                page.goto(source_url, wait_until="domcontentloaded", timeout=timeout_ms)
-                page.wait_for_url(source_url, timeout=timeout_ms)
-            _wait_for_idle_composer(page, timeout_ms=min(timeout_ms, 120_000))
+            _return_to_source_conversation(
+                page,
+                source_url=source_url,
+                timeout_ms=min(timeout_ms, 120_000),
+            )
             return _receipt(
                 request,
                 worker_url=worker_url,
