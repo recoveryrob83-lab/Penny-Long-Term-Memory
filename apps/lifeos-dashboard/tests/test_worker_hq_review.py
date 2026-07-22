@@ -188,6 +188,7 @@ def _review_payload(state: str) -> dict[str, object]:
 
 def _record_wake(service: WorkerHqReviewService) -> None:
     wake = service.build_wake(RUN_ID)
+    assert wake.hq_chat_title == "Engineering_HQ"
     assert wake.report_path == REPORT_PATH
     assert wake.review_path == REVIEW_PATH
     assert "close the source advisory" in wake.instruction
