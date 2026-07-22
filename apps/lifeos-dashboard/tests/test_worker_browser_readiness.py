@@ -102,6 +102,34 @@ class FakePage:
         return "complete"
 
 
+class ReturnPrompt(FakePrompt):
+    def evaluate(self, script: str) -> str:
+        del script
+        raise AssertionError("Return proof must not inspect or clear source draft text.")
+
+
+class ReturnPage:
+    def __init__(self, url: str) -> None:
+        self.url = url
+        self.prompt = ReturnPrompt()
+        self.goto_calls: list[tuple[str, str, int]] = []
+
+    def locator(self, selector: str):
+        assert selector == hydration.PROMPT_SELECTOR
+        return self.prompt
+
+    def goto(self, url: str, *, wait_until: str, timeout: int) -> None:
+        self.goto_calls.append((url, wait_until, timeout))
+        self.url = f"{url}?model=gpt-5"
+
+
+class TimeoutAfterCommitPage(ReturnPage):
+    def goto(self, url: str, *, wait_until: str, timeout: int) -> None:
+        self.goto_calls.append((url, wait_until, timeout))
+        self.url = url
+        raise RuntimeError("navigation timeout after commit")
+
+
 def request(worker_url: str) -> object:
     return hydration.BrowserRoundTripRequest(
         worker_url=worker_url,
@@ -145,6 +173,39 @@ def test_worker_history_snapshot_requires_visible_nonempty_turn() -> None:
     )
 
 
+def test_source_return_proves_exact_normalized_url_without_requiring_idle_composer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source_url = "https://chatgpt.com/g/project/c/source"
+    page = ReturnPage(f"{source_url}?model=gpt-5")
+    monkeypatch.setattr(dispatch.time, "sleep", lambda seconds: None)
+
+    dispatch._wait_for_source_conversation_ready(
+        page,
+        source_url=source_url,
+        timeout_ms=1_000,
+    )
+
+    assert page.goto_calls == []
+
+
+def test_source_return_accepts_late_success_after_navigation_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source_url = "https://chatgpt.com/g/project/c/source"
+    page = TimeoutAfterCommitPage("https://chatgpt.com/g/project/c/worker")
+    monkeypatch.setattr(dispatch.time, "sleep", lambda seconds: None)
+
+    dispatch._return_to_source_conversation(
+        page,
+        source_url=source_url,
+        timeout_ms=1_000,
+    )
+
+    assert page.goto_calls == [(source_url, "commit", 1_000)]
+    assert hydration.normalize_chatgpt_url(page.url) == source_url
+
+
 def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
     script = DISPATCH_SCRIPT.read_text(encoding="utf-8")
     run_body = script.split("def run_dispatch", 1)[1]
@@ -154,9 +215,15 @@ def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
     unchanged_history = run_body.index("if turns.count() != baseline_turns")
     click = run_body.index("send.click()")
     user_turn = run_body.index('role="user"')
-    return_to_source = run_body.index("page.goto(source_url")
+    return_to_source = run_body.index("_return_to_source_conversation(")
 
     assert readiness < fill < unchanged_history < click < user_turn < return_to_source
     assert 'role="assistant"' not in run_body
     assert "_wait_for_stable_turn" not in run_body
     assert "without waiting for Worker output" in script
+
+    post_send = run_body.split("send.click()", 1)[1]
+    assert "submission_confirmed = True" in post_send
+    assert "_return_to_source_conversation(" in post_send
+    assert "_wait_for_idle_composer(page" not in post_send
+    assert "returned_to_source=False" in post_send
