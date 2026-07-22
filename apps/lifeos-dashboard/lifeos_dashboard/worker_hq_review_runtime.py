@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import replace
 from pathlib import Path
 
@@ -21,6 +22,27 @@ _WAKE_FLAG = "_lifeos_worker_hq_review_wake_procedure_patch_installed"
 _REVIEW_PROCEDURE_PATH = (
     "projects/engineering/procedures/engineering_hq_worker_review_receipt.md"
 )
+_AUTOMATION_HQ_CHAT_TITLES = {
+    "engineering": "Engineering_HQ",
+}
+
+
+def _automation_hq_chat_title(owning_department: str) -> str:
+    department = str(owning_department or "").strip().casefold()
+    environment_name = f"LIFEOS_{department.upper()}_HQ_AUTOMATION_TITLE"
+    configured = str(os.getenv(environment_name) or "").strip()
+    if configured:
+        if " " in configured:
+            raise WorkerRuntimeError(
+                f"{environment_name} must use the automation chat-title convention without spaces."
+            )
+        return configured
+    title = _AUTOMATION_HQ_CHAT_TITLES.get(department)
+    if title is None:
+        raise WorkerRuntimeError(
+            "Cross-department HQ routing is not authorized by the Engineering-only Slice 5 pilot."
+        )
+    return title
 
 
 def _install_wake_procedure_pointer() -> None:
@@ -33,6 +55,7 @@ def _install_wake_procedure_pointer() -> None:
         wake = original_build(self, run_id)
         return replace(
             wake,
+            hq_chat_title=_automation_hq_chat_title(wake.owning_department),
             instruction=(
                 wake.instruction
                 + f" Follow the canonical Engineering HQ review procedure at "
