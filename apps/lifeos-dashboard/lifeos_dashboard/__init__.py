@@ -23,3 +23,4 @@ from . import worker_response_receiver_runtime as _worker_response_receiver_runt
 from . import worker_dispatch_runtime as _worker_dispatch_runtime
 from . import worker_result_ingester_runtime as _worker_result_ingester_runtime
 from . import worker_result_ingester_history_runtime as _worker_result_ingester_history_runtime
+from . import worker_hq_review_runtime as _worker_hq_review_runtime
