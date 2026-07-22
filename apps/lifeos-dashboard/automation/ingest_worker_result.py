@@ -7,6 +7,8 @@ import os
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from lifeos_dashboard.command_center import CommandCenterService
 from lifeos_dashboard.worker_operations import WorkerOperationsService
 from lifeos_dashboard.worker_runtime import WorkerRuntimeError
@@ -30,6 +32,7 @@ def _resolved_path(explicit: str | None, environment_name: str, fallback: Path) 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     app_root = Path(__file__).resolve().parents[1]
+    load_dotenv(app_root / ".env", override=False)
     repository_root = _resolved_path(
         args.repository_root,
         "LIFEOS_REPOSITORY_ROOT",
@@ -46,6 +49,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = service.ingest_result(args.run_id)
     except (OSError, WorkerRuntimeError, ValueError) as exc:
         print(f"STOPPED: {exc}", file=sys.stderr)
+        print(f"Repository: {repository_root}", file=sys.stderr)
+        print(f"Database: {database_path}", file=sys.stderr)
         return 2
     print("WORKER_RESULT_INGESTION_OK")
     print(f"{RECEIPT_PREFIX}{json.dumps(payload, sort_keys=True, ensure_ascii=False)}")
