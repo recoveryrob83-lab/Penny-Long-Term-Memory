@@ -1,7 +1,11 @@
 from pathlib import Path
 
 from lifeos_dashboard.worker_result_repair import structured_validation_errors
-from lifeos_dashboard.worker_result_repair_pilot import REPORT_2, run_synthetic_repair_pilot
+from lifeos_dashboard.worker_result_repair_pilot import (
+    REPORT_2,
+    RUN_ID,
+    run_synthetic_repair_pilot,
+)
 
 
 def test_structured_errors_preserve_type_without_copying_string_value() -> None:
@@ -26,6 +30,7 @@ def test_synthetic_report_repair_rejects_repairs_and_deduplicates(tmp_path: Path
     receipt = run_synthetic_repair_pilot(tmp_path)
 
     assert receipt["status"] == "succeeded"
+    assert receipt["run_id"] == RUN_ID
     assert receipt["malformed_attempt"] == 1
     assert str(receipt["rejection_path"]).endswith("/rejection-001.json")
     assert receipt["repair_wake"]["worker_id"] == "engineering_worker"
