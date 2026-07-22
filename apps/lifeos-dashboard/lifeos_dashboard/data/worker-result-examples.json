@@ -82,8 +82,11 @@
     "worker_id": "engineering_worker",
     "validator": "Rob",
     "validation_state": "VERIFIED",
-    "observation": "The physical or subjective result unavailable to HQ inspection was verified.",
-    "evidence_references": ["hq-review-001.json"],
+    "observation": "Rob observed LIFEOS_ROB_OBSERVATION=EXAMPLE_MARKER on the exact surface named by Engineering HQ.",
+    "evidence_references": [
+      "hq-review:projects/engineering/worker-results/engineering_worker/RUN-ADV-EXAMPLE-R1/hq-review-001.json@0123456789abcdef0123456789abcdef01234567",
+      "rob-observation:LIFEOS_ROB_OBSERVATION=EXAMPLE_MARKER"
+    ],
     "ready_for_consumption": true
   }
 }
