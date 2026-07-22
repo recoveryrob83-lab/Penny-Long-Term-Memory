@@ -1,10 +1,11 @@
-"""Install Package E Slice 4 deterministic Worker result ingestion."""
+"""Install Package E Slice 4 deterministic Worker result ingestion and repair."""
 from __future__ import annotations
 
 from pathlib import Path
 
 from . import worker_operations
 from .worker_result_ingester import WorkerResultIngester
+from .worker_result_repair import WorkerResultRepairCoordinator
 from .worker_runtime import WorkerRuntimeError
 
 _INSTALL_FLAG = "_lifeos_worker_result_ingester_runtime_installed"
@@ -31,10 +32,12 @@ def _install_service() -> None:
             database_path,
             runtime=self.worker_center.runtime,
         )
+        self.result_repair = WorkerResultRepairCoordinator(self.result_ingester)
 
     def status(self) -> dict[str, object]:
         payload = original_status(self)
         payload["result_ingestion"] = self.result_ingester.status(limit=100)
+        payload["result_repair"] = self.result_repair.status(limit=100)
         return payload
 
     def ingest_result(self, run_id: str) -> dict[str, object]:
@@ -52,11 +55,12 @@ def _install_service() -> None:
             )
         if len(matches) > 1:
             raise WorkerRuntimeError(f"Worker result assignment {clean_run_id} is ambiguous.")
-        receipt = self.result_ingester.ingest(matches[0])
+        receipt = self.result_repair.ingest_next(matches[0])
         return {
             "status": "succeeded",
             "receipt": receipt.to_dict(),
             "result_ingestion": self.result_ingester.status(limit=100),
+            "result_repair": self.result_repair.status(limit=100),
             "verification": self.verification.status(limit=100),
         }
 
@@ -67,7 +71,7 @@ def _install_service() -> None:
 
 
 def install_worker_result_ingester_runtime() -> bool:
-    """Install deterministic result ingestion once."""
+    """Install deterministic result ingestion and correction-only repair once."""
 
     if getattr(worker_operations, _INSTALL_FLAG, False):
         return False
