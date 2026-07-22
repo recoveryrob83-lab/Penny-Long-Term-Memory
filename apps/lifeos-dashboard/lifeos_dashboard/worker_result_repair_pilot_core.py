@@ -18,7 +18,10 @@ from .worker_result_repair import WorkerReportRepairWake, WorkerResultRepairCoor
 from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 from .worker_runtime_service import WorkerRuntimeService
 
-RUN_ID = "SYNTH-RESULT-REPAIR-RUN-1"
+ADVISORY_ID = "SYNTH-RESULT-REPAIR"
+ADVISORY_REVISION = 1
+RUN_ID = f"RUN-{ADVISORY_ID}-R{ADVISORY_REVISION}"
+WRAPPER_ID = f"WAKE-{ADVISORY_ID}-R{ADVISORY_REVISION}"
 REPORT_1 = (
     "projects/engineering/worker-results/engineering_worker/"
     f"{RUN_ID}/report-001.json"
@@ -92,12 +95,12 @@ def _initialize_repository(root: Path) -> dict[str, str]:
 
 def _advisory() -> ExecutionReadyAdvisory:
     return ExecutionReadyAdvisory(
-        advisory_id="SYNTH-RESULT-REPAIR",
+        advisory_id=ADVISORY_ID,
         title="Synthetic immutable report repair proof",
         board_path="projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md",
         target_department="Engineering HQ",
         target_worker_id="engineering_worker",
-        advisory_revision=1,
+        advisory_revision=ADVISORY_REVISION,
         task_class="engineering_read_only_verification",
         authorization_class="BOUNDED_WRITE",
         procedure_id="engineering_worker_result_outbox_validation",
@@ -161,13 +164,13 @@ def _report_payload(
     payload.update(
         {
             "attempt": attempt,
-            "wrapper_id": "WAKE-SYNTH-RESULT-REPAIR-R1",
+            "wrapper_id": WRAPPER_ID,
             "run_id": RUN_ID,
             "worker_id": "engineering_worker",
             "profile_version": profile_version,
             "owning_department": "engineering",
-            "task_id": "SYNTH-RESULT-REPAIR",
-            "task_revision": 1,
+            "task_id": ADVISORY_ID,
+            "task_revision": ADVISORY_REVISION,
             "procedure_id": "engineering_worker_result_outbox_validation",
             "procedure_version": 1,
             "authorization_source": "ENGINEERING_HQ_PACKAGE_E_SLICE4_SYNTHETIC_REPAIR",
@@ -256,6 +259,16 @@ def run_synthetic_repair_pilot(root: Path) -> dict[str, object]:
     root.mkdir(parents=True, exist_ok=True)
     blob_shas = _initialize_repository(root)
     active = _advisory()
+    contract = active.result_contract
+    if (
+        active.run_id != RUN_ID
+        or active.wrapper_id != WRAPPER_ID
+        or contract is None
+        or contract.run_id != RUN_ID
+    ):
+        raise WorkerRuntimeError(
+            "Synthetic advisory, envelope, and result contract do not share one canonical run identity."
+        )
     malformed = _report_payload(blob_shas, attempt=1, profile_version="1")
     _commit_report(root, REPORT_1, malformed, "Add malformed synthetic Worker report")
 
@@ -273,7 +286,7 @@ def run_synthetic_repair_pilot(root: Path) -> dict[str, object]:
     runtime.set_route_state("engineering_worker", "available")
     WorkerExecutionHistoryStore(database).record(_transport_result(active))
     BrowserWorkerEvidenceStore(database).attach(
-        RUN_ID,
+        active.run_id,
         BrowserDispatchEvidence(
             dispatch_state="DISPATCH_SUBMITTED",
             user_turn_id="conversation-turn-synthetic-repair",
@@ -294,15 +307,19 @@ def run_synthetic_repair_pilot(root: Path) -> dict[str, object]:
         raise WorkerRuntimeError(
             "Synthetic malformed report did not produce deterministic repair preparation."
         )
-    wake = coordinator.repair_wake(RUN_ID)
+    wake = coordinator.repair_wake(active.run_id)
     if wake is None:
         raise WorkerRuntimeError("Synthetic rejection did not queue a repair wake.")
     courier = _synthetic_wake(wake)
 
-    row_after_rejection = coordinator._row(RUN_ID)  # noqa: SLF001 - synthetic evidence inspection
+    row_after_rejection = coordinator._row(  # noqa: SLF001 - synthetic evidence inspection
+        active.run_id
+    )
     repair_inputs = {
         REPORT_1: _git(root, "rev-parse", f"HEAD:{REPORT_1}"),
-        str(row_after_rejection["rejection_path"]): str(row_after_rejection["rejection_blob_sha"]),
+        str(row_after_rejection["rejection_path"]): str(
+            row_after_rejection["rejection_blob_sha"]
+        ),
     }
     corrected = _report_payload(
         blob_shas,
@@ -313,7 +330,7 @@ def run_synthetic_repair_pilot(root: Path) -> dict[str, object]:
     _commit_report(root, REPORT_2, corrected, "Add corrected synthetic Worker report")
     accepted = coordinator.ingest_next(active)
     duplicate = coordinator.ingest_next(active)
-    row = coordinator._row(RUN_ID)  # noqa: SLF001 - synthetic evidence inspection
+    row = coordinator._row(active.run_id)  # noqa: SLF001 - synthetic evidence inspection
     after_tables = _table_names(database)
 
     if accepted.report_state != "REPORT_VALIDATED" or accepted.report_attempt != 2:
@@ -327,7 +344,7 @@ def run_synthetic_repair_pilot(root: Path) -> dict[str, object]:
     with sqlite3.connect(database) as connection:
         row_count = int(
             connection.execute(
-                "SELECT COUNT(*) FROM execution_history WHERE run_id = ?", (RUN_ID,)
+                "SELECT COUNT(*) FROM execution_history WHERE run_id = ?", (active.run_id,)
             ).fetchone()[0]
         )
     if row_count != 1:
@@ -335,7 +352,7 @@ def run_synthetic_repair_pilot(root: Path) -> dict[str, object]:
 
     return {
         "status": "succeeded",
-        "run_id": RUN_ID,
+        "run_id": active.run_id,
         "malformed_attempt": 1,
         "rejection_path": str(row["rejection_path"]),
         "rejection_commit_sha": str(row["rejection_commit_sha"]),
