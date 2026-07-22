@@ -1,4 +1,6 @@
 from pathlib import Path
+import subprocess
+import sys
 
 from lifeos_dashboard.worker_result_repair import structured_validation_errors
 from lifeos_dashboard.worker_result_repair_pilot import (
@@ -45,3 +47,21 @@ def test_synthetic_report_repair_rejects_repairs_and_deduplicates(tmp_path: Path
     assert receipt["same_execution_row"] is True
     assert receipt["second_runtime_ledger_created"] is False
     assert receipt["repair_state"] == "REPORT_REPAIR_ACCEPTED"
+
+
+def test_synthetic_repair_cli_releases_temporary_sqlite_handles() -> None:
+    app_root = Path(__file__).resolve().parents[1]
+    script = app_root / "automation" / "run_synthetic_worker_result_repair_pilot.py"
+
+    completed = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=app_root,
+        capture_output=True,
+        text=True,
+        timeout=180,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr or completed.stdout
+    assert "SYNTHETIC_RESULT_REPAIR_OK" in completed.stdout
+    assert "LIFEOS_SYNTHETIC_RESULT_REPAIR_RECEIPT=" in completed.stdout
