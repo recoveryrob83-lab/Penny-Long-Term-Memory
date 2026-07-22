@@ -1,10 +1,81 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-21
+Updated: 2026-07-22
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
+
+### ADV-20260722-049 — Prove Package E Slice 6 Rob-validation chain
+
+- Date: 2026-07-22
+- From: Engineering HQ
+- To: Engineering Worker
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: IMMEDIATE_HQ
+- Target Department and Owner: Engineering HQ
+- Target Worker ID: `engineering_worker`
+- Record Class: Bounded Engineering read-only verification with one create-only result artifact and one user-visible synthetic observation marker
+- Task Class: `engineering_read_only_verification`
+- Authorization Class: `BOUNDED_WRITE`
+- Authorization Source: `ENGINEERING_HQ_PACKAGE_E_SLICE6_ROB_VALIDATION_PILOT_20260722`
+- Procedure ID: `engineering_worker_rob_validation_pilot`
+- Procedure Version: 1
+- Procedure Path: `projects/engineering/procedures/engineering_worker_rob_validation_pilot.md`
+- Procedure Blob SHA: `c16ddcd7d6d8dc97232bb4fc0718c31ef2515af4`
+- Result Submission Procedure Path: `projects/engineering/procedures/engineering_worker_result_submission.md`
+- Result Submission Procedure Blob SHA: `2faed99249ee268c7bc746104d5e1319428c6bb6`
+- Worker Profile Path: `projects/engineering/workers/engineering_worker.md`
+- Requested Action: Read the exact Package E implementation packet, answer the one bounded Slice 6 question, create exactly one immutable schema-valid Worker report at the authorized current-run result path, and then render the exact synthetic Rob-observation marker once in the final Worker response.
+- Parameters JSON: `{"rob_observation_marker":"LIFEOS_ROB_OBSERVATION=SLICE6_ADV_20260722_049_VISIBLE","targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],"verification_questions":["Does Package E Slice 6 require one bounded Engineering-owned assignment to reach a final consumption-ready state with duplicate suppression and source-owner lifecycle separation, without Rob manually copying prompts or reports?"]}`
+- Parameters Checksum: `SHA256:e6527f17c72a7d69ee7145230ef390a4f3f0d1d393699e05822b24be2d044c4d`
+- Source References JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_rob_validation_pilot.md","projects/engineering/procedures/engineering_worker_result_submission.md","projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json"]`
+- Requested Read Scopes JSON: `["memory/STARTUP_BOOT.md","coordination/LIFEOS_PROJECT_INSTRUCTIONS.md","coordination/LIFEOS_HUB_OPERATING_CONTRACT.md","memory/00_START_HERE.md","memory/CONTEXT_REMINDER.md","memory/03_OPERATIONAL_RULES.md","coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md","coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md","projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md","memory/06_DAILY_OPERATING_SOP.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","coordination/WORKER_EXECUTION_CONTRACT.md","projects/engineering/DEPARTMENT_IDENTITY.md","projects/engineering/workers/engineering_worker.md","coordination/boards/engineering.md","projects/engineering/procedures/engineering_worker_rob_validation_pilot.md","projects/engineering/procedures/engineering_worker_result_submission.md","projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json","apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json"]`
+- Requested Write Scopes JSON: `["projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/report-001.json"]`
+- Requested Tools JSON: `["GitHub"]`
+- Result Contract ID: `lifeos_worker_result`
+- Result Contract Version: 1
+- Result Submission Procedure ID: `engineering_worker_result_submission`
+- Result Submission Procedure Version: 1
+- Result Owning Department: `engineering`
+- Result Attempt: 1
+- Result Path: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/report-001.json`
+- Result Create Only: true
+- Result Overwrite Allowed: false
+- Result Work Reexecution Authorized: false
+- Result Scope Expansion Authorized: false
+- Requests New Authority: false
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: false
+- Requests Material Exception: false
+- Transport Scope Change Detected: false
+- Rob Observation Marker: `LIFEOS_ROB_OBSERVATION=SLICE6_ADV_20260722_049_VISIBLE`
+- Completion Condition: Every exact source is read, the bounded question is answered or explicitly marked unverifiable, exactly one schema-valid immutable `report-001.json` is created at the authorized result path and read back, the exact synthetic marker is rendered once in the final Worker response, no other write or external action occurs, and Engineering HQ plus Rob validation remain pending.
+- Review Condition: Engineering HQ validates report integrity, assignment correlation, authority compliance, and repository evidence. Because the decisive final marker exists only in the Worker chat and the courier must not scrape responses, HQ should issue `ROB_VALIDATION_REQUIRED` naming the exact marker. Rob then records whether the exact marker was observed. A verified Rob receipt may advance the existing runtime row to `READY_FOR_COS`.
+- Closure Authority: Engineering HQ only. Closure is not delegated to the Worker, courier, report, HQ receipt, Rob receipt, dashboard, or automation.
+
+#### Assignment
+
+Perform revision 1 using only the named Slice 6 pilot and result-submission procedures and the exact authorized scopes.
+
+The substantive verification is read-only. The only durable write authorized to the Worker is creation of:
+
+`projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/report-001.json`
+
+Before creating it, confirm the path does not already exist. Create it once, read it back, and preserve exact evidence. After successful creation and read-back, display this exact line once in the final Worker response:
+
+`LIFEOS_ROB_OBSERVATION=SLICE6_ADV_20260722_049_VISIBLE`
+
+Return exactly one controlled outcome in the result artifact:
+
+- `IMPLEMENT` when the bounded inspection, immutable report creation, and final marker rendering complete with required evidence;
+- `REPORT_AND_HOLD` when validation, source loading, inspection, existing-file state, schema construction, creation, read-back, or marker rendering cannot continue safely;
+- `ELEVATE_FOR_APPROVAL` only when broader authority or a new Rob decision is genuinely required.
+
+Do not edit or close this advisory. Do not modify the Advisory Index, Package E packet, procedures, schemas, examples, profile, status, open loops, runtime database, or any other file. Do not run code or tests. Do not perform desktop automation, connector actions beyond exact GitHub reads and the create-only report write, external-system actions, overwrite, deletion, work re-execution, or scope expansion. Do not claim HQ or Rob verification.
 
 ### ADV-20260721-048 — Validate Package E Slice 3 immutable result outbox
 
