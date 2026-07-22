@@ -1,0 +1,29 @@
+{
+  "schema_id": "lifeos_worker_hq_review",
+  "schema_version": 1,
+  "artifact_type": "hq_review",
+  "attempt": 1,
+  "run_id": "RUN-ADV-20260721-048-R1",
+  "worker_id": "engineering_worker",
+  "reviewing_hq": "Engineering HQ",
+  "report_path": "projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json",
+  "review_state": "VERIFIED",
+  "report_integrity_state": "valid",
+  "authority_compliance_state": "compliant",
+  "work_verification_state": "verified",
+  "evidence_checked": [
+    "runtime:execution_history:RUN-ADV-20260721-048-R1:REPORT_VALIDATED",
+    "report:projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json@f218d63519d38352b8aee4a790ed20807b1bebee",
+    "report-checksum:sha256:6d5146c83fd76cb89c333b3a22c35a1560967be75740b5c07d92b6d015c91621",
+    "creation-commit:fbe75f13bc1b3a2dd35815e0d145c25da8695e22:single-authorized-path",
+    "assignment:coordination/boards/engineering.md#ADV-20260721-048-R1",
+    "source-blob:projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md@4fe17028a3a17091e354a768b178f80b7225cd48",
+    "source-blob:projects/engineering/procedures/engineering_worker_result_submission.md@2faed99249ee268c7bc746104d5e1319428c6bb6",
+    "source-blob:apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json@3af530522217da7ee00622156837bafdad84c842",
+    "source-blob:apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json@b384f17e162bfd4e7ed5ff332997a91653df10f4",
+    "review-procedure:projects/engineering/procedures/engineering_hq_worker_review_receipt.md@e4e9c4eec3273f4ee8e6977eda6ba0dfe8dc9b4a"
+  ],
+  "reason": "The immutable report matches advisory revision 1, its canonical checksum, creation commit, and blob; the creation commit contains only the authorized report path; reported reads, writes, tools, and outcome remain within the bounded authority; and the three requested technical claims are independently confirmed in the exact cited Package E, result-submission procedure, report-schema, and typed-example blobs. No Rob-only observation is required.",
+  "ready_for_consumption": true,
+  "requires_rob_validation": false
+}
