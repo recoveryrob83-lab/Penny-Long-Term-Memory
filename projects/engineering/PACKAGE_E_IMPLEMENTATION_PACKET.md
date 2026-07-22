@@ -12,11 +12,11 @@ Record Class: Engineering implementation packet
 
 ## Authorization Basis
 
-Rob explicitly authorized the Automation Command Center UI rebuild on 2026-07-20, designated the resulting work as Package E after Package D closeout, and on 2026-07-21 directed Engineering HQ to reshape Package E around a standardized Worker work log, nonblocking courier dispatch, Department HQ validation, and scheduled Chief of Staff consumption.
+Rob authorized the Automation Command Center UI rebuild on 2026-07-20, designated the resulting work as Package E after Package D closeout, and on 2026-07-21 directed Engineering HQ to reshape Package E around a standardized Worker work log, nonblocking courier dispatch, Department HQ validation, explicit Rob validation when HQ cannot inspect the work, and scheduled Chief of Staff consumption.
 
 This packet authorizes only the bounded Engineering-owned technical architecture and implementation work described here. It does not by itself:
 
-- grant a Worker new durable-write authority;
+- grant universal Worker durable-write authority;
 - change another department's Worker profile or procedure;
 - change shared Worker governance;
 - create cross-department authority;
@@ -36,9 +36,11 @@ The first Package E response-bridge pilot exposed three architectural defects:
 2. after successful submission, the courier could remain occupied waiting for a legitimate long-running Worker response and then lose confidence during post-send capture;
 3. a generated response template represented `profile_version` as a quoted placeholder, leading the Worker to emit a string where the receiver required an integer.
 
-These failures demonstrated that browser transport, Worker execution, result reporting, deterministic report validation, Department HQ review, Rob validation, and Chief of Staff consumption must be separate stages.
+The first live dispatch-only and outbox pilot, `ADV-20260721-048`, then exposed a fourth transport defect:
 
-The courier must not wait for work to finish, interpret chat prose, revisit Worker rooms to scrape responses, validate work, or wake Chief of Staff.
+4. the correlated Worker wake succeeded and the Worker completed independently, but the controlled browser tab did not return to Engineering HQ after dispatch.
+
+These observations demonstrate that browser transport, Worker execution, result reporting, deterministic report validation, Department HQ review, Rob validation, and Chief of Staff consumption must remain separate stages. A successful Worker wake must not be treated as successful browser restoration, and a successful report artifact must not be treated as deterministic ingestion or HQ signoff.
 
 ## Objective
 
@@ -103,11 +105,13 @@ The courier must not:
 - wake Chief of Staff directly;
 - broaden, approve, prioritize, or close work;
 - act on arbitrary browser tabs;
-- blind-retry after uncertain submission.
+- blind-retry after uncertain or confirmed submission.
+
+A confirmed send and an exact source-room return are separate transport postconditions. A failed return must preserve the confirmed dispatch as nonretryable and report browser restoration failure explicitly.
 
 ### Deterministic Worker result outbox
 
-The Engineering pilot uses this deterministic evidence path:
+The Engineering pilot uses:
 
 `projects/<department>/worker-results/<worker_id>/<run_id>/`
 
@@ -125,7 +129,8 @@ Rules:
 - path department, Worker ID, and run ID must match the canonical assignment;
 - every artifact uses a strict versioned schema;
 - unknown fields, missing fields, wrong types, mismatched identities, stale revisions, conflicting attempts, unauthorized scopes, or unverifiable claims fail closed;
-- commit SHA, blob SHA, path, and report checksum become evidence references on the existing runtime state;
+- commit SHA, blob SHA, path, and canonical content checksum become evidence references on the existing runtime state;
+- the ingester calculates the canonical checksum when the Worker connector cannot provide it;
 - prohibited secrets or private data must never enter the outbox;
 - report files do not change advisory lifecycle or constitute HQ verification.
 
@@ -152,6 +157,7 @@ The local result ingester is deterministic technical machinery. It may:
 - poll or watch approved result locations;
 - discover new immutable artifacts;
 - verify exact path identity, schema version, field types, run identity, Worker identity, task revision, procedure, authorization source, verification mode, scopes, tools, evidence, and checksums;
+- calculate the canonical content checksum from stored JSON;
 - compare the report against canonical GitHub assignment sources and existing SQLite runtime state;
 - update report and receiver fields on the existing execution row;
 - write a bounded machine rejection artifact when a report is invalid;
@@ -272,7 +278,7 @@ Implemented foundation includes:
 - exact Worker and source URL verification;
 - stable Worker-history hydration checks;
 - empty-composer and no-generation preflight;
-- one-tab browser navigation and return;
+- one-tab browser navigation;
 - shared pause and one-job execution gate;
 - canonical advisory discovery;
 - existing SQLite execution history and HQ review views;
@@ -285,7 +291,7 @@ Implemented foundation includes:
 
 ## Slice 2: Dispatch-Only Courier
 
-Lifecycle State: Implemented / Locally validated
+Lifecycle State: Implemented / Locally validated / Live dispatch partially validated
 
 Implemented behavior:
 
@@ -294,12 +300,11 @@ Implemented behavior:
 3. sends one correlated bounded assignment;
 4. proves the correlated user turn exists;
 5. records `DISPATCH_SUBMITTED`, user-turn evidence, return status, and dispatch receipt on the existing execution row;
-6. returns to source HQ immediately;
-7. releases the browser gate without waiting for Worker output;
-8. performs no assistant-response capture or interpretation;
-9. preserves stop-before-send and no-blind-retry behavior;
-10. blocks duplicate sends after confirmed submission or recorded submission uncertainty;
-11. retains a zero-authority courier self-test.
+6. releases the browser gate without waiting for Worker output;
+7. performs no assistant-response capture or interpretation;
+8. preserves stop-before-send and no-blind-retry behavior;
+9. blocks duplicate sends after confirmed submission or recorded submission uncertainty;
+10. retains a zero-authority courier self-test.
 
 Implementation locations include:
 
@@ -311,54 +316,84 @@ Implementation locations include:
 Local validation evidence reported by Rob on 2026-07-21:
 
 - focused validation result: **40 passed, 13 warnings**;
-- LifeOS Dashboard relaunched successfully after validation;
-- browser state reported ready;
-- execution gate reported ready;
-- Worker Operations reported ready.
+- LifeOS Dashboard relaunched successfully;
+- browser state ready;
+- execution gate ready;
+- Worker Operations ready.
 
-This evidence validates the local implementation and launch gate. Slice 2 has not yet been live-proven with a fresh execution-ready advisory, because the new result-submission contract belongs to Slice 3 and must exist before the first architecture-complete live run.
+Live evidence from `ADV-20260721-048`:
+
+- the courier reached `engineering_worker` and the correlated wake succeeded;
+- the Worker continued independently and completed;
+- the courier did not return the controlled browser tab to Engineering HQ;
+- no resend is authorized because the dispatch succeeded;
+- the exact return-to-source postcondition remains unproven and requires repair.
+
+Slice 2 is not fully live-validated until a later bounded wake proves successful correlated dispatch, exact source-room return, and gate release without duplicate execution.
 
 ## Slice 3: Engineering Worker Result-Outbox Pilot
 
-Lifecycle State: Next
+Lifecycle State: Implemented / Locally validated / Bounded live artifact validated
 
-Required behavior:
+Implemented behavior:
 
-1. define versioned Worker report, rejection, HQ-review, and Rob-validation JSON schemas;
-2. define deterministic paths and immutable attempt rules;
-3. add exact schema examples whose numeric and boolean fields use correct JSON types;
-4. define one canonical result-submission procedure rather than duplicating the schema in each advisory;
-5. update the Engineering Worker profile or an Engineering-owned procedure to authorize create-only report attempts inside the Worker's own current-run folder;
-6. ensure each advisory supplies only the exact result contract version, result path, attempt number, and run-specific authority;
-7. prohibit overwrites, deletion, unrelated writes, re-execution, and scope expansion;
-8. add parser and schema tests for malformed, missing, unknown, wrong-type, conflicting, duplicate, stale, and unauthorized artifacts;
-9. preserve GitHub commit, blob, path, and checksum evidence;
-10. retain `IMMEDIATE_HQ` review for the pilot.
+1. versioned Worker report, rejection, HQ-review, and Rob-validation JSON schemas;
+2. deterministic paths and immutable attempt rules;
+3. correctly typed canonical examples;
+4. one canonical result-submission procedure;
+5. Engineering-only create-once current-run reporting authority through the exact task procedure and advisory;
+6. advisory validation of contract version, attempt, deterministic path, flags, tool, and exact write scope;
+7. overwrite, deletion, unrelated writes, re-execution, and scope expansion prohibitions;
+8. focused parser and schema tests, including the prior wrong-type `profile_version` defect;
+9. preservation of commit, blob, path, and stored-content evidence;
+10. `IMMEDIATE_HQ` remains pending after Worker report creation.
 
-Completion condition:
+Local validation evidence reported by Rob:
 
-- one synthetic and one bounded live Engineering Worker report appear as immutable schema-valid GitHub artifacts without granting general write authority.
+- the result-outbox validation gate passed;
+- the dashboard relaunched live and ready.
+
+Bounded live evidence from `ADV-20260721-048`:
+
+- exact path: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`;
+- creation commit: `fbe75f13bc1b3a2dd35815e0d145c25da8695e22`;
+- blob SHA: `f218d63519d38352b8aee4a790ed20807b1bebee`;
+- controlled outcome: `IMPLEMENT`;
+- verification state: `pending`;
+- numeric and boolean JSON fields are correctly typed;
+- the only durable write was the authorized report artifact;
+- no external action, advisory lifecycle change, re-execution, or scope expansion occurred;
+- Rob observed the successful package outbox in the live dashboard;
+- the Worker could not provide a separate canonical SHA-256 content checksum through its authorized connector surface, so the ingester must calculate it;
+- deterministic ingestion and formal Engineering HQ signoff have not occurred.
+
+The live artifact satisfies the bounded Slice 3 outbox proof. `ADV-20260721-048` remains OPEN until deterministic ingestion and required HQ review establish its accepted state.
 
 ## Slice 4: Result Ingester and Repair Wakes
 
-Lifecycle State: Planned after Slice 3
+Lifecycle State: Next
 
 Required behavior:
 
 1. discover new result artifacts without browser response scraping;
 2. correlate them to the canonical assignment and existing SQLite runtime state;
 3. validate schema, identity, revision, authority, scopes, tools, evidence, and checksums;
-4. update the existing runtime state without creating another ledger;
-5. write deterministic rejection artifacts for invalid reports;
-6. queue bounded report-repair wakes;
-7. ensure repair wakes authorize report correction only;
-8. suppress duplicate and stale attempts;
-9. route exhausted or conflicted repairs to the owning HQ;
-10. expose actionable status and evidence in Worker Operations.
+4. calculate canonical content checksum from the stored artifact;
+5. update the existing runtime state without creating another ledger;
+6. write deterministic rejection artifacts for invalid reports;
+7. queue bounded report-repair wakes;
+8. ensure repair wakes authorize report correction only;
+9. suppress duplicate and stale attempts;
+10. route exhausted or conflicted repairs to the owning HQ;
+11. expose actionable status and evidence in Worker Operations.
 
 Completion condition:
 
-- an intentionally malformed report is rejected, the same Worker is woken for report repair without repeating the work, a corrected immutable attempt is accepted, and the existing runtime state advances to `REPORT_VALIDATED`.
+- the existing valid ADV-048 report advances through `REPORT_DISCOVERED` and `REPORT_VALIDATED` on its existing execution row;
+- an intentionally malformed synthetic report is rejected;
+- the same Worker can be woken for report repair without repeating the work;
+- a corrected immutable attempt is accepted;
+- no second runtime ledger is created.
 
 ## Slice 5: Owning-HQ Wake and Verification Receipts
 
@@ -387,7 +422,7 @@ Run one bounded Engineering-owned assignment through:
 
 - canonical discovery;
 - dispatch-only Worker wake;
-- immediate courier release;
+- immediate courier release and exact source-room return;
 - immutable Worker result submission;
 - deterministic ingester validation;
 - repair loop if deliberately exercised;
@@ -429,7 +464,7 @@ Package E does not authorize:
 - changing another department's files;
 - changing shared governance or universal boot files without coordinated authority;
 - granting every Worker standing GitHub write authority;
-- closing `ADV-20260718-042`, `ADV-20260720-047`, or any other source-owned advisory automatically;
+- closing `ADV-20260718-042`, `ADV-20260720-047`, `ADV-20260721-048`, or any other source-owned advisory automatically;
 - automatic Department HQ judgment;
 - automatic Rob validation;
 - courier wakes to Chief of Staff;
@@ -464,7 +499,10 @@ Package E may close only when:
 
 ## Smallest Useful Next Action
 
-Implement Slice 3: define the Engineering-only immutable result-outbox contract, schemas, deterministic path rules, create-only reporting procedure and authority, and focused validation tests. Do not create the fresh live advisory until that contract can truthfully authorize its exact `report-001.json` path.
+1. inspect the existing ADV-048 execution row and dispatch receipt without resending the advisory;
+2. repair and regression-test exact return-to-source behavior while preserving the successful send as nonretryable;
+3. implement Slice 4 deterministic ingestion using the existing ADV-048 `report-001.json` as the first valid live artifact;
+4. leave formal Engineering HQ signoff and advisory closure pending until ingestion exists.
 
 ## Review Condition
 
