@@ -15,7 +15,7 @@ Use Engineering HQ for:
 - technical architecture and repository strategy;
 - software, API, connector, and data-model design;
 - automation and desktop-control safety;
-- LifeOS Dashboard and Automation Command Center architecture;
+- LifeOS Dashboard and Worker Operations architecture;
 - prompt systems and command interfaces;
 - technical Worker routing, transport, logging, duplicate suppression, result ingestion, evidence, and reliability;
 - testing, debugging, implementation sequencing, feasibility review, and build-ready packets;
@@ -32,7 +32,7 @@ A Life OS Worker is a specialized ChatGPT room operating beneath one Department 
 - SQLite `execution_history` remains the sole operational runtime ledger.
 - The browser courier wakes an authorized Worker or owning HQ, proves submission, returns immediately, and never waits for completion.
 - The Worker performs bounded work and writes one immutable schema-valid report attempt under exact narrow reporting authority.
-- A deterministic ingester validates the report, updates existing runtime state, and requests report repair when needed without re-executing the work.
+- A deterministic ingester validates the report, calculates the canonical checksum, updates existing runtime state, and requests report repair when needed without re-executing the work.
 - Department HQ reviews report integrity, authority compliance, evidence, and the actual work where possible.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Signed HQ or Rob results become available for later scheduled Chief of Staff consumption.
@@ -53,7 +53,7 @@ A GitHub Worker result outbox is immutable evidence, not a competing runtime led
 
 ## Department File Ownership
 
-Engineering maintains its own project subtree during authorized maintenance and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, implementation packets, decision records, and Engineering source-board advisory text.
+Engineering maintains its own project subtree during authorized maintenance and implementation work. This includes its handoff, identity, README, status, open loops, notebooks, implementation packets, decision records, Engineering source-board advisory text, procedures, and Engineering-owned Worker result evidence.
 
 Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
@@ -61,12 +61,7 @@ Package E may pilot a Worker result outbox under Engineering-owned paths. It may
 
 ## Current Technical State
 
-The LifeOS Dashboard is locally running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
-
-Canonical shared architecture lives in:
-
-- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
-- `coordination/WORKER_EXECUTION_CONTRACT.md`
+The LifeOS Dashboard is running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
 
 Package D is closed after implementing and validating the technical Worker registry, routing, transport, receiver, verification, duplicate-suppression, and synthetic pilot foundation.
 
@@ -74,25 +69,34 @@ Package E is active and authoritative at:
 
 - `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-The initial Package E one-tab courier and Worker Operations cockpit are an implemented transitional foundation. Live pilots demonstrated exact destination routing, hydration protection, and zero-authority transport, but also exposed the architectural cost of waiting for Worker responses in the browser.
+Current Package E evidence:
 
-The production direction is now:
+- Slice 2 dispatch-only transport is implemented and locally validated with 40 focused tests passing;
+- `ADV-20260721-048` reached `engineering_worker` and the Worker completed independently;
+- the courier failed to return the controlled browser tab to Engineering HQ after the successful wake;
+- Slice 3 created the first bounded live immutable report artifact;
+- report path: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`;
+- creation commit: `fbe75f13bc1b3a2dd35815e0d145c25da8695e22`;
+- blob SHA: `f218d63519d38352b8aee4a790ed20807b1bebee`;
+- controlled outcome: `IMPLEMENT`;
+- verification remains `pending`;
+- Rob sees the successful package outbox in Worker Operations;
+- deterministic ingestion and formal HQ signoff do not yet exist.
 
-1. dispatch-only courier wake;
-2. immediate return and browser-gate release;
-3. immutable Worker result artifact;
-4. deterministic ingestion and report repair;
-5. owning-HQ wake and verification receipt;
-6. Rob validation when HQ cannot independently inspect the work;
-7. signed result ready for later Chief of Staff consumption.
-
-The current courier still contains response-waiting and assistant-response capture from the superseded round-trip design. It is transitional and must be refactored before further real Package E proof.
+The existing ADV-048 run must not be resent. Its report is the first valid live target for Slice 4 ingestion.
 
 ## Current Decision Boundary
 
-The next valid implementation is Package E Slice 2: convert the one-tab courier into dispatch-only transport that proves the correlated user turn, records `DISPATCH_SUBMITTED`, returns immediately, and frees the courier while the Worker executes independently.
+The next valid work is:
 
-Later slices add an Engineering-only result-outbox pilot, deterministic ingester and report repair, owning-HQ verification, Rob validation, and a separately authorized read-only Chief of Staff scheduled-consumption task.
+1. inspect the ADV-048 execution row and dispatch receipt;
+2. repair exact return-to-source behavior without weakening dispatch safeguards or reopening duplicate-send risk;
+3. add focused regression coverage;
+4. implement Package E Slice 4 deterministic ingestion, checksum calculation, rejection evidence, report-repair wakes, and same-row runtime updates;
+5. use the existing report artifact for first live ingestion;
+6. leave formal Engineering HQ review and advisory closure pending until ingestion succeeds.
+
+Later slices add owning-HQ verification, Rob validation, `READY_FOR_COS`, and a separately authorized read-only Chief of Staff scheduled-consumption task.
 
 Cross-department rollout, scheduled-task activation, shared Worker-contract changes, new Worker authority, and advisory closure remain separate decisions.
 
@@ -100,7 +104,7 @@ Cross-department rollout, scheduled-task activation, shared Worker-contract chan
 
 The general full-text composer investigation is paused and must not be reopened without demonstrated failure.
 
-The Worker-only entrypoint preserves exact destination, hydration checks, empty-composer protection, explicit send, one-job locking, and stop-on-uncertainty safeguards. The dispatch-only redesign must not reintroduce repeated selection, character-range comparison, dual witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without evidence.
+The Worker-only entrypoint preserves exact destination, hydration checks, empty-composer protection, explicit send, one-job locking, and stop-on-uncertainty safeguards. The return-to-source repair must remain bounded to the demonstrated post-send navigation defect and must not reintroduce repeated selection, character-range comparison, dual witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without evidence.
 
 ## Security Rule
 
@@ -118,4 +122,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D is closed. Package E has been reshaped around nonblocking dispatch, immutable result evidence, deterministic ingestion and repair, Department HQ verification, explicit Rob validation where necessary, and later scheduled Chief of Staff consumption. The next implementation action is the dispatch-only courier conversion.
+Active department. Package D is closed. Package E has a successful live immutable outbox artifact, an open courier return-to-source defect, and no deterministic ingestion or formal HQ signoff yet. Slice 4 is next after the bounded browser-return repair.
