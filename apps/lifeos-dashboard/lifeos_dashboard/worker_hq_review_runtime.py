@@ -1,4 +1,4 @@
-"""Install Package E Slice 5 owning-HQ wake and immutable review ingestion."""
+"""Install Package E Slice 5 HQ review and Slice 6 Rob-validation services."""
 from __future__ import annotations
 
 import json
@@ -12,6 +12,7 @@ from .worker_hq_review import (
     WorkerHqReviewService,
 )
 from .worker_result_contract import artifact_path, validate_artifact
+from .worker_rob_validation import WorkerRobValidationService
 from .worker_runtime import WorkerRuntimeError
 
 _INSTALL_FLAG = "_lifeos_worker_hq_review_runtime_installed"
@@ -169,14 +170,14 @@ def _install_service() -> None:
             repository_root,
             cdp_endpoint=cdp_endpoint,
         )
-        self.hq_review = WorkerHqReviewService(
-            repository_root,
-            Path(command_center.store.database_path),
-        )
+        database_path = Path(command_center.store.database_path)
+        self.hq_review = WorkerHqReviewService(repository_root, database_path)
+        self.rob_validation = WorkerRobValidationService(repository_root, database_path)
 
     def status(self) -> dict[str, object]:
         payload = original_status(self)
         payload["hq_review"] = self.hq_review.status(limit=100)
+        payload["rob_validation"] = self.rob_validation.status(limit=100)
         return payload
 
     def build_hq_review_wake(self, run_id: str) -> dict[str, object]:
@@ -201,16 +202,26 @@ def _install_service() -> None:
             "verification": self.verification.status(limit=100),
         }
 
+    def ingest_rob_validation(self, run_id: str) -> dict[str, object]:
+        receipt = self.rob_validation.ingest_validation(run_id)
+        return {
+            "status": "succeeded",
+            "receipt": receipt.to_dict(),
+            "rob_validation": self.rob_validation.status(limit=100),
+            "verification": self.rob_validation.verification.status(limit=100),
+        }
+
     service_class.__init__ = __init__
     service_class.status = status
     service_class.build_hq_review_wake = build_hq_review_wake
     service_class.record_hq_review_wake = record_hq_review_wake
     service_class.ingest_hq_review = ingest_hq_review
+    service_class.ingest_rob_validation = ingest_rob_validation
     setattr(service_class, _SERVICE_FLAG, True)
 
 
 def install_worker_hq_review_runtime() -> bool:
-    """Install Slice 5 state and service extensions once."""
+    """Install Slice 5 and Slice 6 review-state extensions once."""
 
     if getattr(worker_operations, _INSTALL_FLAG, False):
         return False
