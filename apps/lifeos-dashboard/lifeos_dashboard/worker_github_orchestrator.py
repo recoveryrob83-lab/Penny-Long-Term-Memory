@@ -7,6 +7,7 @@ Chief of Staff. Chief of Staff reads GitHub directly.
 """
 from __future__ import annotations
 
+import json
 import os
 import sqlite3
 import subprocess
@@ -17,12 +18,26 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from .worker_dispatch_runtime import parse_browser_dispatch_receipt
+from .worker_advisory_pipeline import build_wake_job
+from .worker_dispatch_runtime import (
+    parse_browser_dispatch_receipt,
+    run_worker_browser_dispatch,
+)
 from .worker_runtime import WorkerRuntimeError
 
 if TYPE_CHECKING:
     from .worker_advisory_pipeline import ExecutionReadyAdvisory
     from .worker_operations import WorkerOperationsService
+
+
+_SAFE_PRE_SUBMIT_FAILURE_MARKERS = (
+    "before a confirmed dispatch completed",
+    "before submission could be proven",
+    "unique enabled send button was not available",
+    "neither native submit mechanism activated",
+    "exact draft was preserved",
+    "exact draft preserved",
+)
 
 
 @dataclass(frozen=True)
@@ -69,11 +84,23 @@ class WorkerGitHubOrchestrator:
         self._last_cycle_started_at: float | None = None
         self._last_cycle_finished_at: float | None = None
         self._last_error: str | None = None
+        self._initialize()
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path)
         connection.row_factory = sqlite3.Row
         return connection
+
+    def _initialize(self) -> None:
+        with self._connect() as connection:
+            existing = {
+                str(row["name"])
+                for row in connection.execute("PRAGMA table_info(execution_history)").fetchall()
+            }
+            if "dispatch_resume_attempts" not in existing:
+                connection.execute(
+                    "ALTER TABLE execution_history ADD COLUMN dispatch_resume_attempts INTEGER"
+                )
 
     def _event(
         self,
@@ -157,6 +184,100 @@ class WorkerGitHubOrchestrator:
                 (run_id,),
             ).fetchone()
 
+    @staticmethod
+    def _submitted_or_uncertain(row: sqlite3.Row) -> bool:
+        combined = " ".join(
+            str(row[key] or "")
+            for key in ("stderr", "reason", "dispatch_state", "user_turn_id")
+            if key in row.keys()
+        ).casefold()
+        return bool(
+            str(row["status"] or "") == "succeeded"
+            or str(row["dispatch_state"] or "") == "DISPATCH_SUBMITTED"
+            or str(row["user_turn_id"] or "").strip()
+            or "stopped_after_send" in combined
+            or "do not retry blindly" in combined
+            or "submission may have occurred" in combined
+        )
+
+    @staticmethod
+    def _safe_resume_candidate(row: sqlite3.Row) -> bool:
+        if WorkerGitHubOrchestrator._submitted_or_uncertain(row):
+            return False
+        if str(row["status"] or "") not in {"failed", "refused"}:
+            return False
+        attempts = int(row["dispatch_resume_attempts"] or 0)
+        if attempts >= 2:
+            return False
+        combined = " ".join(
+            str(row[key] or "")
+            for key in ("stderr", "reason")
+            if key in row.keys()
+        ).casefold()
+        return any(marker in combined for marker in _SAFE_PRE_SUBMIT_FAILURE_MARKERS)
+
+    def _persist_resumed_dispatch(self, row_id: int, result, evidence) -> None:
+        receipt_json = evidence.dispatch_receipt_json if result.status == "succeeded" else ""
+        with self._connect() as connection:
+            updated = connection.execute(
+                """
+                UPDATE execution_history SET
+                    status = ?, destination = ?, exit_code = ?, started_at = ?, finished_at = ?,
+                    stdout = ?, stderr = ?, reason = ?, trigger = ?,
+                    dispatch_state = ?, user_turn_id = ?, dispatch_receipt_json = ?,
+                    returned_to_source = ?, dispatched_at = ?,
+                    dispatch_resume_attempts = COALESCE(dispatch_resume_attempts, 0) + 1
+                WHERE id = ?
+                """,
+                (
+                    result.status,
+                    result.destination,
+                    result.exit_code,
+                    result.started_at,
+                    result.finished_at,
+                    result.stdout,
+                    result.stderr,
+                    result.reason,
+                    result.trigger,
+                    evidence.dispatch_state,
+                    evidence.user_turn_id,
+                    receipt_json,
+                    int(evidence.returned_to_source),
+                    time.time() if result.status == "succeeded" else None,
+                    row_id,
+                ),
+            )
+            if updated.rowcount != 1:
+                raise WorkerRuntimeError("Safe dispatch resume could not update its existing row.")
+
+    def _resume_dispatch(self, advisory: ExecutionReadyAdvisory, row: sqlite3.Row) -> None:
+        command_center = self.operations.command_center
+        if command_center.paused:
+            return
+        run_lock = command_center._run_lock  # noqa: SLF001 - shared browser execution gate
+        if not run_lock.acquire(blocking=False):
+            return
+        try:
+            job = build_wake_job(advisory, mode="send", confirm_send=True)
+            entry = self.operations.worker_center.runtime.validate_envelope(job.envelope)
+            result, evidence = run_worker_browser_dispatch(
+                job,
+                entry,
+                self.app_root,
+                trigger="scheduled",
+                timeout_seconds=self.timeout_seconds,
+            )
+            self._persist_resumed_dispatch(int(row["id"]), result, evidence)
+        finally:
+            run_lock.release()
+        self._event(
+            "worker_dispatch_resume",
+            result.status,
+            result.reason,
+            run_id=advisory.run_id,
+            advisory_id=advisory.advisory_id,
+        )
+
     def _artifact_exists(self, relative_path: str | None) -> bool:
         if not relative_path:
             return False
@@ -168,12 +289,18 @@ class WorkerGitHubOrchestrator:
         return candidate.is_file()
 
     def _dispatch_new(self, advisories: tuple[ExecutionReadyAdvisory, ...]) -> None:
+        """Dispatch or safely resume at most one advisory per cycle."""
+
         for advisory in advisories:
-            envelope = advisory.envelope()
-            if self.operations.worker_center.history.successful_send_exists(
-                envelope.idempotency_key
-            ):
+            row = self._row(advisory.run_id)
+            if row is not None:
+                if self._submitted_or_uncertain(row):
+                    continue
+                if self._safe_resume_candidate(row):
+                    self._resume_dispatch(advisory, row)
+                    return
                 continue
+
             dispatch = self.operations.pipeline.dispatch(
                 advisory.advisory_id,
                 mode="send",
@@ -188,6 +315,7 @@ class WorkerGitHubOrchestrator:
                 run_id=advisory.run_id,
                 advisory_id=advisory.advisory_id,
             )
+            return
 
     def _ingest_result_if_present(self, advisory: ExecutionReadyAdvisory) -> None:
         contract = advisory.result_contract
