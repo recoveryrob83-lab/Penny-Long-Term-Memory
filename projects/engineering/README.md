@@ -23,6 +23,24 @@ Use `Engineering_HQ` for:
 
 Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, another department's records, source-owner advisory lifecycle, or domain judgment.
 
+## Canonical Naming Boundary
+
+`memory/HQ_NAMING_STANDARD.md` is the canonical naming source.
+
+Current exact ChatGPT room titles are:
+
+- `LifeOS_HQ`
+- `Maintenance_HQ`
+- `Engineering_HQ`
+- `Business_HQ`
+- `Office_Leaks_HQ`
+- `Finance_HQ`
+- `Chief_of_Staff_HQ`
+- `Wellness_HQ`
+- current Worker: `Engineering_Worker`
+
+Maintenance_HQ owns the shared textual standard. Engineering_HQ owns implementation of those titles in Engineering-controlled code, browser routing, runtime configuration, current route mappings, prompt launchers, tests, and bounded active-state migrations. Display-name changes do not authorize filesystem-path renames, worker-ID changes, destination-key changes, historical-row rewrites, immutable-evidence rewrites, or checksum changes.
+
 ## Canonical Worker Model
 
 A LifeOS Worker is a specialized ChatGPT room operating beneath one Department HQ.
@@ -91,7 +109,24 @@ Final live evidence includes:
 - `ADV-20260722-049`: `ROB_VALIDATION_REQUIRED` HQ receipt followed by Rob's immutable `VERIFIED` receipt;
 - `ADV-20260723-051`: Worker report, HQ wake, immutable `VERIFIED` review, `HQ_VERIFIED` runtime reconciliation, and live duplicate-wake suppression after repair.
 
-The scheduled watcher successfully read signed evidence and open advisory state, reported meaningful follow-through to Rob, and generated a normal ChatGPT notification. It did not create authority or close records automatically.
+The scheduled watcher machinery is separately authorized under `Chief_of_Staff_HQ`. `ADV-20260723-052` remains open solely to verify that its report lands in the existing Chief of Staff conversation without creating a new chat or triggering work.
+
+## Current Transition
+
+Maintenance_HQ completed the repository-wide current-text naming repair and preserved executable Engineering surfaces, browser selectors, runtime registries, SQLite data, tests, historical evidence, immutable Worker artifacts, and stable filesystem paths for a separate Engineering repair.
+
+Rob authorized the next Engineering slice after a fresh-room boot and sync:
+
+1. update Engineering-owned code, configuration, route mappings, prompt launchers, dashboard labels, tests, and active title-bearing local state to the canonical underscore titles;
+2. use exact old-to-new mappings rather than broad replacement;
+3. preserve historical execution rows, immutable reports and receipts, worker IDs, destination keys, run IDs, wrapper IDs, checksums, and stable paths;
+4. verify all eight HQ rooms and `Engineering_Worker` in draft or zero-authority mode before resuming broader rollout.
+
+The browser bridge was successfully re-established after an Edge restart through a CDP-enabled Edge session at `http://127.0.0.1:9222`.
+
+A zero-authority courier self-test then exposed a specific verifier defect. The courier resolved the exact `Engineering_Worker` URL and loaded the Worker conversation, but ChatGPT refreshed and collapsed the project sidebar behind `Show more`. The redundant post-navigation identity verifier waited for the hidden sidebar anchor and failed closed before filling the composer or sending. Nothing was sent and no runtime row was created.
+
+The repair must keep pre-navigation sidebar URL resolution, then use the already verified exact URL plus loaded-room, history, composer, and generation witnesses after navigation. Sidebar visibility is navigation furniture, not authoritative post-navigation identity.
 
 ## Current Decision Boundary
 
@@ -110,6 +145,7 @@ Cross-department result-outbox adoption, universal Worker write authority, optio
 ## Browser and Automation Boundary
 
 - Operate only against exact canonical ChatGPT URLs.
+- Use sidebar links to resolve exact destinations when needed, but do not require a selected room's sidebar anchor to remain visible after exact URL navigation.
 - Require stable history hydration, exact room identity, an empty composer, and no active generation.
 - Prove a new marker-bearing user turn, increased turn count, and an empty composer before calling a send confirmed.
 - Never blind-retry a confirmed or uncertain submission.
@@ -136,4 +172,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D and Package E are closed. GitHub-first Worker Operations and the separately authorized scheduled watcher are live-validated. Remaining work is limited to current open loops, demonstrated defects, or new Rob-authorized packages.
+Active department. Package D and Package E are closed. Maintenance_HQ completed the textual naming repair. The next fresh Engineering_HQ chat must boot and sync before executing the bounded exact-title implementation rollover and courier post-navigation verifier repair. The watcher destination test remains pending under `ADV-20260723-052`.
