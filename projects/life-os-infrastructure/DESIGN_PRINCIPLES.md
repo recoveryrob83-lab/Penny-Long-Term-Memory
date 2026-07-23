@@ -1,8 +1,8 @@
-# Life OS Design Principles
+# LifeOS Design Principles
 
 Updated: 2026-07-15
-Project: Life OS Infrastructure
-Purpose: Durable design principles for Rob's Life OS architecture.
+Project: LifeOS Infrastructure
+Purpose: Durable design principles for Rob's LifeOS architecture.
 
 ## Operating Rule
 
@@ -14,7 +14,7 @@ Keep principles short, abstract, and decision-oriented.
 
 ## Principle 001 — Measured-Need Platform Adoption
 
-No new platform enters the Life OS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
+No new platform enters the LifeOS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
 
 Before adopting a new platform, define:
 
@@ -26,7 +26,7 @@ Before adopting a new platform, define:
 
 ## Principle 002 — Separate Headquarters From Execution
 
-The regular ChatGPT hub is the canonical conversational headquarters. The Work environment is a bounded execution surface, not a second headquarters.
+The regular ChatGPT Hub is the canonical conversational headquarters. The Work environment is a bounded execution surface, not a second headquarters.
 
 Plan, coordinate, reason, and prepare instructions in Chat. Enter Work only when a task requires local files, terminal access, code execution, browser control, desktop applications, artifact production, or comparable execution capabilities.
 
@@ -38,7 +38,7 @@ Detailed operating policy:
 
 ## Current Platform Boundaries
 
-Current Life OS ownership boundaries:
+Current LifeOS ownership boundaries:
 
 - GitHub owns durable memory, procedures, advisories, department identities, organizational structure, and abstract operating state.
 - Google Drive owns working documents and detailed artifacts.
@@ -56,7 +56,7 @@ Asana, ClickUp, Trello, or another Kanban-style project-management platform is d
 
 Current decision: do not introduce a Kanban/project-management platform now.
 
-Reason: Life OS currently has clean source-of-truth boundaries. The current bottleneck is synchronization and coordination, not project-management pipeline state.
+Reason: LifeOS currently has clean source-of-truth boundaries. The current bottleneck is synchronization and coordination, not project-management pipeline state.
 
 ## Future Kanban Ownership Boundary
 
@@ -74,10 +74,10 @@ It should not own:
 
 Likely future department-level uses:
 
-- Chief Business HQ pipeline state, such as Ideas, Research, Validation, In Progress, Waiting, Complete.
-- Chief Engineering Penny pipeline state, such as Backlog, Ready, In Development, Testing, Review, Released.
+- `Business_HQ` pipeline state, such as Ideas, Research, Validation, In Progress, Waiting, Complete.
+- `Engineering_HQ` pipeline state, such as Backlog, Ready, In Development, Testing, Review, Released.
 
-Do not add a Kanban/project-management platform as a global Life OS layer unless real scaling pain proves the need.
+Do not add a Kanban/project-management platform as a global LifeOS layer unless real scaling pain proves the need.
 
 ## Re-Evaluation Triggers
 
