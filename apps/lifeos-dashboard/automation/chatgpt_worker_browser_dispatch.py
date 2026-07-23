@@ -3,7 +3,7 @@
 This module is transport infrastructure only. It does not create authority, interpret work,
 wait for Worker completion, capture assistant responses, change advisory lifecycle, update
 databases, or close records. It borrows one already-open ChatGPT tab, submits one explicitly
-confirmed prompt to one exact Worker conversation, proves the correlated user turn exists,
+confirmed prompt to one exact Worker conversation, proves a new correlated user turn exists,
 and returns the tab to its original conversation.
 """
 from __future__ import annotations
@@ -27,7 +27,6 @@ from chatgpt_worker_browser_roundtrip import (
     _composer_text,
     _require_single_chatgpt_page,
     _resolve_worker_url,
-    _turn_for_role_marker,
     _verify_worker_identity,
     _visible,
     _wait_for_idle_composer,
@@ -37,6 +36,7 @@ from chatgpt_worker_browser_roundtrip import (
 
 RECEIPT_PREFIX = "LIFEOS_BROWSER_DISPATCH_RECEIPT="
 SOURCE_RETURN_POLL_SECONDS = 0.25
+SUBMISSION_POLL_SECONDS = 0.25
 SEND_SELECTOR = ", ".join(
     (
         'button[data-testid="send-button"]:visible',
@@ -135,11 +135,24 @@ def _return_to_source_conversation(page, *, source_url: str, timeout_ms: int) ->
         raise
 
 
+
 def _matching_draft(text: str, request: BrowserRoundTripRequest) -> bool:
     """Identify only the exact run-linked draft left by a prior pre-submit failure."""
 
     clean = str(text or "")
     return request.request_marker in clean and request.response_marker in clean
+
+
+def _turn_ids(page) -> tuple[str, ...]:
+    """Return stable IDs for all currently rendered conversation turns."""
+
+    turns = page.locator(TURN_XPATH)
+    values: list[str] = []
+    for index in range(turns.count()):
+        turn_id = str(turns.nth(index).get_attribute("data-testid") or "").strip()
+        if turn_id:
+            values.append(turn_id)
+    return tuple(values)
 
 
 def _wait_for_dispatch_ready(
@@ -148,7 +161,7 @@ def _wait_for_dispatch_ready(
     *,
     worker_url: str,
     timeout_ms: int,
-) -> tuple[object, int, bool]:
+) -> tuple[object, int, tuple[str, ...], bool]:
     """Wait for stable Worker history and allow only this run's exact preserved draft."""
 
     deadline = time.monotonic() + (timeout_ms / 1000)
@@ -179,7 +192,7 @@ def _wait_for_dispatch_ready(
                 if snapshot == last_snapshot:
                     if stable_since is None:
                         stable_since = time.monotonic()
-                    if time.monotonic() - stable_since >= 2.0:
+                  if time.monotonic() - stable_since >= 2.0:
                         _verify_worker_identity(
                             page,
                             request,
@@ -188,8 +201,13 @@ def _wait_for_dispatch_ready(
                                 10_000,
                                 max(1, int((deadline - time.monotonic()) * 1000)),
                             ),
-                        )
-                        return prompt, snapshot[0], reused_draft
+                          )
+                        turn_ids = _turn_ids(page)
+                        if len(turn_ids) != snapshot[0]:
+                            raise BrowserRoundTripError(
+                                "Worker turn IDs were incomplete at readiness."
+                            )
+                        return prompt, snapshot[0], turn_ids, reused_draft
                 else:
                     last_snapshot = snapshot
                     stable_since = None
@@ -228,23 +246,77 @@ def _visible_enabled_send(page):
     return matches
 
 
-def _try_confirm_user_turn(page, *, marker: str, timeout_ms: int) -> tuple[str, int] | None:
-    try:
-        turn = _turn_for_role_marker(
+def _new_matching_user_turn_id(
+    page,
+    *,
+    marker: str,
+    baseline_turn_ids: tuple[str, ...],
+) -> str | None:
+    """Return the newest marker-bearing user turn that did not exist before submit."""
+
+    baseline = set(baseline_turn_ids)
+    role_nodes = page.locator('[data-message-author-role="user"]').filter(has_text=marker)
+    newest: str | None = None
+    for index in range(role_nodes.count()):
+        turn = role_nodes.nth(index).locator(
+            "xpath=ancestor::*[starts-with(@data-testid,'conversation-turn-')][1]"
+        )
+        if turn.count() != 1:
+            continue
+        turn_id = str(turn.get_attribute("data-testid") or "").strip()
+        if turn_id and turn_id not in baseline:
+            newest = turn_id
+    return newest
+
+
+def _submission_witness_valid(
+    *,
+    baseline_turns: int,
+    final_turns: int,
+    baseline_turn_ids: tuple[str, ...],
+    user_turn_id: str | None,
+    composer_text: str,
+) -> bool:
+    """Reject paste-only and stale-turn false positives."""
+
+    return bool(
+        user_turn_id
+        and user_turn_id not in set(baseline_turn_ids)
+        and final_turns > baseline_turns
+        and not str(composer_text or "").strip()
+    )
+
+
+def _try_confirm_user_turn(
+    page,
+    *,
+    marker: str,
+    prompt,
+    baseline_turn_ids: tuple[str, ...],
+    baseline_turns: int,
+    timeout_ms: int,
+) -> tuple[str, int] | None:
+    """Prove a new marker-bearing user turn, an advanced history, and an empty composer."""
+
+    deadline = time.monotonic() + (timeout_ms / 1000)
+    while time.monotonic() < deadline:
+        final_turns = page.locator(TURN_XPATH).count()
+        user_turn_id = _new_matching_user_turn_id(
             page,
-            role="user",
             marker=marker,
-            timeout_ms=timeout_ms,
+            baseline_turn_ids=baseline_turn_ids,
         )
-    except Exception:
-        return None
-    turn_id = str(turn.get_attribute("data-testid") or "")
-    if not turn_id:
-        raise BrowserRoundTripUncertain(
-            "Submission occurred, but the correlated user turn had no stable turn ID. "
-            "Inspect the Worker chat before any retry."
-        )
-    return turn_id, page.locator(TURN_XPATH).count()
+        if _submission_witness_valid(
+            baseline_turns=baseline_turns,
+            final_turns=final_turns,
+            baseline_turn_ids=baseline_turn_ids,
+            user_turn_id=user_turn_id,
+            composer_text=_composer_text(prompt),
+        ):
+            assert user_turn_id is not None
+            return user_turn_id, final_turns
+        time.sleep(SUBMISSION_POLL_SECONDS)
+    return None
 
 
 def _submit_and_confirm(
@@ -253,11 +325,15 @@ def _submit_and_confirm(
     request: BrowserRoundTripRequest,
     *,
     deadline: float,
+    baseline_turn_ids: tuple[str, ...] = (),
+    baseline_turns: int | None = None,
 ) -> tuple[str, int]:
     """Submit once, using a fallback only when the first action provably did nothing."""
 
     if not _matching_draft(_composer_text(prompt), request):
         raise BrowserRoundTripError("Composer no longer contains the exact run-linked draft.")
+    if baseline_turns is None:
+        baseline_turns = page.locator(TURN_XPATH).count()
 
     buttons = _visible_enabled_send(page)
     first_method = "button" if len(buttons) == 1 else "enter"
@@ -271,6 +347,9 @@ def _submit_and_confirm(
     confirmed = _try_confirm_user_turn(
         page,
         marker=request.request_marker,
+        prompt=prompt,
+        baseline_turn_ids=baseline_turn_ids,
+        baseline_turns=baseline_turns,
         timeout_ms=min(5_000, max(1, int((deadline - time.monotonic()) * 1000))),
     )
     if confirmed is not None:
@@ -278,10 +357,11 @@ def _submit_and_confirm(
 
     draft_still_present = _matching_draft(_composer_text(prompt), request)
     generating = _visible(page.locator(STOP_SELECTOR))
-    if not draft_still_present or generating:
+    history_unchanged = page.locator(TURN_XPATH).count() == baseline_turns
+    if not (draft_still_present and not generating and history_unchanged):
         raise BrowserRoundTripUncertain(
-            "A submit action changed the composer or generation state, but the correlated user turn "
-            "was not proven. Inspect the Worker chat before any retry."
+            "A submit action changed the composer, generation state, or conversation history, "
+            "but no strict new-turn witness was proven. Inspect the Worker chat before any retry."
         )
 
     if first_method == "button":
@@ -297,19 +377,24 @@ def _submit_and_confirm(
     confirmed = _try_confirm_user_turn(
         page,
         marker=request.request_marker,
-        timeout_ms=min(30_000, max(1, int((deadline - time.monotonic()) * 1000))),
+        prompt=prompt,
+        baseline_turn_ids=baseline_turn_ids,
+        baseline_turns=baseline_turns,
+        timeout_ms=min(30_000, max(1, int((deadline - time.monotonic()) * 1000)),
     )
     if confirmed is not None:
         return confirmed
-    if _matching_draft(_composer_text(prompt), request) and not _visible(
-        page.locator(STOP_SELECTOR)
-    ):
+
+    draft_still_present = _matching_draft(_composer_text(prompt), request)
+    generating = _visible(page.locator(STOP_SELECTOR))
+    history_unchanged = page.locator(TURN_XPATH).count() == baseline_turns
+    if draft_still_present and not generating and history_unchanged:
         raise BrowserRoundTripError(
             "Neither native submit mechanism activated. The exact draft was preserved."
         )
     raise BrowserRoundTripUncertain(
-        "Submission state changed, but the correlated user turn was not safely proven. "
-        "Inspect the Worker chat before any retry."
+        "Submission state changed, but a new marker-bearing user turn, increased turn count, "
+        "and empty composer were not all proven. Inspect the Worker chat before any retry."
     )
 
 
@@ -330,6 +415,8 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
     source_url = ""
     worker_url = ""
     baseline_turns = 0
+    baseline_turn_ids: tuple[str, ...] = ()
+    submit_attempted = False
     submitted = False
 
     try:
@@ -339,7 +426,10 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
         worker_url = _resolve_worker_url(
             page,
             request,
-            timeout_ms=min(timeout_ms, 120_000),
+            timeout_ms=min(
+                timeout_ms,
+                120_000,
+            ),
         )
         if source_url != worker_url:
             _wait_for_idle_composer(page, timeout_ms=min(timeout_ms, 60_000))
@@ -347,7 +437,7 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
         if normalize_chatgpt_url(page.url) != worker_url:
             page.goto(worker_url, wait_until="domcontentloaded", timeout=timeout_ms)
         page.wait_for_url(worker_url, timeout=timeout_ms)
-        prompt, baseline_turns, reused_draft = _wait_for_dispatch_ready(
+        prompt, baseline_turns, baseline_turn_ids, reused_draft = _wait_for_dispatch_ready(
             page,
             request,
             worker_url=worker_url,
@@ -360,9 +450,7 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
         if not _matching_draft(_composer_text(prompt), request):
             if not reused_draft:
                 prompt.fill("")
-            raise BrowserRoundTripError(
-                "Composer witness did not contain the exact run markers."
-            )
+            raise BrowserRoundTripError("Composer witness did not contain the exact run markers.")
 
         time.sleep(0.75)
         if normalize_chatgpt_url(page.url) != worker_url:
@@ -373,20 +461,19 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
             worker_url=worker_url,
             timeout_ms=min(timeout_ms, 10_000),
         )
-        if turns.count() != baseline_turns:
-            raise BrowserRoundTripError(
-                "Worker conversation history changed before Send. Exact draft preserved."
-            )
+        if turns.count() != baseline_turns or _turn_ids(page) != baseline_turn_ids:
+            raise BrowserRoundTripError("Worker conversation history changed before Send. Exact draft preserved.")
         if _visible(page.locator(STOP_SELECTOR)):
-            raise BrowserRoundTripError(
-                "Worker began generating before Send. Exact draft preserved."
-            )
+            raise BrowserRoundTripError("Worker began generating before Send. Exact draft preserved.")
 
+        submit_attempted = True
         user_turn_id, final_turns = _submit_and_confirm(
             page,
             prompt,
             request,
             deadline=deadline,
+            baseline_turn_ids=baseline_turn_ids,
+            baseline_turns=baseline_turns,
         )
         submitted = True
 
@@ -420,6 +507,12 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
     except BrowserRoundTripError:
         raise
     except Exception as exc:
+        if submit_attempted and not submitted:
+            raise BrowserRoundTripUncertain(
+                "A submit action was attempted, but strict dispatch evidence was incomplete. "
+                "Inspect the Worker chat before any retry. "
+                f"Underlying error: {exc}"
+            ) from exc
         if submitted:
             raise BrowserRoundTripUncertain(
                 "Submission occurred, but final dispatch evidence was incomplete. "
@@ -428,7 +521,7 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
             ) from exc
         raise BrowserRoundTripError(str(exc)) from exc
     finally:
-        if page is not None and not submitted and source_url:
+        if page is not None and not submit_attempted and source_url:
             try:
                 if normalize_chatgpt_url(page.url) != source_url:
                     page.goto(source_url, wait_until="domcontentloaded", timeout=60_000)
