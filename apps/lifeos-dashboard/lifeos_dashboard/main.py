@@ -24,7 +24,7 @@ from .adapters import (
 from .command_center import CommandCenterError, CommandCenterService, CommandJob
 from .department_inspection import DepartmentInspectionSource
 from .service import DashboardService
-from .worker_operations import WorkerOperationsService
+from .worker_route_management import RouteAwareWorkerOperationsService
 from .worker_runtime import WorkerRuntimeError
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
@@ -86,6 +86,12 @@ class WorkerAdvisoryRunRequest(BaseModel):
 class WorkerCourierSelfTestRequest(BaseModel):
     confirm_send: bool = False
     timeout_seconds: int = Field(default=300, ge=60, le=900)
+
+
+class WorkerRouteCaptureRequest(BaseModel):
+    worker_id: str
+    expected_route_revision: int = Field(ge=0)
+    confirm_capture: bool = False
 
 
 class WorkerReviewRequest(BaseModel):
@@ -162,7 +168,7 @@ def create_app(
     )
     repository_root = _repository_root() if source is None else None
     worker_operations = (
-        WorkerOperationsService(command_center, repository_root)
+        RouteAwareWorkerOperationsService(command_center, repository_root)
         if repository_root is not None
         else None
     )
@@ -222,6 +228,27 @@ def create_app(
                 detail="Worker Operations requires a local LifeOS repository checkout.",
             )
         return await run_in_threadpool(worker_operations.status)
+
+    @application.post("/api/worker-operations/routes/capture")
+    async def capture_worker_route(
+        request: WorkerRouteCaptureRequest,
+    ) -> dict[str, object]:
+        if worker_operations is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker Operations requires a local LifeOS repository checkout.",
+            )
+        try:
+            result = await run_in_threadpool(
+                worker_operations.routes.capture_active_route,
+                request.worker_id,
+                expected_route_revision=request.expected_route_revision,
+                confirm_capture=request.confirm_capture,
+            )
+            result["operations"] = worker_operations.status()
+            return result
+        except WorkerRuntimeError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @application.post("/api/worker-operations/run")
     async def run_worker_advisory(request: WorkerAdvisoryRunRequest) -> dict[str, object]:
