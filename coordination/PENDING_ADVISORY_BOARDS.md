@@ -1,11 +1,11 @@
 # Pending Advisory Boards
 
 Updated: 2026-07-04
-Purpose: Standard Life OS workflow for capturing possible advisories before they become formal cross-department coordination items.
+Purpose: Standard LifeOS workflow for capturing possible advisories before they become formal cross-department coordination items.
 
 ## Status
 
-Adopted as a Life OS standard pattern.
+Adopted as a LifeOS standard pattern.
 
 ## Purpose
 
@@ -64,9 +64,7 @@ Purpose: Local staging area for possible future advisories.
 ## Operating Rule
 
 This is a local staging notebook, not a routed advisory board.
-
 Do not update the Advisory Index or Department Event Inbox for items here.
-
 Promote items only during deliberate advisory review.
 
 ## Pending Items
@@ -111,7 +109,7 @@ The department should:
 Promote a pending item into a formal advisory only when it needs one or more of the following:
 
 - another department to read or act,
-- a durable Life OS decision,
+- a durable LifeOS decision,
 - a shared operating-rule change,
 - cross-project coordination,
 - a source-of-truth update,
@@ -125,7 +123,7 @@ Pending boards are checked only when:
 
 - Rob asks,
 - a department is doing deliberate advisory review,
-- Life Logistics HQ is doing housekeeping and the department handoff says its pending board matters,
+- `Maintenance_HQ` is doing housekeeping and the department handoff says its pending board matters,
 - a pending item appears to be blocking current work.
 
 Do not turn pending-board review into a default daily interruption.
