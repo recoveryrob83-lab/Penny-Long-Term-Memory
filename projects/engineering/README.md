@@ -1,16 +1,16 @@
-# Engineering HQ
+# Engineering_HQ
 
 Updated: 2026-07-23
 
 ## Purpose
 
-Engineering HQ coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation sequencing, testing, debugging, and build-readiness for Life OS and related technical systems.
+`Engineering_HQ` coordinates Rob's technical architecture, software planning, repository strategy, automation design, implementation sequencing, testing, debugging, and build-readiness for LifeOS and related technical systems.
 
 Engineering turns approved requirements into safe, testable machinery and maintains durable state inside its own project domain.
 
 ## Role
 
-Use Engineering HQ for:
+Use `Engineering_HQ` for:
 
 - technical architecture and repository strategy;
 - software, API, connector, and data-model design;
@@ -25,7 +25,7 @@ Engineering owns the machinery. It does not own canonical shared Worker governan
 
 ## Canonical Worker Model
 
-A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
+A LifeOS Worker is a specialized ChatGPT room operating beneath one Department HQ.
 
 - The Department HQ owns the Worker profile, procedures, authority, holds, verification, and domain judgment.
 - GitHub holds canonical profiles, procedures, task state, decisions, and immutable result and review evidence.
@@ -37,7 +37,7 @@ A Life OS Worker is a specialized ChatGPT room operating beneath one Department 
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Signed HQ or Rob results become consumption-ready.
 - A separately authorized scheduled watcher may report meaningful signed changes.
-- The courier never wakes Chief of Staff.
+- The courier never wakes `Chief_of_Staff_HQ`.
 - Source owners retain advisory lifecycle and closure authority.
 
 Python, browser automation, SQLite, and the dashboard provide routing, safety, logging, duplicate suppression, ingestion, verification mechanics, and visibility. They are not the Worker and do not replace Department HQ judgment.
@@ -46,11 +46,11 @@ A GitHub Worker result outbox is immutable evidence, not a competing runtime led
 
 ## Not This Department
 
-- Business strategy, branding, market research, monetization, or customer discovery: Business HQ or Office Leaks HQ.
-- Finance, benefits, budget, bills, subscriptions, or cost approval: Finance HQ.
-- Daily one-off scheduling, ordinary coordination, executive-function support, or quick administration: Chief of Staff HQ.
-- Shared global boot integrity, advisory-index hygiene, cross-project audits, migrations, canonical Worker governance, and system-wide housekeeping: Life OS Maintenance HQ.
-- Recovery, pacing, health, or sustainability judgment: Wellness HQ.
+- Business strategy, branding, market research, monetization, or customer discovery: `Business_HQ` or `Office_Leaks_HQ`.
+- Finance, benefits, budget, bills, subscriptions, or cost approval: `Finance_HQ`.
+- Daily one-off scheduling, ordinary coordination, executive-function support, or quick administration: `Chief_of_Staff_HQ`.
+- Shared global boot integrity, advisory-index hygiene, cross-project audits, migrations, canonical Worker governance, and system-wide housekeeping: `Maintenance_HQ`.
+- Recovery, pacing, health, or sustainability judgment: `Wellness_HQ`.
 
 ## Department File Ownership
 
@@ -58,7 +58,7 @@ Engineering maintains its own project subtree during authorized maintenance and 
 
 Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
-Package E proved a Worker result outbox only under Engineering-owned paths. It did not grant universal Worker write authority. Shared adoption requires Life OS Maintenance HQ review and explicit authorization by each owning department.
+Package E proved a Worker result outbox only under Engineering-owned paths. It did not grant universal Worker write authority. Shared adoption requires `Maintenance_HQ` review and explicit authorization by each owning department.
 
 ## Current Technical State
 
@@ -87,7 +87,7 @@ Package E completed and live-validated the Engineering-only chain for:
 
 Final live evidence includes:
 
-- `ADV-20260721-048`: immutable Worker report plus Engineering HQ `VERIFIED` receipt, consumption-ready without Rob validation;
+- `ADV-20260721-048`: immutable Worker report plus `Engineering_HQ` `VERIFIED` receipt, consumption-ready without Rob validation;
 - `ADV-20260722-049`: `ROB_VALIDATION_REQUIRED` HQ receipt followed by Rob's immutable `VERIFIED` receipt;
 - `ADV-20260723-051`: Worker report, HQ wake, immutable `VERIFIED` review, `HQ_VERIFIED` runtime reconciliation, and live duplicate-wake suppression after repair.
 
@@ -122,7 +122,7 @@ Cross-department result-outbox adoption, universal Worker write authority, optio
 
 ## Security Rule
 
-Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, private user data, or sensitive implementation details in Life OS GitHub memory or Worker result artifacts.
+Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, private user data, or sensitive implementation details in LifeOS GitHub memory or Worker result artifacts.
 
 Use ignored local environment files or the appropriate secure source system for operational credentials.
 
