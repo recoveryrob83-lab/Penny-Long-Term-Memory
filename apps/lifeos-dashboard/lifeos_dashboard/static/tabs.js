@@ -43,7 +43,7 @@ const ensureAutomationLogsSurface = () => {
           </div>
           <div class="automation-log-toolbar" aria-label="Automation log filters">
             <label class="cc-filter-field">Result<select id="automation-log-filter-result"><option value="all">All results</option><option value="succeeded">Succeeded</option><option value="failed">Failed</option><option value="refused">Refused</option></select></label>
-            <label class="cc-filter-field">Department<select id="automation-log-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS HQ</option><option value="main">Chief of Staff HQ</option><option value="engineering">Engineering HQ</option><option value="logistics">Life OS Maintenance HQ</option><option value="business">Business HQ</option><option value="office-leaks">Office Leaks HQ</option><option value="finance">Finance HQ</option><option value="wellness">Wellness HQ</option></select></label>
+            <label class="cc-filter-field">Department<select id="automation-log-filter-destination"><option value="all">All departments</option><option value="hub">LifeOS_HQ</option><option value="main">Chief_of_Staff_HQ</option><option value="engineering">Engineering_HQ</option><option value="logistics">Maintenance_HQ</option><option value="business">Business_HQ</option><option value="office-leaks">Office_Leaks_HQ</option><option value="finance">Finance_HQ</option><option value="wellness">Wellness_HQ</option></select></label>
             <label class="cc-filter-field">Trigger<select id="automation-log-filter-trigger"><option value="all">Manual and scheduled</option><option value="manual">Manual</option><option value="scheduled">Scheduled</option><option value="unknown">Legacy / unstructured</option></select></label>
             <label class="cc-filter-field">Worker verification<select id="automation-log-filter-worker-state"><option value="all">All runs</option><option value="not-worker">Non-Worker runs</option><option value="pending">Pending</option><option value="verified">Verified</option><option value="rejected">Rejected / held</option></select></label>
             <label class="cc-filter-field">Wake routing<select id="automation-log-filter-wake"><option value="all">All wake states</option><option value="required">Wake required</option><option value="queued">Routine queue</option><option value="suppressed">Wake suppressed</option></select></label>
@@ -113,6 +113,11 @@ const initial = tabButtons.some((button) => button.dataset.tabTarget === remembe
   ? remembered
   : "overview";
 activateTab(initial);
+
+const roomTitleRollover = document.createElement("script");
+roomTitleRollover.src = "/static/room-title-rollover.js";
+roomTitleRollover.defer = true;
+document.head.appendChild(roomTitleRollover);
 
 const inspectionTuning = document.createElement("script");
 inspectionTuning.src = "/static/department-inspection-tuning.js";
