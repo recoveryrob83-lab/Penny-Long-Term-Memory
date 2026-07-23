@@ -1,6 +1,6 @@
 # Penny Long-Term Memory
 
-Private repository for Rob's personal-assistant / Life OS memory.
+Private repository for Rob's personal-assistant / LifeOS memory.
 
 This repository is being built as the GitHub-backed durable memory layer for Penny. Google Drive remains useful for working documents, spreadsheets, checkbooks, job-search files, notes, and operational artifacts. GitHub is being promoted as the preferred durable source for auditable Markdown memory because it provides commit history, diffs, rollback, and stable text files.
 
