@@ -47,5 +47,5 @@ set LIFEOS_WORKER_ORCHESTRATOR_POLL_SECONDS=30
 start "Life OS Orchestrator" /min cmd /c "".venv\Scripts\python.exe" automation\run_github_worker_orchestrator.py --poll-seconds 30"
 
 echo ADV-050 recovery conductor is running.
-echo The exact preserved draft will be resumed without creating another advisory.
+echo The exact GitHub wake will be refilled or resumed without creating another advisory.
 exit /b 0
