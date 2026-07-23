@@ -1,11 +1,11 @@
 # Projects
 
 Updated: 2026-07-18
-Purpose: Durable project folders for Penny's Life OS work with Rob.
+Purpose: Durable project folders for Penny's LifeOS work with Rob.
 
 Each active department or project should maintain a README, status, open loops, session handoff, department identity, and any project-specific notes that are safe to keep in GitHub.
 
-LifeOS HQ is the shared meeting room and does not maintain an independent department project folder or backlog.
+`LifeOS_HQ` is the shared meeting room and does not maintain an independent department project folder or backlog.
 
 ## Canonical HQ Naming
 
@@ -21,59 +21,59 @@ Project folder names remain stable filesystem paths and do not need to match dis
 
 ## Current Project Folders
 
-- `life-logistics-hq/` - Life OS Maintenance HQ; global GitHub maintenance, boot integrity, governance, audits, shared infrastructure, migrations, and reconciliation
-- `main-assistant/` - Chief of Staff HQ; Rob's primary point of contact, personal assistant, daily operations, Hub chairing, routing, reports, and follow-through
+- `life-logistics-hq/` - `Maintenance_HQ`; global GitHub maintenance, boot integrity, governance, audits, shared infrastructure, migrations, and reconciliation
+- `main-assistant/` - `Chief_of_Staff_HQ`; Rob's primary point of contact, personal assistant, daily operations, Hub chairing, routing, reports, and follow-through
 - `job-search/` - dormant / consolidated work-search history
 - `caregiver-income/` - dormant / consolidated support-pathway history
 - `cleanup/` - Site Cleanup project
-- `finance-benefits/` - Finance HQ
-- `business-development/` - Business HQ
-- `office-leaks-consulting/` - Office Leaks HQ; active business-unit department under Business HQ
-- `engineering/` - Engineering HQ
-- `wellness/` - Wellness HQ
-- `recovery-logistics/` - dormant Recovery Logistics history
-- `philosophy/` - dormant Philosophy HQ history
-- `life-os-infrastructure/` - shared Life OS infrastructure and policies
-- `health-medical/` - Health Medical HQ
-- `housing-logistics/` - Housing Logistics HQ scaffold
+- `finance-benefits/` - `Finance_HQ`
+- `business-development/` - `Business_HQ`
+- `office-leaks-consulting/` - `Office_Leaks_HQ`; active business-unit department under `Business_HQ`
+- `engineering/` - `Engineering_HQ`
+- `wellness/` - `Wellness_HQ`
+- `recovery-logistics/` - dormant Recovery Logistics project history
+- `philosophy/` - dormant Philosophy project history
+- `life-os-infrastructure/` - shared LifeOS infrastructure and policies
+- `health-medical/` - Health Medical project history and records
+- `housing-logistics/` - Housing Logistics project scaffold
 
 Archived historical project context lives outside the active project tree:
 
-- `archive/projects/virtual-assistant-business/` - historical predecessor and redirect context for Office Leaks HQ; active Office Leaks state lives in `projects/office-leaks-consulting/`
+- `archive/projects/virtual-assistant-business/` - historical predecessor and redirect context for `Office_Leaks_HQ`; active Office Leaks state lives in `projects/office-leaks-consulting/`
 
 ## Eight Top-Level Rooms
 
 When Rob starts or boots a top-level LifeOS room, use the canonical display name:
 
-1. `LifeOS HQ` - shared meeting room
-2. `Chief of Staff HQ`
-3. `Life OS Maintenance HQ`
-4. `Engineering HQ`
-5. `Finance HQ`
-6. `Business HQ`
-7. `Office Leaks HQ`
-8. `Wellness HQ`
+1. `LifeOS_HQ` - shared meeting room
+2. `Chief_of_Staff_HQ`
+3. `Maintenance_HQ`
+4. `Engineering_HQ`
+5. `Finance_HQ`
+6. `Business_HQ`
+7. `Office_Leaks_HQ`
+8. `Wellness_HQ`
 
-LifeOS HQ is not a department. Chief of Staff HQ chairs it. Real actions transfer to the owning department and authoritative destination.
+`LifeOS_HQ` is not a department. `Chief_of_Staff_HQ` chairs it. Real actions transfer to the owning department and authoritative destination.
 
-Other project names may use their established descriptive labels, such as Site Cleanup, Recovery Logistics, Philosophy HQ, Life OS Infrastructure, Health Medical HQ, or Housing Logistics HQ.
+Other standalone project names may use established descriptive labels such as Site Cleanup, Recovery Logistics project, Philosophy project, LifeOS Infrastructure project, Health Medical project, or Housing Logistics project. Those project labels do not create additional top-level HQ rooms.
 
 ## Stable Path Mapping
 
 The official role names changed without renaming project folders:
 
-- Chief of Staff HQ uses `projects/main-assistant/`.
-- Life OS Maintenance HQ uses `projects/life-logistics-hq/`.
+- `Chief_of_Staff_HQ` uses `projects/main-assistant/`.
+- `Maintenance_HQ` uses `projects/life-logistics-hq/`.
 
 Legacy path names are implementation details. They do not override the official role names.
 
-Department-local identity, handoff, status, open-loop, notebook, and procedure files may retain legacy names until the owning department completes an authorized Phase Two alignment.
+Department-local identity, handoff, status, open-loop, notebook, and procedure files use the canonical current names in `memory/HQ_NAMING_STANDARD.md`; historical evidence and stable paths may retain prior wording.
 
 ## Project Session Handoffs
 
 Each department or project folder uses `SESSION_HANDOFF.md` as its project-specific continuity anchor.
 
-LifeOS HQ uses:
+`LifeOS_HQ` uses:
 
 - `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
 - `memory/01_SESSION_HANDOFF.md`
@@ -102,9 +102,9 @@ Use `SESSION_HANDOFF.md` for full project continuity.
 ## Reporting Structure
 
 - Rob is final authority.
-- Chief of Staff HQ is the normal daily point of contact and receives department reports.
-- Life OS Maintenance HQ owns global GitHub integrity and governance enforcement.
-- Engineering HQ owns technical architecture and implementation mechanisms.
+- `Chief_of_Staff_HQ` is the normal daily point of contact and receives department reports.
+- `Maintenance_HQ` owns global GitHub integrity and governance enforcement.
+- `Engineering_HQ` owns technical architecture and implementation mechanisms.
 - Specialist departments own judgment and durable state within their domains.
 - Reporting through Chief of Staff does not transfer department ownership.
 
