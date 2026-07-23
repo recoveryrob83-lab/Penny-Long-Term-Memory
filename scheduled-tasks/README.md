@@ -1,66 +1,104 @@
 # Scheduled Tasks
 
-Updated: 2026-07-14
-Purpose: Architecture notes for ChatGPT scheduled tasks used by Life OS.
+Updated: 2026-07-23
+Purpose: Architecture, authority, and continuity notes for ChatGPT scheduled procedures used by LifeOS.
 
 ## Role
 
-Scheduled tasks are experimental Life OS sync workers.
+Scheduled tasks are timed procedures. They are not long-lived department chats, policy owners, independent authorities, or competing sources of truth.
 
-The current preferred model is daily HQ sync for core departments, not many small standalone watcher services.
+A schedule may trigger only already-authorized work within its canonical procedure, target route, pause state, duplicate controls, and verification boundary.
 
-## Current Understanding
+## Current Operating Model
 
-Scheduled-task slots appear scarce, so they should be treated as premium Life OS infrastructure.
+Scheduled-task slots are limited operational infrastructure and should be used only when repeated delivery or condition checking produces demonstrated value.
 
-The standalone Advisory Watcher concept has been retired as preferred slot usage. Its useful behavior is folded into daily HQ sync prompts.
+Current patterns include:
 
-## Core Daily Sync Candidates
+- department sync procedures, when separately authorized;
+- narrow read-only watchers, when their owner, destination, cadence, report condition, and non-action boundary are explicit;
+- one-time bounded tests used to validate scheduling behavior.
 
-Likely core sync slots:
+Do not assume that every department needs a scheduled sync or watcher.
 
-1. Life Logistics HQ Sync
-2. Main Assistant Sync
-3. Chief Finance Sync
-4. Chief Business Sync
-5. Chief Engineering Sync
+## Current Pilot State
 
-## Pilot State
+### Engineering_HQ Daily Sync
 
-`Engineering HQ Daily Sync` was the first pilot. It is currently paused by Rob because scheduled-task execution behavior remains unreliable.
+`Engineering_HQ Daily Sync` was the first department-sync pilot.
 
-Additional scheduling and execution architecture is required before resumption. No other daily HQ sync workers should be rolled out until the pilot is resumed and produces reliable evidence.
+- State: Paused by Rob.
+- Former cadence: daily at 6:00 AM America/Chicago.
+- Current interpretation: scheduler production reliability has been validated, but this specific unattended task remains paused by deliberate operating choice.
+- Resume condition: Rob explicitly authorizes resume under the current architecture.
+- No missed run should silently catch up.
 
-Former cadence: daily at 6:00 AM America/Chicago.
+### Chief_of_Staff_HQ Advisory Watcher
 
-Purpose when resumed: test whether a scheduled sync can preserve department identity, read GitHub boot/handoff/advisory context, consume Engineering-targeted advisories, and report useful updates without unwanted writes.
+A separately authorized hourly read-only advisory watcher is currently associated with `Chief_of_Staff_HQ`.
 
-## Operating Rule
+- Purpose: report meaningful signed advisory changes and follow-through needs in the existing `Chief_of_Staff_HQ` conversation.
+- Current validation: destination behavior is being tested through `ADV-20260723-052`.
+- Authority ceiling: read and report only.
+- It may not close advisories, create work, dispatch Workers, create chats, modify connectors, change priority, or broaden authority.
 
-Scheduled sync workers should prefer read-only analysis and reporting.
+The watcher is not a replacement for the Advisory Index or source boards.
 
-They should not modify GitHub, Google Drive, Todoist, Calendar, Gmail, or other systems unless Rob explicitly authorizes that behavior.
+## Operating Rules
 
-They should report only when there are meaningful updates, advisories requiring routing, documentation changes to recommend, or issues needing action.
+Scheduled procedures should:
+
+- boot or load the correct bounded context;
+- remain read-only unless exact standing authority permits a write;
+- report only meaningful changes, exceptions, or requested summaries;
+- suppress duplicate processing;
+- preserve one owner and one authoritative record;
+- fail closed when route, identity, scope, pause state, or authority is uncertain;
+- distinguish no-change runs from failures;
+- avoid creating a new chat when an existing authorized destination is required.
+
+They should not modify GitHub, Google Drive, Todoist, Calendar, Gmail, Trello, or another system unless the exact canonical procedure and Rob's authority permit that action.
+
+## Missed, Failed, and Paused Runs
+
+A missed, overdue, failed, or paused schedule follows its canonical scheduler policy.
+
+Do not:
+
+- silently catch up every missed occurrence;
+- fabricate execution history;
+- broaden scope because a run is late;
+- treat elapsed time as resume authority;
+- retry an uncertain external action blindly.
 
 ## Core Files
 
-- `TASK_INDEX.md`: list of scheduled tasks and their intended owner.
-- `RUN_LOG.md`: short record of successful task runs.
-- `ISSUE_LOG.md`: short record of failed, partial, blocked, or confusing runs.
+- `TASK_INDEX.md`: current scheduled-task map, ownership, cadence, destination, and state.
+- `RUN_LOG.md`: short historical record of successful task runs.
+- `ISSUE_LOG.md`: short historical record of failed, partial, blocked, or confusing runs.
 - `templates/`: standard memo formats.
-- `memos/`: department-specific inboxes, if memo writing proves useful.
+- `memos/`: department-specific result inboxes when the canonical procedure uses them.
+
+## Historical Evidence Rule
+
+Run and issue logs may retain names and labels that were accurate when the event occurred. Current task rows and current instructions use the canonical names in `memory/HQ_NAMING_STANDARD.md`.
 
 ## Memo Rule
 
-Memos should be short, dated, and operational.
+Memos should be short, dated, abstract, and operational.
 
-Do not store sensitive details here.
+Store only:
 
-Store task result, source pointers, routing, and next action only.
+- task result;
+- source pointers;
+- routing outcome;
+- verification state;
+- smallest next action or review trigger.
+
+Do not store sensitive details or create a competing work ledger.
 
 ## Department Read Pattern
 
-During boot or sync, a department may check its own memo inbox if Rob asks or if its handoff says scheduled task memos are relevant.
+A department may check its own scheduled-task memo inbox when Rob asks, its handoff requires it, or a current procedure routes a result there.
 
-Life Logistics HQ may check the index, run log, issue log, and relevant memo inboxes during system refresh or housekeeping.
+`Maintenance_HQ` may inspect the index, logs, and relevant memos during system review, reconciliation, scheduler governance, or authorized housekeeping. `Engineering_HQ` owns scheduler and automation implementation. `Chief_of_Staff_HQ` owns Rob-facing operational reporting and watcher destination behavior.
