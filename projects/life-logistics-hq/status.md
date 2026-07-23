@@ -2,7 +2,7 @@
 
 Updated: 2026-07-23
 Project: Maintenance_HQ
-Status: Active / Operational / Ready for Chat Rollover
+Status: Active / Operational / Replacement Chat Booted / Shared Reconciliation Complete / Publication Deployment Waiting
 
 ## Current Mission
 
@@ -14,7 +14,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 - The official department name is `Maintenance_HQ`; the canonical filesystem path remains `projects/life-logistics-hq/`.
 - `LifeOS_HQ` is the shared meeting room and does not own an independent backlog.
-- `Chief_of_Staff_HQ` owns daily operations, assignment routing, reporting, and Hub coordination.
+- `Chief_of_Staff_HQ` owns daily operations, assignment routing, reporting, scheduled watcher destination behavior, and Hub coordination.
 - Specialist Department HQs own routine state, judgment, Worker authority, Worker profiles, holds, verification, and retirement inside their own subtrees.
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` and `coordination/WORKER_EXECUTION_CONTRACT.md` remain the canonical shared execution and Worker rules.
 - `memory/STARTUP_BOOT.md` remains the single canonical HQ and Worker entry point.
@@ -23,24 +23,29 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - The current canonical Worker title is `Engineering_Worker`; future Worker titles follow `<Department_Name>_Worker`.
 - The Raw Capture and Inventory packages under root `workers/` remain grandfathered compatibility pilots; no new top-level Worker package is created by analogy.
 - Department-owned profiles define stable identity and authority only.
-- `Engineering_HQ` owns deployment state, Worker routing and runtime implementation, route availability, exact-title and stable-ID transport, receiver state, revision deduplication, verification queues, wake suppression, and technical rollover.
-- `Maintenance_HQ` owns shared contracts, boot coherence, naming and profile conventions, shared-rule and pointer audits, publication-mirror discipline, and reconciliation.
+- `Engineering_HQ` owns deployment state, Worker routing and runtime implementation, route availability, exact-title and stable-ID transport, receiver state, revision deduplication, immutable result ingestion, verification queues, wake suppression, and technical rollover.
+- `Maintenance_HQ` owns shared contracts, boot coherence, naming and profile conventions, shared-rule and pointer audits, Project Source publication discipline, and reconciliation.
 - The LifeOS Dashboard remains a visibility, diagnostic, transport, and bounded-control layer rather than a source of truth.
 - Guarded GitHub dashboard sync remains limited to clean, strictly-behind fast-forward updates.
 - Fully unattended Windows production use remains unapproved unless current Engineering evidence and Rob's authorization establish otherwise.
-- Engineering_HQ Daily Sync remains paused.
+- `Engineering_HQ Daily Sync` remains paused by deliberate operating choice.
+- The hourly `Chief_of_Staff_HQ` advisory watcher is an active read-only pilot with destination validation pending under `ADV-20260723-052`.
 
 ## 2026-07-23 Completed Maintenance
 
-- Completed Rob's repository-wide coordinated naming-only repair across current active nonhistorical textual documentation, including department-local files under the explicit coordinated-repair authority.
+- Completed Rob's repository-wide coordinated naming-only repair across current active nonhistorical textual documentation, including department-local files under explicit coordinated-repair authority.
 - Enforced `LifeOS`, the eight canonical underscore room names, `Engineering_Worker`, and `<Department_Name>_Worker` in current canonical text.
-- Verified all seven Department HQ boot file sets during the repair.
+- Verified all seven Department HQ boot file sets during the naming repair.
 - Preserved stable paths, external URLs, historical evidence, closed advisory evidence, immutable Worker reports, HQ-review receipts, Rob-validation receipts, run identifiers, and quoted historical wording.
 - Left Engineering-owned executable code, selectors, runtime state, transport registries, dashboard configuration, automation databases, prompt-runtime surfaces, and tests untouched.
 - Generated the role-neutral global operations handbook as a noncanonical Project Source publication artifact.
-- Rob confirmed that fresh project chats and other Department HQs can retrieve the global handbook and the other shared Project Source.
 - Placed `LIFEOS_NAMING_REPAIR_FINAL_REPORT.md` in Google Drive under `Life Organization/Chief Engineering Penny`.
-- Created no Worker, advisory, task, chat, schedule, automation, or external action during the naming repair.
+- Booted and synchronized the replacement `Maintenance_HQ` chat from the canonical GitHub sequence.
+- Reconciled `ADV-20260723-052` into the Advisory Index without duplicating its source-board text.
+- Removed the stale global-handoff instruction to continue work under closed `ADV-20260718-042`.
+- Refreshed the system handoff, active-project map, system open loops, scheduled-task architecture, and scheduled-task index.
+- Recorded one compact system-level waiting item for Project Settings and Project Source publication replacement because those UI actions cannot be completed through the GitHub connector.
+- Prepared a refreshed `LIFEOS_GLOBAL_OPERATIONS_HANDBOOK.md` under the stable filename.
 
 ## Active Maintenance Priorities
 
@@ -55,14 +60,14 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
 - Route newly demonstrated department-local drift to the owning Department HQ rather than silently repairing it without authority.
 - Keep desktop automation and guarded GitHub sync safety gates intact.
-- Preserve the unattended-automation production boundary and the paused Engineering_HQ Daily Sync state.
+- Preserve the unattended-automation production boundary and the paused `Engineering_HQ Daily Sync` state.
 - Reconcile the Drive Chief's Manual, canonical Project Instructions, Project Sources, and GitHub implementation when meaningful changes occur.
 
 ## Current Boundaries
 
 - Rob is final authority.
 - `LifeOS_HQ` is the meeting room.
-- `Chief_of_Staff_HQ` coordinates daily operations, routing, reports, and follow-through.
+- `Chief_of_Staff_HQ` coordinates daily operations, routing, reports, watcher destination behavior, and follow-through.
 - `Maintenance_HQ` owns global governance, shared execution contracts, naming and Worker-profile conventions, audits, boot integrity, migrations, source boundaries, publication-mirror discipline, and reconciliation.
 - `Engineering_HQ` owns implementation machinery, routing registry and runtime state, technical reliability, validation, queues, wake suppression, dashboard code, prompt-runtime code, databases, and tests.
 - Specialist Department HQs own their local durable state and Worker profiles.
@@ -75,7 +80,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 - Fetch before editing.
 - Prefer small, scoped changes.
-- Preserve unrelated content.
+- Preserve unrelated content and historical evidence.
 - Verify significant writes through current read-back.
 - Re-fetch shared files before later changes when another HQ may be editing adjacent state.
 - Keep GitHub abstract.
@@ -83,4 +88,6 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 ## Best Next Action
 
-Boot the replacement `Maintenance_HQ` chat from `memory/STARTUP_BOOT.md`, perform a separate read-only Sync, and treat the coordinated naming repair as closed unless a fresh scan demonstrates current active drift. Engineering implementation-title updates remain outside Maintenance authority until separately authorized.
+Rob replaces the deployed Project Instructions from the paste-ready canonical GitHub source and replaces the Project Source handbook with the refreshed stable-filename artifact. After refresh, verify both from a fresh project chat and close the single system-level publication-reconciliation loop if no duplicate handbook copy remains.
+
+Engineering implementation-title updates and courier-verifier repair remain outside Maintenance authority and stay with `Engineering_HQ`.
