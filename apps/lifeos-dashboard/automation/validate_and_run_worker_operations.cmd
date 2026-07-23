@@ -13,7 +13,7 @@ echo Updating the local dashboard environment...
 if errorlevel 1 exit /b %ERRORLEVEL%
 
 echo.
-echo Validating Worker Operations and Package E result-outbox contracts...
+echo Validating Worker Operations and GitHub-first orchestration...
 ".venv\Scripts\python.exe" -m pytest -q ^
   tests\test_app.py ^
   tests\test_worker_operations.py ^
@@ -26,6 +26,7 @@ echo Validating Worker Operations and Package E result-outbox contracts...
   tests\test_worker_result_repair.py ^
   tests\test_worker_hq_review.py ^
   tests\test_worker_rob_validation.py ^
+  tests\test_worker_github_orchestrator.py ^
   tests\test_slice6_advisory_contract.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
@@ -38,8 +39,11 @@ if errorlevel 1 (
 )
 
 echo.
-echo Validation passed. Launching LifeOS Dashboard without opening another browser profile...
+echo Validation passed. Launching LifeOS Dashboard with GitHub-first orchestration...
 set LIFEOS_OPEN_BROWSER=0
+set LIFEOS_GITHUB_AUTO_SYNC=0
+set LIFEOS_WORKER_ORCHESTRATOR_ENABLED=1
+set LIFEOS_WORKER_ORCHESTRATOR_POLL_SECONDS=30
 echo Open this address in a new tab of the current Edge window:
 echo http://127.0.0.1:8765
 ".venv\Scripts\python.exe" run_dashboard.py
