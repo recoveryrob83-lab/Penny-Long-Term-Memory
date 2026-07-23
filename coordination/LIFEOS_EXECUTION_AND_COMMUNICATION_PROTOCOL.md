@@ -1,33 +1,33 @@
 # LifeOS Execution and Communication Protocol
 
 Updated: 2026-07-19
-Owner: Life OS Maintenance HQ
+Owner: Maintenance_HQ
 Status: Active / Canonical
-Purpose: Define how Rob, LifeOS HQ, Chief of Staff HQ, Department HQs, Workers, advisories, scheduled procedures, dashboards, and automation communicate, authorize, execute, verify, report, and close work.
+Purpose: Define how Rob, `LifeOS_HQ`, `Chief_of_Staff_HQ`, Department HQs, Workers, advisories, scheduled procedures, dashboards, and automation communicate, authorize, execute, verify, report, and close work.
 
 ## 1. Authority and Organizational Topology
 
 - Rob is the final authority.
-- LifeOS HQ is the shared strategic meeting room.
-- LifeOS HQ owns no independent backlog, department state, connector authority, or durable project record.
-- Chief of Staff HQ is Rob's primary daily operational point of contact, Hub chair, reporting desk, assignment router, practical coordinator, and follow-through owner.
+- `LifeOS_HQ` is the shared strategic meeting room.
+- `LifeOS_HQ` owns no independent backlog, department state, connector authority, or durable project record.
+- `Chief_of_Staff_HQ` is Rob's primary daily operational point of contact, Hub chair, reporting desk, assignment router, practical coordinator, and follow-through owner.
 - Department HQs own specialist strategy, judgment, durable state, approvals, audits, and department-bound collaboration.
 - Workers perform bounded execution under one owning department and one explicit contract.
 - Workers do not become shadow Department HQs, independent strategists, or competing backlog owners.
-- Life OS Maintenance HQ owns this protocol, shared boot coherence, global governance, source boundaries, and cross-system reconciliation.
-- Engineering HQ owns transport, automation, dashboard, receiver-state, routing-registry, parser, validator, testing, and technical reliability implementation.
+- `Maintenance_HQ` owns this protocol, shared boot coherence, global governance, source boundaries, and cross-system reconciliation.
+- `Engineering_HQ` owns transport, automation, dashboard, receiver-state, routing-registry, parser, validator, testing, and technical reliability implementation.
 - The dashboard is a transport, visibility, diagnostic, and bounded control layer. It is not a source of truth and does not create authority.
 
 Short form:
 
-> Rob decides. LifeOS HQ deliberates. Chief of Staff coordinates. Departments judge and own. Workers execute. Maintenance governs. Engineering builds the machinery.
+> Rob decides. `LifeOS_HQ` deliberates. `Chief_of_Staff_HQ` coordinates. Departments judge and own. Workers execute. `Maintenance_HQ` governs. `Engineering_HQ` builds the machinery.
 
 ## 2. Canonical Operating Surfaces
 
 Use the smallest correct surface:
 
-- **LifeOS HQ:** cross-department strategy, LifeOS architecture, shared operating rules, major priorities, long-range planning, and decisions requiring several department perspectives.
-- **Chief of Staff HQ:** daily operations, appointments, communications, Todoist, Calendar, reminders, reporting, practical coordination, assignment routing, and Rob-facing decisions.
+- **`LifeOS_HQ`:** cross-department strategy, LifeOS architecture, shared operating rules, major priorities, long-range planning, and decisions requiring several department perspectives.
+- **`Chief_of_Staff_HQ`:** daily operations, appointments, communications, Todoist, Calendar, reminders, reporting, practical coordination, assignment routing, and Rob-facing decisions.
 - **Department HQ:** specialist strategy, approvals, interpretation, high-context judgment, exceptions, audits, and work tightly bound to one department.
 - **Department Worker:** already-authorized bounded execution under a valid Worker profile, task definition, advisory, or canonical timed procedure.
 
@@ -61,7 +61,7 @@ Detailed sensitive records remain in their natural systems. GitHub stays abstrac
 
 An execution-ready Worker task may be initiated by:
 
-- Chief of Staff HQ, when Rob has authorized the work and it fits an existing Worker profile;
+- `Chief_of_Staff_HQ`, when Rob has authorized the work and it fits an existing Worker profile;
 - the owning Department HQ;
 - an authorized cross-department advisory whose source may request that task class;
 - a canonical timed procedure with existing standing authority.
@@ -74,7 +74,7 @@ Department ownership does not require an HQ relay wake for every routine task.
 
 The normal bounded path is:
 
-Rob authorizes work through Chief of Staff HQ
+Rob authorizes work through `Chief_of_Staff_HQ`
 → Chief of Staff creates one execution-ready advisory or uses an already-authoritative task definition
 → the work targets the owning Department Worker
 → the Worker performs the bounded procedure
@@ -105,7 +105,7 @@ One blocked work item must not generate a chain of duplicate advisories.
 
 Formal advisory text lives on the source department board. Routing state lives in `coordination/ADVISORY_INDEX.md`.
 
-LifeOS HQ formal advisories use Chief of Staff HQ as the source department and the retained board path `coordination/boards/main-assistant.md`.
+`LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and the retained board path `coordination/boards/main-assistant.md`.
 
 ## 7. Lifecycle and Priority
 
@@ -149,7 +149,7 @@ Every Worker run returns exactly one controlled outcome:
 
 `REPORT_AND_HOLD` means execution cannot safely continue within current authority. The owning Department HQ resolves the hold.
 
-`ELEVATE_FOR_APPROVAL` means Rob must decide, authorize an exception, or approve materially broader authority. Chief of Staff coordinates the elevation while the department retains ownership.
+`ELEVATE_FOR_APPROVAL` means Rob must decide, authorize an exception, or approve materially broader authority. `Chief_of_Staff_HQ` coordinates the elevation while the department retains ownership.
 
 ## 9. Verification Modes
 
@@ -185,7 +185,7 @@ Default routing:
 
 - `OPEN` with an execution-ready Worker target → wake Worker.
 - `HELD` → wake owning Department HQ.
-- `ELEVATED_FOR_APPROVAL` → wake Chief of Staff HQ.
+- `ELEVATED_FOR_APPROVAL` → wake `Chief_of_Staff_HQ`.
 - `RESUME_AUTHORIZED` → wake paused Worker.
 - `REJECTED` → wake Worker only when clean closure action is required.
 - `IMPLEMENTED` with `AUTOMATIC` → verify the defined postcondition; suppress unnecessary chat wake.
@@ -202,7 +202,7 @@ Transport retries must not create duplicate execution.
 
 A hold is resolved by the owning Department HQ.
 
-An elevation is coordinated through Chief of Staff HQ for Rob's decision.
+An elevation is coordinated through `Chief_of_Staff_HQ` for Rob's decision.
 
 The underlying department retains ownership throughout.
 
@@ -215,7 +215,7 @@ Silence, inactivity, elapsed time, or a transport retry is not approval to resum
 - Routine success waits for scheduled or naturally requested Chief of Staff reporting.
 - Chief of Staff synthesizes completed work, exceptions, risks, and decisions.
 - Department HQs do not send separate routine all-clear reports to Rob.
-- Immediate Chief of Staff wakes occur only when Rob must decide or a time-sensitive operational exception requires attention.
+- Immediate `Chief_of_Staff_HQ` wakes occur only when Rob must decide or a time-sensitive operational exception requires attention.
 - Detailed evidence remains in its authoritative advisory, run record, department record, or automation log.
 - Reports distinguish requested work, attempted work, verified work, partial work, held work, and unverified claims.
 
@@ -248,11 +248,11 @@ Routine pause or resume state should not produce duplicate advisories or duplica
 
 ## 15. Ownership Boundaries
 
-- Chief of Staff HQ may route authorized work and report outcomes without taking ownership of specialist judgment.
+- `Chief_of_Staff_HQ` may route authorized work and report outcomes without taking ownership of specialist judgment.
 - Department HQs own their Worker profiles, approvals, exceptions, holds, verification, and department records.
 - Workers may update only evidence and records explicitly permitted by their profile and task.
-- Life OS Maintenance HQ owns shared governance protocols and canonical boot coherence.
-- Engineering HQ owns technical routing, receiver-state, wake suppression, deduplication, transport, and validation mechanisms.
+- `Maintenance_HQ` owns shared governance protocols and canonical boot coherence.
+- `Engineering_HQ` owns technical routing, receiver-state, wake suppression, deduplication, transport, and validation mechanisms.
 - The dashboard and automation layer may not become a policy owner.
 
 ## 16. Boot Application
@@ -275,7 +275,7 @@ LifeOS execution is operating correctly when:
 - transport does not create authority;
 - Workers stay bounded;
 - departments retain judgment;
-- Chief of Staff coordinates without absorbing ownership;
+- `Chief_of_Staff_HQ` coordinates without absorbing ownership;
 - lifecycle and priority remain separate;
 - wake behavior follows verification mode and material state changes;
 - holds and elevations preserve the same authoritative advisory;
