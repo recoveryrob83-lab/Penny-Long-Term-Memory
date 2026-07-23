@@ -1,17 +1,17 @@
 # Decision Rules Registry
 
 Updated: 2026-07-04
-Purpose: Central Life OS registry for reusable decision rules that route important choices to the correct Penny department for structured evaluation.
+Purpose: Central LifeOS registry for reusable decision rules that route important choices to the correct Penny department for structured evaluation.
 
 ## Status
 
-Active Life OS architecture standard.
+Active LifeOS architecture standard.
 
 ## Purpose
 
 Decision Rules are reusable decision procedures.
 
-They help Life OS pause before important choices and route the decision to the department that owns the relevant evaluation.
+They help LifeOS pause before important choices and route the decision to the department that owns the relevant evaluation.
 
 Decision Rules are not ordinary reminders, open loops, or advisories.
 
@@ -53,7 +53,7 @@ Create department decision-rule files only when useful.
 
 | Rule ID | Rule Name | Owning Department | Rule File | Status |
 |---|---|---|---|---|
-| DR-FIN-20260704-001 | Discretionary Purchase Pause Rule | Chief of Finance Penny | `projects/finance-benefits/DECISION_RULES.md` | Active |
+| DR-FIN-20260704-001 | Discretionary Purchase Pause Rule | Finance_HQ | `projects/finance-benefits/DECISION_RULES.md` | Active |
 
 ## Standard Rule Template
 
