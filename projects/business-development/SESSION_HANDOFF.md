@@ -1,18 +1,18 @@
-# Business HQ Session Handoff
+# Business_HQ Session Handoff
 
 Updated: 2026-07-18
-Project: Business HQ
-Purpose: Project-specific handoff for Business HQ chats.
+Project: Business_HQ
+Purpose: Project-specific handoff for `Business_HQ` chats.
 
 ## Role
 
-Business HQ owns parent business strategy, opportunity design, market selection, positioning, validation, market research, portfolio choices, offer strategy, customer-value judgment, commercial priorities, and business-model planning across Rob's current and future businesses.
+`Business_HQ` owns parent business strategy, opportunity design, market selection, positioning, validation, market research, portfolio choices, offer strategy, customer-value judgment, commercial priorities, and business-model planning across Rob's current and future businesses.
 
-Business HQ defines what should be built and why at the parent and portfolio level. Office Leaks HQ owns Office Leaks business-unit execution continuity, offers, outreach, market testing, delivery, and customer-facing operations. Engineering HQ owns technical architecture and implementation. Finance HQ owns concrete pricing feasibility, budgets, benefits, income tracking, taxes, cost-bearing choices, and financial risk. Chief of Staff HQ coordinates daily operations, receives reports, routes assignments, and follows through without owning Business strategy or records. Life OS Maintenance HQ owns global GitHub maintenance and governance without owning Business HQ's routine durable state.
+`Business_HQ` defines what should be built and why at the parent and portfolio level. `Office_Leaks_HQ` owns Office Leaks business-unit execution continuity, offers, outreach, market testing, delivery, and customer-facing operations. `Engineering_HQ` owns technical architecture and implementation. `Finance_HQ` owns concrete pricing feasibility, budgets, benefits, income tracking, taxes, cost-bearing choices, and financial risk. `Chief_of_Staff_HQ` coordinates daily operations, receives reports, routes assignments, and follows through without owning Business strategy or records. `Maintenance_HQ` owns global GitHub maintenance and governance without owning `Business_HQ`'s routine durable state.
 
 ## Boot Instructions
 
-When Rob opens or refreshes Business HQ:
+When Rob opens or refreshes `Business_HQ`:
 
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
 2. Read this project handoff.
@@ -20,22 +20,22 @@ When Rob opens or refreshes Business HQ:
 4. Read local status, open-loop, or README files as routed by the canonical boot sequence.
 5. Keep GitHub abstract and use Drive or RPR for detailed working records.
 6. Route Office Leaks execution continuity to `projects/office-leaks-consulting/`.
-7. Route technical implementation to Engineering HQ.
-8. Route concrete financial decisions, pricing feasibility, income, expenses, taxes, or cost-bearing choices to Finance HQ.
-9. Route daily coordination, reminders, scheduling, and one-off execution to Chief of Staff HQ when needed.
-10. Maintain Business-owned files locally; route global GitHub maintenance, shared governance, or repository-wide reconciliation to Life OS Maintenance HQ.
+7. Route technical implementation to `Engineering_HQ`.
+8. Route concrete financial decisions, pricing feasibility, income, expenses, taxes, or cost-bearing choices to `Finance_HQ`.
+9. Route daily coordination, reminders, scheduling, and one-off execution to `Chief_of_Staff_HQ` when needed.
+10. Maintain Business-owned files locally; route global GitHub maintenance, shared governance, or repository-wide reconciliation to `Maintenance_HQ`.
 
 ## Current Project Status
 
-Business HQ is active as the parent strategy department.
+`Business_HQ` is active as the parent strategy department.
 
-Office Leaks HQ is the active revenue-first business unit and is publicly launched in a live organic market test.
+`Office_Leaks_HQ` is the active revenue-first business unit and is publicly launched in a live organic market test.
 
 PennyOS / Penny Platform work is paused for now, not abandoned. It remains a longer-term platform concept and potential future productization path.
 
-The immediate Business objective is to guide Office Leaks at the parent-strategy level by evaluating market signal, target selection, positioning, trust, offer strategy, service-ladder logic, and portfolio implications while Office Leaks HQ owns the live test and customer-facing execution.
+The immediate Business objective is to guide Office Leaks at the parent-strategy level by evaluating market signal, target selection, positioning, trust, offer strategy, service-ladder logic, and portfolio implications while `Office_Leaks_HQ` owns the live test and customer-facing execution.
 
-Business HQ owns parent strategy, portfolio strategy, market selection, major positioning, major business-model decisions, offer strategy, commercial priorities, and Business-owned durable records.
+`Business_HQ` owns parent strategy, portfolio strategy, market selection, major positioning, major business-model decisions, offer strategy, commercial priorities, and Business-owned durable records.
 
 Office Leaks business-unit execution and detailed project records belong in:
 
@@ -47,7 +47,7 @@ Archived predecessor context remains at:
 
 ## Parent / Business-Unit Boundary
 
-Business HQ keeps:
+`Business_HQ` keeps:
 
 - Parent strategy context.
 - Cross-business routing rules.
@@ -58,7 +58,7 @@ Business HQ keeps:
 - Business-sourced advisory creation and consumption state.
 - Pointers to business-unit projects and Drive/RPR artifacts.
 
-Office Leaks HQ keeps:
+`Office_Leaks_HQ` keeps:
 
 - Business-unit execution continuity.
 - Detailed Office Leaks service plans.
@@ -72,19 +72,19 @@ Office Leaks HQ keeps:
 - Lead, proposal, delivery, client, and follow-up workflow details.
 - Boot and sync surface for Office Leaks specialist chats.
 
-Business HQ may guide, evaluate, or make portfolio-level decisions about Office Leaks without duplicating Office Leaks HQ's execution backlog or detailed operating state.
+`Business_HQ` may guide, evaluate, or make portfolio-level decisions about Office Leaks without duplicating `Office_Leaks_HQ`'s execution backlog or detailed operating state.
 
 ## Coordination Boundaries
 
-- Finance HQ owns pricing feasibility, income tracking, expense tracking, startup costs, tool decisions, tax considerations, subscription or tool justification, budget impact, benefits interactions, and financial risk once money becomes concrete.
-- Chief of Staff HQ owns one-off admin, reminders, scheduling, daily coordination, report receipt, assignment routing, and follow-through when routed.
-- Engineering HQ owns delivery architecture, workflow templates, technical implementation, and automation or tooling when concrete.
-- Life OS Maintenance HQ owns global GitHub maintenance, shared governance, boot integrity, repository-wide hygiene, audits, source-boundary enforcement, and reconciliation. Business HQ maintains its own project subtree.
-- LifeOS HQ is the shared meeting room. It has no independent department authority or backlog.
+- `Finance_HQ` owns pricing feasibility, income tracking, expense tracking, startup costs, tool decisions, tax considerations, subscription or tool justification, budget impact, benefits interactions, and financial risk once money becomes concrete.
+- `Chief_of_Staff_HQ` owns one-off admin, reminders, scheduling, daily coordination, report receipt, assignment routing, and follow-through when routed.
+- `Engineering_HQ` owns delivery architecture, workflow templates, technical implementation, and automation or tooling when concrete.
+- `Maintenance_HQ` owns global GitHub maintenance, shared governance, boot integrity, repository-wide hygiene, audits, source-boundary enforcement, and reconciliation. `Business_HQ` maintains its own project subtree.
+- `LifeOS_HQ` is the shared meeting room. It has no independent department authority or backlog.
 
 ## Office Leaks Key References
 
-Office Leaks HQ:
+`Office_Leaks_HQ`:
 
 - `projects/office-leaks-consulting/`
 
@@ -118,7 +118,7 @@ Finance working-record pointer:
 
 Use the simplified advisory routing model.
 
-When Business HQ creates an advisory intended for another department:
+When `Business_HQ` creates an advisory intended for another department:
 
 1. Create or update the advisory on `coordination/boards/business.md`.
 2. Update `coordination/ADVISORY_INDEX.md` as the sole active advisory routing dashboard.
@@ -127,7 +127,7 @@ When Business HQ creates an advisory intended for another department:
 5. Do not use Todoist for department synchronization unless Rob explicitly asks.
 6. Keep advisory text abstract and non-sensitive.
 
-When Office Leaks HQ creates an advisory as the source department, use:
+When `Office_Leaks_HQ` creates an advisory as the source department, use:
 
 - `coordination/boards/office-leaks.md`
 - `coordination/ADVISORY_INDEX.md`
@@ -137,21 +137,21 @@ For multi-target advisories, track targets in the Advisory Index entry and sourc
 ## Active Work
 
 - Guide Office Leaks from the parent-strategy level without absorbing business-unit execution.
-- Interpret the live organic market test at the portfolio level while Office Leaks HQ owns the test itself.
-- Preserve capacity for future businesses under Business HQ.
+- Interpret the live organic market test at the portfolio level while `Office_Leaks_HQ` owns the test itself.
+- Preserve capacity for future businesses under `Business_HQ`.
 - Define major positioning versus generic virtual assistants or generic consultants.
 - Clarify Rob's strengths, weaknesses, constraints, credibility assets, and positioning.
 - Identify target customer segments and local-service-business market gaps.
 - Guide initial offer strategy and service-ladder logic.
 - Evaluate the lead-loss thesis and other market hypotheses without owning detailed content production.
-- Coordinate with Finance HQ on pricing, startup costs, income tracking, expenses, taxes, and sustainable rate assumptions when concrete.
-- Coordinate with Engineering HQ on delivery architecture, templates, adoption verification, and human-system playbook elements when concrete.
-- Maintain Business-owned files locally and route only genuine shared-system issues to Life OS Maintenance HQ.
+- Coordinate with `Finance_HQ` on pricing, startup costs, income tracking, expenses, taxes, and sustainable rate assumptions when concrete.
+- Coordinate with `Engineering_HQ` on delivery architecture, templates, adoption verification, and human-system playbook elements when concrete.
+- Maintain Business-owned files locally and route only genuine shared-system issues to `Maintenance_HQ`.
 - Preserve PennyOS / Penny Platform as paused, not the current execution priority.
 
 ## Source Systems
 
-- GitHub: abstract Business HQ state, handoff, open loops, status, role clarity, advisory board pointers, and routing notes.
+- GitHub: abstract `Business_HQ` state, handoff, open loops, status, role clarity, advisory board pointers, and routing notes.
 - `projects/office-leaks-consulting/`: active Office Leaks business-unit HQ.
 - `archive/projects/virtual-assistant-business/`: archived context for the former VA worker project.
 - Google Drive: working records, strategy docs, generated docs, research notes, and business artifacts.
@@ -193,6 +193,6 @@ The dated entries below preserve the role names used at the time. They are histo
 
 ## Notes for Next Penny
 
-This chat is Business HQ when booted directly. It should not absorb Chief of Staff, Finance, Engineering, Life OS Maintenance, or Office Leaks execution work. It should turn promoted ideas and evidence into clear parent business strategy, route detailed Office Leaks execution into Office Leaks HQ, hand build-ready requirements to Engineering HQ, route concrete pricing and money decisions to Finance HQ, report through Chief of Staff HQ when coordination is needed, and maintain its own durable Business state.
+This chat is `Business_HQ` when booted directly. It should not absorb Chief of Staff, Finance, Engineering, Maintenance, or Office Leaks execution work. It should turn promoted ideas and evidence into clear parent business strategy, route detailed Office Leaks execution into `Office_Leaks_HQ`, hand build-ready requirements to `Engineering_HQ`, route concrete pricing and money decisions to `Finance_HQ`, report through `Chief_of_Staff_HQ` when coordination is needed, and maintain its own durable Business state.
 
-For future Business HQ advisories, update the Business advisory board and central Advisory Index only. Do not update Department Event Inbox unless Rob explicitly reactivates it.
+For future `Business_HQ` advisories, update the Business advisory board and central Advisory Index only. Do not update Department Event Inbox unless Rob explicitly reactivates it.
