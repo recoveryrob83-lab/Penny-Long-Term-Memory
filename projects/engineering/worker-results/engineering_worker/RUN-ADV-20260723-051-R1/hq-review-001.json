@@ -1,0 +1,27 @@
+{
+  "schema_id": "lifeos_worker_hq_review",
+  "schema_version": 1,
+  "artifact_type": "hq_review",
+  "attempt": 1,
+  "run_id": "RUN-ADV-20260723-051-R1",
+  "worker_id": "engineering_worker",
+  "reviewing_hq": "Engineering HQ",
+  "report_path": "projects/engineering/worker-results/engineering_worker/RUN-ADV-20260723-051-R1/report-001.json",
+  "review_state": "VERIFIED",
+  "report_integrity_state": "valid",
+  "authority_compliance_state": "compliant",
+  "work_verification_state": "verified",
+  "evidence_checked": [
+    "report:projects/engineering/worker-results/engineering_worker/RUN-ADV-20260723-051-R1/report-001.json@bb5f00a7f2a392e545aadc67a8c6551ee729c666",
+    "report-checksum:sha256:cb4d7f1a1261f817320a176a3571cb70e43ae9f77890e4860a03f229cafc14ec",
+    "report-creation-commit:313efc95cf49ba5ed34b10a79b78c0a69a4250c2:single-authorized-path",
+    "assignment:projects/engineering/advisories/ADV-20260723-051.md@1001c72a1b6db0a7368323a1f1a09a588c01d63f",
+    "worker-procedure:projects/engineering/procedures/engineering_worker_hq_wake_receipt_test.md@3d96fcd355bc51b0a606bbe4f9842a3513ebdfc6",
+    "result-procedure:projects/engineering/procedures/engineering_worker_result_submission.md@2faed99249ee268c7bc746104d5e1319428c6bb6",
+    "review-procedure:projects/engineering/procedures/engineering_hq_worker_review_receipt.md@e4e9c4eec3273f4ee8e6977eda6ba0dfe8dc9b4a",
+    "review-schema:apps/lifeos-dashboard/lifeos_dashboard/data/worker-hq-review.schema.json@c369652507b09ef5ec8dd0f415dae22ceb8aef0d"
+  ],
+  "reason": "The immutable report matches ADV-20260723-051 revision 1 and the authorized Engineering Worker identity, procedure, run, and create-only path. The creation commit contains only the authorized report; the stored report preserves IMPLEMENT, completed work, pending HQ verification, the exact current advisory blob as read evidence, GitHub-only tool use, one authorized write, and no substantive Engineering work, lifecycle change, scope expansion, overwrite, external action, or approval requirement. The bounded receipt test is verified and ready for consumption; source-advisory closure remains a separate Engineering HQ action.",
+  "ready_for_consumption": true,
+  "requires_rob_validation": false
+}
