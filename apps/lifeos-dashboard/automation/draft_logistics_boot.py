@@ -1,11 +1,18 @@
-"""Backward-compatible launcher for the canonical Maintenance_HQ boot draft."""
+"""Draft the canonical Maintenance_HQ boot prompt without sending it."""
 from __future__ import annotations
 
 import sys
 
-from draft_department_boot import main
+from draft_department_boot import DEPARTMENTS, build_prompt, run_engine_once
 
 
 if __name__ == "__main__":
-    sys.argv = [sys.argv[0], "logistics", *sys.argv[1:]]
-    raise SystemExit(main())
+    department = DEPARTMENTS["logistics"]
+    forwarded_args = [
+        sys.argv[0],
+        department.chat_title,
+        "--text",
+        build_prompt(department),
+    ]
+    result, _ = run_engine_once(forwarded_args)
+    raise SystemExit(result)
