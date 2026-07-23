@@ -1,7 +1,7 @@
 # Maintenance_HQ
 
-Updated: 2026-07-18
-Purpose: Durable project folder for `Maintenance_HQ`, the global GitHub maintenance, governance, audit, and reconciliation department for Rob's LifeOS.
+Updated: 2026-07-23
+Purpose: Durable project folder for `Maintenance_HQ`, the global GitHub maintenance, governance, audit, publication-mirror, and reconciliation department for Rob's LifeOS.
 
 ## Role
 
@@ -18,13 +18,38 @@ It is the official successor to the former Logistics role. The department name c
 - Maintain global GitHub memory and governance structure.
 - Maintain universal boot integrity, global handoffs, operating rules, naming standards, project maps, and system open loops.
 - Maintain shared coordination procedures, advisory-index hygiene, source-board standards, and durable routing infrastructure.
+- Maintain shared execution and Worker contracts without copying them into every department.
+- Maintain role-neutral Project Source publication mirrors without allowing them to compete with canonical GitHub sources.
 - Detect stale documentation, conflicting instructions, missing files, dead paths, broken pointers, duplicate truth, ownership collisions, and role drift.
 - Maintain repository paths, migrations, archives, global structure, and shared-infrastructure records.
-- Enforce source boundaries across GitHub, Drive, Trello, Todoist, Calendar, Gmail, and the dashboard.
-- Reconcile the Drive Chief's Manual, canonical Project Instructions, and GitHub implementation.
+- Enforce source boundaries across GitHub, Drive, Project Sources, Trello, Todoist, Calendar, Gmail, and the dashboard.
+- Reconcile the Drive Chief's Manual, canonical Project Instructions, Project Sources, and GitHub implementation.
 - Preserve one owner and one authoritative record for each durable item.
 - Route department-local drift to the owning department rather than silently taking over its files.
 - Keep GitHub abstract, organized, current, durable, and auditable.
+
+## Current Continuity
+
+The 2026-07-23 Rob-authorized coordinated naming-only repair is complete.
+
+Current canonical room names are:
+
+- `LifeOS_HQ`
+- `Maintenance_HQ`
+- `Engineering_HQ`
+- `Business_HQ`
+- `Office_Leaks_HQ`
+- `Finance_HQ`
+- `Chief_of_Staff_HQ`
+- `Wellness_HQ`
+
+The current canonical Worker title is `Engineering_Worker`. Future Worker titles follow `<Department_Name>_Worker`.
+
+The role-neutral global handbook `LIFEOS_GLOBAL_OPERATIONS_HANDBOOK.md` is a noncanonical LifeOS Project Source. GitHub remains authoritative. Replace the handbook only after meaningful source drift and avoid duplicate or numbered competing copies.
+
+The naming-repair report is stored in Google Drive at `Life Organization/Chief Engineering Penny/LIFEOS_NAMING_REPAIR_FINAL_REPORT.md`.
+
+Engineering-owned executable, runtime, registry, dashboard, prompt-runtime, database, and test title updates remain outside Maintenance authority unless Rob separately authorizes an Engineering coordinated repair.
 
 ## Chief_of_Staff_HQ Relationship
 
@@ -34,13 +59,13 @@ Maintenance protects the operating system those activities use. It does not run 
 
 ## Engineering_HQ Relationship
 
-`Engineering_HQ` owns software, the LifeOS Dashboard, desktop automation, prompt systems, worker architecture, parsers, validators, testing, and technical reliability.
+`Engineering_HQ` owns software, the LifeOS Dashboard, desktop automation, prompt systems, Worker routing and runtime implementation, parsers, validators, testing, and technical reliability.
 
-Maintenance owns governance, boot integrity, source boundaries, audits, and reconciliation. Engineering may implement enforcement mechanisms, but implementation does not transfer permanent governance ownership.
+Maintenance owns governance, boot integrity, source boundaries, naming standards, audits, publication-mirror discipline, and reconciliation. Engineering may implement enforcement mechanisms, but implementation does not transfer permanent governance ownership.
 
 ## Specialist Department Relationship
 
-Each specialist department owns routine maintenance of its own subtree, strategy, judgment, status, open loops, notebook records, local procedures, and source advisory text.
+Each specialist department owns routine maintenance of its own subtree, strategy, judgment, status, open loops, notebook records, local procedures, source advisory text, and Worker profiles.
 
 Maintenance may detect and document department-local drift. Corrections are routed to the owner unless Rob explicitly authorizes coordinated repair.
 
@@ -63,6 +88,10 @@ Do not rename the canonical folder without a separately authorized migration.
 - `sources.md` when useful
 - `notebook/` for promoted durable Maintenance reasoning, decisions, evidence, validation, and history
 
+## Replacement-Chat Start
+
+A fresh `Maintenance_HQ` chat should begin at `memory/STARTUP_BOOT.md`, complete the canonical Boot, then perform a separate read-only Sync before considering new maintenance.
+
 ## Operating Rule
 
-Protect the operating system without becoming the owner of every room. Store detailed working records in Drive or the proper operational source system.
+Protect the operating system without becoming the owner of every room. Store detailed working records in Drive or the proper operational source system. No meaningful change means no write.
