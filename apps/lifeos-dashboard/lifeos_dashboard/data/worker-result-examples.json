@@ -25,7 +25,7 @@
     "actual_tools": ["GitHub"],
     "what_did_not_occur": ["No advisory lifecycle change occurred.", "No work was re-executed outside the assignment."],
     "unresolved_risks": [],
-    "review_condition": "Engineering HQ must review report integrity, authority compliance, evidence, and the work where independently verifiable.",
+    "review_condition": "Engineering_HQ must review report integrity, authority compliance, evidence, and the work where independently verifiable.",
     "verification_state": "pending",
     "external_actions_verified": true,
     "approval_required_discovered": false,
@@ -62,7 +62,7 @@
     "attempt": 1,
     "run_id": "RUN-ADV-EXAMPLE-R1",
     "worker_id": "engineering_worker",
-    "reviewing_hq": "Engineering HQ",
+    "reviewing_hq": "Engineering_HQ",
     "report_path": "projects/engineering/worker-results/engineering_worker/RUN-ADV-EXAMPLE-R1/report-001.json",
     "review_state": "VERIFIED",
     "report_integrity_state": "valid",
@@ -82,7 +82,7 @@
     "worker_id": "engineering_worker",
     "validator": "Rob",
     "validation_state": "VERIFIED",
-    "observation": "Rob observed LIFEOS_ROB_OBSERVATION=EXAMPLE_MARKER on the exact surface named by Engineering HQ.",
+    "observation": "Rob observed LIFEOS_ROB_OBSERVATION=EXAMPLE_MARKER on the exact surface named by Engineering_HQ.",
     "evidence_references": [
       "hq-review:projects/engineering/worker-results/engineering_worker/RUN-ADV-EXAMPLE-R1/hq-review-001.json@0123456789abcdef0123456789abcdef01234567",
       "rob-observation:LIFEOS_ROB_OBSERVATION=EXAMPLE_MARKER"
