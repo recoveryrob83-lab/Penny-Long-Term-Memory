@@ -1,0 +1,240 @@
+import json
+import sqlite3
+from pathlib import Path
+
+import pytest
+
+from lifeos_dashboard.command_center import CommandCenterService
+from lifeos_dashboard.worker_route_management import (
+    WorkerRouteManager,
+    capture_chatgpt_conversation_url,
+)
+from lifeos_dashboard.worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
+from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
+
+
+CURRENT_URL = "https://chatgpt.com/g/project/c/engineering-worker"
+NEXT_URL = "https://chatgpt.com/g/project/c/engineering-worker-next"
+
+
+def route_fixture(
+    tmp_path: Path,
+    *,
+    captured_url: str = NEXT_URL,
+) -> tuple[CommandCenterService, WorkerRuntimeService, WorkerRouteManager]:
+    database = tmp_path / "command_center.sqlite3"
+    command_center = CommandCenterService(tmp_path, database_path=database)
+    runtime = WorkerRuntimeService(database)
+    runtime.register_worker(
+        WorkerRegistryEntry(
+            worker_id="engineering_worker",
+            chat_title="Engineering_Worker",
+            owning_department="engineering",
+            profile_path="projects/engineering/workers/engineering_worker.md",
+            profile_version=1,
+            conversation_url=CURRENT_URL,
+            route_revision=1,
+        )
+    )
+    runtime.set_route_state(
+        "engineering_worker",
+        "available",
+        last_seen_at=1.0,
+        pause_reason=None,
+    )
+    manager = WorkerRouteManager(
+        command_center,
+        capture_url=lambda endpoint: captured_url,
+    )
+    return command_center, runtime, manager
+
+
+def test_capture_requires_paused_automation(tmp_path: Path) -> None:
+    _, _, manager = route_fixture(tmp_path)
+
+    with pytest.raises(WorkerRuntimeError, match="Pause automation"):
+        manager.capture_active_route(
+            "engineering_worker",
+            expected_route_revision=1,
+            confirm_capture=True,
+        )
+
+
+def test_capture_rolls_existing_row_and_holds_route_for_canary(tmp_path: Path) -> None:
+    command_center, runtime, manager = route_fixture(tmp_path)
+    command_center.set_paused(True)
+
+    result = manager.capture_active_route(
+        "engineering_worker",
+        expected_route_revision=1,
+        confirm_capture=True,
+    )
+
+    saved = runtime.worker("engineering_worker")
+    route = runtime.store.route_state("engineering_worker")
+    assert result["changed"] is True
+    assert saved.conversation_url == NEXT_URL
+    assert saved.route_revision == 2
+    assert route is not None
+    assert route.availability == "unknown"
+    assert route.last_seen_at is None
+    assert "revision 2 awaiting" in str(route.pause_reason)
+
+    with sqlite3.connect(runtime.store.database_path) as connection:
+        count = connection.execute(
+            "SELECT COUNT(*) FROM worker_registry WHERE worker_id = ?",
+            ("engineering_worker",),
+        ).fetchone()[0]
+    assert count == 1
+
+
+def test_capture_rejects_stale_dashboard_revision(tmp_path: Path) -> None:
+    command_center, _, manager = route_fixture(tmp_path)
+    command_center.set_paused(True)
+
+    with pytest.raises(WorkerRuntimeError, match="Refresh before trying again"):
+        manager.capture_active_route(
+            "engineering_worker",
+            expected_route_revision=0,
+            confirm_capture=True,
+        )
+
+
+def test_capture_same_url_is_no_write(tmp_path: Path) -> None:
+    command_center, runtime, manager = route_fixture(
+        tmp_path,
+        captured_url=CURRENT_URL + "?model=gpt-5#fragment",
+    )
+    command_center.set_paused(True)
+
+    result = manager.capture_active_route(
+        "engineering_worker",
+        expected_route_revision=1,
+        confirm_capture=True,
+    )
+
+    saved = runtime.worker("engineering_worker")
+    route = runtime.store.route_state("engineering_worker")
+    assert result["changed"] is False
+    assert saved.conversation_url == CURRENT_URL
+    assert saved.route_revision == 1
+    assert route is not None and route.availability == "available"
+
+
+def test_capture_rejects_route_owned_by_another_worker(tmp_path: Path) -> None:
+    command_center, runtime, manager = route_fixture(tmp_path)
+    runtime.register_worker(
+        WorkerRegistryEntry(
+            worker_id="second_worker",
+            chat_title="Second_Worker",
+            owning_department="engineering",
+            profile_path="projects/engineering/workers/second_worker.md",
+            profile_version=1,
+            conversation_url=NEXT_URL,
+            route_revision=1,
+        )
+    )
+    command_center.set_paused(True)
+
+    with pytest.raises(WorkerRuntimeError, match="already registered to another Worker"):
+        manager.capture_active_route(
+            "engineering_worker",
+            expected_route_revision=1,
+            confirm_capture=True,
+        )
+
+    saved = runtime.worker("engineering_worker")
+    assert saved.conversation_url == CURRENT_URL
+    assert saved.route_revision == 1
+
+
+def test_successful_canary_promotes_only_the_witnessed_revision(tmp_path: Path) -> None:
+    command_center, runtime, manager = route_fixture(tmp_path)
+    command_center.set_paused(True)
+    manager.capture_active_route(
+        "engineering_worker",
+        expected_route_revision=1,
+        confirm_capture=True,
+    )
+    witness = manager.canary_witness()
+
+    promoted = manager.promote_after_canary(
+        witness,
+        {
+            "status": "succeeded",
+            "durable_authority_created": False,
+            "returned_to_source": True,
+            "user_turn_id": "conversation-turn-44",
+        },
+    )
+
+    route = runtime.store.route_state("engineering_worker")
+    assert "verified and available" in promoted["message"]
+    assert route is not None
+    assert route.availability == "available"
+    assert route.last_seen_at is not None
+    assert route.pause_reason is None
+
+
+def test_canary_promotion_rejects_route_drift(tmp_path: Path) -> None:
+    command_center, runtime, manager = route_fixture(tmp_path)
+    command_center.set_paused(True)
+    manager.capture_active_route(
+        "engineering_worker",
+        expected_route_revision=1,
+        confirm_capture=True,
+    )
+    witness = manager.canary_witness()
+    runtime.register_worker(
+        WorkerRegistryEntry(
+            worker_id="engineering_worker",
+            chat_title="Engineering_Worker",
+            owning_department="engineering",
+            profile_path="projects/engineering/workers/engineering_worker.md",
+            profile_version=1,
+            conversation_url="https://chatgpt.com/g/project/c/third-route",
+            route_revision=3,
+        )
+    )
+
+    with pytest.raises(WorkerRuntimeError, match="changed during the canary"):
+        manager.promote_after_canary(
+            witness,
+            {
+                "status": "succeeded",
+                "durable_authority_created": False,
+                "returned_to_source": True,
+                "user_turn_id": "conversation-turn-45",
+            },
+        )
+
+
+class FakeResponse:
+    def __init__(self, payload: object) -> None:
+        self.payload = payload
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, traceback) -> None:
+        del exc_type, exc, traceback
+
+    def read(self) -> bytes:
+        return json.dumps(self.payload).encode("utf-8")
+
+
+def test_cdp_capture_requires_exactly_one_chatgpt_conversation(monkeypatch) -> None:
+    payload = [
+        {"type": "page", "url": "http://127.0.0.1:8000/"},
+        {"type": "page", "url": CURRENT_URL + "?model=gpt-5"},
+    ]
+    monkeypatch.setattr(
+        "lifeos_dashboard.worker_route_management.urllib.request.urlopen",
+        lambda *args, **kwargs: FakeResponse(payload),
+    )
+
+    assert capture_chatgpt_conversation_url("http://127.0.0.1:9222") == CURRENT_URL
+
+    payload.append({"type": "page", "url": NEXT_URL})
+    with pytest.raises(WorkerRuntimeError, match="exactly one"):
+        capture_chatgpt_conversation_url("http://127.0.0.1:9222")
