@@ -82,12 +82,55 @@ def test_matching_draft_requires_both_run_markers():
     assert not dispatch._matching_draft("RUN-ADV-050", item)
 
 
+def test_submission_witness_rejects_adv050_paste_only_false_positive():
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=6,
+        final_turns=6,
+        baseline_turn_ids=("conversation-turn-40",),
+        user_turn_id="conversation-turn-40",
+        composer_text="WAKE-ADV-050 RUN-ADV-050",
+    )
+
+
+def test_submission_witness_requires_all_three_postconditions():
+    baseline_ids = ("conversation-turn-40",)
+
+    assert dispatch._submission_witness_valid(
+        baseline_turns=6,
+        final_turns=7,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-41",
+        composer_text="",
+    )
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=6,
+        final_turns=6,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-41",
+        composer_text="",
+    )
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=6,
+        final_turns=7,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-40",
+        composer_text="",
+    )
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=6,
+        final_turns=7,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-41",
+        composer_text="still pasted",
+    )
+
+
 def test_button_noop_falls_back_to_enter_only_after_draft_remains(monkeypatch):
     item = request()
     prompt = FakePrompt(item.prompt_text)
     page = FakePage()
     button = FakeLocator(count=1, visible=True, enabled=True)
-    confirmations = iter([None, ("conversation-turn-50", 6)])
+    confirmations = iter([None, ("conversation-turn-41", 7)])
 
     monkeypatch.setattr(dispatch, "_visible_enabled_send", lambda _page: [button])
     monkeypatch.setattr(
@@ -103,7 +146,7 @@ def test_button_noop_falls_back_to_enter_only_after_draft_remains(monkeypatch):
         deadline=dispatch.time.monotonic() + 30,
     )
 
-    assert result == ("conversation-turn-50", 6)
+    assert result == ("conversation-turn-41", 7)
     assert button.clicked == 1
     assert prompt.pressed == ["Enter"]
 
@@ -117,7 +160,7 @@ def test_enter_is_used_when_no_visible_send_control(monkeypatch):
     monkeypatch.setattr(
         dispatch,
         "_try_confirm_user_turn",
-        lambda *_args, **_kwargs: ("conversation-turn-50", 6),
+        lambda *_args, **_kwargs: ("conversation-turn-41", 7),
     )
 
     result = dispatch._submit_and_confirm(
@@ -127,5 +170,5 @@ def test_enter_is_used_when_no_visible_send_control(monkeypatch):
         deadline=dispatch.time.monotonic() + 30,
     )
 
-    assert result == ("conversation-turn-50", 6)
+    assert result == ("conversation-turn-41", 7)
     assert prompt.pressed == ["Enter"]
