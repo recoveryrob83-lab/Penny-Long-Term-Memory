@@ -6,6 +6,13 @@ if not exist ".git" (
   exit /b 2
 )
 
+for /f "delims=" %%B in ('git branch --show-current') do set "CURRENT_BRANCH=%%B"
+if /I not "%CURRENT_BRANCH%"=="main" (
+  echo STOPPED: GitHub-first orchestration activation requires the local main branch.
+  echo Current branch: %CURRENT_BRANCH%
+  exit /b 2
+)
+
 for /f "delims=" %%S in ('git status --porcelain') do (
   echo STOPPED: The repository has uncommitted changes.
   git status --short
