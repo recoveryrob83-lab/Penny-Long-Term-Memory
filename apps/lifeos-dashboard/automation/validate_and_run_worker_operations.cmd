@@ -41,6 +41,7 @@ if errorlevel 1 (
 echo.
 echo Validation passed. Launching LifeOS Dashboard with GitHub-first orchestration...
 set LIFEOS_OPEN_BROWSER=0
+set LIFEOS_GITHUB_AUTO_SYNC=0
 set LIFEOS_WORKER_ORCHESTRATOR_ENABLED=1
 set LIFEOS_WORKER_ORCHESTRATOR_POLL_SECONDS=30
 echo Open this address in a new tab of the current Edge window:
