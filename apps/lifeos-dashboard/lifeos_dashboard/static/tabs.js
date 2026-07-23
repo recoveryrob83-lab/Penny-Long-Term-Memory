@@ -114,11 +114,6 @@ const initial = tabButtons.some((button) => button.dataset.tabTarget === remembe
   : "overview";
 activateTab(initial);
 
-const roomTitleRollover = document.createElement("script");
-roomTitleRollover.src = "/static/room-title-rollover.js";
-roomTitleRollover.defer = true;
-document.head.appendChild(roomTitleRollover);
-
 const inspectionTuning = document.createElement("script");
 inspectionTuning.src = "/static/department-inspection-tuning.js";
 inspectionTuning.defer = true;
