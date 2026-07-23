@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+import sqlite3
 import subprocess
 import threading
 from pathlib import Path
 from types import SimpleNamespace
 
 from lifeos_dashboard.worker_github_orchestrator import WorkerGitHubOrchestrator
+from lifeos_dashboard.worker_github_orchestrator_runtime import (
+    _claim_hq_wake,
+    _ensure_hq_wake_claim_column,
+)
 
 
 def _git(path: Path, *args: str) -> str:
@@ -90,6 +95,74 @@ def test_run_once_connects_existing_steps_without_new_policy(monkeypatch) -> Non
 
     assert calls == ["dispatch", "result", "hq", "review", "rob"]
     assert result["last_error"] is None
+
+
+def test_hq_review_artifact_is_ingested_before_browser_wake(monkeypatch) -> None:
+    row = {
+        "id": 1,
+        "run_id": "RUN-1",
+        "result_state": "REPORT_VALIDATED",
+        "owning_department": "engineering",
+        "worker_id": "engineering_worker",
+        "hq_wake_state": None,
+        "hq_review_state": None,
+    }
+    orchestrator = WorkerGitHubOrchestrator.__new__(WorkerGitHubOrchestrator)
+    calls: list[str] = []
+
+    monkeypatch.setattr(orchestrator, "_row", lambda run_id: row)
+    monkeypatch.setattr(
+        orchestrator,
+        "_artifact_exists",
+        lambda path: path.endswith("RUN-1/hq-review-001.json"),
+    )
+    monkeypatch.setattr(
+        orchestrator,
+        "_ingest_hq_review_if_present",
+        lambda run_id, advisory_id: calls.append(f"ingest:{run_id}:{advisory_id}"),
+    )
+
+    orchestrator._send_hq_wake("RUN-1", "ADV-1")
+
+    assert calls == ["ingest:RUN-1:ADV-1"]
+
+
+def test_hq_wake_claim_is_atomic_across_repeat_attempts(tmp_path: Path) -> None:
+    database = tmp_path / "command-center.sqlite3"
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            """
+            CREATE TABLE execution_history (
+                id INTEGER PRIMARY KEY,
+                run_id TEXT,
+                mode TEXT,
+                prompt_type TEXT,
+                result_state TEXT,
+                hq_wake_state TEXT,
+                hq_review_state TEXT
+            )
+            """
+        )
+        connection.execute(
+            """
+            INSERT INTO execution_history (
+                run_id, mode, prompt_type, result_state, hq_wake_state, hq_review_state
+            ) VALUES ('RUN-1', 'send', 'worker', 'REPORT_VALIDATED', NULL, NULL)
+            """
+        )
+
+    orchestrator = WorkerGitHubOrchestrator.__new__(WorkerGitHubOrchestrator)
+    orchestrator.database_path = database
+    _ensure_hq_wake_claim_column(orchestrator)
+    first_row = orchestrator._row("RUN-1")
+
+    assert first_row is not None
+    assert _claim_hq_wake(orchestrator, first_row) is True
+
+    second_row = orchestrator._row("RUN-1")
+    assert second_row is not None
+    assert second_row["hq_wake_claimed_at"] is not None
+    assert _claim_hq_wake(orchestrator, second_row) is False
 
 
 def test_run_once_stops_before_work_when_git_is_not_safe(monkeypatch) -> None:
