@@ -1,17 +1,17 @@
-# Engineering HQ Session Handoff
+# Engineering_HQ Session Handoff
 
 Updated: 2026-07-23
-Project: Engineering HQ
+Project: Engineering_HQ
 Purpose: Fresh-room handoff after Package E closeout, with GitHub-first Worker Operations, immutable evidence, HQ and Rob validation, scheduled consumption, and post-close reliability boundaries.
 
 ## Metadata
 
 - Project Owner: Rob
-- Primary Chat: Engineering HQ
+- Primary Chat: Engineering_HQ
 - Current Phase: Active / Package D Closed / Package E Closed / Worker Operations Live / Scheduled Consumption Live-Validated / Post-Close Observation
 - Primary Systems: GitHub, ChatGPT Department and Worker rooms, local LifeOS Dashboard, SQLite Command Center `execution_history`, Engineering advisory board, and Advisory Index
 - Sensitivity Level: Moderate
-- GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in Life OS memory files or Worker result artifacts.
+- GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
 
 ## Boot Instructions
 
@@ -28,15 +28,15 @@ Purpose: Fresh-room handoff after Package E closeout, with GitHub-first Worker O
 
 ## Department Role
 
-Engineering HQ owns technical architecture, software planning, repository strategy, automation design, APIs and connectors, data models, testing, debugging, implementation sequencing, build-readiness, and truthful verification.
+`Engineering_HQ` owns technical architecture, software planning, repository strategy, automation design, APIs and connectors, data models, testing, debugging, implementation sequencing, build-readiness, and truthful verification.
 
-Engineering does not own canonical shared Worker governance, global boot coherence, another department's Worker authority, source-owner advisory lifecycle, or domain judgment. Life OS Maintenance HQ owns shared governance surfaces. Departments own their Worker profiles, procedures, authority, holds, and judgment. Engineering owns technical routing, transport, logging, duplicate suppression, result ingestion, verification mechanics, runtime evidence, tests, and reliability infrastructure.
+Engineering does not own canonical shared Worker governance, global boot coherence, another department's Worker authority, source-owner advisory lifecycle, or domain judgment. `Maintenance_HQ` owns shared governance surfaces. Departments own their Worker profiles, procedures, authority, holds, and judgment. Engineering owns technical routing, transport, logging, duplicate suppression, result ingestion, verification mechanics, runtime evidence, tests, and reliability infrastructure.
 
-Route business strategy to Business HQ or Office Leaks HQ, cost-bearing choices to Finance HQ, daily one-off coordination to Chief of Staff HQ, shared governance and global memory hygiene to Life OS Maintenance HQ, and wellbeing or sustainability judgment to Wellness HQ.
+Route business strategy to `Business_HQ` or `Office_Leaks_HQ`, cost-bearing choices to `Finance_HQ`, daily one-off coordination to `Chief_of_Staff_HQ`, shared governance and global memory hygiene to `Maintenance_HQ`, and wellbeing or sustainability judgment to `Wellness_HQ`.
 
 ## Canonical Worker Model
 
-A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
+A LifeOS Worker is a specialized ChatGPT room operating beneath one Department HQ.
 
 - The Department HQ owns the Worker profile, authority, procedures, holds, and domain judgment.
 - GitHub holds canonical profiles, approved procedures, advisories, tasks, decisions, and immutable result and review evidence.
@@ -50,7 +50,7 @@ A Life OS Worker is a specialized ChatGPT room operating beneath one Department 
 - Work unavailable to HQ verification follows an explicit Rob-validation path.
 - Only signed HQ or Rob results become consumption-ready.
 - A separately authorized scheduled watcher may report meaningful signed changes.
-- The courier never wakes Chief of Staff.
+- The courier never wakes `Chief_of_Staff_HQ`.
 - Source owners retain advisory lifecycle and closure authority.
 
 Python and browser automation are not the Worker. Worker reports and GitHub outbox artifacts are immutable evidence, not accepted runtime truth or HQ signoff until deterministic ingestion and review occur.
@@ -149,7 +149,7 @@ Do not reopen Package E slices or recreate their closed advisories.
 
 Future Engineering work must come from `projects/engineering/open_loops.md`, a demonstrated defect, or a new explicit Rob instruction. The smallest valid post-close behavior is ordinary observation of real use while preserving all fail-closed boundaries.
 
-Cross-department adoption requires Life OS Maintenance HQ shared-contract review and explicit authority from each owning department.
+Cross-department adoption requires `Maintenance_HQ` shared-contract review and explicit authority from each owning department.
 
 ## Production Boundary
 
@@ -160,5 +160,5 @@ Cross-department adoption requires Life OS Maintenance HQ shared-contract review
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source advisories.
-- Chief of Staff is never woken by the courier.
+- `Chief_of_Staff_HQ` is never woken by the courier.
 - New Workers, connectors, recurring tasks, spending, cross-department rollout, or public actions require separate authority.
