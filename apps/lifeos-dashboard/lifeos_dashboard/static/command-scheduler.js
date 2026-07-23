@@ -31,14 +31,14 @@ let editingId = null;
 let editingSnapshot = null;
 
 const destinationLabels = {
-  hub: "LifeOS HQ",
-  main: "Chief of Staff HQ",
-  engineering: "Engineering HQ",
-  logistics: "Life OS Maintenance HQ",
-  business: "Business HQ",
-  "office-leaks": "Office Leaks HQ",
-  finance: "Finance HQ",
-  wellness: "Wellness HQ",
+  hub: "LifeOS_HQ",
+  main: "Chief_of_Staff_HQ",
+  engineering: "Engineering_HQ",
+  logistics: "Maintenance_HQ",
+  business: "Business_HQ",
+  "office-leaks": "Office_Leaks_HQ",
+  finance: "Finance_HQ",
+  wellness: "Wellness_HQ",
 };
 
 const escapeHtml = (value) => String(value ?? "")
