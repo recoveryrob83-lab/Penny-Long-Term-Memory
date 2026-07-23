@@ -1,7 +1,7 @@
 # Connector Reliability Operating Pattern
 
 Updated: 2026-07-18
-Purpose: Durable Life OS operating pattern for connector-heavy work, verified-write behavior, and fallback workflows.
+Purpose: Durable LifeOS operating pattern for connector-heavy work, verified-write behavior, and fallback workflows.
 
 ## Status
 
@@ -27,7 +27,7 @@ Treat high-sensitivity financial connector sessions as isolated unless later tes
 8. Preserve the source system's authority and do not let connector convenience create duplicate truth elsewhere.
 9. For Drive artifacts with sensitive-field wording or private, medical, or benefits-style structure, consider a Gemini handoff for artifact generation or versioned update.
 10. Use Penny / ChatGPT for orchestration, prompt design, GitHub state, audit, advisory routing, and Drive file placement when connector-safe.
-11. Treat Gemini as an optional Google Workspace artifact generator, not a default Life OS dependency and not a complete in-place Drive record maintainer.
+11. Treat Gemini as an optional Google Workspace artifact generator, not a default LifeOS dependency and not a complete in-place Drive record maintainer.
 12. Keep GitHub records abstract. Store detailed working records in their natural source systems.
 13. Treat generated Drive artifacts as unverified until Rob or Penny checks the result.
 14. Treat Finances connector work as Finance-only session work. Do not mix Finances or Plaid-style operations with GitHub, Drive, Gmail, Instacart, or other connector workflows in the same active session.
@@ -35,7 +35,7 @@ Treat high-sensitivity financial connector sessions as isolated unless later tes
 
 ## Trello Connector Write Protocol
 
-This protocol applies to every Life OS room or department authorized to perform Trello writes.
+This protocol applies to every LifeOS room or department authorized to perform Trello writes.
 
 ### Observed Reliability Boundary
 
@@ -89,7 +89,7 @@ The verified live Trello state is the operational truth. Do not report a write a
 
 ### Source-System Boundary
 
-Trello remains the Life OS capture, possibility, attention, and flow layer.
+Trello remains the LifeOS capture, possibility, attention, and flow layer.
 
 This protocol authorizes safer Trello writes only. It does not authorize:
 
@@ -103,7 +103,7 @@ Any downstream promotion or commitment must pass its own ownership, durable-writ
 
 ## Finances-Only Session Pattern
 
-Observed Life OS operating pattern:
+Observed LifeOS operating pattern:
 
 Treat Finances sessions as connector-isolated until demonstrated otherwise.
 
@@ -111,7 +111,7 @@ Recommended workflow:
 
 1. Finance chat performs Finances-only work.
 2. Finance reports an abstract result to Rob.
-3. Engineering, Life OS Maintenance HQ, or Finance records abstract GitHub notes later from a separate GitHub-capable chat if needed.
+3. `Engineering_HQ`, `Maintenance_HQ`, or `Finance_HQ` records abstract GitHub notes later from a separate GitHub-capable chat if needed.
 4. No financial account names, balances, transactions, credentials, Plaid details, benefit identifiers, or financial documents should be recorded in GitHub.
 
 This is an observed operating pattern, not a confirmed claim about platform internals.
@@ -121,8 +121,8 @@ This is an observed operating pattern, not a confirmed claim about platform inte
 - Penny / ChatGPT: planning, prompt design, GitHub state, audit, routing, connector-safe file placement, verification, and truthful live-state reporting.
 - Gemini: optional Google Workspace artifact generation or versioned update when direct Drive writes are risky.
 - Finance chat: Finances-only connector work and abstract reporting to Rob.
-- Life OS Maintenance HQ: global connector operating rules, source-boundary protection, and cross-system reconciliation.
-- Engineering HQ: connector architecture, compensating mechanisms, reliability tooling, and technical investigation when separately authorized.
+- `Maintenance_HQ`: global connector operating rules, source-boundary protection, and cross-system reconciliation.
+- `Engineering_HQ`: connector architecture, compensating mechanisms, reliability tooling, and technical investigation when separately authorized.
 - Rob: final authority and manual verification or placement when tool limitations require it.
 - GitHub: abstract operational memory.
 - Drive: detailed working records and artifacts.
@@ -131,4 +131,4 @@ This is an observed operating pattern, not a confirmed claim about platform inte
 
 ## Reliability Note
 
-This pattern does not mean connector issues are solved. It is a risk-reduction pattern based on observed Life OS connector behavior, mandatory live verification, and disciplined duplicate prevention.
+This pattern does not mean connector issues are solved. It is a risk-reduction pattern based on observed LifeOS connector behavior, mandatory live verification, and disciplined duplicate prevention.
