@@ -1,0 +1,25 @@
+{
+  "schema_id": "lifeos_worker_hq_review",
+  "schema_version": 1,
+  "artifact_type": "hq_review",
+  "attempt": 1,
+  "run_id": "RUN-ADV-20260722-049-R1",
+  "worker_id": "engineering_worker",
+  "reviewing_hq": "Engineering HQ",
+  "report_path": "projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/report-001.json",
+  "review_state": "ROB_VALIDATION_REQUIRED",
+  "report_integrity_state": "valid",
+  "authority_compliance_state": "compliant",
+  "work_verification_state": "unavailable",
+  "evidence_checked": [
+    "report:projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/report-001.json@db06267b84041d894ba3981482ec0d72339e6e54",
+    "report-checksum:sha256:4f997e409c833ef0f51a8e8acbbbe2f389a7cc30c9c272bbd81d570a2ac9b409",
+    "report-creation-commit:f2569354a718f273516b852743f6c10525ba6a0c",
+    "assignment:coordination/boards/engineering.md@0625f3e1e27ae43ae4f1f7a17fc78688416340cf",
+    "procedure:projects/engineering/procedures/engineering_worker_rob_validation_pilot.md@c16ddcd7d6d8dc97232bb4fc0718c31ef2515af4",
+    "package:projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md@69153a28fced3523053dd43d81812e8486041a24"
+  ],
+  "reason": "The immutable report, creation scope, canonical assignment, authority, repository evidence, and independently inspectable work are valid and compliant. Engineering HQ cannot independently inspect the decisive final Worker-chat marker without violating the courier no-response-scraping boundary. Rob must confirm whether the exact marker LIFEOS_ROB_OBSERVATION=SLICE6_ADV_20260722_049_VISIBLE was observed in the Engineering_Worker final response.",
+  "ready_for_consumption": false,
+  "requires_rob_validation": true
+}
