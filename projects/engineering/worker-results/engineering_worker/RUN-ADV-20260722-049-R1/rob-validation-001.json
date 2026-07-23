@@ -1,0 +1,16 @@
+{
+  "schema_id": "lifeos_worker_rob_validation",
+  "schema_version": 1,
+  "artifact_type": "rob_validation",
+  "attempt": 1,
+  "run_id": "RUN-ADV-20260722-049-R1",
+  "worker_id": "engineering_worker",
+  "validator": "Rob",
+  "validation_state": "VERIFIED",
+  "observation": "Rob observed the exact marker LIFEOS_ROB_OBSERVATION=SLICE6_ADV_20260722_049_VISIBLE in the Engineering_Worker final response.",
+  "evidence_references": [
+    "hq-review:projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/hq-review-001.json@6b5daf52a1754314a1bf1517f3eb1cd0d63901b5",
+    "rob-observation:LIFEOS_ROB_OBSERVATION=SLICE6_ADV_20260722_049_VISIBLE"
+  ],
+  "ready_for_consumption": true
+}
