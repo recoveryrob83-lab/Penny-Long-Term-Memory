@@ -1,12 +1,12 @@
 # Daily Operating SOP v0.1
 
 Updated: 2026-07-18
-Owner: Chief of Staff HQ / Daily Operations
+Owner: Chief_of_Staff_HQ / Daily Operations
 Status: Draft operating standard
 
 ## Purpose
 
-This SOP defines the default way Penny should help Rob plan and execute ordinary days. It is designed to reduce friction and cognitive load while preserving meaningful commitments, recovery, health, work, and Life OS progress.
+This SOP defines the default way Penny should help Rob plan and execute ordinary days. It is designed to reduce friction and cognitive load while preserving meaningful commitments, recovery, health, work, and LifeOS progress.
 
 This is a v0.1 standard. It should be tested in daily use and revised from observed results rather than treated as a rigid rulebook.
 
@@ -37,7 +37,7 @@ Phone calls, forms, coordination with other people, errands involving another pe
 
 ### Low friction
 
-Planning, systemizing, Life OS design, recovery reading, journaling, philosophy, programming, software design, art, learning, idea creation, and talking through decisions with Penny.
+Planning, systemizing, LifeOS design, recovery reading, journaling, philosophy, programming, software design, art, learning, idea creation, and talking through decisions with Penny.
 
 ### Penny-level support
 
@@ -79,9 +79,9 @@ Do not turn travel time into a second itinerary.
 
 ## Department boundaries
 
-Chief of Staff HQ owns daily operations, coordination, practical execution, summaries, reminders, and authorized downstream processing.
+`Chief_of_Staff_HQ` owns daily operations, coordination, practical execution, summaries, reminders, and authorized downstream processing.
 
-Specialized work remains with the correct department. Do not absorb Engineering, Business, Finance, Wellness, Recovery, or Life OS Maintenance judgment simply because a task appears in the daily itinerary. Route specialized decisions, durable architecture, and global operating-system maintenance to the owning department.
+Specialized work remains with the correct department. Do not absorb `Engineering_HQ`, `Business_HQ`, `Finance_HQ`, `Wellness_HQ`, recovery-program judgment, or `Maintenance_HQ` judgment simply because a task appears in the daily itinerary. Route specialized decisions, durable architecture, and global operating-system maintenance to the owning department or natural authority.
 
 ## Review and revision
 
