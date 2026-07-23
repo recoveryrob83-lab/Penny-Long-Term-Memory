@@ -1,11 +1,11 @@
 # Department Notebooks
 
 Updated: 2026-07-18
-Purpose: Standard Life OS workflow for durable department reasoning, evidence, decisions, experiments, validation, discoveries, and historical context that should not be confused with raw idea intake or operational state.
+Purpose: Standard LifeOS workflow for durable department reasoning, evidence, decisions, experiments, validation, discoveries, and historical context that should not be confused with raw idea intake or operational state.
 
 ## Status
 
-Adopted as an optional Life OS standard pattern.
+Adopted as an optional LifeOS standard pattern.
 
 ## Core Boundary
 
@@ -56,7 +56,7 @@ Department Notebooks are not:
 - Department Event Inbox entries;
 - automatic sources of new commitments.
 
-A notebook entry is not routed, acknowledged, scheduled, prioritized, or closed merely because it exists. Notebook material may be read during deliberate review or hub synchronization without being promoted into operational state.
+A notebook entry is not routed, acknowledged, scheduled, prioritized, or closed merely because it exists. Notebook material may be read during deliberate review or Hub synchronization without being promoted into operational state.
 
 ## Standard Locations
 
@@ -110,13 +110,11 @@ Purpose: Durable reasoning, evidence, decisions, validation, discoveries, and hi
 ## Notebook Rules
 
 This is not a raw idea inbox, advisory board, task list, open-loop tracker, or source of current operational truth.
-
 Raw ideas belong in Trello. Promote material here only when its durable knowledge value is clear.
 
 ## Notebook Leaves
 
 Leaf notes, if used, live in `projects/<department-folder>/notebook/`.
-
 Start with `projects/<department-folder>/notebook/README.md` before reading leaf notes.
 
 ## Notes
@@ -159,7 +157,6 @@ Purpose: Routing index for durable notebook leaf records.
 ## Notebook Rules
 
 Notebook leaves preserve promoted durable knowledge.
-
 They are not raw idea captures, advisories, tasks, open loops, or operational source-of-truth records.
 
 ## Naming Convention
@@ -274,11 +271,11 @@ Department Notebooks are checked when:
 - a department is doing deliberate reflection, validation review, or cleanup;
 - a department handoff says the notebook matters for current work;
 - a notebook record may inform a specific current decision;
-- Main Assistant runs an explicit morning, nightly, sync, or notebook-review command.
+- `Chief_of_Staff_HQ` runs an explicit morning, nightly, sync, or notebook-review command.
 
 Do not read full notebook history during ordinary boots or routine conversation.
 
-For the central Main Assistant hub:
+For central `Chief_of_Staff_HQ` review:
 
 - Morning sync reads entries from today and the previous calendar day.
 - Nightly sync reads entries from the current calendar day.
@@ -292,16 +289,16 @@ When reading by date:
 1. Search active department notebook hubs and notebook-leaf indexes.
 2. Read only entries or leaves whose date matches the requested scope.
 3. Treat the review as read-only unless Rob separately authorizes promotion or file changes.
-4. Summarize cross-department implications for the hub without converting every note into a task or open loop.
+4. Summarize cross-department implications for the Hub without converting every note into a task or open loop.
 5. Prefer bounded context over exhaustive history.
 
 ## Scheduled Worker Guidance
 
-When a scheduled sync worker is explicitly asked to review notebook material, it should read the department's notebook index or hub first.
+When a scheduled sync Worker is explicitly asked to review notebook material, it should read the department's notebook index or hub first.
 
 If notebook leaves exist, read `projects/<department-folder>/notebook/README.md` before opening individual leaf notes.
 
-Scheduled workers should remain read-only by default unless Rob explicitly authorizes writes.
+Scheduled Workers should remain read-only by default unless Rob explicitly authorizes writes.
 
 Workers may capture raw ideas into their authorized Trello or intake destination, but they may not promote material into notebooks without explicit authorization.
 
