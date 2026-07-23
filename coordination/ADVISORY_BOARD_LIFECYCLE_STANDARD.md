@@ -1,7 +1,7 @@
-# Life OS Advisory Board Lifecycle Standard
+# LifeOS Advisory Board Lifecycle Standard
 
 Updated: 2026-07-10
-Owner: Life Logistics HQ
+Owner: Maintenance_HQ
 Purpose: Keep advisory boards concise, accurate, boot-friendly, and auditable without losing durable history.
 
 ## Core Principle
@@ -38,7 +38,7 @@ Current operational boards include:
 - `coordination/boards/business.md`
 - `coordination/boards/finance.md`
 - `coordination/boards/office-leaks.md`
-- a future Life Logistics board, if one is created
+- a future `Maintenance_HQ` board, if one is created
 
 Operational boards use the bounded recent-working-set rules in this standard.
 
@@ -88,7 +88,7 @@ Default for operational boards:
 - keep completed advisories from the last 30 days,
 - whichever produces the smaller practical working set.
 
-Life Logistics may adjust this threshold when actual use shows a better balance.
+`Maintenance_HQ` may adjust this threshold when actual use shows a better balance.
 
 Do not remove a completed advisory from the live board while:
 
@@ -191,17 +191,17 @@ Do not leave known stale operational state merely to avoid a justified compactio
 
 ## Ownership
 
-- Life Logistics HQ owns this standard, board hygiene reviews, and compaction scheduling.
+- `Maintenance_HQ` owns this standard, board hygiene reviews, and compaction scheduling.
 - Source departments own the accuracy of their advisory text and completion outcomes.
 - Target departments report acknowledgement or implementation.
-- Chief Engineering Penny may advise on file structure, connector safety, and auditability.
+- `Engineering_HQ` may advise on file structure, connector safety, and auditability.
 - Rob is final authority for archive deletion, major restructuring, exceptions, or reactivation of retired routing surfaces.
 
 ## Review Cadence
 
 Review operational boards during:
 
-- meaningful Life Logistics housekeeping,
+- meaningful `Maintenance_HQ` housekeeping,
 - morning or nightly sync when board size or inconsistency is apparent,
 - advisory closure that requires a large write,
 - or explicit cleanup requests.
