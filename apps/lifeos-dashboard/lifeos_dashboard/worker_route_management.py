@@ -27,10 +27,18 @@ class WorkerRouteWitness:
     route_revision: int
 
 
-CaptureUrl = Callable[[str], str]
+@dataclass(frozen=True)
+class CapturedConversation:
+    """One normalized ChatGPT conversation target observed through local CDP."""
+
+    url: str
+    title: str
 
 
-def capture_chatgpt_conversation_url(cdp_endpoint: str) -> str:
+CaptureConversation = Callable[[str], CapturedConversation]
+
+
+def capture_chatgpt_conversation(cdp_endpoint: str) -> CapturedConversation:
     """Read exactly one ChatGPT conversation page from the local CDP target list."""
 
     target_url = cdp_endpoint.rstrip("/") + "/json/list"
@@ -45,7 +53,7 @@ def capture_chatgpt_conversation_url(cdp_endpoint: str) -> str:
     if not isinstance(payload, list):
         raise WorkerRuntimeError("The local browser target list has the wrong shape.")
 
-    candidates: set[str] = set()
+    candidates: dict[str, str] = {}
     for item in payload:
         if not isinstance(item, dict) or str(item.get("type") or "") != "page":
             continue
@@ -54,14 +62,19 @@ def capture_chatgpt_conversation_url(cdp_endpoint: str) -> str:
         except WorkerRuntimeError:
             continue
         if normalized is not None:
-            candidates.add(normalized)
+            candidates[normalized] = str(item.get("title") or "").strip()
 
     if len(candidates) != 1:
         raise WorkerRuntimeError(
             "Route capture requires exactly one open ChatGPT conversation tab; "
             f"found {len(candidates)}. Nothing was changed."
         )
-    return next(iter(candidates))
+    url, title = next(iter(candidates.items()))
+    if not title:
+        raise WorkerRuntimeError(
+            "The open ChatGPT conversation has no readable browser title. Nothing was changed."
+        )
+    return CapturedConversation(url=url, title=title)
 
 
 class WorkerRouteManager:
@@ -72,13 +85,13 @@ class WorkerRouteManager:
         command_center: CommandCenterService,
         *,
         cdp_endpoint: str = DEFAULT_CDP_ENDPOINT,
-        capture_url: CaptureUrl | None = None,
+        capture_conversation: CaptureConversation | None = None,
     ) -> None:
         self.command_center = command_center
         self.database_path = Path(command_center.store.database_path)
         self.runtime = WorkerRuntimeService(self.database_path)
         self.cdp_endpoint = cdp_endpoint
-        self._capture_url = capture_url or capture_chatgpt_conversation_url
+        self._capture_conversation = capture_conversation or capture_chatgpt_conversation
 
     def _route_payload(self, entry: WorkerRegistryEntry) -> dict[str, object]:
         route = self.runtime.store.route_state(entry.worker_id)
@@ -130,10 +143,17 @@ class WorkerRouteManager:
                     "Refresh before trying again. Nothing was changed."
                 )
 
-            captured = _conversation_url(self._capture_url(self.cdp_endpoint))
+            captured_target = self._capture_conversation(self.cdp_endpoint)
+            captured = _conversation_url(captured_target.url)
             if captured is None:
                 raise WorkerRuntimeError(
                     "The active browser page is not a ChatGPT conversation. Nothing was changed."
+                )
+            if current.chat_title.casefold() not in captured_target.title.casefold():
+                raise WorkerRuntimeError(
+                    "The sole open ChatGPT conversation does not match the selected Worker title "
+                    f"{current.chat_title!r}. Observed browser title: "
+                    f"{captured_target.title!r}. Nothing was changed."
                 )
             if captured == current.conversation_url:
                 return {
@@ -320,9 +340,10 @@ class RouteAwareWorkerOperationsService(WorkerOperationsService):
 
 
 __all__ = [
+    "CapturedConversation",
     "ENGINEERING_CANARY_WORKER_ID",
     "RouteAwareWorkerOperationsService",
     "WorkerRouteManager",
     "WorkerRouteWitness",
-    "capture_chatgpt_conversation_url",
+    "capture_chatgpt_conversation",
 ]
