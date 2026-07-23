@@ -1,5 +1,6 @@
 import json
 import sqlite3
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -7,6 +8,7 @@ import pytest
 from lifeos_dashboard.command_center import CommandCenterService
 from lifeos_dashboard.worker_route_management import (
     CapturedConversation,
+    RouteAwareWorkerOperationsService,
     WorkerRouteManager,
     capture_chatgpt_conversation,
 )
@@ -234,6 +236,74 @@ def test_canary_promotion_rejects_route_drift(tmp_path: Path) -> None:
                 "user_turn_id": "conversation-turn-45",
             },
         )
+
+
+def test_dashboard_canary_uses_authoritative_database_and_promotes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    database = tmp_path / "custom-command-center.sqlite3"
+    command_center = CommandCenterService(tmp_path, database_path=database)
+    service = RouteAwareWorkerOperationsService(
+        command_center,
+        tmp_path,
+        cdp_endpoint="http://127.0.0.1:9222",
+    )
+    service.worker_center.runtime.register_worker(
+        WorkerRegistryEntry(
+            worker_id="engineering_worker",
+            chat_title="Engineering_Worker",
+            owning_department="engineering",
+            profile_path="projects/engineering/workers/engineering_worker.md",
+            profile_version=1,
+            conversation_url=CURRENT_URL,
+            route_revision=1,
+        )
+    )
+    service.worker_center.runtime.set_route_state(
+        "engineering_worker",
+        "unknown",
+        pause_reason="Awaiting canary.",
+    )
+    observed_command: list[str] = []
+    receipt = {
+        "status": "succeeded",
+        "durable_authority_created": False,
+        "returned_to_source": True,
+        "user_turn_id": "conversation-turn-46",
+    }
+    stdout = (
+        "SYNTHETIC_BROWSER_DISPATCH_OK\n"
+        "LIFEOS_SYNTHETIC_BROWSER_RECEIPT=" + json.dumps(receipt)
+    )
+
+    def fake_run(command, **kwargs):
+        del kwargs
+        observed_command.extend(command)
+        return subprocess.CompletedProcess(
+            args=command,
+            returncode=0,
+            stdout=stdout,
+            stderr="",
+        )
+
+    monkeypatch.setattr(
+        "lifeos_dashboard.worker_route_management.subprocess.run",
+        fake_run,
+    )
+
+    result = service.courier_self_test(
+        confirm_send=True,
+        timeout_seconds=60,
+    )
+
+    database_index = observed_command.index("--database-path")
+    assert Path(observed_command[database_index + 1]) == database
+    assert "verified and available" in result["route_promotion"]["message"]
+    route = service.routes.runtime.store.route_state("engineering_worker")
+    assert route is not None
+    assert route.availability == "available"
+    assert route.pause_reason is None
 
 
 class FakeResponse:
