@@ -6,9 +6,28 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
 
-No Engineering-board advisories are currently open.
+### ADV-20260723-052 — Verify Chief of Staff advisory watcher destination
 
-`ADV-20260718-042` remains open on `coordination/boards/main-assistant.md` under its own source owner. Package E closeout does not close or alter it.
+- Date: 2026-07-23
+- From: Engineering HQ
+- To: Chief of Staff HQ
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Record Class: Read-only scheduled-watcher routing test
+- Authorization Source: `ROB_COS_ADVISORY_WATCHER_DESTINATION_TEST_20260723`
+- Requested Observation: The hourly Chief of Staff advisory watcher should discover this new open advisory and report it in the existing Chief of Staff HQ conversation.
+- Authorized Action: Read and report this advisory only.
+- Worker Dispatch Authorized: false
+- HQ Wake Authorized: false
+- New Chat Creation Authorized: false
+- Connector Write Authorized: false
+- External Action Authorized: false
+- Follow-On Work Authorized: false
+- Dashboard Execution Authorized: false
+- Completion Condition: Rob confirms that the watcher reported `ADV-20260723-052` in the existing Chief of Staff HQ conversation without spawning a new chat or triggering any other work.
+- Closure Authority: Engineering HQ after Rob confirms the observed watcher behavior.
+
+This advisory exists solely to test watcher ownership and destination after Rob deleted the Engineering-attached task and recreated the hourly watcher from Chief of Staff HQ. It does not authorize Chief of Staff, Engineering, a Worker, the dashboard, or the watcher to create work, change priority, modify records, dispatch messages, close the advisory, or perform any action beyond the scheduled read-only report.
 
 ## Recently Acknowledged / Implemented Advisories
 
