@@ -1,4 +1,4 @@
-# Engineering HQ Open Loops
+# Engineering_HQ Open Loops
 
 Updated: 2026-07-23
 
@@ -16,17 +16,17 @@ Updated: 2026-07-23
 | Open | Normal | Connector health and retry policy | Define read and write health states, bounded retry rules, stop and backoff triggers, and degraded-mode fallback when a concrete implementation package is authorized | Use dashboard caches, guarded Git sync, browser safety gates, Worker duplicate suppression, one-shot HQ wake claims, and verified connector read-back as evidence patterns |
 | Open | Normal | Worker reliability evidence | Compare synthetic and real pilot results against `coordination/WORKER_EXECUTION_CONTRACT.md` before proposing additional Workers | Package E proved the Engineering pilot. Cross-department rollout remains deferred and must not be inferred from pilot success |
 | Open | Normal | Office Leaks delivery architecture | Continue one-problem local-service-office cleanup playbooks as Business requirements mature | Preserve mechanical workflow and human-system layers |
-| Open | Normal | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to Finance HQ | Finance owns money and paperwork |
+| Open | Normal | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to `Finance_HQ` | Finance owns money and paperwork |
 | Open | Normal | Software repository strategy | Keep LifeOS as the runtime mirror and use separate repositories for educational and future standalone projects | Revisit dashboard extraction only if implementation expands materially |
 | Paused | Low | Optional Python canonical source resolver | Do not implement unless operational evidence demonstrates a concrete reliability, security, or scale gap outside existing deterministic parsing | Python may provide defense in depth but is not the Worker and must not become the owner or interpreter of department judgment |
 | Paused | Low | Canonical prompt transport verification | Do not resume the general composer investigation without demonstrated failure | Preserve validated marker, hydration, exact-destination, strict new-turn witness, and one-tab paths. Full-text equality and broad focus or timeout experiments remain out of scope |
-| Paused | Low | Engineering HQ Daily Sync | Keep paused until Rob explicitly resumes it | Scheduler production reliability is live-validated. This unattended task remains paused by deliberate operating choice, not an unresolved technical gate |
+| Paused | Low | Engineering_HQ Daily Sync | Keep paused until Rob explicitly resumes it | Scheduler production reliability is live-validated. This unattended task remains paused by deliberate operating choice, not an unresolved technical gate |
 
 ## Waiting / Deferred
 
 | Status | Item | Owner / Trigger | Notes |
 |---|---|---|---|
-| Waiting | Cross-department Worker result-outbox adoption | Life OS Maintenance HQ shared-contract review plus explicit authorization from each owning department | Package E closed as an Engineering-only pilot. No universal Worker write authority or cross-department activation was created |
+| Waiting | Cross-department Worker result-outbox adoption | `Maintenance_HQ` shared-contract review plus explicit authorization from each owning department | Package E closed as an Engineering-only pilot. No universal Worker write authority or cross-department activation was created |
 | Deferred | Human-readable Worker envelope summary | Rob authorizes a future usability enhancement after demonstrated need | Package E closeout explicitly deferred this display-only enhancement. JSON remains authoritative; no safety or authority dependency may be placed on a separate display copy |
 | Waiting | Gmail dashboard adapter | First client, multiple active leads, repeated manual inbox checking, or demonstrated risk of missing a client message | Current Gmail use does not justify another adapter |
 | Waiting | General Drive dashboard adapter | Recurring client folders, proposals, deliverables, approvals, or working documents needing dashboard shortcuts | The bounded scheduler Sheet mirror is separate and implemented; general Drive browsing remains deferred |
