@@ -1,13 +1,13 @@
-# Life OS Maintenance HQ Session Handoff
+# Maintenance_HQ Session Handoff
 
 Updated: 2026-07-19
-Project: Life OS Maintenance HQ
+Project: Maintenance_HQ
 Purpose: Project-specific handoff for global GitHub maintenance, boot integrity, shared governance, shared execution contracts, audits, migrations, source boundaries, and system reconciliation.
 
 ## Metadata
 
 - Project Owner: Rob
-- Primary Chat: Life OS Maintenance HQ
+- Primary Chat: Maintenance_HQ
 - Current Phase: Active / Shared-Contract Integrity and Operational Reconciliation
 - Sensitivity Level: Moderate
 - Canonical Filesystem Path: `projects/life-logistics-hq/`
@@ -17,24 +17,24 @@ Purpose: Project-specific handoff for global GitHub maintenance, boot integrity,
 
 Read `projects/life-logistics-hq/DEPARTMENT_IDENTITY.md`.
 
-Life OS Maintenance HQ is the official successor to the former Logistics HQ role. The display and authority name changed; the filesystem path remains unchanged.
+`Maintenance_HQ` is the official successor to the former Logistics role. The display and authority name changed; the filesystem path remains unchanged.
 
-Maintenance protects the Life OS operating system through global GitHub coherence, universal boot integrity, shared operating rules, system open-loop hygiene, advisory infrastructure, repository structure, audits, source-boundary enforcement, Worker-profile conventions, canonical shared execution contracts, and reconciliation between the Drive Chief's Manual, Project Instructions, and GitHub implementation.
+Maintenance protects the LifeOS operating system through global GitHub coherence, universal boot integrity, shared operating rules, system open-loop hygiene, advisory infrastructure, repository structure, audits, source-boundary enforcement, Worker-profile conventions, canonical shared execution contracts, and reconciliation between the Drive Chief's Manual, Project Instructions, and GitHub implementation.
 
-Chief of Staff HQ is Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, Hub chair, routing desk, report receiver, and follow-through coordinator.
+`Chief_of_Staff_HQ` is Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, Hub chair, routing desk, report receiver, and follow-through coordinator.
 
 ## Current Eight-Room Architecture
 
-- LifeOS HQ, shared meeting room
-- Chief of Staff HQ
-- Life OS Maintenance HQ
-- Engineering HQ
-- Finance HQ
-- Business HQ
-- Office Leaks HQ
-- Wellness HQ
+- `LifeOS_HQ`, shared meeting room
+- `Maintenance_HQ`
+- `Engineering_HQ`
+- `Business_HQ`
+- `Office_Leaks_HQ`
+- `Finance_HQ`
+- `Chief_of_Staff_HQ`
+- `Wellness_HQ`
 
-LifeOS HQ is not a department and does not own an independent backlog. Real Hub actions transfer to one owning department and one authoritative destination.
+`LifeOS_HQ` is not a department and does not own an independent backlog. Real Hub actions transfer to one owning department and one authoritative destination.
 
 ## Current System State
 
@@ -56,15 +56,15 @@ LifeOS HQ is not a department and does not own an independent backlog. Real Hub 
 - `workers/penny-raw-capture/` and `workers/penny-inventory/` remain grandfathered compatibility pilots; the root `workers/` area is not the model for new Workers.
 - Desktop department automation and the Automation Command Center remain Engineering-owned implementation machinery.
 - Scheduled execution is not yet production-ready for fully unattended Windows operation.
-- Engineering HQ Daily Sync remains paused until Rob explicitly resumes it under an approved architecture.
+- Engineering_HQ Daily Sync remains paused until Rob explicitly resumes it under an approved architecture.
 - The former Virtual Assistant Business subtree is archived at `archive/projects/virtual-assistant-business/`; active Office Leaks authority remains at `projects/office-leaks-consulting/`.
 
 ## Role Boundaries
 
 - **Rob:** final authority for consequential decisions, exceptions, durable promotions, new authority classes, and operating-architecture changes.
-- **Chief of Staff HQ:** daily operations, executive-function support, Hub chairing, assignment routing, report reception, follow-through, and Rob-authorized direct routing into an existing Worker profile when no department judgment or exception is required.
-- **Life OS Maintenance HQ:** global boot integrity, global handoffs and operating rules, canonical shared execution contracts, Worker-profile conventions, shared coordination procedures, system-loop hygiene, advisory-index and board hygiene, repository paths, migrations, archives, audits, source boundaries, and system reconciliation.
-- **Engineering HQ:** technical architecture, routing-registry implementation, exact-title lookup, stable-ID transport, receiver state, advisory-revision deduplication, verification queues, wake suppression, dashboard implementation, automation, parsers, validators, testing, and technical rollover.
+- **`Chief_of_Staff_HQ`:** daily operations, executive-function support, Hub chairing, assignment routing, report reception, follow-through, and Rob-authorized direct routing into an existing Worker profile when no department judgment or exception is required.
+- **`Maintenance_HQ`:** global boot integrity, global handoffs and operating rules, canonical shared execution contracts, Worker-profile conventions, shared coordination procedures, system-loop hygiene, advisory-index and board hygiene, repository paths, migrations, archives, audits, source boundaries, and system reconciliation.
+- **`Engineering_HQ`:** technical architecture, routing-registry implementation, exact-title lookup, stable-ID transport, receiver state, advisory-revision deduplication, verification queues, wake suppression, dashboard implementation, automation, parsers, validators, testing, and technical rollover.
 - **Specialist Department HQs:** own routine state, judgment, Worker purpose, stable identity, authority, profiles, holds, verification, and retirement inside their own subtrees.
 - **Workers:** perform only bounded work authorized by the owning department's profile and the authoritative advisory, task definition, or schedule.
 
@@ -128,7 +128,7 @@ Read a source board only when the index or Rob routes Maintenance to a specific 
 - Preserve the two root pilots as grandfathered compatibility packages until separately migrated, retired, or relocated.
 - Keep guarded GitHub sync within its clean-and-strictly-behind boundary.
 - Keep unattended scheduling unapproved until Engineering produces sufficient reliability evidence and Rob authorizes production use.
-- Preserve the paused Engineering HQ Daily Sync state.
+- Preserve the paused Engineering_HQ Daily Sync state.
 - Preserve `archive/projects/virtual-assistant-business/` as historical evidence and keep active Office Leaks state at `projects/office-leaks-consulting/`.
 - Prefer small, verified GitHub edits over broad rewrites.
 
@@ -145,12 +145,12 @@ System-level coordination state:
 
 1. Preserve the canonical execution and Worker contracts through ordinary audits and meaningful-change maintenance.
 2. Keep profile-location, compatibility-pilot, and ownership pointers aligned across shared and Maintenance-owned files.
-3. Leave routing-registry, exact-title transport, receiver-state, revision-deduplication, verification-queue, wake-suppression, and technical rollover implementation to Engineering HQ.
+3. Leave routing-registry, exact-title transport, receiver-state, revision-deduplication, verification-queue, wake-suppression, and technical rollover implementation to `Engineering_HQ`.
 4. Route specialist profile creation or correction to the owning Department HQ only when a real Worker is activated or demonstrated drift exists.
 5. Use Role Drift Check when work begins moving into the wrong HQ.
 
 ## Notes for Next Penny
 
-This chat is Life OS Maintenance HQ. Protect the operating system, not every department's workload.
+This chat is `Maintenance_HQ`. Protect the operating system, not every department's workload.
 
-Boot reminder: LifeOS has one canonical HQ and Worker entry point, one shared execution protocol, and one universal Worker contract. New Worker profiles are department-owned and live under the department subtree. The root Raw Capture and Inventory packages are grandfathered compatibility pilots only. Maintenance owns shared contracts, boot coherence, profile conventions, audits, and reconciliation. Engineering owns routing and runtime implementation. Departments own Worker authority and profiles. Chief of Staff coordinates Rob-authorized execution. Rob decides.
+Boot reminder: LifeOS has one canonical HQ and Worker entry point, one shared execution protocol, and one universal Worker contract. New Worker profiles are department-owned and live under the department subtree. The root Raw Capture and Inventory packages are grandfathered compatibility pilots only. Maintenance owns shared contracts, boot coherence, profile conventions, audits, and reconciliation. Engineering owns routing and runtime implementation. Departments own Worker authority and profiles. `Chief_of_Staff_HQ` coordinates Rob-authorized execution. Rob decides.
