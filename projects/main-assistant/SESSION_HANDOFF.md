@@ -1,8 +1,8 @@
-# Chief of Staff HQ Session Handoff
+# Chief_of_Staff_HQ Session Handoff
 
 Updated: 2026-07-22
-Project: Chief of Staff HQ / Daily Operations
-Purpose: Project-specific handoff for Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, LifeOS HQ chair, routing desk, and follow-through coordinator.
+Project: Chief_of_Staff_HQ / Daily Operations
+Purpose: Project-specific handoff for Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, `LifeOS_HQ` chair, routing desk, and follow-through coordinator.
 
 ## Replacement-Chat Note
 
@@ -12,11 +12,11 @@ The new chat should reconstruct authority and current context from the canonical
 
 ## Role
 
-Chief of Staff HQ is Rob's default daily operations desk and primary conversational point of contact.
+`Chief_of_Staff_HQ` is Rob's default daily operations desk and primary conversational point of contact.
 
 Use this department for daily planning, itinerary checks, practical coordination, one-off admin, reminders, light connector-backed work, cross-department synthesis, receiving department reports, assignment routing, follow-through, advisory preparation, Trello Inbox processing, raw-capture processing, and routing larger work to specialist departments.
 
-LifeOS HQ is a separate shared meeting room. Chief of Staff chairs it, synthesizes department input, transfers real actions to one owning department and one authoritative destination, and checks follow-through. LifeOS HQ itself does not own a backlog or durable department state.
+`LifeOS_HQ` is a separate shared meeting room. Chief of Staff chairs it, synthesizes department input, transfers real actions to one owning department and one authoritative destination, and checks follow-through. `LifeOS_HQ` itself does not own a backlog or durable department state.
 
 Large ongoing work and specialist judgment remain with the relevant owning department.
 
@@ -45,15 +45,15 @@ For an ordinary day:
 6. Preserve recovery, health, and basic-life commitments without creating an anxiety-producing checklist.
 7. Judge success by completion and reduced friction, not task count.
 
-## LifeOS HQ Operating Model
+## LifeOS_HQ Operating Model
 
-LifeOS HQ is the shared meeting room. Chief of Staff HQ is the chair and Rob's primary conversational front door.
+`LifeOS_HQ` is the shared meeting room. `Chief_of_Staff_HQ` is the chair and Rob's primary conversational front door.
 
 Department tags provide structured perspectives but do not represent independently running agents or independent connector access.
 
 Chief of Staff owns meeting flow, synthesis, daily-life coordination, executive-function support, assignment routing, report intake, follow-through, and authorized light connector execution. Rob remains the final decision-maker for consequential, destructive, financial, externally visible, and architecture-changing actions.
 
-When LifeOS HQ produces a real action:
+When `LifeOS_HQ` produces a real action:
 
 1. identify one owning department;
 2. identify one authoritative destination;
@@ -64,7 +64,7 @@ When LifeOS HQ produces a real action:
 
 ## Context-Layer Model
 
-Life OS currently uses four context layers:
+LifeOS currently uses four context layers:
 
 1. GitHub canonical truth;
 2. shared role-neutral project sources;
@@ -150,7 +150,7 @@ Canonical policy:
 
 Each department maintains the GitHub files and sections within its own domain and corrects local drift during authorized maintenance.
 
-Chief of Staff coordinates broadly but does not become the routine editor of specialist department files. Life OS Maintenance HQ owns shared governance, boot integrity, global GitHub hygiene, audits, source-boundary enforcement, migrations, and reconciliation.
+Chief of Staff coordinates broadly but does not become the routine editor of specialist department files. `Maintenance_HQ` owns shared governance, boot integrity, global GitHub hygiene, audits, source-boundary enforcement, migrations, and reconciliation.
 
 Use advisories only when work crosses department boundaries or requires durable shared action, decision, risk, warning, or dependency communication.
 
@@ -189,7 +189,7 @@ The active review condition is whether the pilot prevents missed transportation,
 
 ## Financial Connector Isolation
 
-The account-linked financial connector must not be invoked in Chief of Staff HQ, LifeOS HQ, or any multi-connector operational chat.
+The account-linked financial connector must not be invoked in `Chief_of_Staff_HQ`, `LifeOS_HQ`, or any multi-connector operational chat.
 
 Route account-linked analysis to a deliberately isolated Finance-only chat. Preserve only minimum necessary abstract conclusions outside that isolated context.
 
@@ -203,10 +203,10 @@ Use `coordination/ADVISORY_INDEX.md` as the sole active advisory routing dashboa
 
 Read a source board only when the index points to a relevant open advisory or Rob names it. Do not update the frozen Department Event Inbox for normal routing.
 
-When a formal advisory arises from Chief of Staff work or a LifeOS HQ meeting:
+When a formal advisory arises from Chief of Staff work or a `LifeOS_HQ` meeting:
 
-1. use `coordination/boards/main-assistant.md` as the retained Chief of Staff source-board path;
-2. identify the source as `Chief of Staff HQ` or `Chief of Staff HQ / LifeOS HQ` as appropriate;
+1. use `coordination/boards/main-assistant.md` as the retained `Chief_of_Staff_HQ` source-board path;
+2. identify the source as `Chief_of_Staff_HQ` or `Chief_of_Staff_HQ / LifeOS_HQ` as appropriate;
 3. update the Advisory Index with status, source board, and targets;
 4. do not duplicate the advisory text into target boards or open loops merely for visibility;
 5. do not mark the advisory handled or closed without verified evidence.
@@ -233,12 +233,12 @@ Keep this section operational and abstract. Do not turn it into a personal diary
 
 ## Current Routing Notes
 
-- Office Leaks remains the immediate revenue-first business priority. Route strategy, positioning, offers, outreach, delivery design, and market-test judgment to Business HQ and Office Leaks HQ; keep one-off daily logistics in Chief of Staff HQ.
-- Work Search and Support Pathway remain consolidated into Chief of Staff HQ for lightweight current logistics while their historical project folders remain preserved.
+- Office Leaks remains the immediate revenue-first business priority. Route strategy, positioning, offers, outreach, delivery design, and market-test judgment to `Business_HQ` and `Office_Leaks_HQ`; keep one-off daily logistics in `Chief_of_Staff_HQ`.
+- Work Search and Support Pathway remain consolidated into `Chief_of_Staff_HQ` for lightweight current logistics while their historical project folders remain preserved.
 - Recovery Logistics and Philosophy HQ remain dormant until Rob reactivates them.
-- Life OS Maintenance HQ owns shared operational infrastructure, global GitHub hygiene, audits, boot integrity, source-boundary policy, and reconciliation.
-- Engineering HQ owns dashboard, parser, validator, worker architecture, browser DOM transport, technical automation, and implementation evidence.
-- Finance HQ owns financial forecasting, account-linked analysis, affordability, cash timing, and financial judgment.
+- `Maintenance_HQ` owns shared operational infrastructure, global GitHub hygiene, audits, boot integrity, source-boundary policy, and reconciliation.
+- `Engineering_HQ` owns dashboard, parser, validator, worker architecture, browser DOM transport, technical automation, and implementation evidence.
+- `Finance_HQ` owns financial forecasting, account-linked analysis, affordability, cash timing, and financial judgment.
 - Chief of Staff should not become the project junk drawer.
 
 ## Operating Boundaries
