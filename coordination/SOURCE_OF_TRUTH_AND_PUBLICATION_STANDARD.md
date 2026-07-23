@@ -1,13 +1,13 @@
-# Life OS Source-of-Truth and Publication Standard
+# LifeOS Source-of-Truth and Publication Standard
 
 Updated: 2026-07-04
-Purpose: Durable Life OS standard for deciding where information originates, where it is published, and which copy is authoritative.
+Purpose: Durable LifeOS standard for deciding where information originates, where it is published, and which copy is authoritative.
 
 ## Status
 
-Adopted as a Life OS architecture standard.
+Adopted as a LifeOS architecture standard.
 
-Source advisory: ADV-20260704-006 from Chief Engineering Penny.
+Source advisory: ADV-20260704-006 from Chief Engineering Penny. The source attribution is preserved as historical evidence and does not define the current room name.
 
 ## Core Principle
 
@@ -29,7 +29,7 @@ It is a one-authoritative-home rule.
 
 ## Default Ownership
 
-Default Life OS ownership:
+Default LifeOS ownership:
 
 - GitHub owns operational state, Markdown docs, structured records, logs, procedures, architecture, source artifacts, advisory records, department handoffs, and design standards.
 - Google Drive owns polished documents, human-readable artifacts, exported/publication copies, and native office files when they are the authoritative working document.
@@ -37,7 +37,7 @@ Default Life OS ownership:
 - Google Calendar owns timed commitments.
 - Todoist owns Rob-facing actionable tasks and reminders.
 - Gmail owns correspondence and communication evidence.
-- Life Logistics HQ owns coordination clarity and should know where the authoritative home is.
+- `Maintenance_HQ` owns coordination clarity for this standard and should know where the authoritative home is.
 
 ## Publication Rule
 
@@ -119,7 +119,7 @@ Connector reliability observations suggest that GitHub is better suited for repe
 
 Google Drive remains valuable for human-readable working records and native office artifacts, but repeated connector write/create operations can become fragile.
 
-Therefore, Life OS should reduce unnecessary Drive writes by keeping operational source in GitHub where appropriate and publishing to Drive only when a human-facing artifact is needed.
+Therefore, LifeOS should reduce unnecessary Drive writes by keeping operational source in GitHub where appropriate and publishing to Drive only when a human-facing artifact is needed.
 
 ## Design Principle
 
