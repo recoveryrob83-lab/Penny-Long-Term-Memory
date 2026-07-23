@@ -12,6 +12,7 @@ from difflib import SequenceMatcher
 from typing import Any
 
 from . import department_inspection as parser
+from .room_titles import CANONICAL_HQ_TITLES
 
 
 if not getattr(parser, "_RUNTIME_POLICY_TUNED", False):
@@ -19,16 +20,12 @@ if not getattr(parser, "_RUNTIME_POLICY_TUNED", False):
     # as generic Markdown decoration corrupted visible source references.
     parser.MARKDOWN_DECORATION = re.compile(r"[`*~]")
 
-    # Scope IDs and project paths are stable compatibility identifiers. Only the
-    # presentation labels change when a department adopts a new canonical name.
-    _canonical_scope_labels = {
-        "main-assistant": "Chief of Staff HQ",
-        "logistics": "Life OS Maintenance HQ",
-    }
+    # Scope IDs and project paths are stable compatibility identifiers. Presentation
+    # labels use the canonical exact ChatGPT room titles.
     parser.SCOPES = tuple(
         (
             scope_id,
-            _canonical_scope_labels.get(scope_id, label),
+            CANONICAL_HQ_TITLES.get(scope_id, label),
             project_path,
         )
         for scope_id, label, project_path in parser.SCOPES
