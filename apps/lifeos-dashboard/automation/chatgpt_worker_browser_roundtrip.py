@@ -153,12 +153,13 @@ def _worker_link(page, request: BrowserRoundTripRequest, *, timeout_ms: int):
 
 
 def _resolve_worker_url(page, request: BrowserRoundTripRequest, *, timeout_ms: int) -> str:
-    """Resolve the exact Worker URL from the sidebar before navigation."""
-    worker_link = _worker_link(page, request, timeout_ms=timeout_ms)
-    observed = normalize_chatgpt_url(str(worker_link.evaluate("element => element.href")))
-    if request.worker_url is not None and observed != request.worker_url:
-        raise BrowserRoundTripError("Worker sidebar link points to an unexpected conversation.")
-    return request.worker_url or observed
+    """Return the registered exact Worker URL without consulting the sidebar."""
+    del page, timeout_ms
+    if request.worker_url is None:
+        raise BrowserRoundTripError(
+            "Worker dispatch requires a registered exact conversation URL. Nothing was sent."
+        )
+    return request.worker_url
 
 
 def _verify_worker_identity(
@@ -168,12 +169,10 @@ def _verify_worker_identity(
     worker_url: str,
     timeout_ms: int,
 ) -> None:
-    """Verify the already-resolved Worker by its exact active conversation URL.
+    """Verify the loaded Worker against its registered exact conversation URL.
 
-    Sidebar visibility is required only while resolving the URL before navigation. After navigation,
-    room hydration, stable history, one visible empty composer, and no active generation are proven
-    by the readiness gate that calls this verifier. Requiring the selected sidebar anchor here would
-    reject the exact loaded room when ChatGPT folds the project behind Show more.
+    Room hydration, stable history, one visible empty composer, and no active generation are proven
+    by the readiness gate that calls this verifier. Sidebar state is not part of route identity.
     """
     del request, timeout_ms
     if normalize_chatgpt_url(page.url) != worker_url:

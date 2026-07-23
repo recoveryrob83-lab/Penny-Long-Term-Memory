@@ -86,9 +86,31 @@ def run_worker_browser_dispatch(
             empty_evidence,
         )
 
+    worker_url = str(entry.conversation_url or "").strip()
+    if not worker_url:
+        return (
+            worker_operations._base_result(
+                job,
+                entry.chat_title,
+                trigger=trigger,
+                status="refused",
+                exit_code=None,
+                started_at=started_at,
+                stdout="",
+                stderr="",
+                reason=(
+                    "Worker browser dispatch requires a registered exact conversation URL. "
+                    "Nothing was sent."
+                ),
+            ),
+            empty_evidence,
+        )
+
     command = [
         sys.executable,
         str(app_root / "automation" / "chatgpt_worker_browser_dispatch.py"),
+        "--worker-url",
+        worker_url,
         "--worker-chat-title",
         entry.chat_title,
         "--project-title",
