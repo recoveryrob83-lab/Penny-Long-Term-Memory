@@ -135,7 +135,6 @@ def _return_to_source_conversation(page, *, source_url: str, timeout_ms: int) ->
         raise
 
 
-
 def _matching_draft(text: str, request: BrowserRoundTripRequest) -> bool:
     """Identify only the exact run-linked draft left by a prior pre-submit failure."""
 
@@ -192,7 +191,7 @@ def _wait_for_dispatch_ready(
                 if snapshot == last_snapshot:
                     if stable_since is None:
                         stable_since = time.monotonic()
-                  if time.monotonic() - stable_since >= 2.0:
+                    if time.monotonic() - stable_since >= 2.0:
                         _verify_worker_identity(
                             page,
                             request,
@@ -201,7 +200,7 @@ def _wait_for_dispatch_ready(
                                 10_000,
                                 max(1, int((deadline - time.monotonic()) * 1000)),
                             ),
-                          )
+                        )
                         turn_ids = _turn_ids(page)
                         if len(turn_ids) != snapshot[0]:
                             raise BrowserRoundTripError(
@@ -211,7 +210,9 @@ def _wait_for_dispatch_ready(
                 else:
                     last_snapshot = snapshot
                     stable_since = None
-                last_observation = f"Worker history is present but not stable yet: {snapshot[0]} turns."
+                last_observation = (
+                    f"Worker history is present but not stable yet: {snapshot[0]} turns."
+                )
             else:
                 last_snapshot = None
                 stable_since = None
@@ -380,7 +381,7 @@ def _submit_and_confirm(
         prompt=prompt,
         baseline_turn_ids=baseline_turn_ids,
         baseline_turns=baseline_turns,
-        timeout_ms=min(30_000, max(1, int((deadline - time.monotonic()) * 1000)),
+        timeout_ms=min(30_000, max(1, int((deadline - time.monotonic()) * 1000))),
     )
     if confirmed is not None:
         return confirmed
@@ -426,10 +427,7 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
         worker_url = _resolve_worker_url(
             page,
             request,
-            timeout_ms=min(
-                timeout_ms,
-                120_000,
-            ),
+            timeout_ms=min(timeout_ms, 120_000),
         )
         if source_url != worker_url:
             _wait_for_idle_composer(page, timeout_ms=min(timeout_ms, 60_000))
@@ -450,7 +448,9 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
         if not _matching_draft(_composer_text(prompt), request):
             if not reused_draft:
                 prompt.fill("")
-            raise BrowserRoundTripError("Composer witness did not contain the exact run markers.")
+            raise BrowserRoundTripError(
+                "Composer witness did not contain the exact run markers."
+            )
 
         time.sleep(0.75)
         if normalize_chatgpt_url(page.url) != worker_url:
@@ -462,9 +462,13 @@ def run_dispatch(request: BrowserRoundTripRequest) -> BrowserDispatchReceipt:
             timeout_ms=min(timeout_ms, 10_000),
         )
         if turns.count() != baseline_turns or _turn_ids(page) != baseline_turn_ids:
-            raise BrowserRoundTripError("Worker conversation history changed before Send. Exact draft preserved.")
+            raise BrowserRoundTripError(
+                "Worker conversation history changed before Send. Exact draft preserved."
+            )
         if _visible(page.locator(STOP_SELECTOR)):
-            raise BrowserRoundTripError("Worker began generating before Send. Exact draft preserved.")
+            raise BrowserRoundTripError(
+                "Worker began generating before Send. Exact draft preserved."
+            )
 
         submit_attempted = True
         user_turn_id, final_turns = _submit_and_confirm(
