@@ -27,3 +27,4 @@ from . import (
     worker_rob_validation_prerequisites_runtime as _worker_rob_validation_prerequisites_runtime,
 )
 from . import worker_hq_review_runtime as _worker_hq_review_runtime
+from . import worker_cos_consumption_runtime as _worker_cos_consumption_runtime
