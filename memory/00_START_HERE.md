@@ -1,7 +1,7 @@
 # Start Here
 
 Updated: 2026-07-19
-Project: Penny Long-Term Memory / Life OS
+Project: Penny Long-Term Memory / LifeOS
 Purpose: Orientation file for future Penny sessions using GitHub as the durable memory layer.
 
 ## Core Instruction
@@ -22,7 +22,7 @@ Use GitHub for:
 
 Use Google Drive for:
 
-- the human-facing Life OS Chief's Manual;
+- the human-facing LifeOS Chief's Manual;
 - working documents;
 - Google Sheets and operational trackers;
 - notes that need human-friendly Google Docs editing;
@@ -51,20 +51,20 @@ If this file is being read as step 4 from `memory/STARTUP_BOOT.md`, continue to 
 
 LifeOS uses eight top-level rooms:
 
-- `LifeOS HQ`, the shared meeting room;
-- `Chief of Staff HQ`;
-- `Life OS Maintenance HQ`;
-- `Engineering HQ`;
-- `Finance HQ`;
-- `Business HQ`;
-- `Office Leaks HQ`;
-- `Wellness HQ`.
+- `LifeOS_HQ`, the shared meeting room;
+- `Chief_of_Staff_HQ`;
+- `Maintenance_HQ`;
+- `Engineering_HQ`;
+- `Finance_HQ`;
+- `Business_HQ`;
+- `Office_Leaks_HQ`;
+- `Wellness_HQ`.
 
-LifeOS HQ is not a department and does not own an independent backlog.
+`LifeOS_HQ` is not a department and does not own an independent backlog.
 
-Chief of Staff HQ is Rob's primary point of contact and daily-operations department.
+`Chief_of_Staff_HQ` is Rob's primary point of contact and daily-operations department.
 
-Life OS Maintenance HQ owns the global GitHub operating structure, audits, boot integrity, and reconciliation.
+`Maintenance_HQ` owns the global GitHub operating structure, audits, boot integrity, and reconciliation.
 
 Filesystem paths may retain legacy names until a separate migration is authorized.
 
@@ -113,7 +113,7 @@ For Sheets or structured records, verify the row or target range after each edit
 
 If an update appears blocked because the content may be sensitive or triggers safety checks, simplify the payload and use abstract notes instead of repeatedly retrying the same detailed text.
 
-These are operational field notes from Life OS use, not claims about internal connector implementation.
+These are operational field notes from LifeOS use, not claims about internal connector implementation.
 
 ## Source-of-Truth Transition
 
@@ -123,4 +123,4 @@ As of 2026-07-02, GitHub is the durable memory map and Drive is the working-reco
 
 The Drive Chief's Manual explains the human operating doctrine. GitHub translates that doctrine into enforceable operating rules, boot files, contracts, and durable abstract state.
 
-The Life OS Pointer Registry in Drive resolves references between GitHub and detailed operational records.
+The external Drive artifact titled `Life OS Pointer Registry` retains its existing title and resolves references between GitHub and detailed operational records.
