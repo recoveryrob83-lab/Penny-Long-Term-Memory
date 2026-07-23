@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
+import subprocess
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -11,7 +14,11 @@ from pathlib import Path
 from typing import Callable, Mapping
 
 from .command_center import CommandCenterService
-from .worker_operations import DEFAULT_CDP_ENDPOINT, WorkerOperationsService
+from .worker_operations import (
+    DEFAULT_CDP_ENDPOINT,
+    WorkerOperationsService,
+    parse_synthetic_receipt,
+)
 from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError, _conversation_url
 from .worker_runtime_service import WorkerRuntimeService
 
@@ -326,17 +333,67 @@ class RouteAwareWorkerOperationsService(WorkerOperationsService):
         confirm_send: bool,
         timeout_seconds: int = 300,
     ) -> dict[str, object]:
-        witness = self.routes.canary_witness()
-        result = super().courier_self_test(
-            confirm_send=confirm_send,
-            timeout_seconds=timeout_seconds,
-        )
-        receipt = result.get("receipt")
-        if not isinstance(receipt, dict):
-            raise WorkerRuntimeError("Courier self-test returned no receipt to verify.")
-        result["route_promotion"] = self.routes.promote_after_canary(witness, receipt)
-        result["operations"] = self.status()
-        return result
+        """Run one canary against the witnessed route and promote only that exact revision."""
+
+        if not confirm_send:
+            raise WorkerRuntimeError("Courier self-test requires explicit send confirmation.")
+        if timeout_seconds < 60 or timeout_seconds > 900:
+            raise WorkerRuntimeError("timeout_seconds must be between 60 and 900.")
+        if self.command_center.paused:
+            raise WorkerRuntimeError("Automation is paused. Resume it before running a self-test.")
+
+        run_lock = self.command_center._run_lock  # noqa: SLF001 - shared route/canary gate
+        if not run_lock.acquire(blocking=False):
+            raise WorkerRuntimeError("Another automation job is already running.")
+        try:
+            witness = self.routes.canary_witness()
+            command = [
+                sys.executable,
+                str(
+                    self.command_center.app_root
+                    / "automation"
+                    / "run_synthetic_worker_browser_pilot.py"
+                ),
+                "--send",
+                "--confirm-send",
+                "SYNTHETIC_SEND",
+                "--database-path",
+                str(self.routes.database_path),
+                "--timeout-seconds",
+                str(timeout_seconds),
+                "--cdp-endpoint",
+                self.cdp_endpoint,
+            ]
+            try:
+                completed = subprocess.run(
+                    command,
+                    cwd=self.command_center.app_root,
+                    env=os.environ.copy(),
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout_seconds + 30,
+                    check=False,
+                )
+            except subprocess.TimeoutExpired as exc:
+                raise WorkerRuntimeError(
+                    "Courier self-test timed out. Inspect the Worker chat before retrying."
+                ) from exc
+            if completed.returncode != 0:
+                detail = (completed.stderr or completed.stdout).strip()
+                raise WorkerRuntimeError(
+                    detail or "Courier self-test stopped before a verified round trip completed."
+                )
+            receipt = parse_synthetic_receipt(completed.stdout)
+            promotion = self.routes.promote_after_canary(witness, receipt)
+        finally:
+            run_lock.release()
+
+        return {
+            "status": "succeeded",
+            "receipt": receipt,
+            "route_promotion": promotion,
+            "operations": self.status(),
+        }
 
 
 __all__ = [
