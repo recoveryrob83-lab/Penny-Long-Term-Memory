@@ -1,4 +1,4 @@
-"""Draft the canonical Life OS Maintenance HQ boot prompt without sending it."""
+"""Draft the canonical Maintenance_HQ boot prompt without sending it."""
 from __future__ import annotations
 
 import sys

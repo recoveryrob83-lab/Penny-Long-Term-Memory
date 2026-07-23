@@ -1,19 +1,20 @@
-"""Attach the Worker verification view to existing Command Center status output."""
+"""Attach Worker verification views and canonical reviewer-title handling."""
 from __future__ import annotations
 
 from pathlib import Path
 
 from . import command_center
-from .worker_verification import WorkerVerificationService
+from .room_titles import canonical_room_title
+from .worker_verification import WorkerVerificationService, WorkerVerificationStore
 
-_INSTALL_FLAG = "_lifeos_worker_verification_status_installed"
+_STATUS_INSTALL_FLAG = "_lifeos_worker_verification_status_installed"
+_REVIEW_INSTALL_FLAG = "_lifeos_worker_verification_title_installed"
 _SERVICE_ATTR = "_lifeos_worker_verification_service"
 
 
 def install_worker_verification_status() -> bool:
     """Extend status once without creating another API or durable queue."""
-
-    if getattr(command_center.CommandCenterService, _INSTALL_FLAG, False):
+    if getattr(command_center.CommandCenterService, _STATUS_INSTALL_FLAG, False):
         return False
     original_status = command_center.CommandCenterService.status
 
@@ -27,8 +28,36 @@ def install_worker_verification_status() -> bool:
         return payload
 
     command_center.CommandCenterService.status = status
-    setattr(command_center.CommandCenterService, _INSTALL_FLAG, True)
+    setattr(command_center.CommandCenterService, _STATUS_INSTALL_FLAG, True)
+    return True
+
+
+def install_reviewer_title_rollover() -> bool:
+    """Translate an exact legacy reviewer title before any new verification row is written."""
+    if getattr(WorkerVerificationStore, _REVIEW_INSTALL_FLAG, False):
+        return False
+    original_review = WorkerVerificationStore.review
+
+    def review(
+        self: WorkerVerificationStore,
+        run_id: str,
+        state,
+        *,
+        actor: str,
+        reason: str,
+    ):
+        return original_review(
+            self,
+            run_id,
+            state,
+            actor=canonical_room_title(actor),
+            reason=reason,
+        )
+
+    WorkerVerificationStore.review = review
+    setattr(WorkerVerificationStore, _REVIEW_INSTALL_FLAG, True)
     return True
 
 
 install_worker_verification_status()
+install_reviewer_title_rollover()

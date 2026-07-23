@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from typing import cast
 
+from .room_titles import CANONICAL_HQ_TITLES
 from .worker_advisory_pipeline import ExecutionReadyAdvisory
 from .worker_receiver import WorkerAuthorityProfile
 from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
@@ -67,9 +68,9 @@ def _calling_source_allowed_by_prose(source: str, text: str) -> bool:
     if normalized.startswith("ROB"):
         return "rob" in prose
     if normalized.startswith("ENGINEERING_HQ"):
-        return "engineering hq" in prose
+        return "engineering_hq" in prose
     if normalized.startswith("CHIEF_OF_STAFF_HQ"):
-        return "chief of staff hq" in prose
+        return "chief_of_staff_hq" in prose
     return False
 
 
@@ -165,7 +166,7 @@ def load_worker_authority_profile(
         prohibited_task_classes = ()
         labels = (
             entry.owning_department,
-            f"{entry.owning_department.replace('-', ' ').title()} HQ",
+            CANONICAL_HQ_TITLES.get(entry.owning_department, entry.owning_department),
         )
 
     profile = WorkerAuthorityProfile(

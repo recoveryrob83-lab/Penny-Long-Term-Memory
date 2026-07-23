@@ -19,7 +19,7 @@ from pywinauto import Desktop
 from pywinauto.base_wrapper import BaseWrapper
 
 APP_TITLE = "ChatGPT Classic"
-DEFAULT_PROJECT = "Life OS"
+DEFAULT_PROJECT = "LifeOS"
 DEFAULT_TIMEOUT_SECONDS = 5.0
 DEFAULT_READY_TIMEOUT_SECONDS = 20.0
 DEFAULT_STABLE_SECONDS = 1.0

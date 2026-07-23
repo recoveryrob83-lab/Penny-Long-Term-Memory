@@ -50,7 +50,7 @@ if errorlevel 1 (
 
 echo.
 echo Stopping any obsolete standalone orchestrator...
-taskkill /FI "WINDOWTITLE eq Life OS Orchestrator*" /T /F >nul 2>&1
+taskkill /FI "WINDOWTITLE eq LifeOS Orchestrator*" /T /F >nul 2>&1
 
 echo Stopping any stale dashboard listener on port 8765...
 powershell -NoProfile -Command "$p=(Get-NetTCPConnection -LocalPort 8765 -State Listen -ErrorAction SilentlyContinue).OwningProcess | Sort-Object -Unique; foreach($processId in $p){Stop-Process -Id $processId -Force -ErrorAction SilentlyContinue}" >nul 2>&1

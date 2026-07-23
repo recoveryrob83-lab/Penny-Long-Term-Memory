@@ -278,12 +278,25 @@ def _submission_witness_valid(
     user_turn_id: str | None,
     composer_text: str,
 ) -> bool:
-    """Reject paste-only and stale-turn false positives."""
+    """Accept a new correlated turn even when rendered history is virtualized."""
+
+    baseline = set(baseline_turn_ids)
+    new_correlated_turn = bool(
+        user_turn_id
+        and user_turn_id not in baseline
+    )
+
+    history_witness = bool(
+        final_turns > baseline_turns
+        or (
+            final_turns > 0
+            and new_correlated_turn
+        )
+    )
 
     return bool(
-        user_turn_id
-        and user_turn_id not in set(baseline_turn_ids)
-        and final_turns > baseline_turns
+        new_correlated_turn
+        and history_witness
         and not str(composer_text or "").strip()
     )
 
@@ -538,7 +551,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--worker-url")
     parser.add_argument("--worker-chat-title", required=True)
-    parser.add_argument("--project-title", default="Life OS")
+    parser.add_argument("--project-title", default="LifeOS")
     parser.add_argument("--text", required=True)
     parser.add_argument("--request-marker", required=True)
     parser.add_argument("--response-marker", required=True, help="Canonical run ID.")

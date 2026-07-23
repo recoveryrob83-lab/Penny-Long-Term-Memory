@@ -336,7 +336,7 @@ if (workerOps.status) {
       const response = await fetch("/api/worker-operations/review", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({run_id: card.dataset.runId, state: button.dataset.reviewState, actor: "Engineering HQ", reason}),
+        body: JSON.stringify({run_id: card.dataset.runId, state: button.dataset.reviewState, actor: "Engineering_HQ", reason}),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || "HQ review failed.");

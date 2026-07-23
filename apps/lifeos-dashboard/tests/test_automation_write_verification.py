@@ -112,7 +112,7 @@ def fake_base(group: FakeGroup, clipboard_values: list[str]) -> tuple[ModuleType
     base = ModuleType("open_department_chat_group_test_double")
     base.AutomationStopped = AutomationStopped
     base.POLL_SECONDS = 0.001
-    base.current_document_title = lambda window: "Life OS - Engineering HQ"
+    base.current_document_title = lambda window: "LifeOS - Engineering_HQ"
     base.find_composer_group = lambda window: group
     base.normalize_text = lambda value: " ".join(str(value).split())
     base.text_matches_expected = lambda observed, expected: base.normalize_text(observed) == base.normalize_text(expected)
@@ -140,7 +140,7 @@ def test_accessible_composer_text_verifies_without_clipboard_copy() -> None:
     assert runtime.install_base_write_verification(base) is True
     result = base.wait_for_written_text(
         object(),
-        expected_document_title="Life OS - Engineering HQ",
+        expected_document_title="LifeOS - Engineering_HQ",
         expected_text=expected,
         timeout_seconds=0.02,
     )
@@ -157,7 +157,7 @@ def test_clipboard_remains_fallback_when_uia_value_is_empty() -> None:
     runtime.install_base_write_verification(base)
     result = base.wait_for_written_text(
         object(),
-        expected_document_title="Life OS - Engineering HQ",
+        expected_document_title="LifeOS - Engineering_HQ",
         expected_text=expected,
         timeout_seconds=0.02,
     )
@@ -177,7 +177,7 @@ def test_unrelated_visible_text_cannot_verify_the_draft() -> None:
     with pytest.raises(AutomationStopped, match="longest accessible composer value"):
         base.wait_for_written_text(
             object(),
-            expected_document_title="Life OS - Engineering HQ",
+            expected_document_title="LifeOS - Engineering_HQ",
             expected_text="Complete canonical prompt",
             timeout_seconds=0.005,
         )

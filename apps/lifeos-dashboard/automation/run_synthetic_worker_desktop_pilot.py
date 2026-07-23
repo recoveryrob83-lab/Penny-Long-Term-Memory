@@ -1,6 +1,6 @@
 """Run one bounded synthetic Worker transport exercise through ChatGPT Classic.
 
-This launcher is intentionally locked to one disposable visible chat title inside the Life OS
+This launcher is intentionally locked to one disposable visible chat title inside the LifeOS
 project. It creates no Worker profile, registry entry, route record, schedule, wake, or durable
 authority. Draft-only is the default. Sending requires two explicit CLI flags.
 """
@@ -19,7 +19,7 @@ from lifeos_dashboard.worker_command_center import render_worker_prompt
 from lifeos_dashboard.worker_runtime import ExecutionEnvelope
 
 SYNTHETIC_CHAT_TITLE = "Synthetic_Worker_Pilot"
-SYNTHETIC_PROJECT_TITLE = "Life OS"
+SYNTHETIC_PROJECT_TITLE = "LifeOS"
 SYNTHETIC_WORKER_ID = "synthetic_desktop_worker"
 SYNTHETIC_PROCEDURE_ID = "synthetic_desktop_transport"
 SYNTHETIC_AUTHORIZATION_SOURCE = "ROB-BOUNDED-SYNTHETIC-DESKTOP-PILOT-20260719"

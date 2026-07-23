@@ -149,7 +149,7 @@ def request(worker_url: str) -> object:
     return hydration.BrowserRoundTripRequest(
         worker_url=worker_url,
         worker_chat_title="Engineering_Worker",
-        project_title="Life OS",
+        project_title="LifeOS",
         prompt_text="WAKE-ADV-TEST-R1",
         request_marker="WAKE-ADV-TEST-R1",
         response_marker="RUN-ADV-TEST-R1",
@@ -188,25 +188,55 @@ def test_worker_history_snapshot_requires_visible_nonempty_turn() -> None:
     )
 
 
-def test_correlated_turn_id_survives_rendered_history_virtualization(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    page = VirtualizedHistoryPage(rendered_turns=1)
-    monkeypatch.setattr(
-        dispatch,
-        "_turn_for_role_marker",
-        lambda *args, **kwargs: CorrelatedTurn(),
+def test_submission_witness_survives_rendered_history_virtualization() -> None:
+    baseline_ids = ("conversation-turn-9",)
+
+    # ChatGPT may replace rendered history nodes rather than increasing
+    # their visible count. A genuinely new correlated turn still proves
+    # that submission occurred.
+    assert dispatch._submission_witness_valid(
+        baseline_turns=1,
+        final_turns=1,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-42",
+        composer_text="",
     )
 
-    user_turn_id, rendered_turns = dispatch._confirm_correlated_user_turn(
-        page,
-        marker="SYNTH-BROWSER-WRAP-TEST",
-        timeout_ms=1_000,
+    # Normal non-virtualized history growth remains valid.
+    assert dispatch._submission_witness_valid(
+        baseline_turns=1,
+        final_turns=2,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-42",
+        composer_text="",
     )
 
-    assert user_turn_id == "conversation-turn-42"
-    assert rendered_turns == 1
+    # An old turn cannot prove a new submission.
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=1,
+        final_turns=1,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-9",
+        composer_text="",
+    )
 
+    # A nonempty composer means submission is not fully proven.
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=1,
+        final_turns=1,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-42",
+        composer_text="unsent draft",
+    )
+
+    # No rendered history cannot prove submission.
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=1,
+        final_turns=0,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-42",
+        composer_text="",
+    )
 
 def test_source_return_proves_exact_normalized_url_without_requiring_idle_composer(
     monkeypatch: pytest.MonkeyPatch,
@@ -245,22 +275,26 @@ def test_dispatch_gates_send_and_never_waits_for_assistant_response() -> None:
     script = DISPATCH_SCRIPT.read_text(encoding="utf-8")
     run_body = script.split("def run_dispatch", 1)[1]
 
-    readiness = run_body.index("prompt, baseline_turns = _wait_for_worker_conversation_ready")
+    readiness = run_body.index("_wait_for_dispatch_ready(")
     fill = run_body.index("prompt.fill(request.prompt_text)")
-    unchanged_history = run_body.index("if turns.count() != baseline_turns")
-    click = run_body.index("send.click()")
-    user_turn = run_body.index("_confirm_correlated_user_turn(")
+    unchanged_history = run_body.index(
+        "if turns.count() != baseline_turns or _turn_ids(page) != baseline_turn_ids:"
+    )
+    submit = run_body.index("user_turn_id, final_turns = _submit_and_confirm(")
     return_to_source = run_body.index("_return_to_source_conversation(")
 
-    assert readiness < fill < unchanged_history < click < user_turn < return_to_source
+    assert readiness < fill < unchanged_history < submit < return_to_source
     assert 'role="assistant"' not in run_body
     assert "_wait_for_stable_turn" not in run_body
     assert "without waiting for Worker output" in script
+    assert "_wait_for_idle_composer(page" not in run_body[submit:]
 
-    post_send = run_body.split("send.click()", 1)[1]
-    assert "submission_confirmed = True" in post_send
-    assert "_confirm_correlated_user_turn(" in post_send
-    assert "final_turns < baseline_turns + 1" not in post_send
-    assert "_return_to_source_conversation(" in post_send
-    assert "_wait_for_idle_composer(page" not in post_send
-    assert "returned_to_source=False" in post_send
+    submit_body = script.split("def _submit_and_confirm", 1)[1].split(
+        "def run_dispatch", 1
+    )[0]
+
+    assert "_try_confirm_user_turn(" in submit_body
+    assert "draft_still_present" in submit_body
+    assert "history_unchanged" in submit_body
+    assert "BrowserRoundTripUncertain" in submit_body
+    assert 'role="assistant"' not in submit_body

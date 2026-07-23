@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "lifeos://schemas/worker-result-rejection/v1",
-  "title": "Life OS Worker Result Rejection v1",
+  "title": "LifeOS Worker Result Rejection v1",
   "type": "object",
   "additionalProperties": false,
   "required": [

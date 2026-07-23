@@ -30,8 +30,8 @@ The inspector supports seven department scopes plus one system scope.
 
 | Scope ID | Display Label | Scope Type |
 |---|---|---|
-| `main-assistant` | Chief of Staff HQ | department |
-| `logistics` | Life OS Maintenance HQ | department |
+| `main-assistant` | Chief_of_Staff_HQ | department |
+| `logistics` | Maintenance_HQ | department |
 | `engineering` | Engineering HQ | department |
 | `business` | Business HQ | department |
 | `office-leaks` | Office Leaks HQ | department |
@@ -189,7 +189,7 @@ Legacy compatibility mapping:
 
 ## Scope and Ownership Rules
 
-A record is department-scoped when one department owns execution, judgment, and durable maintenance, even when the outcome benefits all of Life OS.
+A record is department-scoped when one department owns execution, judgment, and durable maintenance, even when the outcome benefits all of LifeOS.
 
 A record may be system-scoped only when at least one condition is true:
 
@@ -197,7 +197,7 @@ A record may be system-scoped only when at least one condition is true:
 - shared LifeOS architecture or policy changes;
 - no single department can own the work;
 - the matter blocks multiple departments;
-- Chief of Staff HQ or Life OS Maintenance HQ must coordinate it;
+- Chief_of_Staff_HQ or Maintenance_HQ must coordinate it;
 - it represents a genuine system-wide operational risk.
 
 Broad usefulness does not make work system-owned.

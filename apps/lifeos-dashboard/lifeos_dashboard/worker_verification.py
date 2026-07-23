@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Literal, Mapping, cast
 
+from .room_titles import CANONICAL_HQ_TITLES
 from .worker_receiver_store import WorkerReceiverStore
 from .worker_runtime import WorkerRuntimeError
 
@@ -112,7 +113,7 @@ def _wake_decision(
     if outcome == "ELEVATE_FOR_APPROVAL":
         return (
             "chief_of_staff_hq",
-            "Chief of Staff HQ",
+            CANONICAL_HQ_TITLES["main"],
             "Rob must decide or authorize the elevated scope.",
         )
     if outcome == "REPORT_AND_HOLD":

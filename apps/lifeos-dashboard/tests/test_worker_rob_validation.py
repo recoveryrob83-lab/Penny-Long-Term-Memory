@@ -83,7 +83,7 @@ def _setup(tmp_path: Path) -> tuple[WorkerRobValidationService, Path, str]:
         "attempt": 1,
         "run_id": RUN_ID,
         "worker_id": WORKER_ID,
-        "reviewing_hq": "Engineering HQ",
+        "reviewing_hq": "Engineering_HQ",
         "report_path": (
             "projects/engineering/worker-results/engineering_worker/"
             f"{RUN_ID}/report-001.json"

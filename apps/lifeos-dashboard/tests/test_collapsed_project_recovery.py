@@ -105,11 +105,11 @@ def test_expanded_state_recognition_rejects_partial_and_unknown_values() -> None
 def test_project_labels_remain_exact() -> None:
     project_label_matches = load_function("project_label_matches")
 
-    assert project_label_matches("Life OS", "Life OS") is True
-    assert project_label_matches("Life OS, project", "Life OS") is True
-    assert project_label_matches("Life OS, project, collapsed", "Life OS") is True
-    assert project_label_matches("Life OS Archive", "Life OS") is False
-    assert project_label_matches("Other Project", "Life OS") is False
+    assert project_label_matches("LifeOS", "LifeOS") is True
+    assert project_label_matches("LifeOS, project", "LifeOS") is True
+    assert project_label_matches("LifeOS, project, collapsed", "LifeOS") is True
+    assert project_label_matches("LifeOS Archive", "LifeOS") is False
+    assert project_label_matches("Other Project", "LifeOS") is False
 
 
 def test_composer_state_requires_two_matching_fresh_reads() -> None:

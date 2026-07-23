@@ -51,7 +51,7 @@ def test_draft_plan_is_locked_to_disposable_title_and_wrapper_marker() -> None:
     assert pilot.SYNTHETIC_CHAT_TITLE == "Synthetic_Worker_Pilot"
     assert command[2] == "Synthetic_Worker_Pilot"
     project_index = command.index("--project")
-    assert command[project_index + 1] == "Life OS"
+    assert command[project_index + 1] == "LifeOS"
     marker_index = command.index("--verify-marker")
     assert command[marker_index + 1] == plan.envelope.wrapper_id
     assert "--send" not in command

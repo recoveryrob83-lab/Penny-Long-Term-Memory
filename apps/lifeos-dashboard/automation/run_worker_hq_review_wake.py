@@ -79,7 +79,7 @@ def main(argv: list[str] | None = None) -> int:
                 "--worker-chat-title",
                 wake.hq_chat_title,
                 "--project-title",
-                os.getenv("LIFEOS_CHATGPT_PROJECT_TITLE", "Life OS"),
+                os.getenv("LIFEOS_CHATGPT_PROJECT_TITLE", "LifeOS"),
                 "--text",
                 wake.instruction,
                 "--request-marker",

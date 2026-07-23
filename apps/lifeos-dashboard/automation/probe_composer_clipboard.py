@@ -38,7 +38,7 @@ def parse_args() -> argparse.Namespace:
         description="Probe safe clipboard-copy methods for the active ChatGPT composer."
     )
     parser.add_argument("chat_title", help="Exact active chat title, such as Wellness HQ")
-    parser.add_argument("--project", default="Life OS")
+    parser.add_argument("--project", default="LifeOS")
     parser.add_argument(
         "--timeout",
         type=float,

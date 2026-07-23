@@ -37,7 +37,7 @@ def main() -> int:
     args = parser.parse_args()
 
     department = DEPARTMENTS[args.department]
-    target = Target(chat_title=department.chat_title, project_title="Life OS")
+    target = Target(chat_title=department.chat_title, project_title="LifeOS")
     expected = normalize_text(build_prompt(department))
 
     print(f"Finding window: {APP_TITLE}", flush=True)

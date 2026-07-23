@@ -25,10 +25,10 @@ class Department:
 DEPARTMENTS: dict[str, Department] = {
     "hub": Department(
         key="hub",
-        chat_title="LifeOS HQ",
-        role_title="LifeOS HQ, the shared LifeOS meeting room",
+        chat_title="LifeOS_HQ",
+        role_title="LifeOS_HQ, the shared LifeOS meeting room",
         project_folder=None,
-        report_name="LifeOS HQ",
+        report_name="LifeOS_HQ",
         related_files_note=(
             "Read department project files only when current coordination, routing, or a named "
             "cross-department issue requires them. Do not absorb specialist department judgment."
@@ -36,32 +36,32 @@ DEPARTMENTS: dict[str, Department] = {
     ),
     "logistics": Department(
         key="logistics",
-        chat_title="Life OS Maintenance HQ",
-        role_title="Life OS Maintenance HQ",
+        chat_title="Maintenance_HQ",
+        role_title="Maintenance_HQ",
         project_folder="projects/life-logistics-hq",
-        report_name="Life OS Maintenance",
+        report_name="Maintenance",
         related_files_note=(
-            "Read related Chief of Staff, Finance, Housing, Recovery Logistics, "
-            "Wellness, or Engineering files only when the handoff or task requires "
+            "Read related Chief_of_Staff_HQ, Finance_HQ, Housing, Recovery Logistics, "
+            "Wellness_HQ, or Engineering_HQ files only when the handoff or task requires "
             "cross-project coordination."
         ),
     ),
     "engineering": Department(
         key="engineering",
-        chat_title="Engineering HQ",
-        role_title="Engineering HQ",
+        chat_title="Engineering_HQ",
+        role_title="Engineering_HQ",
         project_folder="projects/engineering",
         report_name="Engineering",
         related_files_note=(
-            "Read related Chief of Staff, Life OS Maintenance, Business, Finance, or "
+            "Read related Chief_of_Staff_HQ, Maintenance_HQ, Business_HQ, Finance_HQ, or "
             "infrastructure files only when the handoff or task requires "
             "cross-project coordination."
         ),
     ),
     "main": Department(
         key="main",
-        chat_title="Chief of Staff HQ",
-        role_title="Chief of Staff HQ",
+        chat_title="Chief_of_Staff_HQ",
+        role_title="Chief_of_Staff_HQ",
         project_folder="projects/main-assistant",
         report_name="Chief of Staff",
         related_files_note=(
@@ -71,41 +71,41 @@ DEPARTMENTS: dict[str, Department] = {
     ),
     "finance": Department(
         key="finance",
-        chat_title="Finance HQ",
-        role_title="Finance HQ",
+        chat_title="Finance_HQ",
+        role_title="Finance_HQ",
         project_folder="projects/finance-benefits",
         report_name="Finance",
         related_files_note=(
-            "Read related Chief of Staff, Life OS Maintenance, Housing, Business, or "
-            "Wellness files only when the handoff or task requires cross-project coordination."
+            "Read related Chief_of_Staff_HQ, Maintenance_HQ, Housing, Business_HQ, or "
+            "Wellness_HQ files only when the handoff or task requires cross-project coordination."
         ),
     ),
     "business": Department(
         key="business",
-        chat_title="Business HQ",
-        role_title="Business HQ",
+        chat_title="Business_HQ",
+        role_title="Business_HQ",
         project_folder="projects/business-development",
         report_name="Business",
         related_files_note=(
-            "Read related Chief of Staff, Finance, Engineering, Office Leaks, or "
-            "Life OS Maintenance files only when the handoff or task requires cross-project coordination."
+            "Read related Chief_of_Staff_HQ, Finance_HQ, Engineering_HQ, Office_Leaks_HQ, or "
+            "Maintenance_HQ files only when the handoff or task requires cross-project coordination."
         ),
     ),
     "office-leaks": Department(
         key="office-leaks",
-        chat_title="Office Leaks HQ",
-        role_title="Office Leaks HQ",
+        chat_title="Office_Leaks_HQ",
+        role_title="Office_Leaks_HQ",
         project_folder="projects/office-leaks-consulting",
         report_name="Office Leaks",
         related_files_note=(
-            "Read related Business, Engineering, Finance, or Life OS Maintenance files only "
+            "Read related Business_HQ, Engineering_HQ, Finance_HQ, or Maintenance_HQ files only "
             "when the handoff or task requires cross-project coordination."
         ),
     ),
     "wellness": Department(
         key="wellness",
-        chat_title="Wellness HQ",
-        role_title="Wellness HQ",
+        chat_title="Wellness_HQ",
+        role_title="Wellness_HQ",
         project_folder="projects/wellness",
         report_name="Wellness",
         related_files_note=(
@@ -126,7 +126,7 @@ def build_prompt(department: Department) -> str:
 - memory/05_OPEN_LOOPS.md
 - coordination/ADVISORY_INDEX.md when advisory routing or cross-department status is relevant
 
-Use memory/HQ_NAMING_STANDARD.md as the canonical headquarters naming source. Chief of Staff HQ chairs this room, departments retain ownership of their work, and Rob remains the final authority."""
+Use memory/HQ_NAMING_STANDARD.md as the canonical headquarters naming source. Chief_of_Staff_HQ chairs this room, departments retain ownership of their work, and Rob remains the final authority."""
     else:
         folder = department.project_folder
         project_boot = f"""Then continue into this department's project boot files exactly as specified by the global routing instructions:

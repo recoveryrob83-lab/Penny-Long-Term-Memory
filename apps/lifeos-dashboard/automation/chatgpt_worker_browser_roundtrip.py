@@ -87,7 +87,6 @@ class BrowserRoundTripReceipt:
 
 def normalize_chatgpt_url(value: str) -> str:
     """Return one canonical absolute ChatGPT conversation URL."""
-
     clean = value.strip()
     parsed = urlsplit(clean)
     if parsed.scheme != "https" or parsed.hostname != "chatgpt.com":
@@ -154,6 +153,7 @@ def _worker_link(page, request: BrowserRoundTripRequest, *, timeout_ms: int):
 
 
 def _resolve_worker_url(page, request: BrowserRoundTripRequest, *, timeout_ms: int) -> str:
+    """Resolve the exact Worker URL from the sidebar before navigation."""
     worker_link = _worker_link(page, request, timeout_ms=timeout_ms)
     observed = normalize_chatgpt_url(str(worker_link.evaluate("element => element.href")))
     if request.worker_url is not None and observed != request.worker_url:
@@ -168,17 +168,20 @@ def _verify_worker_identity(
     worker_url: str,
     timeout_ms: int,
 ) -> None:
+    """Verify the already-resolved Worker by its exact active conversation URL.
+
+    Sidebar visibility is required only while resolving the URL before navigation. After navigation,
+    room hydration, stable history, one visible empty composer, and no active generation are proven
+    by the readiness gate that calls this verifier. Requiring the selected sidebar anchor here would
+    reject the exact loaded room when ChatGPT folds the project behind Show more.
+    """
+    del request, timeout_ms
     if normalize_chatgpt_url(page.url) != worker_url:
         raise BrowserRoundTripError("Exact Worker conversation URL was not reached.")
-    worker_link = _worker_link(page, request, timeout_ms=timeout_ms)
-    absolute_href = normalize_chatgpt_url(str(worker_link.evaluate("element => element.href")))
-    if absolute_href != worker_url:
-        raise BrowserRoundTripError("Worker sidebar link points to an unexpected conversation.")
 
 
 def _worker_history_snapshot(page) -> tuple[int, str, str]:
     """Return a stable identity witness for the currently rendered conversation history."""
-
     try:
         turns = page.locator(TURN_XPATH)
         count = turns.count()
@@ -203,7 +206,6 @@ def _wait_for_worker_conversation_ready(
     stable_seconds: float = WORKER_READY_STABLE_SECONDS,
 ):
     """Wait for the exact Worker room, history, and composer to finish hydrating."""
-
     deadline = time.monotonic() + (timeout_ms / 1000)
     last_snapshot: tuple[int, str, str] | None = None
     stable_since: float | None = None
@@ -306,7 +308,6 @@ def _wait_for_stable_turn(page, turn, *, deadline: float, stable_seconds: float 
 
 def run_round_trip(request: BrowserRoundTripRequest) -> BrowserRoundTripReceipt:
     """Execute one confirmed one-tab browser round trip and return run-linked evidence."""
-
     try:
         from playwright.sync_api import sync_playwright
     except ImportError as exc:
@@ -472,7 +473,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--worker-url")
     parser.add_argument("--worker-chat-title", required=True)
-    parser.add_argument("--project-title", default="Life OS")
+    parser.add_argument("--project-title", default="LifeOS")
     parser.add_argument("--text", required=True)
     parser.add_argument("--request-marker", required=True)
     parser.add_argument("--response-marker", required=True)
