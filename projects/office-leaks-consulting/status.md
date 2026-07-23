@@ -1,4 +1,4 @@
-# Office Leaks HQ Status
+# Office_Leaks_HQ Status
 
 Updated: 2026-07-18
 
@@ -12,7 +12,7 @@ Revenue-first service launch / live market test.
 
 ## Parent Department
 
-Business HQ.
+Business_HQ.
 
 ## Current Priority
 
@@ -22,11 +22,11 @@ Current execution priorities:
 
 1. Observe response to the live Facebook launch package.
 2. Continue the lead-loss content lane with short, practical videos.
-3. Capture real audience and inquiry signals, adjust Office Leaks-owned execution materials within approved strategy, and route parent-level positioning or offer-strategy implications to Business HQ.
+3. Capture real audience and inquiry signals, adjust Office Leaks-owned execution materials within approved strategy, and route parent-level positioning or offer-strategy implications to `Business_HQ`.
 4. Build Office Leak Audit / Lead Leak materials as demand becomes clearer.
 5. Create proposal, diagnostic, and handoff artifacts when a real lead requires them.
-6. Coordinate repeatable delivery method with Engineering HQ when concrete.
-7. Route cost-bearing decisions, pricing feasibility, startup costs, and paid-promotion affordability to Finance HQ when concrete.
+6. Coordinate repeatable delivery method with `Engineering_HQ` when concrete.
+7. Route cost-bearing decisions, pricing feasibility, startup costs, and paid-promotion affordability to `Finance_HQ` when concrete.
 
 ## Current Business Frame
 
@@ -53,13 +53,13 @@ Current lead message:
 
 ## Current Routing
 
-- Parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment: Business HQ.
-- Offers, outreach, sales activity, market tests, delivery design, operating playbooks, customer-facing execution, and Office Leaks durable state: Office Leaks HQ.
-- Coordination, reports, assignment routing, scheduling, reminders, and authorized practical support: Chief of Staff HQ, without ownership transfer.
-- Global GitHub maintenance, governance, boot integrity, audits, shared procedures, and reconciliation: Life OS Maintenance HQ, without ownership of routine Office Leaks state.
-- Finance, tax, affordability, budget, pricing feasibility, and cost-bearing implications: Finance HQ when concrete.
-- Technical implementation, delivery tooling, software, automation, templates, and architecture: Engineering HQ when concrete.
-- Cross-department discussion and synthesis: LifeOS HQ as the shared meeting room, with no independent authority or backlog.
+- Parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment: `Business_HQ`.
+- Offers, outreach, sales activity, market tests, delivery design, operating playbooks, customer-facing execution, and Office Leaks durable state: `Office_Leaks_HQ`.
+- Coordination, reports, assignment routing, scheduling, reminders, and authorized practical support: `Chief_of_Staff_HQ`, without ownership transfer.
+- Global GitHub maintenance, governance, boot integrity, audits, shared procedures, and reconciliation: `Maintenance_HQ`, without ownership of routine Office Leaks state.
+- Finance, tax, affordability, budget, pricing feasibility, and cost-bearing implications: `Finance_HQ` when concrete.
+- Technical implementation, delivery tooling, software, automation, templates, and architecture: `Engineering_HQ` when concrete.
+- Cross-department discussion and synthesis: `LifeOS_HQ` as the shared meeting room, with no independent authority or backlog.
 - Final authority: Rob.
 
 ## Current Note
