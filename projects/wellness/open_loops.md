@@ -1,4 +1,4 @@
-# Wellness HQ Open Loops
+# Wellness_HQ Open Loops
 
 Updated: 2026-07-18
 
@@ -6,7 +6,7 @@ Updated: 2026-07-18
 
 None.
 
-Wellness HQ does not currently own a concrete unfinished workflow. Create or update a Wellness open loop only when a specific non-clinical wellbeing need has one owner, a clear next action or review trigger, and a completion or review condition.
+`Wellness_HQ` does not currently own a concrete unfinished workflow. Create or update a Wellness open loop only when a specific non-clinical wellbeing need has one owner, a clear next action or review trigger, and a completion or review condition.
 
 ## Operating Watches
 
@@ -15,8 +15,8 @@ These are conditions to notice, not tasks or commitments:
 - **Routine sustainability:** If a sleep, hydration, nutrition, movement, hygiene, or self-care routine becomes concretely difficult, reduce it to one sustainable Wellness-owned action.
 - **Pacing and functional capacity:** If a plan overloads Rob's available energy or executive-function capacity, recommend a smaller pace without taking over scheduling or task ownership.
 - **Emotional regulation:** If a concrete non-clinical coping or regulation barrier appears, support one practical structure within Wellness scope.
-- **Recovery-support boundary:** Wellness may support sleep, food, self-care, pacing, and emotional-regulation context. Recovery Logistics owns meeting logistics, sponsor-contact logistics, transportation coordination, and operational recovery commitments where that domain applies.
-- **Clinical boundary:** Symptoms, diagnoses, treatment, medication, appointments, medical records, and clinical decisions route to Health Medical HQ.
+- **Recovery-support boundary:** Wellness may support sleep, food, self-care, pacing, and emotional-regulation context. Rob, sponsor, meetings, literature, program relationships, peers, and qualified addiction-care sources own recovery-program guidance. `Chief_of_Staff_HQ` owns practical meeting, sponsor-contact, transportation, and follow-through coordination when requested.
+- **Clinical boundary:** Symptoms, diagnoses, treatment, medication, medical records, and clinical decisions route to qualified clinicians and official medical sources; practical appointment coordination routes to `Chief_of_Staff_HQ`.
 
 ## Standing Guardrails
 
@@ -24,13 +24,13 @@ These are operating rules, not separate tasks:
 
 - Keep sensitive details out of GitHub.
 - Use the canonical path `projects/wellness/`.
-- LifeOS HQ is the shared meeting room and has no independent backlog or department authority.
-- Chief of Staff HQ coordinates reminders, appointments, routines, assignments, reports, and follow-through without owning Wellness judgment or records.
-- Life OS Maintenance HQ owns global GitHub maintenance and governance without owning routine Wellness durable state.
-- Use Health Medical HQ for clinical and medical matters.
-- Use Recovery Logistics for recovery-program logistics where that domain applies.
-- Use Finance HQ for money, benefits, affordability, bills, and financial paperwork.
-- Use Engineering HQ for technical implementation or automation.
+- `LifeOS_HQ` is the shared meeting room and has no independent backlog or department authority.
+- `Chief_of_Staff_HQ` coordinates reminders, appointments, routines, assignments, reports, recovery logistics, and follow-through without owning Wellness judgment or records.
+- `Maintenance_HQ` owns global GitHub maintenance and governance without owning routine Wellness durable state.
+- Use qualified clinicians and official medical sources for clinical and medical matters.
+- Preserve sponsor, meeting, literature, program-relationship, peer, and qualified addiction-care authority for recovery-program guidance; use `Chief_of_Staff_HQ` for practical logistics when requested.
+- Use `Finance_HQ` for money, benefits, affordability, bills, and financial paperwork.
+- Use `Engineering_HQ` for technical implementation or automation.
 - Use the Wellness board and Advisory Index only when formal cross-department routing is genuinely needed.
 - Do not create empty notebooks, pending-advisory files, decision-rule files, trackers, templates, or speculative open loops before a real need exists.
 
