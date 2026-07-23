@@ -2,6 +2,7 @@ import json
 import sqlite3
 import subprocess
 import time
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -20,6 +21,7 @@ from lifeos_dashboard.worker_operations import (
     parse_synthetic_receipt,
     run_worker_browser_transport,
 )
+from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
 from lifeos_dashboard.worker_runtime import (
     ExecutionEnvelope,
     WorkerRegistryEntry,
@@ -48,6 +50,8 @@ def entry() -> WorkerRegistryEntry:
         owning_department="engineering",
         profile_path="projects/engineering/workers/engineering_worker.md",
         profile_version=1,
+        conversation_url="https://chatgpt.com/g/project/c/engineering-worker",
+        route_revision=1,
     )
 
 
@@ -101,6 +105,118 @@ def test_synthetic_receipt_requires_explicit_zero_authority() -> None:
     unsafe = "LIFEOS_SYNTHETIC_BROWSER_RECEIPT=" + json.dumps(payload)
     with pytest.raises(WorkerRuntimeError, match="zero authority"):
         parse_synthetic_receipt(unsafe)
+
+
+def test_legacy_worker_registry_migrates_route_columns(tmp_path: Path) -> None:
+    database = tmp_path / "legacy.sqlite3"
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            """
+            CREATE TABLE worker_registry (
+                worker_id TEXT PRIMARY KEY,
+                chat_title TEXT NOT NULL UNIQUE,
+                owning_department TEXT NOT NULL,
+                profile_path TEXT NOT NULL UNIQUE,
+                profile_version INTEGER NOT NULL,
+                specialization TEXT NOT NULL,
+                role TEXT NOT NULL,
+                deployment_state TEXT NOT NULL,
+                created_at REAL NOT NULL,
+                updated_at REAL NOT NULL
+            )
+            """
+        )
+        connection.execute(
+            """
+            INSERT INTO worker_registry VALUES (
+                'engineering_worker',
+                'Engineering_Worker',
+                'engineering',
+                'projects/engineering/workers/engineering_worker.md',
+                1,
+                'general',
+                'worker',
+                'enabled',
+                1.0,
+                1.0
+            )
+            """
+        )
+
+    runtime = WorkerRuntimeService(database)
+    migrated = runtime.worker("engineering_worker")
+
+    assert migrated.conversation_url is None
+    assert migrated.route_revision == 0
+
+    with sqlite3.connect(database) as connection:
+        columns = {
+            row[1]
+            for row in connection.execute(
+                "PRAGMA table_info(worker_registry)"
+            ).fetchall()
+        }
+
+    assert "conversation_url" in columns
+    assert "route_revision" in columns
+
+
+def test_browser_transport_refuses_missing_registered_url(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def should_not_run(*args, **kwargs):
+        raise AssertionError("subprocess must not run without a registered URL")
+
+    monkeypatch.setattr(
+        "lifeos_dashboard.worker_dispatch_runtime.subprocess.run",
+        should_not_run,
+    )
+
+    result, evidence = run_worker_browser_transport(
+        job(),
+        replace(entry(), conversation_url=None, route_revision=0),
+        tmp_path,
+        trigger="manual",
+        timeout_seconds=120,
+    )
+
+    assert result.status == "refused"
+    assert "registered exact conversation URL" in result.reason
+    assert evidence.dispatch_state == "DISPATCH_PENDING"
+
+
+def test_browser_transport_passes_registered_url_to_dispatch_cli(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observed: list[str] = []
+
+    def fake_run(command, **kwargs):
+        del kwargs
+        observed.extend(command)
+        return subprocess.CompletedProcess(
+            args=command,
+            returncode=2,
+            stdout="",
+            stderr="STOPPED: synthetic pre-send stop",
+        )
+
+    monkeypatch.setattr(
+        "lifeos_dashboard.worker_dispatch_runtime.subprocess.run",
+        fake_run,
+    )
+
+    run_worker_browser_transport(
+        job(),
+        entry(),
+        tmp_path,
+        trigger="manual",
+        timeout_seconds=120,
+    )
+
+    url_index = observed.index("--worker-url")
+    assert observed[url_index + 1] == entry().conversation_url
 
 
 def test_browser_transport_submits_without_waiting_for_worker_response(

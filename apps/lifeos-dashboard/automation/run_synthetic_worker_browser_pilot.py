@@ -7,6 +7,7 @@ import sys
 import time
 import uuid
 from dataclasses import dataclass
+from pathlib import Path
 
 from chatgpt_worker_browser_dispatch import run_dispatch
 from chatgpt_worker_browser_roundtrip import (
@@ -15,13 +16,12 @@ from chatgpt_worker_browser_roundtrip import (
     BrowserRoundTripUncertain,
 )
 from lifeos_dashboard.worker_command_center import render_worker_prompt
-from lifeos_dashboard.worker_runtime import ExecutionEnvelope
+from lifeos_dashboard.worker_runtime import ExecutionEnvelope, WorkerRuntimeError
+from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
 
-WORKER_URL = (
-    "https://chatgpt.com/g/g-p-6a43ef8989a08191961253952ffe1670/"
-    "c/6a5df5b7-f6b8-83ea-8f8e-1633d53941fe"
-)
+WORKER_ID = "engineering_worker"
 WORKER_CHAT_TITLE = "Engineering_Worker"
+DEFAULT_DATABASE_PATH = Path(".local/command_center.sqlite3")
 PROJECT_TITLE = "LifeOS"
 AUTHORIZATION_SOURCE = "ROB-BOUNDED-SYNTHETIC-BROWSER-PILOT-20260720"
 SEND_CONFIRMATION = "SYNTHETIC_SEND"
@@ -38,6 +38,7 @@ class SyntheticBrowserPilotPlan:
     prompt_text: str
     expected_ack: str
     request: BrowserRoundTripRequest
+    route_revision: int
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -46,6 +47,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--confirm-send", default="")
     parser.add_argument("--timeout-seconds", type=int, default=300)
     parser.add_argument("--cdp-endpoint", default="http://127.0.0.1:9222")
+    parser.add_argument(
+        "--database-path",
+        type=Path,
+        default=DEFAULT_DATABASE_PATH,
+    )
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args(argv)
 
@@ -95,19 +101,53 @@ def build_instruction(envelope: ExecutionEnvelope) -> tuple[str, str]:
     return instruction, expected_ack
 
 
+def load_registered_route(database_path: Path):
+    """Load the one authoritative Engineering Worker route for a canary."""
+
+    runtime = WorkerRuntimeService(database_path)
+    entry = runtime.worker(WORKER_ID, require_enabled=True)
+
+    if entry.chat_title != WORKER_CHAT_TITLE:
+        raise SyntheticBrowserPilotError(
+            f"Registered Worker title is {entry.chat_title!r}, not {WORKER_CHAT_TITLE!r}."
+        )
+    if not entry.conversation_url:
+        raise SyntheticBrowserPilotError(
+            "Engineering Worker has no registered exact conversation URL."
+        )
+    if entry.route_revision < 1:
+        raise SyntheticBrowserPilotError(
+            "Engineering Worker route revision is not initialized."
+        )
+
+    route_state = runtime.store.route_state(WORKER_ID)
+    if route_state is not None and route_state.availability in {
+        "unavailable",
+        "ambiguous",
+    }:
+        raise SyntheticBrowserPilotError(
+            "Engineering Worker route is "
+            f"{route_state.availability}; canary dispatch is blocked."
+        )
+
+    return entry
+
+
 def build_plan(
     *,
+    database_path: Path = DEFAULT_DATABASE_PATH,
     timestamp: int | None = None,
     nonce: str | None = None,
     timeout_seconds: int = 300,
     cdp_endpoint: str = "http://127.0.0.1:9222",
 ) -> SyntheticBrowserPilotPlan:
+    entry = load_registered_route(database_path)
     envelope = build_envelope(timestamp=timestamp, nonce=nonce)
     instruction, expected_ack = build_instruction(envelope)
     prompt_text = render_worker_prompt(envelope, instruction)
     request = BrowserRoundTripRequest(
-        worker_url=WORKER_URL,
-        worker_chat_title=WORKER_CHAT_TITLE,
+        worker_url=entry.conversation_url,
+        worker_chat_title=entry.chat_title,
         project_title=PROJECT_TITLE,
         prompt_text=prompt_text,
         request_marker=envelope.wrapper_id,
@@ -120,14 +160,16 @@ def build_plan(
         prompt_text=prompt_text,
         expected_ack=expected_ack,
         request=request,
+        route_revision=entry.route_revision,
     )
 
 
 def dry_run_receipt(plan: SyntheticBrowserPilotPlan) -> dict[str, object]:
     return {
         "status": "dry_run",
-        "worker_url": WORKER_URL,
-        "worker_chat_title": WORKER_CHAT_TITLE,
+        "worker_url": plan.request.worker_url,
+        "worker_chat_title": plan.request.worker_chat_title,
+        "route_revision": plan.route_revision,
         "wrapper_id": plan.envelope.wrapper_id,
         "run_id": plan.envelope.run_id,
         "task_id": plan.envelope.task_id,
@@ -141,14 +183,23 @@ def main(argv: list[str] | None = None) -> int:
     try:
         validate_args(args)
         plan = build_plan(
+            database_path=args.database_path,
             timeout_seconds=args.timeout_seconds,
             cdp_endpoint=args.cdp_endpoint,
         )
-    except (SyntheticBrowserPilotError, BrowserRoundTripError) as exc:
+    except (
+        SyntheticBrowserPilotError,
+        BrowserRoundTripError,
+        WorkerRuntimeError,
+    ) as exc:
         print(f"STOPPED: {exc}", file=sys.stderr)
         return 2
 
-    print(f"Synthetic browser target: {PROJECT_TITLE} / {WORKER_CHAT_TITLE}")
+    print(
+        "Synthetic browser target: "
+        f"{PROJECT_TITLE} / {plan.request.worker_chat_title}"
+    )
+    print(f"Registered route revision: {plan.route_revision}")
     print(f"Wrapper: {plan.envelope.wrapper_id}")
     print("Durable Worker authority: none")
 

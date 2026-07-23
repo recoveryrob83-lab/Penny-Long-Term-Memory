@@ -38,6 +38,9 @@ class WorkerRuntimeStore:
                     owning_department TEXT NOT NULL,
                     profile_path TEXT NOT NULL UNIQUE,
                     profile_version INTEGER NOT NULL CHECK(profile_version > 0),
+                    conversation_url TEXT,
+                    route_revision INTEGER NOT NULL DEFAULT 0
+                        CHECK(route_revision >= 0),
                     specialization TEXT NOT NULL,
                     role TEXT NOT NULL CHECK(role = 'worker'),
                     deployment_state TEXT NOT NULL
@@ -72,6 +75,22 @@ class WorkerRuntimeStore:
                 );
                 """
             )
+            registry_columns = {
+                str(row["name"])
+                for row in connection.execute(
+                    "PRAGMA table_info(worker_registry)"
+                ).fetchall()
+            }
+            if "conversation_url" not in registry_columns:
+                connection.execute(
+                    "ALTER TABLE worker_registry ADD COLUMN conversation_url TEXT"
+                )
+            if "route_revision" not in registry_columns:
+                connection.execute(
+                    "ALTER TABLE worker_registry "
+                    "ADD COLUMN route_revision INTEGER NOT NULL DEFAULT 0 "
+                    "CHECK(route_revision >= 0)"
+                )
 
     @staticmethod
     def _registry_from_row(row: sqlite3.Row | None) -> WorkerRegistryEntry | None:
@@ -113,14 +132,17 @@ class WorkerRuntimeStore:
                     """
                     INSERT INTO worker_registry(
                         worker_id, chat_title, owning_department, profile_path,
-                        profile_version, specialization, role, deployment_state,
+                        profile_version, conversation_url, route_revision,
+                        specialization, role, deployment_state,
                         created_at, updated_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     ON CONFLICT(worker_id) DO UPDATE SET
                         chat_title = excluded.chat_title,
                         owning_department = excluded.owning_department,
                         profile_path = excluded.profile_path,
                         profile_version = excluded.profile_version,
+                        conversation_url = excluded.conversation_url,
+                        route_revision = excluded.route_revision,
                         specialization = excluded.specialization,
                         role = excluded.role,
                         deployment_state = excluded.deployment_state,
@@ -132,6 +154,8 @@ class WorkerRuntimeStore:
                         entry.owning_department,
                         entry.profile_path,
                         entry.profile_version,
+                        entry.conversation_url,
+                        entry.route_revision,
                         entry.specialization,
                         entry.role,
                         entry.deployment_state,

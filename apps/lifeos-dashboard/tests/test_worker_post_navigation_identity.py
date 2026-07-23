@@ -26,7 +26,7 @@ class ExactWorkerPage:
         )
 
 
-def request(worker_url: str):
+def request(worker_url: str | None):
     return roundtrip.BrowserRoundTripRequest(
         worker_url=worker_url,
         worker_chat_title="Engineering_Worker",
@@ -35,6 +35,38 @@ def request(worker_url: str):
         request_marker="SYNTHETIC_ZERO_AUTHORITY_MARKER",
         response_marker="UNUSED_RESPONSE_MARKER",
     )
+
+
+def test_pre_navigation_resolution_uses_registered_url_without_sidebar() -> None:
+    worker_url = "https://chatgpt.com/g/project/c/engineering-worker"
+    page = ExactWorkerPage("https://chatgpt.com/g/project/c/source")
+
+    resolved = roundtrip._resolve_worker_url(
+        page,
+        request(worker_url),
+        timeout_ms=1_000,
+    )
+
+    assert resolved == worker_url
+    assert page.locator_calls == []
+
+
+def test_pre_navigation_resolution_requires_registered_url() -> None:
+    page = ExactWorkerPage("https://chatgpt.com/g/project/c/source")
+
+    try:
+        roundtrip._resolve_worker_url(
+            page,
+            request(None),
+            timeout_ms=1_000,
+        )
+    except roundtrip.BrowserRoundTripError as exc:
+        assert "registered exact conversation URL" in str(exc)
+        assert "Nothing was sent" in str(exc)
+    else:
+        raise AssertionError("A missing registered Worker URL must fail closed.")
+
+    assert page.locator_calls == []
 
 
 def test_post_navigation_identity_uses_already_resolved_exact_url() -> None:

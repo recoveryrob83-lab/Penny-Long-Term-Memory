@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import asdict, dataclass
+from urllib.parse import urlsplit, urlunsplit
 from typing import Literal, Mapping, Sequence, cast
 
 DeploymentState = Literal["enabled", "paused", "retired"]
@@ -37,6 +38,33 @@ def _positive_int(value: object, field_name: str) -> int:
     return number
 
 
+def _nonnegative_int(value: object, field_name: str) -> int:
+    try:
+        number = int(value)
+    except (TypeError, ValueError) as exc:
+        raise WorkerRuntimeError(f"{field_name} must be a nonnegative integer.") from exc
+    if number < 0:
+        raise WorkerRuntimeError(f"{field_name} must be a nonnegative integer.")
+    return number
+
+
+def _conversation_url(value: object) -> str | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    parsed = urlsplit(text)
+    if parsed.scheme != "https" or parsed.hostname != "chatgpt.com":
+        raise WorkerRuntimeError(
+            "conversation_url must be an https://chatgpt.com conversation URL."
+        )
+    path = parsed.path.rstrip("/")
+    if "/c/" not in path:
+        raise WorkerRuntimeError(
+            "conversation_url must identify one ChatGPT conversation."
+        )
+    return urlunsplit(("https", "chatgpt.com", path, "", ""))
+
+
 @dataclass(frozen=True)
 class WorkerRegistryEntry:
     """Stable Worker identity plus Engineering-owned deployment state."""
@@ -46,6 +74,8 @@ class WorkerRegistryEntry:
     owning_department: str
     profile_path: str
     profile_version: int
+    conversation_url: str | None = None
+    route_revision: int = 0
     specialization: str = "general"
     role: str = "worker"
     deployment_state: DeploymentState = "enabled"
@@ -69,6 +99,18 @@ class WorkerRegistryEntry:
                 "profile_path must point to projects/<department>/workers/<profile>.md."
             )
         _positive_int(self.profile_version, "profile_version")
+        normalized_url = _conversation_url(self.conversation_url)
+        revision = _nonnegative_int(self.route_revision, "route_revision")
+        object.__setattr__(self, "conversation_url", normalized_url)
+        object.__setattr__(self, "route_revision", revision)
+        if normalized_url is None and revision != 0:
+            raise WorkerRuntimeError(
+                "route_revision must be 0 when conversation_url is absent."
+            )
+        if normalized_url is not None and revision < 1:
+            raise WorkerRuntimeError(
+                "route_revision must be at least 1 when conversation_url is registered."
+            )
         _required_text(self.specialization, "specialization")
         if self.role != "worker":
             raise WorkerRuntimeError("role must be worker.")
@@ -85,6 +127,10 @@ class WorkerRegistryEntry:
             ),
             profile_path=_required_text(values.get("profile_path"), "profile_path"),
             profile_version=_positive_int(values.get("profile_version"), "profile_version"),
+            conversation_url=values.get("conversation_url") or None,
+            route_revision=_nonnegative_int(
+                values.get("route_revision", 0), "route_revision"
+            ),
             specialization=_required_text(
                 values.get("specialization", "general"), "specialization"
             ),

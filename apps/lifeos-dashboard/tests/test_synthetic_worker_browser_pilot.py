@@ -3,6 +3,9 @@ import json
 import sys
 from pathlib import Path
 
+from lifeos_dashboard.worker_runtime import WorkerRegistryEntry
+from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
+
 import pytest
 
 
@@ -27,6 +30,34 @@ assert PILOT_SPEC is not None and PILOT_SPEC.loader is not None
 pilot = importlib.util.module_from_spec(PILOT_SPEC)
 sys.modules[PILOT_SPEC.name] = pilot
 PILOT_SPEC.loader.exec_module(pilot)
+
+
+def registered_database(
+    tmp_path: Path,
+    *,
+    url: str | None = "https://chatgpt.com/g/project/c/engineering-worker",
+    revision: int = 1,
+    availability: str = "unknown",
+) -> Path:
+    database = tmp_path / "command_center.sqlite3"
+    runtime = WorkerRuntimeService(database)
+    runtime.register_worker(
+        WorkerRegistryEntry(
+            worker_id="engineering_worker",
+            chat_title="Engineering_Worker",
+            owning_department="engineering",
+            profile_path="projects/engineering/workers/engineering_worker.md",
+            profile_version=1,
+            conversation_url=url,
+            route_revision=revision,
+        )
+    )
+    runtime.set_route_state(
+        "engineering_worker",
+        availability,
+        pause_reason="Synthetic test route.",
+    )
+    return database
 
 
 def test_normalize_chatgpt_url_removes_query_fragment_and_trailing_slash() -> None:
@@ -68,14 +99,24 @@ def test_request_requires_markers_and_bounded_timeout() -> None:
         )
 
 
-def test_synthetic_plan_is_zero_authority_and_locked_to_engineering_worker() -> None:
-    plan = pilot.build_plan(timestamp=1234567890, nonce="abc123")
+def test_synthetic_plan_is_zero_authority_and_locked_to_engineering_worker(
+    tmp_path: Path,
+) -> None:
+    database = registered_database(tmp_path)
+    plan = pilot.build_plan(
+        database_path=database,
+        timestamp=1234567890,
+        nonce="abc123",
+    )
 
     assert plan.envelope.wrapper_id == "SYNTH-BROWSER-WRAP-1234567890-abc123"
     assert plan.envelope.run_id == "SYNTH-BROWSER-RUN-1234567890-abc123"
     assert plan.envelope.worker_id == "engineering_worker"
     assert plan.envelope.authorization_source == pilot.AUTHORIZATION_SOURCE
-    assert plan.request.worker_url == pilot.WORKER_URL
+    assert plan.request.worker_url == (
+        "https://chatgpt.com/g/project/c/engineering-worker"
+    )
+    assert plan.route_revision == 1
     assert plan.request.worker_chat_title == "Engineering_Worker"
     assert plan.request.request_marker == plan.envelope.wrapper_id
     assert plan.request.response_marker == plan.envelope.run_id
@@ -93,6 +134,7 @@ def test_synthetic_send_requires_exact_confirmation() -> None:
 
 
 def test_dry_run_emits_receipt_without_browser_transport(
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
@@ -100,8 +142,13 @@ def test_dry_run_emits_receipt_without_browser_transport(
         raise AssertionError("dry run must not attach to a browser")
 
     monkeypatch.setattr(pilot, "run_dispatch", should_not_run)
+    database = registered_database(tmp_path)
 
-    assert pilot.main(["--dry-run"]) == 0
+    assert pilot.main([
+        "--dry-run",
+        "--database-path",
+        str(database),
+    ]) == 0
     output = capsys.readouterr().out
     receipt_line = next(
         line for line in output.splitlines() if line.startswith(pilot.RECEIPT_PREFIX)
@@ -109,10 +156,12 @@ def test_dry_run_emits_receipt_without_browser_transport(
     receipt = json.loads(receipt_line.removeprefix(pilot.RECEIPT_PREFIX))
     assert receipt["status"] == "dry_run"
     assert receipt["worker_chat_title"] == "Engineering_Worker"
+    assert receipt["route_revision"] == 1
     assert receipt["durable_authority_created"] is False
 
 
 def test_successful_pilot_reports_dispatch_and_return(
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
@@ -133,8 +182,15 @@ def test_successful_pilot_reports_dispatch_and_return(
         )
 
     monkeypatch.setattr(pilot, "run_dispatch", fake_run)
+    database = registered_database(tmp_path)
 
-    assert pilot.main(["--send", "--confirm-send", "SYNTHETIC_SEND"]) == 0
+    assert pilot.main([
+        "--send",
+        "--confirm-send",
+        "SYNTHETIC_SEND",
+        "--database-path",
+        str(database),
+    ]) == 0
     output = capsys.readouterr().out
     assert "SYNTHETIC_BROWSER_DISPATCH_OK" in output
     receipt_line = next(
@@ -145,3 +201,30 @@ def test_successful_pilot_reports_dispatch_and_return(
     assert receipt["returned_to_source"] is True
     assert receipt["user_turn_id"] == "conversation-turn-16"
     assert receipt["durable_authority_created"] is False
+
+
+def test_pilot_refuses_missing_registered_url(tmp_path: Path) -> None:
+    database = registered_database(tmp_path, url=None, revision=0)
+
+    with pytest.raises(
+        pilot.SyntheticBrowserPilotError,
+        match="no registered exact conversation URL",
+    ):
+        pilot.build_plan(database_path=database)
+
+
+@pytest.mark.parametrize("availability", ["unavailable", "ambiguous"])
+def test_pilot_refuses_unsafe_route_state(
+    tmp_path: Path,
+    availability: str,
+) -> None:
+    database = registered_database(
+        tmp_path,
+        availability=availability,
+    )
+
+    with pytest.raises(
+        pilot.SyntheticBrowserPilotError,
+        match=f"route is {availability}",
+    ):
+        pilot.build_plan(database_path=database)
