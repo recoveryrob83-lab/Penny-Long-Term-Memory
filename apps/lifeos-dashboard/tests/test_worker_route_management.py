@@ -6,8 +6,9 @@ import pytest
 
 from lifeos_dashboard.command_center import CommandCenterService
 from lifeos_dashboard.worker_route_management import (
+    CapturedConversation,
     WorkerRouteManager,
-    capture_chatgpt_conversation_url,
+    capture_chatgpt_conversation,
 )
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
@@ -21,6 +22,7 @@ def route_fixture(
     tmp_path: Path,
     *,
     captured_url: str = NEXT_URL,
+    captured_title: str = "Engineering_Worker",
 ) -> tuple[CommandCenterService, WorkerRuntimeService, WorkerRouteManager]:
     database = tmp_path / "command_center.sqlite3"
     command_center = CommandCenterService(tmp_path, database_path=database)
@@ -44,7 +46,10 @@ def route_fixture(
     )
     manager = WorkerRouteManager(
         command_center,
-        capture_url=lambda endpoint: captured_url,
+        capture_conversation=lambda endpoint: CapturedConversation(
+            url=captured_url,
+            title=captured_title,
+        ),
     )
     return command_center, runtime, manager
 
@@ -98,6 +103,28 @@ def test_capture_rejects_stale_dashboard_revision(tmp_path: Path) -> None:
             expected_route_revision=0,
             confirm_capture=True,
         )
+
+
+def test_capture_rejects_wrong_worker_title(tmp_path: Path) -> None:
+    command_center, runtime, manager = route_fixture(
+        tmp_path,
+        captured_title="Chief_of_Staff_HQ",
+    )
+    command_center.set_paused(True)
+
+    with pytest.raises(
+        WorkerRuntimeError,
+        match="does not match the selected Worker title",
+    ):
+        manager.capture_active_route(
+            "engineering_worker",
+            expected_route_revision=1,
+            confirm_capture=True,
+        )
+
+    saved = runtime.worker("engineering_worker")
+    assert saved.conversation_url == CURRENT_URL
+    assert saved.route_revision == 1
 
 
 def test_capture_same_url_is_no_write(tmp_path: Path) -> None:
@@ -225,16 +252,28 @@ class FakeResponse:
 
 def test_cdp_capture_requires_exactly_one_chatgpt_conversation(monkeypatch) -> None:
     payload = [
-        {"type": "page", "url": "http://127.0.0.1:8000/"},
-        {"type": "page", "url": CURRENT_URL + "?model=gpt-5"},
+        {"type": "page", "url": "http://127.0.0.1:8000/", "title": "LifeOS Dashboard"},
+        {
+            "type": "page",
+            "url": CURRENT_URL + "?model=gpt-5",
+            "title": "Engineering_Worker",
+        },
     ]
     monkeypatch.setattr(
         "lifeos_dashboard.worker_route_management.urllib.request.urlopen",
         lambda *args, **kwargs: FakeResponse(payload),
     )
 
-    assert capture_chatgpt_conversation_url("http://127.0.0.1:9222") == CURRENT_URL
+    captured = capture_chatgpt_conversation("http://127.0.0.1:9222")
+    assert captured.url == CURRENT_URL
+    assert captured.title == "Engineering_Worker"
 
-    payload.append({"type": "page", "url": NEXT_URL})
+    payload.append(
+        {
+            "type": "page",
+            "url": NEXT_URL,
+            "title": "Engineering_Worker",
+        }
+    )
     with pytest.raises(WorkerRuntimeError, match="exactly one"):
-        capture_chatgpt_conversation_url("http://127.0.0.1:9222")
+        capture_chatgpt_conversation("http://127.0.0.1:9222")
