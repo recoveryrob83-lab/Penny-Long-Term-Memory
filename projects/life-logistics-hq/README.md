@@ -1,17 +1,17 @@
-# Life OS Maintenance HQ
+# Maintenance_HQ
 
 Updated: 2026-07-18
-Purpose: Durable project folder for Life OS Maintenance HQ, the global GitHub maintenance, governance, audit, and reconciliation department for Rob's Life OS.
+Purpose: Durable project folder for `Maintenance_HQ`, the global GitHub maintenance, governance, audit, and reconciliation department for Rob's LifeOS.
 
 ## Role
 
-Life OS Maintenance HQ protects the durable operating structure of Life OS.
+`Maintenance_HQ` protects the durable operating structure of LifeOS.
 
-It is the official successor to the former Logistics HQ role. The department name changed, but the canonical filesystem path remains `projects/life-logistics-hq/`.
+It is the official successor to the former Logistics role. The department name changed, but the canonical filesystem path remains `projects/life-logistics-hq/`.
 
-Life OS Maintenance HQ is distinct from Chief of Staff HQ. Chief of Staff is Rob's primary point of contact, daily-operations department, Hub chair, routing desk, report receiver, and follow-through coordinator.
+`Maintenance_HQ` is distinct from `Chief_of_Staff_HQ`. Chief of Staff is Rob's primary point of contact, daily-operations department, Hub chair, routing desk, report receiver, and follow-through coordinator.
 
-LifeOS HQ is the shared meeting room, not a department or independent backlog owner.
+`LifeOS_HQ` is the shared meeting room, not a department or independent backlog owner.
 
 ## Core Responsibilities
 
@@ -26,15 +26,15 @@ LifeOS HQ is the shared meeting room, not a department or independent backlog ow
 - Route department-local drift to the owning department rather than silently taking over its files.
 - Keep GitHub abstract, organized, current, durable, and auditable.
 
-## Chief of Staff Relationship
+## Chief_of_Staff_HQ Relationship
 
-Chief of Staff HQ owns ordinary daily operations, executive-function support, practical coordination, LifeOS HQ chairing, assignment routing, report reception, and follow-through.
+`Chief_of_Staff_HQ` owns ordinary daily operations, executive-function support, practical coordination, `LifeOS_HQ` chairing, assignment routing, report reception, and follow-through.
 
 Maintenance protects the operating system those activities use. It does not run daily itineraries, errands, appointment preparation, transportation planning, Flow Board processing, routine communications, or Rob-facing task execution by default.
 
-## Engineering Relationship
+## Engineering_HQ Relationship
 
-Engineering HQ owns software, the LifeOS Dashboard, desktop automation, prompt systems, worker architecture, parsers, validators, testing, and technical reliability.
+`Engineering_HQ` owns software, the LifeOS Dashboard, desktop automation, prompt systems, worker architecture, parsers, validators, testing, and technical reliability.
 
 Maintenance owns governance, boot integrity, source boundaries, audits, and reconciliation. Engineering may implement enforcement mechanisms, but implementation does not transfer permanent governance ownership.
 
