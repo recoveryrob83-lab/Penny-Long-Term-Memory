@@ -1,12 +1,12 @@
 # Chat and Work Execution Policy
 
 Updated: 2026-07-18
-Project: Life OS Infrastructure
+Project: LifeOS Infrastructure
 Purpose: Define the operating boundary between regular ChatGPT conversations and the separate Work execution environment.
 
 ## Core Model
 
-Life OS uses two distinct operating surfaces:
+LifeOS uses two distinct operating surfaces:
 
 - **Chat is headquarters.** Use it for conversation, planning, department coordination, writing, strategy, recovery work, philosophy, ordinary reasoning, and light connector work where available.
 - **Work is the execution environment.** Use it for local files, terminal access, coding, testing, browser control, desktop applications, artifact production, repository changes, and other tasks that require computer execution.
@@ -33,11 +33,11 @@ These are field observations, not claims about undocumented platform internals. 
 
 ## Headquarters Rule
 
-The regular ChatGPT Life OS project is the canonical conversational environment. LifeOS HQ is the shared meeting room, and Chief of Staff HQ is Rob's normal daily coordination point.
+The regular ChatGPT LifeOS project is the canonical conversational environment. `LifeOS_HQ` is the shared meeting room, and `Chief_of_Staff_HQ` is Rob's normal daily coordination point.
 
 Use Chat for:
 
-- Chief of Staff HQ coordination
+- `Chief_of_Staff_HQ` coordination
 - department perspectives and decisions
 - planning and prioritization
 - recovery, wellness, philosophy, and long-form discussion
@@ -128,7 +128,7 @@ Suggested categories are flexible rather than fixed quotas:
 
 ## Task Brief Standard
 
-When Chat determines that Work is required, the owning department should produce a compact Task Brief. Chief of Staff HQ may prepare or refine the brief when coordinating daily execution, routing a cross-department dependency, or helping Rob transfer the task into Work.
+When Chat determines that Work is required, the owning department should produce a compact Task Brief. `Chief_of_Staff_HQ` may prepare or refine the brief when coordinating daily execution, routing a cross-department dependency, or helping Rob transfer the task into Work.
 
 The Task Brief should contain:
 
