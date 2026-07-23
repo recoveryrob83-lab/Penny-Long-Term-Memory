@@ -28,6 +28,7 @@ if (workerOps.status) {
   let workerOpsData = null;
   let selectedAdvisoryId = "";
   let workerOpsBusy = false;
+  const openHistoryRunIds = new Set();
 
   const woEscape = (value) => String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -148,18 +149,32 @@ if (workerOps.status) {
     }).join("") || '<p class="worker-empty">No Worker runs currently require HQ review.</p>';
   }
 
+  function captureOpenHistoryRuns() {
+    workerOps.history.querySelectorAll(".worker-history-item[data-run-id] details[open]").forEach((details) => {
+      const item = details.closest(".worker-history-item[data-run-id]");
+      if (item?.dataset.runId) openHistoryRunIds.add(item.dataset.runId);
+    });
+  }
+
   function renderHistory(data) {
+    captureOpenHistoryRuns();
     const rows = data.history || [];
+    const visibleRunIds = new Set(rows.map((item) => String(item.run_id || "")));
+    for (const runId of [...openHistoryRunIds]) {
+      if (!visibleRunIds.has(runId)) openHistoryRunIds.delete(runId);
+    }
     workerOps.historyCount.textContent = `${rows.length} runs shown`;
     workerOps.history.innerHTML = rows.map((item) => {
+      const runId = String(item.run_id || "");
       const dispatch = item.dispatch_state || (item.assistant_turn_id ? "LEGACY_RESPONSE_CAPTURED" : "Not submitted");
       const resultState = item.controlled_outcome || item.worker_reported_outcome || (dispatch === "DISPATCH_SUBMITTED" ? "RESULT_PENDING" : "Not available");
       const detail = item.stdout || item.stderr || item.reason || "No additional run detail recorded.";
-      return `<article class="worker-history-item">
+      const detailsOpen = openHistoryRunIds.has(runId) ? " open" : "";
+      return `<article class="worker-history-item" data-run-id="${woEscape(runId)}">
         <div class="worker-card-header"><strong>${woEscape(item.task_id || item.run_id)}</strong><span class="worker-badge ${woBadgeClass(item.status)}">${woEscape(item.status)}</span></div>
         <div class="worker-history-meta"><span>${woEscape(item.worker_id)}</span><span>r${woEscape(item.task_revision)}</span><span>${woEscape(woDate(item.finished_at))}</span></div>
         <div class="worker-history-outcomes"><span>Dispatch: <b>${woEscape(dispatch)}</b></span><span>Result: <b>${woEscape(resultState)}</b></span></div>
-        <details><summary>Run evidence</summary><p><b>Run:</b> ${woEscape(item.run_id)}</p><p><b>Wrapper:</b> ${woEscape(item.wrapper_id)}</p><p><b>User turn:</b> ${woEscape(item.user_turn_id || "Not recorded")}</p><p><b>Returned to HQ:</b> ${item.returned_to_source ? "yes" : "not verified"}</p><pre>${woEscape(detail)}</pre></details>
+        <details${detailsOpen}><summary>Run evidence</summary><p><b>Run:</b> ${woEscape(item.run_id)}</p><p><b>Wrapper:</b> ${woEscape(item.wrapper_id)}</p><p><b>User turn:</b> ${woEscape(item.user_turn_id || "Not recorded")}</p><p><b>Returned to HQ:</b> ${item.returned_to_source ? "yes" : "not verified"}</p><pre>${woEscape(detail)}</pre></details>
       </article>`;
     }).join("") || '<p class="worker-empty">No Worker execution rows have been recorded.</p>';
   }
@@ -217,6 +232,14 @@ if (workerOps.status) {
   workerOps.confirmSend.addEventListener("change", updateRunAvailability);
   workerOps.confirmSelfTest.addEventListener("change", updateRunAvailability);
   workerOps.refresh.addEventListener("click", () => loadWorkerOperations());
+  workerOps.history.addEventListener("toggle", (event) => {
+    const details = event.target.closest("details");
+    const item = details?.closest(".worker-history-item[data-run-id]");
+    const runId = item?.dataset.runId;
+    if (!details || !runId) return;
+    if (details.open) openHistoryRunIds.add(runId);
+    else openHistoryRunIds.delete(runId);
+  }, true);
 
   workerOps.pause.addEventListener("click", async () => {
     workerOps.pause.disabled = true;
