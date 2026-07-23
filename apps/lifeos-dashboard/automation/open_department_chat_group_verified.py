@@ -16,6 +16,7 @@ import time
 
 import open_department_chat_group as base
 from lifeos_dashboard.clipboard_runtime import run_with_restored_clipboard
+from lifeos_dashboard.room_titles import canonical_room_title
 
 SIDEBAR_EXPANSION_TIMEOUT_SECONDS = 5.0
 SIDEBAR_EXPANSION_POLL_SECONDS = 0.25
@@ -26,24 +27,13 @@ EXPAND_COLLAPSE_COLLAPSED = 0
 EXPAND_COLLAPSE_EXPANDED = 1
 RESULT_MARKER = "LIFEOS_RESULT_CODE="
 
-CHAT_TITLE_ALIASES = {
-    "Main Assistant HQ": "Chief of Staff HQ",
-    "Logistics HQ": "Life OS Maintenance HQ",
-    "Life Logistics HQ": "Life OS Maintenance HQ",
-}
-
-
-def canonical_chat_title(value: str) -> str:
-    """Translate a retired exact title while leaving canonical and unknown titles unchanged."""
-    return CHAT_TITLE_ALIASES.get(value, value)
-
 
 def normalize_cli_chat_title() -> None:
-    """Rewrite only the positional chat-title argument before the exact-navigation engine runs."""
+    """Rewrite only the positional exact chat-title argument before navigation runs."""
     if len(sys.argv) < 2:
         return
     original = sys.argv[1]
-    canonical = canonical_chat_title(original)
+    canonical = canonical_room_title(original)
     if canonical != original:
         print(f"COMPATIBILITY MAPPING: {original!r} -> {canonical!r}")
         sys.argv[1] = canonical
