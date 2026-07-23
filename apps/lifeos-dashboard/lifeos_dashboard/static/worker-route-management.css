@@ -1,0 +1,61 @@
+.worker-route-panel {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.worker-route-summary {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  border-radius: 12px;
+  background: rgba(14, 116, 144, 0.06);
+}
+
+.worker-route-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.worker-route-url {
+  min-width: 0;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.worker-route-url code {
+  color: #bae6fd;
+  white-space: normal;
+}
+
+.worker-route-detail {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.worker-route-confirm {
+  margin: 0;
+}
+
+.worker-route-message {
+  min-height: 2.65rem;
+  padding: 0.7rem;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #cbd5e1;
+  font-size: 0.8rem;
+}
+
+.worker-route-message[data-tone="good"] { border-left: 3px solid #22c55e; }
+.worker-route-message[data-tone="warn"] { border-left: 3px solid #f59e0b; }
+.worker-route-message[data-tone="bad"] { border-left: 3px solid #ef4444; }
+
+.worker-route-panel button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
