@@ -1,7 +1,7 @@
 # Open Loop Ownership and Visibility SOP
 
 Updated: 2026-07-18
-Project: Life OS Coordination
+Project: LifeOS Coordination
 Purpose: Define where unfinished work belongs, when it becomes system-level, how cross-department visibility works, and how the dashboard aggregates state without creating duplicate truth.
 
 ## Core Principle
@@ -36,11 +36,11 @@ Department-owned unfinished work belongs in the owning department's `open_loops.
 
 Examples:
 
-- dashboard parser implementation belongs to Engineering HQ;
-- repository-path migration and archive disposition belong to Life OS Maintenance HQ;
-- pricing decisions belong to Finance HQ or Business HQ according to the decision being made;
-- wellness routines belong to Wellness HQ;
-- Office Leaks execution belongs to Office Leaks HQ.
+- dashboard parser implementation belongs to `Engineering_HQ`;
+- repository-path migration and archive disposition belong to `Maintenance_HQ`;
+- pricing decisions belong to `Finance_HQ` or `Business_HQ` according to the decision being made;
+- wellness routines belong to `Wellness_HQ`;
+- Office Leaks execution belongs to `Office_Leaks_HQ`.
 
 The authoritative department record may be summarized in its `status.md` or `SESSION_HANDOFF.md`, but those summaries must not become competing open-loop ledgers.
 
@@ -56,9 +56,9 @@ A work item remains department-owned when one department can:
 - maintain the authoritative context;
 - route any narrow dependency through an advisory or explicit handoff.
 
-Broad usefulness, executive interest, historical importance, or visibility across Life OS do not make a department item system-owned.
+Broad usefulness, executive interest, historical importance, or visibility across LifeOS do not make a department item system-owned.
 
-A dashboard feature may help all of Life OS while its implementation remains Engineering-owned.
+A dashboard feature may help all of LifeOS while its implementation remains Engineering-owned.
 
 ## System-Level Promotion Threshold
 
@@ -68,7 +68,7 @@ Promote work into `memory/05_OPEN_LOOPS.md` only when at least one of these is t
 2. Two or more departments must each take substantive action or make a decision.
 3. A shared policy, boot rule, source boundary, or architecture contract is changing.
 4. The work represents a system-wide blocker, risk, outage, or integrity problem.
-5. Chief of Staff HQ or Life OS Maintenance HQ must actively coordinate multiple owners through completion.
+5. `Chief_of_Staff_HQ` or `Maintenance_HQ` must actively coordinate multiple owners through completion.
 6. Rob explicitly designates the work as system-level.
 
 Mere mentions, awareness, downstream benefit, or a possible future dependency are not enough.
@@ -146,7 +146,7 @@ Summaries and handoffs should point back to the authoritative record rather than
 
 Use `Waiting` when progress depends on an external event or input.
 
-Use `Paused` when Life OS intentionally stops the work.
+Use `Paused` when LifeOS intentionally stops the work.
 
 Use a parking lot only when the item is genuinely non-current and has a meaningful resume or review trigger.
 
@@ -173,7 +173,7 @@ During a department sync or system audit:
 
 ## Cross-Department Routing
 
-Use an advisory, explicit dependency, routed handoff, or Chief of Staff / Life OS Maintenance coordination when another department must know, act, decide, monitor, or accept responsibility.
+Use an advisory, explicit dependency, routed handoff, or `Chief_of_Staff_HQ` / `Maintenance_HQ` coordination when another department must know, act, decide, monitor, or accept responsibility.
 
 Do not duplicate an open loop into another department merely to create awareness.
 
@@ -222,17 +222,17 @@ Specialists read:
 
 Specialists do not routinely load the global handoff, all active projects, all system loops, migration state, or unrelated department backlogs.
 
-### Chief of Staff HQ
+### Chief_of_Staff_HQ
 
-Chief of Staff HQ may read broader shared state when coordinating daily operations, system decisions, cross-department synthesis, department reports, assignments, or a full Hub report.
+`Chief_of_Staff_HQ` may read broader shared state when coordinating daily operations, system decisions, cross-department synthesis, department reports, assignments, or a full Hub report.
 
-### Life OS Maintenance HQ
+### Maintenance_HQ
 
-Life OS Maintenance HQ reads broad system state when maintaining boot integrity, shared governance, advisory hygiene, cross-project audits, migrations, source boundaries, or global reconciliation.
+`Maintenance_HQ` reads broad system state when maintaining boot integrity, shared governance, advisory hygiene, cross-project audits, migrations, source boundaries, or global reconciliation.
 
 ### Workers
 
-Workers follow their worker boot contract and do not inherit department or system backlogs unless their contract explicitly requires a pointer.
+Workers follow their Worker boot contract and do not inherit department or system backlogs unless their contract explicitly requires a pointer.
 
 ## Responsibility Map
 
@@ -244,13 +244,13 @@ Workers follow their worker boot contract and do not inherit department or syste
 - routes real cross-department dependencies;
 - avoids speculative and duplicated entries.
 
-### Chief of Staff HQ
+### Chief_of_Staff_HQ
 
 - coordinates daily operations, cross-department decisions, reports, assignments, and follow-through;
 - identifies when a system coordination record is warranted;
 - does not become the routine editor or owner of every department backlog.
 
-### Life OS Maintenance HQ
+### Maintenance_HQ
 
 - maintains global boot and system-loop integrity;
 - maintains shared governance and source-boundary rules;
@@ -259,7 +259,7 @@ Workers follow their worker boot contract and do not inherit department or syste
 - removes system records that no longer meet the promotion threshold;
 - routes department-local corrections rather than silently taking over local files.
 
-### Engineering HQ
+### Engineering_HQ
 
 - maintains the read-only inspector and normalization contract;
 - corrects parser defects from observed evidence;
