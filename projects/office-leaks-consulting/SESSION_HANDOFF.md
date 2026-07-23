@@ -1,8 +1,8 @@
-# Office Leaks HQ Session Handoff
+# Office_Leaks_HQ Session Handoff
 
 Updated: 2026-07-18
-Project: Office Leaks HQ
-Parent: Business HQ
+Project: Office_Leaks_HQ
+Parent: Business_HQ
 Phase: Public launch / live market test
 
 ## Current State
@@ -57,13 +57,13 @@ Broadcast advisory:
 
 ## Role Split
 
-- Office Leaks HQ owns the active business unit's offers, outreach, sales activity, market tests, delivery design, operating playbooks, service materials, customer-facing execution, and routine durable state.
-- Business HQ owns parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment. It may guide, evaluate, and prioritize Office Leaks without duplicating the Office Leaks execution backlog or becoming the operational owner.
-- Engineering HQ owns technical implementation, delivery tooling, workflow templates, automation, software, and architecture when concrete.
-- Finance HQ owns cost-bearing decisions, pricing feasibility, startup costs, paid-promotion affordability, income tracking, tax set-aside, tool affordability, and financial risk when concrete.
-- Chief of Staff HQ coordinates, receives reports, routes assignments, follows through, and supports daily admin, reminders, scheduling, and authorized outreach logistics without owning Office Leaks strategy, execution, customer work, or records.
-- Life OS Maintenance HQ owns global GitHub maintenance, governance, shared operating rules, repository-wide hygiene, audits, and reconciliation. It does not own Office Leaks' routine durable state.
-- LifeOS HQ is the shared meeting room and has no independent department authority or backlog.
+- `Office_Leaks_HQ` owns the active business unit's offers, outreach, sales activity, market tests, delivery design, operating playbooks, service materials, customer-facing execution, and routine durable state.
+- `Business_HQ` owns parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment. It may guide, evaluate, and prioritize Office Leaks without duplicating the Office Leaks execution backlog or becoming the operational owner.
+- `Engineering_HQ` owns technical implementation, delivery tooling, workflow templates, automation, software, and architecture when concrete.
+- `Finance_HQ` owns cost-bearing decisions, pricing feasibility, startup costs, paid-promotion affordability, income tracking, tax set-aside, tool affordability, and financial risk when concrete.
+- `Chief_of_Staff_HQ` coordinates, receives reports, routes assignments, follows through, and supports daily admin, reminders, scheduling, and authorized outreach logistics without owning Office Leaks strategy, execution, customer work, or records.
+- `Maintenance_HQ` owns global GitHub maintenance, governance, shared operating rules, repository-wide hygiene, audits, and reconciliation. It does not own Office Leaks' routine durable state.
+- `LifeOS_HQ` is the shared meeting room and has no independent department authority or backlog.
 
 ## Boot / Sync
 
@@ -121,7 +121,7 @@ Reference:
 
 - `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
 
-Use Finance HQ for cost-bearing decisions, pricing, startup costs, tool affordability, paid promotion, revenue tracking, tax set-aside planning, budget impact, and financial risk when concrete.
+Use `Finance_HQ` for cost-bearing decisions, pricing, startup costs, tool affordability, paid promotion, revenue tracking, tax set-aside planning, budget impact, and financial risk when concrete.
 
 Keep detailed financial records in Drive, not GitHub.
 
@@ -129,15 +129,15 @@ Keep detailed financial records in Drive, not GitHub.
 
 1. Observe organic response to the live Facebook launch package.
 2. Continue lead-loss content with short, practical videos.
-3. Capture real audience and inquiry signals, adjust Office Leaks-owned execution materials within approved strategy, and route parent-level positioning or offer-strategy implications to Business HQ.
-4. Define focused service packages, especially Office Leak Audit and one-leak cleanup sprints, within Business HQ's parent-strategy guidance.
+3. Capture real audience and inquiry signals, adjust Office Leaks-owned execution materials within approved strategy, and route parent-level positioning or offer-strategy implications to `Business_HQ`.
+4. Define focused service packages, especially Office Leak Audit and one-leak cleanup sprints, within `Business_HQ`'s parent-strategy guidance.
 5. Build lead-leak materials and local-service-business outreach content.
 6. Create proposal / diagnostic / handoff artifacts when required by a real prospect.
 7. Build portfolio or sample-work packet.
 8. Create a day-to-day operating system for lead tracking, proposals, delivery, follow-up, and client onboarding.
-9. Coordinate with Engineering HQ on delivery templates and human-system verification when concrete.
-10. Coordinate with Finance HQ on cost-bearing decisions, pricing, startup costs, paid promotion, tool affordability, and tax set-aside when concrete.
-11. Route concrete reminders, scheduling, transportation, outreach-support, and visit-logistics needs to Chief of Staff HQ when authorized; Office Leaks HQ retains execution ownership.
+9. Coordinate with `Engineering_HQ` on delivery templates and human-system verification when concrete.
+10. Coordinate with `Finance_HQ` on cost-bearing decisions, pricing, startup costs, paid promotion, tool affordability, and tax set-aside when concrete.
+11. Route concrete reminders, scheduling, transportation, outreach-support, and visit-logistics needs to `Chief_of_Staff_HQ` when authorized; `Office_Leaks_HQ` retains execution ownership.
 
 ## Next Best Action
 
@@ -149,4 +149,4 @@ Keep GitHub abstract. Do not store client details, financial details, private pr
 
 Do not treat views, reactions, inquiries, or revenue as established until observed or verified.
 
-Do not rename or restructure broader Business HQ until Rob explicitly authorizes it.
+Do not rename or restructure broader `Business_HQ` until Rob explicitly authorizes it.
