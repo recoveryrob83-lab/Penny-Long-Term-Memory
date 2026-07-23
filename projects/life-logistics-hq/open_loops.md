@@ -1,4 +1,4 @@
-# Life OS Maintenance HQ Open Loops
+# Maintenance_HQ Open Loops
 
 Updated: 2026-07-19
 
@@ -6,7 +6,7 @@ Updated: 2026-07-19
 
 None.
 
-System-level work led or co-led by Life OS Maintenance HQ remains authoritative in:
+System-level work led or co-led by `Maintenance_HQ` remains authoritative in:
 
 - `memory/05_OPEN_LOOPS.md`
 
@@ -21,8 +21,8 @@ None.
 These are standing watches, not open work. Create or promote an open loop only when a trigger produces a concrete unfinished action.
 
 - **Global GitHub coherence:** Watch boot files, shared contracts, shared summaries, project maps, status files, system loops, operating rules, and pointers for meaningful drift after cross-project changes.
-- **Canonical name and path integrity:** Preserve `Life OS Maintenance HQ` as the official department name and `projects/life-logistics-hq/` as the stable filesystem path until a separate migration is authorized.
-- **Authority-boundary consistency:** Watch for LifeOS HQ becoming a department, Chief of Staff absorbing specialist ownership, Maintenance absorbing daily operations or department-local maintenance, Engineering absorbing permanent governance, or Workers becoming shadow Department HQs.
+- **Canonical name and path integrity:** Preserve `Maintenance_HQ` as the official department name and `projects/life-logistics-hq/` as the stable filesystem path until a separate migration is authorized.
+- **Authority-boundary consistency:** Watch for `LifeOS_HQ` becoming a department, Chief of Staff absorbing specialist ownership, Maintenance absorbing daily operations or department-local maintenance, Engineering absorbing permanent governance, or Workers becoming shadow Department HQs.
 - **Advisory hygiene:** Keep the Advisory Index as the sole active routing dashboard, preserve source-board ownership, and compact boards only under the lifecycle standard.
 - **Source-system boundaries:** Preserve GitHub as durable abstract state, Drive as working records, Trello as intake and flow, Todoist as commitments, Calendar as timed commitments, Gmail as communication evidence, and dashboard or automation logs as transport and run evidence.
 - **Canonical Worker architecture:** Keep `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`, `coordination/WORKER_EXECUTION_CONTRACT.md`, and the Worker branch in `memory/STARTUP_BOOT.md` coherent without copying the protocols into department subtrees.
@@ -31,7 +31,7 @@ These are standing watches, not open work. Create or promote an open loop only w
 - **Grandfathered pilot compatibility:** Preserve `workers/penny-raw-capture/` and `workers/penny-inventory/` as bounded compatibility pilots; keep `workers/README.md` and `workers/WORKER_STANDARD.md` compatibility-only; do not create new top-level Worker packages by analogy.
 - **Desktop automation safety:** Preserve exact destination matching, occupied-composer protection, clipboard verification, draft-only defaults where applicable, explicit send authorization, duplicate suppression, and stop-on-uncertainty behavior.
 - **Automation production boundary:** Scheduling exists, but fully unattended Windows production remains unapproved until Engineering validates restart, overdue, recurrence, project-expansion, preflight, missed-run, and packaging behavior and Rob authorizes production use.
-- **Engineering HQ Daily Sync:** Preserve the paused state until Rob explicitly resumes the pilot under an approved architecture.
+- **Engineering_HQ Daily Sync:** Preserve the paused state until Rob explicitly resumes the pilot under an approved architecture.
 - **Guarded dashboard sync:** Preserve clean-and-strictly-behind fast-forward behavior; do not imply automatic conflict resolution, reset, rebase, worktree cleanup, or broad write authority.
 - **Dashboard adapter restraint:** Keep Gmail and Drive adapters deferred until demonstrated operational need and explicit Engineering routing.
 - **Maintenance overreach:** Route department-local drift to the owning department unless Rob explicitly authorizes coordinated repair.
@@ -61,4 +61,4 @@ Historical advisories and prior commits may retain role names and paths that wer
 
 ## Operating Rule
 
-Use Life OS Maintenance HQ for global GitHub integrity, boot rules, shared governance contracts, Worker-profile conventions, system-loop hygiene, advisory infrastructure, audits, migrations, source boundaries, and reconciliation. Route daily operations to Chief of Staff HQ, technical routing and runtime implementation to Engineering HQ, and specialist authority or profile work to the owning Department HQ.
+Use `Maintenance_HQ` for global GitHub integrity, boot rules, shared governance contracts, Worker-profile conventions, system-loop hygiene, advisory infrastructure, audits, migrations, source boundaries, and reconciliation. Route daily operations to `Chief_of_Staff_HQ`, technical routing and runtime implementation to `Engineering_HQ`, and specialist authority or profile work to the owning Department HQ.
