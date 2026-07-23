@@ -12,6 +12,7 @@ from typing import Literal
 
 from .command_center_schedule import ScheduleSpec, compute_next_run
 from .command_center_store import CommandCenterStore
+from .room_titles import CANONICAL_HQ_TITLES, migrate_active_title_state
 
 DestinationKey = Literal[
     "hub", "main", "engineering", "logistics", "business", "office-leaks", "finance", "wellness"
@@ -28,14 +29,8 @@ class Destination:
 
 
 DESTINATIONS: dict[str, Destination] = {
-    "hub": Destination("hub", "LifeOS HQ", "LifeOS HQ"),
-    "main": Destination("main", "Chief of Staff HQ", "Chief of Staff HQ"),
-    "engineering": Destination("engineering", "Engineering HQ", "Engineering HQ"),
-    "logistics": Destination("logistics", "Life OS Maintenance HQ", "Life OS Maintenance HQ"),
-    "business": Destination("business", "Business HQ", "Business HQ"),
-    "office-leaks": Destination("office-leaks", "Office Leaks HQ", "Office Leaks HQ"),
-    "finance": Destination("finance", "Finance HQ", "Finance HQ"),
-    "wellness": Destination("wellness", "Wellness HQ", "Wellness HQ"),
+    key: Destination(key, title, title)  # type: ignore[arg-type]
+    for key, title in CANONICAL_HQ_TITLES.items()
 }
 
 
@@ -218,6 +213,7 @@ class CommandCenterService:
         self.store = CommandCenterStore(
             database_path or app_root / ".local" / "command_center.sqlite3"
         )
+        self.title_migration = migrate_active_title_state(self.store.database_path)
         self._paused = False
         self._state_lock = threading.Lock()
         self._run_lock = threading.Lock()
@@ -475,6 +471,7 @@ class CommandCenterService:
             "saved_prompts": self.store.list_prompts(),
             "scheduled_jobs": self.schedules(),
             "history": self.history(),
+            "title_migration": dict(self.title_migration),
         }
 
     def _record(self, result: ExecutionResult) -> ExecutionResult:
