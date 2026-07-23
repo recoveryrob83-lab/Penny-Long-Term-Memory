@@ -40,3 +40,16 @@ def test_worker_operations_assets_expose_dispatch_only_controls() -> None:
     assert "Worker response captured" not in script
     assert ".worker-ops-layout" in style
     assert ".worker-history-item" in style
+
+
+def test_worker_execution_history_preserves_open_evidence_across_refresh() -> None:
+    script = SCRIPT.read_text(encoding="utf-8")
+
+    assert "const openHistoryRunIds = new Set();" in script
+    assert "function captureOpenHistoryRuns()" in script
+    assert 'data-run-id="${woEscape(runId)}"' in script
+    assert 'const detailsOpen = openHistoryRunIds.has(runId) ? " open" : "";' in script
+    assert "<details${detailsOpen}>" in script
+    assert 'workerOps.history.addEventListener("toggle"' in script
+    assert "if (details.open) openHistoryRunIds.add(runId);" in script
+    assert "else openHistoryRunIds.delete(runId);" in script
