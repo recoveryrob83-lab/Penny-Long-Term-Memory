@@ -1,11 +1,11 @@
-# Life OS Operating Rules
+# LifeOS Operating Rules
 
 Updated: 2026-07-18
 Source: Google Drive `11_OPERATIONAL_RULES.md`
 
 ## Purpose
 
-This document stores durable operating rules for Rob's Life OS operating system.
+This document stores durable operating rules for Rob's LifeOS operating system.
 
 These rules govern how Strategy Penny, Implementation Penny, connectors, source-of-truth files, ideas, durable-write promotion, advisories, advisory-board lifecycle, decision rules, role drift checks, pending advisory boards, department notebooks, department events, scheduled sync workers, design principles, publication standards, and operational context should be handled.
 
@@ -27,7 +27,7 @@ These rules govern how Strategy Penny, Implementation Penny, connectors, source-
 - `coordination/DEPARTMENT_NOTEBOOKS.md` is the standard procedure for optional local department notebooks.
 - `coordination/SOURCE_OF_TRUTH_AND_PUBLICATION_STANDARD.md` is the standard for authoritative homes and publication copies.
 - `coordination/CONNECTOR_RELIABILITY_OPERATING_PATTERN.md` is the operating pattern for connector-heavy work, fallback workflows, and Finances-only session behavior.
-- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for Life OS design principles.
+- `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md` is the durable home for LifeOS design principles.
 
 Do not assume information is true merely because it appears in chat memory. Prefer verified connector results, GitHub files, Drive files, Gmail messages, Calendar events, Todoist tasks, Trello cards, and Finances results where appropriate.
 
@@ -88,16 +88,16 @@ Rob remains the final decision-maker.
 
 ## Advisory Routing Rules
 
-Formal Life OS advisories must be posted to the proper advisory routing files:
+Formal LifeOS advisories must be posted to the proper advisory routing files:
 
 1. The source department board under `coordination/boards/`.
 2. `coordination/ADVISORY_INDEX.md`.
 
 Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing.
 
-GitHub Issues are not a Life OS advisory surface unless Rob explicitly changes the architecture later.
+GitHub Issues are not a LifeOS advisory surface unless Rob explicitly changes the architecture later.
 
-Do not create, track, route, or close formal Life OS advisories through GitHub Issues.
+Do not create, track, route, or close formal LifeOS advisories through GitHub Issues.
 
 The Advisory Index is the official dashboard for formal advisory state. It should answer:
 
@@ -136,7 +136,7 @@ Review a board for compaction when it becomes roughly 250–300 lines, completed
 
 Git history is the default archive. Separate archive files are optional and should be created only when discoverability materially requires them.
 
-Life OS Maintenance HQ owns board hygiene and compaction scheduling. Source departments own advisory text accuracy. Target departments report acknowledgement or implementation. Rob remains final authority for major restructuring, archive deletion, and exceptions.
+`Maintenance_HQ` owns board hygiene and compaction scheduling. Source departments own advisory text accuracy. Target departments report acknowledgement or implementation. Rob remains final authority for major restructuring, archive deletion, and exceptions.
 
 ## Connector Reliability Rules
 
@@ -148,7 +148,7 @@ Connector reliability rules are observed operating patterns, not confirmed claim
 
 Use explicit connector invocation when practical.
 
-Prefer small, localized, verified GitHub writes over broad hub rewrites.
+Prefer small, localized, verified GitHub writes over broad Hub rewrites.
 
 If a write safety trigger occurs, stop and wait before retrying. Do not hammer the same blocked operation.
 
@@ -172,13 +172,13 @@ This is not GitHub-for-everything. It is a one-authoritative-home rule.
 
 ## Design Principles Rule
 
-Life OS design principles live in:
+LifeOS design principles live in:
 
 - `projects/life-os-infrastructure/DESIGN_PRINCIPLES.md`
 
 Design principles are stable architecture guardrails, not implementation details.
 
-Current platform-adoption principle: no new platform enters the Life OS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
+Current platform-adoption principle: no new platform enters the LifeOS architecture until it solves a measured problem that cannot be cleanly solved by an existing component.
 
 Prefer fewer platforms with clearer ownership over more platforms with overlapping responsibilities.
 
@@ -224,13 +224,13 @@ Notebook entries should use explicit status metadata and canonical vocabulary so
 
 ## Scheduled HQ Sync Rules
 
-Daily HQ sync workers are the preferred scheduled-task experiment for core HQs.
+Daily HQ sync Workers are the preferred scheduled-task experiment for core HQs.
 
 The standalone Advisory Watcher is retired as a preferred scheduled-task pattern. Its useful reporting logic may inform a future sync design only after the paused Engineering pilot's execution architecture is strengthened.
 
-Scheduled HQ sync workers should boot into the correct department identity, read current boot/handoff/advisory/decision-rule context, consume advisories addressed to that department, report meaningful updates, and avoid modifying systems unless Rob explicitly authorizes that behavior.
+Scheduled HQ sync Workers should boot into the correct department identity, read current boot/handoff/advisory/decision-rule context, consume advisories addressed to that department, report meaningful updates, and avoid modifying systems unless Rob explicitly authorizes that behavior.
 
-Engineering HQ Daily Sync was the first pilot and is currently paused by Rob because scheduled-task execution remains unreliable. Do not roll out additional daily sync workers until the architecture is strengthened and the pilot is explicitly resumed.
+`Engineering_HQ` Daily Sync was the first pilot and is currently paused by Rob because scheduled-task execution remains unreliable. Do not roll out additional daily sync Workers until the architecture is strengthened and the pilot is explicitly resumed.
 
 ## Connector Truthfulness Rules
 
@@ -240,7 +240,7 @@ Distinguish clearly between connector unavailable, schema undiscovered, permissi
 
 Before beginning multi-document or production edits, verify that connector invocation is currently available.
 
-If connector invocation fails or becomes unstable, do not fight the environment. Report the blocker and bootstrap a fresh Implementation Penny session if needed.
+If connector invocation fails or becomes unstable, do not fight the environment. Report the blocker and bootstrap a fresh implementation session if needed.
 
 ## GitHub Editing Rule
 
@@ -261,7 +261,7 @@ Prefer short, dated entries for ongoing logs.
 
 Use housekeeping updates only when meaningful state changes occur.
 
-Update Session Handoff after meaningful Life OS work.
+Update Session Handoff after meaningful LifeOS work.
 
 Update Open Loops when committed open loops are created, closed, clarified, or changed.
 
