@@ -1,97 +1,36 @@
 # Chief of Staff HQ Advisory Board
 
-Updated: 2026-07-19
+Updated: 2026-07-23
 Purpose: Canonical advisory text sourced from Chief of Staff HQ, including formal advisories arising from LifeOS HQ meetings. The retained filesystem path remains `coordination/boards/main-assistant.md`.
 
 ## Open Advisories
+
+None.
+
+## Recently Acknowledged / Implemented Advisories
 
 ### ADV-20260718-042 — Move automated prompt verification from composer transport to receiving Workers
 
 - Date: 2026-07-18
 - From: Chief of Staff HQ / LifeOS HQ
 - To: Engineering HQ
-- Lifecycle State: OPEN
+- Lifecycle State: CLOSED
 - Priority: HIGH
+- Implemented: 2026-07-23
+- Source Verified: 2026-07-23
+- Closed: 2026-07-23
+- Closeout Authority: Rob
 - Posted Board: `coordination/boards/main-assistant.md`
 - Target Department and Owner: Engineering HQ
 - Record Class: Automation architecture implementation request
-- Authorization Basis: Rob-approved bounded Engineering implementation
-- Related Work: Package C migration, dashboard automation, prompt database, event-driven automation, and the canonical Worker contracts
-- Completion Condition: The automation layer reliably delivers and logs a recognized envelope without exact semantic full-text equality; receiving Workers validate the canonical prompt, parameters, authority, ownership, and scope; the Worker returns `IMPLEMENT`, `ELEVATE_FOR_APPROVAL`, or `REPORT_AND_HOLD`; Engineering provides current test or run-log evidence that duplicate execution and silent scope expansion are prevented.
 
-#### Objective
+#### Implementation and Closeout
 
-Move semantic validation out of the composer transport and into the receiving Worker.
+Engineering completed the receiver-side validation and supporting automation machinery requested by this advisory. The implemented system includes durable run correlation, canonical prompt and parameter validation, authority and ownership checks, duplicate suppression, fail-closed handling, explicit Worker outcomes, immutable result evidence, HQ verification, and bounded scheduled consumption.
 
-The automation layer is the courier. It verifies bounded delivery, correlation, and transport evidence. The receiving Worker verifies meaning, legitimacy, scope, ownership, authorization, and source-system boundaries under:
+Current Package D and Package E records and live-run evidence establish that the system was built and tested without transferring source-owner lifecycle authority, permitting silent scope expansion, or creating a competing operational ledger. Rob confirmed on 2026-07-23 that the system is complete and ready for slow rollout and authorized Chief of Staff HQ to close the source advisory.
 
-- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
-- `coordination/WORKER_EXECUTION_CONTRACT.md`
-
-#### Required Transport Behavior
-
-Engineering should implement a small machine-readable envelope that includes at least:
-
-```text
-<<<LIFEOS_AUTOMATION>>>
-run_id: RUN-YYYYMMDD-NNNN
-prompt_id: DEPARTMENT_ACTION_ID
-prompt_version: N
-canonical_prompt_checksum: SHA256:...
-source: CHIEF_OF_STAFF_HQ
-target: ENGINEERING_HQ
-authorization: READ_ONLY | BOUNDED_WRITE | APPROVAL_REQUIRED
-advisory_id: ADV-YYYYMMDD-NNN
-params_json: {...}
-params_checksum: SHA256:...
-<<<END_LIFEOS_AUTOMATION>>>
-```
-
-The transport must:
-
-1. deliver one recognizable envelope to the intended destination;
-2. require recognizable boundaries and minimum viable fields rather than exact full-text equality;
-3. preserve one durable `run_id` across retries;
-4. log source, target, prompt ID and version, authorization class, advisory or approval reference, parameters, checksums, delivery attempt, send action, observed composer state, retry count, and transport result;
-5. prevent duplicate delivery for the same `run_id`;
-6. avoid interpreting, editing, approving, silently truncating, or discarding requested work;
-7. treat character counts and copied composer text as diagnostic evidence rather than the semantic gate.
-
-#### Required Receiver Validation
-
-The receiving Worker must:
-
-1. recognize and parse the wrapper;
-2. verify `prompt_id` and `prompt_version` against the canonical prompt database;
-3. load the canonical prompt from the database when prompt-ID invocation is available;
-4. normalize and verify prompt and parameter checksums;
-5. validate parameters against the prompt schema;
-6. confirm the source may request the task class;
-7. confirm the target department owns the work;
-8. confirm authorization, advisory or approval references, procedures, and source boundaries;
-9. ignore harmless transport noise outside the recognized envelope while refusing text that changes scope, destination, permanence, permissions, or requested actions;
-10. preserve `run_id`, advisory revision, Worker ID, and profile version in execution and reporting evidence.
-
-#### Receiver Outcomes
-
-- `IMPLEMENT`: wrapper, prompt, parameters, ownership, and authorization validate; execute only the bounded work and report evidence tied to `run_id`.
-- `ELEVATE_FOR_APPROVAL`: the request is legitimate but requires new authority, judgment, conflict resolution, financial or privacy approval, or another decision not already granted.
-- `REPORT_AND_HOLD`: prompt or checksum is unknown, parameters fail, ownership is wrong, authority is missing, the envelope is corrupted, scope conflicts with procedures, or unexpected instructions materially change the request.
-
-#### Logging and Boundaries
-
-The run log must preserve transport, validation, duplicate-suppression, Worker outcome, evidence, and final verification state.
-
-Do not:
-
-- make exact composer-text equality a release blocker;
-- use minimum character count as semantic proof;
-- let transport reinterpret work;
-- let the wrapper bypass ownership, procedures, advisory approval, durable-write gates, or source-system boundaries;
-- create a competing prompt source;
-- close this advisory without current test or run-log evidence.
-
-## Recently Acknowledged / Implemented Advisories
+Slow rollout remains an operational pacing decision, not an unresolved implementation condition. This advisory is implemented, source-verified, and closed.
 
 ### ADV-20260719-045 — Acknowledge the project and chat source memory architecture discovery
 
