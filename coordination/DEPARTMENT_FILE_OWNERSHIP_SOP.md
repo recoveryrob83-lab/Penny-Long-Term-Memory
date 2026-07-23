@@ -1,18 +1,18 @@
 # Department File Ownership and Drift Management SOP
 
 Updated: 2026-07-18
-Project: Life OS Coordination
+Project: LifeOS Coordination
 Purpose: Define how departments maintain their own durable GitHub state while minimizing Rob's manual routing burden.
 
 ## Core Rule
 
 Each department is responsible for maintaining the GitHub files and sections within its own domain.
 
-The department that owns the working context should normally update the durable record directly rather than routing routine maintenance through Life OS Maintenance HQ.
+The department that owns the working context should normally update the durable record directly rather than routing routine maintenance through `Maintenance_HQ`.
 
 Short form:
 
-> Departments maintain their own rooms. Chief of Staff coordinates. Life OS Maintenance protects the shared operating system.
+> Departments maintain their own rooms. `Chief_of_Staff_HQ` coordinates. `Maintenance_HQ` protects the shared operating system.
 
 ## Companion Governance Rules
 
@@ -29,9 +29,9 @@ Raw ideas normally remain in Trello until they pass the promotion gate. Departme
 
 ## Why This Rule Exists
 
-The ideal architecture would automate cross-department synchronization, advisory consumption, and routine memory maintenance. The current platform does not provide a reliable low-friction way to automate the seven department HQ chats and their advisories.
+The ideal architecture would automate cross-department synchronization, advisory consumption, and routine memory maintenance. The current platform does not provide a reliable low-friction way to automate the seven Department HQ chats and their advisories.
 
-Routing every routine change through Rob and then through Life OS Maintenance HQ creates unnecessary switching, delay, and cognitive load. Because each department chat already holds the most current working context for its domain, that department is usually best positioned to detect and correct drift.
+Routing every routine change through Rob and then through `Maintenance_HQ` creates unnecessary switching, delay, and cognitive load. Because each department chat already holds the most current working context for its domain, that department is usually best positioned to detect and correct drift.
 
 Reality takes priority over architectural purity when the cleaner design makes Rob the manual message bus.
 
@@ -62,12 +62,12 @@ During routine work, syncs, and boots, the department should:
 9. Use explicit canonical lifecycle state and priority rather than combined or improvised labels.
 10. Preserve raw possibilities in Trello until ownership, outcome, next action or review trigger, destination, and authorization are clear.
 
-## Chief of Staff HQ Responsibilities
+## Chief_of_Staff_HQ Responsibilities
 
-Chief of Staff HQ owns:
+`Chief_of_Staff_HQ` owns:
 
 - daily operations and executive-function support;
-- chairing LifeOS HQ;
+- chairing `LifeOS_HQ`;
 - cross-department coordination and synthesis;
 - routing assignments, decisions, reports, and follow-through;
 - identifying when a local department change has broader consequences;
@@ -75,11 +75,11 @@ Chief of Staff HQ owns:
 - supporting low-friction idea capture without creating accidental commitments;
 - helping clarify ownership and destination before promotion.
 
-Chief of Staff HQ should not become the routine editor of every department's internal files or promote every useful idea into system memory.
+`Chief_of_Staff_HQ` should not become the routine editor of every department's internal files or promote every useful idea into system memory.
 
-## Life OS Maintenance HQ Responsibilities
+## Maintenance_HQ Responsibilities
 
-Life OS Maintenance HQ owns shared operational infrastructure, governance, and cross-system hygiene, including:
+`Maintenance_HQ` owns shared operational infrastructure, governance, and cross-system hygiene, including:
 
 - global boot and routing integrity;
 - global handoffs and operating rules;
@@ -93,7 +93,7 @@ Life OS Maintenance HQ owns shared operational infrastructure, governance, and c
 - reconciliation between the Drive Chief's Manual, Project Instructions, and GitHub implementation;
 - auditing durable-write promotion, source boundaries, duplicate ownership, and canonical tag drift.
 
-Life OS Maintenance HQ is not the default implementation bottleneck for routine department file maintenance.
+`Maintenance_HQ` is not the default implementation bottleneck for routine department file maintenance.
 
 Maintenance detects department-local drift and routes precise corrections. It does not silently edit another department's files without explicit coordinated-repair authority.
 
@@ -143,7 +143,7 @@ When a change touches:
 - the Advisory Index;
 - system architecture files;
 
-route through Chief of Staff HQ, Life OS Maintenance HQ, the owning department, or an explicit coordinated action as appropriate.
+route through `Chief_of_Staff_HQ`, `Maintenance_HQ`, the owning department, or an explicit coordinated action as appropriate.
 
 System files must not become mirrors of department backlogs. When shared coordination is genuinely needed, use the compact coordination-record rules in `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`.
 
