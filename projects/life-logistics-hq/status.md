@@ -29,7 +29,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Guarded GitHub dashboard sync remains limited to clean, strictly-behind fast-forward updates.
 - Fully unattended Windows production use remains unapproved unless current Engineering evidence and Rob's authorization establish otherwise.
 - `Engineering_HQ Daily Sync` remains paused by deliberate operating choice.
-- The hourly `Chief_of_Staff_HQ` advisory watcher is an active read-only pilot with destination validation pending under `ADV-20260723-052`.
+- The hourly `Chief_of_Staff_HQ` advisory watcher remains an active read-only pilot. Its destination validation passed in the existing Chief of Staff conversation, and `ADV-20260723-052` is closed.
 
 ## 2026-07-23 Completed Maintenance
 
@@ -41,7 +41,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Generated the role-neutral global operations handbook as a noncanonical Project Source publication artifact.
 - Placed `LIFEOS_NAMING_REPAIR_FINAL_REPORT.md` in Google Drive under `Life Organization/Chief Engineering Penny`.
 - Booted and synchronized the replacement `Maintenance_HQ` chat from the canonical GitHub sequence.
-- Reconciled `ADV-20260723-052` into the Advisory Index without duplicating its source-board text.
+- Reconciled `ADV-20260723-052` into the Advisory Index without duplicating its source-board text, then closed it after the watcher destination test passed and Rob authorized closure.
 - Removed the stale global-handoff instruction to continue work under closed `ADV-20260718-042`.
 - Refreshed the system handoff, active-project map, system open loops, scheduled-task architecture, and scheduled-task index.
 - Recorded one compact system-level waiting item for Project Settings and Project Source publication replacement because those UI actions cannot be completed through the GitHub connector.
