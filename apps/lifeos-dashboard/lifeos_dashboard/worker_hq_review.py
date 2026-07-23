@@ -15,6 +15,7 @@ import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from .room_titles import CANONICAL_HQ_TITLES, canonical_room_title
 from .worker_result_contract import artifact_checksum, artifact_path, validate_artifact
 from .worker_runtime import WorkerRuntimeError
 from .worker_verification import WorkerVerificationService
@@ -177,9 +178,14 @@ class WorkerHqReviewService:
         environment_name = f"LIFEOS_{department.upper()}_HQ_CHAT_TITLE"
         configured = str(os.getenv(environment_name) or "").strip()
         if configured:
-            return configured
+            canonical = canonical_room_title(configured)
+            if canonical not in CANONICAL_HQ_TITLES.values():
+                raise WorkerRuntimeError(
+                    f"Configured HQ chat title is not a canonical exact title: {configured!r}"
+                )
+            return canonical
         if department == "engineering":
-            return "Engineering HQ"
+            return CANONICAL_HQ_TITLES["engineering"]
         raise WorkerRuntimeError(
             "Cross-department HQ routing is not authorized by the Engineering-only Slice 5 pilot."
         )
@@ -334,8 +340,8 @@ class WorkerHqReviewService:
         integrity = str(payload.get("report_integrity_state") or "")
         authority = str(payload.get("authority_compliance_state") or "")
         work = str(payload.get("work_verification_state") or "")
-        ready = payload.get("ready_for_consumption") is True
-        needs_rob = payload.get("requires_rob_validation") is True
+        ready = bool(payload.get("ready_for_consumption"))
+        needs_rob = bool(payload.get("requires_rob_validation"))
         if state == "VERIFIED" and not (
             integrity == "valid"
             and authority == "compliant"
