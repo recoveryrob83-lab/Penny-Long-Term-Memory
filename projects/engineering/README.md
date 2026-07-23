@@ -1,6 +1,6 @@
 # Engineering HQ
 
-Updated: 2026-07-21
+Updated: 2026-07-23
 
 ## Purpose
 
@@ -28,14 +28,15 @@ Engineering owns the machinery. It does not own canonical shared Worker governan
 A Life OS Worker is a specialized ChatGPT room operating beneath one Department HQ.
 
 - The Department HQ owns the Worker profile, procedures, authority, holds, verification, and domain judgment.
-- GitHub holds canonical profiles, procedures, task state, and immutable result and review evidence.
+- GitHub holds canonical profiles, procedures, task state, decisions, and immutable result and review evidence.
 - SQLite `execution_history` remains the sole operational runtime ledger.
-- The browser courier wakes an authorized Worker or owning HQ, proves submission, returns immediately, and never waits for completion.
+- The browser courier wakes an authorized Worker or owning HQ, proves one correlated submission, returns immediately, and never waits for completion.
 - The Worker performs bounded work and writes one immutable schema-valid report attempt under exact narrow reporting authority.
-- A deterministic ingester validates the report, calculates the canonical checksum, updates existing runtime state, and requests report repair when needed without re-executing the work.
+- A deterministic ingester validates the report, calculates the canonical checksum, updates the existing runtime row, and requests report repair when needed without re-executing the work.
 - Department HQ reviews report integrity, authority compliance, evidence, and the actual work where possible.
 - Work unavailable to HQ inspection requires explicit Rob validation.
-- Signed HQ or Rob results become available for later scheduled Chief of Staff consumption.
+- Signed HQ or Rob results become consumption-ready.
+- A separately authorized scheduled watcher may report meaningful signed changes.
 - The courier never wakes Chief of Staff.
 - Source owners retain advisory lifecycle and closure authority.
 
@@ -57,7 +58,7 @@ Engineering maintains its own project subtree during authorized maintenance and 
 
 Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
-Package E may pilot a Worker result outbox under Engineering-owned paths. It may not silently grant universal Worker write authority. Shared adoption requires Life OS Maintenance HQ review and explicit authorization by each owning department.
+Package E proved a Worker result outbox only under Engineering-owned paths. It did not grant universal Worker write authority. Shared adoption requires Life OS Maintenance HQ review and explicit authorization by each owning department.
 
 ## Current Technical State
 
@@ -65,46 +66,59 @@ The LifeOS Dashboard is running on Rob's Windows machine with live read-only Git
 
 Package D is closed after implementing and validating the technical Worker registry, routing, transport, receiver, verification, duplicate-suppression, and synthetic pilot foundation.
 
-Package E is active and authoritative at:
+Package E is closed and authoritative at:
 
 - `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-Current Package E evidence:
+Package E completed and live-validated the Engineering-only chain for:
 
-- Slice 2 dispatch-only transport is implemented and locally validated with 40 focused tests passing;
-- `ADV-20260721-048` reached `engineering_worker` and the Worker completed independently;
-- the courier failed to return the controlled browser tab to Engineering HQ after the successful wake;
-- Slice 3 created the first bounded live immutable report artifact;
-- report path: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`;
-- creation commit: `fbe75f13bc1b3a2dd35815e0d145c25da8695e22`;
-- blob SHA: `f218d63519d38352b8aee4a790ed20807b1bebee`;
-- controlled outcome: `IMPLEMENT`;
-- verification remains `pending`;
-- Rob sees the successful package outbox in Worker Operations;
-- deterministic ingestion and formal HQ signoff do not yet exist.
+- dispatch-only Worker wakes;
+- exact URL, hydration, identity, composer, generation, and new-turn submission witnesses;
+- immediate courier release and source-room return;
+- immutable schema-valid Worker reports;
+- deterministic checksum and same-row result ingestion;
+- rejection and correction-only report-repair mechanics;
+- owning-HQ wakes and immutable HQ review receipts;
+- explicit Rob-validation receipts when HQ cannot inspect decisive evidence;
+- signed consumption-ready states;
+- scheduled watcher reporting under separate authorization;
+- duplicate execution, result, and HQ-wake suppression;
+- source-owner advisory lifecycle separation.
 
-The existing ADV-048 run must not be resent. Its report is the first valid live target for Slice 4 ingestion.
+Final live evidence includes:
+
+- `ADV-20260721-048`: immutable Worker report plus Engineering HQ `VERIFIED` receipt, consumption-ready without Rob validation;
+- `ADV-20260722-049`: `ROB_VALIDATION_REQUIRED` HQ receipt followed by Rob's immutable `VERIFIED` receipt;
+- `ADV-20260723-051`: Worker report, HQ wake, immutable `VERIFIED` review, `HQ_VERIFIED` runtime reconciliation, and live duplicate-wake suppression after repair.
+
+The scheduled watcher successfully read signed evidence and open advisory state, reported meaningful follow-through to Rob, and generated a normal ChatGPT notification. It did not create authority or close records automatically.
 
 ## Current Decision Boundary
 
-The next valid work is:
+Package E slices and advisories must not be recreated as active work.
 
-1. inspect the ADV-048 execution row and dispatch receipt;
-2. repair exact return-to-source behavior without weakening dispatch safeguards or reopening duplicate-send risk;
-3. add focused regression coverage;
-4. implement Package E Slice 4 deterministic ingestion, checksum calculation, rejection evidence, report-repair wakes, and same-row runtime updates;
-5. use the existing report artifact for first live ingestion;
-6. leave formal Engineering HQ review and advisory closure pending until ingestion succeeds.
+Future Engineering work must come from:
 
-Later slices add owning-HQ verification, Rob validation, `READY_FOR_COS`, and a separately authorized read-only Chief of Staff scheduled-consumption task.
+- `projects/engineering/open_loops.md`;
+- a demonstrated defect with bounded repair authority;
+- or a new explicit Rob instruction.
 
-Cross-department rollout, scheduled-task activation, shared Worker-contract changes, new Worker authority, and advisory closure remain separate decisions.
+Cross-department result-outbox adoption, universal Worker write authority, optional human-readable envelope work, broader unattended packaging, new recurring tasks, connectors, spending, and public actions remain separate decisions.
 
-## Composer Boundary
+`ADV-20260718-042` remains open under `coordination/boards/main-assistant.md` and is not closed by Package E.
 
-The general full-text composer investigation is paused and must not be reopened without demonstrated failure.
+## Browser and Automation Boundary
 
-The Worker-only entrypoint preserves exact destination, hydration checks, empty-composer protection, explicit send, one-job locking, and stop-on-uncertainty safeguards. The return-to-source repair must remain bounded to the demonstrated post-send navigation defect and must not reintroduce repeated selection, character-range comparison, dual witnesses, focus hacks, alternate paste mechanisms, or broad timeout experiments without evidence.
+- Operate only against exact canonical ChatGPT URLs.
+- Require stable history hydration, exact room identity, an empty composer, and no active generation.
+- Prove a new marker-bearing user turn, increased turn count, and an empty composer before calling a send confirmed.
+- Never blind-retry a confirmed or uncertain submission.
+- Ingest existing immutable HQ evidence before attempting another HQ wake.
+- Use atomic one-shot claims to suppress concurrent or uncertain repeat wakes.
+- Fail closed on unrecognized post-submit states and require human inspection.
+- Do not scrape assistant responses in the dispatch-only courier.
+- Do not let automation decide HQ or Rob judgment.
+- Do not let courier, dashboard, watcher, or evidence receipts close source advisories automatically.
 
 ## Security Rule
 
@@ -122,4 +136,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D is closed. Package E has a successful live immutable outbox artifact, an open courier return-to-source defect, and no deterministic ingestion or formal HQ signoff yet. Slice 4 is next after the bounded browser-return repair.
+Active department. Package D and Package E are closed. GitHub-first Worker Operations and the separately authorized scheduled watcher are live-validated. Remaining work is limited to current open loops, demonstrated defects, or new Rob-authorized packages.
