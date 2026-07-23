@@ -1,14 +1,14 @@
-# Office Leaks HQ
+# Office_Leaks_HQ
 
 Updated: 2026-07-18
-Parent Department: Business HQ
+Parent Department: Business_HQ
 Status: Active business-unit HQ / live market test
 
 ## Purpose
 
 Office Leaks Consulting is Rob's active revenue-first business unit for practical systems consulting with small local service businesses.
 
-It grew out of the Virtual Assistant Business worker project, but it is no longer merely a virtual assistant concept. It is now operated by Office Leaks HQ as an active business unit under Business HQ's parent-level strategy and portfolio judgment.
+It grew out of the Virtual Assistant Business worker project, but it is no longer merely a virtual assistant concept. It is now operated by `Office_Leaks_HQ` as an active business unit under `Business_HQ`'s parent-level strategy and portfolio judgment.
 
 Working promise:
 
@@ -21,21 +21,21 @@ Operating philosophy:
 - The tool is not the product. The habit is the product.
 - No shame. No blame. Fix the system.
 
-## Relationship To Business HQ
+## Relationship To Business_HQ
 
-Business HQ owns parent-level business strategy, market selection, positioning, offer strategy, commercial priorities, portfolio thinking, and business-model decisions.
+`Business_HQ` owns parent-level business strategy, market selection, positioning, offer strategy, commercial priorities, portfolio thinking, and business-model decisions.
 
-Office Leaks HQ owns the active business unit's offers, outreach, sales activity, market tests, delivery design, operating playbooks, customer-facing execution, service development, delivery readiness, and routine durable state.
+`Office_Leaks_HQ` owns the active business unit's offers, outreach, sales activity, market tests, delivery design, operating playbooks, customer-facing execution, service development, delivery readiness, and routine durable state.
 
-Business HQ may guide, evaluate, prioritize, or make portfolio-level decisions about Office Leaks. It does not duplicate the Office Leaks execution backlog or become the operational owner.
+`Business_HQ` may guide, evaluate, prioritize, or make portfolio-level decisions about Office Leaks. It does not duplicate the Office Leaks execution backlog or become the operational owner.
 
 ## Coordination Model
 
-- LifeOS HQ is the shared meeting room and has no independent department authority or backlog.
-- Chief of Staff HQ coordinates, receives reports, routes assignments, and checks follow-through without owning Office Leaks strategy, execution, customer work, or records.
-- Life OS Maintenance HQ owns global GitHub maintenance, governance, audits, boot integrity, shared procedures, and reconciliation without owning Office Leaks' routine durable state.
-- Engineering HQ owns technical implementation, software, automation, delivery tooling, templates, and architecture when concrete.
-- Finance HQ owns cost-bearing decisions, affordability, pricing feasibility, startup costs, paid promotion, tool costs, tax set-aside, and financial risk when concrete.
+- `LifeOS_HQ` is the shared meeting room and has no independent department authority or backlog.
+- `Chief_of_Staff_HQ` coordinates, receives reports, routes assignments, and checks follow-through without owning Office Leaks strategy, execution, customer work, or records.
+- `Maintenance_HQ` owns global GitHub maintenance, governance, audits, boot integrity, shared procedures, and reconciliation without owning Office Leaks' routine durable state.
+- `Engineering_HQ` owns technical implementation, software, automation, delivery tooling, templates, and architecture when concrete.
+- `Finance_HQ` owns cost-bearing decisions, affordability, pricing feasibility, startup costs, paid promotion, tool costs, tax set-aside, and financial risk when concrete.
 - Rob remains the final authority.
 
 ## Core Scope
@@ -51,11 +51,11 @@ Office Leaks Consulting focuses on:
 
 ## Primary Support Departments
 
-- Business HQ: parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment.
-- Engineering HQ: technical implementation, delivery architecture, workflow templates, automation, software, and tooling when concrete.
-- Finance HQ: cost-bearing decisions, pricing feasibility, startup costs, paid promotion, tool affordability, revenue tracking, tax set-aside, and financial risk.
-- Chief of Staff HQ: coordination, reports, assignment routing, scheduling, reminders, and authorized practical support without ownership transfer.
-- Life OS Maintenance HQ: global GitHub governance, boot integrity, shared operating infrastructure, audits, and reconciliation.
+- `Business_HQ`: parent strategy, market selection, positioning, offer strategy, commercial priorities, portfolio decisions, and business-model judgment.
+- `Engineering_HQ`: technical implementation, delivery architecture, workflow templates, automation, software, and tooling when concrete.
+- `Finance_HQ`: cost-bearing decisions, pricing feasibility, startup costs, paid promotion, tool affordability, revenue tracking, tax set-aside, and financial risk.
+- `Chief_of_Staff_HQ`: coordination, reports, assignment routing, scheduling, reminders, and authorized practical support without ownership transfer.
+- `Maintenance_HQ`: global GitHub governance, boot integrity, shared operating infrastructure, audits, and reconciliation.
 
 ## Key References
 
