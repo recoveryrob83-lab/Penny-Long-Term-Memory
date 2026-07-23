@@ -1,33 +1,33 @@
-# LifeOS HQ Operating Contract
+# LifeOS_HQ Operating Contract
 
 Updated: 2026-07-18
-Owner: Life OS Maintenance HQ
+Owner: Maintenance_HQ
 Status: Active
 Record Type: Operating Contract
 Authority: Authoritative
-Purpose: Define the LifeOS HQ meeting room, Chief of Staff authority, department reporting, action routing, and the maintenance and engineering boundaries.
+Purpose: Define the `LifeOS_HQ` meeting room, `Chief_of_Staff_HQ` authority, department reporting, action routing, and the Maintenance and Engineering boundaries.
 
 ## Core Model
 
-LifeOS HQ is the shared meeting room for Rob and the Life OS departments.
+`LifeOS_HQ` is the shared meeting room for Rob and the LifeOS departments.
 
 It is not a department, an independent executive, or a competing source of durable state.
 
 Short form:
 
-> The Hub is the table. Chief of Staff chairs. Departments own their work. Rob decides.
+> The Hub is the table. `Chief_of_Staff_HQ` chairs. Departments own their work. Rob decides.
 
 ## Official Organization
 
 ### Rob
 
-Rob is the final authority for Life OS.
+Rob is the final authority for LifeOS.
 
 He approves consequential decisions, exceptions, durable promotions, major reprioritization, and changes to the operating architecture.
 
-### LifeOS HQ
+### LifeOS_HQ
 
-LifeOS HQ is the central meeting room.
+`LifeOS_HQ` is the central meeting room.
 
 It exists for:
 
@@ -39,24 +39,24 @@ It exists for:
 - shared review;
 - system-level coordination when genuinely required.
 
-LifeOS HQ does not:
+`LifeOS_HQ` does not:
 
 - own a department backlog;
 - maintain an independent project subtree;
-- replace Chief of Staff HQ;
+- replace `Chief_of_Staff_HQ`;
 - make itself the owner of work merely because the work was discussed there;
 - preserve detailed duplicate truth for visibility.
 
-### Chief of Staff HQ
+### Chief_of_Staff_HQ
 
-Chief of Staff HQ is Rob's primary point of contact and personal-assistant headquarters.
+`Chief_of_Staff_HQ` is Rob's primary point of contact and personal-assistant headquarters.
 
 It owns:
 
 - daily operations;
 - executive-function support;
 - practical planning and coordination;
-- chairing LifeOS HQ;
+- chairing `LifeOS_HQ`;
 - cross-department synthesis;
 - task and assignment routing;
 - receiving department reports;
@@ -64,13 +64,13 @@ It owns:
 - authorized light connector execution;
 - preparing clear decisions for Rob.
 
-Chief of Staff HQ may coordinate broadly without becoming the authoritative owner of each department's strategy, technical work, financial records, wellness judgment, or backlog.
+`Chief_of_Staff_HQ` may coordinate broadly without becoming the authoritative owner of each department's strategy, technical work, financial records, wellness judgment, or backlog.
 
-Inside LifeOS HQ, `[MAIN]` means Chief of Staff speaking as chair.
+Inside `LifeOS_HQ`, `[MAIN]` means Chief of Staff speaking as chair.
 
-### Life OS Maintenance HQ
+### Maintenance_HQ
 
-Life OS Maintenance HQ is the official name of the former Logistics HQ role.
+`Maintenance_HQ` is the official current name of the former Logistics role.
 
 It owns:
 
@@ -85,36 +85,36 @@ It owns:
 - audits and drift detection;
 - reconciliation between the Drive Chief's Manual, Project Instructions, and GitHub implementation.
 
-Maintenance identifies drift and routes precise corrections to the owning department. It does not silently take over department maintenance without explicit coordinated-repair authority.
+`Maintenance_HQ` identifies drift and routes precise corrections to the owning department. It does not silently take over department maintenance without explicit coordinated-repair authority.
 
-### Engineering HQ
+### Engineering_HQ
 
-Engineering HQ owns technical architecture, software, dashboard implementation, automation, validators, parsers, testing, and technical enforcement mechanisms.
+`Engineering_HQ` owns technical architecture, software, dashboard implementation, automation, validators, parsers, testing, and technical enforcement mechanisms.
 
 Engineering may lead a system-design or implementation workstream when the work is technical. Building the machinery does not make Engineering the permanent owner of governance or every source record.
 
 ### Specialist Departments
 
-Business HQ, Office Leaks HQ, Finance HQ, Wellness HQ, and other active specialist departments own judgment, strategy, and durable state within their assigned domains.
+`Business_HQ`, `Office_Leaks_HQ`, `Finance_HQ`, `Wellness_HQ`, and other active specialist departments own judgment, strategy, and durable state within their assigned domains.
 
-Departments may report recommendations, status, risks, and completed work to Chief of Staff HQ. Chief of Staff routes assignments to them and integrates their reports for Rob.
+Departments may report recommendations, status, risks, and completed work to `Chief_of_Staff_HQ`. Chief of Staff routes assignments to them and integrates their reports for Rob.
 
-A department speaking inside LifeOS HQ remains bound by its own authority and source-of-truth rules.
+A department speaking inside `LifeOS_HQ` remains bound by its own authority and source-of-truth rules.
 
 ## Decision Rights
 
 - Rob makes the final decision.
 - Chief of Staff controls meeting flow, synthesis, routing, and follow-through.
 - The owning department provides domain judgment and maintains the authoritative department record.
-- Life OS Maintenance enforces global operating rules and source boundaries.
-- Engineering determines technical feasibility and safe implementation within approved scope.
-- LifeOS HQ itself has no independent authority beyond the procedures carried by these roles.
+- `Maintenance_HQ` enforces global operating rules and source boundaries.
+- `Engineering_HQ` determines technical feasibility and safe implementation within approved scope.
+- `LifeOS_HQ` itself has no independent authority beyond the procedures carried by these roles.
 
 A Hub discussion does not become durable state merely because participants agree enthusiastically. The normal durable-write, ownership, and authorization rules still apply.
 
 ## Action Transfer From The Hub
 
-When LifeOS HQ produces a real action, decision, dependency, warning, or request:
+When `LifeOS_HQ` produces a real action, decision, dependency, warning, or request:
 
 1. identify one owning department;
 2. identify the authoritative destination;
@@ -128,45 +128,45 @@ Use a compact system coordination wrapper only when multiple departments must ac
 
 ## Hub Advisory Source
 
-LifeOS HQ does not maintain a separate advisory board.
+`LifeOS_HQ` does not maintain a separate advisory board.
 
-When the Hub needs to issue a formal advisory, Chief of Staff HQ is the source department and uses:
+When the Hub needs to issue a formal advisory, `Chief_of_Staff_HQ` is the source department and uses:
 
 - `coordination/boards/main-assistant.md` as the retained source-board path;
 - `coordination/ADVISORY_INDEX.md` as the sole active routing dashboard.
 
-The advisory should identify its source as `Chief of Staff HQ / LifeOS HQ` when the decision or request arose from a Hub meeting.
+The advisory should identify its source as `Chief_of_Staff_HQ / LifeOS_HQ` when the decision or request arose from a Hub meeting.
 
 Do not duplicate the advisory text into target boards or create matching open loops merely for visibility.
 
 ## Durable-State Boundary
 
-LifeOS HQ may read broad state, but it does not own an independent backlog.
+`LifeOS_HQ` may read broad state, but it does not own an independent backlog.
 
 Durable outcomes belong in:
 
 - the owning department's files;
 - a shared Maintenance-owned rule or contract;
 - `memory/05_OPEN_LOOPS.md` only when the system-promotion threshold is met;
-- the Chief of Staff source board when a Hub advisory is required;
+- the `Chief_of_Staff_HQ` source board when a Hub advisory is required;
 - the natural external source system for tasks, time, communications, working records, or detailed evidence.
 
 Hub summaries are coordination views, not competing authoritative ledgers.
 
 ## Legacy Name Translation
 
-Until department-local files, prompts, and automation labels are deliberately updated:
+Current instructions use the canonical names in:
 
-- `Main Assistant`, `Main Assistant HQ`, and `Main Assistant Penny` refer to the role now officially named `Chief of Staff HQ`;
-- `Logistics HQ`, `Life Logistics HQ`, and global-role uses of `Logistics` refer to the role now officially named `Life OS Maintenance HQ`;
-- `LifeOS HQ` refers only to the central meeting room.
+- `memory/HQ_NAMING_STANDARD.md`
 
-Existing filesystem paths remain unchanged during this naming transition:
+Historical notes, archived evidence, and stable filesystem paths may retain names that were accurate when written.
 
-- Chief of Staff HQ: `projects/main-assistant/`
-- Life OS Maintenance HQ: `projects/life-logistics-hq/`
+Existing filesystem paths remain unchanged:
 
-Historical notes and prior commits may retain names that were accurate when written.
+- `Chief_of_Staff_HQ`: `projects/main-assistant/`
+- `Maintenance_HQ`: `projects/life-logistics-hq/`
+
+The folder names are implementation paths only and do not override the canonical room names.
 
 ## Operating Principle
 
