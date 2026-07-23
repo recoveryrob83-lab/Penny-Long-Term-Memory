@@ -1,13 +1,13 @@
-# Finance HQ Session Handoff
+# Finance_HQ Session Handoff
 
 Updated: 2026-07-18
-Project: Finance HQ
-Purpose: Project-specific handoff for new Finance HQ chats.
+Project: Finance_HQ
+Purpose: Project-specific handoff for new `Finance_HQ` chats.
 
 ## Metadata
 
 - Project Owner: Rob
-- Primary Chat: Finance HQ
+- Primary Chat: Finance_HQ
 - Current Phase: Active
 - Primary Systems: Google Drive, Finances connector in dedicated Finance-only sessions, Gmail, Todoist, Calendar, RPR/user-mediated files, Finance Advisory Board, Decision Rules Registry, Advisory Index, GitHub abstract memory
 - Sensitivity Level: High
@@ -19,11 +19,11 @@ Read:
 
 `projects/finance-benefits/DEPARTMENT_IDENTITY.md`
 
-Finance HQ handles finance, benefits, ledgers, budgeting, forecasting, bills, income planning, subscriptions, cost evaluation, and program workflows.
+`Finance_HQ` handles finance, benefits, ledgers, budgeting, forecasting, bills, income planning, subscriptions, cost evaluation, and program workflows.
 
 ## Boot Instructions
 
-When Rob opens a new Finance HQ chat:
+When Rob opens a new `Finance_HQ` chat:
 
 1. Read the global boot files from `memory/STARTUP_BOOT.md`.
 2. Read this project handoff.
@@ -57,15 +57,15 @@ The immediate personal-finance priority is to maintain a trustworthy cash pictur
 
 ## Authority and Coordination
 
-- Finance HQ owns financial judgment, budgeting, forecasting, affordability, benefits, financial planning, Finance records, and Finance open loops.
-- Chief of Staff HQ receives Finance reports, coordinates cross-department work, routes assignments, and follows through without taking ownership of Finance judgment or records.
-- Life OS Maintenance HQ owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, and reconciliation. It does not own Finance's routine durable state.
-- LifeOS HQ is the shared meeting room. It is not a department, independent authority, or owner of a Finance backlog.
+- `Finance_HQ` owns financial judgment, budgeting, forecasting, affordability, benefits, financial planning, Finance records, and Finance open loops.
+- `Chief_of_Staff_HQ` receives Finance reports, coordinates cross-department work, routes assignments, and follows through without taking ownership of Finance judgment or records.
+- `Maintenance_HQ` owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, and reconciliation. It does not own Finance's routine durable state.
+- `LifeOS_HQ` is the shared meeting room. It is not a department, independent authority, or owner of a Finance backlog.
 - Rob remains the final authority.
 
 ## Office Leaks Finance Context
 
-Office Leaks Consulting is the immediate business priority under Business HQ.
+Office Leaks Consulting is the immediate business priority under `Business_HQ`.
 
 Finance supports:
 
@@ -129,7 +129,7 @@ GitHub should point to these records abstractly. Detailed values and transaction
 
 ## Advisory Procedure
 
-Finance HQ is primarily an advisory consumer unless Rob routes it to create or respond to an advisory.
+`Finance_HQ` is primarily an advisory consumer unless Rob routes it to create or respond to an advisory.
 
 When Finance creates an advisory:
 
