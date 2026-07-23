@@ -27,6 +27,8 @@ echo Validating Worker Operations and GitHub-first orchestration...
   tests\test_worker_hq_review.py ^
   tests\test_worker_rob_validation.py ^
   tests\test_worker_github_orchestrator.py ^
+  tests\test_worker_github_orchestrator_resume.py ^
+  tests\test_worker_browser_submit_recovery.py ^
   tests\test_slice6_advisory_contract.py ^
   tests\test_worker_operations_ui.py ^
   tests\test_server_availability_ui.py ^
