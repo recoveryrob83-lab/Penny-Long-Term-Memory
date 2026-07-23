@@ -21,11 +21,12 @@ if not getattr(parser, "_RUNTIME_POLICY_TUNED", False):
     parser.MARKDOWN_DECORATION = re.compile(r"[`*~]")
 
     # Scope IDs and project paths are stable compatibility identifiers. Presentation
-    # labels use the canonical exact ChatGPT room titles.
+    # labels use the canonical exact ChatGPT room titles through an explicit key bridge.
+    _scope_title_keys = {"main-assistant": "main"}
     parser.SCOPES = tuple(
         (
             scope_id,
-            CANONICAL_HQ_TITLES.get(scope_id, label),
+            CANONICAL_HQ_TITLES.get(_scope_title_keys.get(scope_id, scope_id), label),
             project_path,
         )
         for scope_id, label, project_path in parser.SCOPES
