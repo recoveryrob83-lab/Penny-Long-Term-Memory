@@ -53,13 +53,13 @@
   };
 
   const labelByDepartment = {
-    "main-assistant": "Chief of Staff HQ",
-    logistics: "Life OS Maintenance HQ",
-    engineering: "Engineering HQ",
-    business: "Business HQ",
-    "office-leaks": "Office Leaks HQ",
-    finance: "Finance HQ",
-    wellness: "Wellness HQ",
+    "main-assistant": "Chief_of_Staff_HQ",
+    logistics: "Maintenance_HQ",
+    engineering: "Engineering_HQ",
+    business: "Business_HQ",
+    "office-leaks": "Office_Leaks_HQ",
+    finance: "Finance_HQ",
+    wellness: "Wellness_HQ",
     system: "System",
   };
 
