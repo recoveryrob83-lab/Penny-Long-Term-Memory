@@ -1,4 +1,4 @@
-# Engineering HQ Status
+# Engineering_HQ Status
 
 Updated: 2026-07-23
 
@@ -8,7 +8,7 @@ Active / Package D Closed / Package E Closed / GitHub-First Worker Operations Li
 
 ## Summary
 
-Engineering HQ owns technical architecture, software planning, repository strategy, automation design, connector and API research, testing strategy, prompt systems, implementation sequencing, build-readiness, and truthful verification.
+`Engineering_HQ` owns technical architecture, software planning, repository strategy, automation design, connector and API research, testing strategy, prompt systems, implementation sequencing, build-readiness, and truthful verification.
 
 Engineering owns technical Worker infrastructure: routing registry, stable IDs, exact browser transport, revision state, duplicate suppression, immutable result ingestion, report-repair mechanics, HQ and Rob receipt ingestion, runtime evidence, verification views, and reliability safeguards. It does not own shared governance, another department's Worker authority, source-owner advisory lifecycle, or domain judgment.
 
@@ -19,7 +19,7 @@ Engineering owns technical Worker infrastructure: routing registry, stable IDs, 
 - SQLite Command Center `execution_history`: sole operational runtime ledger for dispatch, result, repair, HQ review, Rob validation, and consumption readiness.
 - Worker result folders: immutable evidence and audit trail, not a competing queue or lifecycle ledger.
 - Dashboard and scheduled watcher: visibility and reporting interfaces, not independent truth or closure authority.
-- Life OS Maintenance HQ: canonical shared Worker governance and global operating integrity.
+- `Maintenance_HQ`: canonical shared Worker governance and global operating integrity.
 
 Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in GitHub memory or Worker result artifacts.
 
@@ -127,7 +127,7 @@ Package E implementation and its four source advisories are no longer open work.
 
 Current Engineering work is limited to separately authorized items in `projects/engineering/open_loops.md`, including ordinary dashboard observation, connector reliability, existing Worker pilots, and any demonstrated post-close transport defect.
 
-Cross-department Worker result-outbox adoption remains deferred until Life OS Maintenance HQ reviews shared contracts and each owning department explicitly authorizes its own profile or procedure.
+Cross-department Worker result-outbox adoption remains deferred until `Maintenance_HQ` reviews shared contracts and each owning department explicitly authorizes its own profile or procedure.
 
 ## Production Boundary
 
@@ -139,9 +139,9 @@ Cross-department Worker result-outbox adoption remains deferred until Life OS Ma
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source advisories.
-- The courier never wakes Chief of Staff.
+- The courier never wakes `Chief_of_Staff_HQ`.
 - Cross-department rollout, new recurring tasks, connectors, spending, or public actions require separate authority.
 
 ## Boundary
 
-Engineering HQ owns the machinery. Rob decides. Department HQs own their Workers and judgment. Life OS Maintenance owns shared governance. Source owners close their own records.
+`Engineering_HQ` owns the machinery. Rob decides. Department HQs own their Workers and judgment. `Maintenance_HQ` owns shared governance. Source owners close their own records.
