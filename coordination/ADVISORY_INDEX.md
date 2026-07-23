@@ -5,7 +5,9 @@ Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
-None.
+| Advisory ID | Lifecycle | Priority | Revision | Verification Mode | Source | Target | Source Board | Summary |
+|---|---|---|---:|---|---|---|---|---|
+| ADV-20260723-052 | OPEN | NORMAL | 1 | N/A | Engineering_HQ | Chief_of_Staff_HQ | `coordination/boards/engineering.md` | Read-only watcher destination test pending Rob confirmation that the hourly watcher reports in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work |
 
 ## Recently Closed Advisories
 
@@ -32,6 +34,7 @@ The entries below preserve the names and wording used when they were created or 
 - `LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and `coordination/boards/main-assistant.md` as the retained source-board path.
 - A material advisory change increments `advisory_revision`.
 - Lifecycle and priority remain separate fields.
+- `N/A` in Verification Mode means the advisory is a read-only observation or routing test rather than an execution-ready Worker task.
 - Closed advisory rows may retain historical names, identifiers, and exact outcomes.
 - Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` for normal advisory routing unless Rob explicitly reactivates it.
 - Do not use GitHub Issues or Todoist as advisory-state systems.
