@@ -6,49 +6,49 @@
   "departments": [
     {
       "id": "life_logistics_hq",
-      "label": "Logistics HQ",
+      "label": "Maintenance_HQ",
       "project_folder": "projects/life-logistics-hq",
-      "report_name": "Logistics",
+      "report_name": "Maintenance",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "main_assistant",
-      "label": "Main Assistant HQ",
+      "label": "Chief_of_Staff_HQ",
       "project_folder": "projects/main-assistant",
-      "report_name": "Main Assistant",
+      "report_name": "Chief of Staff",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_finance",
-      "label": "Finance HQ",
+      "label": "Finance_HQ",
       "project_folder": "projects/finance-benefits",
       "report_name": "Finance",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_business",
-      "label": "Business HQ",
+      "label": "Business_HQ",
       "project_folder": "projects/business-development",
       "report_name": "Business",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "office_leaks",
-      "label": "Office Leaks HQ",
+      "label": "Office_Leaks_HQ",
       "project_folder": "projects/office-leaks-consulting",
       "report_name": "Office Leaks",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_engineering",
-      "label": "Engineering HQ",
+      "label": "Engineering_HQ",
       "project_folder": "projects/engineering",
       "report_name": "Engineering",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
     },
     {
       "id": "chief_wellness",
-      "label": "Wellness HQ",
+      "label": "Wellness_HQ",
       "project_folder": "projects/wellness",
       "report_name": "Wellness",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md", "status.md", "open_loops.md"]
@@ -215,13 +215,13 @@
       "category": "Boot / Sync",
       "description": "Summarize the current hub state and begin a clean operating phase.",
       "mode": "simple",
-      "template": "/REBOOT @GitHub\n\nSummarize current decisions, active priorities, open loops, pending writes, and unresolved questions. Establish a clean operating state for the next phase. Do not make changes unless authorized.\n{custom_block}"
+      "template": "/REBOOT @GitHub\n\nSummarize current decisions, active priorities, open loops, pending writes, and unresolved questions. Establish a clean operating phase without changing durable state.\n{custom_block}"
     },
     {
       "id": "role_review",
       "title": "Role Review",
       "category": "Hub / Coordination",
-      "description": "Ask selected department perspectives to review an issue, then have Main Assistant synthesize.",
+      "description": "Ask selected department perspectives to review an issue, then have Chief_of_Staff_HQ synthesize.",
       "mode": "simple",
       "template": "/ROLES\n\nAsk the relevant tagged department perspectives to review the issue below. Keep each response concise and labeled. Then have [MAIN] synthesize the recommendation, owner, next action, and any connector work requiring confirmation.\n{custom_block}"
     },
@@ -250,5 +250,5 @@
       "template": "[MAIN] Chair, daily-operations lead, coordinator, synthesizer, executive-function support, and connector operator.\n[LOGISTICS] GitHub operations, durable continuity, shared infrastructure, cross-project audits, and longer-horizon coordination.\n[ENGINEERING] Direct, analytical software, dashboard, and automation review.\n[FINANCE] Careful, numbers-first cost and affordability review.\n[BUSINESS] Excitable, opportunity-focused strategy and commercial review.\n[WELLNESS] Warm, sustainable health and energy review.\n\nUse the relevant role tags for perspective; [MAIN] synthesizes and executes authorized connector actions.\n{custom_block}"
     }
   ],
-  "updated": "2026-07-17"
+  "updated": "2026-07-23"
 }
