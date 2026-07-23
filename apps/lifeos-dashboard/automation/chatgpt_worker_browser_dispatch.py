@@ -37,11 +37,13 @@ from chatgpt_worker_browser_roundtrip import (
 
 RECEIPT_PREFIX = "LIFEOS_BROWSER_DISPATCH_RECEIPT="
 SOURCE_RETURN_POLL_SECONDS = 0.25
-SEND_SELECTORS = (
-    'button[data-testid="send-button"]:visible',
-    'button[aria-label="Send prompt"]:visible',
-    'button[aria-label="Send message"]:visible',
-    'button[aria-label="Send"]:visible',
+SEND_SELECTOR = ", ".join(
+    (
+        'button[data-testid="send-button"]:visible',
+        'button[aria-label="Send prompt"]:visible',
+        'button[aria-label="Send message"]:visible',
+        'button[aria-label="Send"]:visible',
+    )
 )
 
 
@@ -182,7 +184,10 @@ def _wait_for_dispatch_ready(
                             page,
                             request,
                             worker_url=worker_url,
-                            timeout_ms=min(10_000, max(1, int((deadline - time.monotonic()) * 1000))),
+                            timeout_ms=min(
+                                10_000,
+                                max(1, int((deadline - time.monotonic()) * 1000)),
+                            ),
                         )
                         return prompt, snapshot[0], reused_draft
                 else:
@@ -214,13 +219,12 @@ def _wait_for_dispatch_ready(
 
 
 def _visible_enabled_send(page):
+    locator = page.locator(SEND_SELECTOR)
     matches = []
-    for selector in SEND_SELECTORS:
-        locator = page.locator(selector)
-        for index in range(locator.count()):
-            candidate = locator.nth(index)
-            if candidate.is_visible() and candidate.is_enabled():
-                matches.append(candidate)
+    for index in range(locator.count()):
+        candidate = locator.nth(index)
+        if candidate.is_visible() and candidate.is_enabled():
+            matches.append(candidate)
     return matches
 
 
@@ -280,8 +284,6 @@ def _submit_and_confirm(
             "was not proven. Inspect the Worker chat before any retry."
         )
 
-    # The first action provably did nothing because the exact draft remains and generation did not
-    # begin. Use the other native submit mechanism once.
     if first_method == "button":
         prompt.press("Enter")
     else:
