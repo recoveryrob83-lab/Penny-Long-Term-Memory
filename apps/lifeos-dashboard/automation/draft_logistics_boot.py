@@ -1,18 +1,11 @@
-"""Draft the canonical Life OS Maintenance HQ boot prompt without sending it."""
+"""Backward-compatible launcher for the canonical Maintenance_HQ boot draft."""
 from __future__ import annotations
 
 import sys
 
-from draft_department_boot import DEPARTMENTS, build_prompt, run_engine_once
+from draft_department_boot import main
 
 
 if __name__ == "__main__":
-    department = DEPARTMENTS["logistics"]
-    forwarded_args = [
-        sys.argv[0],
-        department.chat_title,
-        "--text",
-        build_prompt(department),
-    ]
-    result, _ = run_engine_once(forwarded_args)
-    raise SystemExit(result)
+    sys.argv = [sys.argv[0], "logistics", *sys.argv[1:]]
+    raise SystemExit(main())
