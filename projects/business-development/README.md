@@ -1,25 +1,25 @@
-# Business HQ
+# Business_HQ
 
 Updated: 2026-07-18
 
 ## Purpose
 
-Business HQ owns Rob's parent business strategy, market selection, portfolio choices, product and service strategy, branding, positioning, market research, offer strategy, customer discovery, monetization, and business planning.
+`Business_HQ` owns Rob's parent business strategy, market selection, portfolio choices, product and service strategy, branding, positioning, market research, offer strategy, customer discovery, monetization, and business planning.
 
-This department turns promoted ideas and evidence into clear business strategy before Engineering HQ builds or a business-unit HQ executes.
+This department turns promoted ideas and evidence into clear business strategy before `Engineering_HQ` builds or a business-unit HQ executes.
 
 ## Current Status
 
 Active parent-strategy department.
 
-Office Leaks HQ is the active revenue-first business unit and is publicly launched in a live organic market test.
+`Office_Leaks_HQ` is the active revenue-first business unit and is publicly launched in a live organic market test.
 
 Immediate Business priorities:
 
 - Interpret Office Leaks market signal at the parent and portfolio level without absorbing execution.
 - Strengthen positioning, trust, offer strategy, customer selection, and go-to-market direction.
 - Separate the introductory offer from the eventual profitable service ladder.
-- Preserve capacity for future businesses under Business HQ.
+- Preserve capacity for future businesses under `Business_HQ`.
 - Keep PennyOS / Penny Platform paused, not abandoned, until Rob reactivates it or Office Leaks generates useful productization evidence.
 
 ## Current Strategic Frame
@@ -39,9 +39,9 @@ PennyOS remains a longer-term execution and coordination platform concept. Its p
 
 ## Role
 
-Business HQ is the specialist department for parent business strategy and commercial continuity.
+`Business_HQ` is the specialist department for parent business strategy and commercial continuity.
 
-Use Business HQ for:
+Use `Business_HQ` for:
 
 - Business ideas and opportunity sorting after capture.
 - Market selection and customer-value judgment.
@@ -52,17 +52,17 @@ Use Business HQ for:
 - Go-to-market planning.
 - Portfolio strategy across current and future businesses.
 - Future Penny product and business concept planning.
-- Portfolio-level guidance and evaluation for Office Leaks HQ.
-- Coordination with Office Leaks HQ, Engineering HQ, Finance HQ, Chief of Staff HQ, and Life OS Maintenance HQ within their respective boundaries.
+- Portfolio-level guidance and evaluation for `Office_Leaks_HQ`.
+- Coordination with `Office_Leaks_HQ`, `Engineering_HQ`, `Finance_HQ`, `Chief_of_Staff_HQ`, and `Maintenance_HQ` within their respective boundaries.
 
 ## Not This Department
 
-- Office Leaks offers, outreach, live market tests, delivery, customer-facing operations, and execution continuity: Office Leaks HQ.
-- Technical implementation, architecture, automation, tooling, and testing: Engineering HQ.
-- Personal finance, benefits, budget, bills, pricing feasibility, or financial execution: Finance HQ.
-- Daily one-off scheduling, report routing, follow-through, or quick admin: Chief of Staff HQ.
-- Global GitHub maintenance, shared governance, boot integrity, repository-wide audits, or reconciliation: Life OS Maintenance HQ.
-- Independent authority or backlog for LifeOS HQ: none; LifeOS HQ is the shared meeting room.
+- Office Leaks offers, outreach, live market tests, delivery, customer-facing operations, and execution continuity: `Office_Leaks_HQ`.
+- Technical implementation, architecture, automation, tooling, and testing: `Engineering_HQ`.
+- Personal finance, benefits, budget, bills, pricing feasibility, or financial execution: `Finance_HQ`.
+- Daily one-off scheduling, report routing, follow-through, or quick admin: `Chief_of_Staff_HQ`.
+- Global GitHub maintenance, shared governance, boot integrity, repository-wide audits, or reconciliation: `Maintenance_HQ`.
+- Independent authority or backlog for `LifeOS_HQ`: none; `LifeOS_HQ` is the shared meeting room.
 
 ## Source Systems
 
@@ -95,7 +95,7 @@ Preserved Business records include:
 
 ## Advisory Workflow
 
-When Business HQ creates an advisory for another department:
+When `Business_HQ` creates an advisory for another department:
 
 1. Update `coordination/boards/business.md`.
 2. Update `coordination/ADVISORY_INDEX.md`.
@@ -107,7 +107,7 @@ Office Leaks-sourced advisories use `coordination/boards/office-leaks.md` plus t
 
 ## Ownership Boundary
 
-Business HQ maintains its own durable project state. Chief of Staff HQ may receive reports, route assignments, and check follow-through without owning Business strategy. Life OS Maintenance HQ protects shared governance and global GitHub integrity without owning Business's routine records. Office Leaks HQ owns the detailed Office Leaks execution backlog and operating state.
+`Business_HQ` maintains its own durable project state. `Chief_of_Staff_HQ` may receive reports, route assignments, and check follow-through without owning Business strategy. `Maintenance_HQ` protects shared governance and global GitHub integrity without owning Business's routine records. `Office_Leaks_HQ` owns the detailed Office Leaks execution backlog and operating state.
 
 ## Privacy Rule
 
