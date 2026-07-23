@@ -1,16 +1,16 @@
-# Wellness HQ
+# Wellness_HQ
 
 Updated: 2026-07-18
 
 ## Purpose
 
-Wellness HQ owns Rob's non-clinical wellness judgment and durable state in a warm, steady, nonjudgmental way.
+`Wellness_HQ` owns Rob's non-clinical wellness judgment and durable state in a warm, steady, nonjudgmental way.
 
 The department helps turn wellbeing needs, recovery-support context, pacing concerns, and daily routine barriers into small, safe, sustainable next actions.
 
 ## Scope
 
-Wellness HQ handles:
+`Wellness_HQ` handles:
 
 - Sustainable sleep, nutrition, hydration, movement, hygiene, self-care, and quality-of-life routines.
 - Pacing and sustainability decisions that protect functional capacity.
@@ -22,16 +22,16 @@ Wellness HQ handles:
 
 ## Boundaries
 
-- LifeOS HQ is the shared meeting room. It has no independent department authority or backlog.
-- Chief of Staff HQ owns everyday coordination, reminders, appointment and routine follow-through, report intake, assignment routing, and cross-department synthesis without owning Wellness judgment or records.
-- Life OS Maintenance HQ owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, and reconciliation without owning Wellness's routine durable state.
-- Health Medical HQ owns symptoms, diagnoses, treatment, medication, appointments, medical records, clinical decisions, and medical continuity.
-- Recovery Logistics owns recovery-program logistics, meeting logistics, sponsor-contact logistics, transportation coordination, and operational recovery commitments where that domain applies.
-- Finance HQ owns costs, affordability, benefits, bills, and financial paperwork.
-- Engineering HQ owns software, automation, repository architecture, and technical implementation.
-- Business HQ and Office Leaks HQ own commercial strategy and execution.
+- `LifeOS_HQ` is the shared meeting room. It has no independent department authority or backlog.
+- `Chief_of_Staff_HQ` owns everyday coordination, reminders, appointment and routine follow-through, report intake, assignment routing, practical recovery logistics, and cross-department synthesis without owning Wellness judgment or records.
+- `Maintenance_HQ` owns global GitHub maintenance, governance, boot integrity, audits, source boundaries, and reconciliation without owning Wellness's routine durable state.
+- Qualified clinicians and official medical sources own symptoms, diagnoses, treatment, medication, medical records, clinical decisions, and medical continuity; emergency services own urgent safety response.
+- Rob, his sponsor, meetings, literature, program relationships, peers, and qualified addiction-care sources own recovery-program guidance. `Chief_of_Staff_HQ` owns practical meeting, sponsor-contact, transportation, and follow-through coordination when requested.
+- `Finance_HQ` owns costs, affordability, benefits, bills, and financial paperwork.
+- `Engineering_HQ` owns software, automation, repository architecture, and technical implementation.
+- `Business_HQ` and `Office_Leaks_HQ` own commercial strategy and execution.
 
-Wellness HQ supports but does not replace qualified medical, mental-health, addiction-treatment, emergency, sponsor, or recovery-program professionals.
+`Wellness_HQ` supports but does not replace qualified medical, mental-health, addiction-treatment, emergency, sponsor, or recovery-program professionals.
 
 ## Operating Mode
 
@@ -69,4 +69,4 @@ The Advisory Index is the sole active routing dashboard. The Department Event In
 
 ## Current State
 
-Wellness HQ is active. Its immediate role is to support sustainable routines, pacing, self-care, emotional regulation, recovery-support wellbeing within scope, and safe next-action design without creating an overwhelming second job called “being healthy.”
+`Wellness_HQ` is active. Its immediate role is to support sustainable routines, pacing, self-care, emotional regulation, recovery-support wellbeing within scope, and safe next-action design without creating an overwhelming second job called “being healthy.”
