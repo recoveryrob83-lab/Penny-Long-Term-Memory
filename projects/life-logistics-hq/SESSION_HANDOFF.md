@@ -56,6 +56,7 @@ Maintenance protects the LifeOS operating system through global GitHub coherence
 - Desktop department automation and the Automation Command Center remain Engineering-owned implementation machinery.
 - Fully unattended Windows production use remains unapproved unless current Engineering evidence and Rob's authorization establish otherwise.
 - `Engineering_HQ Daily Sync` remains paused by deliberate operating choice.
+- The hourly `Chief_of_Staff_HQ` advisory watcher remains an active read-only pilot. Its destination test passed in the existing Chief of Staff conversation without spawning a new chat or triggering follow-on work.
 - The former Virtual Assistant Business subtree remains archived at `archive/projects/virtual-assistant-business/`; active Office Leaks authority remains at `projects/office-leaks-consulting/`.
 
 ## July 23 Coordinated Naming Repair
@@ -88,7 +89,7 @@ The Sync found and the authorized repair corrected:
 
 Completed GitHub reconciliation:
 
-- added `ADV-20260723-052` to `coordination/ADVISORY_INDEX.md` without duplicating its source text;
+- added `ADV-20260723-052` to `coordination/ADVISORY_INDEX.md` without duplicating its source text, then closed it after the destination test passed and Rob authorized closure;
 - refreshed `memory/01_SESSION_HANDOFF.md`;
 - refreshed `memory/04_ACTIVE_PROJECTS.md`;
 - added one compact system-level publication-reconciliation item to `memory/05_OPEN_LOOPS.md`;
@@ -165,7 +166,7 @@ Use `coordination/ADVISORY_INDEX.md` as the live source of truth. Do not cache a
 
 Read a source board only when the index or Rob routes Maintenance to a specific advisory. Hub-originated formal advisories use `coordination/boards/main-assistant.md`; department-originated advisories remain on the source department board.
 
-`ADV-20260718-042` is closed and must not be recreated as open work.
+`ADV-20260718-042` and `ADV-20260723-052` are closed and must not be recreated as open work.
 
 ## Current Maintenance Watches
 
@@ -191,13 +192,12 @@ Read a source board only when the index or Rob routes Maintenance to a specific 
 3. Refresh the application and verify both from a fresh project chat; remove any superseded or numbered handbook copy.
 4. Close the system publication-reconciliation loop only after that verification.
 5. Let `Engineering_HQ` complete its separately authorized exact-title rollover and courier verifier repair.
-6. Await Rob's observation for `ADV-20260723-052`; source-owner closure remains with Engineering.
-7. Use Role Drift Check when work begins moving into the wrong HQ.
+6. Use Role Drift Check when work begins moving into the wrong HQ.
 
 ## Notes for Next Penny
 
 This chat is `Maintenance_HQ`. Protect the operating system, not every department's workload.
 
-The replacement chat is booted and synchronized. GitHub reconciliation is complete. No active Maintenance-owned implementation backlog was created. The only remaining shared work is the manual ChatGPT Project Settings and Project Source replacement tracked in `memory/05_OPEN_LOOPS.md`.
+The replacement chat is booted and synchronized. GitHub reconciliation is complete. No active Maintenance-owned implementation backlog was created. The remaining Maintenance-led shared dependency is the manual ChatGPT Project Settings and Project Source replacement tracked in `memory/05_OPEN_LOOPS.md`.
 
 LifeOS has one canonical HQ and Worker entry point, one shared execution protocol, one universal Worker contract, and one canonical naming source. New Worker profiles are department-owned and live under department subtrees. The root Raw Capture and Inventory packages are grandfathered compatibility pilots only. Maintenance owns shared contracts, boot coherence, naming and profile conventions, audits, publication-mirror discipline, and reconciliation. Engineering owns routing and runtime implementation. Departments own Worker authority and profiles. `Chief_of_Staff_HQ` coordinates Rob-authorized execution. Rob decides.

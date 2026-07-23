@@ -5,9 +5,7 @@ Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
-| Advisory ID | Lifecycle | Priority | Revision | Verification Mode | Source | Target | Source Board | Summary |
-|---|---|---|---:|---|---|---|---|---|
-| ADV-20260723-052 | OPEN | NORMAL | 1 | N/A | Engineering_HQ | Chief_of_Staff_HQ | `coordination/boards/engineering.md` | Read-only watcher destination test pending Rob confirmation that the hourly watcher reports in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work |
+None.
 
 ## Recently Closed Advisories
 
@@ -15,6 +13,7 @@ The entries below preserve the names and wording used when they were created or 
 
 | Advisory ID | Lifecycle | Priority | Revision | Verification Mode | Source | Target | Source Board | Closed | Summary |
 |---|---|---|---:|---|---|---|---|---|---|
+| ADV-20260723-052 | CLOSED | NORMAL | 2 | N/A | Engineering_HQ | Chief_of_Staff_HQ | `coordination/boards/engineering.md` | 2026-07-23 | Hourly watcher destination test passed in the existing Chief of Staff HQ conversation; Rob confirmed the result and authorized closure |
 | ADV-20260718-042 | CLOSED | HIGH | 1 | IMMEDIATE_HQ | Chief_of_Staff_HQ / LifeOS_HQ | Engineering_HQ | `coordination/boards/main-assistant.md` | 2026-07-23 | Receiver-side semantic validation was built, tested, source-verified, and approved by Rob for slow rollout |
 | ADV-20260723-051 | CLOSED | HIGH | 1 | IMMEDIATE_HQ | Engineering HQ | Engineering HQ | `coordination/boards/engineering.md` | 2026-07-23 | Verify owning-HQ wake, receipt ingestion, and duplicate suppression |
 | ADV-20260722-049 | CLOSED | HIGH | 1 | IMMEDIATE_HQ | Engineering HQ | Engineering HQ / Rob | `coordination/boards/engineering.md` | 2026-07-23 | Prove the explicit Rob-validation path |
