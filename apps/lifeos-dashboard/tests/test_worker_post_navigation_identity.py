@@ -30,7 +30,7 @@ def request(worker_url: str):
     return roundtrip.BrowserRoundTripRequest(
         worker_url=worker_url,
         worker_chat_title="Engineering_Worker",
-        project_title="Life OS",
+        project_title="LifeOS",
         prompt_text="SYNTHETIC_ZERO_AUTHORITY_MARKER",
         request_marker="SYNTHETIC_ZERO_AUTHORITY_MARKER",
         response_marker="UNUSED_RESPONSE_MARKER",

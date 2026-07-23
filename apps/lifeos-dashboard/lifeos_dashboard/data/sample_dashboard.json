@@ -47,7 +47,7 @@
       {"label": "Unread", "count": 7, "detail": "Full inbox is intentionally not shown"}
     ],
     "drive": [
-      {"title": "Life OS Pointer Registry", "kind": "Google Sheet", "status": "Pinned"},
+      {"title": "LifeOS Pointer Registry", "kind": "Google Sheet", "status": "Pinned"},
       {"title": "Reliable Connector Execution Layer - Design Note", "kind": "Google Doc", "status": "Recent"},
       {"title": "Engineering Delivery Architecture Specification", "kind": "Google Doc", "status": "Recent"}
     ]

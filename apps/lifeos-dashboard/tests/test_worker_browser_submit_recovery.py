@@ -67,7 +67,7 @@ def request():
     return dispatch.BrowserRoundTripRequest(
         worker_url="https://chatgpt.com/g/project/c/worker",
         worker_chat_title="Engineering_Worker",
-        project_title="Life OS",
+        project_title="LifeOS",
         prompt_text="WAKE-ADV-050 RUN-ADV-050",
         request_marker="WAKE-ADV-050",
         response_marker="RUN-ADV-050",
@@ -92,9 +92,10 @@ def test_submission_witness_rejects_adv050_paste_only_false_positive():
     )
 
 
-def test_submission_witness_requires_all_three_postconditions():
+def test_submission_witness_requires_correlated_turn_history_and_empty_composer():
     baseline_ids = ("conversation-turn-40",)
 
+    # Normal case: the visible history count increases.
     assert dispatch._submission_witness_valid(
         baseline_turns=6,
         final_turns=7,
@@ -102,13 +103,18 @@ def test_submission_witness_requires_all_three_postconditions():
         user_turn_id="conversation-turn-41",
         composer_text="",
     )
-    assert not dispatch._submission_witness_valid(
+
+    # Virtualized case: ChatGPT replaces a rendered node, so the count
+    # stays the same even though a genuinely new correlated turn appears.
+    assert dispatch._submission_witness_valid(
         baseline_turns=6,
         final_turns=6,
         baseline_turn_ids=baseline_ids,
         user_turn_id="conversation-turn-41",
         composer_text="",
     )
+
+    # An existing baseline turn cannot prove a new submission.
     assert not dispatch._submission_witness_valid(
         baseline_turns=6,
         final_turns=7,
@@ -116,12 +122,23 @@ def test_submission_witness_requires_all_three_postconditions():
         user_turn_id="conversation-turn-40",
         composer_text="",
     )
+
+    # A nonempty composer means submission was not fully proven.
     assert not dispatch._submission_witness_valid(
         baseline_turns=6,
         final_turns=7,
         baseline_turn_ids=baseline_ids,
         user_turn_id="conversation-turn-41",
         composer_text="still pasted",
+    )
+
+    # No rendered conversation history cannot prove submission.
+    assert not dispatch._submission_witness_valid(
+        baseline_turns=6,
+        final_turns=0,
+        baseline_turn_ids=baseline_ids,
+        user_turn_id="conversation-turn-41",
+        composer_text="",
     )
 
 

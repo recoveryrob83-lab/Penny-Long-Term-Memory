@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "lifeos://schemas/worker-hq-review/v1",
-  "title": "Life OS Worker HQ Review v1",
+  "title": "LifeOS Worker HQ Review v1",
   "type": "object",
   "additionalProperties": false,
   "required": [

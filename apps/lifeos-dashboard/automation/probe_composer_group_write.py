@@ -36,7 +36,7 @@ def parse_args() -> argparse.Namespace:
         description="Safely verify writing to the Group-based ChatGPT composer shell."
     )
     parser.add_argument("chat_title", help="Exact chat title, such as Wellness HQ")
-    parser.add_argument("--project", default="Life OS")
+    parser.add_argument("--project", default="LifeOS")
     parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT_SECONDS)
     return parser.parse_args()
 

@@ -1,4 +1,4 @@
-"""Run the canonical local GitHub-first Life OS Worker orchestration loop."""
+"""Run the canonical local GitHub-first LifeOS Worker orchestration loop."""
 from __future__ import annotations
 
 import argparse

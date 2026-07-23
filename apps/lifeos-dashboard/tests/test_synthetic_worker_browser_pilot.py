@@ -50,7 +50,7 @@ def test_request_requires_markers_and_bounded_timeout() -> None:
         dispatch.BrowserRoundTripRequest(
             worker_url="https://chatgpt.com/g/project/c/chat-id",
             worker_chat_title="Engineering_Worker",
-            project_title="Life OS",
+            project_title="LifeOS",
             prompt_text="prompt without marker",
             request_marker="WRAP-1",
             response_marker="RUN-1",
@@ -60,7 +60,7 @@ def test_request_requires_markers_and_bounded_timeout() -> None:
         dispatch.BrowserRoundTripRequest(
             worker_url="https://chatgpt.com/g/project/c/chat-id",
             worker_chat_title="Engineering_Worker",
-            project_title="Life OS",
+            project_title="LifeOS",
             prompt_text="WRAP-1",
             request_marker="WRAP-1",
             response_marker="RUN-1",

@@ -38,13 +38,13 @@ if errorlevel 1 (
 )
 
 echo Replacing the old orchestration process...
-taskkill /FI "WINDOWTITLE eq Life OS Orchestrator*" /T /F >nul 2>&1
+taskkill /FI "WINDOWTITLE eq LifeOS Orchestrator*" /T /F >nul 2>&1
 
 set LIFEOS_OPEN_BROWSER=0
 set LIFEOS_GITHUB_AUTO_SYNC=0
 set LIFEOS_WORKER_ORCHESTRATOR_ENABLED=1
 set LIFEOS_WORKER_ORCHESTRATOR_POLL_SECONDS=30
-start "Life OS Orchestrator" /min cmd /c "".venv\Scripts\python.exe" automation\run_github_worker_orchestrator.py --poll-seconds 30"
+start "LifeOS Orchestrator" /min cmd /c "".venv\Scripts\python.exe" automation\run_github_worker_orchestrator.py --poll-seconds 30"
 
 echo ADV-050 recovery conductor is running.
 echo The exact GitHub wake will be refilled or resumed without creating another advisory.

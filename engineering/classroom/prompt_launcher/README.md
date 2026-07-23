@@ -10,13 +10,13 @@ Prompt Launcher is a simple Python-based desktop utility learning project.
 
 The first goal is to load a JSON prompt library, display prompt buttons, and copy selected prompt text to the clipboard.
 
-Longer term, this project may grow into a standardized Life OS prompt builder.
+Longer term, this project may grow into a standardized LifeOS prompt builder.
 
 ## Important Boundary
 
 This is an Engineering Classroom learning project.
 
-It is not Chief Engineering Penny operational infrastructure, not Life Logistics automation, and not a production Life OS system.
+It is not Chief Engineering Penny operational infrastructure, not Life Logistics automation, and not a production LifeOS system.
 
 Do not connect it to GitHub, advisories, or production automation until Rob explicitly chooses to promote it beyond classroom work.
 
@@ -42,7 +42,7 @@ Do not connect it to GitHub, advisories, or production automation until Rob expl
 - Advisory prompt builder.
 - GitHub advisory list integration.
 - Categories, search, and favorites.
-- Standard Life OS boot/prompt library.
+- Standard LifeOS boot/prompt library.
 
 ## Suggested Next Classroom Step
 

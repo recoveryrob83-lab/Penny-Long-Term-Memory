@@ -1,4 +1,4 @@
-"""Local Life OS prompt launcher.
+"""Local LifeOS prompt launcher.
 
 Loads an editable JSON prompt library, builds department-aware prompts, and
 copies the result to the clipboard. It uses only Python's standard library.
@@ -185,7 +185,7 @@ class PromptLauncherApp:
         self.department_choice = tk.StringVar(value=library.departments[0].label)
         self.status_text = tk.StringVar(value="Ready. Choose a command, then copy it.")
 
-        self.root.title("Life OS Prompt Launcher")
+        self.root.title("LifeOS Prompt Launcher")
         self.root.geometry("920x680")
         self.root.minsize(760, 560)
         self._build_layout()
@@ -201,7 +201,7 @@ class PromptLauncherApp:
 
         ttk.Label(
             container,
-            text="Life OS Prompt Launcher",
+            text="LifeOS Prompt Launcher",
             font=("Segoe UI", 18, "bold"),
         ).grid(row=0, column=0, columnspan=2, sticky="w")
         ttk.Label(
@@ -308,7 +308,7 @@ def main() -> None:
         library = load_prompt_library()
     except ValueError as error:
         root.withdraw()
-        messagebox.showerror("Life OS Prompt Launcher", str(error), parent=root)
+        messagebox.showerror("LifeOS Prompt Launcher", str(error), parent=root)
         root.destroy()
         raise SystemExit(1) from error
 

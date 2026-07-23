@@ -1,8 +1,8 @@
 {
   "schema_version": "1.1",
-  "project": "Life OS Prompt Launcher",
+  "project": "LifeOS Prompt Launcher",
   "repository": "recoveryrob83-lab/Penny-Long-Term-Memory",
-  "description": "Editable prompt library for the local Life OS Prompt Launcher.",
+  "description": "Editable prompt library for the local LifeOS Prompt Launcher.",
   "departments": [
     {
       "id": "life_logistics_hq",
@@ -55,9 +55,9 @@
     },
     {
       "id": "life_os_infrastructure",
-      "label": "Life OS Infrastructure",
+      "label": "LifeOS Infrastructure",
       "project_folder": "projects/life-os-infrastructure",
-      "report_name": "Life OS Infrastructure",
+      "report_name": "LifeOS Infrastructure",
       "boot_files": ["SESSION_HANDOFF.md", "DEPARTMENT_IDENTITY.md", "README.md"]
     }
   ],
@@ -156,7 +156,7 @@
     {
       "id": "open_loops",
       "title": "Review Open Loops",
-      "category": "Life OS",
+      "category": "LifeOS",
       "description": "Review durable open loops and recommend the next actions.",
       "mode": "department",
       "template": "/OPENLOOPS @GitHub\n\nDepartment: {department}\n\nRead the relevant handoff and open-loop files. Separate active, waiting, blocked, stale, and recently closed items. Recommend the smallest useful next actions without changing durable state.\n{custom_block}"
@@ -164,7 +164,7 @@
     {
       "id": "capture",
       "title": "Capture Thought",
-      "category": "Life OS",
+      "category": "LifeOS",
       "description": "Route a raw thought to the correct durable or working location.",
       "mode": "simple",
       "template": "/CAPTURE @GitHub\n\nClassify the raw thought or note below. Recommend the correct destination: GitHub durable memory, a project notebook, an open loop, Todoist, Calendar, Google Drive, or no capture. Do not write anything until I explicitly authorize the destination and change.\n{custom_block}"

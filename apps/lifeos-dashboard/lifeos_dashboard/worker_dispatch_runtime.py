@@ -92,7 +92,7 @@ def run_worker_browser_dispatch(
         "--worker-chat-title",
         entry.chat_title,
         "--project-title",
-        os.getenv("LIFEOS_CHATGPT_PROJECT_TITLE", "Life OS"),
+        os.getenv("LIFEOS_CHATGPT_PROJECT_TITLE", "LifeOS"),
         "--text",
         worker_operations.render_worker_prompt(job.envelope, job.instruction),
         "--request-marker",

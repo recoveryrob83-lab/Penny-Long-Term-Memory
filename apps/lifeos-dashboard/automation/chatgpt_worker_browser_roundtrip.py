@@ -473,7 +473,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--worker-url")
     parser.add_argument("--worker-chat-title", required=True)
-    parser.add_argument("--project-title", default="Life OS")
+    parser.add_argument("--project-title", default="LifeOS")
     parser.add_argument("--text", required=True)
     parser.add_argument("--request-marker", required=True)
     parser.add_argument("--response-marker", required=True)
