@@ -19,7 +19,7 @@ from .worker_runtime import WorkerRuntimeError
 from .worker_verification import WorkerVerificationService, WorkerVerificationStore
 
 _HEX40 = re.compile(r"^[0-9a-f]{40}$")
-_OBSERVATION_MARKER = re.compile(r"LIFEOS_ROB_OBSERVATION=[A-Z0-9_.:-]+")
+_OBSERVATION_MARKER = re.compile(r"LIFEOS_ROB_OBSERVATION=[A-Z0-9_:-]+")
 
 
 @dataclass(frozen=True)
