@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for open Life OS advisories.
 
 ## Open / Unacknowledged Advisories
 
-None.
+- ADV-20260723-052 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: Chief of Staff HQ — Read-only watcher-destination test. The hourly Chief of Staff advisory watcher should report this advisory in the existing Chief of Staff HQ conversation. No Worker dispatch, HQ wake, new chat, connector write, external action, dashboard execution, follow-on work, or automatic closure is authorized. Completion requires Rob to confirm the report arrived in the existing CoS conversation without spawning a new chat.
 
 ## Acknowledged / Implemented Advisories
 
