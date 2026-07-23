@@ -68,7 +68,6 @@ def insert_run(database: Path, **overrides: object) -> WorkerVerificationService
 
 def test_routine_batch_pending_is_queued_without_immediate_wake() -> None:
     record = record_from_row(row())
-
     assert record.verification_state == "pending"
     assert record.queue_eligible is True
     assert record.review_route == "routine_batch"
@@ -80,7 +79,6 @@ def test_verified_automatic_work_suppresses_wake() -> None:
     record = record_from_row(
         row(verification_mode="AUTOMATIC", receiver_verification_state="verified")
     )
-
     assert record.receiver_evidence_state == "verified"
     assert record.verification_state == "verified"
     assert record.review_route == "automatic"
@@ -91,7 +89,6 @@ def test_receiver_evidence_does_not_replace_immediate_hq_review() -> None:
     record = record_from_row(
         row(verification_mode="IMMEDIATE_HQ", receiver_verification_state="verified")
     )
-
     assert record.receiver_evidence_state == "verified"
     assert record.verification_state == "pending"
     assert record.wake_required is True
@@ -99,7 +96,6 @@ def test_receiver_evidence_does_not_replace_immediate_hq_review() -> None:
 
 def test_unverified_automatic_work_fails_safe_to_department_hq() -> None:
     record = record_from_row(row(verification_mode="AUTOMATIC"))
-
     assert record.verification_state == "pending"
     assert record.wake_disposition == "owning_department_hq"
     assert record.wake_target == "office-leaks-consulting"
@@ -108,7 +104,6 @@ def test_unverified_automatic_work_fails_safe_to_department_hq() -> None:
 
 def test_immediate_hq_implementation_requires_department_wake() -> None:
     record = record_from_row(row(verification_mode="IMMEDIATE_HQ"))
-
     assert record.review_route == "immediate_hq"
     assert record.wake_required is True
     assert record.wake_target == "office-leaks-consulting"
@@ -121,7 +116,6 @@ def test_hold_is_rejected_and_routes_to_owning_department() -> None:
             receiver_verification_state="unavailable",
         )
     )
-
     assert record.verification_state == "rejected"
     assert record.queue_eligible is False
     assert record.wake_disposition == "owning_department_hq"
@@ -134,10 +128,9 @@ def test_elevation_is_rejected_and_routes_to_chief_of_staff() -> None:
             receiver_verification_state="unavailable",
         )
     )
-
     assert record.verification_state == "rejected"
     assert record.wake_disposition == "chief_of_staff_hq"
-    assert record.wake_target == "Chief of Staff HQ"
+    assert record.wake_target == "Chief_of_Staff_HQ"
 
 
 @pytest.mark.parametrize("lifecycle", ["SOURCE_VERIFIED", "CLOSED"])
@@ -146,7 +139,6 @@ def test_terminal_canonical_lifecycle_suppresses_wake(lifecycle: str) -> None:
         row(controlled_outcome="REPORT_AND_HOLD"),
         authoritative_lifecycle_state=lifecycle,
     )
-
     assert record.wake_disposition == "suppressed"
     assert lifecycle in record.wake_reason
 
@@ -160,9 +152,7 @@ def test_status_filters_existing_history_without_new_queue_table(tmp_path: Path)
         controlled_outcome="REPORT_AND_HOLD",
         receiver_verification_state="unavailable",
     )
-
     status = service.status()
-
     assert status["summary"] == {
         "total": 2,
         "pending": 1,
@@ -187,18 +177,16 @@ def test_status_filters_existing_history_without_new_queue_table(tmp_path: Path)
 def test_routine_review_updates_same_history_row(tmp_path: Path) -> None:
     database = tmp_path / "command-center.sqlite3"
     service = insert_run(database)
-
     reviewed = service.review(
         "RUN-1",
         "verified",
-        actor="Office Leaks HQ",
+        actor="Office_Leaks_HQ",
         reason="Evidence read back successfully.",
     )
-
     assert reviewed.verification_state == "verified"
     assert reviewed.queue_eligible is False
     assert reviewed.wake_required is False
-    assert reviewed.verification_actor == "Office Leaks HQ"
+    assert reviewed.verification_actor == "Office_Leaks_HQ"
     assert reviewed.verification_reason == "Evidence read back successfully."
     with sqlite3.connect(database) as connection:
         stored = connection.execute(
@@ -213,14 +201,12 @@ def test_immediate_hq_review_suppresses_repeat_wake(tmp_path: Path) -> None:
     before = service.store.record("RUN-1")
     assert before is not None
     assert before.wake_required is True
-
     reviewed = service.review(
         "RUN-1",
         "verified",
-        actor="Office Leaks HQ",
+        actor="Office_Leaks_HQ",
         reason="Immediate review completed.",
     )
-
     assert reviewed.verification_state == "verified"
     assert reviewed.wake_required is False
 
@@ -228,12 +214,11 @@ def test_immediate_hq_review_suppresses_repeat_wake(tmp_path: Path) -> None:
 def test_review_cannot_override_automatic_machine_verification(tmp_path: Path) -> None:
     database = tmp_path / "command-center.sqlite3"
     service = insert_run(database, verification_mode="AUTOMATIC")
-
     with pytest.raises(WorkerRuntimeError, match="machine postcondition"):
         service.review(
             "RUN-1",
             "verified",
-            actor="Engineering HQ",
+            actor="Engineering_HQ",
             reason="Manual override attempted.",
         )
 
@@ -244,14 +229,13 @@ def test_terminal_review_cannot_be_reversed(tmp_path: Path) -> None:
     service.review(
         "RUN-1",
         "verified",
-        actor="Office Leaks HQ",
+        actor="Office_Leaks_HQ",
         reason="Evidence accepted.",
     )
-
     with pytest.raises(WorkerRuntimeError, match="already terminal"):
         service.review(
             "RUN-1",
             "rejected",
-            actor="Office Leaks HQ",
+            actor="Office_Leaks_HQ",
             reason="Conflicting second decision.",
         )
