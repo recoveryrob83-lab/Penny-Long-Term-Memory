@@ -1,9 +1,9 @@
 # Worker Execution Contract
 
 Updated: 2026-07-19
-Owner: Life OS Maintenance HQ
+Owner: Maintenance_HQ
 Status: Active / Canonical
-Purpose: Define the universal authority ceiling, boot path, identity, profile convention, execution outcomes, evidence, verification, holds, elevations, naming, and durable-state rules for every Life OS Worker.
+Purpose: Define the universal authority ceiling, boot path, identity, profile convention, execution outcomes, evidence, verification, holds, elevations, naming, and durable-state rules for every LifeOS Worker.
 
 ## 1. Worker Definition
 
@@ -96,13 +96,13 @@ Do not create `workers/README.md` inside a department unless multiple active pro
 
 ## 5. Required Profile Metadata
 
-Recommended front matter:
+Recommended front matter for the current Engineering Worker:
 
 ```yaml
 ---
-worker_id: office_leaks_worker
-chat_title: OfficeLeaks_Worker
-owning_department: office_leaks
+worker_id: engineering_worker
+chat_title: Engineering_Worker
+owning_department: engineering
 role: worker
 specialization: general
 profile_version: 1
@@ -162,7 +162,7 @@ A dashboard button, schedule, existing chat, or technical ability does not activ
 
 A Worker may receive execution-ready work from:
 
-- Chief of Staff HQ, when Rob has authorized the work and it fits the existing profile;
+- `Chief_of_Staff_HQ`, when Rob has authorized the work and it fits the existing profile;
 - the owning Department HQ;
 - an authorized advisory whose source may request that task class;
 - a canonical timed procedure with existing standing authority.
@@ -216,7 +216,7 @@ Use when Rob must decide or authorize:
 - destructive, public-facing, unusual, or high-consequence scope not already authorized;
 - a material change to the approved operating model.
 
-Chief of Staff HQ coordinates the elevation. The owning department retains the work.
+`Chief_of_Staff_HQ` coordinates the elevation. The owning department retains the work.
 
 ## 9. Run Identity and Evidence
 
@@ -332,28 +332,32 @@ Silence, elapsed time, a schedule retry, a transport retry, or an unchanged advi
 
 ## 15. Naming and Stable IDs
 
-Visible chat-title pattern:
+Canonical current Worker title:
 
-`<DepartmentToken>_Worker[_<SpecializationToken>]`
+- `Engineering_Worker`
+
+Future visible chat-title pattern:
+
+`<Department_Name>_Worker`
 
 Examples:
 
-- `OfficeLeaks_Worker`
-- `OfficeLeaks_Worker_Visuals`
-- `OfficeLeaks_Worker_MarketResearch`
+- `Maintenance_Worker`
+- `Business_Worker`
+- `Office_Leaks_Worker`
+- `Finance_Worker`
+- `Chief_of_Staff_Worker`
 - `Wellness_Worker`
-- `Engineering_Worker`
 
 Visible-title rules:
 
 - ASCII letters, numbers, and underscores only;
 - no whitespace or decorative punctuation;
-- PascalCase within tokens;
+- canonical department name followed by `_Worker`;
 - globally unique;
 - exact visible title may function as a desktop transport address;
-- specialization represents a persistent execution role, not a one-time task;
 - one general Worker per department by default;
-- specialized Workers require repeated operational evidence.
+- specialized Workers require repeated operational evidence and a separately approved naming extension.
 
 Stable internal ID pattern:
 
@@ -362,11 +366,20 @@ Stable internal ID pattern:
 - globally unique;
 - separate from the visible title.
 
-Examples:
+Current example:
 
+- `engineering_worker`
+
+Future examples:
+
+- `maintenance_worker`
+- `business_worker`
 - `office_leaks_worker`
-- `office_leaks_worker_visuals`
-- `office_leaks_worker_market_research`
+- `finance_worker`
+- `chief_of_staff_worker`
+- `wellness_worker`
+
+This naming convention does not create or activate any Worker.
 
 A Worker rename is an operational routing change, not a cosmetic edit. It requires:
 
@@ -404,14 +417,14 @@ The owning Department HQ:
 - approves department-level exceptions within existing authority;
 - retires or changes the profile.
 
-Life OS Maintenance HQ:
+`Maintenance_HQ`:
 
 - owns this global contract;
 - owns the profile convention and canonical boot integration;
 - audits shared rule coherence;
 - does not invent department-specific permissions or activate profiles.
 
-Engineering HQ:
+`Engineering_HQ`:
 
 - owns routing registry implementation;
 - exact-title lookup;
