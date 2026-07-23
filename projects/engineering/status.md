@@ -4,7 +4,7 @@ Updated: 2026-07-23
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / GitHub-First Worker Operations Live / Scheduled Consumption Live-Validated / Post-Close Operational Observation
+Active / Package D Closed / Package E Closed / Maintenance Textual Naming Repair Complete / Engineering Runtime Title Rollover Pending / Courier Verifier Defect Demonstrated / Fresh Chat Required
 
 ## Summary
 
@@ -20,8 +20,29 @@ Engineering owns technical Worker infrastructure: routing registry, stable IDs, 
 - Worker result folders: immutable evidence and audit trail, not a competing queue or lifecycle ledger.
 - Dashboard and scheduled watcher: visibility and reporting interfaces, not independent truth or closure authority.
 - `Maintenance_HQ`: canonical shared Worker governance and global operating integrity.
+- `memory/HQ_NAMING_STANDARD.md`: canonical room-title and Worker-title source.
 
 Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in GitHub memory or Worker result artifacts.
+
+## Current Transition
+
+Maintenance_HQ completed the repository-wide textual naming repair and preserved the Engineering implementation boundary. The ingested final report records the canonical room titles as:
+
+- `LifeOS_HQ`
+- `Maintenance_HQ`
+- `Engineering_HQ`
+- `Business_HQ`
+- `Office_Leaks_HQ`
+- `Finance_HQ`
+- `Chief_of_Staff_HQ`
+- `Wellness_HQ`
+- current Worker: `Engineering_Worker`
+
+No Engineering code, browser selector, runtime registry, SQLite state, test fixture, immutable Worker artifact, historical execution row, stable filesystem path, or checksum was changed by Maintenance.
+
+The next authorized Engineering package is a bounded exact-title implementation rollover across Engineering-owned executable code, current configuration, route mappings, prompt launchers, tests, and active title-bearing local state. Use exact old-to-new mappings. Preserve stable destination keys, worker IDs, historical execution evidence, immutable reports and receipts, checksums, run IDs, wrapper IDs, and stable paths.
+
+A demonstrated courier defect belongs in the same repair slice: after the zero-authority self-test resolved and opened the exact `Engineering_Worker` URL, ChatGPT refreshed and collapsed the project sidebar behind `Show more`. The Worker room was fully loaded, but the redundant post-navigation verifier required the exact sidebar anchor again, timed out, and failed closed before composer fill or Send. The browser bridge is healthy. Nothing was sent and no execution-history row was created.
 
 ## Package State
 
@@ -96,7 +117,10 @@ Closed on 2026-07-23:
 - `ADV-20260722-049` — Rob-validation chain complete;
 - `ADV-20260723-051` — HQ-wake chain and duplicate-suppression proof complete.
 
-`ADV-20260718-042` remains open under `coordination/boards/main-assistant.md`. Package E closeout does not alter it.
+Open:
+
+- `ADV-20260723-052` remains OPEN pending Rob's confirmation that the hourly watcher reports in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work.
+- `ADV-20260718-042` remains open under `coordination/boards/main-assistant.md`. Package E closeout does not alter it.
 
 ## Automation and Dashboard State
 
@@ -115,17 +139,19 @@ The dashboard process owns the GitHub-first orchestrator thread. The orchestrato
 - uses one-shot local claims to suppress uncertain or competing wake retries;
 - records actionable runtime events and errors.
 
+The browser bridge was re-established after an Edge restart through a dedicated CDP-enabled Edge session at `http://127.0.0.1:9222`. Dashboard health reports the bridge ready. The current zero-authority courier self-test is blocked by the demonstrated post-navigation sidebar-witness defect, not by bridge reachability or Worker-room hydration.
+
 ### Scheduled Watcher
 
-Status: Live-validated under separate authorization.
+Status: Formalized under `Chief_of_Staff_HQ`; destination test pending.
 
-The watcher successfully read signed evidence and source advisory state, reported meaningful open-advisory follow-through to Rob, and generated a normal ChatGPT notification. It does not close advisories or create authority.
+The watcher is read-only and separately authorized. It may report meaningful signed changes and open-advisory follow-through to Rob, but it does not close advisories, create work, dispatch Workers, create chats, or create authority. `ADV-20260723-052` remains the bounded destination test.
 
 ## Current Work
 
-Package E implementation and its four source advisories are no longer open work.
+Package E implementation and its completed source advisories are no longer open work.
 
-Current Engineering work is limited to separately authorized items in `projects/engineering/open_loops.md`, including ordinary dashboard observation, connector reliability, existing Worker pilots, and any demonstrated post-close transport defect.
+Current Engineering work is limited to separately authorized items in `projects/engineering/open_loops.md`. The immediate fresh-room priority is the canonical exact-title implementation rollover plus the demonstrated courier post-navigation verifier repair.
 
 Cross-department Worker result-outbox adoption remains deferred until `Maintenance_HQ` reviews shared contracts and each owning department explicitly authorizes its own profile or procedure.
 
