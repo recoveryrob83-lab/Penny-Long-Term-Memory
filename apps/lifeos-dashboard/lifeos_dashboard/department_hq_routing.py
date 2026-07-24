@@ -13,9 +13,10 @@ from pathlib import PurePosixPath
 from typing import Mapping
 
 from .room_titles import CANONICAL_HQ_TITLES
+from .worker_runtime import WorkerRuntimeError
 
 
-class DepartmentHqRoutingError(RuntimeError):
+class DepartmentHqRoutingError(WorkerRuntimeError):
     """Raised when an owning department cannot resolve one safe exact HQ destination."""
 
 
