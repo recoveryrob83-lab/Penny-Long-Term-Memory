@@ -4,7 +4,7 @@ Updated: 2026-07-23
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / Fresh Chat Boot and Sync Complete / Live Dashboard Smoke Pending
+Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / ChatGPT DOM Window Extension Merged / Fresh Chat Boot and Sync Complete / Live Dashboard and Extension Smokes Pending
 
 ## Summary
 
@@ -71,11 +71,27 @@ Completed and merged through PR #13.
 - Targeted launcher harness: `5 passed`; dashboard JavaScript syntax check passed.
 - Live Windows/dashboard validation remains pending after local pull and dashboard restart.
 
+### Opt-in ChatGPT DOM Window Edge extension
+
+Completed and merged through PR #14.
+
+- Merge commit: `131cf5d10a4a13cc76c30f99a09cefe75f4306c9`
+- The inert Manifest V3 package lives at `apps/chatgpt-dom-window-extension` and requires manual Edge sideloading.
+- It is disabled by default and stores settings per exact saved conversation.
+- It keeps a configurable recent rendered-turn window, trims only on stable non-generating routes, auto-trims only near the bottom, and preserves selected, focused, and pinned turns.
+- Restore disables the conversation setting and reloads the full authoritative ChatGPT history.
+- Canonical `*_Worker` rooms are protected because LifeOS transport counts rendered `conversation-turn-*` elements.
+- Permissions are limited to `activeTab` and `storage`; the extension has no remote code, analytics, network calls, dashboard writes, route writes, or Worker authority.
+- Static validation passed, but live Edge behavior and memory effectiveness remain unproven until measured.
+
 ## Validation
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
 - Coverage included route capture, stale revision refusal, wrong-room refusal, duplicate-route refusal, single-row preservation, verification holds, canary-only promotion, route-drift refusal, authoritative database propagation, dashboard API/UI contracts, runtime validation, browser readiness, submission recovery, and post-navigation identity.
 - PR #13 added focused launcher, API, and UI tests. The targeted launcher harness passed and the new JavaScript parsed cleanly; no repository workflow was configured on that PR.
+- PR #14 core test suite: `5 passed`.
+- PR #14 `src/core.js`, `src/content.js`, and `popup/popup.js` syntax checks passed; manifest and package JSON parsed successfully.
+- Direct ChatGPT DOM mutation remains site-sensitive. Static test success is not evidence of renderer-memory recovery.
 
 ## Current Production Route State
 
@@ -117,33 +133,34 @@ Recently closed:
 - `ADV-20260723-052` closed after the hourly watcher reported in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work; Rob confirmed the result and authorized closure.
 - `ADV-20260718-042` closed by the Chief of Staff source owner after Engineering implementation, source verification, and Rob approval for slow rollout. Slow rollout is an operational pacing decision, not unfinished implementation.
 
-## Dashboard State
+## Dashboard and Extension State
 
-The latest dashboard code is on `main` at merge `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later.
+The dashboard reconnect code is on `main` at merge `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later. The experimental extension package is on `main` at merge `131cf5d10a4a13cc76c30f99a09cefe75f4306c9` or later.
 
-Expected local endpoint:
+Expected local dashboard endpoint:
 
 ```text
 http://127.0.0.1:8765
 ```
 
-This fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. The running local dashboard must be pulled to current `main` and restarted because `run_dashboard.py` intentionally uses `reload=False`.
+This fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. The dashboard process must be restarted after pulling reconnect-code changes because `run_dashboard.py` uses `reload=False`. The DOM Window extension does not run merely because its files exist; Edge must load the unpacked directory manually.
 
-Starting or reconnecting the dashboard browser bridge does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
+Starting or reconnecting the dashboard browser bridge, or loading the experimental extension, does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
 
 ## Current Work
 
-The canonical title rollover, courier verifier repair, direct URL routing, guarded route-management implementation, and browser bridge reconnect implementation are complete and are no longer open code loops.
+The canonical title rollover, courier verifier repair, direct URL routing, guarded route-management implementation, browser bridge reconnect implementation, and DOM Window extension package are complete and are no longer open code loops.
 
-The immediate Engineering task is the pending live dashboard smoke check:
+The immediate Engineering tasks are the pending live smokes:
 
-1. confirm local `main` contains `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later;
-2. restart the dashboard process;
-3. verify `/api/health` and Worker Operations;
-4. confirm one `engineering_worker` route at revision `1` and availability `available`;
-5. confirm guarded route controls render;
-6. close the dedicated Edge bridge window and verify **Reconnect bridge** launches Edge and restores the Browser bridge card to Ready;
-7. do not capture or change a route without an actual replacement room and explicit authorization.
+1. verify the dashboard reconnect path and existing `engineering_worker` route state without changing the route;
+2. load `apps/chatgpt-dom-window-extension` unpacked in Edge;
+3. confirm an ordinary saved chat is detected and canonical Worker rooms are Protected;
+4. record Edge Task Manager renderer memory before trimming;
+5. enable a 40-turn window on one long human conversation and verify scrolling, composing, and a new response;
+6. record renderer memory after eligible cleanup time;
+7. use **Restore full chat** and confirm complete authoritative history returns;
+8. do not claim the memory problem solved unless measured results support it.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -153,6 +170,8 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - The registered exact URL is the authoritative Worker locator; sidebar visibility is not route identity.
 - Route rollover updates one existing row and must pass a zero-authority canary before availability.
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
+- DOM Window is experimental, disabled by default, scoped per conversation, and prohibited in canonical Worker rooms.
+- DOM elements removed are not equivalent to verified process-memory reclaimed; Edge Task Manager evidence controls the conclusion.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
 - Any unrecognized post-submit state fails closed and requires human inspection.
