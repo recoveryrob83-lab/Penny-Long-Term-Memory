@@ -1,5 +1,6 @@
 import pytest
 
+import lifeos_dashboard.worker_hq_review_runtime  # noqa: F401 - installs the runtime patch
 from lifeos_dashboard.department_hq_routing import (
     DepartmentHqRoutingError,
     canonical_department_key,
@@ -8,7 +9,6 @@ from lifeos_dashboard.department_hq_routing import (
     resolve_hq_chat_title,
 )
 from lifeos_dashboard.worker_hq_review import WorkerHqReviewService
-import lifeos_dashboard.worker_hq_review_runtime  # noqa: F401 - installs the runtime patch
 
 
 @pytest.mark.parametrize(
@@ -156,6 +156,48 @@ def test_review_procedure_path_must_be_safe_and_department_owned(unsafe_path: st
             "maintenance",
             environment={"LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE": unsafe_path},
         )
+
+
+def _validated_row(owning_department: str) -> dict[str, object]:
+    return {
+        "result_state": "REPORT_VALIDATED",
+        "run_id": "RUN-CROSS-HQ-ROUTING-1",
+        "worker_id": "synthetic_worker",
+        "owning_department": owning_department,
+        "report_path": "projects/engineering/worker-results/synthetic/report-001.json",
+        "report_checksum": "checksum",
+        "report_commit_sha": "a" * 40,
+        "report_blob_sha": "b" * 40,
+        "verification_mode": "IMMEDIATE_HQ",
+        "hq_review_state": "",
+        "hq_wake_state": "",
+    }
+
+
+def _service_with_row(row: dict[str, object]) -> WorkerHqReviewService:
+    service = object.__new__(WorkerHqReviewService)
+    service._row = lambda _run_id: row  # type: ignore[method-assign]  # noqa: SLF001
+    return service
+
+
+def test_runtime_build_wake_uses_registered_maintenance_route(monkeypatch) -> None:
+    procedure = "projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md"
+    monkeypatch.setenv("LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE", procedure)
+    service = _service_with_row(_validated_row("maintenance"))
+
+    wake = service.build_wake("RUN-CROSS-HQ-ROUTING-1")
+
+    assert wake.hq_chat_title == "Maintenance_HQ"
+    assert procedure in wake.instruction
+    assert wake.owning_department == "maintenance"
+
+
+def test_runtime_build_wake_holds_without_department_review_procedure(monkeypatch) -> None:
+    monkeypatch.delenv("LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE", raising=False)
+    service = _service_with_row(_validated_row("maintenance"))
+
+    with pytest.raises(DepartmentHqRoutingError, match="HQ_REVIEW_PROCEDURE is required"):
+        service.build_wake("RUN-CROSS-HQ-ROUTING-1")
 
 
 def test_runtime_patch_replaces_engineering_only_base_title_resolver() -> None:
