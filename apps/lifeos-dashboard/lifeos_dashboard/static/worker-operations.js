@@ -4,6 +4,9 @@ const workerOps = {
   browserState: document.getElementById("wo-browser-state"),
   browserDetail: document.getElementById("wo-browser-detail"),
   gateState: document.getElementById("wo-gate-state"),
+  budgetState: document.getElementById("wo-budget-state"),
+  budgetDetail: document.getElementById("wo-budget-detail"),
+  resetBudget: document.getElementById("wo-reset-budget"),
   advisoryCount: document.getElementById("wo-advisory-count"),
   reviewCount: document.getElementById("wo-review-count"),
   advisorySelect: document.getElementById("wo-advisory-select"),
@@ -83,6 +86,23 @@ if (workerOps.status) {
     workerOps.status.textContent = gateLabel;
     workerOps.status.className = `mode-badge ${data.paused ? "wo-paused" : data.running ? "wo-running" : "wo-ready"}`;
     workerOps.pause.textContent = data.paused ? "Resume automation" : "Pause automation";
+
+    const budget = data.send_budget || {};
+    const used = Number(budget.used || 0);
+    const limit = Number(budget.limit || 0);
+    const remaining = Number(budget.remaining || 0);
+    const heldCount = Number(budget.held_operations?.count || budget.held_count || 0);
+    workerOps.budgetState.textContent = `${used} / ${limit}`;
+    workerOps.budgetState.className = budget.exhausted
+      ? "worker-health-bad"
+      : remaining <= 1
+        ? "worker-health-warn"
+        : "worker-health-good";
+    workerOps.budgetDetail.textContent = (
+      `Epoch ${budget.epoch || 1} · ${remaining} remaining · ${heldCount} held`
+    );
+    workerOps.resetBudget.disabled = !data.paused || data.running || workerOpsBusy;
+
     workerOps.advisoryCount.textContent = String((data.advisories || []).length);
     workerOps.reviewCount.textContent = String(Number(data.verification?.summary?.pending || 0));
   }
@@ -192,8 +212,16 @@ if (workerOps.status) {
     const advisory = selectedAdvisory();
     const browserReady = Boolean(workerOpsData?.browser?.available);
     const blocked = Boolean(workerOpsData?.paused || workerOpsData?.running || workerOpsBusy);
-    workerOps.run.disabled = !advisory || !browserReady || blocked || !workerOps.confirmSend.checked;
+    const budgetExhausted = Boolean(workerOpsData?.send_budget?.exhausted);
+    workerOps.run.disabled = (
+      !advisory
+      || !browserReady
+      || blocked
+      || budgetExhausted
+      || !workerOps.confirmSend.checked
+    );
     workerOps.selfTest.disabled = !browserReady || blocked || !workerOps.confirmSelfTest.checked;
+    workerOps.resetBudget.disabled = !workerOpsData?.paused || workerOpsData?.running || workerOpsBusy;
   }
 
   function renderWorkerOperations(data) {
@@ -256,6 +284,35 @@ if (workerOps.status) {
       setRunMessage(error.message, "bad");
     } finally {
       workerOps.pause.disabled = false;
+    }
+  });
+
+  workerOps.resetBudget.addEventListener("click", async () => {
+    if (!workerOpsData?.paused) return;
+    const confirmed = window.confirm(
+      "Reset the global send budget for a new manual epoch? This does not resume automation or erase execution evidence.",
+    );
+    if (!confirmed) return;
+    workerOpsBusy = true;
+    updateRunAvailability();
+    try {
+      const response = await fetch("/api/command-center/send-budget/reset", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({confirm_reset: true}),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || "Send budget reset failed.");
+      setRunMessage(
+        `Send budget reset to epoch ${data.send_budget?.epoch}. Automation remains paused.`,
+        "good",
+      );
+      await loadWorkerOperations({quiet: true});
+    } catch (error) {
+      setRunMessage(error.message, "bad");
+    } finally {
+      workerOpsBusy = false;
+      updateRunAvailability();
     }
   });
 
