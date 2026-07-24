@@ -51,7 +51,9 @@ Wave 0A completion does not activate any non-Engineering Worker, create a cross-
 Lifecycle State: ACTIVE
 Started: 2026-07-23
 
-The first bounded slice is cross-department owning-HQ destination resolution. Resolve canonical destinations without creating identities, routes, schedules, or authority. Later Wave 0B slices will address automatic global pause triggers, a conservative send budget, and a contract-derived activation gate under separate bounded scopes.
+The first bounded slice is cross-department owning-HQ destination resolution in draft PR #15. The branch resolves canonical destinations without creating identities, routes, schedules, or authority; requires an explicitly registered department-owned review procedure; rejects cross-owner paths, Hub routing, and Chief of Staff courier routing; and preserves the existing Engineering-only default.
+
+Isolated validation in this chat passed 21 resolver cases and 4 runtime-integration cases. The execution container could not reach GitHub directly and the repository has no remote CI result for this PR, so the repository-native focused tests and Ruff checks remain the explicit merge gate. Later Wave 0B slices will address automatic global pause triggers, a conservative send budget, and a contract-derived activation gate under separate bounded scopes.
 
 ## Completed Engineering Repair Chain
 
@@ -120,8 +122,9 @@ Package merged through PR #14; live conclusion recorded 2026-07-23.
 - PR #13 targeted launcher harness: `5 passed`.
 - PR #13 dashboard JavaScript syntax check passed.
 - PR #14 core tests: `5 passed`; JavaScript syntax and JSON validation passed.
-- The repository had no automated workflow configured for PRs #13 or #14.
-- Live evidence, not static test success, controls conclusions about browser memory recovery.
+- Draft PR #15 isolated harness: `21` resolver cases and `4` runtime-integration cases passed.
+- The repository had no automated workflow configured for PRs #13, #14, or #15.
+- Live evidence, not static or isolated test success, controls claims about routing availability and browser execution.
 
 ## Current Production Route State
 
@@ -179,18 +182,23 @@ Recently closed:
 
 ## Next Valid Action
 
-Implement Package F Wave 0B Slice 1 on a dedicated Engineering branch:
+Run the repository-native merge gate for draft PR #15 from `apps/lifeos-dashboard`:
 
-1. derive department HQ titles from the canonical executable mapping rather than a competing local map;
-2. normalize only explicit known aliases such as `maintenance` to the canonical Maintenance department key and `chief-of-staff` to the canonical Chief of Staff key;
-3. permit exact environment overrides only when they resolve to canonical department HQ titles;
-4. reject unknown departments, Hub routing, malformed overrides, or noncanonical targets before any send;
-5. wire the resolver into the existing owning-HQ wake runtime without changing result ingestion, review semantics, duplicate suppression, route state, schedules, or source advisory lifecycle;
-6. add focused dependency-free tests;
-7. keep the PR draft until the focused checks pass and the integration boundary is reviewed;
-8. do not create or register a non-Engineering Worker or private route as part of this slice.
+```cmd
+call .venv\Scripts\activate.bat
+python -m pytest -q tests/test_department_hq_routing.py tests/test_worker_hq_review.py
+python -m ruff check lifeos_dashboard/department_hq_routing.py lifeos_dashboard/worker_hq_review_runtime.py tests/test_department_hq_routing.py
+```
 
-After the routing slice, continue only from the remaining Wave 0B safety-kernel work or another explicit Rob instruction.
+If both commands pass:
+
+1. mark PR #15 ready;
+2. merge it into `main`;
+3. restart the dashboard only when Rob is ready to load the merged code;
+4. do not configure a non-Engineering review procedure or attempt a live wake as part of this slice;
+5. continue to the next separately bounded Wave 0B safety-kernel slice.
+
+If either command fails, repair only the demonstrated defect on PR #15 and rerun the same gate.
 
 ## Production Boundary
 
