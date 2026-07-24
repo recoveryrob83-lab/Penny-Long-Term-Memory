@@ -244,6 +244,7 @@ def test_dashboard_canary_uses_authoritative_database_and_promotes(
 ) -> None:
     database = tmp_path / "custom-command-center.sqlite3"
     command_center = CommandCenterService(tmp_path, database_path=database)
+    (tmp_path / ".git").mkdir()
     service = RouteAwareWorkerOperationsService(
         command_center,
         tmp_path,
