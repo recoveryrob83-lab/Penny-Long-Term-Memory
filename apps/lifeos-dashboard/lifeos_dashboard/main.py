@@ -21,6 +21,7 @@ from .adapters import (
     TodoistDashboardSource,
     TrelloFlowDashboardSource,
 )
+from .browser_bridge import BrowserBridgeService
 from .command_center import CommandCenterError, CommandCenterService, CommandJob
 from .department_inspection import DepartmentInspectionSource
 from .service import DashboardService
@@ -86,6 +87,11 @@ class WorkerAdvisoryRunRequest(BaseModel):
 class WorkerCourierSelfTestRequest(BaseModel):
     confirm_send: bool = False
     timeout_seconds: int = Field(default=300, ge=60, le=900)
+
+
+class BrowserBridgeReconnectRequest(BaseModel):
+    confirm_launch: bool = False
+    timeout_seconds: int = Field(default=20, ge=5, le=60)
 
 
 class WorkerRouteCaptureRequest(BaseModel):
@@ -172,6 +178,15 @@ def create_app(
         if repository_root is not None
         else None
     )
+    browser_bridge = (
+        BrowserBridgeService(
+            command_center,
+            APP_ROOT,
+            cdp_endpoint=worker_operations.cdp_endpoint,
+        )
+        if worker_operations is not None
+        else None
+    )
     department_inspection = inspection_source or DepartmentInspectionSource(
         repository_root if source is None else None
     )
@@ -183,6 +198,7 @@ def create_app(
     application.state.dashboard_service = service
     application.state.command_center = command_center
     application.state.worker_operations = worker_operations
+    application.state.browser_bridge = browser_bridge
     application.state.department_inspection = department_inspection
     application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
     templates = Jinja2Templates(directory=PACKAGE_ROOT / "templates")
@@ -228,6 +244,26 @@ def create_app(
                 detail="Worker Operations requires a local LifeOS repository checkout.",
             )
         return await run_in_threadpool(worker_operations.status)
+
+    @application.post("/api/worker-operations/browser/reconnect")
+    async def reconnect_browser_bridge(
+        request: BrowserBridgeReconnectRequest,
+    ) -> dict[str, object]:
+        if worker_operations is None or browser_bridge is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Browser bridge control requires a local LifeOS repository checkout.",
+            )
+        try:
+            result = await run_in_threadpool(
+                browser_bridge.reconnect,
+                confirm_launch=request.confirm_launch,
+                timeout_seconds=request.timeout_seconds,
+            )
+            result["operations"] = worker_operations.status()
+            return result
+        except WorkerRuntimeError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @application.post("/api/worker-operations/routes/capture")
     async def capture_worker_route(
