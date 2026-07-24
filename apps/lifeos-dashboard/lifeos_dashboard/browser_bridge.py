@@ -26,7 +26,7 @@ Sleep = Callable[[float], None]
 
 def _loopback_port(cdp_endpoint: str) -> int:
     parsed = urlsplit(str(cdp_endpoint or "").strip())
-    if parsed.scheme != "http" or parsed.hostname not in {"127.0.0.1", "localhost", "::1"}:
+    if parsed.scheme != "http" or parsed.hostname not in {"127.0.0.1", "localhost"}:
         raise WorkerRuntimeError(
             "Browser bridge launch requires a local http loopback CDP endpoint."
         )
@@ -50,7 +50,9 @@ def _edge_candidates(configured: str | None = None) -> list[Path]:
     for variable in ("PROGRAMFILES(X86)", "PROGRAMFILES", "LOCALAPPDATA"):
         root = os.getenv(variable)
         if root:
-            values.append(Path(root) / "Microsoft" / "Edge" / "Application" / "msedge.exe")
+            values.append(
+                Path(root) / "Microsoft" / "Edge" / "Application" / "msedge.exe"
+            )
 
     for command in ("msedge.exe", "msedge"):
         resolved = shutil.which(command)
@@ -113,18 +115,19 @@ def launch_edge_bridge(
         }
 
     executable = resolve_edge_executable(edge_executable)
-    profile = (
-        user_data_dir
-        or Path(os.getenv("LIFEOS_EDGE_CDP_USER_DATA_DIR", "")).expanduser()
-        if os.getenv("LIFEOS_EDGE_CDP_USER_DATA_DIR")
+    configured_profile = os.getenv("LIFEOS_EDGE_CDP_USER_DATA_DIR")
+    profile = user_data_dir or (
+        Path(configured_profile).expanduser()
+        if configured_profile
         else app_root / ".local" / "edge-cdp-profile"
     )
     profile = Path(profile).expanduser().resolve()
     profile.mkdir(parents=True, exist_ok=True)
+
     target_url = str(
         start_url or os.getenv("LIFEOS_EDGE_CDP_START_URL") or DEFAULT_START_URL
     ).strip()
-    if not target_url.startswith("https://"):
+    if urlsplit(target_url).scheme != "https":
         raise WorkerRuntimeError("Browser bridge start URL must use https.")
 
     command = [
