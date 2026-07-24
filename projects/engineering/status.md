@@ -4,7 +4,7 @@ Updated: 2026-07-23
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Fresh Chat Boot and Sync Complete / Post-Merge Dashboard Smoke Pending
+Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / Fresh Chat Boot and Sync Complete / Live Dashboard Smoke Pending
 
 ## Summary
 
@@ -59,10 +59,23 @@ Completed and merged through PR #11.
 - Capture and canary use the dashboard's exact active SQLite database.
 - No production route rollover occurred during implementation.
 
+### One-click Edge browser bridge reconnect
+
+Completed and merged through PR #13.
+
+- Merge commit: `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab`
+- The dashboard exposes **Reconnect bridge** when the local Edge CDP endpoint is offline.
+- The endpoint launches a dedicated persistent local Edge profile on loopback `127.0.0.1:9222` and verifies `/json/version` before reporting Ready.
+- The launcher refuses non-loopback endpoints, duplicate launch while already healthy, and launch while another automation action holds the shared execution lock.
+- Reconnect does not mutate Worker routes, advisories, schedules, runtime execution history, or Worker authority.
+- Targeted launcher harness: `5 passed`; dashboard JavaScript syntax check passed.
+- Live Windows/dashboard validation remains pending after local pull and dashboard restart.
+
 ## Validation
 
-- Final consolidated local regression gate: `80 passed`.
+- Final consolidated pre-PR-13 local regression gate: `80 passed`.
 - Coverage included route capture, stale revision refusal, wrong-room refusal, duplicate-route refusal, single-row preservation, verification holds, canary-only promotion, route-drift refusal, authoritative database propagation, dashboard API/UI contracts, runtime validation, browser readiness, submission recovery, and post-navigation identity.
+- PR #13 added focused launcher, API, and UI tests. The targeted launcher harness passed and the new JavaScript parsed cleanly; no repository workflow was configured on that PR.
 
 ## Current Production Route State
 
@@ -106,7 +119,7 @@ Recently closed:
 
 ## Dashboard State
 
-The completed dashboard code is on `main` and ready for local launch or restart.
+The latest dashboard code is on `main` at merge `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later.
 
 Expected local endpoint:
 
@@ -114,22 +127,23 @@ Expected local endpoint:
 http://127.0.0.1:8765
 ```
 
-This fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. A post-merge local dashboard smoke result has not yet been recorded, so the actual running process and UI state must still be verified rather than assumed.
+This fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. The running local dashboard must be pulled to current `main` and restarted because `run_dashboard.py` intentionally uses `reload=False`.
 
-Starting the dashboard does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
+Starting or reconnecting the dashboard browser bridge does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
 
 ## Current Work
 
-The canonical title rollover, courier verifier repair, direct URL routing, and guarded route-management implementation are complete and are no longer open loops.
+The canonical title rollover, courier verifier repair, direct URL routing, guarded route-management implementation, and browser bridge reconnect implementation are complete and are no longer open code loops.
 
-The immediate Engineering task is the pending read-only post-merge dashboard smoke check:
+The immediate Engineering task is the pending live dashboard smoke check:
 
-1. confirm local `main` is clean and contains `2587b540e24ca09036c1f0094187c69c2b363c63` or later;
-2. start or confirm the dashboard;
-3. verify health and Worker Operations;
+1. confirm local `main` contains `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later;
+2. restart the dashboard process;
+3. verify `/api/health` and Worker Operations;
 4. confirm one `engineering_worker` route at revision `1` and availability `available`;
 5. confirm guarded route controls render;
-6. do not capture or change the route without an actual replacement room and explicit authorization.
+6. close the dedicated Edge bridge window and verify **Reconnect bridge** launches Edge and restores the Browser bridge card to Ready;
+7. do not capture or change a route without an actual replacement room and explicit authorization.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -138,6 +152,7 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - Browser automation acts only on exact canonical URLs.
 - The registered exact URL is the authoritative Worker locator; sidebar visibility is not route identity.
 - Route rollover updates one existing row and must pass a zero-authority canary before availability.
+- Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
 - Any unrecognized post-submit state fails closed and requires human inspection.
