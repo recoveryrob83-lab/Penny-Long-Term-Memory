@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ Status
 
-Updated: 2026-07-18
+Updated: 2026-07-23
 Project: Chief_of_Staff_HQ / Daily Operations
 Status: Active / Operational
 
@@ -14,7 +14,7 @@ It handles daily planning, practical coordination, cross-department synthesis, o
 
 ## Current Phase
 
-Operational use, completed Phase Two role alignment, and evidence-based refinement.
+Operational use, completed Phase Two role alignment, completed Package F Wave 0A watcher integration, and evidence-based refinement.
 
 The friction-aware Daily Operating SOP is active through the universal boot sequence and should be tested in ordinary daily planning rather than expanded into another layer of bureaucracy.
 
@@ -38,6 +38,7 @@ Departments retain their own durable GitHub ownership and drift-management respo
 - Chat/Work policy: `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
 - LifeOS Dashboard: locally running read-mostly interface with GitHub, Trello, Todoist, and Google Calendar private iCal
 - Desktop department automation: `apps/lifeos-dashboard/automation/draft_department_boot.py`
+- Life OS Change Watch: enabled hourly GitHub-only condition watch that reports meaningful signed work changes and remains silent when nothing changed
 - Todoist: Rob-facing commitments and reminders
 - Calendar: appointments and timed commitments
 - Gmail: searches, summaries, evidence, and drafts
@@ -70,7 +71,7 @@ Departments retain their own durable GitHub ownership and drift-management respo
 ## Current Dependencies
 
 - `Maintenance_HQ` owns future reconciliation if the deployed ChatGPT Project Settings diverge from the canonical Project Instructions, plus shared-governance maintenance, boot integrity, audits, migrations, source boundaries, and global repository reconciliation.
-- `Engineering_HQ` owns Package B updates to automation labels, canonical prompts, dashboard labels, compatibility mappings, code, and tests. Current automation labels may still display `Main Assistant HQ` and `Logistics HQ` until that separately authorized Engineering work is completed.
+- `Engineering_HQ` completed the Engineering-only Worker transport, immutable result, owning-HQ review, watcher-reporting, direct-route, route-rollover, and browser-bridge foundation. Engineering is now implementing controlled cross-department HQ routing; this does not activate a new Worker or grant cross-department execution authority.
 - `Engineering_HQ` owns unattended scheduler validation. Engineering_HQ Daily Sync remains paused until Rob explicitly resumes it after the relevant safety boundaries are validated.
 - `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, offer design, outreach, delivery, and market-test judgment.
 - `Finance_HQ` owns forecasting models, account-linked analysis, and financial judgment. Account-linked connector work remains isolated in Finance-only chat.
@@ -83,7 +84,9 @@ Departments retain their own durable GitHub ownership and drift-management respo
 - The LifeOS Dashboard is live with four verified source types: GitHub, Trello, Todoist, and Google Calendar private iCal.
 - Guarded GitHub auto-sync is limited to clean, strictly-behind fast-forward updates.
 - Windows desktop boot automation passed draft-mode validation across the seven department HQs and recognizes `LifeOS_HQ` as an eighth exact destination.
-- A watched live send to the legacy `Main Assistant HQ` automation destination succeeded and initiated a normal reboot; the legacy label remains an Engineering-owned implementation detail.
+- Canonical room names and the `<Department_Name>_Worker` convention are established and current files were reconciled while preserving historical evidence and stable paths.
+- The Engineering-only Worker chain proved exact URL transport, bounded execution, immutable result ingestion, owning-HQ review, Rob validation when required, watcher consumption, and duplicate suppression.
+- The enabled Life OS Change Watch successfully reported meaningful GitHub changes into the existing `Chief_of_Staff_HQ` conversation without creating a duplicate room or taking action on the work.
 - Office Leaks is publicly launched and in live organic market testing.
 - Trello is active as the visual flow system and the mobile Now widget targets the correct list.
 - The Advisory Index currently reports no open advisories.
