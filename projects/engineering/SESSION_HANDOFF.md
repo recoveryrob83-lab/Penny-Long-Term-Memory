@@ -2,14 +2,14 @@
 
 Updated: 2026-07-23
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the canonical title rollover, direct Worker URL routing, guarded route management, advisory cleanup, and one-click Edge browser bridge reconnect were completed and merged.
+Purpose: Fresh-room handoff after Package F Wave 0A reconciliation and the start of controlled cross-department owning-HQ routing.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Engineering_HQ
-- Current Phase: Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / Fresh Chat Boot and Sync Complete / Live Dashboard Smoke Pending
-- Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, and the local Edge CDP bridge
+- Current Phase: Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Package F Wave 0B Cross-Department HQ Routing Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Memory Experiment Concluded
+- Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, the local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
 
@@ -34,6 +34,24 @@ Purpose: Fresh-room handoff after the canonical title rollover, direct Worker UR
 Engineering owns technical Worker infrastructure: exact routing, transport, logging, duplicate suppression, result ingestion, verification mechanics, runtime evidence, tests, and reliability safeguards. Engineering does not own shared Worker governance, another department's Worker authority, source-owner advisory lifecycle, or domain judgment.
 
 Route business strategy to `Business_HQ` or `Office_Leaks_HQ`, cost-bearing choices to `Finance_HQ`, ordinary daily coordination to `Chief_of_Staff_HQ`, shared governance and global memory hygiene to `Maintenance_HQ`, and wellbeing or sustainability judgment to `Wellness_HQ`.
+
+## Package F Roadmap
+
+### Wave 0A: Foundation
+
+Lifecycle State: COMPLETE
+Completed: 2026-07-23
+
+Wave 0A includes the successful GitHub-only Life OS Change Watch, canonical room and Worker naming, repository-wide current-text reconciliation, the Engineering-only Worker execution and immutable evidence chain, owning-HQ review, Rob validation when required, watcher consumption, duplicate suppression, direct URL routing, guarded route rollover, and browser-bridge recovery.
+
+Wave 0A completion does not activate any non-Engineering Worker, create a cross-department route, grant new tools or durable-write authority, or authorize unattended sends.
+
+### Wave 0B: Controlled cross-department safety kernel
+
+Lifecycle State: ACTIVE
+Started: 2026-07-23
+
+The first bounded slice is cross-department owning-HQ destination resolution. Resolve canonical destinations without creating identities, routes, schedules, or authority. Later Wave 0B slices will address automatic global pause triggers, a conservative send budget, and a contract-derived activation gate under separate bounded scopes.
 
 ## Completed Engineering Repair Chain
 
@@ -84,14 +102,26 @@ Merged through PR #13.
 - Reconnect cannot mutate Worker routes, route revisions, advisories, schedules, execution history, or Worker authority.
 - The launcher waits for verified CDP readiness even when the original Edge launcher process hands the browser window to another process.
 
+### Phase 2d: ChatGPT DOM memory experiment
+
+Package merged through PR #14; live conclusion recorded 2026-07-23.
+
+- Merge commit: `131cf5d10a4a13cc76c30f99a09cefe75f4306c9`
+- The extension is inert until manually loaded, disabled by default, scoped per saved conversation, and blocked in canonical Worker rooms.
+- Static tests passed.
+- A long `LifeOS_HQ` conversation exposed only 11 rendered turns, demonstrating that ChatGPT already virtualized the old DOM.
+- Edge Task Manager showed JavaScript memory as roughly half the renderer footprint during connector-heavy and coding work.
+- The extension did not address the demonstrated primary memory pressure and should remain disabled unless a future page actually mounts excessive old DOM.
+
 ## Validation Evidence
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
 - The regression set covered route capture, wrong-room refusal, stale revision refusal, duplicate-route refusal, single-row preservation, verification hold behavior, canary-only promotion, route drift refusal, authoritative database propagation, dashboard API/UI controls, runtime contracts, browser readiness, submission recovery, and post-navigation identity behavior.
-- PR #13 was mergeable before squash merge.
 - PR #13 targeted launcher harness: `5 passed`.
 - PR #13 dashboard JavaScript syntax check passed.
-- The repository had no automated workflow configured for PR #13; live Windows/dashboard validation remains pending.
+- PR #14 core tests: `5 passed`; JavaScript syntax and JSON validation passed.
+- The repository had no automated workflow configured for PRs #13 or #14.
+- Live evidence, not static test success, controls conclusions about browser memory recovery.
 
 ## Current Production Route State
 
@@ -103,11 +133,11 @@ Merged through PR #13.
 - One authoritative registry row exists.
 - The private exact conversation URL remains in ignored local SQLite state and is not duplicated into GitHub memory.
 - Local Worker courier or orchestrator sends remain unauthorized unless Rob separately authorizes them.
-- The separate `Chief_of_Staff_HQ` cloud watcher is not the local Worker courier and may remain enabled under its own authority.
+- The separate `Chief_of_Staff_HQ` cloud watcher is not the local Worker courier and remains governed by its own read-only authority.
 
 ## Dashboard Startup State
 
-The fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. PR #13 is merged to `main`, but the current local dashboard process must be pulled forward and restarted before the new reconnect control can appear because `run_dashboard.py` uses `reload=False`.
+The fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. The dashboard reconnect code is merged to `main` and Rob has closed and relaunched the dedicated Edge window during the memory investigation. The remaining dashboard smoke is a bounded route-state and guarded-control observation, not a new implementation package.
 
 Canonical local launch command from `apps/lifeos-dashboard`:
 
@@ -136,7 +166,7 @@ Lifecycle State: CLOSED
 Closed: 2026-07-23
 Canonical closeout: `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-Do not recreate completed Package D or Package E slices as active work.
+Do not recreate completed Package D, Package E, or Package F Wave 0A work as active tasks.
 
 ## Advisory State
 
@@ -149,17 +179,18 @@ Recently closed:
 
 ## Next Valid Action
 
-Perform the pending live dashboard smoke check:
+Implement Package F Wave 0B Slice 1 on a dedicated Engineering branch:
 
-1. Confirm local `main` contains merge commit `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or a later fast-forward.
-2. Restart the dashboard process.
-3. Inspect `/api/health` and the Worker Operations page.
-4. Confirm exactly one `engineering_worker` row is visible with title `Engineering_Worker`, route revision `1`, and availability `available`.
-5. Confirm guarded route-capture controls render.
-6. Close the dedicated Edge bridge window and confirm **Reconnect bridge** relaunches Edge and restores the Browser bridge card to Ready.
-7. Do not capture or roll the route unless a replacement Worker conversation actually exists and Rob explicitly chooses to change the route.
-8. Do not run a live advisory or enable local unattended Worker sends without separate authorization.
-9. Report the smoke-test result and then continue only from the remaining open loops.
+1. derive department HQ titles from the canonical executable mapping rather than a competing local map;
+2. normalize only explicit known aliases such as `maintenance` to the canonical Maintenance department key and `chief-of-staff` to the canonical Chief of Staff key;
+3. permit exact environment overrides only when they resolve to canonical department HQ titles;
+4. reject unknown departments, Hub routing, malformed overrides, or noncanonical targets before any send;
+5. wire the resolver into the existing owning-HQ wake runtime without changing result ingestion, review semantics, duplicate suppression, route state, schedules, or source advisory lifecycle;
+6. add focused dependency-free tests;
+7. keep the PR draft until the focused checks pass and the integration boundary is reviewed;
+8. do not create or register a non-Engineering Worker or private route as part of this slice.
+
+After the routing slice, continue only from the remaining Wave 0B safety-kernel work or another explicit Rob instruction.
 
 ## Production Boundary
 
@@ -167,11 +198,12 @@ Perform the pending live dashboard smoke check:
 - Registered exact Worker URLs, not sidebar visibility, are authoritative route locators.
 - Route changes update one existing Worker row and must pass the zero-authority canary before becoming available.
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
+- Cross-department destination resolution is not Worker activation, route registration, permission expansion, scheduling, or dispatch authority.
 - Confirmed or uncertain submissions are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
 - Worker reports remain evidence until deterministic ingestion.
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source advisories.
-- The Worker courier never wakes `Chief_of_Staff_HQ`.
+- The Worker courier never wakes `Chief_of_Staff_HQ` unless a separately authorized future contract explicitly changes that boundary.
 - New Workers, connectors, recurring tasks, spending, cross-department rollout, or public actions require separate authority.
