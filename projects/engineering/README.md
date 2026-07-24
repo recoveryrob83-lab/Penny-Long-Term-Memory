@@ -39,7 +39,9 @@ Current exact ChatGPT room titles are:
 - `Wellness_HQ`
 - current Worker: `Engineering_Worker`
 
-Maintenance_HQ owns the shared textual standard. Engineering_HQ owns implementation of those titles in Engineering-controlled code, browser routing, runtime configuration, current route mappings, prompt launchers, tests, and bounded active-state migrations. Display-name changes do not authorize filesystem-path renames, worker-ID changes, destination-key changes, historical-row rewrites, immutable-evidence rewrites, or checksum changes.
+`Maintenance_HQ` owns the shared textual standard. `Engineering_HQ` owns implementation of those titles in Engineering-controlled code, browser routing, runtime configuration, current route mappings, prompt launchers, tests, and bounded active-state migrations.
+
+Display-name changes do not authorize filesystem-path renames, Worker-ID changes, destination-key changes, historical-row rewrites, immutable-evidence rewrites, or checksum changes.
 
 ## Canonical Worker Model
 
@@ -47,7 +49,9 @@ A LifeOS Worker is a specialized ChatGPT room operating beneath one Department H
 
 - The Department HQ owns the Worker profile, procedures, authority, holds, verification, and domain judgment.
 - GitHub holds canonical profiles, procedures, task state, decisions, and immutable result and review evidence.
-- SQLite `execution_history` remains the sole operational runtime ledger.
+- SQLite runtime state remains the sole operational ledger.
+- The Worker registry row holds stable identity, the exact private ChatGPT conversation URL, and a monotonic route revision.
+- Browser dispatch uses the registered exact URL and fails closed if it is missing or invalid.
 - The browser courier wakes an authorized Worker or owning HQ, proves one correlated submission, returns immediately, and never waits for completion.
 - The Worker performs bounded work and writes one immutable schema-valid report attempt under exact narrow reporting authority.
 - A deterministic ingester validates the report, calculates the canonical checksum, updates the existing runtime row, and requests report repair when needed without re-executing the work.
@@ -55,12 +59,44 @@ A LifeOS Worker is a specialized ChatGPT room operating beneath one Department H
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Signed HQ or Rob results become consumption-ready.
 - A separately authorized scheduled watcher may report meaningful signed changes.
-- The courier never wakes `Chief_of_Staff_HQ`.
+- The Worker courier never wakes `Chief_of_Staff_HQ`.
 - Source owners retain advisory lifecycle and closure authority.
 
 Python, browser automation, SQLite, and the dashboard provide routing, safety, logging, duplicate suppression, ingestion, verification mechanics, and visibility. They are not the Worker and do not replace Department HQ judgment.
 
 A GitHub Worker result outbox is immutable evidence, not a competing runtime ledger.
+
+## Direct URL Routing Contract
+
+The registered exact conversation URL is the authoritative browser locator for a Worker.
+
+- Sidebar discovery is not part of normal Worker dispatch.
+- Sidebar visibility after navigation is not route identity.
+- A missing or invalid registered URL blocks dispatch before any send.
+- One existing Worker row remains authoritative; fresh-chat rollover does not create a second Worker identity.
+- Route changes increment `route_revision`.
+- A changed route is placed on `unknown` hold with `last_seen_at` cleared.
+- Real advisory execution requires route availability to be exactly `available`.
+- A zero-authority canary promotes only the exact unchanged witnessed revision.
+- Private exact conversation URLs remain in ignored local runtime state and are not copied into GitHub memory files.
+
+## Guarded Dashboard Route Rollover
+
+The Worker Operations dashboard can capture a replacement Worker conversation directly from the local CDP browser target list without requiring manual URL pasting.
+
+Capture fails closed unless:
+
+- automation is paused;
+- the shared execution lock is free;
+- the operator explicitly confirms capture;
+- the expected route revision still matches the authoritative row;
+- exactly one ChatGPT conversation target is open;
+- the browser target title matches the selected Worker's exact title;
+- the captured URL is not already owned by another Worker.
+
+A successful changed capture updates one existing registry row, increments the revision, and holds the route until the existing synthetic zero-authority canary succeeds.
+
+Starting the dashboard alone does not authorize route capture, route rollover, real Worker dispatch, schedules, or unattended local orchestrator sends.
 
 ## Not This Department
 
@@ -80,57 +116,63 @@ Package E proved a Worker result outbox only under Engineering-owned paths. It d
 
 ## Current Technical State
 
-The LifeOS Dashboard is running on Rob's Windows machine with live read-only GitHub, Trello, Todoist, and Google Calendar data. Department Inspection has been locally verified at 414 normalized records, zero findings, and zero warnings.
+Package D and Package E are closed.
 
-Package D is closed after implementing and validating the technical Worker registry, routing, transport, receiver, verification, duplicate-suppression, and synthetic pilot foundation.
+The completed runtime repair chain is:
 
-Package E is closed and authoritative at:
+1. **Canonical title rollover and courier verifier repair**
+   - PR #9
+   - Merge: `f8cc341e17cb68492c5f66339382b753bd1612ab`
+   - Canonical underscore titles implemented in Engineering executable surfaces and active title-bearing state.
+   - Post-navigation identity uses the already resolved exact URL plus room witnesses instead of requiring persistent sidebar visibility.
 
-- `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
+2. **Authoritative direct Worker URL routing**
+   - PR #10
+   - Merge: `b859c3c72e8b82f876b9ebf72d2961f4eb33ecbd`
+   - Existing Worker registry row stores the exact URL and route revision.
+   - Direct dispatch fails closed without the registered URL.
+   - Production `engineering_worker` route revision `1` was verified by a live zero-authority canary and promoted to `available`.
 
-Package E completed and live-validated the Engineering-only chain for:
+3. **Guarded dashboard route capture and rollover**
+   - PR #11
+   - Merge: `2587b540e24ca09036c1f0094187c69c2b363c63`
+   - Dashboard capture, revision guards, wrong-room refusal, duplicate ownership refusal, verification holds, and canary-only promotion are implemented.
+   - Final consolidated regression gate: `80 passed`.
+   - No production route rollover occurred during implementation.
 
-- dispatch-only Worker wakes;
-- exact URL, hydration, identity, composer, generation, and new-turn submission witnesses;
-- immediate courier release and source-room return;
-- immutable schema-valid Worker reports;
-- deterministic checksum and same-row result ingestion;
-- rejection and correction-only report-repair mechanics;
-- owning-HQ wakes and immutable HQ review receipts;
-- explicit Rob-validation receipts when HQ cannot inspect decisive evidence;
-- signed consumption-ready states;
-- scheduled watcher reporting under separate authorization;
-- duplicate execution, result, and HQ-wake suppression;
-- source-owner advisory lifecycle separation.
+## Current Production Worker State
 
-Final live evidence includes:
+- Worker ID: `engineering_worker`
+- Chat title: `Engineering_Worker`
+- Deployment state: `enabled`
+- Route revision: `1`
+- Route availability: `available`
+- Registry identity rows: one
+- Private exact URL: local runtime state only
 
-- `ADV-20260721-048`: immutable Worker report plus `Engineering_HQ` `VERIFIED` receipt, consumption-ready without Rob validation;
-- `ADV-20260722-049`: `ROB_VALIDATION_REQUIRED` HQ receipt followed by Rob's immutable `VERIFIED` receipt;
-- `ADV-20260723-051`: Worker report, HQ wake, immutable `VERIFIED` review, `HQ_VERIFIED` runtime reconciliation, and live duplicate-wake suppression after repair.
+## Current Dashboard State
 
-The scheduled watcher machinery is separately authorized under `Chief_of_Staff_HQ`. `ADV-20260723-052` remains open solely to verify that its report lands in the existing Chief of Staff conversation without creating a new chat or triggering work.
+The LifeOS Dashboard code is merged to `main` and ready for local launch or restart.
 
-## Current Transition
+Expected endpoint:
 
-Maintenance_HQ completed the repository-wide current-text naming repair and preserved executable Engineering surfaces, browser selectors, runtime registries, SQLite data, tests, historical evidence, immutable Worker artifacts, and stable filesystem paths for a separate Engineering repair.
+```text
+http://127.0.0.1:8765
+```
 
-Rob authorized the next Engineering slice after a fresh-room boot and sync:
+The next fresh `Engineering_HQ` chat must perform a read-only Boot and Sync, then record a post-merge smoke result:
 
-1. update Engineering-owned code, configuration, route mappings, prompt launchers, dashboard labels, tests, and active title-bearing local state to the canonical underscore titles;
-2. use exact old-to-new mappings rather than broad replacement;
-3. preserve historical execution rows, immutable reports and receipts, worker IDs, destination keys, run IDs, wrapper IDs, checksums, and stable paths;
-4. verify all eight HQ rooms and `Engineering_Worker` in draft or zero-authority mode before resuming broader rollout.
-
-The browser bridge was successfully re-established after an Edge restart through a CDP-enabled Edge session at `http://127.0.0.1:9222`.
-
-A zero-authority courier self-test then exposed a specific verifier defect. The courier resolved the exact `Engineering_Worker` URL and loaded the Worker conversation, but ChatGPT refreshed and collapsed the project sidebar behind `Show more`. The redundant post-navigation identity verifier waited for the hidden sidebar anchor and failed closed before filling the composer or sending. Nothing was sent and no runtime row was created.
-
-The repair must keep pre-navigation sidebar URL resolution, then use the already verified exact URL plus loaded-room, history, composer, and generation witnesses after navigation. Sidebar visibility is navigation furniture, not authoritative post-navigation identity.
+- confirm local `main` is clean and contains merge `2587b540e24ca09036c1f0094187c69c2b363c63` or later;
+- start or confirm the dashboard process;
+- inspect `/api/health`;
+- inspect Worker Operations;
+- confirm one `engineering_worker` row at route revision `1` with availability `available`;
+- confirm guarded route controls render;
+- do not capture or mutate the route without an actual replacement Worker room and explicit Rob authorization.
 
 ## Current Decision Boundary
 
-Package E slices and advisories must not be recreated as active work.
+Completed routing repairs must not remain open merely for visibility and must not be recreated as new work.
 
 Future Engineering work must come from:
 
@@ -140,12 +182,13 @@ Future Engineering work must come from:
 
 Cross-department result-outbox adoption, universal Worker write authority, optional human-readable envelope work, broader unattended packaging, new recurring tasks, connectors, spending, and public actions remain separate decisions.
 
-`ADV-20260718-042` remains open under `coordination/boards/main-assistant.md` and is not closed by Package E.
+`ADV-20260718-042` remains open under `coordination/boards/main-assistant.md` and is not closed by Engineering package completion.
 
 ## Browser and Automation Boundary
 
 - Operate only against exact canonical ChatGPT URLs.
-- Use sidebar links to resolve exact destinations when needed, but do not require a selected room's sidebar anchor to remain visible after exact URL navigation.
+- Use the registered exact Worker URL as the authoritative locator.
+- Do not require selected-room sidebar visibility after exact URL navigation.
 - Require stable history hydration, exact room identity, an empty composer, and no active generation.
 - Prove a new marker-bearing user turn, increased turn count, and an empty composer before calling a send confirmed.
 - Never blind-retry a confirmed or uncertain submission.
@@ -158,9 +201,9 @@ Cross-department result-outbox adoption, universal Worker write authority, optio
 
 ## Security Rule
 
-Never store secrets, credentials, tokens, API keys, private calendar URLs, financial account details, medical details, private user data, or sensitive implementation details in LifeOS GitHub memory or Worker result artifacts.
+Never store secrets, credentials, tokens, API keys, private calendar URLs, private ChatGPT conversation URLs, financial account details, medical details, private user data, or sensitive implementation details in LifeOS GitHub memory or Worker result artifacts.
 
-Use ignored local environment files or the appropriate secure source system for operational credentials.
+Use ignored local environment files or the appropriate secure source system for operational credentials and private runtime locators.
 
 ## Boot Files
 
@@ -172,4 +215,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D and Package E are closed. Maintenance_HQ completed the textual naming repair. The next fresh Engineering_HQ chat must boot and sync before executing the bounded exact-title implementation rollover and courier post-navigation verifier repair. The watcher destination test remains pending under `ADV-20260723-052`.
+Active department. Package D and Package E are closed. Canonical runtime titles, direct Worker URL routing, and guarded dashboard route management are complete. The next fresh `Engineering_HQ` room must Boot, Sync, and perform the read-only post-merge dashboard smoke check before continuing from the remaining open loops.
