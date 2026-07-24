@@ -1,5 +1,7 @@
 # LifeOS ChatGPT DOM Window
 
+> Experimental: static validation is complete, but live Edge and ChatGPT DOM behavior must still be measured before this is treated as proven.
+
 A local Microsoft Edge Manifest V3 extension that reduces the rendered size of explicitly enabled long ChatGPT conversations.
 
 It removes older rendered conversation turns while keeping a configurable recent window. The authoritative conversation remains on ChatGPT and can be restored by disabling trimming and reloading.
@@ -34,7 +36,7 @@ Do not force-enable it in a LifeOS Worker room. The extension blocks canonical W
 
 ## What it can and cannot reduce
 
-Removing old rendered turn subtrees can reduce DOM nodes, layout objects, event-bound descendants, syntax-highlighted code blocks, and other renderer-side weight. It does not remove ChatGPT's server history, and it may not reclaim memory retained by the site's JavaScript application state or browser caches. Measure the result in Edge Task Manager before and after trimming.
+Removing old rendered turn subtrees can reduce DOM nodes, layout objects, event-bound descendants, syntax-highlighted code blocks, and other renderer-side weight. It does not remove ChatGPT's server history, and it may not reclaim memory retained by the site's JavaScript application state, React references, or browser caches. Measure the result in Edge Task Manager before and after trimming.
 
 ## Files
 
@@ -55,3 +57,12 @@ node --check src\core.js
 node --check src\content.js
 node --check popup\popup.js
 ```
+
+## Live smoke checklist
+
+1. Confirm an ordinary saved conversation is detected and a canonical `*_Worker` room is Protected.
+2. Record the ChatGPT renderer memory in Edge Task Manager.
+3. Enable the extension for one long human conversation and begin with a 40-turn window.
+4. Confirm old rendered turns disappear while scrolling, composing, and receiving a new response still work.
+5. Record renderer memory again after Edge has had time to reclaim eligible resources.
+6. Use **Restore full chat** and confirm the complete authoritative history returns after reload.
