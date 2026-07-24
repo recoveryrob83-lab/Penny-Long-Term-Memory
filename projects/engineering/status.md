@@ -4,7 +4,7 @@ Updated: 2026-07-23
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Post-Merge Dashboard Smoke Pending / Fresh Chat Required
+Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Fresh Chat Boot and Sync Complete / Post-Merge Dashboard Smoke Pending
 
 ## Summary
 
@@ -97,10 +97,12 @@ Cross-department adoption, universal Worker durable-write authority, optional hu
 
 ## Advisory State
 
-Open:
+Open Engineering advisories: None.
 
-- `ADV-20260723-052` remains OPEN pending Rob's confirmation that the hourly watcher reports in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work.
-- `ADV-20260718-042` remains open under `coordination/boards/main-assistant.md` and is not owned or closed by Engineering.
+Recently closed:
+
+- `ADV-20260723-052` closed after the hourly watcher reported in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work; Rob confirmed the result and authorized closure.
+- `ADV-20260718-042` closed by the Chief of Staff source owner after Engineering implementation, source verification, and Rob approval for slow rollout. Slow rollout is an operational pacing decision, not unfinished implementation.
 
 ## Dashboard State
 
@@ -112,7 +114,7 @@ Expected local endpoint:
 http://127.0.0.1:8765
 ```
 
-Rob pulled the merged work locally and prepared to start the dashboard, but this session ended before a fresh-room post-merge smoke result was recorded. The next room must verify the actual process and UI state rather than assuming it.
+This fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. A post-merge local dashboard smoke result has not yet been recorded, so the actual running process and UI state must still be verified rather than assumed.
 
 Starting the dashboard does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
 
@@ -120,15 +122,14 @@ Starting the dashboard does not authorize real Worker dispatch, route capture, r
 
 The canonical title rollover, courier verifier repair, direct URL routing, and guarded route-management implementation are complete and are no longer open loops.
 
-The immediate Engineering task is a read-only post-merge dashboard smoke check in the fresh room:
+The immediate Engineering task is the pending read-only post-merge dashboard smoke check:
 
-1. boot and sync;
-2. confirm local `main` is clean and contains `2587b540e24ca09036c1f0094187c69c2b363c63` or later;
-3. start or confirm the dashboard;
-4. verify health and Worker Operations;
-5. confirm one `engineering_worker` route at revision `1` and availability `available`;
-6. confirm guarded route controls render;
-7. do not capture or change the route without an actual replacement room and explicit authorization.
+1. confirm local `main` is clean and contains `2587b540e24ca09036c1f0094187c69c2b363c63` or later;
+2. start or confirm the dashboard;
+3. verify health and Worker Operations;
+4. confirm one `engineering_worker` route at revision `1` and availability `available`;
+5. confirm guarded route controls render;
+6. do not capture or change the route without an actual replacement room and explicit authorization.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
