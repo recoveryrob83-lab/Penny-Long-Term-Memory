@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ Open Loops
 
-Updated: 2026-07-22
+Updated: 2026-07-23
 Project: Chief_of_Staff_HQ / Daily Operations
 Purpose: Track genuine unfinished Chief of Staff work without mixing standing responsibilities, specialist work, operating watches, or completed history into the active queue.
 
@@ -31,7 +31,8 @@ These are conditions to observe, not unfinished tasks:
 - **Chat / Work boundary:** Keep regular Chat as headquarters and Work as bounded execution; re-evaluate only after meaningful product changes or demonstrated friction.
 - **Context-layer drift:** Treat chat-specific handbooks as noncanonical context mirrors. Use current-source reads, focused Sync, or full Boot when the source state or operating frame matters.
 - **Inventory scope creep:** Keep the initial inventory pilot limited to expendables and transportation access. Do not found a new department, log every use, or expand into durable possessions before the pilot proves useful.
-- **Automation boundary:** Treat browser DOM transport as an Engineering-owned direction still under validation. Completion requires current end-to-end evidence for transport, receiver validation, bounded execution, evidence return, duplicate prevention, and failure recovery.
+- **Automation boundary:** Package F Wave 0A is complete: the GitHub-only change watch and Engineering-only Worker proof chain are operational. Cross-department HQ routing remains an Engineering-owned implementation under controlled rollout and does not authorize a new Worker, new route, or unattended send.
+- **Watcher authority:** Treat Life OS Change Watch output as a report for synthesis and follow-through. It does not choose priorities, modify GitHub, close advisories, or convert reported work into Chief of Staff ownership.
 
 ## Standing Responsibilities
 
@@ -55,7 +56,7 @@ These are enduring department duties, not open loops:
 These items are owned elsewhere and are not duplicated as Chief of Staff open loops:
 
 - `Maintenance_HQ` owns future Project Settings reconciliation only when a demonstrated divergence appears, plus shared governance, boot integrity, audits, migrations, source boundaries, and global repository reconciliation.
-- `Engineering_HQ` owns browser DOM department transport, selectors, compatibility mappings, dashboard code, tests, technical reliability, duplicate protection, evidence return, failure recovery, and any remaining legacy desktop-label cleanup.
+- `Engineering_HQ` owns cross-department HQ routing, browser DOM transport, selectors, compatibility mappings, dashboard code, tests, technical reliability, duplicate protection, evidence return, and failure recovery.
 - `Finance_HQ` owns forecasting models, account-linked analysis, affordability, cash timing, spending analysis, and financial judgment.
 - `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, offers, outreach, delivery, and market-test judgment.
 
@@ -63,10 +64,12 @@ Chief of Staff may track a narrow routed dependency or follow-through condition 
 
 ## Recently Closed or Clarified
 
+- 2026-07-23: Package F Wave 0A was reconciled as complete: the existing Life OS Change Watch is enabled and successful, canonical room and Worker naming is established, current files were reconciled, and the Engineering-only Worker proof chain is complete.
+- 2026-07-23: Clarified that the watcher reports meaningful GitHub changes into the existing `Chief_of_Staff_HQ` room but remains read-only and does not close or own the underlying work.
 - 2026-07-22: Narrowed the proposed inventory concept to a lightweight expendables-first pilot under Chief of Staff operations rather than creating a Finance subdepartment.
 - 2026-07-22: Clarified the split between operational stock awareness in Chief of Staff and affordability or spending judgment in Finance.
 - 2026-07-22: Prepared the department for a replacement chat because the current conversation had become laggy; the chat-specific handbook remains a noncanonical orientation aid rather than a replacement for GitHub or current-source verification.
-- 2026-07-22: Recorded Rob's Engineering direction away from desktop-app visual automation and toward browser DOM transport; no completion claim is made without Engineering evidence.
+- 2026-07-22: Recorded Rob's Engineering direction away from desktop-app visual automation and toward browser DOM transport.
 - 2026-07-22: Reviewed and rejected a vague remote Crescent Solutions role after the available copy strongly suggested opaque performance-based sales rather than stable salaried support work.
 - 2026-07-18: Removed the stale implication that deployed Project Settings reconciliation remained pending; the deployed copy matches the canonical Project Instructions and future reconciliation opens only on demonstrated drift.
 - 2026-07-18: Completed the Chief of Staff-owned Phase Two architecture repair across the local handoff, identity, README, status, open loops, notebook framing, and retained advisory-board header and notes.
