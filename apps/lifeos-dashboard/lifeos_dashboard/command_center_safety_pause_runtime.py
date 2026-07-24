@@ -35,13 +35,13 @@ def _install_command_center_pause() -> None:
         return self.safety_pause_store.state().paused
 
     def set_paused(self, paused_value: bool) -> bool:
-        with self._state_lock:  # noqa: SLF001 - preserves the existing pause synchronization gate
+        with self._state_lock:
             state = (
                 self.safety_pause_store.pause_manually()
                 if paused_value
                 else self.safety_pause_store.resume()
             )
-            self._paused = state.paused  # noqa: SLF001 - compatibility mirror only
+            self._paused = state.paused
             return state.paused
 
     def trip_safety_pause(
@@ -52,14 +52,14 @@ def _install_command_center_pause() -> None:
         trigger: str,
         recovery_condition: str = DEFAULT_RECOVERY_CONDITION,
     ) -> dict[str, object]:
-        with self._state_lock:  # noqa: SLF001 - same shared pause synchronization gate
+        with self._state_lock:
             state = self.safety_pause_store.trip(
                 reason=reason,
                 affected_run_id=affected_run_id,
                 trigger=trigger,
                 recovery_condition=recovery_condition,
             )
-            self._paused = state.paused  # noqa: SLF001 - compatibility mirror only
+            self._paused = state.paused
             return state.to_dict()
 
     def pause_state(self) -> dict[str, object]:
@@ -114,14 +114,14 @@ def _install_worker_center_pause() -> None:
             raise WorkerRuntimeError("Worker execution trigger must be manual or scheduled.")
         started_at = time.time()
         if self.command_center.paused:
-            return self._refusal(  # noqa: SLF001 - reuses the existing one-row refusal path
+            return self._refusal(
                 job,
                 trigger=trigger,
                 started_at=started_at,
                 reason="Automation is paused. Resume it before running a Worker job.",
             )
-        if not self._run_lock.acquire(blocking=False):  # noqa: SLF001 - shared execution gate
-            return self._refusal(  # noqa: SLF001 - reuses the existing one-row refusal path
+        if not self._run_lock.acquire(blocking=False):
+            return self._refusal(
                 job,
                 trigger=trigger,
                 started_at=started_at,
@@ -134,7 +134,7 @@ def _install_worker_center_pause() -> None:
             try:
                 entry = self.runtime.validate_envelope(job.envelope)
             except WorkerRuntimeError as exc:
-                return self._refusal(  # noqa: SLF001 - deterministic pre-send hold
+                return self._refusal(
                     job,
                     trigger=trigger,
                     started_at=started_at,
@@ -143,7 +143,7 @@ def _install_worker_center_pause() -> None:
             if job.mode == "send" and self.history.successful_send_exists(
                 job.envelope.idempotency_key
             ):
-                return self._refusal(  # noqa: SLF001 - duplicate-suppression hold
+                return self._refusal(
                     job,
                     trigger=trigger,
                     started_at=started_at,
@@ -163,7 +163,7 @@ def _install_worker_center_pause() -> None:
             _trip_for_worker_result(self, result)
             return result
         finally:
-            self._run_lock.release()  # noqa: SLF001 - release after any safety trip is persisted
+            self._run_lock.release()
 
     center_class.execute = execute
     setattr(center_class, _WORKER_CENTER_FLAG, True)
