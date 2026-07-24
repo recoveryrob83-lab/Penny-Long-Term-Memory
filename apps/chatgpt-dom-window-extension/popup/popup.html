@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatGPT DOM Window</title>
+  <link rel="stylesheet" href="popup.css">
+  <script defer src="popup.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">LIFEOS EDGE TOOL</p>
+        <h1>ChatGPT DOM Window</h1>
+      </div>
+      <span id="state" class="badge">Checking</span>
+    </header>
+
+    <p id="summary" class="summary">Inspecting the current ChatGPT conversation…</p>
+    <div id="warning" class="warning" hidden></div>
+
+    <section class="controls">
+      <label class="toggle-row">
+        <input id="enabled" type="checkbox">
+        <span><strong>Enable for this conversation</strong><small>Disabled by default on every chat.</small></span>
+      </label>
+
+      <label>
+        <span>Rendered turns to keep</span>
+        <select id="keep-turns">
+          <option value="20">20 turns</option>
+          <option value="40">40 turns</option>
+          <option value="60">60 turns</option>
+          <option value="100">100 turns</option>
+        </select>
+      </label>
+
+      <label class="toggle-row">
+        <input id="auto-trim" type="checkbox">
+        <span><strong>Trim automatically near the bottom</strong><small>Pauses while generating or reading older history.</small></span>
+      </label>
+    </section>
+
+    <section class="stats" aria-label="DOM Window statistics">
+      <div><span>Visible turns</span><strong id="visible-turns">0</strong></div>
+      <div><span>Trimmed turns</span><strong id="trimmed-turns">0</strong></div>
+      <div><span>Elements removed</span><strong id="trimmed-elements">0</strong></div>
+      <div><span>Pinned turns</span><strong id="pinned-turns">0</strong></div>
+    </section>
+
+    <div class="actions">
+      <button id="trim-now" class="primary" type="button">Trim now</button>
+      <button id="restore" type="button">Restore full chat</button>
+    </div>
+
+    <p class="hint"><kbd>Alt</kbd> + <kbd>Shift</kbd> + click a turn to pin or unpin it. Restoring disables trimming for this chat and reloads the authoritative conversation.</p>
+    <p id="message" class="message" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>
