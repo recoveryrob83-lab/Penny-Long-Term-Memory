@@ -47,6 +47,10 @@ class PauseRequest(BaseModel):
     paused: bool
 
 
+class SendBudgetResetRequest(BaseModel):
+    confirm_reset: bool = False
+
+
 class SavedPromptRequest(BaseModel):
     name: str
     prompt: str
@@ -349,6 +353,19 @@ def create_app(
     @application.post("/api/command-center/pause")
     async def command_center_pause(request: PauseRequest) -> dict[str, object]:
         command_center.set_paused(request.paused)
+        return command_center.status()
+
+    @application.post("/api/command-center/send-budget/reset")
+    async def reset_command_center_send_budget(
+        request: SendBudgetResetRequest,
+    ) -> dict[str, object]:
+        try:
+            await run_in_threadpool(
+                command_center.reset_send_budget,
+                confirm_reset=request.confirm_reset,
+            )
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
         return command_center.status()
 
     @application.post("/api/command-center/prompts")
