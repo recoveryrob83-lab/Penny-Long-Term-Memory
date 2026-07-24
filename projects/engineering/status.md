@@ -4,7 +4,7 @@ Updated: 2026-07-24
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slice 1 Complete / Wave 0B Slice 2 Automatic Safety Pause Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
+Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slices 1–2 Complete / Wave 0B Slice 3 Conservative Send Budget Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
 
 ## Summary
 
@@ -16,7 +16,7 @@ Engineering owns the Worker machinery: exact routing, stable IDs, direct browser
 
 - GitHub: durable architecture, packages, procedures, profiles, advisories, decisions, and immutable result evidence.
 - `projects/engineering/open_loops.md`: authoritative unfinished Engineering work.
-- SQLite Command Center runtime state: sole operational ledger for dispatch, route state, result, repair, HQ review, Rob validation, and consumption readiness.
+- SQLite Command Center runtime state: sole operational ledger for dispatch, route state, result, repair, HQ review, Rob validation, consumption readiness, shared pause state, and future send-budget accounting.
 - Worker result folders: immutable evidence and audit trail, not a competing queue or lifecycle ledger.
 - Dashboard and scheduled watcher: visibility and reporting interfaces, not independent truth or closure authority.
 - `Maintenance_HQ`: canonical shared Worker governance and global operating integrity.
@@ -60,13 +60,26 @@ Rob ran the repository-native merge gate. The focused pytest command and Ruff co
 
 #### Slice 2: Automatic shared safety-pause triggers
 
+Lifecycle State: COMPLETE
+Completed: 2026-07-24
+Merged PR: #16
+Merge commit: `3bf20ca231b3b5fbb1c315b24881e46939b3b508`
+
+Slice 2 strengthens the existing shared Command Center pause rather than creating a second circuit-breaker state. One singleton record in the existing SQLite database now persists manual and safety pause state, reason, affected run ID, trigger, recovery condition, and timestamps across dashboard restarts. Worker dispatch and owning-HQ review wakes trip this same pause before releasing the shared execution lock only when a send may have occurred but cannot be reconciled, a claimed-success receipt is invalid, the browser cannot return to a verified source state, or confirmed-send evidence cannot be persisted.
+
+Ordinary deterministic pre-send validation failures, unavailable routes, duplicate suppression, department review holds, and rejected work remain local. Resume is explicit and the first safety incident is preserved until human review.
+
+Rob ran the repository-native gate. The affected regression set passed `47` tests and the focused Ruff gate passed before PR #16 was marked ready and squash-merged. No live Worker or HQ wake occurred.
+
+#### Slice 3: Conservative global send budget
+
 Lifecycle State: ACTIVE
 Priority: High
 Started: 2026-07-24
 
-The next bounded slice must strengthen the existing shared Command Center pause rather than create a second circuit-breaker state. It will identify the exact transport and orchestration outcomes that should trip the shared pause, persist a concise reason and affected run reference in existing Engineering-owned runtime state, prevent further sends, and require explicit human resume. It must not convert ordinary task holds, domain rejection, or a single deterministic pre-send validation failure into a global outage.
+The next bounded slice must add one conservative send budget to the existing Command Center database, execution-history evidence, shared pause, and execution lock. It must count confirmed send attempts across both Worker dispatches and owning-HQ wakes, fail closed before the next send when the configured limit is reached, expose current usage and held operations, and never treat elapsed time as proof that an uncertain send is safe to retry.
 
-A conservative send budget and a contract-derived activation gate remain later Wave 0B slices rather than being silently bundled into Slice 2.
+The budget must not create a second execution ledger, auto-clear uncertain attempts, activate a Worker, configure a non-Engineering route, or bundle the contract-derived activation gate into this slice.
 
 ## Completed Runtime Repair Chain
 
@@ -77,7 +90,7 @@ Completed and merged through PR #9.
 - Merge commit: `f8cc341e17cb68492c5f66339382b753bd1612ab`
 - Engineering executable surfaces use the canonical underscore room titles.
 - Active title-bearing SQLite state was migrated idempotently.
-- Stable keys, IDs, paths, historical rows, immutable evidence, and checksums were preserved.
+- Stable destination keys, IDs, paths, historical rows, immutable evidence, and checksums were preserved.
 - Post-navigation identity no longer depends on selected-room sidebar visibility after exact URL navigation.
 - Virtualized-history submission witnesses were repaired without weakening fail-closed behavior.
 
@@ -139,6 +152,19 @@ Completed and merged through PR #15.
 - The runtime hook replaces only the old Engineering-only destination gate; existing pause, execution-lock, duplicate-suppression, immutable-review, and send-confirmation behavior remains in place.
 - No live non-Engineering wake or route registration occurred.
 
+### Persisted shared safety-pause triggers
+
+Completed and merged through PR #16.
+
+- Merge commit: `3bf20ca231b3b5fbb1c315b24881e46939b3b508`
+- One `command_center_control` singleton in the existing Command Center SQLite database persists the shared pause across restarts.
+- Manual pause, automatic safety trip, status reporting, and explicit resume use the same authoritative record.
+- Safety trips persist a concise reason, affected run ID, trigger, recovery condition, and timestamps.
+- Worker and owning-HQ send paths trip before releasing the shared execution lock on true post-send uncertainty, invalid claimed-success receipts, unknown browser return state, unclassified confirmed-send exceptions, or evidence-persistence failure.
+- Ordinary deterministic pre-send failures remain local and do not become a global outage.
+- No automatic recovery exists, and a later manual pause cannot overwrite the first unresolved safety incident.
+- No live Worker or HQ wake occurred during implementation or validation.
+
 ## Validation
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
@@ -148,6 +174,8 @@ Completed and merged through PR #15.
 - PR #14 JavaScript syntax and JSON validation passed, but the live measurement rejected DOM volume as the primary cause of the observed memory growth.
 - PR #15 isolated execution evidence: 21 resolver tests and 4 runtime-integration tests passed on 2026-07-24.
 - PR #15 repository-native focused pytest and Ruff gates both passed under Rob's local dashboard environment before merge.
+- PR #16 repository-native affected regression gate: `47 passed`.
+- PR #16 focused Ruff gate passed after the package import formatting repair.
 
 ## Current Production Route State
 
@@ -160,7 +188,8 @@ Completed and merged through PR #15.
 - Private exact URL: retained only in ignored local SQLite state
 - Local Worker courier or orchestrator sends: not authorized unless Rob separately authorizes them
 - Separate `Chief_of_Staff_HQ` cloud watcher: governed by its own authorization and not equivalent to the local Worker courier
-- Non-Engineering Worker registry rows or private routes created by Slice 1: none
+- Non-Engineering Worker registry rows or private routes created by Slices 1–2: none
+- Production safety pause deliberately triggered during Slice 2 validation: no
 
 ## Package State
 
@@ -192,7 +221,7 @@ Recently closed:
 
 ## Dashboard State
 
-The latest dashboard code on `main` includes PR #15 at merge commit `83c309f651de0354982fcd6cbb68f9cf3251d6a3` or later.
+The latest dashboard code on `main` includes PR #16 at merge commit `3bf20ca231b3b5fbb1c315b24881e46939b3b508` or later.
 
 Expected local endpoint:
 
@@ -204,9 +233,9 @@ Starting or reconnecting the dashboard browser bridge does not authorize real Wo
 
 ## Current Work
 
-Package F Wave 0B Slice 1 is complete and must not be recreated as active work.
+Package F Wave 0B Slices 1–2 are complete and must not be recreated as active work.
 
-The immediate Engineering implementation is Slice 2: automatic shared safety-pause triggers. Before code changes, inspect the existing Command Center pause schema, pause and resume entry points, browser-dispatch uncertainty outcomes, Worker orchestrator exception paths, and current tests. Define the smallest trigger set that catches post-send uncertainty and safety interstitials without globally pausing on ordinary deterministic pre-send holds.
+The immediate Engineering implementation is Slice 3: conservative global send budget. Before code changes, inspect the current execution-history schema, Worker dispatch and HQ-wake send entry points, idempotency and uncertain-send suppression, persisted pause state, scheduler behavior, and status surfaces. Define the smallest budget period, limit, reservation point, completion semantics, and human reset behavior that prevents burst sends without silently laundering uncertainty through time.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -217,6 +246,8 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - Route rollover updates one existing row and must pass a zero-authority canary before availability.
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
 - Cross-department destination resolution is not Worker activation, route registration, permission expansion, scheduling, or dispatch authority.
+- The persisted shared safety pause is the only circuit-breaker state and requires explicit human resume.
+- A future send budget must use existing authoritative runtime evidence and must not treat elapsed time as resolution of an uncertain send.
 - The DOM Window extension is optional, disabled by default, and not a solution to the demonstrated JavaScript-heavy memory growth.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
