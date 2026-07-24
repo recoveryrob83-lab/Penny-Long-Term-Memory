@@ -249,15 +249,21 @@ def _install_worker_center_pause() -> None:
                     destination=entry.chat_title,
                 )
 
-            budget = _reserve_worker_budget(
-                self,
-                job,
-                trigger=trigger,
-                started_at=started_at,
-                destination=entry.chat_title,
-            )
-            if isinstance(budget, worker_operations.WorkerExecutionResult):
-                return budget
+            budget: SendBudgetDecision | None = None
+            if job.mode == "send":
+                budget_result = _reserve_worker_budget(
+                    self,
+                    job,
+                    trigger=trigger,
+                    started_at=started_at,
+                    destination=entry.chat_title,
+                )
+                if isinstance(
+                    budget_result,
+                    worker_operations.WorkerExecutionResult,
+                ):
+                    return budget_result
+                budget = budget_result
 
             try:
                 result, evidence = worker_operations.run_worker_browser_transport(
@@ -268,27 +274,29 @@ def _install_worker_center_pause() -> None:
                     timeout_seconds=timeout_seconds,
                 )
             except Exception:
-                self.command_center.trip_safety_pause(
-                    reason=(
-                        "Worker browser transport raised an unclassified exception after entering "
-                        "the confirmed send path."
-                    ),
-                    affected_run_id=job.envelope.run_id,
-                    trigger="worker_browser_transport",
-                )
+                if budget is not None:
+                    self.command_center.trip_safety_pause(
+                        reason=(
+                            "Worker browser transport raised an unclassified exception after "
+                            "entering the confirmed send path."
+                        ),
+                        affected_run_id=job.envelope.run_id,
+                        trigger="worker_browser_transport",
+                    )
                 raise
 
             try:
                 self.history.record(result)
-                self.command_center.append_send_budget_evidence(
-                    run_id=result.run_id,
-                    decision=budget,
-                )
+                if budget is not None:
+                    self.command_center.append_send_budget_evidence(
+                        run_id=result.run_id,
+                        decision=budget,
+                    )
                 if result.status == "succeeded":
                     self.browser_evidence.attach(result.run_id, evidence)
             except Exception:
                 pause_reason = _pause_reason_for_worker_result(result)
-                if result.status == "succeeded" and pause_reason is None:
+                if budget is not None and result.status == "succeeded" and pause_reason is None:
                     pause_reason = (
                         "A confirmed Worker send completed, but authoritative runtime evidence "
                         "could not be persisted."
