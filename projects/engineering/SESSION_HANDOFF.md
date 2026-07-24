@@ -2,13 +2,13 @@
 
 Updated: 2026-07-23
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the canonical title rollover, direct Worker URL routing, guarded dashboard route-management work, and advisory-state cleanup were completed.
+Purpose: Fresh-room handoff after the canonical title rollover, direct Worker URL routing, guarded route management, advisory cleanup, and one-click Edge browser bridge reconnect were completed and merged.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Engineering_HQ
-- Current Phase: Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Fresh Chat Boot and Sync Complete / Post-Merge Dashboard Smoke Pending
+- Current Phase: Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / Fresh Chat Boot and Sync Complete / Live Dashboard Smoke Pending
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, and the local Edge CDP bridge
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -73,11 +73,25 @@ Merged through PR #11.
 - Route capture and canary verification use the dashboard's exact active SQLite database.
 - No production route rollover was performed during this implementation.
 
+### Phase 2c: One-click Edge browser bridge reconnect
+
+Merged through PR #13.
+
+- Merge commit: `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab`
+- Worker Operations now shows **Reconnect bridge** when the Edge CDP endpoint is offline.
+- The reconnect API launches a dedicated Edge profile on loopback `127.0.0.1:9222`, preserves that profile under ignored local state, and verifies `/json/version` before reporting Ready.
+- The action uses the shared execution lock and refuses non-loopback endpoints, concurrent automation, and unnecessary duplicate launch when CDP is already healthy.
+- Reconnect cannot mutate Worker routes, route revisions, advisories, schedules, execution history, or Worker authority.
+- The launcher waits for verified CDP readiness even when the original Edge launcher process hands the browser window to another process.
+
 ## Validation Evidence
 
-- Final consolidated local regression gate: `80 passed`.
+- Final consolidated pre-PR-13 local regression gate: `80 passed`.
 - The regression set covered route capture, wrong-room refusal, stale revision refusal, duplicate-route refusal, single-row preservation, verification hold behavior, canary-only promotion, route drift refusal, authoritative database propagation, dashboard API/UI controls, runtime contracts, browser readiness, submission recovery, and post-navigation identity behavior.
-- PR #11 was mergeable before squash merge.
+- PR #13 was mergeable before squash merge.
+- PR #13 targeted launcher harness: `5 passed`.
+- PR #13 dashboard JavaScript syntax check passed.
+- The repository had no automated workflow configured for PR #13; live Windows/dashboard validation remains pending.
 
 ## Current Production Route State
 
@@ -93,7 +107,7 @@ Merged through PR #11.
 
 ## Dashboard Startup State
 
-The fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. A post-merge local dashboard inspection has not yet been recorded, so the actual running process and UI state must still be verified rather than assumed.
+The fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. PR #13 is merged to `main`, but the current local dashboard process must be pulled forward and restarted before the new reconnect control can appear because `run_dashboard.py` uses `reload=False`.
 
 Canonical local launch command from `apps/lifeos-dashboard`:
 
@@ -108,7 +122,7 @@ Dashboard URL:
 http://127.0.0.1:8765
 ```
 
-Starting the dashboard does not authorize a real Worker dispatch, route capture, route rollover, schedule creation, orchestrator activation, or advisory lifecycle change.
+Starting the dashboard or reconnecting the local browser bridge does not authorize a real Worker dispatch, route capture, route rollover, schedule creation, orchestrator activation, or advisory lifecycle change.
 
 ## Package State
 
@@ -135,22 +149,24 @@ Recently closed:
 
 ## Next Valid Action
 
-Perform the pending read-only post-merge dashboard smoke check:
+Perform the pending live dashboard smoke check:
 
-1. Confirm local `main` is clean and contains merge commit `2587b540e24ca09036c1f0094187c69c2b363c63` or a later fast-forward.
-2. Start or confirm the dashboard process.
+1. Confirm local `main` contains merge commit `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or a later fast-forward.
+2. Restart the dashboard process.
 3. Inspect `/api/health` and the Worker Operations page.
 4. Confirm exactly one `engineering_worker` row is visible with title `Engineering_Worker`, route revision `1`, and availability `available`.
-5. Confirm the guarded route-capture controls render.
-6. Do not capture or roll the route unless a replacement Worker conversation actually exists and Rob explicitly chooses to change the route.
-7. Do not run a live advisory or enable local unattended Worker sends without separate authorization.
-8. Report the smoke-test result and then continue only from the remaining open loops.
+5. Confirm guarded route-capture controls render.
+6. Close the dedicated Edge bridge window and confirm **Reconnect bridge** relaunches Edge and restores the Browser bridge card to Ready.
+7. Do not capture or roll the route unless a replacement Worker conversation actually exists and Rob explicitly chooses to change the route.
+8. Do not run a live advisory or enable local unattended Worker sends without separate authorization.
+9. Report the smoke-test result and then continue only from the remaining open loops.
 
 ## Production Boundary
 
 - Browser automation acts only on exact canonical URLs.
 - Registered exact Worker URLs, not sidebar visibility, are authoritative route locators.
 - Route changes update one existing Worker row and must pass the zero-authority canary before becoming available.
+- Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
 - Confirmed or uncertain submissions are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
 - Worker reports remain evidence until deterministic ingestion.
