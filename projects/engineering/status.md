@@ -4,7 +4,7 @@ Updated: 2026-07-24
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Package F Wave 0B Cross-Department HQ Routing Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
+Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slice 1 Complete / Wave 0B Slice 2 Automatic Safety Pause Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
 
 ## Summary
 
@@ -47,9 +47,26 @@ Lifecycle State: ACTIVE
 Priority: High
 Started: 2026-07-23
 
-The first bounded slice is cross-department owning-HQ route resolution. Draft PR #15 is open and mergeable, derives destinations from the canonical executable map, requires an owning-department review procedure, rejects Hub and Chief of Staff courier routing, and creates no Worker identity or private route merely by resolving a destination.
+#### Slice 1: Cross-department owning-HQ destination resolution
 
-Connector-backed review plus an isolated execution harness passed 21 resolver cases and 4 runtime-integration cases on 2026-07-24. The repository-native dashboard test environment was unavailable in this chat, so PR #15 remains draft until the focused repository tests and Ruff checks run in that environment. Global automatic pause triggers, send budgets, and contract-derived activation validation remain later Wave 0B slices rather than being silently bundled into the first routing change.
+Lifecycle State: COMPLETE
+Completed: 2026-07-24
+Merged PR: #15
+Merge commit: `83c309f651de0354982fcd6cbb68f9cf3251d6a3`
+
+Slice 1 derives owning-HQ destinations from the canonical executable title map, accepts only explicit known aliases, requires an owning-department review procedure, rejects cross-owner procedure paths, rejects Hub and Chief of Staff courier routing, and creates no Worker identity, private route, schedule, send, database state, or authority merely by resolving a destination.
+
+Rob ran the repository-native merge gate. The focused pytest command and Ruff command both passed before PR #15 was marked ready and squash-merged.
+
+#### Slice 2: Automatic shared safety-pause triggers
+
+Lifecycle State: ACTIVE
+Priority: High
+Started: 2026-07-24
+
+The next bounded slice must strengthen the existing shared Command Center pause rather than create a second circuit-breaker state. It will identify the exact transport and orchestration outcomes that should trip the shared pause, persist a concise reason and affected run reference in existing Engineering-owned runtime state, prevent further sends, and require explicit human resume. It must not convert ordinary task holds, domain rejection, or a single deterministic pre-send validation failure into a global outage.
+
+A conservative send budget and a contract-derived activation gate remain later Wave 0B slices rather than being silently bundled into Slice 2.
 
 ## Completed Runtime Repair Chain
 
@@ -110,6 +127,18 @@ Package merged through PR #14; memory experiment concluded as ineffective for th
 - Edge Task Manager showed JavaScript memory accounting for roughly half of the observed renderer usage during connector-heavy and coding work.
 - The extension therefore does not address the demonstrated primary memory pressure. It remains optional and should stay disabled unless a future page actually mounts enough old DOM to justify it.
 
+### Cross-department owning-HQ destination resolution
+
+Completed and merged through PR #15.
+
+- Merge commit: `83c309f651de0354982fcd6cbb68f9cf3251d6a3`
+- The resolver reuses the canonical executable room-title map instead of maintaining a competing destination map.
+- Maintenance, Engineering, Business, Office Leaks, Finance, and Wellness resolve only through explicit known aliases and exact canonical titles.
+- Non-Engineering wakes remain held until an owning-department Markdown review procedure is registered under that department's project subtree.
+- `LifeOS_HQ`, unknown departments, wrong-title overrides, unsafe paths, cross-owner procedure paths, and Worker courier wakes to `Chief_of_Staff_HQ` fail closed.
+- The runtime hook replaces only the old Engineering-only destination gate; existing pause, execution-lock, duplicate-suppression, immutable-review, and send-confirmation behavior remains in place.
+- No live non-Engineering wake or route registration occurred.
+
 ## Validation
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
@@ -117,7 +146,8 @@ Package merged through PR #14; memory experiment concluded as ineffective for th
 - PR #13 added focused launcher, API, and UI tests. The targeted launcher harness passed and the new JavaScript parsed cleanly; no repository workflow was configured on that PR.
 - PR #14 core test suite: `5 passed`.
 - PR #14 JavaScript syntax and JSON validation passed, but the live measurement rejected DOM volume as the primary cause of the observed memory growth.
-- Draft PR #15 isolated execution evidence: 21 resolver tests and 4 runtime-integration tests passed on 2026-07-24. This is not represented as the repository-native full suite.
+- PR #15 isolated execution evidence: 21 resolver tests and 4 runtime-integration tests passed on 2026-07-24.
+- PR #15 repository-native focused pytest and Ruff gates both passed under Rob's local dashboard environment before merge.
 
 ## Current Production Route State
 
@@ -130,6 +160,7 @@ Package merged through PR #14; memory experiment concluded as ineffective for th
 - Private exact URL: retained only in ignored local SQLite state
 - Local Worker courier or orchestrator sends: not authorized unless Rob separately authorizes them
 - Separate `Chief_of_Staff_HQ` cloud watcher: governed by its own authorization and not equivalent to the local Worker courier
+- Non-Engineering Worker registry rows or private routes created by Slice 1: none
 
 ## Package State
 
@@ -161,7 +192,7 @@ Recently closed:
 
 ## Dashboard State
 
-The latest dashboard reconnect code is on `main` at merge `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later.
+The latest dashboard code on `main` includes PR #15 at merge commit `83c309f651de0354982fcd6cbb68f9cf3251d6a3` or later.
 
 Expected local endpoint:
 
@@ -173,17 +204,9 @@ Starting or reconnecting the dashboard browser bridge does not authorize real Wo
 
 ## Current Work
 
-The canonical title rollover, courier verifier repair, direct URL routing, guarded route-management implementation, browser bridge reconnect implementation, Package F Wave 0A foundation, and DOM-memory investigation are complete and are no longer open code loops.
+Package F Wave 0B Slice 1 is complete and must not be recreated as active work.
 
-The immediate Engineering implementation is Package F Wave 0B Slice 1 in draft PR #15. The slice must:
-
-1. derive supported department HQ titles from the canonical executable mapping rather than maintaining a competing title map;
-2. normalize only explicit known department aliases;
-3. allow exact environment overrides only when they resolve to a canonical department HQ title;
-4. fail closed for unknown departments, Hub routing, Chief of Staff courier routing, malformed overrides, cross-owner procedure paths, or destinations outside the canonical department set;
-5. preserve all existing Engineering route, report, review, and duplicate-suppression behavior;
-6. create no Worker, route, schedule, advisory, or authority by resolving a title;
-7. remain draft until repository-native focused tests and Ruff checks pass.
+The immediate Engineering implementation is Slice 2: automatic shared safety-pause triggers. Before code changes, inspect the existing Command Center pause schema, pause and resume entry points, browser-dispatch uncertainty outcomes, Worker orchestrator exception paths, and current tests. Define the smallest trigger set that catches post-send uncertainty and safety interstitials without globally pausing on ordinary deterministic pre-send holds.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -193,6 +216,7 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - The registered exact URL is the authoritative Worker locator; sidebar visibility is not route identity.
 - Route rollover updates one existing row and must pass a zero-authority canary before availability.
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
+- Cross-department destination resolution is not Worker activation, route registration, permission expansion, scheduling, or dispatch authority.
 - The DOM Window extension is optional, disabled by default, and not a solution to the demonstrated JavaScript-heavy memory growth.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
