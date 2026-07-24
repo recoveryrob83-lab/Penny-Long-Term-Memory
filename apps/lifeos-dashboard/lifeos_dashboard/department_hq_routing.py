@@ -8,9 +8,9 @@ from __future__ import annotations
 
 import os
 import re
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import PurePosixPath
-from typing import Mapping
 
 from .room_titles import CANONICAL_HQ_TITLES
 from .worker_runtime import WorkerRuntimeError
