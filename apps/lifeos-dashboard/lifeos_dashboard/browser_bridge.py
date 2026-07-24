@@ -167,9 +167,6 @@ def launch_edge_bridge(
                 "pid": getattr(process, "pid", None),
                 "reason": "Dedicated Edge CDP bridge launched and verified.",
             }
-        poll = getattr(process, "poll", None)
-        if callable(poll) and poll() is not None:
-            break
         sleep(0.25)
 
     detail = str(last_health.get("reason") or "CDP endpoint did not become ready.")
