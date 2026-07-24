@@ -1,14 +1,14 @@
 # Engineering_HQ Session Handoff
 
-Updated: 2026-07-23
+Updated: 2026-07-24
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after Package F Wave 0A reconciliation and the start of controlled cross-department owning-HQ routing.
+Purpose: Fresh-room handoff after Package F Wave 0B Slice 1 cross-department owning-HQ destination resolution was validated and merged.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Engineering_HQ
-- Current Phase: Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Package F Wave 0B Cross-Department HQ Routing Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Memory Experiment Concluded
+- Current Phase: Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slice 1 Complete / Wave 0B Slice 2 Automatic Safety Pause Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Memory Experiment Concluded
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, the local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -51,9 +51,25 @@ Wave 0A completion does not activate any non-Engineering Worker, create a cross-
 Lifecycle State: ACTIVE
 Started: 2026-07-23
 
-The first bounded slice is cross-department owning-HQ destination resolution in draft PR #15. The branch resolves canonical destinations without creating identities, routes, schedules, or authority; requires an explicitly registered department-owned review procedure; rejects cross-owner paths, Hub routing, and Chief of Staff courier routing; and preserves the existing Engineering-only default.
+#### Slice 1: Cross-department owning-HQ destination resolution
 
-Isolated validation in this chat passed 21 resolver cases and 4 runtime-integration cases. The execution container could not reach GitHub directly and the repository has no remote CI result for this PR, so the repository-native focused tests and Ruff checks remain the explicit merge gate. Later Wave 0B slices will address automatic global pause triggers, a conservative send budget, and a contract-derived activation gate under separate bounded scopes.
+Lifecycle State: COMPLETE
+Completed: 2026-07-24
+Merged PR: #15
+Merge commit: `83c309f651de0354982fcd6cbb68f9cf3251d6a3`
+
+The merged resolver derives canonical destinations without creating identities, routes, schedules, or authority; requires an explicitly registered department-owned review procedure; rejects cross-owner paths, Hub routing, and Chief of Staff courier routing; and preserves the existing Engineering-only default.
+
+Rob ran the repository-native focused pytest and Ruff gates successfully before PR #15 was marked ready and squash-merged. No live non-Engineering wake or route registration occurred.
+
+#### Slice 2: Automatic shared safety-pause triggers
+
+Lifecycle State: ACTIVE
+Started: 2026-07-24
+
+The next bounded slice must strengthen the existing shared Command Center pause instead of creating a competing circuit-breaker record. It should globally pause on true transport uncertainty such as post-send ambiguity or a safety interstitial, persist a concise reason and affected run reference in existing Engineering-owned runtime state, prevent further sends, and require explicit human resume.
+
+Ordinary deterministic pre-send validation failures, department review holds, rejected work, or unavailable routes should remain local holds rather than globally pausing all automation. Later Wave 0B slices will address a conservative send budget and a contract-derived activation gate under separate scopes.
 
 ## Completed Engineering Repair Chain
 
@@ -115,6 +131,18 @@ Package merged through PR #14; live conclusion recorded 2026-07-23.
 - Edge Task Manager showed JavaScript memory as roughly half the renderer footprint during connector-heavy and coding work.
 - The extension did not address the demonstrated primary memory pressure and should remain disabled unless a future page actually mounts excessive old DOM.
 
+### Phase 2e: Cross-department owning-HQ destination resolution
+
+Merged through PR #15.
+
+- Merge commit: `83c309f651de0354982fcd6cbb68f9cf3251d6a3`
+- Supported department destinations derive from the canonical executable title map.
+- Only explicit known aliases and exact canonical title overrides are accepted.
+- Non-Engineering wakes require a department-owned Markdown review procedure under the owning department's project subtree.
+- Hub routing, unknown departments, wrong-title overrides, unsafe paths, cross-owner procedures, and Worker courier wakes to `Chief_of_Staff_HQ` fail closed.
+- Existing pause, execution-lock, duplicate-suppression, immutable-review, and send-confirmation gates remain unchanged.
+- Destination resolution alone creates no Worker, private route, schedule, send, database state, or authority.
+
 ## Validation Evidence
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
@@ -122,7 +150,8 @@ Package merged through PR #14; live conclusion recorded 2026-07-23.
 - PR #13 targeted launcher harness: `5 passed`.
 - PR #13 dashboard JavaScript syntax check passed.
 - PR #14 core tests: `5 passed`; JavaScript syntax and JSON validation passed.
-- Draft PR #15 isolated harness: `21` resolver cases and `4` runtime-integration cases passed.
+- PR #15 isolated harness: `21` resolver cases and `4` runtime-integration cases passed.
+- PR #15 repository-native focused pytest and Ruff gates both passed before merge.
 - The repository had no automated workflow configured for PRs #13, #14, or #15.
 - Live evidence, not static or isolated test success, controls claims about routing availability and browser execution.
 
@@ -137,10 +166,11 @@ Package merged through PR #14; live conclusion recorded 2026-07-23.
 - The private exact conversation URL remains in ignored local SQLite state and is not duplicated into GitHub memory.
 - Local Worker courier or orchestrator sends remain unauthorized unless Rob separately authorizes them.
 - The separate `Chief_of_Staff_HQ` cloud watcher is not the local Worker courier and remains governed by its own read-only authority.
+- Slice 1 created no non-Engineering Worker registry row or private route.
 
 ## Dashboard Startup State
 
-The fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. The dashboard reconnect code is merged to `main` and Rob has closed and relaunched the dedicated Edge window during the memory investigation. The remaining dashboard smoke is a bounded route-state and guarded-control observation, not a new implementation package.
+The latest dashboard code on `main` includes PR #15 at merge commit `83c309f651de0354982fcd6cbb68f9cf3251d6a3` or later. Pull and restart the dashboard only when Rob is ready to load the merged code. The remaining dashboard smoke is a bounded route-state and guarded-control observation, not permission to configure or test a non-Engineering wake.
 
 Canonical local launch command from `apps/lifeos-dashboard`:
 
@@ -169,7 +199,7 @@ Lifecycle State: CLOSED
 Closed: 2026-07-23
 Canonical closeout: `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-Do not recreate completed Package D, Package E, or Package F Wave 0A work as active tasks.
+Do not recreate completed Package D, Package E, Package F Wave 0A, or Wave 0B Slice 1 work as active tasks.
 
 ## Advisory State
 
@@ -182,23 +212,16 @@ Recently closed:
 
 ## Next Valid Action
 
-Run the repository-native merge gate for draft PR #15 from `apps/lifeos-dashboard`:
+Begin Package F Wave 0B Slice 2 with a read-only implementation inspection:
 
-```cmd
-call .venv\Scripts\activate.bat
-python -m pytest -q tests/test_department_hq_routing.py tests/test_worker_hq_review.py
-python -m ruff check lifeos_dashboard/department_hq_routing.py lifeos_dashboard/worker_hq_review_runtime.py tests/test_department_hq_routing.py
-```
-
-If both commands pass:
-
-1. mark PR #15 ready;
-2. merge it into `main`;
-3. restart the dashboard only when Rob is ready to load the merged code;
-4. do not configure a non-Engineering review procedure or attempt a live wake as part of this slice;
-5. continue to the next separately bounded Wave 0B safety-kernel slice.
-
-If either command fails, repair only the demonstrated defect on PR #15 and rerun the same gate.
+1. locate the existing shared Command Center pause state and persistence fields;
+2. identify every current pause and resume entry point;
+3. identify browser-dispatch results that mean the send may have occurred but cannot be verified;
+4. identify explicit safety-interstitial detection paths;
+5. inspect Worker and HQ-wake orchestration exception handling;
+6. classify outcomes into global-pause triggers versus local holds;
+7. propose the smallest code and test surface before writing;
+8. do not create a second pause ledger, auto-resume, add a send budget, or activate a non-Engineering Worker in this slice.
 
 ## Production Boundary
 
