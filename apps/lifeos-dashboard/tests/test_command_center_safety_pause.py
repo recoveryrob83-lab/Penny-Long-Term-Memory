@@ -5,8 +5,13 @@ import pytest
 import lifeos_dashboard.command_center_safety_pause_runtime  # noqa: F401
 from lifeos_dashboard import worker_operations
 from lifeos_dashboard.command_center import CommandCenterService
-from lifeos_dashboard.command_center_safety_pause import safety_pause_reason_for_transport
-from lifeos_dashboard.worker_command_center import WorkerCommandJob, WorkerExecutionResult
+from lifeos_dashboard.command_center_safety_pause import (
+    safety_pause_reason_for_transport,
+)
+from lifeos_dashboard.worker_command_center import (
+    WorkerCommandJob,
+    WorkerExecutionResult,
+)
 from lifeos_dashboard.worker_operations import BrowserWorkerCommandCenter
 from lifeos_dashboard.worker_runtime import ExecutionEnvelope, WorkerRegistryEntry
 
@@ -44,7 +49,9 @@ def _entry() -> WorkerRegistryEntry:
         owning_department="engineering",
         profile_path="projects/engineering/workers/synthetic_worker.md",
         profile_version=1,
-        conversation_url="https://chatgpt.com/c/00000000-0000-0000-0000-000000000001",
+        conversation_url=(
+            "https://chatgpt.com/c/00000000-0000-0000-0000-000000000001"
+        ),
         route_revision=1,
     )
 
@@ -57,7 +64,7 @@ def _result(
     stderr: str,
     reason: str,
 ) -> WorkerExecutionResult:
-    return worker_operations._base_result(  # noqa: SLF001 - focused transport harness
+    return worker_operations._base_result(
         job,
         "Synthetic_Worker",
         trigger="manual",
@@ -76,9 +83,21 @@ def _prepared_center(
 ) -> tuple[CommandCenterService, BrowserWorkerCommandCenter]:
     service = _service(tmp_path)
     center = BrowserWorkerCommandCenter(service)
-    monkeypatch.setattr(center.runtime, "validate_envelope", lambda _envelope: _entry())
-    monkeypatch.setattr(center.history, "successful_send_exists", lambda _key: False)
-    monkeypatch.setattr(center.browser_evidence, "attach", lambda _run_id, _evidence: None)
+    monkeypatch.setattr(
+        center.runtime,
+        "validate_envelope",
+        lambda _envelope: _entry(),
+    )
+    monkeypatch.setattr(
+        center.history,
+        "successful_send_exists",
+        lambda _key: False,
+    )
+    monkeypatch.setattr(
+        center.browser_evidence,
+        "attach",
+        lambda _run_id, _evidence: None,
+    )
     return service, center
 
 
@@ -120,10 +139,22 @@ def test_manual_pause_uses_the_same_persisted_record(tmp_path: Path) -> None:
     ("exit_code", "stderr", "reason", "claimed_success", "should_trip"),
     [
         (3, "STOPPED_AFTER_SEND: uncertain", "", False, True),
-        (None, "", "Submission state may be uncertain; inspect before retry.", False, True),
+        (
+            None,
+            "",
+            "Submission state may be uncertain; inspect before retry.",
+            False,
+            True,
+        ),
         (0, "", "Receipt marker mismatch.", True, True),
         (0, "", "Courier could not verify return to HQ.", False, True),
-        (2, "STOPPED: exact draft preserved", "Safe pre-send refusal.", False, False),
+        (
+            2,
+            "STOPPED: exact draft preserved",
+            "Safe pre-send refusal.",
+            False,
+            False,
+        ),
         (2, "", "Unknown Worker route; nothing was sent.", False, False),
     ],
 )
@@ -163,7 +194,11 @@ def test_worker_uncertainty_trips_before_execute_returns(
             object(),
         )
 
-    monkeypatch.setattr(worker_operations, "run_worker_browser_transport", uncertain_transport)
+    monkeypatch.setattr(
+        worker_operations,
+        "run_worker_browser_transport",
+        uncertain_transport,
+    )
 
     result = center.execute(job)
 
@@ -196,7 +231,11 @@ def test_confirmed_send_with_unknown_return_state_trips_pause(
             object(),
         )
 
-    monkeypatch.setattr(worker_operations, "run_worker_browser_transport", unknown_return_transport)
+    monkeypatch.setattr(
+        worker_operations,
+        "run_worker_browser_transport",
+        unknown_return_transport,
+    )
 
     result = center.execute(job)
 
@@ -219,12 +258,18 @@ def test_deterministic_presend_failure_does_not_trip_global_pause(
                 status="failed",
                 exit_code=2,
                 stderr="STOPPED: exact draft preserved",
-                reason="Browser courier stopped safely before a confirmed dispatch completed.",
+                reason=(
+                    "Browser courier stopped safely before a confirmed dispatch completed."
+                ),
             ),
             object(),
         )
 
-    monkeypatch.setattr(worker_operations, "run_worker_browser_transport", safe_refusal_transport)
+    monkeypatch.setattr(
+        worker_operations,
+        "run_worker_browser_transport",
+        safe_refusal_transport,
+    )
 
     result = center.execute(job)
 
