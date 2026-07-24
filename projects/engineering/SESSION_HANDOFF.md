@@ -2,13 +2,13 @@
 
 Updated: 2026-07-24
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after Package F Wave 0B Slice 1 cross-department owning-HQ destination resolution was validated and merged.
+Purpose: Fresh-room handoff after Package F Wave 0B Slice 2 persisted shared safety-pause triggers were validated and merged.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Engineering_HQ
-- Current Phase: Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slice 1 Complete / Wave 0B Slice 2 Automatic Safety Pause Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Memory Experiment Concluded
+- Current Phase: Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slices 1–2 Complete / Wave 0B Slice 3 Conservative Send Budget Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Memory Experiment Concluded
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, the local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -64,12 +64,25 @@ Rob ran the repository-native focused pytest and Ruff gates successfully before 
 
 #### Slice 2: Automatic shared safety-pause triggers
 
+Lifecycle State: COMPLETE
+Completed: 2026-07-24
+Merged PR: #16
+Merge commit: `3bf20ca231b3b5fbb1c315b24881e46939b3b508`
+
+The merged safety slice strengthens the existing shared Command Center pause instead of creating a competing circuit-breaker record. One singleton row in the existing SQLite database persists manual and safety pause state, reason, affected run ID, trigger, recovery condition, and timestamps across dashboard restarts.
+
+Worker dispatch and owning-HQ review wakes use the same pause and trip it before releasing the shared execution lock only for true post-send uncertainty, invalid claimed-success receipts, unknown browser return state, unclassified exceptions after entering a confirmed-send path, or confirmed-send evidence persistence failure. Ordinary deterministic pre-send validation failures, unavailable routes, duplicate suppression, department review holds, and rejected work remain local.
+
+Rob ran the repository-native affected regression gate successfully with `47 passed`, and the focused Ruff gate passed after the package import formatting repair. No live Worker or HQ wake occurred.
+
+#### Slice 3: Conservative global send budget
+
 Lifecycle State: ACTIVE
 Started: 2026-07-24
 
-The next bounded slice must strengthen the existing shared Command Center pause instead of creating a competing circuit-breaker record. It should globally pause on true transport uncertainty such as post-send ambiguity or a safety interstitial, persist a concise reason and affected run reference in existing Engineering-owned runtime state, prevent further sends, and require explicit human resume.
+The next bounded slice must add one conservative send budget to the existing Command Center database, execution-history evidence, shared pause, and execution lock. It should cover confirmed send attempts across Worker dispatch and owning-HQ wake transports, fail closed before the next send when the configured limit is reached, expose usage and held operations, and require explicit human action for reset or rearm.
 
-Ordinary deterministic pre-send validation failures, department review holds, rejected work, or unavailable routes should remain local holds rather than globally pausing all automation. Later Wave 0B slices will address a conservative send budget and a contract-derived activation gate under separate scopes.
+Elapsed time must never resolve an uncertain send or restore retry eligibility. The slice must not create a second execution ledger, activate a Worker, configure a non-Engineering route, or bundle the contract-derived activation gate.
 
 ## Completed Engineering Repair Chain
 
@@ -143,6 +156,19 @@ Merged through PR #15.
 - Existing pause, execution-lock, duplicate-suppression, immutable-review, and send-confirmation gates remain unchanged.
 - Destination resolution alone creates no Worker, private route, schedule, send, database state, or authority.
 
+### Phase 2f: Persisted shared safety-pause triggers
+
+Merged through PR #16.
+
+- Merge commit: `3bf20ca231b3b5fbb1c315b24881e46939b3b508`
+- One singleton record in the existing Command Center database persists the shared pause across service instances and dashboard restarts.
+- Manual Pause, safety trips, status reporting, and explicit Resume use the same authoritative state.
+- The first unresolved safety incident is preserved rather than overwritten by a later manual pause.
+- Worker and owning-HQ confirmed-send paths trip the pause before releasing the shared lock on genuine uncertainty or evidence failure.
+- Deterministic pre-send stops remain local and do not disable unrelated automation.
+- Optional scheduler startup occurs only after the persisted pause store is initialized.
+- No automatic recovery or time-based uncertainty clearing exists.
+
 ## Validation Evidence
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
@@ -152,7 +178,9 @@ Merged through PR #15.
 - PR #14 core tests: `5 passed`; JavaScript syntax and JSON validation passed.
 - PR #15 isolated harness: `21` resolver cases and `4` runtime-integration cases passed.
 - PR #15 repository-native focused pytest and Ruff gates both passed before merge.
-- The repository had no automated workflow configured for PRs #13, #14, or #15.
+- PR #16 repository-native affected regression gate: `47 passed`.
+- PR #16 focused Ruff gate passed after the import-line formatting repair.
+- The repository had no automated workflow configured for PRs #13, #14, #15, or #16.
 - Live evidence, not static or isolated test success, controls claims about routing availability and browser execution.
 
 ## Current Production Route State
@@ -166,11 +194,12 @@ Merged through PR #15.
 - The private exact conversation URL remains in ignored local SQLite state and is not duplicated into GitHub memory.
 - Local Worker courier or orchestrator sends remain unauthorized unless Rob separately authorizes them.
 - The separate `Chief_of_Staff_HQ` cloud watcher is not the local Worker courier and remains governed by its own read-only authority.
-- Slice 1 created no non-Engineering Worker registry row or private route.
+- Slices 1–2 created no non-Engineering Worker registry row or private route.
+- No production safety pause was deliberately triggered during Slice 2 validation.
 
 ## Dashboard Startup State
 
-The latest dashboard code on `main` includes PR #15 at merge commit `83c309f651de0354982fcd6cbb68f9cf3251d6a3` or later. Pull and restart the dashboard only when Rob is ready to load the merged code. The remaining dashboard smoke is a bounded route-state and guarded-control observation, not permission to configure or test a non-Engineering wake.
+The latest dashboard code on `main` includes PR #16 at merge commit `3bf20ca231b3b5fbb1c315b24881e46939b3b508` or later. Pull and restart the dashboard only when Rob is ready to load the merged code. The remaining dashboard smoke is a bounded route-state, persisted-pause, and guarded-control observation, not permission to configure or test a non-Engineering wake.
 
 Canonical local launch command from `apps/lifeos-dashboard`:
 
@@ -199,7 +228,7 @@ Lifecycle State: CLOSED
 Closed: 2026-07-23
 Canonical closeout: `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-Do not recreate completed Package D, Package E, Package F Wave 0A, or Wave 0B Slice 1 work as active tasks.
+Do not recreate completed Package D, Package E, Package F Wave 0A, or Wave 0B Slices 1–2 as active tasks.
 
 ## Advisory State
 
@@ -212,16 +241,16 @@ Recently closed:
 
 ## Next Valid Action
 
-Begin Package F Wave 0B Slice 2 with a read-only implementation inspection:
+Begin Package F Wave 0B Slice 3 with a read-only implementation inspection:
 
-1. locate the existing shared Command Center pause state and persistence fields;
-2. identify every current pause and resume entry point;
-3. identify browser-dispatch results that mean the send may have occurred but cannot be verified;
-4. identify explicit safety-interstitial detection paths;
-5. inspect Worker and HQ-wake orchestration exception handling;
-6. classify outcomes into global-pause triggers versus local holds;
-7. propose the smallest code and test surface before writing;
-8. do not create a second pause ledger, auto-resume, add a send budget, or activate a non-Engineering Worker in this slice.
+1. locate every Worker-dispatch and owning-HQ wake confirmed-send entry point;
+2. inspect the existing execution-history rows, idempotency evidence, uncertain-send suppression, and shared pause state;
+3. define whether the budget counts reservations, confirmed attempts, or both, and identify the atomic reservation point before browser submission;
+4. define one conservative configured limit and explicit human rearm behavior;
+5. ensure Worker dispatches and HQ wakes draw from the same authoritative budget;
+6. expose usage and held operations through existing status payloads;
+7. prove an uncertain send remains counted indefinitely until human reconciliation;
+8. keep the activation gate, Worker registration, route configuration, live sends, and unattended schedules out of this slice.
 
 ## Production Boundary
 
@@ -230,6 +259,8 @@ Begin Package F Wave 0B Slice 2 with a read-only implementation inspection:
 - Route changes update one existing Worker row and must pass the zero-authority canary before becoming available.
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
 - Cross-department destination resolution is not Worker activation, route registration, permission expansion, scheduling, or dispatch authority.
+- The persisted shared safety pause is the only circuit-breaker state and requires explicit human resume.
+- A future send budget must use existing authoritative runtime evidence and must not treat elapsed time as resolution of an uncertain send.
 - Confirmed or uncertain submissions are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
 - Worker reports remain evidence until deterministic ingestion.
