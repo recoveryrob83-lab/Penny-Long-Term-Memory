@@ -98,7 +98,9 @@ def canonical_department_key(value: str) -> str:
     if not token:
         raise DepartmentHqRoutingError("Owning department cannot be empty.")
     if token in _HUB_ALIASES:
-        raise DepartmentHqRoutingError("LifeOS_HQ is a shared meeting room, not an owning department.")
+        raise DepartmentHqRoutingError(
+            "LifeOS_HQ is a shared meeting room, not an owning department."
+        )
     key = _DEPARTMENT_ALIASES.get(token)
     if key is None or key not in _ENV_PREFIX_BY_KEY:
         raise DepartmentHqRoutingError(f"Unknown owning department: {value!r}.")
