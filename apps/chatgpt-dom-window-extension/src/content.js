@@ -306,7 +306,7 @@
       await saveConfig({...config, enabled: false});
     }
     removePlaceholder();
-    location.reload();
+    window.setTimeout(() => location.reload(), 150);
   }
 
   function scheduleTrim(delay = AUTO_TRIM_DEBOUNCE_MS) {
