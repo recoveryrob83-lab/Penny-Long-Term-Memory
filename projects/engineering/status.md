@@ -4,45 +4,77 @@ Updated: 2026-07-23
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Maintenance Textual Naming Repair Complete / Engineering Runtime Title Rollover Pending / Courier Verifier Defect Demonstrated / Fresh Chat Required
+Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Post-Merge Dashboard Smoke Pending / Fresh Chat Required
 
 ## Summary
 
 `Engineering_HQ` owns technical architecture, software planning, repository strategy, automation design, connector and API research, testing strategy, prompt systems, implementation sequencing, build-readiness, and truthful verification.
 
-Engineering owns technical Worker infrastructure: routing registry, stable IDs, exact browser transport, revision state, duplicate suppression, immutable result ingestion, report-repair mechanics, HQ and Rob receipt ingestion, runtime evidence, verification views, and reliability safeguards. It does not own shared governance, another department's Worker authority, source-owner advisory lifecycle, or domain judgment.
+Engineering owns the Worker machinery: exact routing, stable IDs, direct browser transport, revision state, duplicate suppression, immutable result ingestion, report-repair mechanics, HQ and Rob receipt ingestion, runtime evidence, verification views, tests, and reliability safeguards. It does not own shared governance, another department's Worker authority, source-owner advisory lifecycle, or domain judgment.
 
 ## Source-of-Truth Boundaries
 
 - GitHub: durable architecture, packages, procedures, profiles, advisories, decisions, and immutable result evidence.
 - `projects/engineering/open_loops.md`: authoritative unfinished Engineering work.
-- SQLite Command Center `execution_history`: sole operational runtime ledger for dispatch, result, repair, HQ review, Rob validation, and consumption readiness.
+- SQLite Command Center runtime state: sole operational ledger for dispatch, route state, result, repair, HQ review, Rob validation, and consumption readiness.
 - Worker result folders: immutable evidence and audit trail, not a competing queue or lifecycle ledger.
 - Dashboard and scheduled watcher: visibility and reporting interfaces, not independent truth or closure authority.
 - `Maintenance_HQ`: canonical shared Worker governance and global operating integrity.
 - `memory/HQ_NAMING_STANDARD.md`: canonical room-title and Worker-title source.
 
-Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, or sensitive implementation details in GitHub memory or Worker result artifacts.
+Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in GitHub memory or Worker result artifacts.
 
-## Current Transition
+## Completed Runtime Repair Chain
 
-Maintenance_HQ completed the repository-wide textual naming repair and preserved the Engineering implementation boundary. The ingested final report records the canonical room titles as:
+### Canonical title rollover and courier verifier repair
 
-- `LifeOS_HQ`
-- `Maintenance_HQ`
-- `Engineering_HQ`
-- `Business_HQ`
-- `Office_Leaks_HQ`
-- `Finance_HQ`
-- `Chief_of_Staff_HQ`
-- `Wellness_HQ`
-- current Worker: `Engineering_Worker`
+Completed and merged through PR #9.
 
-No Engineering code, browser selector, runtime registry, SQLite state, test fixture, immutable Worker artifact, historical execution row, stable filesystem path, or checksum was changed by Maintenance.
+- Merge commit: `f8cc341e17cb68492c5f66339382b753bd1612ab`
+- Engineering executable surfaces use the canonical underscore room titles.
+- Active title-bearing SQLite state was migrated idempotently.
+- Stable keys, IDs, paths, historical rows, immutable evidence, and checksums were preserved.
+- Post-navigation identity no longer depends on selected-room sidebar visibility after exact URL navigation.
+- Virtualized-history submission witnesses were repaired without weakening fail-closed behavior.
 
-The next authorized Engineering package is a bounded exact-title implementation rollover across Engineering-owned executable code, current configuration, route mappings, prompt launchers, tests, and active title-bearing local state. Use exact old-to-new mappings. Preserve stable destination keys, worker IDs, historical execution evidence, immutable reports and receipts, checksums, run IDs, wrapper IDs, and stable paths.
+### Authoritative direct Worker URL routing
 
-A demonstrated courier defect belongs in the same repair slice: after the zero-authority self-test resolved and opened the exact `Engineering_Worker` URL, ChatGPT refreshed and collapsed the project sidebar behind `Show more`. The Worker room was fully loaded, but the redundant post-navigation verifier required the exact sidebar anchor again, timed out, and failed closed before composer fill or Send. The browser bridge is healthy. Nothing was sent and no execution-history row was created.
+Completed and merged through PR #10.
+
+- Merge commit: `b859c3c72e8b82f876b9ebf72d2961f4eb33ecbd`
+- The existing Worker registry row stores the exact conversation URL and monotonic route revision.
+- Browser dispatch uses the registered exact URL only and fails closed when it is absent or invalid.
+- The existing production `engineering_worker` row was migrated in place.
+- A zero-authority live canary succeeded and the route was promoted to `available`.
+
+### Guarded dashboard route capture and rollover
+
+Completed and merged through PR #11.
+
+- Merge commit: `2587b540e24ca09036c1f0094187c69c2b363c63`
+- The dashboard can capture the sole active ChatGPT Worker conversation without manual URL pasting.
+- Capture requires paused automation, the shared lock, explicit confirmation, current route revision, exactly one conversation target, correct Worker title, and no duplicate ownership.
+- Changed routes update one existing row, increment the revision, and remain on `unknown` hold until a zero-authority canary verifies the exact unchanged revision.
+- Real advisory execution remains blocked unless route availability is exactly `available`.
+- Capture and canary use the dashboard's exact active SQLite database.
+- No production route rollover occurred during implementation.
+
+## Validation
+
+- Final consolidated local regression gate: `80 passed`.
+- Coverage included route capture, stale revision refusal, wrong-room refusal, duplicate-route refusal, single-row preservation, verification holds, canary-only promotion, route-drift refusal, authoritative database propagation, dashboard API/UI contracts, runtime validation, browser readiness, submission recovery, and post-navigation identity.
+
+## Current Production Route State
+
+- Worker ID: `engineering_worker`
+- Chat title: `Engineering_Worker`
+- Deployment state: `enabled`
+- Route revision: `1`
+- Availability: `available`
+- Registry rows for this Worker: one authoritative row
+- Private exact URL: retained only in ignored local SQLite state
+- Local Worker courier or orchestrator sends: not authorized unless Rob separately authorizes them
+- Separate `Chief_of_Staff_HQ` cloud watcher: governed by its own authorization and not equivalent to the local Worker courier
 
 ## Package State
 
@@ -59,113 +91,60 @@ Priority: Normal
 Closed: 2026-07-23
 Canonical closeout: `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
 
-Package E completed the Engineering-only chain for:
+Package E completed the Engineering-only dispatch, immutable result, deterministic ingestion, report repair, HQ review, Rob validation, signed consumption, watcher reporting, and duplicate-suppression chain.
 
-- dispatch-only Worker courier wakes;
-- exact destination, hydration, composer, generation, and submission witnesses;
-- immediate source-room return and shared-gate release;
-- immutable schema-valid Worker result artifacts;
-- deterministic checksum and same-row result ingestion;
-- rejection and correction-only repair mechanics;
-- owning-HQ wakes and immutable review receipts;
-- explicit Rob-validation receipts where HQ cannot inspect decisive evidence;
-- consumption-ready signed results;
-- separately authorized scheduled watcher reporting;
-- duplicate execution, result, and HQ-wake suppression;
-- source-owner advisory lifecycle separation.
-
-The optional display-only human-readable envelope and cross-department adoption are explicitly deferred. Legacy response-capture machinery is not part of the active courier path and remains rollback-compatible only where retained.
-
-## Verified Package E Evidence
-
-### ADV-20260721-048
-
-- Lifecycle: CLOSED
-- Run: `RUN-ADV-20260721-048-R1`
-- Worker report: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/report-001.json`
-- HQ review: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260721-048-R1/hq-review-001.json`
-- HQ state: `VERIFIED`
-- Ready for consumption: true
-
-### ADV-20260722-049
-
-- Lifecycle: CLOSED
-- Run: `RUN-ADV-20260722-049-R1`
-- HQ state: `ROB_VALIDATION_REQUIRED`
-- Rob state: `VERIFIED`
-- Rob receipt: `projects/engineering/worker-results/engineering_worker/RUN-ADV-20260722-049-R1/rob-validation-001.json`
-- Ready for consumption: true
-
-### ADV-20260723-051
-
-- Lifecycle: CLOSED
-- Run: `RUN-ADV-20260723-051-R1`
-- Worker report commit: `313efc95cf49ba5ed34b10a79b78c0a69a4250c2`
-- HQ review commit: `9dd13b45782fa6abf83c59c361bb7754a907bae5`
-- Runtime state: `HQ_VERIFIED`
-- Ready for consumption: true
-- Rob validation required: false
-
-The live test exposed repeated HQ wakes after receipt creation. Engineering repaired the defect with Git-first HQ receipt ingestion and an atomic one-shot wake claim. The relaunched dashboard ingested the existing review without another wake and continued clean 30-second polling cycles.
+Cross-department adoption, universal Worker durable-write authority, optional human-readable envelopes, and broader unattended packaging remain deferred.
 
 ## Advisory State
-
-Closed on 2026-07-23:
-
-- `ADV-20260720-047` — architecture discovery preserved and superseded by Package E completion;
-- `ADV-20260721-048` — immutable outbox and HQ verification complete;
-- `ADV-20260722-049` — Rob-validation chain complete;
-- `ADV-20260723-051` — HQ-wake chain and duplicate-suppression proof complete.
 
 Open:
 
 - `ADV-20260723-052` remains OPEN pending Rob's confirmation that the hourly watcher reports in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work.
-- `ADV-20260718-042` remains open under `coordination/boards/main-assistant.md`. Package E closeout does not alter it.
+- `ADV-20260718-042` remains open under `coordination/boards/main-assistant.md` and is not owned or closed by Engineering.
 
-## Automation and Dashboard State
+## Dashboard State
 
-### Worker Operations
+The completed dashboard code is on `main` and ready for local launch or restart.
 
-Status: Active Engineering pilot control surface.
+Expected local endpoint:
 
-The dashboard process owns the GitHub-first orchestrator thread. The orchestrator:
+```text
+http://127.0.0.1:8765
+```
 
-- polls every 30 seconds;
-- fast-forwards a clean strictly-behind checkout;
-- discovers canonical advisories;
-- dispatches bounded Worker wakes;
-- ingests immutable reports before downstream actions;
-- ingests existing HQ receipts before browser wake attempts;
-- uses one-shot local claims to suppress uncertain or competing wake retries;
-- records actionable runtime events and errors.
+Rob pulled the merged work locally and prepared to start the dashboard, but this session ended before a fresh-room post-merge smoke result was recorded. The next room must verify the actual process and UI state rather than assuming it.
 
-The browser bridge was re-established after an Edge restart through a dedicated CDP-enabled Edge session at `http://127.0.0.1:9222`. Dashboard health reports the bridge ready. The current zero-authority courier self-test is blocked by the demonstrated post-navigation sidebar-witness defect, not by bridge reachability or Worker-room hydration.
-
-### Scheduled Watcher
-
-Status: Formalized under `Chief_of_Staff_HQ`; destination test pending.
-
-The watcher is read-only and separately authorized. It may report meaningful signed changes and open-advisory follow-through to Rob, but it does not close advisories, create work, dispatch Workers, create chats, or create authority. `ADV-20260723-052` remains the bounded destination test.
+Starting the dashboard does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
 
 ## Current Work
 
-Package E implementation and its completed source advisories are no longer open work.
+The canonical title rollover, courier verifier repair, direct URL routing, and guarded route-management implementation are complete and are no longer open loops.
 
-Current Engineering work is limited to separately authorized items in `projects/engineering/open_loops.md`. The immediate fresh-room priority is the canonical exact-title implementation rollover plus the demonstrated courier post-navigation verifier repair.
+The immediate Engineering task is a read-only post-merge dashboard smoke check in the fresh room:
 
-Cross-department Worker result-outbox adoption remains deferred until `Maintenance_HQ` reviews shared contracts and each owning department explicitly authorizes its own profile or procedure.
+1. boot and sync;
+2. confirm local `main` is clean and contains `2587b540e24ca09036c1f0094187c69c2b363c63` or later;
+3. start or confirm the dashboard;
+4. verify health and Worker Operations;
+5. confirm one `engineering_worker` route at revision `1` and availability `available`;
+6. confirm guarded route controls render;
+7. do not capture or change the route without an actual replacement room and explicit authorization.
+
+All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
 ## Production Boundary
 
-- Browser automation acts only on exact canonical URLs under one-tab hydration and composer safeguards.
+- Browser automation acts only on exact canonical URLs.
+- The registered exact URL is the authoritative Worker locator; sidebar visibility is not route identity.
+- Route rollover updates one existing row and must pass a zero-authority canary before availability.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
-- Any unrecognized post-submit state must fail closed and require human inspection.
+- Any unrecognized post-submit state fails closed and requires human inspection.
 - Worker reports remain evidence until deterministic ingestion.
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source advisories.
-- The courier never wakes `Chief_of_Staff_HQ`.
+- The Worker courier never wakes `Chief_of_Staff_HQ`.
 - Cross-department rollout, new recurring tasks, connectors, spending, or public actions require separate authority.
 
 ## Boundary
