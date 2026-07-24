@@ -180,7 +180,7 @@ def _service_with_row(row: dict[str, object]) -> WorkerHqReviewService:
     def row_for_run(_run_id: str) -> dict[str, object]:
         return row
 
-    setattr(service, "_row", row_for_run)
+    service.__dict__["_row"] = row_for_run
     return service
 
 
