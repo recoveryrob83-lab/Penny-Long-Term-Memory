@@ -27,9 +27,15 @@ def _install_command_center_pause() -> None:
     original_status = service_class.status
 
     def __init__(self, *args, **kwargs) -> None:
+        start_scheduler = bool(kwargs.get("start_scheduler", False))
+        if start_scheduler:
+            kwargs = dict(kwargs)
+            kwargs["start_scheduler"] = False
         original_init(self, *args, **kwargs)
         database_path = Path(self.store.database_path)
         self.safety_pause_store = CommandCenterSafetyPauseStore(database_path)
+        if start_scheduler:
+            self.start_scheduler()
 
     def paused(self) -> bool:
         return self.safety_pause_store.state().paused
@@ -80,22 +86,36 @@ def _install_command_center_pause() -> None:
     setattr(service_class, _COMMAND_CENTER_FLAG, True)
 
 
-def _trip_for_worker_result(
-    center: worker_operations.BrowserWorkerCommandCenter,
+def _pause_reason_for_worker_result(
     result: worker_operations.WorkerExecutionResult,
-) -> None:
-    pause_reason = safety_pause_reason_for_transport(
+) -> str | None:
+    return safety_pause_reason_for_transport(
         exit_code=result.exit_code,
         stderr=result.stderr,
         reason=result.reason,
     )
-    if pause_reason is None:
-        return
+
+
+def _trip_worker_pause(
+    center: worker_operations.BrowserWorkerCommandCenter,
+    result: worker_operations.WorkerExecutionResult,
+    *,
+    reason: str,
+) -> None:
     center.command_center.trip_safety_pause(
-        reason=pause_reason,
+        reason=reason,
         affected_run_id=result.run_id,
         trigger="worker_browser_transport",
     )
+
+
+def _trip_for_worker_result(
+    center: worker_operations.BrowserWorkerCommandCenter,
+    result: worker_operations.WorkerExecutionResult,
+) -> None:
+    pause_reason = _pause_reason_for_worker_result(result)
+    if pause_reason is not None:
+        _trip_worker_pause(center, result, reason=pause_reason)
 
 
 def _install_worker_center_pause() -> None:
@@ -150,16 +170,40 @@ def _install_worker_center_pause() -> None:
                     reason="This Worker task revision already has a successful send record.",
                     destination=entry.chat_title,
                 )
-            result, evidence = worker_operations.run_worker_browser_transport(
-                job,
-                entry,
-                self.command_center.app_root,
-                trigger=trigger,
-                timeout_seconds=timeout_seconds,
-            )
-            self.history.record(result)
-            if result.status == "succeeded":
-                self.browser_evidence.attach(result.run_id, evidence)
+            try:
+                result, evidence = worker_operations.run_worker_browser_transport(
+                    job,
+                    entry,
+                    self.command_center.app_root,
+                    trigger=trigger,
+                    timeout_seconds=timeout_seconds,
+                )
+            except Exception:
+                self.command_center.trip_safety_pause(
+                    reason=(
+                        "Worker browser transport raised an unclassified exception after entering "
+                        "the confirmed send path."
+                    ),
+                    affected_run_id=job.envelope.run_id,
+                    trigger="worker_browser_transport",
+                )
+                raise
+
+            try:
+                self.history.record(result)
+                if result.status == "succeeded":
+                    self.browser_evidence.attach(result.run_id, evidence)
+            except Exception:
+                pause_reason = _pause_reason_for_worker_result(result)
+                if result.status == "succeeded" and pause_reason is None:
+                    pause_reason = (
+                        "A confirmed Worker send completed, but authoritative runtime evidence "
+                        "could not be persisted."
+                    )
+                if pause_reason is not None:
+                    _trip_worker_pause(self, result, reason=pause_reason)
+                raise
+
             _trip_for_worker_result(self, result)
             return result
         finally:
