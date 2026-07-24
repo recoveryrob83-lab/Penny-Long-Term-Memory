@@ -1,0 +1,61 @@
+.lifeos-dom-window-placeholder {
+  margin: 0.75rem auto 1rem;
+  width: min(46rem, calc(100% - 2rem));
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, Canvas 92%, #3b82f6 8%);
+  color: CanvasText;
+  padding: 0.75rem 0.9rem;
+  box-sizing: border-box;
+  font: 13px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.lifeos-dom-window-placeholder strong,
+.lifeos-dom-window-placeholder span {
+  display: block;
+}
+
+.lifeos-dom-window-placeholder span {
+  margin-top: 0.2rem;
+  opacity: 0.72;
+}
+
+.lifeos-dom-window-placeholder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.lifeos-dom-window-placeholder button {
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  border-radius: 0.55rem;
+  background: color-mix(in srgb, Canvas 86%, currentColor 14%);
+  color: inherit;
+  cursor: pointer;
+  padding: 0.42rem 0.65rem;
+  font: inherit;
+}
+
+.lifeos-dom-window-placeholder button:hover {
+  filter: brightness(1.08);
+}
+
+.lifeos-dom-window-pinned {
+  outline: 2px solid color-mix(in srgb, #f59e0b 65%, transparent);
+  outline-offset: -2px;
+}
+
+.lifeos-dom-window-toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2147483647;
+  max-width: 22rem;
+  border-radius: 0.75rem;
+  background: rgba(15, 23, 42, 0.94);
+  color: #f8fafc;
+  padding: 0.7rem 0.85rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+  font: 13px/1.4 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
