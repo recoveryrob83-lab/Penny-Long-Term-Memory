@@ -64,6 +64,16 @@ _ENV_PREFIX_BY_KEY: dict[str, str] = {
     "wellness": "WELLNESS",
 }
 
+_PROJECT_ROOT_BY_KEY: dict[str, PurePosixPath] = {
+    "logistics": PurePosixPath("projects/life-logistics-hq"),
+    "engineering": PurePosixPath("projects/engineering"),
+    "business": PurePosixPath("projects/business-development"),
+    "office-leaks": PurePosixPath("projects/office-leaks-consulting"),
+    "finance": PurePosixPath("projects/finance-benefits"),
+    "main": PurePosixPath("projects/main-assistant"),
+    "wellness": PurePosixPath("projects/wellness"),
+}
+
 _DEFAULT_REVIEW_PROCEDURES: dict[str, str] = {
     "engineering": "projects/engineering/procedures/engineering_hq_worker_review_receipt.md",
 }
@@ -166,15 +176,17 @@ def _review_procedure_path(
 
     normalized = value.replace("\\", "/")
     path = PurePosixPath(normalized)
+    project_root = _PROJECT_ROOT_BY_KEY[department_key]
     if (
         path.is_absolute()
         or not path.parts
-        or path.parts[0] != "projects"
         or any(part in {"", ".", ".."} for part in path.parts)
         or path.suffix.casefold() != ".md"
+        or not path.is_relative_to(project_root)
     ):
         raise DepartmentHqRoutingError(
-            f"{variable_name} must be one safe repository-relative Markdown path under projects/."
+            f"{variable_name} must be one safe department-owned Markdown path under "
+            f"{project_root.as_posix()}/."
         )
     return path.as_posix()
 
@@ -187,12 +199,17 @@ def resolve_department_hq_route(
     """Resolve exact HQ titles plus an explicit department-owned review procedure.
 
     Non-Engineering departments remain held until their review procedure is explicitly registered.
-    This is a destination-resolution gate only; callers still own route availability, execution lock,
-    pause, duplicate-suppression, and send-confirmation checks.
+    Chief of Staff wake routing remains prohibited by the current Worker courier contract. This is a
+    destination-resolution gate only; callers still own route availability, execution lock, pause,
+    duplicate-suppression, and send-confirmation checks.
     """
 
     values = _environment(environment)
     key = canonical_department_key(owning_department)
+    if key == "main":
+        raise DepartmentHqRoutingError(
+            "Worker courier wakes to Chief_of_Staff_HQ remain prohibited by the current contract."
+        )
     return DepartmentHqRoute(
         department_key=key,
         hq_chat_title=resolve_hq_chat_title(owning_department, environment=values),
