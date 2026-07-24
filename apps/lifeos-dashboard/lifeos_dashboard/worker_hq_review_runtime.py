@@ -106,7 +106,9 @@ def _install_duplicate_receipt_suppression() -> None:
         try:
             payload = json.loads(review_file.read_text(encoding="utf-8"))
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise WorkerRuntimeError("Previously ingested HQ review receipt is unreadable.") from exc
+            raise WorkerRuntimeError(
+                "Previously ingested HQ review receipt is unreadable."
+            ) from exc
         if not isinstance(payload, dict):
             raise WorkerRuntimeError("Previously ingested HQ review receipt has the wrong shape.")
         validate_artifact("hq_review", payload)
