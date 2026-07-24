@@ -2,13 +2,13 @@
 
 Updated: 2026-07-23
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the canonical title rollover, direct Worker URL routing, and guarded dashboard route-management work were completed and merged.
+Purpose: Fresh-room handoff after the canonical title rollover, direct Worker URL routing, guarded dashboard route-management work, and advisory-state cleanup were completed.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: Engineering_HQ
-- Current Phase: Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Post-Merge Dashboard Smoke Pending / Fresh Chat Required
+- Current Phase: Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Fresh Chat Boot and Sync Complete / Post-Merge Dashboard Smoke Pending
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, and the local Edge CDP bridge
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -93,7 +93,7 @@ Merged through PR #11.
 
 ## Dashboard Startup State
 
-Rob pulled the completed work to local `main` and prepared to launch the dashboard. This session ended before a fresh-room post-merge inspection was recorded, so the next room must verify the actual running process rather than assuming it.
+The fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. A post-merge local dashboard inspection has not yet been recorded, so the actual running process and UI state must still be verified rather than assumed.
 
 Canonical local launch command from `apps/lifeos-dashboard`:
 
@@ -126,30 +126,25 @@ Do not recreate completed Package D or Package E slices as active work.
 
 ## Advisory State
 
-Open Engineering-owned advisory:
+Open Engineering advisories: None.
 
-- `ADV-20260723-052` remains OPEN pending Rob's confirmation that the hourly `Chief_of_Staff_HQ` watcher reports in the existing Chief of Staff conversation without creating a new chat or triggering work.
+Recently closed:
 
-External source-owner advisory:
-
-- `ADV-20260718-042` remains OPEN under `coordination/boards/main-assistant.md`. Engineering does not close it merely because its own Worker packages are complete.
+- `ADV-20260723-052` closed after the hourly `Chief_of_Staff_HQ` watcher reported in the existing Chief of Staff conversation without creating a new chat or triggering work; Rob confirmed the result and authorized closure.
+- `ADV-20260718-042` closed by the Chief of Staff source owner after Engineering implementation, source verification, and Rob approval for slow rollout. Slow rollout is an operational pacing decision, not unfinished Engineering implementation.
 
 ## Next Valid Action
 
-Start a fresh `Engineering_HQ` chat.
+Perform the pending read-only post-merge dashboard smoke check:
 
-In that fresh chat:
-
-1. Boot from `memory/STARTUP_BOOT.md`.
-2. Perform a separate read-only Sync.
-3. Confirm local `main` is clean and contains merge commit `2587b540e24ca09036c1f0094187c69c2b363c63` or a later fast-forward.
-4. Start or confirm the dashboard process.
-5. Inspect `/api/health` and the Worker Operations page.
-6. Confirm exactly one `engineering_worker` row is visible with title `Engineering_Worker`, route revision `1`, and availability `available`.
-7. Confirm the guarded route-capture controls render.
-8. Do not capture or roll the route unless a replacement Worker conversation actually exists and Rob explicitly chooses to change the route.
-9. Do not run a live advisory or enable local unattended Worker sends without separate authorization.
-10. Report the smoke-test result and then continue only from the remaining open loops.
+1. Confirm local `main` is clean and contains merge commit `2587b540e24ca09036c1f0094187c69c2b363c63` or a later fast-forward.
+2. Start or confirm the dashboard process.
+3. Inspect `/api/health` and the Worker Operations page.
+4. Confirm exactly one `engineering_worker` row is visible with title `Engineering_Worker`, route revision `1`, and availability `available`.
+5. Confirm the guarded route-capture controls render.
+6. Do not capture or roll the route unless a replacement Worker conversation actually exists and Rob explicitly chooses to change the route.
+7. Do not run a live advisory or enable local unattended Worker sends without separate authorization.
+8. Report the smoke-test result and then continue only from the remaining open loops.
 
 ## Production Boundary
 
