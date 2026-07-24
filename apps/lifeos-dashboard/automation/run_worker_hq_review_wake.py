@@ -14,6 +14,10 @@ from lifeos_dashboard.command_center import CommandCenterService
 from lifeos_dashboard.command_center_safety_pause import (
     safety_pause_reason_for_transport,
 )
+from lifeos_dashboard.command_center_send_budget import (
+    BUDGET_RECOVERY_CONDITION,
+    SendBudgetDecision,
+)
 from lifeos_dashboard.worker_dispatch_runtime import parse_browser_dispatch_receipt
 from lifeos_dashboard.worker_hq_review import WorkerHqReviewService
 from lifeos_dashboard.worker_runtime import WorkerRuntimeError
@@ -67,6 +71,46 @@ def _trip_for_transport(
     )
 
 
+def _reserve_hq_wake_budget(
+    command_center: CommandCenterService,
+    *,
+    run_id: str,
+) -> SendBudgetDecision:
+    decision = command_center.reserve_send_budget(
+        kind="hq_review_wake",
+        run_id=run_id,
+    )
+    if not decision.reserved:
+        command_center.trip_safety_pause(
+            reason=decision.reason,
+            affected_run_id=run_id,
+            trigger="send_budget",
+            recovery_condition=BUDGET_RECOVERY_CONDITION,
+        )
+        raise WorkerRuntimeError(
+            f"{decision.reason} Reset the budget explicitly while paused before another send."
+        )
+    try:
+        command_center.append_send_budget_evidence(
+            run_id=run_id,
+            decision=decision,
+        )
+    except Exception as exc:
+        command_center.trip_safety_pause(
+            reason=(
+                "An HQ review wake reserved a global send attempt, but the reservation could not "
+                "be attached to the authoritative execution row. Nothing was sent."
+            ),
+            affected_run_id=run_id,
+            trigger="send_budget_evidence",
+            recovery_condition=BUDGET_RECOVERY_CONDITION,
+        )
+        raise WorkerRuntimeError(
+            "HQ review send-budget evidence could not be persisted before transport."
+        ) from exc
+    return decision
+
+
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     app_root = Path(__file__).resolve().parents[1]
@@ -106,6 +150,10 @@ def main(argv: list[str] | None = None) -> int:
             raise WorkerRuntimeError("Another automation job is already running.")
         try:
             wake = review.build_wake(args.run_id)
+            budget = _reserve_hq_wake_budget(
+                command_center,
+                run_id=args.run_id,
+            )
             command = [
                 sys.executable,
                 str(app_root / "automation" / "chatgpt_worker_browser_dispatch.py"),
@@ -205,6 +253,8 @@ def main(argv: list[str] | None = None) -> int:
         "browser_receipt": browser_receipt,
         "hq_review": review.status(limit=100),
         "pause": command_center.pause_state(),
+        "send_budget": command_center.send_budget_state(),
+        "send_budget_reservation": budget.to_dict(),
     }
     print("HQ_REVIEW_WAKE_OK")
     print(
