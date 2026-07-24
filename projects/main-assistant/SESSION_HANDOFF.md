@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ Session Handoff
 
-Updated: 2026-07-22
+Updated: 2026-07-23
 Project: Chief_of_Staff_HQ / Daily Operations
 Purpose: Project-specific handoff for Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, `LifeOS_HQ` chair, routing desk, and follow-through coordinator.
 
@@ -121,18 +121,13 @@ Guarded GitHub auto-sync only fast-forwards a clean, strictly-behind local `main
 
 ## Browser DOM Department Transport
 
-Rob reports that Engineering has shifted the preferred transport direction away from desktop-app visual automation and toward browser DOM-based reading and interaction.
+Package F Wave 0A is complete. Engineering's Engineering-only Worker chain has demonstrated exact registered URL transport, bounded execution, immutable report ingestion, owning-HQ review, Rob validation when required, watcher consumption, duplicate suppression, guarded route rollover, and browser-bridge recovery.
 
-This is a promising architecture change because DOM access can provide structured selectors, readable state, explicit targets, and stronger verification than coordinate-driven desktop interaction. It remains Engineering-owned and should not be described as complete until current end-to-end evidence demonstrates:
+The enabled Life OS Change Watch is the standing Chief of Staff report channel. It reads GitHub, reports only meaningful signed changes into the existing `Chief_of_Staff_HQ` conversation, remains silent when nothing meaningful changed, and cannot modify GitHub, choose priorities, close advisories, or act on the reported work.
 
-- authorized transport to the intended chat;
-- receiver identity and wrapper validation;
-- bounded execution only;
-- evidence return to the correct owner;
-- duplicate and replay protection;
-- safe recovery from timeouts, selector changes, partial sends, and other failures.
+Cross-department HQ routing remains under controlled Engineering implementation. No non-Engineering Worker, HQ wake route, recurring schedule, or cross-department execution authority is created merely because the Engineering proof chain and watcher are operational.
 
-The prior desktop automation evidence remains historical evidence, not proof that the new browser transport is complete. Chief of Staff receives reports and coordinates follow-through but does not implement or certify the transport layer.
+Chief of Staff receives reports, synthesizes decision-relevant signal, routes follow-through to the source owner, and preserves department ownership. Engineering owns transport implementation and evidence; Maintenance owns shared Worker governance; each department owns its eventual Worker profile and procedure.
 
 ## Chat and Work Boundary
 
@@ -237,7 +232,7 @@ Keep this section operational and abstract. Do not turn it into a personal diary
 - Work Search and Support Pathway remain consolidated into `Chief_of_Staff_HQ` for lightweight current logistics while their historical project folders remain preserved.
 - Recovery Logistics and Philosophy HQ remain dormant until Rob reactivates them.
 - `Maintenance_HQ` owns shared operational infrastructure, global GitHub hygiene, audits, boot integrity, source-boundary policy, and reconciliation.
-- `Engineering_HQ` owns dashboard, parser, validator, worker architecture, browser DOM transport, technical automation, and implementation evidence.
+- `Engineering_HQ` owns dashboard, parser, validator, Worker architecture, browser DOM transport, cross-department HQ routing, technical automation, and implementation evidence.
 - `Finance_HQ` owns financial forecasting, account-linked analysis, affordability, cash timing, and financial judgment.
 - Chief of Staff should not become the project junk drawer.
 
@@ -265,7 +260,7 @@ Current active items at handoff:
 1. Validate the friction-aware Daily Operating SOP through ordinary use.
 2. Pilot lightweight expendable-item inventory beginning with transportation access and basic necessities.
 
-Engineering browser DOM transport is an external dependency and operating watch, not a Chief of Staff-owned implementation loop.
+Cross-department HQ routing is an Engineering-owned external dependency and operating watch, not a Chief of Staff-owned implementation loop.
 
 ## Next Actions
 
@@ -282,5 +277,5 @@ When asked, Chief of Staff should:
 9. Report advisory state only after a current index read when freshness matters.
 10. Process worker inbox items when authorized.
 11. Keep the expendables inventory pilot small and useful.
-12. Treat the browser DOM transport as incomplete until Engineering provides current end-to-end evidence.
+12. Treat Life OS Change Watch as a read-only report channel and cross-department HQ routing as an Engineering-owned implementation that creates no authority until separately activated and verified.
 13. Keep durable updates small, scoped, owner-correct, and verified.
