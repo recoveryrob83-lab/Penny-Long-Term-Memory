@@ -5,7 +5,7 @@ import sqlite3
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Literal, cast
 
 PauseKind = Literal["none", "manual", "safety"]
 DEFAULT_RECOVERY_CONDITION = (
@@ -86,10 +86,12 @@ class CommandCenterSafetyPauseStore:
             pause_kind = "safety"
         return CommandCenterPauseState(
             paused=bool(row["paused"]),
-            pause_kind=pause_kind,  # type: ignore[arg-type]
+            pause_kind=cast(PauseKind, pause_kind),
             reason=str(row["reason"] or ""),
             affected_run_id=(
-                str(row["affected_run_id"]) if row["affected_run_id"] is not None else None
+                str(row["affected_run_id"])
+                if row["affected_run_id"] is not None
+                else None
             ),
             trigger=str(row["trigger"]) if row["trigger"] is not None else None,
             recovery_condition=(
@@ -97,11 +99,16 @@ class CommandCenterSafetyPauseStore:
                 if row["recovery_condition"] is not None
                 else None
             ),
-            tripped_at=float(row["tripped_at"]) if row["tripped_at"] is not None else None,
+            tripped_at=(
+                float(row["tripped_at"]) if row["tripped_at"] is not None else None
+            ),
             updated_at=float(row["updated_at"]),
         )
 
-    def _state_from_connection(self, connection: sqlite3.Connection) -> CommandCenterPauseState:
+    def _state_from_connection(
+        self,
+        connection: sqlite3.Connection,
+    ) -> CommandCenterPauseState:
         row = connection.execute(
             "SELECT * FROM command_center_control WHERE control_key = ?",
             (self._CONTROL_KEY,),
@@ -220,9 +227,13 @@ def safety_pause_reason_for_transport(
 
     diagnostic = f"{stderr}\n{reason}".casefold()
     if exit_code == 3 or "stopped_after_send:" in diagnostic:
-        return "Browser transport stopped after a send attempt with uncertain submission state."
+        return (
+            "Browser transport stopped after a send attempt with uncertain submission state."
+        )
     if claimed_success_without_valid_receipt:
-        return "Browser transport claimed success but its dispatch receipt could not be validated."
+        return (
+            "Browser transport claimed success but its dispatch receipt could not be validated."
+        )
     if any(
         phrase in diagnostic
         for phrase in (
@@ -241,7 +252,9 @@ def safety_pause_reason_for_transport(
             "could not verify return to the source",
         )
     ):
-        return "A send was confirmed, but the browser did not return to a verified source state."
+        return (
+            "A send was confirmed, but the browser did not return to a verified source state."
+        )
     return None
 
 
