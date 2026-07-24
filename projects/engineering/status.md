@@ -4,7 +4,7 @@ Updated: 2026-07-23
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / ChatGPT DOM Window Extension Merged / Fresh Chat Boot and Sync Complete / Live Dashboard and Extension Smokes Pending
+Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Package F Wave 0B Cross-Department HQ Routing Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
 
 ## Summary
 
@@ -23,6 +23,31 @@ Engineering owns the Worker machinery: exact routing, stable IDs, direct browser
 - `memory/HQ_NAMING_STANDARD.md`: canonical room-title and Worker-title source.
 
 Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in GitHub memory or Worker result artifacts.
+
+## Package F Roadmap State
+
+### Wave 0A: Foundation
+
+Lifecycle State: COMPLETE
+Completed: 2026-07-23
+
+Wave 0A now includes:
+
+- the enabled GitHub-only Life OS Change Watch reporting meaningful signed changes into the existing `Chief_of_Staff_HQ` room and remaining silent when nothing changed;
+- canonical eight-room naming and the `<Department_Name>_Worker` convention;
+- repository-wide current-text reconciliation while preserving historical evidence and stable filesystem paths;
+- the Engineering-only Worker execution, immutable result, owning-HQ review, Rob-validation, watcher-consumption, and duplicate-suppression proof chain;
+- exact Worker URL routing, route revision state, guarded route capture, zero-authority route canary, and one-click browser bridge recovery.
+
+Wave 0A completion does not activate any non-Engineering Worker, create a cross-department route, grant new connector or durable-write authority, or authorize unattended sends.
+
+### Wave 0B: Controlled cross-department safety kernel
+
+Lifecycle State: ACTIVE
+Priority: High
+Started: 2026-07-23
+
+The first bounded slice is cross-department owning-HQ route resolution. It must reuse canonical names, remain fail-closed for unknown departments or invalid overrides, and create no Worker identity or route merely by resolving a destination. Global automatic pause triggers, send budgets, and contract-derived activation validation remain later Wave 0B slices rather than being silently bundled into the first routing change.
 
 ## Completed Runtime Repair Chain
 
@@ -69,20 +94,19 @@ Completed and merged through PR #13.
 - The launcher refuses non-loopback endpoints, duplicate launch while already healthy, and launch while another automation action holds the shared execution lock.
 - Reconnect does not mutate Worker routes, advisories, schedules, runtime execution history, or Worker authority.
 - Targeted launcher harness: `5 passed`; dashboard JavaScript syntax check passed.
-- Live Windows/dashboard validation remains pending after local pull and dashboard restart.
+- Live Windows/dashboard route-state validation remains pending as a bounded observation, although Rob successfully closed and relaunched the dedicated Edge window during the memory investigation.
 
 ### Opt-in ChatGPT DOM Window Edge extension
 
-Completed and merged through PR #14.
+Package merged through PR #14; memory experiment concluded as ineffective for the observed problem.
 
 - Merge commit: `131cf5d10a4a13cc76c30f99a09cefe75f4306c9`
 - The inert Manifest V3 package lives at `apps/chatgpt-dom-window-extension` and requires manual Edge sideloading.
-- It is disabled by default and stores settings per exact saved conversation.
-- It keeps a configurable recent rendered-turn window, trims only on stable non-generating routes, auto-trims only near the bottom, and preserves selected, focused, and pinned turns.
-- Restore disables the conversation setting and reloads the full authoritative ChatGPT history.
-- Canonical `*_Worker` rooms are protected because LifeOS transport counts rendered `conversation-turn-*` elements.
-- Permissions are limited to `activeTab` and `storage`; the extension has no remote code, analytics, network calls, dashboard writes, route writes, or Worker authority.
-- Static validation passed, but live Edge behavior and memory effectiveness remain unproven until measured.
+- It is disabled by default, scoped per exact saved conversation, and blocks canonical `*_Worker` rooms.
+- Static validation passed.
+- Live inspection of the long `LifeOS_HQ` conversation showed only `11` rendered turns, so ChatGPT was already virtualizing old conversation DOM and the extension had nothing useful to trim.
+- Edge Task Manager showed JavaScript memory accounting for roughly half of the observed renderer usage during connector-heavy and coding work.
+- The extension therefore does not address the demonstrated primary memory pressure. It remains optional and should stay disabled unless a future page actually mounts enough old DOM to justify it.
 
 ## Validation
 
@@ -90,8 +114,7 @@ Completed and merged through PR #14.
 - Coverage included route capture, stale revision refusal, wrong-room refusal, duplicate-route refusal, single-row preservation, verification holds, canary-only promotion, route-drift refusal, authoritative database propagation, dashboard API/UI contracts, runtime validation, browser readiness, submission recovery, and post-navigation identity.
 - PR #13 added focused launcher, API, and UI tests. The targeted launcher harness passed and the new JavaScript parsed cleanly; no repository workflow was configured on that PR.
 - PR #14 core test suite: `5 passed`.
-- PR #14 `src/core.js`, `src/content.js`, and `popup/popup.js` syntax checks passed; manifest and package JSON parsed successfully.
-- Direct ChatGPT DOM mutation remains site-sensitive. Static test success is not evidence of renderer-memory recovery.
+- PR #14 JavaScript syntax and JSON validation passed, but the live measurement rejected DOM volume as the primary cause of the observed memory growth.
 
 ## Current Production Route State
 
@@ -133,34 +156,31 @@ Recently closed:
 - `ADV-20260723-052` closed after the hourly watcher reported in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work; Rob confirmed the result and authorized closure.
 - `ADV-20260718-042` closed by the Chief of Staff source owner after Engineering implementation, source verification, and Rob approval for slow rollout. Slow rollout is an operational pacing decision, not unfinished implementation.
 
-## Dashboard and Extension State
+## Dashboard State
 
-The dashboard reconnect code is on `main` at merge `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later. The experimental extension package is on `main` at merge `131cf5d10a4a13cc76c30f99a09cefe75f4306c9` or later.
+The latest dashboard reconnect code is on `main` at merge `0a1223c5f32df17fb22f11cb53d0badd5ef2a1ab` or later.
 
-Expected local dashboard endpoint:
+Expected local endpoint:
 
 ```text
 http://127.0.0.1:8765
 ```
 
-This fresh `Engineering_HQ` room completed canonical Boot and a separate read-only Sync on 2026-07-23. The dashboard process must be restarted after pulling reconnect-code changes because `run_dashboard.py` uses `reload=False`. The DOM Window extension does not run merely because its files exist; Edge must load the unpacked directory manually.
-
-Starting or reconnecting the dashboard browser bridge, or loading the experimental extension, does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
+Starting or reconnecting the dashboard browser bridge does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
 
 ## Current Work
 
-The canonical title rollover, courier verifier repair, direct URL routing, guarded route-management implementation, browser bridge reconnect implementation, and DOM Window extension package are complete and are no longer open code loops.
+The canonical title rollover, courier verifier repair, direct URL routing, guarded route-management implementation, browser bridge reconnect implementation, Package F Wave 0A foundation, and DOM-memory investigation are complete and are no longer open code loops.
 
-The immediate Engineering tasks are the pending live smokes:
+The immediate Engineering implementation is Package F Wave 0B Slice 1: controlled cross-department owning-HQ destination resolution. The slice must:
 
-1. verify the dashboard reconnect path and existing `engineering_worker` route state without changing the route;
-2. load `apps/chatgpt-dom-window-extension` unpacked in Edge;
-3. confirm an ordinary saved chat is detected and canonical Worker rooms are Protected;
-4. record Edge Task Manager renderer memory before trimming;
-5. enable a 40-turn window on one long human conversation and verify scrolling, composing, and a new response;
-6. record renderer memory after eligible cleanup time;
-7. use **Restore full chat** and confirm complete authoritative history returns;
-8. do not claim the memory problem solved unless measured results support it.
+1. derive supported department HQ titles from the canonical executable mapping rather than maintaining a competing title map;
+2. normalize only explicit known department aliases;
+3. allow exact environment overrides only when they resolve to a canonical department HQ title;
+4. fail closed for unknown departments, Hub routing, malformed overrides, or destinations outside the canonical department set;
+5. preserve all existing Engineering route, report, review, and duplicate-suppression behavior;
+6. create no Worker, route, schedule, advisory, or authority by resolving a title;
+7. remain a draft implementation until focused tests and review are complete.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -170,8 +190,7 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - The registered exact URL is the authoritative Worker locator; sidebar visibility is not route identity.
 - Route rollover updates one existing row and must pass a zero-authority canary before availability.
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
-- DOM Window is experimental, disabled by default, scoped per conversation, and prohibited in canonical Worker rooms.
-- DOM elements removed are not equivalent to verified process-memory reclaimed; Edge Task Manager evidence controls the conclusion.
+- The DOM Window extension is optional, disabled by default, and not a solution to the demonstrated JavaScript-heavy memory growth.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
 - Any unrecognized post-submit state fails closed and requires human inspection.
@@ -179,7 +198,7 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source advisories.
-- The Worker courier never wakes `Chief_of_Staff_HQ`.
+- The Worker courier never wakes `Chief_of_Staff_HQ` unless a separately authorized future contract explicitly changes that boundary.
 - Cross-department rollout, new recurring tasks, connectors, spending, or public actions require separate authority.
 
 ## Boundary
