@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "LifeOS ChatGPT DOM Window",
+  "version": "0.1.0",
+  "description": "Keeps long ChatGPT conversations lighter by removing older rendered turns on explicitly enabled chats.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_title": "ChatGPT DOM Window",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*"
+      ],
+      "css": [
+        "src/content.css"
+      ],
+      "js": [
+        "src/core.js",
+        "src/content.js"
+      ],
+      "run_at": "document_idle",
+      "world": "ISOLATED"
+    }
+  ]
+}
