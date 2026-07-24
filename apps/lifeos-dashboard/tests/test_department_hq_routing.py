@@ -12,28 +12,61 @@ import lifeos_dashboard.worker_hq_review_runtime  # noqa: F401 - installs the ru
 
 
 @pytest.mark.parametrize(
-    ("alias", "expected_key", "expected_title", "prefix"),
+    ("alias", "expected_key", "expected_title", "procedure_path"),
     [
-        ("maintenance", "logistics", "Maintenance_HQ", "MAINTENANCE"),
-        ("Engineering_HQ", "engineering", "Engineering_HQ", "ENGINEERING"),
-        ("business", "business", "Business_HQ", "BUSINESS"),
-        ("office leaks", "office-leaks", "Office_Leaks_HQ", "OFFICE_LEAKS"),
-        ("finance", "finance", "Finance_HQ", "FINANCE"),
-        ("chief_of_staff", "main", "Chief_of_Staff_HQ", "CHIEF_OF_STAFF"),
-        ("wellness", "wellness", "Wellness_HQ", "WELLNESS"),
+        (
+            "maintenance",
+            "logistics",
+            "Maintenance_HQ",
+            "projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md",
+        ),
+        (
+            "Engineering_HQ",
+            "engineering",
+            "Engineering_HQ",
+            "projects/engineering/procedures/test_engineering_hq_review.md",
+        ),
+        (
+            "business",
+            "business",
+            "Business_HQ",
+            "projects/business-development/procedures/business_hq_worker_review.md",
+        ),
+        (
+            "office leaks",
+            "office-leaks",
+            "Office_Leaks_HQ",
+            "projects/office-leaks-consulting/procedures/office_leaks_hq_worker_review.md",
+        ),
+        (
+            "finance",
+            "finance",
+            "Finance_HQ",
+            "projects/finance-benefits/procedures/finance_hq_worker_review.md",
+        ),
+        (
+            "wellness",
+            "wellness",
+            "Wellness_HQ",
+            "projects/wellness/procedures/wellness_hq_worker_review.md",
+        ),
     ],
 )
-def test_supported_departments_resolve_from_canonical_titles(
+def test_supported_department_routes_use_canonical_titles_and_owned_procedures(
     alias: str,
     expected_key: str,
     expected_title: str,
-    prefix: str,
+    procedure_path: str,
 ) -> None:
-    environment = {
-        f"LIFEOS_{prefix}_HQ_REVIEW_PROCEDURE": (
-            f"projects/test-fixtures/{expected_key}-hq-review.md"
-        )
-    }
+    prefix = {
+        "logistics": "MAINTENANCE",
+        "engineering": "ENGINEERING",
+        "business": "BUSINESS",
+        "office-leaks": "OFFICE_LEAKS",
+        "finance": "FINANCE",
+        "wellness": "WELLNESS",
+    }[expected_key]
+    environment = {f"LIFEOS_{prefix}_HQ_REVIEW_PROCEDURE": procedure_path}
 
     route = resolve_department_hq_route(alias, environment=environment)
 
@@ -41,7 +74,7 @@ def test_supported_departments_resolve_from_canonical_titles(
     assert route.department_key == expected_key
     assert route.hq_chat_title == expected_title
     assert route.automation_title == expected_title
-    assert route.review_procedure_path.endswith("-hq-review.md")
+    assert route.review_procedure_path == procedure_path
 
 
 def test_engineering_keeps_its_registered_default_review_procedure() -> None:
@@ -86,6 +119,21 @@ def test_wrong_department_title_override_fails_closed(function, variable_name: s
         function("finance", environment={variable_name: "Engineering_HQ"})
 
 
+def test_chief_of_staff_title_can_be_resolved_but_worker_wake_route_remains_held() -> None:
+    assert canonical_department_key("chief_of_staff") == "main"
+    assert resolve_hq_chat_title("chief_of_staff", environment={}) == "Chief_of_Staff_HQ"
+
+    with pytest.raises(DepartmentHqRoutingError, match="remain prohibited"):
+        resolve_department_hq_route(
+            "chief_of_staff",
+            environment={
+                "LIFEOS_CHIEF_OF_STAFF_HQ_REVIEW_PROCEDURE": (
+                    "projects/main-assistant/procedures/chief_of_staff_hq_worker_review.md"
+                )
+            },
+        )
+
+
 @pytest.mark.parametrize("department", ["LifeOS_HQ", "hub", "", "unknown-department"])
 def test_hub_empty_and_unknown_owners_fail_closed(department: str) -> None:
     with pytest.raises(DepartmentHqRoutingError):
@@ -96,13 +144,14 @@ def test_hub_empty_and_unknown_owners_fail_closed(department: str) -> None:
     "unsafe_path",
     [
         "../maintenance-review.md",
-        "/projects/maintenance-review.md",
+        "/projects/life-logistics-hq/maintenance-review.md",
         "coordination/maintenance-review.md",
         "projects/life-logistics-hq/procedures/maintenance-review.json",
+        "projects/engineering/procedures/wrong-owner-review.md",
     ],
 )
-def test_review_procedure_path_must_be_safe_repository_markdown(unsafe_path: str) -> None:
-    with pytest.raises(DepartmentHqRoutingError, match="repository-relative Markdown"):
+def test_review_procedure_path_must_be_safe_and_department_owned(unsafe_path: str) -> None:
+    with pytest.raises(DepartmentHqRoutingError, match="department-owned Markdown"):
         resolve_department_hq_route(
             "maintenance",
             environment={"LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE": unsafe_path},
