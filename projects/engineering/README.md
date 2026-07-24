@@ -160,7 +160,7 @@ Expected endpoint:
 http://127.0.0.1:8765
 ```
 
-The next fresh `Engineering_HQ` chat must perform a read-only Boot and Sync, then record a post-merge smoke result:
+The current fresh `Engineering_HQ` chat completed canonical Boot and a separate read-only Sync. The remaining post-merge smoke check is:
 
 - confirm local `main` is clean and contains merge `2587b540e24ca09036c1f0094187c69c2b363c63` or later;
 - start or confirm the dashboard process;
@@ -182,7 +182,7 @@ Future Engineering work must come from:
 
 Cross-department result-outbox adoption, universal Worker write authority, optional human-readable envelope work, broader unattended packaging, new recurring tasks, connectors, spending, and public actions remain separate decisions.
 
-`ADV-20260718-042` remains open under `coordination/boards/main-assistant.md` and is not closed by Engineering package completion.
+`ADV-20260723-052` is closed after Rob confirmed the watcher destination test passed. `ADV-20260718-042` is closed by its Chief of Staff source owner after implementation and source verification. Slow rollout remains an operational pacing decision, not unfinished Engineering work.
 
 ## Browser and Automation Boundary
 
@@ -215,4 +215,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Package D and Package E are closed. Canonical runtime titles, direct Worker URL routing, and guarded dashboard route management are complete. The next fresh `Engineering_HQ` room must Boot, Sync, and perform the read-only post-merge dashboard smoke check before continuing from the remaining open loops.
+Active department. Package D and Package E are closed. Canonical runtime titles, direct Worker URL routing, and guarded dashboard route management are complete. Fresh-room Boot and Sync are complete; the read-only post-merge dashboard smoke check remains pending before continuing from the remaining open loops.
