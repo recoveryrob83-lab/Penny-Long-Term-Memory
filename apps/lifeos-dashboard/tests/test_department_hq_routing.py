@@ -176,7 +176,11 @@ def _validated_row(owning_department: str) -> dict[str, object]:
 
 def _service_with_row(row: dict[str, object]) -> WorkerHqReviewService:
     service = object.__new__(WorkerHqReviewService)
-    service._row = lambda _run_id: row  # type: ignore[method-assign]  # noqa: SLF001
+
+    def row_for_run(_run_id: str) -> dict[str, object]:
+        return row
+
+    setattr(service, "_row", row_for_run)
     return service
 
 
