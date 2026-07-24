@@ -1,12 +1,15 @@
-"""Install Package E Slice 5 HQ review and Slice 6 Rob-validation services."""
+"""Install Package E HQ review services plus Package F destination resolution."""
 from __future__ import annotations
 
 import json
-import os
 from dataclasses import replace
 from pathlib import Path
 
 from . import worker_operations
+from .department_hq_routing import (
+    resolve_department_hq_route,
+    resolve_hq_chat_title,
+)
 from .worker_hq_review import (
     WorkerHqReviewIngestionReceipt,
     WorkerHqReviewService,
@@ -20,47 +23,29 @@ _SERVICE_FLAG = "_lifeos_worker_hq_review_service_installed"
 _DUPLICATE_FLAG = "_lifeos_worker_hq_review_duplicate_patch_installed"
 _SEMANTICS_FLAG = "_lifeos_worker_hq_review_semantics_patch_installed"
 _WAKE_FLAG = "_lifeos_worker_hq_review_wake_procedure_patch_installed"
-_REVIEW_PROCEDURE_PATH = (
-    "projects/engineering/procedures/engineering_hq_worker_review_receipt.md"
-)
-_AUTOMATION_HQ_CHAT_TITLES = {
-    "engineering": "Engineering_HQ",
-}
-
-
-def _automation_hq_chat_title(owning_department: str) -> str:
-    department = str(owning_department or "").strip().casefold()
-    environment_name = f"LIFEOS_{department.upper()}_HQ_AUTOMATION_TITLE"
-    configured = str(os.getenv(environment_name) or "").strip()
-    if configured:
-        if " " in configured:
-            raise WorkerRuntimeError(
-                f"{environment_name} must use the automation chat-title convention without spaces."
-            )
-        return configured
-    title = _AUTOMATION_HQ_CHAT_TITLES.get(department)
-    if title is None:
-        raise WorkerRuntimeError(
-            "Cross-department HQ routing is not authorized by the Engineering-only Slice 5 pilot."
-        )
-    return title
 
 
 def _install_wake_procedure_pointer() -> None:
     service_class = WorkerHqReviewService
     if getattr(service_class, _WAKE_FLAG, False):
         return
+
+    # Package E's base service was intentionally Engineering-only. Package F replaces only the
+    # exact-title resolver here, while the route resolver below still requires an explicitly
+    # registered department-owned review procedure before a non-Engineering wake can be built.
+    service_class._hq_chat_title = staticmethod(resolve_hq_chat_title)
     original_build = service_class.build_wake
 
     def build_wake(self: WorkerHqReviewService, run_id: str):
         wake = original_build(self, run_id)
+        route = resolve_department_hq_route(wake.owning_department)
         return replace(
             wake,
-            hq_chat_title=_automation_hq_chat_title(wake.owning_department),
+            hq_chat_title=route.automation_title,
             instruction=(
                 wake.instruction
-                + f" Follow the canonical Engineering HQ review procedure at "
-                f"`{_REVIEW_PROCEDURE_PATH}`."
+                + f" Follow the registered owning-HQ review procedure at "
+                f"`{route.review_procedure_path}`."
             ),
         )
 
@@ -221,7 +206,7 @@ def _install_service() -> None:
 
 
 def install_worker_hq_review_runtime() -> bool:
-    """Install Slice 5 and Slice 6 review-state extensions once."""
+    """Install Package E review-state extensions and Package F route resolution once."""
 
     if getattr(worker_operations, _INSTALL_FLAG, False):
         return False
