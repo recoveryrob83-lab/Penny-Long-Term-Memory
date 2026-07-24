@@ -78,7 +78,10 @@ def test_command_center_status_exposes_eight_destinations() -> None:
     assert payload["paused"] is False
     assert payload["running"] is False
     assert len(payload["destinations"]) == 8
-    assert any(item["key"] == "hub" and item["label"] == "LifeOS HQ" for item in payload["destinations"])
+    assert any(
+        item["key"] == "hub" and item["label"] == "LifeOS_HQ"
+        for item in payload["destinations"]
+    )
 
 
 def test_command_center_pause_round_trip() -> None:

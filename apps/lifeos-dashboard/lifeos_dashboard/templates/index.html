@@ -8,11 +8,13 @@
   <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/github.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/worker-operations.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='/worker-route-management.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/department-inspection.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/tabs.css') }}">
   <script defer src="{{ url_for('static', path='/server-availability.js') }}"></script>
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
   <script defer src="{{ url_for('static', path='/worker-operations.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/worker-route-management.js') }}"></script>
   <script defer src="{{ url_for('static', path='/department-inspection.js') }}"></script>
   <script defer src="{{ url_for('static', path='/tabs.js') }}"></script>
 </head>
@@ -119,7 +121,7 @@
             <label class="worker-confirm"><input id="wo-confirm-send" type="checkbox"><span>I authorize one live send of this exact advisory revision through the one-tab browser courier.</span></label>
             <div class="worker-actions"><button id="wo-run" class="primary-button" type="button" disabled>Run selected advisory</button><button id="wo-pause" class="worker-danger-button" type="button">Pause automation</button></div>
             <section class="worker-self-test" aria-labelledby="worker-self-test-heading">
-              <div><p class="eyebrow">NO DURABLE WORK</p><h4 id="worker-self-test-heading">Courier self-test</h4><p>Send one synthetic zero-authority wrapper, capture its acknowledgement, and return to HQ.</p></div>
+              <div><p class="eyebrow">ZERO-AUTHORITY CANARY</p><h4 id="worker-self-test-heading">Courier self-test</h4><p>Submits one synthetic wake, proves the correlated user turn, and returns to HQ without creating a Worker task.</p></div>
               <label class="worker-confirm worker-self-test-confirm"><input id="wo-confirm-self-test" type="checkbox"><span>I authorize one synthetic browser round trip.</span></label>
               <button id="wo-self-test" class="copy-button" type="button" disabled>Test courier</button>
             </section>
@@ -127,6 +129,18 @@
             <details class="worker-legacy-note"><summary>Legacy automation retained for rollback</summary><p id="wo-legacy-detail">Loading legacy state...</p></details>
           </section>
           <aside class="worker-side-stack">
+            <section id="wo-route-management" class="worker-list-panel worker-route-panel" aria-labelledby="worker-route-heading">
+              <div class="worker-subheading"><div><p class="eyebrow">SAFE ROLLOVER</p><h3 id="worker-route-heading">Worker route</h3></div><span id="wo-route-revision" class="worker-pill">No route</span></div>
+              <label class="worker-field">Registered Worker<select id="wo-route-worker"><option value="">Loading Workers</option></select></label>
+              <div class="worker-route-summary">
+                <div class="worker-route-summary-row"><span>Availability</span><span id="wo-route-state" class="worker-badge worker-badge-neutral">unknown</span></div>
+                <div id="wo-route-url" class="worker-route-url">No exact conversation URL is registered.</div>
+                <p id="wo-route-detail" class="worker-route-detail">Pause automation and keep exactly one replacement Worker conversation open before capture.</p>
+              </div>
+              <label class="worker-confirm worker-route-confirm"><input id="wo-confirm-route-capture" type="checkbox"><span>I confirm the sole open ChatGPT conversation is the replacement route for this Worker.</span></label>
+              <button id="wo-capture-route" class="copy-button" type="button" disabled>Capture active chat as route</button>
+              <div id="wo-route-message" class="worker-route-message" role="status" aria-live="polite">No route change requested.</div>
+            </section>
             <section class="worker-list-panel" aria-labelledby="worker-routes-heading"><div class="worker-subheading"><div><p class="eyebrow">ROUTES</p><h3 id="worker-routes-heading">Registered Workers</h3></div><span id="wo-worker-count" class="panel-meta"></span></div><div id="wo-workers" class="worker-card-list"></div></section>
             <section class="worker-list-panel" aria-labelledby="worker-review-heading"><div class="worker-subheading"><div><p class="eyebrow">JUDGMENT STAYS HERE</p><h3 id="worker-review-heading">HQ review queue</h3></div><span id="wo-review-meta" class="panel-meta"></span></div><div id="wo-reviews" class="worker-card-list"></div></section>
           </aside>
