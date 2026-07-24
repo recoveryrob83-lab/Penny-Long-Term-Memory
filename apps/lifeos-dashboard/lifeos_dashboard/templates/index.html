@@ -8,12 +8,14 @@
   <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/github.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/worker-operations.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='/browser-bridge.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/worker-route-management.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/department-inspection.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='/tabs.css') }}">
   <script defer src="{{ url_for('static', path='/server-availability.js') }}"></script>
   <script defer src="{{ url_for('static', path='/app.js') }}"></script>
   <script defer src="{{ url_for('static', path='/worker-operations.js') }}"></script>
+  <script defer src="{{ url_for('static', path='/browser-bridge.js') }}"></script>
   <script defer src="{{ url_for('static', path='/worker-route-management.js') }}"></script>
   <script defer src="{{ url_for('static', path='/department-inspection.js') }}"></script>
   <script defer src="{{ url_for('static', path='/tabs.js') }}"></script>
@@ -108,7 +110,7 @@
         </div>
         <p class="worker-ops-intro">Canonical advisories are the assignment source. The browser is only the courier. Receiver and HQ review remain separate from transport.</p>
         <div class="worker-ops-metrics" aria-label="Worker Operations health">
-          <article class="worker-metric"><span>Browser bridge</span><strong id="wo-browser-state">Checking</strong><small id="wo-browser-detail">Loopback CDP</small></article>
+          <article class="worker-metric browser-bridge-metric"><span>Browser bridge</span><strong id="wo-browser-state">Checking</strong><small id="wo-browser-detail">Loopback CDP</small><button id="wo-reconnect-browser" class="copy-button browser-bridge-button" type="button" disabled>Reconnect bridge</button></article>
           <article class="worker-metric"><span>Execution gate</span><strong id="wo-gate-state">Checking</strong><small>Shared pause and one-job lock</small></article>
           <article class="worker-metric"><span>Open Worker advisories</span><strong id="wo-advisory-count">0</strong><small>Canonical Advisory Index</small></article>
           <article class="worker-metric"><span>HQ reviews pending</span><strong id="wo-review-count">0</strong><small>Existing execution rows</small></article>
