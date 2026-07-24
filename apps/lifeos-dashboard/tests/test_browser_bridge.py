@@ -20,8 +20,8 @@ from lifeos_dashboard.worker_runtime import WorkerRuntimeError
 class FakeProcess:
     pid = 4242
 
-    def poll(self) -> None:
-        return None
+    def poll(self) -> int:
+        return 0
 
 
 def test_launch_returns_without_duplicate_when_bridge_is_ready(tmp_path: Path) -> None:
@@ -125,7 +125,8 @@ def test_service_calls_launcher_under_shared_lock(monkeypatch, tmp_path: Path) -
 
     assert result["status"] == "ready"
     assert observed["locked"] is True
-    assert str(tmp_path / "automation" / "reconnect_edge_cdp_bridge.py") in observed["command"]
+    launcher = str(tmp_path / "automation" / "reconnect_edge_cdp_bridge.py")
+    assert launcher in observed["command"]
     assert center._run_lock.locked() is False
 
 
