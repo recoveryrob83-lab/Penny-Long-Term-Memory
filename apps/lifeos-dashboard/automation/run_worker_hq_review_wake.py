@@ -11,7 +11,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from lifeos_dashboard.command_center import CommandCenterService
-from lifeos_dashboard.command_center_safety_pause import safety_pause_reason_for_transport
+from lifeos_dashboard.command_center_safety_pause import (
+    safety_pause_reason_for_transport,
+)
 from lifeos_dashboard.worker_dispatch_runtime import parse_browser_dispatch_receipt
 from lifeos_dashboard.worker_hq_review import WorkerHqReviewService
 from lifeos_dashboard.worker_runtime import WorkerRuntimeError
@@ -32,7 +34,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def _resolved_path(explicit: str | None, environment_name: str, fallback: Path) -> Path:
+def _resolved_path(
+    explicit: str | None,
+    environment_name: str,
+    fallback: Path,
+) -> Path:
     selected = explicit or os.getenv(environment_name)
     return Path(selected).expanduser().resolve() if selected else fallback.resolve()
 
@@ -80,7 +86,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     if not args.send or args.confirm_send != SEND_CONFIRMATION:
         print(
-            f"STOPPED: Live HQ review wake requires --send --confirm-send {SEND_CONFIRMATION}.",
+            "STOPPED: Live HQ review wake requires "
+            f"--send --confirm-send {SEND_CONFIRMATION}.",
             file=sys.stderr,
         )
         return 2
@@ -94,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if command_center.paused:
             raise WorkerRuntimeError("Automation is paused. Resume it before waking an HQ.")
-        run_lock = command_center._run_lock  # noqa: SLF001 - shared one-job execution gate
+        run_lock = command_center._run_lock
         if not run_lock.acquire(blocking=False):
             raise WorkerRuntimeError("Another automation job is already running.")
         try:
@@ -136,7 +143,10 @@ def main(argv: list[str] | None = None) -> int:
                     run_id=args.run_id,
                     exit_code=None,
                     stderr=str(exc.stderr or ""),
-                    reason="HQ review browser transport timed out before submission could be proven.",
+                    reason=(
+                        "HQ review browser transport timed out before submission "
+                        "could be proven."
+                    ),
                 )
                 raise
 
@@ -178,7 +188,12 @@ def main(argv: list[str] | None = None) -> int:
                 )
         finally:
             run_lock.release()
-    except (OSError, subprocess.TimeoutExpired, WorkerRuntimeError, ValueError) as exc:
+    except (
+        OSError,
+        subprocess.TimeoutExpired,
+        WorkerRuntimeError,
+        ValueError,
+    ) as exc:
         print(f"STOPPED: {exc}", file=sys.stderr)
         print(f"Repository: {repository_root}", file=sys.stderr)
         print(f"Database: {database_path}", file=sys.stderr)
@@ -192,7 +207,10 @@ def main(argv: list[str] | None = None) -> int:
         "pause": command_center.pause_state(),
     }
     print("HQ_REVIEW_WAKE_OK")
-    print(f"{RECEIPT_PREFIX}{json.dumps(payload, sort_keys=True, ensure_ascii=False)}")
+    print(
+        f"{RECEIPT_PREFIX}"
+        f"{json.dumps(payload, sort_keys=True, ensure_ascii=False)}"
+    )
     return 0
 
 
