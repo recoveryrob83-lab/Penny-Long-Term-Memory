@@ -1,13 +1,22 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from lifeos_dashboard.adapters import SampleDashboardSource
 from lifeos_dashboard.main import PACKAGE_ROOT, create_app
 
 sample_source = SampleDashboardSource(PACKAGE_ROOT / "data" / "sample_dashboard.json")
-client = TestClient(create_app(sample_source))
 
 
-def test_health_endpoint() -> None:
+@pytest.fixture
+def client(tmp_path, monkeypatch) -> TestClient:
+    monkeypatch.setenv(
+        "COMMAND_CENTER_DATABASE_PATH",
+        str(tmp_path / "command-center.sqlite3"),
+    )
+    return TestClient(create_app(sample_source))
+
+
+def test_health_endpoint(client: TestClient) -> None:
     response = client.get("/api/health")
 
     assert response.status_code == 200
@@ -18,7 +27,7 @@ def test_health_endpoint() -> None:
     }
 
 
-def test_dashboard_endpoint_returns_eagle_eye_sections() -> None:
+def test_dashboard_endpoint_returns_eagle_eye_sections(client: TestClient) -> None:
     response = client.get("/api/dashboard")
 
     assert response.status_code == 200
@@ -30,7 +39,7 @@ def test_dashboard_endpoint_returns_eagle_eye_sections() -> None:
     assert payload["commands"]
 
 
-def test_department_inspection_endpoint_exposes_contract() -> None:
+def test_department_inspection_endpoint_exposes_contract(client: TestClient) -> None:
     response = client.get("/api/department-inspection")
 
     assert response.status_code == 200
@@ -41,7 +50,7 @@ def test_department_inspection_endpoint_exposes_contract() -> None:
     assert payload["records"] == []
 
 
-def test_dashboard_home_renders_interface() -> None:
+def test_dashboard_home_renders_interface(client: TestClient) -> None:
     response = client.get("/")
 
     assert response.status_code == 200
@@ -55,22 +64,26 @@ def test_dashboard_home_renders_interface() -> None:
     assert "Courier self-test" in response.text
 
 
-def test_worker_operations_requires_real_local_repository_mode() -> None:
+def test_worker_operations_requires_real_local_repository_mode(client: TestClient) -> None:
     response = client.get("/api/worker-operations")
 
     assert response.status_code == 503
     assert "local LifeOS repository checkout" in response.json()["detail"]
 
 
-def test_legacy_scheduler_is_dormant_by_default(monkeypatch) -> None:
+def test_legacy_scheduler_is_dormant_by_default(tmp_path, monkeypatch) -> None:
     monkeypatch.delenv("LIFEOS_LEGACY_SCHEDULER_ENABLED", raising=False)
+    monkeypatch.setenv(
+        "COMMAND_CENTER_DATABASE_PATH",
+        str(tmp_path / "command-center.sqlite3"),
+    )
     application = create_app(sample_source)
 
     with TestClient(application):
         assert application.state.command_center.scheduler_running is False
 
 
-def test_command_center_status_exposes_eight_destinations() -> None:
+def test_command_center_status_exposes_eight_destinations(client: TestClient) -> None:
     response = client.get("/api/command-center")
 
     assert response.status_code == 200
@@ -84,7 +97,7 @@ def test_command_center_status_exposes_eight_destinations() -> None:
     )
 
 
-def test_command_center_pause_round_trip() -> None:
+def test_command_center_pause_round_trip(client: TestClient) -> None:
     pause_response = client.post("/api/command-center/pause", json={"paused": True})
 
     assert pause_response.status_code == 200
