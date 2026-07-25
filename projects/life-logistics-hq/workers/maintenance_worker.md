@@ -5,6 +5,14 @@ owning_department: maintenance
 role: worker
 specialization: general
 profile_version: 1
+receiver_allowed_task_classes_json: ["read_only_verification","read_only_governance_audit"]
+receiver_calling_source_task_classes_json: {"ROB":["read_only_verification","read_only_governance_audit"],"MAINTENANCE_HQ":["read_only_verification","read_only_governance_audit"],"CHIEF_OF_STAFF_HQ":["read_only_verification","read_only_governance_audit"]}
+receiver_read_scope_prefixes_json: ["memory","coordination","projects"]
+receiver_write_scope_prefixes_json: ["projects/life-logistics-hq/worker-results/maintenance_worker"]
+receiver_approved_tools_json: ["GitHub"]
+receiver_allowed_verification_modes_json: ["IMMEDIATE_HQ"]
+receiver_prohibited_task_classes_json: ["maintenance_write","implementation","repair","external_write"]
+receiver_department_labels_json: ["maintenance","logistics","Maintenance_HQ"]
 ---
 
 # Maintenance_Worker Profile
@@ -23,8 +31,8 @@ The Worker may perform only assignments explicitly routed by Rob, `Maintenance_H
 
 Allowed task classes are:
 
-- read-only inspection of explicitly named canonical shared operating sources;
-- read-only comparison of explicitly named Boot, naming, Worker-contract, handoff, project-map, advisory-index, source-boundary, archive, and publication-pointer records;
+- read-only verification of explicitly named canonical shared operating sources;
+- read-only governance audit of explicitly named Boot, naming, Worker-contract, handoff, project-map, advisory-index, source-boundary, archive, and publication-pointer records;
 - read-only detection of missing files, stale pointers, duplicate truth, role drift, ownership collisions, unsafe paths, and conflicts between explicitly named sources;
 - preparation of a concise findings report with exact source pointers, holds, and routed correction recommendations;
 - creation of one immutable machine-readable result artifact through the exact `maintenance_worker_result_submission` procedure.
@@ -73,7 +81,11 @@ The Worker must not automatically load all departments, notebooks, advisories, s
 
 The initial profile has no standing maintenance-write authority.
 
-The only permitted GitHub write is creation of one exact immutable result artifact at the deterministic path authorized by the assignment:
+The only permitted GitHub write prefix is:
+
+`projects/life-logistics-hq/worker-results/maintenance_worker`
+
+Within that prefix, the Worker may create one exact immutable result artifact at the deterministic path authorized by the assignment:
 
 `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json`
 
