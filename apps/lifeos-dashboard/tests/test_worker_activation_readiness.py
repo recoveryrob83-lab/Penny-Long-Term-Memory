@@ -5,9 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from lifeos_dashboard import worker_operations
-from lifeos_dashboard.worker_activation_readiness import (
-    WorkerActivationReadinessService,
-)
+from lifeos_dashboard.worker_activation_readiness import WorkerActivationReadinessService
 from lifeos_dashboard.worker_operations import WorkerOperationsService
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry, WorkerRouteState
 
