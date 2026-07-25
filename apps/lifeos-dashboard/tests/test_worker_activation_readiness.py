@@ -9,7 +9,6 @@ from lifeos_dashboard.worker_activation_readiness import WorkerActivationReadine
 from lifeos_dashboard.worker_operations import WorkerOperationsService
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry, WorkerRouteState
 
-
 VALID_PROFILE = """---
 worker_id: engineering_worker
 chat_title: Engineering_Worker
