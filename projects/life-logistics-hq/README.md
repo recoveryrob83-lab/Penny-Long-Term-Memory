@@ -53,30 +53,26 @@ Engineering completed the separately authorized canonical runtime-title rollover
 
 Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and procedures through a coordinated repair while Maintenance was reconciling shared state.
 
-The authorized branch has now merged these Maintenance-owned prerequisites to `main`:
+The authorized branch merged these Maintenance-owned prerequisites to `main`:
 
 - `projects/life-logistics-hq/workers/maintenance_worker.md`
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
 - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
 
-Maintenance did not create or edit those three files during this reconciliation.
+Maintenance did not create or edit those three files during reconciliation.
 
-## Maintenance Worker Governance Hold
+## Maintenance Worker Approval and Rollout Boundary
 
-The merged profile is read-only with respect to authoritative maintenance and source records, but it grants one narrow create-only GitHub write for an immutable Worker result artifact under:
+On 2026-07-25, Rob and `Maintenance_HQ` explicitly accepted:
 
-`projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json`
+- the narrow create-only GitHub result-artifact authority at `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only exception to the original no-GitHub-writes approval;
+- final procedure ID `maintenance_hq_worker_review_receipt` at `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` as the authoritative Maintenance HQ review procedure.
 
-The original Maintenance approval stated **no GitHub writes**. The immutable result-artifact write is therefore a material scope distinction that requires explicit Maintenance and Rob acceptance before route registration, activation review, or pilot dispatch.
+The reporting exception authorizes only one immutable machine-readable Worker result artifact under the exact current-run path and approved result-submission procedure. It does not authorize edits to shared rules, source records, handoffs, maps, indexes, profiles, procedures, open loops, status files, runtime state, routes, schedules, or external systems.
 
-The merged HQ review procedure also uses final procedure ID `maintenance_hq_worker_review_receipt` at `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`, rather than the earlier placeholder path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md`. The merged procedure contains the contract-required review sections, but the final destination and ID require explicit acceptance because the earlier approval named a different authoritative path.
+The governance-review hold is cleared. The next permitted technical stage is Engineering registration, exact-route preparation, zero-authority route testing, and a current fail-closed activation-prerequisite report.
 
-Until both points are accepted or corrected:
-
-- the profile and procedures may remain on `main` as merged prerequisites;
-- no Maintenance Worker route, registry entry, schedule, dispatch, HQ wake, activation, connector authority, source-record write authority, unattended execution authority, spending, or cross-department authority is approved;
-- `READY_FOR_AUTHORITY_REVIEW` remains technical evidence only and cannot clear this governance hold;
-- Maintenance must not create competing profile or procedure copies.
+None of those technical steps activates or dispatches the Worker. A passing report remains evidence only and must continue to report `activation_authorized: false`. The first real pilot remains separately bounded, manually dispatched, read-only with respect to authoritative source records, and subject to `IMMEDIATE_HQ` verification.
 
 Ownership of the profile, procedures, authority, holds, verification, and retirement remains with `Maintenance_HQ`.
 
