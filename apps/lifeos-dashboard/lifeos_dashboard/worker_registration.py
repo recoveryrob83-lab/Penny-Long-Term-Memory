@@ -13,7 +13,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 
 from .command_center import CommandCenterService
-from .department_hq_routing import resolve_hq_chat_title
+from .department_hq_routing import department_project_root, resolve_hq_chat_title
 from .room_titles import CANONICAL_WORKER_TITLES
 from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 from .worker_runtime_service import WorkerRuntimeService
@@ -110,6 +110,12 @@ class WorkerRegistrationService:
             raise WorkerRuntimeError(
                 "Worker profile title and owning department do not identify the same "
                 f"canonical department: expected {expected_owner_title!r}."
+            )
+        expected_profile_root = department_project_root(owning_department) / "workers"
+        if not PurePosixPath(normalized).is_relative_to(expected_profile_root):
+            raise WorkerRuntimeError(
+                "Worker profile path is outside the canonical owning department subtree: "
+                f"expected {expected_profile_root.as_posix()}/."
             )
 
         entry = WorkerRegistryEntry(
