@@ -77,19 +77,37 @@ def test_supported_department_routes_use_canonical_titles_and_owned_procedures(
     assert route.review_procedure_path == procedure_path
 
 
-def test_engineering_keeps_its_registered_default_review_procedure() -> None:
-    route = resolve_department_hq_route("engineering", environment={})
+@pytest.mark.parametrize(
+    ("department", "expected_title", "expected_procedure"),
+    [
+        (
+            "maintenance",
+            "Maintenance_HQ",
+            "projects/life-logistics-hq/procedures/"
+            "maintenance_hq_worker_review_receipt.md",
+        ),
+        (
+            "engineering",
+            "Engineering_HQ",
+            "projects/engineering/procedures/engineering_hq_worker_review_receipt.md",
+        ),
+    ],
+)
+def test_activated_departments_keep_registered_default_review_procedures(
+    department: str,
+    expected_title: str,
+    expected_procedure: str,
+) -> None:
+    route = resolve_department_hq_route(department, environment={})
 
-    assert route.hq_chat_title == "Engineering_HQ"
-    assert route.automation_title == "Engineering_HQ"
-    assert route.review_procedure_path == (
-        "projects/engineering/procedures/engineering_hq_worker_review_receipt.md"
-    )
+    assert route.hq_chat_title == expected_title
+    assert route.automation_title == expected_title
+    assert route.review_procedure_path == expected_procedure
 
 
-def test_nonengineering_route_requires_explicit_review_procedure() -> None:
+def test_department_without_registered_default_requires_explicit_review_procedure() -> None:
     with pytest.raises(DepartmentHqRoutingError, match="HQ_REVIEW_PROCEDURE is required"):
-        resolve_department_hq_route("maintenance", environment={})
+        resolve_department_hq_route("business", environment={})
 
 
 def test_exact_canonical_title_override_is_accepted() -> None:
@@ -97,7 +115,7 @@ def test_exact_canonical_title_override_is_accepted() -> None:
         "LIFEOS_MAINTENANCE_HQ_CHAT_TITLE": "Maintenance_HQ",
         "LIFEOS_MAINTENANCE_HQ_AUTOMATION_TITLE": "Maintenance_HQ",
         "LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE": (
-            "projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md"
+            "projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md"
         ),
     }
 
@@ -185,20 +203,22 @@ def _service_with_row(row: dict[str, object]) -> WorkerHqReviewService:
 
 
 def test_runtime_build_wake_uses_registered_maintenance_route(monkeypatch) -> None:
-    procedure = "projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md"
-    monkeypatch.setenv("LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE", procedure)
+    monkeypatch.delenv("LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE", raising=False)
     service = _service_with_row(_validated_row("maintenance"))
 
     wake = service.build_wake("RUN-CROSS-HQ-ROUTING-1")
 
+    procedure = (
+        "projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md"
+    )
     assert wake.hq_chat_title == "Maintenance_HQ"
     assert procedure in wake.instruction
     assert wake.owning_department == "maintenance"
 
 
 def test_runtime_build_wake_holds_without_department_review_procedure(monkeypatch) -> None:
-    monkeypatch.delenv("LIFEOS_MAINTENANCE_HQ_REVIEW_PROCEDURE", raising=False)
-    service = _service_with_row(_validated_row("maintenance"))
+    monkeypatch.delenv("LIFEOS_BUSINESS_HQ_REVIEW_PROCEDURE", raising=False)
+    service = _service_with_row(_validated_row("business"))
 
     with pytest.raises(DepartmentHqRoutingError, match="HQ_REVIEW_PROCEDURE is required"):
         service.build_wake("RUN-CROSS-HQ-ROUTING-1")
