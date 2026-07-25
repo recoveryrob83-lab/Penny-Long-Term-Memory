@@ -6,7 +6,7 @@ Updated: 2026-07-25
 
 None.
 
-The repository-wide naming repair, replacement-chat GitHub reconciliation, shared publication reconciliation, and Wave 0B governance review are closed. Do not keep them open merely because a later implementation or rollout step exists under a separate lifecycle state.
+The repository-wide naming repair, replacement-chat GitHub reconciliation, shared publication reconciliation, Wave 0B governance review, and Maintenance Worker governance acceptance are closed. Do not keep them open merely because the rollout has moved into a later lifecycle stage.
 
 System-level work led or co-led by `Maintenance_HQ` remains authoritative in:
 
@@ -18,9 +18,9 @@ Do not mirror system coordination records or formal advisories here.
 
 | Status | Priority | Item | Owner | Current State | Next Action | Resume / Completion Condition |
 |---|---|---|---|---|---|---|
-| Waiting | Normal | Read-only `Maintenance_Worker` rollout governance acceptance | `Maintenance_HQ` | Profile and two procedures are merged to `main`; rollout is held on the reporting-only GitHub result write and the final HQ review procedure ID and path | Rob and `Maintenance_HQ` explicitly accept or reject the narrow immutable result-artifact write and accept the final review procedure destination or route a bounded correction | Resume only after both governance points are resolved; complete only after Engineering registration and zero-authority route testing, a current fail-closed activation-prerequisite report, one bounded `IMMEDIATE_HQ` pilot, and required verification |
+| Waiting | Normal | Read-only `Maintenance_Worker` rollout technical preparation | `Maintenance_HQ` | Profile and two procedures are merged to `main`; Rob and Maintenance accepted the reporting-only result artifact and final HQ review procedure destination | `Engineering_HQ` registers the exact `maintenance_worker` route, performs zero-authority route testing, and produces a current fail-closed activation-prerequisite report | Resume for Maintenance review when current registration, route-test, and readiness evidence exists; complete only after one separately authorized bounded `IMMEDIATE_HQ` pilot and required verification |
 
-Merged prerequisites:
+Merged and approved prerequisites:
 
 - `projects/life-logistics-hq/workers/maintenance_worker.md`
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
@@ -31,13 +31,13 @@ Authority and state:
 - Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`.
 - Rob explicitly authorized `Engineering_HQ` to prepare the Maintenance-owned prerequisite files as a temporary coordinated repair while Maintenance was occupied with reconciliation.
 - Temporary implementation authority did not transfer profile ownership, procedure ownership, Worker authority, holds, verification, retirement, or future Maintenance maintenance authority to Engineering.
-- Maintenance did not create or edit the merged profile or procedures during this reconciliation.
-- The merged profile grants one narrow create-only GitHub write for an immutable result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json`.
-- The original approval stated no GitHub writes. The reporting-only artifact write therefore requires explicit Rob and Maintenance acceptance before registration or dispatch.
-- The merged HQ review procedure uses ID `maintenance_hq_worker_review_receipt` and path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`, rather than the earlier placeholder `projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md`.
-- The final procedure contains the contract-required review sections, but the changed authoritative ID and path require explicit Maintenance acceptance.
-- No Maintenance Worker route, registry entry, schedule, dispatch, HQ wake, activation record, connector authority, source-record write authority, recurring task, spending, unattended execution, or cross-department authority is approved by the merge.
-- A merge, route registration, successful canary, or `READY_FOR_AUTHORITY_REVIEW` report does not by itself activate the Worker.
+- Maintenance did not create or edit the merged profile or procedures during reconciliation.
+- Rob and `Maintenance_HQ` explicitly accepted the narrow create-only GitHub result artifact at `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only exception.
+- The exception authorizes only the exact immutable current-run result artifact under `maintenance_worker_result_submission` version 1. It does not authorize edits to authoritative Maintenance, shared, department, runtime, route, schedule, or external-system records.
+- Rob and `Maintenance_HQ` accepted procedure ID `maintenance_hq_worker_review_receipt` and path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` as the final authoritative HQ review procedure.
+- No Maintenance Worker route, registry entry, schedule, dispatch, HQ wake, activation record, connector authority, source-record write authority, recurring task, spending, unattended execution, or cross-department authority is approved merely by the merge or governance acceptance.
+- A successful registration, canary, or `READY_FOR_AUTHORITY_REVIEW` report does not by itself activate the Worker.
+- Every readiness report must remain read-only and state `activation_authorized: false`.
 - Initial pilot verification mode remains `IMMEDIATE_HQ`.
 - Do not create competing profile or procedure copies.
 
@@ -80,7 +80,7 @@ Future Maintenance action occurs only when:
 - a department routes a bounded governance review;
 - Rob authorizes a coordinated repair;
 - a real Worker profile requires Maintenance review under the canonical contract;
-- a merged Worker prerequisite creates a concrete governance decision such as the Waiting item above.
+- current Engineering registration, route-test, or readiness evidence triggers the Waiting rollout item above.
 
 Prohibited without new authority: editing Engineering code, selectors, databases, registries, runtime state, tests, schedules, automation configuration, or prompt-runtime surfaces.
 
@@ -99,7 +99,7 @@ These are standing watches, not open work. Create or promote an open loop only w
 - **Worker profile location and authority:** Preserve `projects/<department>/workers/<profile>.md` as the canonical new profile location; keep profiles limited to stable identity and authority, and route profile corrections to the owning Department HQ.
 - **Worker deployment-state separation:** Keep route availability, pause, active or retired routing, exact-title and stable-ID resolution, receiver state, revision deduplication, verification queues, wake suppression, and technical rollover in Engineering-owned registry and runtime state rather than department profiles.
 - **Activation-gate restraint:** Treat `READY_FOR_AUTHORITY_REVIEW` as technical evidence only. It does not create owning-department authority, Maintenance approval, Rob authorization, a route, or a Worker.
-- **Immutable evidence restraint:** Do not treat a Worker result artifact as authority to change the audited source, close an advisory, repair drift, or bypass HQ review.
+- **Immutable evidence restraint:** The approved result artifact is reporting evidence only. Do not treat it as authority to change an audited source, close an advisory, repair drift, or bypass HQ review.
 - **Grandfathered pilot compatibility:** Preserve `workers/penny-raw-capture/` and `workers/penny-inventory/` as bounded compatibility pilots; keep `workers/README.md` and `workers/WORKER_STANDARD.md` compatibility-only; do not create new top-level Worker packages by analogy.
 - **Desktop automation safety:** Preserve exact destination matching, occupied-composer protection, clipboard verification, draft-only defaults where applicable, explicit send authorization, duplicate suppression, one-shot claims, shared safety pause, send budgeting, and stop-on-uncertainty behavior.
 - **Automation production boundary:** Fully unattended Windows production remains unapproved unless Engineering produces sufficient current reliability evidence and Rob authorizes the exact production scope.
@@ -113,6 +113,7 @@ These are standing watches, not open work. Create or promote an open loop only w
 
 | Closed Date | Item | Notes |
 |---|---|---|
+| 2026-07-25 | Maintenance Worker governance acceptance | Rob and Maintenance accepted the reporting-only immutable result artifact and final `maintenance_hq_worker_review_receipt` ID and path; governance hold cleared without activating or dispatching the Worker |
 | 2026-07-25 | Maintenance Worker prerequisite merge detection | Read-back found the profile and two procedures had merged to `main` during Maintenance verification; no profile or procedure was created or edited by Maintenance |
 | 2026-07-25 | Engineering, Maintenance, and global read-only comparison | Confirmed authority integrity; identified stale Engineering continuity and Maintenance continuity requiring reconciliation |
 | 2026-07-25 | Secondary Sync reconciliation | Removed stale `ADV-20260723-052`, Engineering-title-rollover, and Project publication waiting language from shared and Maintenance continuity records |
