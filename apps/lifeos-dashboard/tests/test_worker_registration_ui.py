@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 PACKAGE = Path(__file__).parents[1] / "lifeos_dashboard"
 TEMPLATE = PACKAGE / "templates" / "index.html"
 SCRIPT = PACKAGE / "static" / "worker-route-management.js"
