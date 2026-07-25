@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-23
+Updated: 2026-07-25
 Purpose: High-level LifeOS project and operating-surface map.
 
 ## Operating Rule
@@ -17,8 +17,8 @@ GitHub is the map. Drive is the filing cabinet.
 |---|---|---|---|---|
 | Active | `LifeOS_HQ` | `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md` | Shared meeting room; no independent backlog | Use `Chief_of_Staff_HQ` as chair and transfer real actions to the owning department |
 | Active | `Chief_of_Staff_HQ` | `projects/main-assistant/` | Rob's primary point of contact, personal assistant, daily operations, routing, reports, and follow-through | Maintain the daily operating picture and route specialist assignments without absorbing ownership |
-| Active | `Maintenance_HQ` | `projects/life-logistics-hq/` | Global GitHub maintenance, governance, boot integrity, audits, source boundaries, publication mirrors, and reconciliation | Maintain the shared operating system, complete the pending Project Settings and Project Source publication reconciliation with Rob, and route department-local corrections to owners |
-| Active | `Engineering_HQ` | `projects/engineering/` | Technical architecture, dashboard, automation, validators, testing, routing runtime, and implementation | Complete the authorized exact-title implementation rollover and demonstrated courier verifier repair within Engineering-owned surfaces |
+| Active | `Maintenance_HQ` | `projects/life-logistics-hq/` | Global GitHub maintenance, governance, boot integrity, audits, source boundaries, publication mirrors, and reconciliation | Maintain the shared operating system, audit governance-sensitive rollout boundaries, and route department-local corrections to owners |
+| Active | `Engineering_HQ` | `projects/engineering/` | Technical architecture, dashboard, automation, validators, testing, routing runtime, and implementation | Observe ordinary post-Wave-0B operation and repair only demonstrated technical defects under bounded authority |
 | Active | `Finance_HQ` | `projects/finance-benefits/` | Finance, ledger, forecasting, benefits, affordability, and money-risk advisory | Maintain Finance-owned forecasting and support concrete money decisions |
 | Active | `Business_HQ` | `projects/business-development/` | Parent business strategy, positioning, market, offers, and portfolio decisions | Guide Office Leaks market hypotheses and preserve future portfolio capacity |
 | Active | `Office_Leaks_HQ` | `projects/office-leaks-consulting/` | Active business-unit execution, market test, outreach, offers, and delivery continuity | Observe organic signal, continue the lead-loss lane, and route concrete inquiries or delivery work |
@@ -31,8 +31,8 @@ GitHub is the map. Drive is the filing cabinet.
 | Active | LifeOS Flow Board | `coordination/TRELLO_FLOW_BOARD_SOP.md` | Trello authoritative | Active operating interface | Keep one card in Now, no more than three in Next, and preserve source-system boundaries |
 | Active | LifeOS Dashboard | `apps/lifeos-dashboard/` | Local Windows application | Running / tested / read-mostly four-source interface | Maintain verified GitHub, Trello, Todoist, and Calendar views; expand only after demonstrated need and explicit routing |
 | Active | Desktop Department Automation | `apps/lifeos-dashboard/automation/` | Local Windows automation | Operational / validated across seven department HQs | Preserve exact navigation, draft safety, clipboard verification, explicit send authorization, one-shot claims, and stop-on-uncertainty behavior |
-| Active | Automation Command Center | `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md` | Dashboard-integrated implementation | Package E closed / active Engineering pilot control surface | Complete the exact-title implementation rollover and courier post-navigation verifier repair; preserve source-owner advisory closure and unattended-production boundaries |
-| Active Pilot | Chief_of_Staff_HQ Advisory Watcher | `scheduled-tasks/TASK_INDEX.md` | ChatGPT scheduled task | Hourly read-only destination validation | Await Rob confirmation under `ADV-20260723-052`; report in the existing `Chief_of_Staff_HQ` conversation without creating chats or work |
+| Active | Automation Command Center | `projects/engineering/notebook/NOTE-20260717-012-lifeos-ui-automation-command-center-plan.md` | Dashboard-integrated implementation | Package E closed / Package F Wave 0B safety kernel complete | Preserve source-owner lifecycle, shared pause, send-budget, activation-readiness, exact-route, and unattended-production boundaries; change only from demonstrated evidence and bounded authority |
+| Active Pilot | Chief_of_Staff_HQ Advisory Watcher | `scheduled-tasks/TASK_INDEX.md` | ChatGPT scheduled task | Hourly read-only pilot / destination validated | Continue reporting in the existing `Chief_of_Staff_HQ` conversation under its standing read-only authority without creating chats, work, or advisory lifecycle changes |
 | Active | Site Cleanup | `projects/cleanup/` | REF-002 | Active when routed | Continue collecting and comparing options when Rob requests follow-up |
 | Active | LifeOS Infrastructure | `projects/life-os-infrastructure/` | REF-004 | Active / As Needed | Maintain shared policies, Chat/Work boundaries, Worker architecture, dashboard boundaries, and source-system standards |
 | Archived | Virtual Assistant Business | `archive/projects/virtual-assistant-business/` | Unassigned | Historical predecessor to `Office_Leaks_HQ` | Consult only when historical context is needed; active Office Leaks state remains in `projects/office-leaks-consulting/` |
@@ -57,7 +57,7 @@ The LifeOS Dashboard is locally running and tested with four verified sources: G
 
 Guarded GitHub auto-sync is limited to clean, strictly-behind fast-forward updates. Gmail and Drive dashboard adapters remain deferred.
 
-Desktop automation is validated across the seven department HQs. The Command Center recognizes `LifeOS_HQ` as an eighth exact destination. Current Engineering-owned automation and runtime labels may still require the authorized canonical-title rollover.
+Desktop automation is validated across the seven department HQs. The canonical runtime title rollover, direct Worker URL routing, guarded route capture, browser bridge reconnect, shared safety pause, global send budget, and read-only activation-prerequisite report are complete. Their technical completion creates no Worker or rollout authority.
 
 Scheduler production reliability has live evidence, but fully unattended Windows production remains unapproved without current Engineering evidence and explicit Rob authorization. `Engineering_HQ Daily Sync` remains paused by deliberate choice.
 
