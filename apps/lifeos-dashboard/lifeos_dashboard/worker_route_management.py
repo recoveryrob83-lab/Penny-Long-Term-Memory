@@ -1,4 +1,5 @@
 """Safe capture, rollover, and canary promotion for Worker conversation routes."""
+
 from __future__ import annotations
 
 import json
@@ -9,9 +10,9 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from collections.abc import Callable, Mapping
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
-from typing import Callable, Mapping
 
 from .command_center import CommandCenterService
 from .worker_operations import (
@@ -120,7 +121,7 @@ class WorkerRouteManager:
         expected_route_revision: int,
         confirm_capture: bool,
     ) -> dict[str, object]:
-        """Capture the sole ChatGPT conversation and hold a changed route for canary verification."""
+        """Capture one ChatGPT conversation and hold the changed route for verification."""
 
         clean_worker_id = str(worker_id or "").strip()
         if not clean_worker_id:
