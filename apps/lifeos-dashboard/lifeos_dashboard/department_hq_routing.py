@@ -112,6 +112,12 @@ def canonical_department_key(value: str) -> str:
     return key
 
 
+def department_project_root(value: str) -> PurePosixPath:
+    """Return the canonical project subtree for one explicit owning department."""
+
+    return _PROJECT_ROOT_BY_KEY[canonical_department_key(value)]
+
+
 def _environment(environment: Mapping[str, str] | None) -> Mapping[str, str]:
     return os.environ if environment is None else environment
 
@@ -229,6 +235,7 @@ __all__ = [
     "DepartmentHqRoute",
     "DepartmentHqRoutingError",
     "canonical_department_key",
+    "department_project_root",
     "resolve_department_hq_route",
     "resolve_hq_automation_title",
     "resolve_hq_chat_title",

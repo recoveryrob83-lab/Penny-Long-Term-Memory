@@ -1,4 +1,5 @@
 """Safe capture, rollover, and canary promotion for Worker conversation routes."""
+
 from __future__ import annotations
 
 import json
@@ -9,9 +10,9 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from collections.abc import Callable, Mapping
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
-from typing import Callable, Mapping
 
 from .command_center import CommandCenterService
 from .worker_operations import (
@@ -23,6 +24,7 @@ from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError, _conversati
 from .worker_runtime_service import WorkerRuntimeService
 
 ENGINEERING_CANARY_WORKER_ID = "engineering_worker"
+CANARY_HOLD_MARKER = "awaiting zero-authority browser canary"
 
 
 @dataclass(frozen=True)
@@ -119,7 +121,7 @@ class WorkerRouteManager:
         expected_route_revision: int,
         confirm_capture: bool,
     ) -> dict[str, object]:
-        """Capture the sole ChatGPT conversation and hold a changed route for canary verification."""
+        """Capture one ChatGPT conversation and hold the changed route for verification."""
 
         clean_worker_id = str(worker_id or "").strip()
         if not clean_worker_id:
@@ -176,7 +178,7 @@ class WorkerRouteManager:
                 route_revision=next_revision,
             )
             hold_reason = (
-                f"Direct URL route revision {next_revision} awaiting zero-authority browser canary."
+                f"Direct URL route revision {next_revision} {CANARY_HOLD_MARKER}."
             )
             now = time.time()
 
@@ -246,13 +248,19 @@ class WorkerRouteManager:
         finally:
             run_lock.release()
 
-    def canary_witness(self, worker_id: str = ENGINEERING_CANARY_WORKER_ID) -> WorkerRouteWitness:
+    def canary_witness(
+        self,
+        worker_id: str = ENGINEERING_CANARY_WORKER_ID,
+    ) -> WorkerRouteWitness:
         """Return the exact route that a canary is expected to verify."""
 
-        entry = self.runtime.worker(worker_id, require_enabled=True)
+        clean_worker_id = str(worker_id or "").strip()
+        if not clean_worker_id:
+            raise WorkerRuntimeError("worker_id cannot be empty.")
+        entry = self.runtime.worker(clean_worker_id, require_enabled=True)
         if not entry.conversation_url or entry.route_revision < 1:
             raise WorkerRuntimeError("The Worker has no initialized direct route to verify.")
-        route = self.runtime.store.route_state(worker_id)
+        route = self.runtime.store.route_state(clean_worker_id)
         if route is not None and route.availability in {"unavailable", "ambiguous"}:
             raise WorkerRuntimeError(
                 f"The Worker route is {route.availability}; canary dispatch is blocked."
@@ -262,6 +270,29 @@ class WorkerRouteManager:
             conversation_url=entry.conversation_url,
             route_revision=entry.route_revision,
         )
+
+    def pending_canary_witness(self) -> WorkerRouteWitness:
+        """Resolve exactly one route still held for its zero-authority canary."""
+
+        candidates: list[str] = []
+        for entry in self.runtime.workers():
+            if (
+                entry.deployment_state != "enabled"
+                or not entry.conversation_url
+                or entry.route_revision < 1
+            ):
+                continue
+            route = self.runtime.store.route_state(entry.worker_id)
+            if route is None or route.availability != "unknown":
+                continue
+            candidates.append(entry.worker_id)
+
+        if len(candidates) != 1:
+            raise WorkerRuntimeError(
+                "Courier self-test requires exactly one registered route awaiting its "
+                f"zero-authority canary; found {len(candidates)}."
+            )
+        return self.canary_witness(candidates[0])
 
     def promote_after_canary(
         self,
@@ -333,7 +364,7 @@ class RouteAwareWorkerOperationsService(WorkerOperationsService):
         confirm_send: bool,
         timeout_seconds: int = 300,
     ) -> dict[str, object]:
-        """Run one canary against the witnessed route and promote only that exact revision."""
+        """Run one canary against the sole pending route and promote that exact revision."""
 
         if not confirm_send:
             raise WorkerRuntimeError("Courier self-test requires explicit send confirmation.")
@@ -346,7 +377,7 @@ class RouteAwareWorkerOperationsService(WorkerOperationsService):
         if not run_lock.acquire(blocking=False):
             raise WorkerRuntimeError("Another automation job is already running.")
         try:
-            witness = self.routes.canary_witness()
+            witness = self.routes.pending_canary_witness()
             command = [
                 sys.executable,
                 str(
@@ -357,6 +388,10 @@ class RouteAwareWorkerOperationsService(WorkerOperationsService):
                 "--send",
                 "--confirm-send",
                 "SYNTHETIC_SEND",
+                "--worker-id",
+                witness.worker_id,
+                "--expected-route-revision",
+                str(witness.route_revision),
                 "--database-path",
                 str(self.routes.database_path),
                 "--timeout-seconds",
@@ -397,6 +432,7 @@ class RouteAwareWorkerOperationsService(WorkerOperationsService):
 
 
 __all__ = [
+    "CANARY_HOLD_MARKER",
     "CapturedConversation",
     "ENGINEERING_CANARY_WORKER_ID",
     "RouteAwareWorkerOperationsService",

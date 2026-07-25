@@ -25,6 +25,7 @@ from .browser_bridge import BrowserBridgeService
 from .command_center import CommandCenterError, CommandCenterService, CommandJob
 from .department_inspection import DepartmentInspectionSource
 from .service import DashboardService
+from .worker_registration import WorkerRegistrationService
 from .worker_route_management import RouteAwareWorkerOperationsService
 from .worker_runtime import WorkerRuntimeError
 
@@ -102,6 +103,11 @@ class WorkerRouteCaptureRequest(BaseModel):
     worker_id: str
     expected_route_revision: int = Field(ge=0)
     confirm_capture: bool = False
+
+
+class WorkerRegistrationRequest(BaseModel):
+    profile_path: str
+    confirm_registration: bool = False
 
 
 class WorkerReviewRequest(BaseModel):
@@ -182,6 +188,11 @@ def create_app(
         if repository_root is not None
         else None
     )
+    worker_registration = (
+        WorkerRegistrationService(command_center, repository_root)
+        if repository_root is not None
+        else None
+    )
     browser_bridge = (
         BrowserBridgeService(
             command_center,
@@ -202,6 +213,7 @@ def create_app(
     application.state.dashboard_service = service
     application.state.command_center = command_center
     application.state.worker_operations = worker_operations
+    application.state.worker_registration = worker_registration
     application.state.browser_bridge = browser_bridge
     application.state.department_inspection = department_inspection
     application.mount("/static", StaticFiles(directory=PACKAGE_ROOT / "static"), name="static")
@@ -248,6 +260,36 @@ def create_app(
                 detail="Worker Operations requires a local LifeOS repository checkout.",
             )
         return await run_in_threadpool(worker_operations.status)
+
+    @application.get("/api/worker-operations/registration")
+    async def worker_registration_status() -> dict[str, object]:
+        if worker_registration is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker registration requires a local LifeOS repository checkout.",
+            )
+        return await run_in_threadpool(worker_registration.status)
+
+    @application.post("/api/worker-operations/registration")
+    async def register_worker(
+        request: WorkerRegistrationRequest,
+    ) -> dict[str, object]:
+        if worker_operations is None or worker_registration is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Worker registration requires a local LifeOS repository checkout.",
+            )
+        try:
+            result = await run_in_threadpool(
+                worker_registration.register_profile,
+                request.profile_path,
+                confirm_registration=request.confirm_registration,
+            )
+            result["registration"] = worker_registration.status()
+            result["operations"] = worker_operations.status()
+            return result
+        except WorkerRuntimeError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     @application.post("/api/worker-operations/browser/reconnect")
     async def reconnect_browser_bridge(

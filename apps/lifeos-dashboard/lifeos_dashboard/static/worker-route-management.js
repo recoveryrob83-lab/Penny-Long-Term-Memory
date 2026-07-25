@@ -10,10 +10,21 @@ const workerRouteUi = {
   message: document.getElementById("wo-route-message"),
 };
 
-if (workerRouteUi.panel) {
+const workerRegistrationUi = {
+  panel: document.getElementById("wo-worker-registration"),
+  profile: document.getElementById("wo-registration-profile"),
+  confirm: document.getElementById("wo-confirm-registration"),
+  register: document.getElementById("wo-register-worker"),
+  message: document.getElementById("wo-registration-message"),
+};
+
+if (workerRouteUi.panel && workerRegistrationUi.panel) {
   let routeOperations = null;
+  let registrationStatus = null;
   let routeBusy = false;
+  let registrationBusy = false;
   let selectedWorkerId = "";
+  let selectedProfilePath = "";
 
   const routeEscape = (value) => String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -26,16 +37,25 @@ if (workerRouteUi.panel) {
     (item) => item.worker_id === selectedWorkerId,
   );
 
+  const currentProfile = () => (registrationStatus?.candidates || []).find(
+    (item) => item.profile_path === selectedProfilePath,
+  );
+
   function setRouteMessage(message, tone = "neutral") {
     workerRouteUi.message.textContent = message;
     workerRouteUi.message.dataset.tone = tone;
+  }
+
+  function setRegistrationMessage(message, tone = "neutral") {
+    workerRegistrationUi.message.textContent = message;
+    workerRegistrationUi.message.dataset.tone = tone;
   }
 
   function updateRouteAvailability() {
     const worker = currentWorker();
     const browserReady = Boolean(routeOperations?.browser?.available);
     const paused = Boolean(routeOperations?.paused);
-    const blocked = Boolean(routeOperations?.running || routeBusy);
+    const blocked = Boolean(routeOperations?.running || routeBusy || registrationBusy);
     workerRouteUi.capture.disabled = (
       !worker
       || !browserReady
@@ -43,6 +63,54 @@ if (workerRouteUi.panel) {
       || blocked
       || !workerRouteUi.confirm.checked
     );
+  }
+
+  function updateRegistrationAvailability() {
+    const profile = currentProfile();
+    const paused = Boolean(registrationStatus?.paused);
+    const blocked = Boolean(
+      registrationStatus?.running || registrationBusy || routeBusy
+    );
+    workerRegistrationUi.register.disabled = (
+      !profile
+      || !paused
+      || blocked
+      || !workerRegistrationUi.confirm.checked
+    );
+  }
+
+  function renderRegistration(data) {
+    registrationStatus = data;
+    const candidates = data.candidates || [];
+    if (!candidates.some((item) => item.profile_path === selectedProfilePath)) {
+      selectedProfilePath = candidates[0]?.profile_path || "";
+    }
+    workerRegistrationUi.profile.innerHTML = candidates.length
+      ? candidates.map((item) => (
+        `<option value="${routeEscape(item.profile_path)}">${routeEscape(item.chat_title)} · ${routeEscape(item.worker_id)}</option>`
+      )).join("")
+      : '<option value="">No canonical unregistered profiles</option>';
+    workerRegistrationUi.profile.value = selectedProfilePath;
+
+    if (!candidates.length && (data.errors || []).length) {
+      setRegistrationMessage(
+        `Profile discovery held: ${data.errors[0].reason}`,
+        "bad",
+      );
+    } else if (!candidates.length) {
+      setRegistrationMessage("Every canonical profile is already registered.", "good");
+    } else if (!data.paused) {
+      setRegistrationMessage(
+        "Pause automation before registering the selected canonical identity.",
+        "warn",
+      );
+    } else {
+      setRegistrationMessage(
+        "Ready to create one route-less registry row at revision 0.",
+        "neutral",
+      );
+    }
+    updateRegistrationAvailability();
   }
 
   function renderRouteManagement(data) {
@@ -101,6 +169,83 @@ if (workerRouteUi.panel) {
     }
   }
 
+  async function loadRegistration({quiet = false} = {}) {
+    if (!quiet) workerRegistrationUi.register.disabled = true;
+    try {
+      const response = await fetch(
+        "/api/worker-operations/registration",
+        {cache: "no-store"},
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || `Worker registration returned ${response.status}.`);
+      renderRegistration(data);
+    } catch (error) {
+      setRegistrationMessage(error.message, "bad");
+    } finally {
+      updateRegistrationAvailability();
+    }
+  }
+
+  workerRegistrationUi.profile.addEventListener("change", () => {
+    selectedProfilePath = workerRegistrationUi.profile.value;
+    workerRegistrationUi.confirm.checked = false;
+    updateRegistrationAvailability();
+  });
+
+  workerRegistrationUi.confirm.addEventListener(
+    "change",
+    updateRegistrationAvailability,
+  );
+
+  workerRegistrationUi.register.addEventListener("click", async () => {
+    const profile = currentProfile();
+    if (!profile || !workerRegistrationUi.confirm.checked) return;
+    registrationBusy = true;
+    updateRegistrationAvailability();
+    updateRouteAvailability();
+    workerRegistrationUi.register.textContent = "Registering Worker...";
+    setRegistrationMessage(
+      `Registering ${profile.chat_title} from ${profile.profile_path}.`,
+      "warn",
+    );
+    try {
+      const response = await fetch("/api/worker-operations/registration", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          profile_path: profile.profile_path,
+          confirm_registration: true,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || "Worker registration failed.");
+      selectedWorkerId = data.worker?.worker_id || selectedWorkerId;
+      workerRegistrationUi.confirm.checked = false;
+      renderRegistration(data.registration || registrationStatus || {});
+      renderRouteManagement(data.operations || routeOperations || {});
+      setRegistrationMessage(
+        `${data.message} Registration created no route and no activation authority.`,
+        data.changed ? "good" : "neutral",
+      );
+      setRouteMessage(
+        `Select ${data.worker?.chat_title || "the new Worker"}, keep its exact chat open, and capture the route while automation remains paused.`,
+        "warn",
+      );
+      document.getElementById("wo-refresh")?.click();
+    } catch (error) {
+      setRegistrationMessage(error.message, "bad");
+      await Promise.all([
+        loadRegistration({quiet: true}),
+        loadRouteOperations({quiet: true}),
+      ]);
+    } finally {
+      registrationBusy = false;
+      workerRegistrationUi.register.textContent = "Register approved Worker";
+      updateRegistrationAvailability();
+      updateRouteAvailability();
+    }
+  });
+
   workerRouteUi.worker.addEventListener("change", () => {
     selectedWorkerId = workerRouteUi.worker.value;
     workerRouteUi.confirm.checked = false;
@@ -114,6 +259,7 @@ if (workerRouteUi.panel) {
     if (!worker || !workerRouteUi.confirm.checked) return;
     routeBusy = true;
     updateRouteAvailability();
+    updateRegistrationAvailability();
     workerRouteUi.capture.textContent = "Capturing route...";
     setRouteMessage(
       `Capturing the sole open ChatGPT conversation for ${worker.chat_title}.`,
@@ -135,7 +281,7 @@ if (workerRouteUi.panel) {
       renderRouteManagement(data.operations || routeOperations || {});
       setRouteMessage(
         data.changed
-          ? `${data.message} Resume automation, then run the zero-authority courier test.`
+          ? `${data.message} Resume automation, then run the zero-authority courier test supported for that Worker.`
           : data.message,
         data.changed ? "warn" : "good",
       );
@@ -147,18 +293,29 @@ if (workerRouteUi.panel) {
       routeBusy = false;
       workerRouteUi.capture.textContent = "Capture active chat as route";
       updateRouteAvailability();
+      updateRegistrationAvailability();
     }
   });
 
   document.getElementById("wo-pause")?.addEventListener("click", () => {
-    window.setTimeout(() => loadRouteOperations({quiet: true}), 350);
+    window.setTimeout(() => {
+      loadRouteOperations({quiet: true});
+      loadRegistration({quiet: true});
+    }, 350);
+  });
+  document.getElementById("wo-refresh")?.addEventListener("click", () => {
+    loadRegistration({quiet: true});
   });
   document.getElementById("wo-self-test")?.addEventListener("click", () => {
     window.setTimeout(() => loadRouteOperations({quiet: true}), 1200);
   });
 
   loadRouteOperations();
+  loadRegistration();
   window.setInterval(() => {
-    if (!routeBusy && !document.hidden) loadRouteOperations({quiet: true});
+    if (!routeBusy && !registrationBusy && !document.hidden) {
+      loadRouteOperations({quiet: true});
+      loadRegistration({quiet: true});
+    }
   }, 8000);
 }

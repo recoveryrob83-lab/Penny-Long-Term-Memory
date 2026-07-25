@@ -4,12 +4,12 @@ The durable naming authority remains ``memory/HQ_NAMING_STANDARD.md``. This modu
 Engineering-owned executable mapping used by routing, display, and active local-state repair.
 It never rewrites historical execution evidence.
 """
+
 from __future__ import annotations
 
 import sqlite3
 from pathlib import Path
 from typing import Final
-
 
 CANONICAL_HQ_TITLES: Final[dict[str, str]] = {
     "hub": "LifeOS_HQ",
@@ -24,6 +24,7 @@ CANONICAL_HQ_TITLES: Final[dict[str, str]] = {
 
 CANONICAL_WORKER_TITLES: Final[dict[str, str]] = {
     "engineering_worker": "Engineering_Worker",
+    "maintenance_worker": "Maintenance_Worker",
 }
 
 EXACT_TITLE_ROLLOVER: Final[dict[str, str]] = {
