@@ -24,6 +24,7 @@ CANONICAL_HQ_TITLES: Final[dict[str, str]] = {
 
 CANONICAL_WORKER_TITLES: Final[dict[str, str]] = {
     "engineering_worker": "Engineering_Worker",
+    "maintenance_worker": "Maintenance_Worker",
 }
 
 EXACT_TITLE_ROLLOVER: Final[dict[str, str]] = {
