@@ -10,8 +10,13 @@ from lifeos_dashboard.worker_runtime import WorkerRegistryEntry, WorkerRuntimeEr
 PROFILE_PATH = "projects/life-logistics-hq/workers/maintenance_worker.md"
 
 
-def write_profile(repository_root: Path, *, owning_department: str) -> None:
-    profile = repository_root / PROFILE_PATH
+def write_profile(
+    repository_root: Path,
+    *,
+    owning_department: str,
+    profile_path: str = PROFILE_PATH,
+) -> None:
+    profile = repository_root / profile_path
     profile.parent.mkdir(parents=True)
     profile.write_text(
         "\n".join(
@@ -32,19 +37,41 @@ def write_profile(repository_root: Path, *, owning_department: str) -> None:
     )
 
 
-def test_profile_title_must_match_owning_department(tmp_path: Path) -> None:
-    repository_root = tmp_path / "repo"
-    repository_root.mkdir()
-    write_profile(repository_root, owning_department="engineering")
+def service_for(tmp_path: Path, repository_root: Path) -> WorkerRegistrationService:
     command_center = CommandCenterService(
         tmp_path,
         database_path=tmp_path / "command-center.sqlite3",
     )
-    service = WorkerRegistrationService(command_center, repository_root)
-    command_center.set_paused(True)
+    return WorkerRegistrationService(command_center, repository_root)
+
+
+def test_profile_title_must_match_owning_department(tmp_path: Path) -> None:
+    repository_root = tmp_path / "repo"
+    repository_root.mkdir()
+    write_profile(repository_root, owning_department="engineering")
+    service = service_for(tmp_path, repository_root)
+    service.command_center.set_paused(True)
 
     with pytest.raises(WorkerRuntimeError, match="owning department"):
         service.register_profile(PROFILE_PATH, confirm_registration=True)
+
+    assert service.runtime.workers() == []
+
+
+def test_profile_path_must_match_owning_department_subtree(tmp_path: Path) -> None:
+    repository_root = tmp_path / "repo"
+    repository_root.mkdir()
+    wrong_path = "projects/engineering/workers/maintenance_worker.md"
+    write_profile(
+        repository_root,
+        owning_department="maintenance",
+        profile_path=wrong_path,
+    )
+    service = service_for(tmp_path, repository_root)
+    service.command_center.set_paused(True)
+
+    with pytest.raises(WorkerRuntimeError, match="owning department subtree"):
+        service.register_profile(wrong_path, confirm_registration=True)
 
     assert service.runtime.workers() == []
 
@@ -53,11 +80,7 @@ def test_status_reports_existing_registry_identity_drift(tmp_path: Path) -> None
     repository_root = tmp_path / "repo"
     repository_root.mkdir()
     write_profile(repository_root, owning_department="maintenance")
-    command_center = CommandCenterService(
-        tmp_path,
-        database_path=tmp_path / "command-center.sqlite3",
-    )
-    service = WorkerRegistrationService(command_center, repository_root)
+    service = service_for(tmp_path, repository_root)
     service.runtime.register_worker(
         WorkerRegistryEntry(
             worker_id="maintenance_worker",
