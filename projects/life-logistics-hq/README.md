@@ -51,15 +51,34 @@ The naming-repair report is stored in Google Drive at `Life Organization/Chief E
 
 Engineering completed the separately authorized canonical runtime-title rollover, courier verifier repair, direct exact-URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel within Engineering-owned surfaces. Technical completion did not create cross-department Worker authority.
 
-Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and review procedure through a coordinated repair while Maintenance was reconciling shared state.
+Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and procedures through a coordinated repair while Maintenance was reconciling shared state.
 
-Current rollout state:
+The authorized branch has now merged these Maintenance-owned prerequisites to `main`:
 
-- the proposed profile and review procedure are held in an Engineering branch pending merge;
-- neither prerequisite is yet authoritative on `main`;
-- Maintenance did not create either file during the 2026-07-25 reconciliation;
-- no Maintenance Worker registry row, private route, schedule, dispatch, HQ wake, activation record, connector authority, durable-write authority, or unattended execution authority has been created;
-- ownership of the profile, procedure, authority, holds, verification, and retirement remains with `Maintenance_HQ` after merge.
+- `projects/life-logistics-hq/workers/maintenance_worker.md`
+- `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
+- `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
+
+Maintenance did not create or edit those three files during this reconciliation.
+
+## Maintenance Worker Governance Hold
+
+The merged profile is read-only with respect to authoritative maintenance and source records, but it grants one narrow create-only GitHub write for an immutable Worker result artifact under:
+
+`projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json`
+
+The original Maintenance approval stated **no GitHub writes**. The immutable result-artifact write is therefore a material scope distinction that requires explicit Maintenance and Rob acceptance before route registration, activation review, or pilot dispatch.
+
+The merged HQ review procedure also uses final procedure ID `maintenance_hq_worker_review_receipt` at `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`, rather than the earlier placeholder path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md`. The merged procedure contains the contract-required review sections, but the final destination and ID require explicit acceptance because the earlier approval named a different authoritative path.
+
+Until both points are accepted or corrected:
+
+- the profile and procedures may remain on `main` as merged prerequisites;
+- no Maintenance Worker route, registry entry, schedule, dispatch, HQ wake, activation, connector authority, source-record write authority, unattended execution authority, spending, or cross-department authority is approved;
+- `READY_FOR_AUTHORITY_REVIEW` remains technical evidence only and cannot clear this governance hold;
+- Maintenance must not create competing profile or procedure copies.
+
+Ownership of the profile, procedures, authority, holds, verification, and retirement remains with `Maintenance_HQ`.
 
 ## Chief_of_Staff_HQ Relationship
 
@@ -99,8 +118,9 @@ Do not rename the canonical folder without a separately authorized migration.
 - `notes.md` when useful
 - `sources.md` when useful
 - `notebook/` for promoted durable Maintenance reasoning, decisions, evidence, validation, and history
-- `workers/` only for active department-owned Worker profiles created under the canonical Worker contract
-- `procedures/` for active Maintenance-owned procedures when a real operational need and authority exist
+- `workers/` for active department-owned Worker profiles created under the canonical Worker contract
+- `procedures/` for active Maintenance-owned procedures
+- `worker-results/` only for immutable evidence created under an exact approved Worker reporting procedure
 
 ## Replacement-Chat Start
 
