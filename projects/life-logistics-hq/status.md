@@ -2,7 +2,7 @@
 
 Updated: 2026-07-25
 Project: Maintenance_HQ
-Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Preparation Waiting on Engineering Branch Merge
+Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Prerequisites Merged / Governance Review Hold
 
 ## Current Mission
 
@@ -34,27 +34,32 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - The activation-prerequisite report remains read-only, fail-closed, and incapable of granting authority.
 - The deployed project context shows canonical underscore instructions and retrieves the stable global and intended-room handbook mirrors. The publication-reconciliation wrapper is closed.
 
-## Maintenance Worker Preparation
+## Maintenance Worker Prerequisites
 
 Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`.
 
-Approved initial scope:
+The following Maintenance-owned prerequisites now exist on `main`:
 
-- read-only Boot and Sync review;
-- global and department pointer checks;
-- ownership, naming, source-boundary, advisory-index, and handbook-source audits;
-- evidence-backed `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL` outcomes;
-- `IMMEDIATE_HQ` verification for the initial pilot.
+- `projects/life-logistics-hq/workers/maintenance_worker.md`
+- `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
+- `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
 
-Current state:
+Rob authorized `Engineering_HQ` to prepare these files as a bounded coordinated repair while Maintenance was occupied with reconciliation. Maintenance did not create or edit the merged profile or procedures during this pass. Temporary implementation authority did not transfer ownership or rollout authority to Engineering.
 
-- Rob authorized `Engineering_HQ` to prepare the Maintenance-owned profile and review procedure as a bounded coordinated repair while Maintenance was occupied with reconciliation;
-- Engineering is holding those proposed files in a branch pending merge;
-- neither file is authoritative on `main` yet;
-- Maintenance will not create competing copies;
-- no Maintenance Worker registry row, private route, schedule, dispatch, HQ wake, or activation record exists on current authoritative evidence;
-- no connector, external-system write, durable GitHub write, recurring schedule, unattended execution, spending, or cross-department authority is approved;
-- after merge, Maintenance must perform a read-only conformity review before Engineering registration and testing continue.
+## Current Governance Hold
+
+The profile and procedures preserve read-only access to authoritative source records and prohibit maintenance repair, source edits, external writes, route mutation, self-modification, unattended execution, and cross-department authority.
+
+Two points require explicit acceptance before Engineering registration or pilot dispatch:
+
+1. The merged profile permits one create-only immutable GitHub result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json`. The original approval stated no GitHub writes, so this reporting-only write requires explicit Rob and Maintenance acceptance.
+2. The merged HQ review procedure uses procedure ID `maintenance_hq_worker_review_receipt` and path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`, rather than the earlier placeholder `projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md`. Its structure matches the canonical review contract, but the final authoritative ID and path require explicit Maintenance acceptance.
+
+Until both points are resolved:
+
+- no Maintenance Worker route, registry entry, schedule, dispatch, HQ wake, activation, connector authority, source-record write authority, unattended execution, spending, or cross-department authority is approved;
+- no competing profile or procedure copy should be created;
+- `READY_FOR_AUTHORITY_REVIEW` remains technical evidence only.
 
 ## 2026-07-23-25 Completed Maintenance
 
@@ -73,7 +78,8 @@ Current state:
 - Closed the shared ChatGPT Project publication reconciliation after current project context showed canonical names, retrieved the global handbook, exposed the eight intended-room handbooks, and showed no numbered competing global handbook.
 - Completed a read-only Wave 0B governance review and confirmed that Engineering completion creates no Worker activation authority.
 - Reconciled the system handoff, active-project map, system open loops, and Maintenance continuity after Wave 0B and publication completion.
-- Completed a read-only Engineering, Maintenance, and global drift comparison, then updated only Maintenance-owned continuity for the authorized branch-held Worker preparation.
+- Completed a read-only Engineering, Maintenance, and global drift comparison.
+- Detected the Maintenance Worker prerequisite merge during verification and updated only Maintenance-owned continuity without modifying the profile or procedures.
 
 ## Active Maintenance Priorities
 
@@ -86,8 +92,8 @@ Current state:
 - Keep the global handbook role-neutral and each room handbook explicitly scoped, noncanonical, and refreshable only through meaningful stable-title replacement.
 - Audit the canonical Worker contract, profile location, root-pilot compatibility status, and Maintenance/Engineering/department ownership split.
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
-- Do not create a competing Maintenance Worker profile or review procedure while the authorized Engineering branch is pending merge.
-- After merge, verify the profile and procedure against the approved read-only scope before technical registration or pilot execution.
+- Resolve the two explicit Maintenance Worker governance questions before registration or pilot dispatch.
+- Do not create competing Maintenance Worker profile or procedure files.
 - Route newly demonstrated department-local drift to the owning Department HQ rather than silently repairing it without authority.
 - Keep desktop automation and guarded GitHub sync safety gates intact.
 - Preserve the unattended-automation production boundary and the paused `Engineering_HQ Daily Sync` state.
@@ -119,4 +125,4 @@ Current state:
 
 ## Best Next Action
 
-Wait for Engineering to merge the authorized branch containing the proposed Maintenance Worker profile and Maintenance HQ review procedure. Then fetch both files from `main`, perform a read-only conformity review, and allow Engineering registration, route testing, and activation-prerequisite reporting only after that review passes. A merged profile or passing technical report does not itself activate the Worker.
+Resolve the reporting-only GitHub result write and the final HQ review procedure ID and path. After explicit acceptance or correction, allow Engineering registration, zero-authority route testing, and a current activation-prerequisite report. A merged profile or passing technical report does not itself activate the Worker.
