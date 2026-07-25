@@ -4,7 +4,7 @@ Updated: 2026-07-25
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slices 1–3 Complete / Wave 0B Slice 4 Contract-Derived Activation Gate Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
+Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Controlled Cross-Department Safety Kernel Complete / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
 
 ## Summary
 
@@ -43,9 +43,12 @@ Wave 0A completion does not activate any non-Engineering Worker, create a cross-
 
 ### Wave 0B: Controlled cross-department safety kernel
 
-Lifecycle State: ACTIVE
+Lifecycle State: COMPLETE
 Priority: High
 Started: 2026-07-23
+Completed: 2026-07-25
+
+Wave 0B completed Engineering's bounded technical safety kernel for future cross-department Worker adoption. It did not activate a Worker, create a non-Engineering private route, grant connector or durable-write authority, authorize unattended sends, or transfer activation authority to Engineering.
 
 #### Slice 1: Cross-department owning-HQ destination resolution
 
@@ -88,13 +91,16 @@ Rob ran both repository-native pytest gates and the focused Ruff gate successful
 
 #### Slice 4: Contract-derived activation gate
 
-Lifecycle State: ACTIVE
-Priority: High
-Started: 2026-07-25
+Lifecycle State: COMPLETE
+Completed: 2026-07-25
+Merged PR: #18
+Merge commit: `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`
 
-The next bounded slice must implement a read-only, fail-closed activation validator derived from the canonical Worker contracts and existing runtime evidence. It must verify the Worker profile, owning-department procedure, authority and tool scopes, evidence contract, registered route and revision state, owning-HQ review path, pause and send-budget gates, unresolved holds, and retirement rules before reporting whether activation prerequisites are satisfied.
+Slice 4 adds one read-only, fail-closed activation prerequisite report derived from the canonical Worker contracts, current department-owned profile and review procedure, and existing SQLite runtime evidence. The report verifies registry uniqueness and contract shape, exact Worker title and profile identity, deployment and route state, exact conversation-route registration and revision, owning-HQ review procedure metadata and sections, shared pause state, remaining send budget, unresolved repair or Rob-validation holds, and retirement ownership.
 
-The validator must not create or modify a Worker registry row, route, procedure, deployment state, schedule, advisory, permission, or runtime authorization. It must not become another deployment ledger or infer authority merely because technical prerequisites pass. Owning-department authority, Maintenance shared-governance review, and Rob's explicit decision remain separate requirements.
+The report is recomputed rather than persisted as another deployment ledger. It opens SQLite in read-only mode, exposes explicit `PASS`, `HOLD`, and `NOT_APPLICABLE` findings through Worker Operations, and always reports `activation_authorized: false`. `READY_FOR_AUTHORITY_REVIEW` means only that the inspected technical prerequisites contain no current hold. Owning-department authority, Maintenance shared-governance review, and Rob's approval where required remain separate gates.
+
+Rob ran the repository-native focused pytest, affected regression, and Ruff gates successfully before PR #18 was marked ready and merged. No Worker activation, dispatch, HQ wake, route change, schedule, pause or resume action, or budget reset occurred.
 
 ## Completed Runtime Repair Chain
 
@@ -195,6 +201,19 @@ Completed and merged through PR #17.
 - Usage, remaining attempts, epoch, and holds are visible in Command Center and Worker Operations.
 - No live Worker or HQ wake occurred during implementation or validation.
 
+### Read-only contract-derived activation readiness
+
+Completed and merged through PR #18.
+
+- Merge commit: `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`
+- One ephemeral report recomputes technical prerequisites from canonical files and current runtime state.
+- SQLite is opened read-only and no readiness, deployment, route, procedure, permission, or authority record is created.
+- Every registered Worker row in Worker Operations includes the recomputed readiness report and an aggregate summary.
+- Technical findings use explicit `PASS`, `HOLD`, or `NOT_APPLICABLE` states with source pointers.
+- The validator fails closed on missing or conflicting profile, procedure, registry, route, pause, budget, unresolved-review, and retirement evidence.
+- `activation_authorized` remains false even when the technical state is `READY_FOR_AUTHORITY_REVIEW`.
+- No live Worker action or production control mutation occurred during implementation or validation.
+
 ## Validation
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
@@ -208,6 +227,8 @@ Completed and merged through PR #17.
 - PR #16 focused Ruff gate passed after the package import formatting repair.
 - PR #17 repository-native focused pytest, affected regression, and Ruff gates passed.
 - PR #17 dashboard smoke loaded the Worker Operations budget metric and guarded reset control cleanly. Node.js was unavailable, so no separate Node syntax claim is made.
+- PR #18 repository-native focused activation-readiness tests, affected runtime regressions, and Ruff gate passed.
+- No automated GitHub workflow was configured for PR #18; Rob's native environment supplied the merge gate.
 
 ## Current Production Route State
 
@@ -220,9 +241,10 @@ Completed and merged through PR #17.
 - Private exact URL: retained only in ignored local SQLite state
 - Local Worker courier or orchestrator sends: not authorized unless Rob separately authorizes them
 - Separate `Chief_of_Staff_HQ` cloud watcher: governed by its own authorization and not equivalent to the local Worker courier
-- Non-Engineering Worker registry rows or private routes created by Slices 1–3: none
-- Production safety pause deliberately triggered during Slice 2 or Slice 3 validation: no
-- Production send-budget attempts consumed during Slice 3 validation: none
+- Non-Engineering Worker registry rows or private routes created by Wave 0B: none
+- Non-Engineering Workers activated by Wave 0B: none
+- Production safety pause deliberately triggered during Wave 0B validation: no
+- Production send-budget attempts consumed during Wave 0B validation: none
 
 ## Package State
 
@@ -250,11 +272,11 @@ Open Engineering advisories: None.
 Recently closed:
 
 - `ADV-20260723-052` closed after the hourly watcher reported in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work; Rob confirmed the result and authorized closure.
-- `ADV-20260718-042` closed by the Chief of Staff source owner after Engineering implementation, source verification, and Rob approval for slow rollout. Slow rollout is an operational pacing decision, not unfinished implementation.
+- `ADV-20260718-042` closed by the Chief of Staff source owner after Engineering implementation, source verification, and Rob approval for slow rollout. Slow rollout is an operational pacing decision, not unfinished Engineering implementation.
 
 ## Dashboard State
 
-The latest dashboard code on `main` includes PR #17 at merge commit `e1d297f1a2517490b3fb2a37298689c6db25bfb0` or later.
+The latest dashboard code on `main` includes PR #18 at merge commit `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5` or later.
 
 Expected local endpoint:
 
@@ -266,11 +288,11 @@ Starting or reconnecting the dashboard browser bridge does not authorize real Wo
 
 ## Current Work
 
-Package F Wave 0B Slices 1–3 are complete and must not be recreated as active work.
+Package F Wave 0B Slices 1–4 are complete and must not be recreated as active work.
 
-The immediate Engineering implementation is Slice 4: contract-derived activation gate. Begin with a read-only inspection of the canonical Worker execution and communication contracts, current Worker profile and procedure schemas, runtime registry and route checks, owning-HQ review requirements, pause and send-budget status, unresolved hold evidence, and retirement behavior. Define one fail-closed prerequisite report that reads existing truth and cannot activate or mutate anything.
+No further cross-department Worker activation or rollout implementation is authorized by Wave 0B. The next bounded Engineering action is the read-only post-merge dashboard smoke and route-management observation already recorded in `projects/engineering/open_loops.md`, followed only by demonstrated defects with bounded repair authority or a new explicit Rob instruction.
 
-All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
+Cross-department Worker adoption remains Waiting on a current passing prerequisite report, the owning department's explicit authority, Maintenance shared-governance review, and Rob's decision wherever the canonical contract requires it.
 
 ## Production Boundary
 
@@ -283,6 +305,7 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - The persisted send budget is one manually reset epoch shared by Worker dispatch and owning-HQ wake attempts; elapsed time never refills it.
 - Resetting the send budget does not Resume automation, erase safety incidents, or authorize a send.
 - The activation validator may report prerequisites only. It may not create authority, mutate deployment state, or replace owning-department, Maintenance, or Rob approval.
+- `READY_FOR_AUTHORITY_REVIEW` is a technical report state, not activation approval.
 - The DOM Window extension is optional, disabled by default, and not a solution to the demonstrated JavaScript-heavy memory growth.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
