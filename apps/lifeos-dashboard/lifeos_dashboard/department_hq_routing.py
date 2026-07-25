@@ -1,9 +1,10 @@
 """Fail-closed Package F department-to-HQ destination resolution.
 
-This module resolves canonical department HQ titles and an explicitly registered department-owned
-HQ review procedure. Resolution does not create a Worker, register a private route, authorize a
-send, or broaden any department's authority.
+This module resolves canonical department HQ titles and an explicitly registered
+Department-owned HQ review procedure. Resolution does not create a Worker, register a
+private route, authorize a send, or broaden any department's authority.
 """
+
 from __future__ import annotations
 
 import os
@@ -75,6 +76,10 @@ _PROJECT_ROOT_BY_KEY: dict[str, PurePosixPath] = {
 }
 
 _DEFAULT_REVIEW_PROCEDURES: dict[str, str] = {
+    "logistics": (
+        "projects/life-logistics-hq/procedures/"
+        "maintenance_hq_worker_review_receipt.md"
+    ),
     "engineering": "projects/engineering/procedures/engineering_hq_worker_review_receipt.md",
 }
 
@@ -198,12 +203,12 @@ def resolve_department_hq_route(
     *,
     environment: Mapping[str, str] | None = None,
 ) -> DepartmentHqRoute:
-    """Resolve exact HQ titles plus an explicit department-owned review procedure.
+    """Resolve exact HQ titles plus a registered department-owned review procedure.
 
-    Non-Engineering departments remain held until their review procedure is explicitly registered.
-    Chief of Staff wake routing remains prohibited by the current Worker courier contract. This is a
-    destination-resolution gate only; callers still own route availability, execution lock, pause,
-    duplicate-suppression, and send-confirmation checks.
+    Departments without a canonical default remain held until their review procedure is
+    explicitly registered. Chief of Staff wake routing remains prohibited by the current Worker
+    courier contract. This is a destination-resolution gate only; callers still own route
+    availability, execution lock, pause, duplicate-suppression, and send-confirmation checks.
     """
 
     values = _environment(environment)
