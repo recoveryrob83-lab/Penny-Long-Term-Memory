@@ -8,10 +8,17 @@ const browserBridgeUi = {
 if (browserBridgeUi.button) {
   let bridgeBusy = false;
   let lastOperations = null;
+  let lastBridgeAvailable = null;
+
+  function refreshWorkerSurfaces() {
+    browserBridgeUi.refresh?.click();
+  }
 
   function renderBridgeControl(data) {
     lastOperations = data;
     const available = Boolean(data?.browser?.available);
+    const becameAvailable = available && lastBridgeAvailable === false;
+    lastBridgeAvailable = available;
     const blocked = Boolean(data?.running || bridgeBusy);
     browserBridgeUi.button.disabled = available || blocked;
     browserBridgeUi.button.textContent = bridgeBusy
@@ -24,6 +31,7 @@ if (browserBridgeUi.button) {
       : blocked
         ? "Another local automation action is currently running."
         : "Launch the dedicated Edge CDP profile and verify the loopback bridge.";
+    if (becameAvailable) refreshWorkerSurfaces();
   }
 
   async function loadBridgeState({quiet = false} = {}) {
@@ -36,6 +44,7 @@ if (browserBridgeUi.button) {
       }
       renderBridgeControl(data);
     } catch (error) {
+      lastBridgeAvailable = false;
       browserBridgeUi.button.disabled = true;
       browserBridgeUi.button.textContent = "Bridge unavailable";
       browserBridgeUi.detail.textContent = error.message;
@@ -61,7 +70,6 @@ if (browserBridgeUi.button) {
       browserBridgeUi.state.textContent = "Ready";
       browserBridgeUi.state.className = "worker-health-good";
       browserBridgeUi.detail.textContent = data.reason || "Browser bridge verified.";
-      browserBridgeUi.refresh?.click();
     } catch (error) {
       browserBridgeUi.state.textContent = "Offline";
       browserBridgeUi.state.className = "worker-health-bad";
@@ -70,6 +78,12 @@ if (browserBridgeUi.button) {
     } finally {
       bridgeBusy = false;
       renderBridgeControl(lastOperations || {});
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !bridgeBusy) {
+      loadBridgeState({quiet: true}).finally(refreshWorkerSurfaces);
     }
   });
 
