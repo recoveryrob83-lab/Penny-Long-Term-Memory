@@ -6,7 +6,6 @@ from lifeos_dashboard.command_center import CommandCenterService
 from lifeos_dashboard.worker_registration import WorkerRegistrationService
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 
-
 PROFILE_PATH = "projects/life-logistics-hq/workers/maintenance_worker.md"
 
 
