@@ -43,3 +43,6 @@ from . import worker_hq_review_runtime as _worker_hq_review_runtime
 from . import (
     worker_github_orchestrator_runtime as _worker_github_orchestrator_runtime,
 )
+from . import (
+    worker_activation_readiness_runtime as _worker_activation_readiness_runtime,
+)
