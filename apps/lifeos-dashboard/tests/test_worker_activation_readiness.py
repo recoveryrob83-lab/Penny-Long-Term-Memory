@@ -357,8 +357,20 @@ def test_worker_operations_status_embeds_ephemeral_activation_report(
         paused=False,
         running=False,
         status=lambda: {"scheduler_running": False, "scheduled_jobs": [], "saved_prompts": []},
+        pause_state=lambda: {"paused": False, "pause_kind": "none"},
+        send_budget_state=lambda: {
+            "limit": 3,
+            "used": 0,
+            "remaining": 3,
+            "epoch": 1,
+        },
     )
     service.verification = SimpleNamespace(status=lambda limit: {"summary": {}, "records": []})
+    service.result_ingester = SimpleNamespace(status=lambda limit: {})
+    service.result_repair = SimpleNamespace(status=lambda limit: {})
+    service.hq_review = SimpleNamespace(status=lambda limit: {})
+    service.rob_validation = SimpleNamespace(status=lambda limit: {})
+    service.orchestrator = SimpleNamespace(status=lambda: {})
     service.cdp_endpoint = "http://127.0.0.1:9222"
     service._advisory_rows = lambda: ([], None)
     monkeypatch.setattr(
