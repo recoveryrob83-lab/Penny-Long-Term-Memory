@@ -1,4 +1,4 @@
-"""Run one zero-authority Engineering Worker browser dispatch pilot."""
+"""Run one zero-authority Worker browser dispatch pilot."""
 from __future__ import annotations
 
 import argparse
@@ -15,12 +15,12 @@ from chatgpt_worker_browser_roundtrip import (
     BrowserRoundTripRequest,
     BrowserRoundTripUncertain,
 )
+from lifeos_dashboard.room_titles import CANONICAL_WORKER_TITLES
 from lifeos_dashboard.worker_command_center import render_worker_prompt
 from lifeos_dashboard.worker_runtime import ExecutionEnvelope, WorkerRuntimeError
 from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
 
-WORKER_ID = "engineering_worker"
-WORKER_CHAT_TITLE = "Engineering_Worker"
+DEFAULT_WORKER_ID = "engineering_worker"
 DEFAULT_DATABASE_PATH = Path(".local/command_center.sqlite3")
 PROJECT_TITLE = "LifeOS"
 AUTHORIZATION_SOURCE = "ROB-BOUNDED-SYNTHETIC-BROWSER-PILOT-20260720"
@@ -45,6 +45,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--send", action="store_true")
     parser.add_argument("--confirm-send", default="")
+    parser.add_argument("--worker-id", default=DEFAULT_WORKER_ID)
+    parser.add_argument("--expected-route-revision", type=int)
     parser.add_argument("--timeout-seconds", type=int, default=300)
     parser.add_argument("--cdp-endpoint", default="http://127.0.0.1:9222")
     parser.add_argument(
@@ -57,6 +59,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def validate_args(args: argparse.Namespace) -> None:
+    if not str(args.worker_id or "").strip():
+        raise SyntheticBrowserPilotError("worker-id cannot be empty.")
+    if args.expected_route_revision is not None and args.expected_route_revision < 1:
+        raise SyntheticBrowserPilotError("expected-route-revision must be positive.")
     if args.timeout_seconds < 30 or args.timeout_seconds > 900:
         raise SyntheticBrowserPilotError("timeout-seconds must be between 30 and 900.")
     if args.send and args.confirm_send != SEND_CONFIRMATION:
@@ -71,16 +77,24 @@ def validate_args(args: argparse.Namespace) -> None:
         raise SyntheticBrowserPilotError("Use --dry-run or explicitly authorize --send.")
 
 
-def build_envelope(*, timestamp: int | None = None, nonce: str | None = None) -> ExecutionEnvelope:
+def build_envelope(
+    worker_id: str = DEFAULT_WORKER_ID,
+    *,
+    timestamp: int | None = None,
+    nonce: str | None = None,
+) -> ExecutionEnvelope:
     moment = int(time.time()) if timestamp is None else int(timestamp)
     clean_nonce = (nonce or uuid.uuid4().hex[:10]).strip().lower()
     if not clean_nonce or not clean_nonce.isalnum():
         raise SyntheticBrowserPilotError("Synthetic nonce must be non-empty and alphanumeric.")
+    clean_worker_id = str(worker_id or "").strip()
+    if not clean_worker_id:
+        raise SyntheticBrowserPilotError("worker_id cannot be empty.")
     token = f"{moment}-{clean_nonce}"
     return ExecutionEnvelope(
         wrapper_id=f"SYNTH-BROWSER-WRAP-{token}",
         run_id=f"SYNTH-BROWSER-RUN-{token}",
-        worker_id="engineering_worker",
+        worker_id=clean_worker_id,
         task_id=f"SYNTH-BROWSER-TASK-{token}",
         task_revision=1,
         procedure_id="synthetic_browser_transport",
@@ -101,32 +115,52 @@ def build_instruction(envelope: ExecutionEnvelope) -> tuple[str, str]:
     return instruction, expected_ack
 
 
-def load_registered_route(database_path: Path):
-    """Load the one authoritative Engineering Worker route for a canary."""
+def load_registered_route(
+    database_path: Path,
+    worker_id: str = DEFAULT_WORKER_ID,
+    *,
+    expected_route_revision: int | None = None,
+):
+    """Load one exact registered Worker route for a canary."""
+
+    clean_worker_id = str(worker_id or "").strip()
+    expected_title = CANONICAL_WORKER_TITLES.get(clean_worker_id)
+    if expected_title is None:
+        raise SyntheticBrowserPilotError(
+            f"Worker {clean_worker_id!r} is not present in the executable canonical title map."
+        )
 
     runtime = WorkerRuntimeService(database_path)
-    entry = runtime.worker(WORKER_ID, require_enabled=True)
+    entry = runtime.worker(clean_worker_id, require_enabled=True)
 
-    if entry.chat_title != WORKER_CHAT_TITLE:
+    if entry.chat_title != expected_title:
         raise SyntheticBrowserPilotError(
-            f"Registered Worker title is {entry.chat_title!r}, not {WORKER_CHAT_TITLE!r}."
+            f"Registered Worker title is {entry.chat_title!r}, not {expected_title!r}."
         )
     if not entry.conversation_url:
         raise SyntheticBrowserPilotError(
-            "Engineering Worker has no registered exact conversation URL."
+            f"{entry.chat_title} has no registered exact conversation URL."
         )
     if entry.route_revision < 1:
         raise SyntheticBrowserPilotError(
-            "Engineering Worker route revision is not initialized."
+            f"{entry.chat_title} route revision is not initialized."
+        )
+    if (
+        expected_route_revision is not None
+        and entry.route_revision != expected_route_revision
+    ):
+        raise SyntheticBrowserPilotError(
+            f"{entry.chat_title} route revision changed from expected "
+            f"{expected_route_revision} to {entry.route_revision}."
         )
 
-    route_state = runtime.store.route_state(WORKER_ID)
+    route_state = runtime.store.route_state(clean_worker_id)
     if route_state is not None and route_state.availability in {
         "unavailable",
         "ambiguous",
     }:
         raise SyntheticBrowserPilotError(
-            "Engineering Worker route is "
+            f"{entry.chat_title} route is "
             f"{route_state.availability}; canary dispatch is blocked."
         )
 
@@ -136,13 +170,23 @@ def load_registered_route(database_path: Path):
 def build_plan(
     *,
     database_path: Path = DEFAULT_DATABASE_PATH,
+    worker_id: str = DEFAULT_WORKER_ID,
+    expected_route_revision: int | None = None,
     timestamp: int | None = None,
     nonce: str | None = None,
     timeout_seconds: int = 300,
     cdp_endpoint: str = "http://127.0.0.1:9222",
 ) -> SyntheticBrowserPilotPlan:
-    entry = load_registered_route(database_path)
-    envelope = build_envelope(timestamp=timestamp, nonce=nonce)
+    entry = load_registered_route(
+        database_path,
+        worker_id,
+        expected_route_revision=expected_route_revision,
+    )
+    envelope = build_envelope(
+        entry.worker_id,
+        timestamp=timestamp,
+        nonce=nonce,
+    )
     instruction, expected_ack = build_instruction(envelope)
     prompt_text = render_worker_prompt(envelope, instruction)
     request = BrowserRoundTripRequest(
@@ -167,6 +211,7 @@ def build_plan(
 def dry_run_receipt(plan: SyntheticBrowserPilotPlan) -> dict[str, object]:
     return {
         "status": "dry_run",
+        "worker_id": plan.envelope.worker_id,
         "worker_url": plan.request.worker_url,
         "worker_chat_title": plan.request.worker_chat_title,
         "route_revision": plan.route_revision,
@@ -184,6 +229,8 @@ def main(argv: list[str] | None = None) -> int:
         validate_args(args)
         plan = build_plan(
             database_path=args.database_path,
+            worker_id=args.worker_id,
+            expected_route_revision=args.expected_route_revision,
             timeout_seconds=args.timeout_seconds,
             cdp_endpoint=args.cdp_endpoint,
         )
@@ -199,6 +246,7 @@ def main(argv: list[str] | None = None) -> int:
         "Synthetic browser target: "
         f"{PROJECT_TITLE} / {plan.request.worker_chat_title}"
     )
+    print(f"Worker ID: {plan.envelope.worker_id}")
     print(f"Registered route revision: {plan.route_revision}")
     print(f"Wrapper: {plan.envelope.wrapper_id}")
     print("Durable Worker authority: none")
@@ -219,6 +267,8 @@ def main(argv: list[str] | None = None) -> int:
     payload = {
         "status": "succeeded",
         "dispatch_state": "DISPATCH_SUBMITTED",
+        "worker_id": plan.envelope.worker_id,
+        "route_revision": plan.route_revision,
         "wrapper_id": plan.envelope.wrapper_id,
         "run_id": plan.envelope.run_id,
         "task_id": plan.envelope.task_id,
