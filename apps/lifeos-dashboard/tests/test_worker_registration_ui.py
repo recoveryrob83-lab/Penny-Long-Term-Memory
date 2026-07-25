@@ -3,6 +3,7 @@ from pathlib import Path
 PACKAGE = Path(__file__).parents[1] / "lifeos_dashboard"
 TEMPLATE = PACKAGE / "templates" / "index.html"
 SCRIPT = PACKAGE / "static" / "worker-route-management.js"
+BRIDGE_SCRIPT = PACKAGE / "static" / "browser-bridge.js"
 MAIN = PACKAGE / "main.py"
 ROOM_TITLES = PACKAGE / "room_titles.py"
 
@@ -30,6 +31,15 @@ def test_registration_ui_requires_pause_profile_and_confirmation() -> None:
     assert "!paused" in script
     assert "Register approved Worker" in script
     assert "Registration created no route and no activation authority" in script
+
+
+def test_registration_retries_when_bridge_recovers_or_dashboard_returns() -> None:
+    bridge_script = BRIDGE_SCRIPT.read_text(encoding="utf-8")
+
+    assert "lastBridgeAvailable === false" in bridge_script
+    assert "if (becameAvailable) refreshWorkerSurfaces();" in bridge_script
+    assert 'document.addEventListener("visibilitychange"' in bridge_script
+    assert "loadBridgeState({quiet: true}).finally(refreshWorkerSurfaces)" in bridge_script
 
 
 def test_registration_api_is_bounded_and_profile_derived() -> None:
