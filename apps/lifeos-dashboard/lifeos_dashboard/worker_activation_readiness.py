@@ -11,7 +11,7 @@ import sqlite3
 from collections.abc import Mapping
 from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
-from typing import Literal, cast
+from typing import Literal
 
 from .department_hq_routing import (
     DepartmentHqRoute,
@@ -214,7 +214,7 @@ class WorkerActivationReadinessService:
                 raise WorkerRuntimeError("Worker profile front matter contains an invalid line.")
             key, value = line.split(":", 1)
             clean_key = key.strip()
-            clean_value = value.strip().strip("\"").strip("'")
+            clean_value = value.strip().strip('"').strip("'")
             if not clean_key or not clean_value or clean_key in values:
                 raise WorkerRuntimeError(
                     "Worker profile front matter contains an empty or duplicate field."
@@ -514,7 +514,10 @@ class WorkerActivationReadinessService:
                 (
                     "Profile reserves retirement and profile changes to the owning Department HQ."
                     if retirement_ready
-                    else "Profile does not state both self-retirement prohibition and HQ retirement."
+                    else (
+                        "Profile does not state both self-retirement prohibition and "
+                        "HQ retirement."
+                    )
                 ),
                 source,
             )
@@ -626,7 +629,10 @@ class WorkerActivationReadinessService:
                     + ", ".join(missing_sections)
                     + "."
                     if missing_sections
-                    else "HQ review procedure defines authority, inputs, receipt, states, and ingestion."
+                    else (
+                        "HQ review procedure defines authority, inputs, receipt, states, "
+                        "and ingestion."
+                    )
                 ),
                 source,
             )
@@ -702,7 +708,10 @@ class WorkerActivationReadinessService:
                     self._finding(
                         "runtime.route_identity",
                         "HOLD",
-                        "One registered exact conversation URL and positive route revision are required.",
+                        (
+                            "One registered exact conversation URL and positive route "
+                            "revision are required."
+                        ),
                         "worker_registry",
                     )
                 )
@@ -711,7 +720,10 @@ class WorkerActivationReadinessService:
                     self._finding(
                         "runtime.route_identity",
                         "PASS",
-                        "An exact ChatGPT conversation URL and positive route revision are registered.",
+                        (
+                            "An exact ChatGPT conversation URL and positive route revision "
+                            "are registered."
+                        ),
                         "worker_registry",
                     )
                 )
@@ -780,7 +792,8 @@ class WorkerActivationReadinessService:
                         "runtime.send_budget",
                         "PASS" if valid_budget else "HOLD",
                         (
-                            f"Send-budget epoch {epoch} has {remaining} of {limit} attempts remaining."
+                            f"Send-budget epoch {epoch} has {remaining} of {limit} "
+                            "attempts remaining."
                             if valid_budget
                             else "Send-budget state is malformed or exhausted."
                         ),
