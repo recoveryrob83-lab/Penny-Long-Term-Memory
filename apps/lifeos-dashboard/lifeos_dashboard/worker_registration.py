@@ -13,6 +13,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 
 from .command_center import CommandCenterService
+from .department_hq_routing import resolve_hq_chat_title
 from .room_titles import CANONICAL_WORKER_TITLES
 from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 from .worker_runtime_service import WorkerRuntimeService
@@ -103,6 +104,13 @@ class WorkerRegistrationService:
             raise WorkerRuntimeError(
                 f"Worker profile title must equal canonical exact title {expected_title!r}."
             )
+        owning_hq_title = resolve_hq_chat_title(owning_department, environment={})
+        expected_owner_title = f"{owning_hq_title.removesuffix('_HQ')}_Worker"
+        if chat_title != expected_owner_title:
+            raise WorkerRuntimeError(
+                "Worker profile title and owning department do not identify the same "
+                f"canonical department: expected {expected_owner_title!r}."
+            )
 
         entry = WorkerRegistryEntry(
             worker_id=worker_id,
@@ -133,6 +141,23 @@ class WorkerRegistrationService:
                 paths.append(candidate.relative_to(self.repository_root).as_posix())
         return tuple(sorted(paths))
 
+    @staticmethod
+    def _entry_matches_profile(
+        entry: WorkerRegistryEntry,
+        profile: CanonicalWorkerProfile,
+    ) -> bool:
+        return all(
+            (
+                entry.worker_id == profile.worker_id,
+                entry.chat_title == profile.chat_title,
+                entry.owning_department == profile.owning_department,
+                entry.profile_path == profile.profile_path,
+                entry.profile_version == profile.profile_version,
+                entry.specialization == profile.specialization,
+                entry.role == profile.role,
+            )
+        )
+
     def status(self) -> dict[str, object]:
         """List canonical unregistered profiles plus any fail-closed discovery errors."""
 
@@ -152,6 +177,15 @@ class WorkerRegistrationService:
 
             current = by_id.get(profile.worker_id)
             if current is not None:
+                if not self._entry_matches_profile(current, profile):
+                    errors.append(
+                        {
+                            "profile_path": profile.profile_path,
+                            "reason": (
+                                "Existing registry identity conflicts with its canonical profile."
+                            ),
+                        }
+                    )
                 continue
             conflict = by_title.get(profile.chat_title) or by_path.get(profile.profile_path)
             if conflict is not None:
