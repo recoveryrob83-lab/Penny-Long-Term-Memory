@@ -132,6 +132,14 @@
             <details class="worker-legacy-note"><summary>Legacy automation retained for rollback</summary><p id="wo-legacy-detail">Loading legacy state...</p></details>
           </section>
           <aside class="worker-side-stack">
+            <section id="wo-worker-registration" class="worker-list-panel worker-route-panel" aria-labelledby="worker-registration-heading">
+              <div class="worker-subheading"><div><p class="eyebrow">APPROVED IDENTITY</p><h3 id="worker-registration-heading">Register Worker</h3></div><span class="worker-pill">Route-less</span></div>
+              <label class="worker-field">Canonical unregistered profile<select id="wo-registration-profile"><option value="">Loading profiles</option></select></label>
+              <p class="worker-route-detail">Registration reads identity from GitHub, creates one route-less row at revision 0, and grants no activation or assignment authority.</p>
+              <label class="worker-confirm worker-route-confirm"><input id="wo-confirm-registration" type="checkbox"><span>I confirm Rob approved creation of this exact canonical Worker identity.</span></label>
+              <button id="wo-register-worker" class="copy-button" type="button" disabled>Register approved Worker</button>
+              <div id="wo-registration-message" class="worker-route-message" role="status" aria-live="polite">No Worker registration requested.</div>
+            </section>
             <section id="wo-route-management" class="worker-list-panel worker-route-panel" aria-labelledby="worker-route-heading">
               <div class="worker-subheading"><div><p class="eyebrow">SAFE ROLLOVER</p><h3 id="worker-route-heading">Worker route</h3></div><span id="wo-route-revision" class="worker-pill">No route</span></div>
               <label class="worker-field">Registered Worker<select id="wo-route-worker"><option value="">Loading Workers</option></select></label>
