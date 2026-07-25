@@ -2,7 +2,7 @@
 
 Updated: 2026-07-25
 Project: Maintenance_HQ
-Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Prerequisites Merged / Governance Review Hold
+Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Prerequisites Merged / Governance Approved / Waiting on Engineering Registration and Readiness Evidence
 
 ## Current Mission
 
@@ -38,28 +38,35 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`.
 
-The following Maintenance-owned prerequisites now exist on `main`:
+The following Maintenance-owned prerequisites exist on `main`:
 
 - `projects/life-logistics-hq/workers/maintenance_worker.md`
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
 - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
 
-Rob authorized `Engineering_HQ` to prepare these files as a bounded coordinated repair while Maintenance was occupied with reconciliation. Maintenance did not create or edit the merged profile or procedures during this pass. Temporary implementation authority did not transfer ownership or rollout authority to Engineering.
+Rob authorized `Engineering_HQ` to prepare these files as a bounded coordinated repair while Maintenance was occupied with reconciliation. Maintenance did not create or edit the merged profile or procedures during that pass. Temporary implementation authority did not transfer ownership or rollout authority to Engineering.
 
-## Current Governance Hold
+## Governance Approval
 
-The profile and procedures preserve read-only access to authoritative source records and prohibit maintenance repair, source edits, external writes, route mutation, self-modification, unattended execution, and cross-department authority.
+On 2026-07-25, Rob and `Maintenance_HQ` explicitly approved:
 
-Two points require explicit acceptance before Engineering registration or pilot dispatch:
+1. The narrow create-only immutable GitHub result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only exception to the original no-GitHub-writes approval.
+2. Procedure ID `maintenance_hq_worker_review_receipt` and path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` as the final authoritative Maintenance HQ review procedure.
 
-1. The merged profile permits one create-only immutable GitHub result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json`. The original approval stated no GitHub writes, so this reporting-only write requires explicit Rob and Maintenance acceptance.
-2. The merged HQ review procedure uses procedure ID `maintenance_hq_worker_review_receipt` and path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`, rather than the earlier placeholder `projects/life-logistics-hq/procedures/maintenance_hq_worker_review.md`. Its structure matches the canonical review contract, but the final authoritative ID and path require explicit Maintenance acceptance.
+The reporting-only exception does not authorize repair or edits to authoritative source records. It permits only the exact immutable result artifact created under `maintenance_worker_result_submission` version 1 and the approved current-run path.
 
-Until both points are resolved:
+The governance hold is cleared. Engineering may proceed with bounded registration, exact-route preparation, zero-authority route testing, and a current fail-closed activation-prerequisite report.
 
-- no Maintenance Worker route, registry entry, schedule, dispatch, HQ wake, activation, connector authority, source-record write authority, unattended execution, spending, or cross-department authority is approved;
-- no competing profile or procedure copy should be created;
-- `READY_FOR_AUTHORITY_REVIEW` remains technical evidence only.
+The following remain unapproved until separately satisfied:
+
+- real Worker dispatch;
+- Worker activation;
+- recurring schedules or unattended execution;
+- source-record writes or maintenance repair;
+- new connectors or external-system authority;
+- spending or cross-department authority.
+
+A route, successful canary, or `READY_FOR_AUTHORITY_REVIEW` report remains technical evidence only. Every readiness report must continue to state `activation_authorized: false`. The initial pilot remains manually dispatched, bounded, read-only with respect to authoritative source records, and subject to `IMMEDIATE_HQ` verification.
 
 ## 2026-07-23-25 Completed Maintenance
 
@@ -80,6 +87,7 @@ Until both points are resolved:
 - Reconciled the system handoff, active-project map, system open loops, and Maintenance continuity after Wave 0B and publication completion.
 - Completed a read-only Engineering, Maintenance, and global drift comparison.
 - Detected the Maintenance Worker prerequisite merge during verification and updated only Maintenance-owned continuity without modifying the profile or procedures.
+- Recorded Rob's explicit acceptance of the reporting-only result artifact and the final HQ review procedure destination, clearing the Maintenance governance hold.
 
 ## Active Maintenance Priorities
 
@@ -92,7 +100,8 @@ Until both points are resolved:
 - Keep the global handbook role-neutral and each room handbook explicitly scoped, noncanonical, and refreshable only through meaningful stable-title replacement.
 - Audit the canonical Worker contract, profile location, root-pilot compatibility status, and Maintenance/Engineering/department ownership split.
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
-- Resolve the two explicit Maintenance Worker governance questions before registration or pilot dispatch.
+- Preserve the reporting-only result-artifact boundary and final approved HQ review procedure destination.
+- Review Engineering registration, zero-authority route evidence, and the current activation-prerequisite report before any pilot dispatch.
 - Do not create competing Maintenance Worker profile or procedure files.
 - Route newly demonstrated department-local drift to the owning Department HQ rather than silently repairing it without authority.
 - Keep desktop automation and guarded GitHub sync safety gates intact.
@@ -125,4 +134,4 @@ Until both points are resolved:
 
 ## Best Next Action
 
-Resolve the reporting-only GitHub result write and the final HQ review procedure ID and path. After explicit acceptance or correction, allow Engineering registration, zero-authority route testing, and a current activation-prerequisite report. A merged profile or passing technical report does not itself activate the Worker.
+Let Engineering register the exact `maintenance_worker` route, perform zero-authority route testing, and produce a current fail-closed activation-prerequisite report. Maintenance then performs a read-only evidence review. No real Worker dispatch or activation is authorized by this approval alone.
