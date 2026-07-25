@@ -1,6 +1,6 @@
 # System Session Handoff
 
-Updated: 2026-07-23
+Updated: 2026-07-25
 Project: LifeOS / Maintenance_HQ / Penny Long-Term Memory
 Purpose: System-level baton pass for `LifeOS_HQ`, `Chief_of_Staff_HQ`, `Maintenance_HQ`, and explicit cross-department coordination. This file is not a mirror of department backlogs, live advisories, runtime state, or the full Worker contract.
 
@@ -9,8 +9,8 @@ Purpose: System-level baton pass for `LifeOS_HQ`, `Chief_of_Staff_HQ`, `Maintena
 LifeOS is operational with:
 
 - GitHub as the durable memory and architecture map;
-- Google Drive as the working-records cabinet and home of the human-facing Chief's Manual;
-- Project Sources as role-neutral, noncanonical shared publication mirrors;
+- Google Drive as the working-records cabinet, home of the human-facing Chief's Manual, and editable handbook library;
+- Project Sources as noncanonical project-context mirrors, including one role-neutral global handbook and explicitly intended-room handbook mirrors;
 - Trello as the raw-intake, visual-attention, and active-flow layer;
 - Todoist as Rob-facing commitments and reminders;
 - Calendar as the timed-commitment layer;
@@ -18,7 +18,7 @@ LifeOS is operational with:
 - a locally running LifeOS Dashboard with Overview, Department Inspection, Automation, and Worker Operations surfaces;
 - one central meeting room plus seven Department HQ chats;
 - validated Windows desktop automation for bounded exact-destination transport;
-- a dashboard-integrated Automation Command Center with persistent history, scheduled procedures, and safety reporting;
+- a dashboard-integrated Automation Command Center with persistent history, scheduled procedures, shared safety pause, conservative send budget, activation-prerequisite reporting, and safety reporting;
 - one canonical HQ and Worker boot entry point at `memory/STARTUP_BOOT.md`;
 - one canonical execution protocol at `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`;
 - one canonical Worker authority contract at `coordination/WORKER_EXECUTION_CONTRACT.md`;
@@ -89,11 +89,11 @@ Short form:
 
 > The Hub is the table. `Chief_of_Staff_HQ` coordinates. Departments judge and own. Workers execute. `Maintenance_HQ` protects the contracts. `Engineering_HQ` builds the machinery. Rob decides.
 
-## July 23 Naming and Publication Reconciliation
+## July 23–25 Naming and Publication Reconciliation
 
 Rob authorized a repository-wide naming-only coordinated repair on 2026-07-23.
 
-Completed GitHub outcomes:
+Completed outcomes:
 
 - current system spelling is `LifeOS`;
 - current top-level room titles use exact underscore names;
@@ -101,15 +101,11 @@ Completed GitHub outcomes:
 - future Worker titles follow `<Department_Name>_Worker`;
 - all seven Department HQ boot file sets were aligned and verified;
 - stable filesystem paths, historical evidence, immutable Worker artifacts, receipts, checksums, IDs, URLs, and accurate quotations were preserved;
-- Engineering-owned executable code, selectors, runtime state, registries, dashboard configuration, prompt-runtime surfaces, databases, and tests were not edited.
+- Engineering-owned executable and runtime surfaces were initially left untouched, then Engineering completed the separately authorized canonical runtime-title rollover, direct URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel;
+- `ADV-20260723-052` closed after the read-only watcher reported in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work;
+- the shared ChatGPT Project publication reconciliation closed on 2026-07-25 after current project context showed canonical underscore instructions, retrieved the stable global handbook, exposed the eight intended-room handbooks, and showed no numbered competing global handbook copy.
 
-The remaining exact-title implementation rollover belongs to `Engineering_HQ` and remains authoritative in `projects/engineering/open_loops.md`.
-
-A replacement `Maintenance_HQ` chat demonstrated that the deployed ChatGPT Project Instructions still contain legacy display names. The canonical GitHub source is correct. Rob must replace the deployed Project Settings text from the paste-ready section of `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md` through the ChatGPT UI.
-
-The role-neutral global handbook has been refreshed as `LIFEOS_GLOBAL_OPERATIONS_HANDBOOK.md`. Project Source replacement also requires Rob-facing UI action. Use one stable filename and remove any superseded or numbered competing copy after retrieval is verified.
-
-The remaining manual publication work is tracked once in `memory/05_OPEN_LOOPS.md` rather than duplicated across departments.
+Project Source handbooks remain generated, noncanonical context mirrors. The global handbook is role-neutral. Each room handbook carries an explicit intended-room statement and grants no authority merely because it is visible to another room.
 
 ## Shared Execution and Worker Architecture
 
@@ -124,7 +120,9 @@ The canonical architecture established on 2026-07-19 remains active:
 - the normal execution-ready path targets the owning Department Worker directly and should usually require one event-driven wake;
 - verification modes, wake suppression, holds, elevations, resume signals, revision handling, immutable evidence, and duplicate suppression are shared rules rather than department copies.
 
-Package D and Package E Engineering implementation are closed. Their validated machinery does not create cross-department adoption authority, new Workers, or automatic advisory closure.
+Package D, Package E, Package F Wave 0A, and Package F Wave 0B Engineering implementation are complete. Their validated machinery does not create cross-department adoption authority, new Workers, or automatic advisory closure.
+
+The Wave 0B activation-prerequisite report is read-only and always reports `activation_authorized: false`. Technical readiness remains separate from owning-department authority, Maintenance shared-governance review, and Rob approval where the Worker contract requires it.
 
 ## Department Inspection Evidence
 
@@ -149,13 +147,13 @@ Verified live sources:
 
 Guarded GitHub sync may fast-forward only when local `main` is clean and strictly behind. It does not resolve conflicts, discard work, rebase, reset, or authorize broad automatic writes.
 
-The Automation Command Center supports exact destinations, protected canonical prompts, persistent run history, bounded schedules, immutable result ingestion, HQ and Rob verification receipts, and duplicate-suppression controls.
+The Automation Command Center supports exact destinations, protected canonical prompts, persistent run history, bounded schedules, immutable result ingestion, HQ and Rob verification receipts, shared safety pause, conservative send budgeting, read-only activation-prerequisite reporting, and duplicate-suppression controls.
 
 Scheduler production reliability has live evidence, but fully unattended Windows production remains unapproved unless current Engineering evidence and Rob's explicit authorization establish the exact production scope.
 
 `Engineering_HQ Daily Sync` remains paused by deliberate operating choice until Rob explicitly resumes it.
 
-A separately authorized hourly `Chief_of_Staff_HQ` advisory watcher is undergoing destination validation through `ADV-20260723-052`. It is read-only, must report in the existing Chief of Staff conversation, creates no work or authority, and does not close advisories.
+The hourly `Chief_of_Staff_HQ` advisory watcher remains an active read-only pilot. Its destination test passed, `ADV-20260723-052` is closed, and the watcher creates no work, authority, or advisory lifecycle changes.
 
 Deployment state, route availability, pause state, exact-title resolution, stable-ID transport, receiver state, verification queues, one-shot wake claims, and technical rollover belong to the Engineering-owned routing registry and runtime. Department-owned Worker profiles define stable identity and authority only.
 
@@ -199,7 +197,7 @@ Department Event Inbox remains frozen as historical context unless Rob explicitl
 
 `LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and `coordination/boards/main-assistant.md` as the retained source-board path. Department-originated advisories remain on their source department boards.
 
-`ADV-20260718-042` is closed. Do not recreate it as active implementation work.
+`ADV-20260718-042` and `ADV-20260723-052` are closed. Do not recreate them as active implementation or validation work.
 
 ## Active Core Rooms
 
@@ -219,8 +217,8 @@ Consolidated or dormant domains remain preserved rather than deleted.
 ## Source Boundaries
 
 - GitHub: durable abstract state, architecture, ownership, pointers, contracts, profiles, and auditable changes.
-- Drive: Chief's Manual, working documents, detailed records, and human-facing artifacts.
-- Project Sources: role-neutral shared publication mirrors and durable project context; noncanonical and free of live department state.
+- Drive: Chief's Manual, working documents, detailed records, editable handbook documents, and human-facing artifacts.
+- Project Sources: noncanonical project context, including the role-neutral global handbook and explicitly intended-room handbook mirrors; no handbook grants authority or replaces live GitHub state.
 - Trello: raw intake, current attention, and flow.
 - Todoist: Rob-facing commitments and reminders.
 - Calendar: timed commitments.
@@ -231,14 +229,12 @@ Consolidated or dormant domains remain preserved rather than deleted.
 
 ## Best Next System Actions
 
-1. Complete the Rob-facing Project Settings replacement from `coordination/LIFEOS_PROJECT_INSTRUCTIONS.md` and verify canonical names in a fresh project chat.
-2. Replace the global Project Source handbook with the refreshed stable-filename artifact, verify retrieval, and remove the superseded copy.
-3. Let `Engineering_HQ` complete the separately authorized exact-title implementation rollover and courier post-navigation verifier repair within Engineering-owned surfaces.
-4. Await Rob's observation for `ADV-20260723-052`, then let the Engineering source owner reconcile and close the advisory when its completion condition is met.
-5. Continue ordinary role-routed boot observation and inspect only demonstrated defects.
-6. Let specialist departments create Worker profiles only when a real Worker is activated and operational evidence justifies it.
-7. Observe the two grandfathered pilots under compatibility rules and migrate or retire them only through separate owner review and authorization.
+1. Continue ordinary role-routed boot observation and inspect only demonstrated defects.
+2. Let Department HQs create or change Worker profiles only under their own authority and the canonical Worker contract.
+3. Keep Wave 0B technical readiness separate from owning-department authority, Maintenance governance review, and Rob approval.
+4. Observe the two grandfathered pilots under compatibility rules and migrate or retire them only through separate owner review and authorization.
+5. Preserve one stable global handbook and one explicitly intended-room handbook per room without numbered competing copies or authority drift.
 
 ## Guiding Principle
 
-GitHub is the map. Drive is the filing cabinet. Project Sources publish stable shared context. Trello catches possibility and shows flow. Calendar owns time. Todoist owns commitments and reminders. Gmail owns communications. The dashboard transports and observes without governing. The Hub deliberates. `Chief_of_Staff_HQ` coordinates. Departments judge and own. Workers execute. `Maintenance_HQ` protects the contracts. `Engineering_HQ` builds the machinery. Rob decides.
+GitHub is the map. Drive is the filing cabinet and editable handbook library. Project Sources publish noncanonical context. Trello catches possibility and shows flow. Calendar owns time. Todoist owns commitments and reminders. Gmail owns communications. The dashboard transports and observes without governing. The Hub deliberates. `Chief_of_Staff_HQ` coordinates. Departments judge and own. Workers execute. `Maintenance_HQ` protects the contracts. `Engineering_HQ` builds the machinery. Rob decides.
