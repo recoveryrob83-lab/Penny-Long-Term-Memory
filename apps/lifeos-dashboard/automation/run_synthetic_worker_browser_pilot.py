@@ -1,5 +1,4 @@
 """Run one zero-authority Worker browser dispatch pilot."""
-
 from __future__ import annotations
 
 import argparse
