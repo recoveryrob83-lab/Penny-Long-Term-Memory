@@ -1,8 +1,8 @@
 # Maintenance_HQ Status
 
-Updated: 2026-07-23
+Updated: 2026-07-25
 Project: Maintenance_HQ
-Status: Active / Operational / Replacement Chat Booted / Shared Reconciliation Complete / Publication Deployment Waiting
+Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current
 
 ## Current Mission
 
@@ -30,22 +30,27 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Fully unattended Windows production use remains unapproved unless current Engineering evidence and Rob's authorization establish otherwise.
 - `Engineering_HQ Daily Sync` remains paused by deliberate operating choice.
 - The hourly `Chief_of_Staff_HQ` advisory watcher remains an active read-only pilot. Its destination validation passed in the existing Chief of Staff conversation, and `ADV-20260723-052` is closed.
+- Package F Wave 0B completed the Engineering-owned cross-department safety kernel without creating or activating a non-Engineering Worker.
+- The activation-prerequisite report remains read-only, fail-closed, and incapable of granting authority.
+- The deployed project context now shows canonical underscore instructions and retrieves the stable global and intended-room handbook mirrors. The publication-reconciliation wrapper is closed.
 
-## 2026-07-23 Completed Maintenance
+## 2026-07-23–25 Completed Maintenance
 
 - Completed Rob's repository-wide coordinated naming-only repair across current active nonhistorical textual documentation, including department-local files under explicit coordinated-repair authority.
 - Enforced `LifeOS`, the eight canonical underscore room names, `Engineering_Worker`, and `<Department_Name>_Worker` in current canonical text.
 - Verified all seven Department HQ boot file sets during the naming repair.
 - Preserved stable paths, external URLs, historical evidence, closed advisory evidence, immutable Worker reports, HQ-review receipts, Rob-validation receipts, run identifiers, and quoted historical wording.
-- Left Engineering-owned executable code, selectors, runtime state, transport registries, dashboard configuration, automation databases, prompt-runtime surfaces, and tests untouched.
+- Left Engineering-owned executable code, selectors, runtime state, transport registries, dashboard configuration, automation databases, prompt-runtime surfaces, and tests untouched during the naming-only pass.
 - Generated the role-neutral global operations handbook as a noncanonical Project Source publication artifact.
 - Placed `LIFEOS_NAMING_REPAIR_FINAL_REPORT.md` in Google Drive under `Life Organization/Chief Engineering Penny`.
 - Booted and synchronized the replacement `Maintenance_HQ` chat from the canonical GitHub sequence.
 - Reconciled `ADV-20260723-052` into the Advisory Index without duplicating its source-board text, then closed it after the watcher destination test passed and Rob authorized closure.
 - Removed the stale global-handoff instruction to continue work under closed `ADV-20260718-042`.
 - Refreshed the system handoff, active-project map, system open loops, scheduled-task architecture, and scheduled-task index.
-- Recorded one compact system-level waiting item for Project Settings and Project Source publication replacement because those UI actions cannot be completed through the GitHub connector.
-- Prepared a refreshed `LIFEOS_GLOBAL_OPERATIONS_HANDBOOK.md` under the stable filename.
+- Prepared the stable global handbook and later verified the deployed project context and room-handbook library.
+- Closed the shared ChatGPT Project publication reconciliation after current project context showed canonical names, retrieved the global handbook, exposed the eight intended-room handbooks, and showed no numbered competing global handbook.
+- Completed a read-only Wave 0B governance review and confirmed that Engineering completion creates no Worker activation authority.
+- Reconciled the system handoff, active-project map, system open loops, and Maintenance continuity after Wave 0B and publication completion.
 
 ## Active Maintenance Priorities
 
@@ -55,7 +60,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Maintain advisory-index and source-board hygiene without duplicating target backlogs.
 - Preserve one owner and one authoritative record for each durable item.
 - Preserve source-system authority across GitHub, Drive, Project Sources, Trello, Todoist, Calendar, Gmail, the dashboard, and automation logs.
-- Keep the global handbook role-neutral, noncanonical, and refreshable only through meaningful stable-filename replacement.
+- Keep the global handbook role-neutral and each room handbook explicitly scoped, noncanonical, and refreshable only through meaningful stable-title replacement.
 - Audit the canonical Worker contract, profile location, root-pilot compatibility status, and Maintenance/Engineering/department ownership split.
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
 - Route newly demonstrated department-local drift to the owning Department HQ rather than silently repairing it without authority.
@@ -88,6 +93,4 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 ## Best Next Action
 
-Rob replaces the deployed Project Instructions from the paste-ready canonical GitHub source and replaces the Project Source handbook with the refreshed stable-filename artifact. After refresh, verify both from a fresh project chat and close the single system-level publication-reconciliation loop if no duplicate handbook copy remains.
-
-Engineering implementation-title updates and courier-verifier repair remain outside Maintenance authority and stay with `Engineering_HQ`.
+Maintain clean shared governance state and wait for explicitly routed work. No active Maintenance-owned implementation or publication dependency is open. Any Maintenance Worker profile, procedure, route, or pilot must proceed through the owning-department authority, canonical Worker contract, Engineering registration and testing, and Rob approval where required.
