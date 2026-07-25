@@ -1,6 +1,6 @@
 # Maintenance_HQ
 
-Updated: 2026-07-23
+Updated: 2026-07-25
 Purpose: Durable project folder for `Maintenance_HQ`, the global GitHub maintenance, governance, audit, publication-mirror, and reconciliation department for Rob's LifeOS.
 
 ## Role
@@ -19,7 +19,7 @@ It is the official successor to the former Logistics role. The department name c
 - Maintain universal boot integrity, global handoffs, operating rules, naming standards, project maps, and system open loops.
 - Maintain shared coordination procedures, advisory-index hygiene, source-board standards, and durable routing infrastructure.
 - Maintain shared execution and Worker contracts without copying them into every department.
-- Maintain role-neutral Project Source publication mirrors without allowing them to compete with canonical GitHub sources.
+- Maintain one role-neutral global Project Source handbook and one explicitly intended-room handbook per top-level room without allowing those mirrors to compete with canonical GitHub sources.
 - Detect stale documentation, conflicting instructions, missing files, dead paths, broken pointers, duplicate truth, ownership collisions, and role drift.
 - Maintain repository paths, migrations, archives, global structure, and shared-infrastructure records.
 - Enforce source boundaries across GitHub, Drive, Project Sources, Trello, Todoist, Calendar, Gmail, and the dashboard.
@@ -43,13 +43,23 @@ Current canonical room names are:
 - `Chief_of_Staff_HQ`
 - `Wellness_HQ`
 
-The current canonical Worker title is `Engineering_Worker`. Future Worker titles follow `<Department_Name>_Worker`.
+The current production Worker title is `Engineering_Worker`. Future Worker titles follow `<Department_Name>_Worker`.
 
-The role-neutral global handbook `LIFEOS_GLOBAL_OPERATIONS_HANDBOOK.md` is a noncanonical LifeOS Project Source. GitHub remains authoritative. Replace the handbook only after meaningful source drift and avoid duplicate or numbered competing copies.
+The current Drive-backed handbook library contains one role-neutral global operations handbook and one explicitly intended-room handbook for each of the eight top-level rooms. These are noncanonical Project Source mirrors. GitHub remains authoritative. Replace a handbook only after meaningful source drift and avoid duplicate or numbered competing copies.
 
 The naming-repair report is stored in Google Drive at `Life Organization/Chief Engineering Penny/LIFEOS_NAMING_REPAIR_FINAL_REPORT.md`.
 
-Engineering-owned executable, runtime, registry, dashboard, prompt-runtime, database, and test title updates remain outside Maintenance authority unless Rob separately authorizes an Engineering coordinated repair.
+Engineering completed the separately authorized canonical runtime-title rollover, courier verifier repair, direct exact-URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel within Engineering-owned surfaces. Technical completion did not create cross-department Worker authority.
+
+Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and review procedure through a coordinated repair while Maintenance was reconciling shared state.
+
+Current rollout state:
+
+- the proposed profile and review procedure are held in an Engineering branch pending merge;
+- neither prerequisite is yet authoritative on `main`;
+- Maintenance did not create either file during the 2026-07-25 reconciliation;
+- no Maintenance Worker registry row, private route, schedule, dispatch, HQ wake, activation record, connector authority, durable-write authority, or unattended execution authority has been created;
+- ownership of the profile, procedure, authority, holds, verification, and retirement remains with `Maintenance_HQ` after merge.
 
 ## Chief_of_Staff_HQ Relationship
 
@@ -62,6 +72,8 @@ Maintenance protects the operating system those activities use. It does not run 
 `Engineering_HQ` owns software, the LifeOS Dashboard, desktop automation, prompt systems, Worker routing and runtime implementation, parsers, validators, testing, and technical reliability.
 
 Maintenance owns governance, boot integrity, source boundaries, naming standards, audits, publication-mirror discipline, and reconciliation. Engineering may implement enforcement mechanisms, but implementation does not transfer permanent governance ownership.
+
+Rob may explicitly authorize Engineering to perform a bounded coordinated repair inside Maintenance-owned files. Such authority is temporary, exact-scope authority and does not transfer file ownership, Worker ownership, future maintenance authority, or rollout approval to Engineering.
 
 ## Specialist Department Relationship
 
@@ -87,6 +99,8 @@ Do not rename the canonical folder without a separately authorized migration.
 - `notes.md` when useful
 - `sources.md` when useful
 - `notebook/` for promoted durable Maintenance reasoning, decisions, evidence, validation, and history
+- `workers/` only for active department-owned Worker profiles created under the canonical Worker contract
+- `procedures/` for active Maintenance-owned procedures when a real operational need and authority exist
 
 ## Replacement-Chat Start
 
