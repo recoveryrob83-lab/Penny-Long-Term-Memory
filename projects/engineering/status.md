@@ -1,10 +1,10 @@
 # Engineering_HQ Status
 
-Updated: 2026-07-24
+Updated: 2026-07-25
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slices 1–2 Complete / Wave 0B Slice 3 Conservative Send Budget Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
+Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Wave 0B Slices 1–3 Complete / Wave 0B Slice 4 Contract-Derived Activation Gate Started / Canonical Runtime Title Rollover Complete / Direct URL Routing Complete / Guarded Route Capture Complete / Browser Bridge Reconnect Merged / DOM Window Experiment Concluded
 
 ## Summary
 
@@ -16,7 +16,7 @@ Engineering owns the Worker machinery: exact routing, stable IDs, direct browser
 
 - GitHub: durable architecture, packages, procedures, profiles, advisories, decisions, and immutable result evidence.
 - `projects/engineering/open_loops.md`: authoritative unfinished Engineering work.
-- SQLite Command Center runtime state: sole operational ledger for dispatch, route state, result, repair, HQ review, Rob validation, consumption readiness, shared pause state, and future send-budget accounting.
+- SQLite Command Center runtime state: sole operational ledger for dispatch, route state, result, repair, HQ review, Rob validation, consumption readiness, shared pause state, and send-budget accounting.
 - Worker result folders: immutable evidence and audit trail, not a competing queue or lifecycle ledger.
 - Dashboard and scheduled watcher: visibility and reporting interfaces, not independent truth or closure authority.
 - `Maintenance_HQ`: canonical shared Worker governance and global operating integrity.
@@ -73,13 +73,28 @@ Rob ran the repository-native gate. The affected regression set passed `47` test
 
 #### Slice 3: Conservative global send budget
 
+Lifecycle State: COMPLETE
+Completed: 2026-07-25
+Merged PR: #17
+Merge commit: `e1d297f1a2517490b3fb2a37298689c6db25bfb0`
+
+Slice 3 extends the existing singleton Command Center control record with one manually reset send-budget epoch. The default limit is three confirmed attempts, configurable from one through twenty. Worker dispatches and owning-HQ review wakes reserve atomically against the same budget under the existing execution lock immediately before browser transport.
+
+Attempts remain consumed whether transport succeeds, fails safely, or becomes uncertain. Elapsed time and dashboard restart do not refill the budget. Deterministic pre-send route, duplicate, draft, and validation holds occur before reservation. Exhaustion blocks the next send before transport, records the held operation, and trips the existing shared pause. Reset is available only while paused, increments the epoch, and does not Resume automation or erase execution evidence.
+
+Reservation evidence is appended to the existing authoritative Worker execution row rather than stored in a second ledger. Command Center and Worker Operations expose limit, usage, remaining attempts, epoch, and held-operation state. The zero-authority courier self-test remains outside this budget.
+
+Rob ran both repository-native pytest gates and the focused Ruff gate successfully. Because Node.js was not installed locally, JavaScript syntax was not separately checked with Node; Rob instead loaded the dashboard and confirmed the Worker Operations budget UI rendered cleanly. No live Worker or HQ wake occurred.
+
+#### Slice 4: Contract-derived activation gate
+
 Lifecycle State: ACTIVE
 Priority: High
-Started: 2026-07-24
+Started: 2026-07-25
 
-The next bounded slice must add one conservative send budget to the existing Command Center database, execution-history evidence, shared pause, and execution lock. It must count confirmed send attempts across both Worker dispatches and owning-HQ wakes, fail closed before the next send when the configured limit is reached, expose current usage and held operations, and never treat elapsed time as proof that an uncertain send is safe to retry.
+The next bounded slice must implement a read-only, fail-closed activation validator derived from the canonical Worker contracts and existing runtime evidence. It must verify the Worker profile, owning-department procedure, authority and tool scopes, evidence contract, registered route and revision state, owning-HQ review path, pause and send-budget gates, unresolved holds, and retirement rules before reporting whether activation prerequisites are satisfied.
 
-The budget must not create a second execution ledger, auto-clear uncertain attempts, activate a Worker, configure a non-Engineering route, or bundle the contract-derived activation gate into this slice.
+The validator must not create or modify a Worker registry row, route, procedure, deployment state, schedule, advisory, permission, or runtime authorization. It must not become another deployment ledger or infer authority merely because technical prerequisites pass. Owning-department authority, Maintenance shared-governance review, and Rob's explicit decision remain separate requirements.
 
 ## Completed Runtime Repair Chain
 
@@ -165,6 +180,21 @@ Completed and merged through PR #16.
 - No automatic recovery exists, and a later manual pause cannot overwrite the first unresolved safety incident.
 - No live Worker or HQ wake occurred during implementation or validation.
 
+### Conservative global send budget
+
+Completed and merged through PR #17.
+
+- Merge commit: `e1d297f1a2517490b3fb2a37298689c6db25bfb0`
+- One manually reset budget epoch lives on the existing singleton Command Center control record.
+- Confirmed Worker dispatch and owning-HQ wake attempts draw from the same atomic counter under the existing execution lock.
+- The default limit is three, with a bounded configuration range of one through twenty.
+- Deterministic pre-send holds do not consume budget.
+- Exhaustion blocks before transport, records a held operation, and trips the existing shared pause.
+- Reset requires explicit confirmation while paused, increments the epoch, and remains separate from Resume.
+- Reservation evidence attaches to the existing execution row rather than creating a second ledger.
+- Usage, remaining attempts, epoch, and holds are visible in Command Center and Worker Operations.
+- No live Worker or HQ wake occurred during implementation or validation.
+
 ## Validation
 
 - Final consolidated pre-PR-13 local regression gate: `80 passed`.
@@ -176,6 +206,8 @@ Completed and merged through PR #16.
 - PR #15 repository-native focused pytest and Ruff gates both passed under Rob's local dashboard environment before merge.
 - PR #16 repository-native affected regression gate: `47 passed`.
 - PR #16 focused Ruff gate passed after the package import formatting repair.
+- PR #17 repository-native focused pytest, affected regression, and Ruff gates passed.
+- PR #17 dashboard smoke loaded the Worker Operations budget metric and guarded reset control cleanly. Node.js was unavailable, so no separate Node syntax claim is made.
 
 ## Current Production Route State
 
@@ -188,8 +220,9 @@ Completed and merged through PR #16.
 - Private exact URL: retained only in ignored local SQLite state
 - Local Worker courier or orchestrator sends: not authorized unless Rob separately authorizes them
 - Separate `Chief_of_Staff_HQ` cloud watcher: governed by its own authorization and not equivalent to the local Worker courier
-- Non-Engineering Worker registry rows or private routes created by Slices 1–2: none
-- Production safety pause deliberately triggered during Slice 2 validation: no
+- Non-Engineering Worker registry rows or private routes created by Slices 1–3: none
+- Production safety pause deliberately triggered during Slice 2 or Slice 3 validation: no
+- Production send-budget attempts consumed during Slice 3 validation: none
 
 ## Package State
 
@@ -221,7 +254,7 @@ Recently closed:
 
 ## Dashboard State
 
-The latest dashboard code on `main` includes PR #16 at merge commit `3bf20ca231b3b5fbb1c315b24881e46939b3b508` or later.
+The latest dashboard code on `main` includes PR #17 at merge commit `e1d297f1a2517490b3fb2a37298689c6db25bfb0` or later.
 
 Expected local endpoint:
 
@@ -229,13 +262,13 @@ Expected local endpoint:
 http://127.0.0.1:8765
 ```
 
-Starting or reconnecting the dashboard browser bridge does not authorize real Worker dispatch, route capture, route rollover, schedules, or unattended local orchestrator sends.
+Starting or reconnecting the dashboard browser bridge does not authorize real Worker dispatch, route capture, route rollover, schedules, activation, or unattended local orchestrator sends.
 
 ## Current Work
 
-Package F Wave 0B Slices 1–2 are complete and must not be recreated as active work.
+Package F Wave 0B Slices 1–3 are complete and must not be recreated as active work.
 
-The immediate Engineering implementation is Slice 3: conservative global send budget. Before code changes, inspect the current execution-history schema, Worker dispatch and HQ-wake send entry points, idempotency and uncertain-send suppression, persisted pause state, scheduler behavior, and status surfaces. Define the smallest budget period, limit, reservation point, completion semantics, and human reset behavior that prevents burst sends without silently laundering uncertainty through time.
+The immediate Engineering implementation is Slice 4: contract-derived activation gate. Begin with a read-only inspection of the canonical Worker execution and communication contracts, current Worker profile and procedure schemas, runtime registry and route checks, owning-HQ review requirements, pause and send-budget status, unresolved hold evidence, and retirement behavior. Define one fail-closed prerequisite report that reads existing truth and cannot activate or mutate anything.
 
 All further work comes from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -247,7 +280,9 @@ All further work comes from `projects/engineering/open_loops.md`, a demonstrated
 - Browser bridge reconnect is a local transport-recovery action only and cannot mutate route identity or authorize execution.
 - Cross-department destination resolution is not Worker activation, route registration, permission expansion, scheduling, or dispatch authority.
 - The persisted shared safety pause is the only circuit-breaker state and requires explicit human resume.
-- A future send budget must use existing authoritative runtime evidence and must not treat elapsed time as resolution of an uncertain send.
+- The persisted send budget is one manually reset epoch shared by Worker dispatch and owning-HQ wake attempts; elapsed time never refills it.
+- Resetting the send budget does not Resume automation, erase safety incidents, or authorize a send.
+- The activation validator may report prerequisites only. It may not create authority, mutate deployment state, or replace owning-department, Maintenance, or Rob approval.
 - The DOM Window extension is optional, disabled by default, and not a solution to the demonstrated JavaScript-heavy memory growth.
 - Confirmed or uncertain sends are not retried blindly.
 - Immutable Git evidence outranks stale local transport state.
