@@ -2,7 +2,7 @@
 
 Updated: 2026-07-25
 Project: Maintenance_HQ
-Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current
+Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Preparation Waiting on Engineering Branch Merge
 
 ## Current Mission
 
@@ -20,7 +20,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - `memory/STARTUP_BOOT.md` remains the single canonical HQ and Worker entry point.
 - `memory/HQ_NAMING_STANDARD.md` remains the sole canonical naming source.
 - Current canonical room titles use exact underscore names.
-- The current canonical Worker title is `Engineering_Worker`; future Worker titles follow `<Department_Name>_Worker`.
+- The current production Worker title is `Engineering_Worker`; future Worker titles follow `<Department_Name>_Worker`.
 - The Raw Capture and Inventory packages under root `workers/` remain grandfathered compatibility pilots; no new top-level Worker package is created by analogy.
 - Department-owned profiles define stable identity and authority only.
 - `Engineering_HQ` owns deployment state, Worker routing and runtime implementation, route availability, exact-title and stable-ID transport, receiver state, revision deduplication, immutable result ingestion, verification queues, wake suppression, and technical rollover.
@@ -32,9 +32,31 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - The hourly `Chief_of_Staff_HQ` advisory watcher remains an active read-only pilot. Its destination validation passed in the existing Chief of Staff conversation, and `ADV-20260723-052` is closed.
 - Package F Wave 0B completed the Engineering-owned cross-department safety kernel without creating or activating a non-Engineering Worker.
 - The activation-prerequisite report remains read-only, fail-closed, and incapable of granting authority.
-- The deployed project context now shows canonical underscore instructions and retrieves the stable global and intended-room handbook mirrors. The publication-reconciliation wrapper is closed.
+- The deployed project context shows canonical underscore instructions and retrieves the stable global and intended-room handbook mirrors. The publication-reconciliation wrapper is closed.
 
-## 2026-07-23–25 Completed Maintenance
+## Maintenance Worker Preparation
+
+Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`.
+
+Approved initial scope:
+
+- read-only Boot and Sync review;
+- global and department pointer checks;
+- ownership, naming, source-boundary, advisory-index, and handbook-source audits;
+- evidence-backed `IMPLEMENT`, `REPORT_AND_HOLD`, or `ELEVATE_FOR_APPROVAL` outcomes;
+- `IMMEDIATE_HQ` verification for the initial pilot.
+
+Current state:
+
+- Rob authorized `Engineering_HQ` to prepare the Maintenance-owned profile and review procedure as a bounded coordinated repair while Maintenance was occupied with reconciliation;
+- Engineering is holding those proposed files in a branch pending merge;
+- neither file is authoritative on `main` yet;
+- Maintenance will not create competing copies;
+- no Maintenance Worker registry row, private route, schedule, dispatch, HQ wake, or activation record exists on current authoritative evidence;
+- no connector, external-system write, durable GitHub write, recurring schedule, unattended execution, spending, or cross-department authority is approved;
+- after merge, Maintenance must perform a read-only conformity review before Engineering registration and testing continue.
+
+## 2026-07-23-25 Completed Maintenance
 
 - Completed Rob's repository-wide coordinated naming-only repair across current active nonhistorical textual documentation, including department-local files under explicit coordinated-repair authority.
 - Enforced `LifeOS`, the eight canonical underscore room names, `Engineering_Worker`, and `<Department_Name>_Worker` in current canonical text.
@@ -51,6 +73,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Closed the shared ChatGPT Project publication reconciliation after current project context showed canonical names, retrieved the global handbook, exposed the eight intended-room handbooks, and showed no numbered competing global handbook.
 - Completed a read-only Wave 0B governance review and confirmed that Engineering completion creates no Worker activation authority.
 - Reconciled the system handoff, active-project map, system open loops, and Maintenance continuity after Wave 0B and publication completion.
+- Completed a read-only Engineering, Maintenance, and global drift comparison, then updated only Maintenance-owned continuity for the authorized branch-held Worker preparation.
 
 ## Active Maintenance Priorities
 
@@ -63,6 +86,8 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - Keep the global handbook role-neutral and each room handbook explicitly scoped, noncanonical, and refreshable only through meaningful stable-title replacement.
 - Audit the canonical Worker contract, profile location, root-pilot compatibility status, and Maintenance/Engineering/department ownership split.
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
+- Do not create a competing Maintenance Worker profile or review procedure while the authorized Engineering branch is pending merge.
+- After merge, verify the profile and procedure against the approved read-only scope before technical registration or pilot execution.
 - Route newly demonstrated department-local drift to the owning Department HQ rather than silently repairing it without authority.
 - Keep desktop automation and guarded GitHub sync safety gates intact.
 - Preserve the unattended-automation production boundary and the paused `Engineering_HQ Daily Sync` state.
@@ -77,6 +102,7 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 - `Engineering_HQ` owns implementation machinery, routing registry and runtime state, technical reliability, validation, queues, wake suppression, dashboard code, prompt-runtime code, databases, and tests.
 - Specialist Department HQs own their local durable state and Worker profiles.
 - Workers execute bounded work and own no independent strategy or backlog.
+- Temporary coordinated-repair authority does not transfer permanent file or Worker ownership.
 - `Finance_HQ` owns detailed money records and concrete financial decisions.
 - `Business_HQ` and `Office_Leaks_HQ` own parent strategy and business-unit execution respectively.
 - `Wellness_HQ` owns non-clinical wellbeing, pacing, routines, self-care, emotional-regulation support, and recovery-support context within scope.
@@ -93,4 +119,4 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 ## Best Next Action
 
-Maintain clean shared governance state and wait for explicitly routed work. No active Maintenance-owned implementation or publication dependency is open. Any Maintenance Worker profile, procedure, route, or pilot must proceed through the owning-department authority, canonical Worker contract, Engineering registration and testing, and Rob approval where required.
+Wait for Engineering to merge the authorized branch containing the proposed Maintenance Worker profile and Maintenance HQ review procedure. Then fetch both files from `main`, perform a read-only conformity review, and allow Engineering registration, route testing, and activation-prerequisite reporting only after that review passes. A merged profile or passing technical report does not itself activate the Worker.
