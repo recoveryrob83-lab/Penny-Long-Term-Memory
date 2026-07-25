@@ -120,8 +120,7 @@ def test_registration_creates_one_route_less_row_and_unknown_hold(tmp_path: Path
             ("maintenance_worker",),
         ).fetchone()[0]
         history_count = connection.execute(
-            "SELECT COUNT(*) FROM execution_history WHERE worker_id = ?",
-            ("maintenance_worker",),
+            "SELECT COUNT(*) FROM execution_history"
         ).fetchone()[0]
     assert registry_count == 1
     assert history_count == 0
