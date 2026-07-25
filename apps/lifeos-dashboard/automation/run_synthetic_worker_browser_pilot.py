@@ -1,4 +1,5 @@
 """Run one zero-authority Worker browser dispatch pilot."""
+
 from __future__ import annotations
 
 import argparse
@@ -17,7 +18,10 @@ from chatgpt_worker_browser_roundtrip import (
 )
 from lifeos_dashboard.room_titles import CANONICAL_WORKER_TITLES
 from lifeos_dashboard.worker_command_center import render_worker_prompt
-from lifeos_dashboard.worker_runtime import ExecutionEnvelope, WorkerRuntimeError
+from lifeos_dashboard.worker_runtime import (
+    ExecutionEnvelope,
+    WorkerRuntimeError,
+)
 from lifeos_dashboard.worker_runtime_service import WorkerRuntimeService
 
 DEFAULT_WORKER_ID = "engineering_worker"
