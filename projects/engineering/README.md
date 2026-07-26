@@ -87,13 +87,13 @@ Current merged behavior:
 
 - requires stable room hydration, exact route identity, one visible composer, and no active generation;
 - reuses only the current run-linked draft;
-- preserves unrelated text;
+- preserves unrelated, malformed, and unproven text;
+- clears an older canonical LifeOS wrapper only when its `wrapper_id` and `run_id` are proven together in one submitted user turn;
+- verifies the proven stale composer is empty before inserting a new prompt;
 - proves a new correlated user turn and an empty composer before confirming a send;
 - never blind-retries confirmed or uncertain submissions.
 
-Draft PR #21 adds evidence-backed stale-residue cleanup. Static Engineering review on 2026-07-26 found no blocking code defect. The branch recognizes only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line with valid JSON and nonempty `wrapper_id` and `run_id`, requires both IDs in one submitted user turn before cleanup, verifies the composer is empty after clearing, preserves malformed, unrelated, and unproven text, and does not retry the prior send.
-
-The branch has diverged from `main` through later documentation-only commits. GitHub reports no workflow runs or status checks on the head. The code is not production-complete until PR #21 is separately merged, deployed, and observed during a later authorized dispatch.
+PR #21, `Clear proven stale Worker composer residue`, was squash-merged to `main` as `620ef84c57cbb87123bbca30e43faffda1e71032` after the branch was refreshed against current `main` and Rob reported the focused tests, affected regressions, and Ruff green. Local pull, dashboard restart, and ordinary health confirmation remain the immediate deployment follow-through. A later separately authorized Worker run should provide natural live observation without replaying the completed Maintenance canary.
 
 ## Completed Technical State
 
@@ -103,6 +103,7 @@ The branch has diverged from `main` through later documentation-only commits. Gi
 - Package F Wave 0B: owning-HQ destination resolution, persisted shared safety pause, global send budget, and read-only activation readiness.
 - PR #19: approved Maintenance profile, result procedure, HQ review procedure, review-path bridge, and tests.
 - PR #20: guarded Worker registration and canary targeting for the sole routed Worker awaiting verification.
+- PR #21: evidence-backed stale composer-residue cleanup with unrelated-text preservation and no prior-send retry.
 - Maintenance Worker registration, exact route revision 1, successful canary, route availability, and active deployment are user-reported complete.
 
 Key recent merge commits:
@@ -113,6 +114,7 @@ Key recent merge commits:
 - PR #18: `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`
 - PR #19: `28a7a4fc40317d043dbe9983747475f85d37742a`
 - PR #20: `e91783dd9705df4a090eae2b4414adead6dafcf4`
+- PR #21: `620ef84c57cbb87123bbca30e43faffda1e71032`
 
 ## Current Worker State
 
@@ -160,12 +162,11 @@ Maintenance-owned Worker artifacts remain owned by `Maintenance_HQ`; Engineering
 
 ## Current Decision Boundary
 
-1. Merge PR #21 only under explicit merge authority.
-2. After merge, pull `main`, restart the dashboard, and verify ordinary health.
-3. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-4. Observe the next separately authorized dispatch for composer cleanup behavior.
-5. Keep Office Leaks paused.
-6. Wait for `Business_HQ` and Rob to define a Business Worker contract before Engineering creates machinery around it.
+1. Pull current `main`, restart the dashboard, and verify ordinary health after PR #21.
+2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
+3. Observe the next separately authorized dispatch for composer cleanup behavior.
+4. Keep Office Leaks paused.
+5. Wait for `Business_HQ` and Rob to define a Business Worker contract before Engineering creates machinery around it.
 
 Business candidacy is not approval. Do not create a profile, title, ID, room, registry row, route, schedule, activation, or assignment by analogy with Maintenance.
 
@@ -176,6 +177,8 @@ Future Engineering work must come from `projects/engineering/open_loops.md`, a d
 - Operate only against exact canonical ChatGPT URLs.
 - Use the registered exact Worker URL as the authoritative locator.
 - Require stable history hydration, exact room identity, a safe composer state, and no active generation.
+- Preserve unrelated, malformed, and unproven composer text.
+- Clear only evidence-backed stale canonical LifeOS wrapper residue.
 - Prove a new marker-bearing user turn and an empty composer before calling a send confirmed.
 - Never blind-retry a confirmed or uncertain submission.
 - Ingest existing immutable evidence before attempting another HQ wake.
@@ -200,4 +203,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The Maintenance Worker is active and live with no work assigned. PR #21 passed static Engineering review but remains unmerged and therefore is not production-complete. Office Leaks is paused. Business is the likely next Worker-owning department, pending an explicit Business-owned contract and Rob authorization.
+Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The Maintenance Worker is active and live with no work assigned. PR #21 is merged to `main`; local pull, dashboard restart, and ordinary health confirmation remain. Office Leaks is paused. Business is the likely next Worker-owning department, pending an explicit Business-owned contract and Rob authorization.
