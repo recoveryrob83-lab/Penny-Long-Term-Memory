@@ -1,6 +1,6 @@
 # Engineering_HQ
 
-Updated: 2026-07-25
+Updated: 2026-07-26
 
 ## Purpose
 
@@ -21,13 +21,13 @@ Use `Engineering_HQ` for:
 - testing, debugging, implementation sequencing, feasibility review, and build-ready packets;
 - Engineering-owned durable-memory maintenance.
 
-Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, another department's records, source-owner advisory lifecycle, or domain judgment.
+Engineering owns the machinery. It does not own canonical shared Worker governance, department-specific Worker authority, another department's records, source-owner lifecycle, business strategy, or domain judgment.
 
 ## Canonical Naming Boundary
 
 `memory/HQ_NAMING_STANDARD.md` is the canonical naming source.
 
-Current exact ChatGPT room titles are:
+Current exact Department HQ room titles include:
 
 - `LifeOS_HQ`
 - `Maintenance_HQ`
@@ -43,7 +43,7 @@ Current canonical Worker titles and IDs are:
 - `Engineering_Worker` / `engineering_worker`
 - `Maintenance_Worker` / `maintenance_worker`
 
-The Maintenance profile and procedures are canonical on `main`, but its private ChatGPT route and runtime linkage remain pending until Rob creates and links the room through Worker Operations.
+No Business Worker title or ID is canonical yet. `Business_HQ` is only the likely next owning department after Rob's shift toward an AI systems business for solo developers and small teams.
 
 `Maintenance_HQ` owns the shared textual standard. `Engineering_HQ` owns implementation of titles and stable IDs in Engineering-controlled code, browser routing, runtime configuration, route mappings, tests, and bounded active-state migrations.
 
@@ -92,27 +92,49 @@ The registered exact conversation URL is the authoritative browser locator for a
 - One existing Worker row remains authoritative; fresh-chat rollover does not create a second Worker identity.
 - Route changes increment `route_revision`.
 - A changed or newly linked route begins on hold.
-- Real advisory execution requires route availability to be exactly `available`.
+- Real execution requires route availability to be exactly `available`.
 - A zero-authority canary promotes only the exact unchanged witnessed revision.
 - Private exact conversation URLs remain in ignored local runtime state and are not copied into GitHub memory files.
 
-## Guarded Dashboard Route Linkage
+## Guarded Registration and Route Linkage
 
-Worker Operations can capture or link the sole active ChatGPT Worker conversation from the local CDP browser target list without copying the private URL into GitHub.
+Worker Operations can register an approved canonical Worker profile and capture the exact active ChatGPT Worker conversation without copying the private URL into GitHub.
 
-Capture fails closed unless:
+Registration fails closed unless:
 
-- automation is paused when the guarded mechanism requires it;
+- the profile is under a canonical department-owned `projects/*/workers/*.md` path;
+- Worker ID, title, owner, project, profile metadata, specialization, and role agree exactly;
+- automation is paused;
+- no job is running;
 - the shared execution lock is free;
-- the operator explicitly confirms capture;
-- the expected route revision still matches the authoritative row;
+- the operator explicitly confirms registration.
+
+A successful registration creates one route-less registry row and one `unknown` route hold. It creates no assignment, execution row, schedule, route, activation, or authority.
+
+Route capture fails closed unless:
+
+- the expected route revision still matches;
 - exactly one intended ChatGPT conversation target is open;
 - the browser target title matches the selected Worker's exact title;
 - the captured URL is not already owned by another Worker.
 
-A successful route change updates one existing registry row, increments the revision, and keeps the route held until the zero-authority canary succeeds.
+A successful route change updates one existing row, increments the revision, and keeps the route held until the zero-authority canary succeeds.
 
-Starting the dashboard alone does not authorize route capture, route rollover, real Worker dispatch, schedules, activation, budget reset, or unattended local orchestrator sends.
+Starting the dashboard alone does not authorize registration, route capture, route rollover, real Worker dispatch, schedules, activation, budget reset, or unattended local orchestrator sends.
+
+## Composer Safety
+
+The browser courier preserves user text and fails closed around uncertain drafts.
+
+Current merged behavior:
+
+- requires stable room hydration, exact route identity, one visible composer, and no active generation;
+- reuses only the exact current run-linked draft;
+- preserves unrelated text;
+- proves a new correlated user turn and an empty composer before confirming a send;
+- never blind-retries confirmed or uncertain submissions.
+
+Draft PR #21 adds evidence-backed stale-residue cleanup. After merge, an older canonical LifeOS wrapper may be cleared only when its `wrapper_id` and `run_id` already occur together in one submitted user turn. Malformed, unrelated, or unproven text remains untouched.
 
 ## Current Technical State
 
@@ -122,7 +144,8 @@ Completed foundations:
 2. Package E: immutable result outbox, deterministic ingestion, repair, HQ review, Rob validation, consumption, and duplicate suppression.
 3. Package F Wave 0A: canonical naming, exact URL routing, guarded route capture, zero-authority canary, and browser-bridge recovery.
 4. Package F Wave 0B: owning-HQ destination resolution, persisted shared safety pause, global send budget, and read-only activation readiness.
-5. PR #19: approved Maintenance profile, immutable Maintenance result procedure, Maintenance HQ review procedure, canonical Maintenance review-path bridge, and canonical tests.
+5. PR #19: approved Maintenance profile, immutable Maintenance result procedure, Maintenance HQ review procedure, review-path bridge, and canonical tests.
+6. PR #20: guarded Worker registration and canary targeting for the sole routed Worker still awaiting verification.
 
 Key merge commits:
 
@@ -136,6 +159,7 @@ Key merge commits:
 - PR #17: `e1d297f1a2517490b3fb2a37298689c6db25bfb0`
 - PR #18: `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`
 - PR #19: `28a7a4fc40317d043dbe9983747475f85d37742a`
+- PR #20: `e91783dd9705df4a090eae2b4414adead6dafcf4`
 
 ## Current Worker State
 
@@ -156,8 +180,19 @@ Key merge commits:
 - Profile and procedures: present on `main`
 - Initial authority: manually dispatched read-only verification and governance audit, plus one exact immutable result artifact
 - Required verification: `IMMEDIATE_HQ`
-- Chat room, registry linkage, exact private route, route revision, canary, and live readiness inspection: pending
-- Real pilot assignment: not implied by profile creation or route linkage
+- Registry, exact route revision 1, zero-authority canary, return to Engineering, and route availability `available`: user-reported complete
+- Activation and real assignment authority: absent
+
+### Business Worker Candidate
+
+- Likely owner: `Business_HQ`
+- Strategic focus: AI systems services for solo developers and small teams
+- Canonical profile, procedures, stable ID, exact title, room, route, canary, activation, schedule, and first assignment: not defined or authorized
+
+### Office Leaks
+
+- Business and Worker rollout: paused by Rob
+- Existing Office Leaks records remain owned by `Office_Leaks_HQ`
 
 ## Project Source Handbook Boundary
 
@@ -165,7 +200,8 @@ The Engineering handbook and other LifeOS handbooks are available through Projec
 
 ## Not This Department
 
-- Business strategy, branding, market research, monetization, or customer discovery: `Business_HQ` or `Office_Leaks_HQ`.
+- AI systems business strategy, branding, market research, monetization, customer discovery, or Business Worker purpose: `Business_HQ`.
+- Paused Office Leaks strategy and records: `Office_Leaks_HQ`.
 - Finance, benefits, budget, bills, subscriptions, or cost approval: `Finance_HQ`.
 - Daily scheduling, ordinary coordination, executive-function support, or quick administration: `Chief_of_Staff_HQ`.
 - Shared global Boot integrity, advisory-index hygiene, cross-project audits, migrations, canonical Worker governance, and system-wide housekeeping: `Maintenance_HQ`.
@@ -177,13 +213,19 @@ Engineering maintains its own project subtree during authorized maintenance and 
 
 Shared global files, other departments' canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
-PR #19 contains Maintenance-owned artifacts created under Rob's explicit rollout authority. Their ongoing maintenance, judgment, and retirement belong to `Maintenance_HQ`; Engineering owns only the routing and runtime bridge around them.
+Maintenance-owned Worker artifacts remain owned by `Maintenance_HQ`; Engineering owns only the routing and runtime bridge around them. Business owns any future Business Worker purpose and authority.
 
 ## Current Decision Boundary
 
-The next bounded action is exact `Maintenance_Worker` room creation and guarded route linkage, followed by registry inspection, zero-authority canary, and read-only readiness inspection.
+The next bounded Engineering decisions are:
 
-Do not dispatch real work, wake Maintenance HQ, create schedules, reset the send budget, or infer assignment authority from successful route linkage or canary results.
+1. review and merge PR #21 only under explicit merge authority;
+2. inspect Maintenance activation readiness before any real assignment;
+3. observe the next separately authorized dispatch for composer cleanup behavior;
+4. keep Office Leaks paused;
+5. wait for `Business_HQ` and Rob to define a Business Worker contract before Engineering creates machinery around it.
+
+Do not create a Business Worker profile, title, ID, room, registry row, route, schedule, activation, or assignment merely because Business is the likely next target.
 
 Future Engineering work must come from:
 
@@ -195,8 +237,8 @@ Future Engineering work must come from:
 
 - Operate only against exact canonical ChatGPT URLs.
 - Use the registered exact Worker URL as the authoritative locator.
-- Require stable history hydration, exact room identity, an empty composer, and no active generation.
-- Prove a new marker-bearing user turn, increased turn count, and an empty composer before calling a send confirmed.
+- Require stable history hydration, exact room identity, an empty or safely reusable composer, and no active generation.
+- Prove a new marker-bearing user turn and an empty composer before calling a send confirmed.
 - Never blind-retry a confirmed or uncertain submission.
 - Ingest existing immutable evidence before attempting another HQ wake.
 - Use atomic one-shot claims to suppress concurrent or uncertain repeat wakes.
@@ -221,4 +263,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The approved Maintenance Worker profile and review chain are on `main`; exact chat creation, guarded route linkage, zero-authority canary, and live readiness inspection remain pending.
+Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. Maintenance registration, route revision 1, and the zero-authority canary are user-reported complete; activation is not authorized. PR #21 is validated but unmerged. Office Leaks is paused. Business is the likely next Worker-owning department, pending an explicit Business-owned contract and Rob authorization.
