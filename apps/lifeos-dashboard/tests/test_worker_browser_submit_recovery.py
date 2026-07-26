@@ -2,7 +2,6 @@ import importlib.util
 import sys
 from pathlib import Path
 
-
 AUTOMATION = Path(__file__).parents[1] / "automation"
 if str(AUTOMATION) not in sys.path:
     sys.path.insert(0, str(AUTOMATION))
