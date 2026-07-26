@@ -4,7 +4,7 @@ Updated: 2026-07-26
 
 ## Current Phase
 
-Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Route Verified / PR #21 Pending Merge / Office Leaks Paused / Business Worker Candidate Waiting
+Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Reviewed and Pending Merge / Office Leaks Paused / Business Worker Candidate Waiting
 
 ## Department Scope
 
@@ -18,7 +18,7 @@ Engineering does not own shared governance, another department's Worker authorit
 
 - GitHub holds durable architecture, profiles, procedures, packages, decisions, advisories, and immutable Worker evidence.
 - `projects/engineering/open_loops.md` is authoritative for unfinished Engineering work.
-- SQLite Command Center state is the sole operational ledger for Worker registry, routes, dispatch, results, review, pause, and send-budget state.
+- SQLite Command Center state is the sole operational ledger for Worker registry, routes, dispatch, results, review, pause, send-budget, and deployment state.
 - Private ChatGPT conversation URLs remain only in ignored local runtime state.
 - Dashboard views provide visibility and transport, not independent truth or closure authority.
 - Department HQs own their Worker purpose, authority, holds, verification, and retirement.
@@ -44,7 +44,7 @@ Key merges:
 
 ## Maintenance Worker
 
-Lifecycle State: ROUTE VERIFIED / ACTIVATION NOT AUTHORIZED
+Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
 
 Canonical files:
 
@@ -59,23 +59,29 @@ Rob reports:
 - route revision `1`;
 - successful zero-authority browser round trip;
 - successful return to Engineering;
-- route availability `available`.
+- route availability `available`;
+- Worker deployment state active and live;
+- no work assigned.
 
-This proves the route and transport only. It does not authorize activation, a real assignment, Maintenance HQ wake, schedules, budget reset, unattended execution, or broader write authority.
-
-Next Maintenance step: inspect the read-only activation report. A first real assignment requires separately exact authority, one allowed task class, source references, read scopes, one immutable result path, authorization source, and `IMMEDIATE_HQ` verification.
+Activation is complete and is recorded separately from assignment authority. It does not create a task, schedule, unattended execution, broader connector permission, source-record repair authority, spending, or cross-department authority. The first real assignment still requires one separately exact bounded task, required source references and scopes, authorization source, immutable result path, and `IMMEDIATE_HQ` verification.
 
 ## Composer Residue Repair
 
-Lifecycle State: IMPLEMENTED AND NATIVELY VALIDATED / PR OPEN
+Lifecycle State: STATIC REVIEW PASSED / PR OPEN / NOT ON `main`
 
-During the Maintenance canary, ChatGPT restored the already-submitted prompt in the Worker composer after the transport had confirmed the user turn and returned to Engineering. Rob manually removed it.
+During the Maintenance canary, ChatGPT restored the already-submitted prompt in the Worker composer after transport had confirmed the user turn and returned to Engineering. Rob manually removed it.
 
 Draft PR #21, `Clear proven stale Worker composer residue`, remains open on `engineering/worker-composer-residue-fix` at head `132ba74e24911b429a762a7d0f994ac7aeab647b`.
 
-The repair reuses an exact current-run draft, preserves unrelated text, and clears an older canonical LifeOS wrapper only when its `wrapper_id` and `run_id` already occur together in one submitted user turn. Malformed or unproven residue is preserved and nothing is sent.
+Static Engineering review on 2026-07-26 found that the repair:
 
-Rob reports focused tests, affected regressions, and Ruff pass. PR #21 is not on `main` until it is merged. Do not rerun the completed Maintenance canary merely to test it.
+- recognizes only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line containing valid JSON and nonempty `wrapper_id` and `run_id`;
+- requires both IDs to occur together in one submitted user turn in that same Worker conversation before clearing residue;
+- preserves unrelated, malformed, and unproven composer text;
+- verifies the proven stale composer is empty before inserting the next prompt;
+- does not retry the prior send or weaken the existing correlated-turn and stop-on-uncertainty gates.
+
+No blocking code defect was found. The branch is 7 commits ahead of and 6 documentation commits behind current `main`. GitHub reports no workflow runs or status checks for the head. Rob's focused tests, affected regressions, and Ruff pass remain the available native validation evidence. The repair is not on `main` and is not production-complete until separately merged, deployed, and observed during a later authorized dispatch. Do not rerun the completed Maintenance canary merely to test it.
 
 ## Worker Portfolio
 
@@ -92,8 +98,9 @@ Rob reports focused tests, affected regressions, and Ruff pass. PR #21 is not on
 - ID: `maintenance_worker`
 - Title: `Maintenance_Worker`
 - Profile and procedures: on `main`
-- Registry, route revision 1, canary, and availability: user-reported complete
-- Activation and first real assignment: absent
+- Registry, route revision 1, canary, return to Engineering, and availability `available`: user-reported complete
+- Deployment state: active and live
+- Assigned work: none
 
 ### Business Worker Candidate
 
@@ -109,9 +116,9 @@ Rob reports focused tests, affected regressions, and Ruff pass. PR #21 is not on
 
 ## Current Work
 
-1. Review and merge PR #21 only under explicit merge authority.
-2. Pull `main` and restart the dashboard after merge.
-3. Inspect Maintenance activation readiness before requesting a real assignment.
+1. Merge PR #21 only under explicit merge authority.
+2. After merge, pull `main`, restart the dashboard, and confirm ordinary health.
+3. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
 4. Observe the next separately authorized dispatch for composer cleanup behavior without rerunning the completed canary.
 5. Keep Office Leaks paused.
 6. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded task before Engineering prepares registration or routing work.
@@ -131,14 +138,14 @@ Open Engineering advisories: None.
 - Route changes require a revision increment, initial hold, and zero-authority canary.
 - The persisted shared safety pause is the only circuit breaker and requires explicit human resume.
 - The shared send budget is one manually reset epoch; elapsed time never refills it and Reset does not Resume.
-- The activation validator always reports `activation_authorized: false`.
+- The activation validator always reports `activation_authorized: false`; explicit human activation is a separate authority event and does not make the validator an activation ledger.
 - Confirmed or uncertain sends are never blind-retried.
 - After PR #21 merges, only proven stale LifeOS residue may be cleared; unrelated drafts remain protected.
 - Immutable Git evidence outranks stale local transport state.
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Courier, dashboard, ingester, watcher, HQ receipt, and Rob receipt do not close source work automatically.
 - The Worker courier does not wake `Chief_of_Staff_HQ` under the current contract.
-- Additional Workers, recurring tasks, connectors, spending, public actions, or broader authority require separate owner review and authorization.
+- Additional Workers, recurring tasks, connectors, spending, public actions, broader authority, and real Maintenance assignments require separate owner review and authorization.
 
 ## Boundary
 
