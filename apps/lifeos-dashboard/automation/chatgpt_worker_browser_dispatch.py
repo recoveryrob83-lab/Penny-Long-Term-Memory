@@ -37,6 +37,8 @@ from chatgpt_worker_browser_roundtrip import (
 RECEIPT_PREFIX = "LIFEOS_BROWSER_DISPATCH_RECEIPT="
 SOURCE_RETURN_POLL_SECONDS = 0.25
 SUBMISSION_POLL_SECONDS = 0.25
+LIFEOS_WRAPPER_PREFIX = "LIFEOS_EXECUTION_WRAPPER="
+USER_MESSAGE_SELECTOR = '[data-message-author-role="user"]'
 SEND_SELECTOR = ", ".join(
     (
         'button[data-testid="send-button"]:visible',
@@ -142,6 +144,80 @@ def _matching_draft(text: str, request: BrowserRoundTripRequest) -> bool:
     return request.request_marker in clean and request.response_marker in clean
 
 
+def _lifeos_draft_markers(text: str) -> tuple[str, str] | None:
+    """Extract wrapper and run IDs from one canonical LifeOS Worker draft."""
+
+    clean = str(text or "").strip()
+    if not clean.startswith(LIFEOS_WRAPPER_PREFIX):
+        return None
+    first_line = clean.splitlines()[0]
+    raw_wrapper = first_line[len(LIFEOS_WRAPPER_PREFIX) :].strip()
+    try:
+        payload = json.loads(raw_wrapper)
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    wrapper_id = str(payload.get("wrapper_id") or "").strip()
+    run_id = str(payload.get("run_id") or "").strip()
+    if not wrapper_id or not run_id:
+        return None
+    return wrapper_id, run_id
+
+
+def _submitted_user_turn_has_markers(
+    page,
+    *,
+    wrapper_id: str,
+    run_id: str,
+) -> bool:
+    """Prove both stale-draft markers already exist in one submitted user turn."""
+
+    role_nodes = page.locator(USER_MESSAGE_SELECTOR).filter(has_text=wrapper_id)
+    for index in range(role_nodes.count()):
+        node = role_nodes.nth(index)
+        text = str(
+            node.evaluate("element => element.innerText || element.textContent || ''") or ""
+        )
+        if wrapper_id in text and run_id in text:
+            return True
+    return False
+
+
+def _prepare_existing_draft(
+    page,
+    prompt,
+    request: BrowserRoundTripRequest,
+) -> bool | None:
+    """Reuse this run, clear proven stale LifeOS residue, or preserve uncertain text."""
+
+    draft = _composer_text(prompt)
+    if not draft:
+        return False
+    if _matching_draft(draft, request):
+        return True
+
+    markers = _lifeos_draft_markers(draft)
+    if markers is None:
+        raise BrowserRoundTripError(
+            "Worker composer contains a different unsent draft. It was preserved."
+        )
+    wrapper_id, run_id = markers
+    if not _submitted_user_turn_has_markers(
+        page,
+        wrapper_id=wrapper_id,
+        run_id=run_id,
+    ):
+        return None
+
+    prompt.fill("")
+    if _composer_text(prompt):
+        raise BrowserRoundTripError(
+            "Proven stale LifeOS composer residue could not be cleared. Nothing was sent."
+        )
+    return False
+
+
 def _turn_ids(page) -> tuple[str, ...]:
     """Return stable IDs for all currently rendered conversation turns."""
 
@@ -161,7 +237,7 @@ def _wait_for_dispatch_ready(
     worker_url: str,
     timeout_ms: int,
 ) -> tuple[object, int, tuple[str, ...], bool]:
-    """Wait for stable Worker history and allow only this run's exact preserved draft."""
+    """Wait for stable Worker history and safely prepare its composer."""
 
     deadline = time.monotonic() + (timeout_ms / 1000)
     last_snapshot: tuple[int, str, str] | None = None
@@ -177,12 +253,16 @@ def _wait_for_dispatch_ready(
             if _visible(page.locator(STOP_SELECTOR)):
                 raise BrowserRoundTripError("Worker conversation is still generating.")
 
-            draft = _composer_text(prompt)
-            reused_draft = bool(draft)
-            if reused_draft and not _matching_draft(draft, request):
-                raise BrowserRoundTripError(
-                    "Worker composer contains a different unsent draft. It was preserved."
+            reused_draft = _prepare_existing_draft(page, prompt, request)
+            if reused_draft is None:
+                last_snapshot = None
+                stable_since = None
+                last_observation = (
+                    "Worker composer contains a prior LifeOS draft, but its submitted user turn "
+                    "is not yet proven. The draft was preserved."
                 )
+                time.sleep(WORKER_READY_POLL_SECONDS)
+                continue
 
             ready_state = str(page.evaluate("document.readyState"))
             snapshot = _worker_history_snapshot(page)
@@ -220,7 +300,10 @@ def _wait_for_dispatch_ready(
                     f"Worker room not hydrated: readyState={ready_state}, turns={snapshot[0]}."
                 )
         except BrowserRoundTripError as exc:
-            if "different unsent draft" in str(exc):
+            if (
+                "different unsent draft" in str(exc)
+                or "could not be cleared" in str(exc)
+            ):
                 raise
             last_snapshot = None
             stable_since = None
@@ -256,7 +339,7 @@ def _new_matching_user_turn_id(
     """Return the newest marker-bearing user turn that did not exist before submit."""
 
     baseline = set(baseline_turn_ids)
-    role_nodes = page.locator('[data-message-author-role="user"]').filter(has_text=marker)
+    role_nodes = page.locator(USER_MESSAGE_SELECTOR).filter(has_text=marker)
     newest: str | None = None
     for index in range(role_nodes.count()):
         turn = role_nodes.nth(index).locator(
@@ -281,17 +364,11 @@ def _submission_witness_valid(
     """Accept a new correlated turn even when rendered history is virtualized."""
 
     baseline = set(baseline_turn_ids)
-    new_correlated_turn = bool(
-        user_turn_id
-        and user_turn_id not in baseline
-    )
+    new_correlated_turn = bool(user_turn_id and user_turn_id not in baseline)
 
     history_witness = bool(
         final_turns > baseline_turns
-        or (
-            final_turns > 0
-            and new_correlated_turn
-        )
+        or (final_turns > 0 and new_correlated_turn)
     )
 
     return bool(
