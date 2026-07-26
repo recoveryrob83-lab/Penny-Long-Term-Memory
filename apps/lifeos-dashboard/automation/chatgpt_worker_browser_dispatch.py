@@ -104,7 +104,10 @@ def _wait_for_source_conversation_ready(page, *, source_url: str, timeout_ms: in
         try:
             observed_url = normalize_chatgpt_url(page.url)
             if observed_url != source_url:
-                last_observation = f"Exact source conversation URL is not active yet: {observed_url}."
+                last_observation = (
+                    "Exact source conversation URL is not active yet: "
+                    f"{observed_url}."
+                )
             else:
                 prompt = page.locator(PROMPT_SELECTOR)
                 count = prompt.count()
@@ -429,7 +432,9 @@ def _submit_and_confirm(
     buttons = _visible_enabled_send(page)
     first_method = "button" if len(buttons) == 1 else "enter"
     if len(buttons) > 1:
-        raise BrowserRoundTripError("Multiple enabled Send controls are visible; draft was preserved.")
+        raise BrowserRoundTripError(
+            "Multiple enabled Send controls are visible; draft was preserved."
+        )
     if first_method == "button":
         buttons[0].click()
     else:
@@ -461,7 +466,8 @@ def _submit_and_confirm(
         buttons = _visible_enabled_send(page)
         if len(buttons) != 1:
             raise BrowserRoundTripError(
-                "No unique enabled Send control appeared after Enter did nothing. Exact draft preserved."
+                "No unique enabled Send control appeared after Enter did nothing. "
+                "Exact draft preserved."
             )
         buttons[0].click()
 
