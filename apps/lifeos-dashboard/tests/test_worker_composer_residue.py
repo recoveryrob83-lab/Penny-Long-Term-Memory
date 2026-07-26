@@ -10,7 +10,10 @@ if str(AUTOMATION) not in sys.path:
     sys.path.insert(0, str(AUTOMATION))
 
 SCRIPT = AUTOMATION / "chatgpt_worker_browser_dispatch.py"
-SPEC = importlib.util.spec_from_file_location("chatgpt_worker_browser_dispatch_residue", SCRIPT)
+SPEC = importlib.util.spec_from_file_location(
+    "chatgpt_worker_browser_dispatch_residue",
+    SCRIPT,
+)
 assert SPEC is not None and SPEC.loader is not None
 dispatch = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = dispatch
@@ -86,7 +89,10 @@ def lifeos_draft(wrapper_id: str = "OLD-WRAP", run_id: str = "OLD-RUN") -> str:
 
 
 def test_lifeos_draft_markers_extract_wrapper_and_run_ids() -> None:
-    assert dispatch._lifeos_draft_markers(lifeos_draft()) == ("OLD-WRAP", "OLD-RUN")
+    assert dispatch._lifeos_draft_markers(lifeos_draft()) == (
+        "OLD-WRAP",
+        "OLD-RUN",
+    )
     assert dispatch._lifeos_draft_markers("ordinary user draft") is None
     assert dispatch._lifeos_draft_markers("LIFEOS_EXECUTION_WRAPPER={bad json}") is None
 
@@ -118,7 +124,7 @@ def test_proven_stale_lifeos_residue_is_cleared_before_new_fill() -> None:
     assert prompt.fill_calls == [""]
 
 
-def test_unproven_lifeos_draft_is_preserved_until_history_proves_submission() -> None:
+def test_unproven_lifeos_draft_is_preserved() -> None:
     stale = lifeos_draft()
     prompt = FakePrompt(stale)
 
@@ -127,7 +133,7 @@ def test_unproven_lifeos_draft_is_preserved_until_history_proves_submission() ->
     assert prompt.fill_calls == []
 
 
-def test_wrapper_and_run_ids_must_appear_in_the_same_submitted_turn() -> None:
+def test_wrapper_and_run_ids_must_appear_in_same_submitted_turn() -> None:
     stale = lifeos_draft()
     prompt = FakePrompt(stale)
     page = FakePage(["OLD-WRAP only", "OLD-RUN only"])
