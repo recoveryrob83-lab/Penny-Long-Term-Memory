@@ -4,7 +4,6 @@ from pathlib import Path
 
 import pytest
 
-
 AUTOMATION = Path(__file__).parents[1] / "automation"
 if str(AUTOMATION) not in sys.path:
     sys.path.insert(0, str(AUTOMATION))
@@ -237,6 +236,7 @@ def test_submission_witness_survives_rendered_history_virtualization() -> None:
         user_turn_id="conversation-turn-42",
         composer_text="",
     )
+
 
 def test_source_return_proves_exact_normalized_url_without_requiring_idle_composer(
     monkeypatch: pytest.MonkeyPatch,
