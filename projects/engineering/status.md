@@ -4,7 +4,7 @@ Updated: 2026-07-26
 
 ## Current Phase
 
-Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Office Leaks Paused / Business Worker Candidate Waiting
+Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Office Leaks Paused / Repository Audit Assignment Pending Separate Authorization
 
 ## Department Scope
 
@@ -32,6 +32,7 @@ Never store secrets, credentials, tokens, private account details, medical detai
 - Package E: CLOSED on 2026-07-23. Immutable result evidence, deterministic ingestion, repair, HQ review, Rob validation, consumption readiness, watcher reporting, and duplicate suppression.
 - Package F Wave 0A: COMPLETE on 2026-07-23. Canonical naming, exact URL routing, route revisions, guarded route capture, zero-authority canary behavior, and browser recovery.
 - Package F Wave 0B: COMPLETE on 2026-07-25. Owning-HQ destination resolution, persisted shared safety pause, global send budget, and read-only activation readiness.
+- Initial cross-department Worker rollout: COMPLETE on 2026-07-26 with an intentionally lean production portfolio.
 
 Key merges:
 
@@ -103,11 +104,12 @@ No GitHub workflow runs were attached to the merge. Rob's local validation is th
 - Deployment state: active and live
 - Assigned work: none
 
-### Business Worker Candidate
+### Deferred Department Workers
 
-- Likely owner: `Business_HQ`
-- Strategic direction: AI systems services for solo developers and small teams
-- Profile, procedures, stable ID, title, room, registry, route, canary, activation, schedule, and assignment: not defined or authorized
+- `Business_HQ`: no Worker requested. Continue bounded one-off research assignments. Reconsider only a narrow Market Evidence Worker after recurring standardized research creates a measurable bottleneck.
+- `Finance_HQ`: no Worker requested at present. Continue bounded one-off assignments and reconsider only after a recurring standardized workload creates a measurable bottleneck.
+- `Wellness_HQ`: no Worker requested at present. Continue bounded one-off assignments and reconsider only after a recurring standardized workload creates a measurable bottleneck.
+- No title, stable ID, profile, room, registry row, route, canary, activation, schedule, or assignment is authorized for these departments.
 
 ### Office Leaks
 
@@ -119,11 +121,10 @@ No GitHub workflow runs were attached to the merge. Rob's local validation is th
 
 1. Pull current `main`, restart the dashboard, and confirm ordinary health after PR #21.
 2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-3. Observe the next separately authorized dispatch for composer cleanup behavior without rerunning the completed canary.
-4. Keep Office Leaks paused.
-5. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded task before Engineering prepares registration or routing work.
-
-Business Worker candidacy is not authorization.
+3. Define the future repository-audit assignment separately, including exact scope, authorization source, allowed writes, immutable result path, and `IMMEDIATE_HQ` review. This closeout does not assign it.
+4. Use that or another separately authorized Worker dispatch to observe the full execution chain and composer cleanup behavior without rerunning the completed canary.
+5. Keep the production Worker portfolio lean unless an owning department demonstrates a recurring standardized bottleneck and requests evaluation.
+6. Keep Office Leaks paused.
 
 ## Advisory State
 
@@ -145,7 +146,8 @@ Open Engineering advisories: None.
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Courier, dashboard, ingester, watcher, HQ receipt, and Rob receipt do not close source work automatically.
 - The Worker courier does not wake `Chief_of_Staff_HQ` under the current contract.
-- Additional Workers, recurring tasks, connectors, spending, public actions, broader authority, and real Maintenance assignments require separate owner review and authorization.
+- The current production Worker portfolio is `Engineering_Worker` plus `Maintenance_Worker`; additional Workers require a demonstrated bottleneck, owner request, shared-contract review, and separate authorization.
+- Recurring tasks, connectors, spending, public actions, broader authority, and real Maintenance assignments require separate owner review and authorization.
 
 ## Boundary
 
