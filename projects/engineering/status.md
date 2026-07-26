@@ -1,16 +1,16 @@
 # Engineering_HQ Status
 
-Updated: 2026-07-25
+Updated: 2026-07-26
 
 ## Current Phase
 
-Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Package F Wave 0B Complete / Maintenance Worker GitHub Rollout Prepared / Maintenance Route Linkage Pending
+Active / Package D Closed / Package E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Route Verified / Composer Residue Repair Pending Merge / Office Leaks Paused / Business Worker Candidate Waiting
 
 ## Summary
 
 `Engineering_HQ` owns technical architecture, software planning, repository strategy, automation design, connector and API research, testing strategy, prompt systems, implementation sequencing, build-readiness, and truthful verification.
 
-Engineering owns Worker machinery: exact routing, stable IDs, direct browser transport, route revisions, duplicate suppression, immutable result ingestion, report repair, HQ and Rob receipt ingestion, runtime evidence, activation-prerequisite reporting, verification views, tests, and reliability safeguards. It does not own shared governance, another department's Worker authority, source-owner advisory lifecycle, or domain judgment.
+Engineering owns Worker machinery: exact routing, stable IDs, direct browser transport, route revisions, duplicate suppression, immutable result ingestion, report repair, HQ and Rob receipt ingestion, runtime evidence, activation-prerequisite reporting, verification views, tests, and reliability safeguards. It does not own shared governance, another department's Worker authority, source-owner advisory lifecycle, business strategy, or domain judgment.
 
 ## Source-of-Truth Boundaries
 
@@ -54,38 +54,61 @@ Established canonical room and Worker naming, exact Worker URL routing, route re
 ### Package F Wave 0B
 
 Lifecycle State: COMPLETE
-Started: 2026-07-23
 Completed: 2026-07-25
 
-Wave 0B delivered the controlled cross-department safety kernel:
+Delivered the controlled cross-department safety kernel:
 
-1. PR #15, merge `83c309f651de0354982fcd6cbb68f9cf3251d6a3`: canonical owning-HQ destination resolution with department-owned review-procedure enforcement.
+1. PR #15, merge `83c309f651de0354982fcd6cbb68f9cf3251d6a3`: canonical owning-HQ destination resolution.
 2. PR #16, merge `3bf20ca231b3b5fbb1c315b24881e46939b3b508`: one persisted shared safety pause with fail-closed automatic triggers.
-3. PR #17, merge `e1d297f1a2517490b3fb2a37298689c6db25bfb0`: one conservative manually reset global send-budget epoch shared by Worker and HQ wake attempts.
+3. PR #17, merge `e1d297f1a2517490b3fb2a37298689c6db25bfb0`: one conservative manually reset global send-budget epoch.
 4. PR #18, merge `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`: read-only contract-derived activation prerequisite reports that always return `activation_authorized: false`.
 
-Rob confirmed the post-merge dashboard smoke passed: health and Worker Operations were ready, the Engineering Worker was available, the browser bridge and execution gate were active, and no review was pending.
+Rob confirmed the post-merge dashboard smoke passed.
 
 ## Maintenance Worker Rollout
 
-Lifecycle State: GITHUB PREREQUISITES COMPLETE / ROUTE LINKAGE PENDING
+Lifecycle State: ROUTE VERIFIED / ACTIVATION NOT AUTHORIZED
 Priority: High
-Approval: Rob reports Wave 0B governance passed and creation of `Maintenance_Worker` is approved.
-Merged PR: #19
-Merge commit: `28a7a4fc40317d043dbe9983747475f85d37742a`
 
-PR #19 added:
+Canonical prerequisites:
 
-- `projects/life-logistics-hq/workers/maintenance_worker.md`;
-- `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`;
-- `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`;
-- the canonical default Maintenance HQ review-procedure path in the Engineering routing resolver;
-- canonical activation-readiness tests for Engineering and Maintenance;
-- explicit machine-readable receiver authority for the Maintenance profile.
+- PR #19 merged as `28a7a4fc40317d043dbe9983747475f85d37742a`.
+- PR #20 merged as `e91783dd9705df4a090eae2b4414adead6dafcf4`.
+- Canonical profile: `projects/life-logistics-hq/workers/maintenance_worker.md`.
+- Canonical result procedure: `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`.
+- Canonical HQ review procedure: `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`.
 
-The initial Maintenance profile is manually dispatched and read-only except for creation of one exact immutable machine-result artifact. It permits only `read_only_verification` and `read_only_governance_audit`, requires `IMMEDIATE_HQ`, and grants no standing repair, reconciliation, publication-write, department-write, connector, schedule, route, runtime-control, or unattended-execution authority.
+Rob reports the following live local state:
 
-Rob reported the focused pytest, affected regression, and Ruff gates passed before PR #19 was merged. No GitHub Actions workflow was configured for this merge, so Rob's native results are the validation evidence.
+- one registered `maintenance_worker` row;
+- exact ChatGPT title `Maintenance_Worker`;
+- route revision `1`;
+- successful zero-authority browser round trip;
+- successful return to Engineering;
+- route availability promoted to `available`.
+
+This proves the registered route and browser transport. It does not authorize activation, a real Maintenance assignment, Maintenance HQ wake, schedules, budget reset, unattended execution, or broader write authority.
+
+The next Maintenance step is a read-only activation-readiness inspection. A first real assignment still requires separately exact authority, one allowed task class, source references, read scopes, one immutable result path, authorization source, and `IMMEDIATE_HQ` verification.
+
+## Composer Residue Repair
+
+Lifecycle State: IMPLEMENTED AND NATIVELY VALIDATED / PR OPEN
+Priority: Normal
+
+During the successful Maintenance canary, ChatGPT restored the already-submitted synthetic prompt in the Worker composer after the transport had confirmed the new user turn and returned to Engineering. Rob manually removed the residue.
+
+Draft PR #21, `Clear proven stale Worker composer residue`, is open on `engineering/worker-composer-residue-fix` at head `132ba74e24911b429a762a7d0f994ac7aeab647b`.
+
+The repair:
+
+- reuses an exact current-run draft;
+- preserves unrelated user text;
+- recognizes only canonical `LIFEOS_EXECUTION_WRAPPER=` drafts with nonempty `wrapper_id` and `run_id`;
+- clears an older LifeOS draft only when both IDs already occur together in one submitted user turn;
+- preserves malformed or unproven residue and sends nothing.
+
+Rob reports focused tests, affected regressions, and Ruff pass. PR #21 remains draft and unmerged, so the repair is not yet on `main`. No live canary rerun is needed or authorized merely to test this fix.
 
 ## Current Runtime State
 
@@ -101,42 +124,49 @@ Rob reported the focused pytest, affected regression, and Ruff gates passed befo
 
 ### Maintenance Worker
 
-- Canonical Worker ID: `maintenance_worker`
-- Canonical chat title: `Maintenance_Worker`
+- Worker ID: `maintenance_worker`
+- Chat title: `Maintenance_Worker`
 - Canonical profile and procedures: present on `main`
-- ChatGPT Worker room: not yet created or verified by Engineering
-- Runtime registry row: not yet verified
-- Exact private route: not yet linked
-- Route revision and availability: not yet established
-- Zero-authority canary: pending
-- Activation-readiness inspection against live runtime state: pending
-- Real pilot assignment or dispatch: not authorized by route linkage alone
+- Registry and exact route: user-reported complete
+- Route revision: user-reported `1`
+- Zero-authority canary: user-reported successful
+- Route availability: user-reported `available`
+- Activation authorization: none
+- Real pilot assignment: none
+
+### Business Worker Candidate
+
+- Owning department candidate: `Business_HQ`
+- Business direction: AI systems services for solo developers and small teams
+- Profile, procedures, stable Worker ID, chat title, room, registry row, route, canary, activation, schedule, and first assignment: not yet defined or authorized
+
+### Office Leaks
+
+- Business state: paused by Rob
+- Office Leaks Worker rollout: paused
+- Existing Office Leaks records remain owned by `Office_Leaks_HQ` and must not be repurposed as competing truth for the AI systems business
 
 ## Validation Evidence
 
 - Pre-PR-13 consolidated regression gate: `80 passed`.
 - PR #13 launcher harness: `5 passed`; dashboard JavaScript syntax passed.
 - PR #14 core tests: `5 passed`; JavaScript syntax and JSON validation passed.
-- PR #15 repository-native focused pytest and Ruff passed.
-- PR #16 affected regression gate: `47 passed`; focused Ruff passed.
-- PR #17 focused pytest, affected regressions, and Ruff passed; Worker Operations budget UI loaded cleanly.
-- PR #18 focused activation-readiness tests, affected regressions, and Ruff passed.
-- PR #19 focused routing/profile/readiness tests, affected regressions, and Ruff passed according to Rob's native environment.
+- PRs #15 through #20 passed the available native focused pytest, affected regression, and Ruff gates as reported by Rob.
+- PR #21 focused composer tests, affected regressions, and Ruff passed as reported by Rob.
 - Live evidence, not static test success, controls claims about exact route identity, route availability, browser execution, and external action success.
 
 ## Current Work
 
-The active bounded rollout sequence is:
+The active bounded sequence is:
 
-1. Rob creates the exact `Maintenance_Worker` ChatGPT room.
-2. Rob links it through Worker Operations using the guarded mechanism.
-3. Engineering verifies exactly one `maintenance_worker` registry row with the canonical profile path and version.
-4. Engineering verifies the exact private route, positive route revision, and expected initial route hold.
-5. Engineering runs the existing zero-authority canary against the unchanged route revision.
-6. Engineering inspects the read-only activation report and confirms `activation_authorized: false` regardless of technical readiness.
-7. A first real Maintenance assignment requires its own exact authority, task class, sources, result path, and `IMMEDIATE_HQ` verification path.
+1. Review and merge PR #21 only under explicit merge authority.
+2. Pull current `main` and restart the dashboard after merge.
+3. Inspect the read-only Maintenance activation report before requesting any real assignment authority.
+4. Observe the next separately authorized Worker dispatch for composer cleanup behavior without rerunning the completed Maintenance canary.
+5. Keep Office Leaks rollout paused.
+6. Wait for `Business_HQ` and Rob to define the exact Business Worker purpose, profile, procedures, review path, and first bounded task before Engineering prepares registration or routing work.
 
-Do not dispatch real work, wake Maintenance HQ, create a schedule, reset the send budget, pause or resume automation, or infer assignment authority merely from successful chat creation, route linkage, canary success, or a technically ready report.
+Do not infer Business Worker approval from strategic enthusiasm, Maintenance precedent, dashboard visibility, or this status record.
 
 ## Advisory State
 
@@ -153,6 +183,7 @@ Open Engineering advisories: None.
 - The send budget is one manually reset epoch; elapsed time never refills it and Reset does not Resume.
 - The activation validator reports prerequisites only. `READY_FOR_AUTHORITY_REVIEW` is not activation approval.
 - Confirmed or uncertain sends are never blind-retried.
+- Proven stale LifeOS composer residue may be cleared only under the evidence-backed PR #21 rule after merge; unrelated drafts remain protected.
 - Immutable Git evidence outranks stale local transport state.
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Work unavailable to HQ inspection requires explicit Rob validation.
