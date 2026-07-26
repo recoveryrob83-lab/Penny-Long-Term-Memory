@@ -2,13 +2,13 @@
 
 Updated: 2026-07-26
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the Maintenance Worker became active and live without an assignment, the composer-residue repair passed static Engineering review but remained unmerged, Office Leaks stayed paused, and Business remained the likely next Worker candidate.
+Purpose: Fresh-room handoff after the Maintenance Worker became active and live without an assignment, PR #21 merged the composer-residue repair to `main`, local deployment health remained to be confirmed, Office Leaks stayed paused, and Business remained the likely next Worker candidate.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: `Engineering_HQ`
-- Current Phase: Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Reviewed and Pending Merge / Office Leaks Paused / Business Worker Candidate Waiting
+- Current Phase: Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Office Leaks Paused / Business Worker Candidate Waiting
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -107,13 +107,13 @@ The activation-readiness service remains read-only and continues to report `acti
 
 ## Composer Residue Repair
 
-Lifecycle State: STATIC REVIEW PASSED / PR OPEN / NOT ON `main`
+Lifecycle State: MERGED TO `main` / LOCAL DEPLOYMENT HEALTH PENDING
 
 After the successful Maintenance canary, ChatGPT restored the submitted synthetic prompt in the Maintenance composer. Rob manually deleted it. The send itself remained confirmed and the route remained valid.
 
-Draft PR #21, `Clear proven stale Worker composer residue`, is open on branch `engineering/worker-composer-residue-fix` at head `132ba74e24911b429a762a7d0f994ac7aeab647b`.
+PR #21, `Clear proven stale Worker composer residue`, was refreshed against current `main` and squash-merged as `620ef84c57cbb87123bbca30e43faffda1e71032` after Rob reported the focused tests, affected regressions, and Ruff green.
 
-Static Engineering review on 2026-07-26 confirmed that the branch:
+The merged repair:
 
 - parses only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line containing valid JSON and nonempty `wrapper_id` and `run_id`;
 - clears an older LifeOS composer draft only when both identifiers are proven together in one submitted user turn in the same Worker conversation;
@@ -122,7 +122,7 @@ Static Engineering review on 2026-07-26 confirmed that the branch:
 - verifies the proven stale composer is empty before inserting a new prompt;
 - does not retry the prior send or weaken new-turn correlation and stop-on-uncertainty behavior.
 
-No blocking code defect was found. The branch has diverged from `main` through later documentation-only commits. GitHub exposed no workflow runs or status checks for the head. Rob's focused tests, affected regressions, and Ruff pass remain the current native validation evidence. The fix is not on `main` and is not production-complete until separately merged, deployed, and observed during a later authorized dispatch. Do not rerun the completed Maintenance canary merely to test it.
+GitHub exposed no workflow run for the merge. Rob's local validation is the current test evidence. Pull current `main`, restart the dashboard, and confirm ordinary health before treating deployment follow-through as complete. The next separately authorized Worker dispatch should provide natural live evidence of cleanup behavior; do not rerun the completed Maintenance canary merely to manufacture evidence.
 
 ## Current Production Worker State
 
@@ -162,12 +162,11 @@ No blocking code defect was found. The branch has diverged from `main` through l
 
 ## Next Valid Actions
 
-1. Merge PR #21 only under explicit merge authority.
-2. After merge, pull `main`, restart the dashboard, and confirm ordinary health.
-3. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-4. Observe the next separately authorized Worker dispatch for composer cleanup behavior without rerunning the completed canary.
-5. Keep Office Leaks work paused.
-6. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded pilot before Engineering prepares registration or routing changes.
+1. Pull current `main`, restart the dashboard, and confirm ordinary health after PR #21.
+2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
+3. Observe the next separately authorized Worker dispatch for composer cleanup behavior without rerunning the completed canary.
+4. Keep Office Leaks work paused.
+5. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded pilot before Engineering prepares registration or routing changes.
 
 Business Worker candidacy is not authorization. Do not manufacture a profile, title, ID, route, schedule, or assignment by analogy with Maintenance.
 
@@ -199,7 +198,7 @@ Open Engineering advisories: None.
 - The activation validator reports prerequisites only and always sets `activation_authorized: false`; explicit human activation is separate.
 - `READY_FOR_AUTHORITY_REVIEW` is not activation approval or assignment authority.
 - Confirmed or uncertain submissions are not retried blindly.
-- After PR #21 merges, only proven stale LifeOS residue may be cleared; unrelated composer text remains protected.
+- PR #21 permits only proven stale LifeOS residue to be cleared; unrelated composer text remains protected.
 - Immutable Git evidence outranks stale local transport state.
 - Worker reports remain evidence until deterministic ingestion.
 - `IMMEDIATE_HQ` work never auto-verifies.
