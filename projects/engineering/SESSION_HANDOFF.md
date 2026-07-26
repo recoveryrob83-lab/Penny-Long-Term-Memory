@@ -1,14 +1,14 @@
 # Engineering_HQ Session Handoff
 
-Updated: 2026-07-25
+Updated: 2026-07-26
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after Package F Wave 0B passed governance and the approved Maintenance Worker GitHub rollout prerequisites merged.
+Purpose: Fresh-room handoff after the Maintenance Worker route canary succeeded, a bounded composer-residue repair was implemented and validated, Office Leaks was paused, and Business became the likely next Worker candidate.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: `Engineering_HQ`
-- Current Phase: Active / Package D Closed / Package E Closed / Package F Wave 0A Complete / Package F Wave 0B Complete / Maintenance Worker GitHub Prerequisites Complete / Route Linkage Pending
+- Current Phase: Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Route Verified / PR #21 Pending Merge / Office Leaks Paused / Business Worker Candidate Waiting
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -29,7 +29,7 @@ Purpose: Fresh-room handoff after Package F Wave 0B passed governance and the ap
 
 ## Handbook Context
 
-The Engineering-specific handbook is available through Project Sources as a noncanonical context mirror. It may restore ordinary room identity and stable boundaries without a full Boot, but it does not replace GitHub or authorize writes. Fetch live canonical files before consequential actions, runtime claims, route changes, or new package decisions.
+The Engineering handbook is available through Project Sources as a noncanonical context mirror. It may restore ordinary room identity and stable boundaries without a full Boot, but it does not replace GitHub or authorize writes. Fetch live canonical files before consequential actions, runtime claims, route changes, or package decisions.
 
 ## Department Role
 
@@ -37,9 +37,9 @@ The Engineering-specific handbook is available through Project Sources as a nonc
 
 Engineering owns technical Worker infrastructure: exact routing, transport, logging, duplicate suppression, immutable result ingestion, report repair, verification mechanics, runtime evidence, activation-prerequisite reporting, tests, and reliability safeguards.
 
-Engineering does not own shared Worker governance, another department's Worker purpose or authority, source-owner advisory lifecycle, or domain judgment.
+Engineering does not own shared Worker governance, another department's Worker purpose or authority, source-owner lifecycle, business strategy, or domain judgment.
 
-Route business strategy to `Business_HQ` or `Office_Leaks_HQ`, cost-bearing choices to `Finance_HQ`, ordinary daily coordination to `Chief_of_Staff_HQ`, shared governance and global memory hygiene to `Maintenance_HQ`, and wellbeing or sustainability judgment to `Wellness_HQ`.
+Route AI systems business strategy to `Business_HQ`, paused Office Leaks matters to `Office_Leaks_HQ`, cost-bearing choices to `Finance_HQ`, ordinary coordination to `Chief_of_Staff_HQ`, shared governance and memory hygiene to `Maintenance_HQ`, and wellbeing judgment to `Wellness_HQ`.
 
 ## Completed Architecture
 
@@ -76,37 +76,44 @@ Completed slices:
 - PR #17, merge `e1d297f1a2517490b3fb2a37298689c6db25bfb0`: conservative global send budget.
 - PR #18, merge `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`: read-only contract-derived activation gate.
 
-Rob confirmed the post-merge dashboard smoke passed. Health and Worker Operations were ready, the Engineering Worker was available, the bridge and execution gate were active, and no review was pending.
+Rob confirmed the post-merge dashboard smoke passed.
 
 ## Maintenance Worker Rollout
 
-Lifecycle State: GITHUB PREREQUISITES COMPLETE / ROUTE LINKAGE PENDING
-Approval: Rob reports Wave 0B governance passed and creation of `Maintenance_Worker` is approved.
-Merged PR: #19
-Merge commit: `28a7a4fc40317d043dbe9983747475f85d37742a`
+Lifecycle State: ROUTE VERIFIED / ACTIVATION NOT AUTHORIZED
 
-Canonical profile:
+Canonical GitHub work:
 
-- `projects/life-logistics-hq/workers/maintenance_worker.md`
+- PR #19 merged as `28a7a4fc40317d043dbe9983747475f85d37742a`.
+- PR #20 merged as `e91783dd9705df4a090eae2b4414adead6dafcf4`.
+- Profile: `projects/life-logistics-hq/workers/maintenance_worker.md`.
+- Result procedure: `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`.
+- HQ review procedure: `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`.
 
-Canonical procedures:
+Rob reports the following live local state:
 
-- `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
-- `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
+- one registered `maintenance_worker` row;
+- exact title `Maintenance_Worker`;
+- exact private route captured at revision 1;
+- zero-authority browser canary succeeded;
+- courier returned to Engineering;
+- route availability became `available`.
 
-PR #19 also registered the canonical Maintenance HQ review path in the Engineering-owned destination resolver and added canonical tests for profile loading, route resolution, result-procedure binding, and read-only activation readiness.
+The canary created no real assignment, durable authority, schedule, activation, budget reset, or Maintenance HQ wake.
 
-The initial profile permits only:
+The next valid Maintenance action is a read-only activation-readiness inspection. A first real Maintenance assignment requires separately exact authority, one permitted task class, sources, read scope, immutable result path, authorization source, and `IMMEDIATE_HQ` review.
 
-- manually dispatched `read_only_verification`;
-- manually dispatched `read_only_governance_audit`;
-- GitHub reads within the explicit assignment scope;
-- one exact immutable result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/`;
-- `IMMEDIATE_HQ` verification.
+## Composer Residue Repair
 
-The profile grants no standing authority for maintenance writes, repair, implementation, publication changes, department-local edits, connectors, schedules, route control, runtime control, external writes, or unattended execution.
+Lifecycle State: IMPLEMENTED AND VALIDATED / PR OPEN
 
-Rob reported the focused pytest, affected regression, and Ruff gates passed before merge. No automated GitHub workflow was configured, so the native local results are the recorded merge gate.
+After the successful Maintenance canary, ChatGPT restored the submitted synthetic prompt in the Maintenance composer. Rob manually deleted it. The send itself remained confirmed and the route remained valid.
+
+Draft PR #21, `Clear proven stale Worker composer residue`, is open on branch `engineering/worker-composer-residue-fix` at head `132ba74e24911b429a762a7d0f994ac7aeab647b`.
+
+The repair clears only an older canonical LifeOS wrapper after its `wrapper_id` and `run_id` are proven together in one submitted user turn. It reuses an exact current-run draft, preserves unrelated text, preserves malformed or unproven LifeOS text, and does not retry the prior send.
+
+Rob reports focused tests, affected regressions, and Ruff pass. PR #21 is still draft and not merged. Do not claim the fix is on `main` until merge evidence exists. Do not rerun the completed Maintenance canary merely to test it.
 
 ## Current Production Worker State
 
@@ -122,43 +129,39 @@ Rob reported the focused pytest, affected regression, and Ruff gates passed befo
 
 ### Maintenance Worker
 
-- Canonical Worker ID: `maintenance_worker`
+- Worker ID: `maintenance_worker`
 - Exact chat title: `Maintenance_Worker`
 - Canonical profile and procedures: present on `main`
-- ChatGPT room: pending Rob creation
-- Runtime registry linkage: pending
-- Exact private route and positive route revision: pending
-- Route availability: not yet established
-- Zero-authority canary: pending
-- Live activation-readiness inspection: pending
-- Real pilot dispatch: not authorized by profile or route linkage alone
+- Registry and route linkage: user-reported complete
+- Route revision: user-reported `1`
+- Route availability: user-reported `available`
+- Zero-authority canary: user-reported successful
+- Activation authorization: none
+- First real assignment: none
 
-## Next Valid Action
+### Business Worker Candidate
 
-After Rob creates the exact `Maintenance_Worker` room and opens it in the dedicated browser bridge:
+- Likely owning department: `Business_HQ`
+- Strategic context: Rob is embracing an AI systems business serving solo developers and small teams.
+- Profile, procedures, stable Worker ID, exact chat title, room, registry row, route, canary, activation, schedule, and assignment: not defined or authorized.
 
-1. Pull current `main` and restart or refresh the dashboard as needed.
-2. Use Worker Operations to link the exact room through the guarded route mechanism.
-3. Confirm exactly one `maintenance_worker` registry row.
-4. Confirm the registry uses:
-   - chat title `Maintenance_Worker`;
-   - owning department `maintenance`;
-   - profile path `projects/life-logistics-hq/workers/maintenance_worker.md`;
-   - profile version `1`;
-   - specialization `general`;
-   - role `worker`.
-5. Confirm the private exact URL remains only in local SQLite state.
-6. Confirm a positive route revision and the expected initial route hold.
-7. Run the existing zero-authority canary against the unchanged route revision.
-8. Confirm route availability becomes `available` only after the canary succeeds.
-9. Inspect the read-only activation report and confirm:
-   - profile checks pass;
-   - Maintenance HQ review-procedure checks pass;
-   - route, pause, budget, and unresolved-review checks accurately reflect current runtime state;
-   - `activation_authorized` remains `false`.
-10. Stop before any real assignment, Worker dispatch, Maintenance HQ wake, schedule, pause/resume action, or budget reset.
+### Office Leaks
 
-A first real Maintenance pilot requires a separately exact assignment with one authorized task class, source references, read scopes, immutable result path, authorization source, and `IMMEDIATE_HQ` review condition.
+- Business state: paused by Rob.
+- Office Leaks Worker rollout: paused.
+- Existing Office Leaks files remain owned by `Office_Leaks_HQ` and must not become competing truth for the AI systems business.
+
+## Next Valid Actions
+
+1. Start the replacement `Engineering_HQ` room with Boot and a separate read-only Sync.
+2. Review PR #21 and merge only under explicit merge authority.
+3. After merge, pull `main`, restart the dashboard, and confirm ordinary health.
+4. Inspect the read-only Maintenance activation report before requesting any real assignment.
+5. Observe the next separately authorized Worker dispatch for composer cleanup behavior without rerunning the completed canary.
+6. Keep Office Leaks work paused.
+7. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded pilot before Engineering prepares registration or routing changes.
+
+Business Worker candidacy is not authorization. Do not manufacture a profile, title, ID, route, schedule, or assignment by analogy with Maintenance.
 
 ## Validation Standard
 
@@ -167,7 +170,7 @@ A first real Maintenance pilot requires a separately exact assignment with one a
 - Preserve unrelated content and historical evidence.
 - Prefer the smallest useful change.
 - Read back every significant write.
-- Do not claim route availability, a canary pass, dispatch, external action, or verification without current evidence.
+- Do not claim route availability, a canary pass, dispatch, external action, or verification without current evidence or explicit Rob report.
 - No meaningful change means no write.
 
 ## Advisory State
@@ -188,6 +191,7 @@ Open Engineering advisories: None.
 - The activation validator reports prerequisites only and always sets `activation_authorized: false`.
 - `READY_FOR_AUTHORITY_REVIEW` is not activation approval or assignment authority.
 - Confirmed or uncertain submissions are not retried blindly.
+- After PR #21 merges, only proven stale LifeOS residue may be cleared; unrelated composer text remains protected.
 - Immutable Git evidence outranks stale local transport state.
 - Worker reports remain evidence until deterministic ingestion.
 - `IMMEDIATE_HQ` work never auto-verifies.
