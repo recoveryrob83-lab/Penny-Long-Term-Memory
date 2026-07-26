@@ -81,7 +81,7 @@ Static Engineering review on 2026-07-26 found that the repair:
 - verifies the proven stale composer is empty before inserting the next prompt;
 - does not retry the prior send or weaken the existing correlated-turn and stop-on-uncertainty gates.
 
-No blocking code defect was found. The branch is 7 commits ahead of and 6 documentation commits behind current `main`. GitHub reports no workflow runs or status checks for the head. Rob's focused tests, affected regressions, and Ruff pass remain the available native validation evidence. The repair is not on `main` and is not production-complete until separately merged, deployed, and observed during a later authorized dispatch. Do not rerun the completed Maintenance canary merely to test it.
+No blocking code defect was found. The branch has diverged from `main` through later documentation-only commits. GitHub reports no workflow runs or status checks for the head. Rob's focused tests, affected regressions, and Ruff pass remain the available native validation evidence. The repair is not on `main` and is not production-complete until separately merged, deployed, and observed during a later authorized dispatch. Do not rerun the completed Maintenance canary merely to test it.
 
 ## Worker Portfolio
 
