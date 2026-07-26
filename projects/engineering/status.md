@@ -4,7 +4,7 @@ Updated: 2026-07-26
 
 ## Current Phase
 
-Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Reviewed and Pending Merge / Office Leaks Paused / Business Worker Candidate Waiting
+Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Office Leaks Paused / Business Worker Candidate Waiting
 
 ## Department Scope
 
@@ -41,6 +41,7 @@ Key merges:
 - PR #18: `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`
 - PR #19: `28a7a4fc40317d043dbe9983747475f85d37742a`
 - PR #20: `e91783dd9705df4a090eae2b4414adead6dafcf4`
+- PR #21: `620ef84c57cbb87123bbca30e43faffda1e71032`
 
 ## Maintenance Worker
 
@@ -67,13 +68,13 @@ Activation is complete and is recorded separately from assignment authority. It 
 
 ## Composer Residue Repair
 
-Lifecycle State: STATIC REVIEW PASSED / PR OPEN / NOT ON `main`
+Lifecycle State: MERGED TO `main` / LOCAL DEPLOYMENT HEALTH PENDING
 
 During the Maintenance canary, ChatGPT restored the already-submitted prompt in the Worker composer after transport had confirmed the user turn and returned to Engineering. Rob manually removed it.
 
-Draft PR #21, `Clear proven stale Worker composer residue`, remains open on `engineering/worker-composer-residue-fix` at head `132ba74e24911b429a762a7d0f994ac7aeab647b`.
+PR #21, `Clear proven stale Worker composer residue`, was squash-merged to `main` as `620ef84c57cbb87123bbca30e43faffda1e71032` after the branch was refreshed to current `main` and Rob reported all focused tests, affected regressions, and Ruff green.
 
-Static Engineering review on 2026-07-26 found that the repair:
+The merged repair:
 
 - recognizes only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line containing valid JSON and nonempty `wrapper_id` and `run_id`;
 - requires both IDs to occur together in one submitted user turn in that same Worker conversation before clearing residue;
@@ -81,7 +82,7 @@ Static Engineering review on 2026-07-26 found that the repair:
 - verifies the proven stale composer is empty before inserting the next prompt;
 - does not retry the prior send or weaken the existing correlated-turn and stop-on-uncertainty gates.
 
-No blocking code defect was found. The branch has diverged from `main` through later documentation-only commits. GitHub reports no workflow runs or status checks for the head. Rob's focused tests, affected regressions, and Ruff pass remain the available native validation evidence. The repair is not on `main` and is not production-complete until separately merged, deployed, and observed during a later authorized dispatch. Do not rerun the completed Maintenance canary merely to test it.
+No GitHub workflow runs were attached to the merge. Rob's local validation is the current test evidence. The next deployment step is to pull `main`, restart the dashboard, and confirm ordinary health. Live composer-cleanup evidence should come from a later separately authorized Worker dispatch rather than rerunning the completed Maintenance canary.
 
 ## Worker Portfolio
 
@@ -116,12 +117,11 @@ No blocking code defect was found. The branch has diverged from `main` through l
 
 ## Current Work
 
-1. Merge PR #21 only under explicit merge authority.
-2. After merge, pull `main`, restart the dashboard, and confirm ordinary health.
-3. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-4. Observe the next separately authorized dispatch for composer cleanup behavior without rerunning the completed canary.
-5. Keep Office Leaks paused.
-6. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded task before Engineering prepares registration or routing work.
+1. Pull current `main`, restart the dashboard, and confirm ordinary health after PR #21.
+2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
+3. Observe the next separately authorized dispatch for composer cleanup behavior without rerunning the completed canary.
+4. Keep Office Leaks paused.
+5. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded task before Engineering prepares registration or routing work.
 
 Business Worker candidacy is not authorization.
 
@@ -140,7 +140,7 @@ Open Engineering advisories: None.
 - The shared send budget is one manually reset epoch; elapsed time never refills it and Reset does not Resume.
 - The activation validator always reports `activation_authorized: false`; explicit human activation is a separate authority event and does not make the validator an activation ledger.
 - Confirmed or uncertain sends are never blind-retried.
-- After PR #21 merges, only proven stale LifeOS residue may be cleared; unrelated drafts remain protected.
+- PR #21 permits only proven stale LifeOS residue to be cleared; unrelated drafts remain protected.
 - Immutable Git evidence outranks stale local transport state.
 - `IMMEDIATE_HQ` work never auto-verifies.
 - Courier, dashboard, ingester, watcher, HQ receipt, and Rob receipt do not close source work automatically.
