@@ -44,7 +44,7 @@ A LifeOS Worker is a specialized ChatGPT room operating beneath one Department H
 
 - The Department HQ owns the Worker profile, procedures, authority, holds, verification, retirement, and domain judgment.
 - GitHub holds canonical profiles, procedures, decisions, and immutable result and review evidence.
-- SQLite runtime state is the sole operational ledger for registry, route, dispatch, result, review, pause, and send-budget state.
+- SQLite runtime state is the sole operational ledger for registry, route, dispatch, result, review, pause, send-budget, and deployment state.
 - Each Worker has one stable ID and one authoritative registry row.
 - Browser dispatch uses the registered exact private conversation URL and fails closed if it is missing or invalid.
 - Route changes increment the revision and remain held until the unchanged route passes a zero-authority canary.
@@ -67,6 +67,7 @@ The activation-readiness service recomputes technical prerequisites from canonic
 - Every report returns `activation_authorized: false`.
 - Technical readiness does not create a profile, route, registry row, schedule, permission, assignment, or activation authority.
 - Owning-department authority, Maintenance governance review, and Rob approval remain separate gates wherever required.
+- Explicit human activation is a separate authority event and does not turn the readiness report into an activation ledger.
 
 ## Guarded Registration and Routing
 
@@ -85,12 +86,14 @@ Starting the dashboard alone authorizes none of these actions.
 Current merged behavior:
 
 - requires stable room hydration, exact route identity, one visible composer, and no active generation;
-- reuses only the exact current run-linked draft;
+- reuses only the current run-linked draft;
 - preserves unrelated text;
 - proves a new correlated user turn and an empty composer before confirming a send;
 - never blind-retries confirmed or uncertain submissions.
 
-Draft PR #21 adds evidence-backed stale-residue cleanup. After merge, an older canonical LifeOS wrapper may be cleared only when its `wrapper_id` and `run_id` already occur together in one submitted user turn. Malformed, unrelated, or unproven text remains untouched.
+Draft PR #21 adds evidence-backed stale-residue cleanup. Static Engineering review on 2026-07-26 found no blocking code defect. The branch recognizes only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line with valid JSON and nonempty `wrapper_id` and `run_id`, requires both IDs in one submitted user turn before cleanup, verifies the composer is empty after clearing, preserves malformed, unrelated, and unproven text, and does not retry the prior send.
+
+The branch is 7 commits ahead of and 6 documentation commits behind the `main` revision inspected during review. GitHub reports no workflow runs or status checks on the head. The code is not production-complete until PR #21 is separately merged, deployed, and observed during a later authorized dispatch.
 
 ## Completed Technical State
 
@@ -100,6 +103,7 @@ Draft PR #21 adds evidence-backed stale-residue cleanup. After merge, an older c
 - Package F Wave 0B: owning-HQ destination resolution, persisted shared safety pause, global send budget, and read-only activation readiness.
 - PR #19: approved Maintenance profile, result procedure, HQ review procedure, review-path bridge, and tests.
 - PR #20: guarded Worker registration and canary targeting for the sole routed Worker awaiting verification.
+- Maintenance Worker registration, exact route revision 1, successful canary, route availability, and active deployment are user-reported complete.
 
 Key recent merge commits:
 
@@ -125,7 +129,8 @@ Key recent merge commits:
 - Title: `Maintenance_Worker`
 - Profile and procedures: on `main`
 - Registry, route revision 1, canary, return to Engineering, and availability `available`: user-reported complete
-- Activation and first real assignment authority: absent
+- Deployment state: active and live
+- Assigned work: none
 
 ### Business Worker Candidate
 
@@ -155,11 +160,12 @@ Maintenance-owned Worker artifacts remain owned by `Maintenance_HQ`; Engineering
 
 ## Current Decision Boundary
 
-1. Review and merge PR #21 only under explicit merge authority.
-2. Inspect Maintenance activation readiness before any real assignment.
-3. Observe the next separately authorized dispatch for composer cleanup behavior.
-4. Keep Office Leaks paused.
-5. Wait for `Business_HQ` and Rob to define a Business Worker contract before Engineering creates machinery around it.
+1. Merge PR #21 only under explicit merge authority.
+2. After merge, pull `main`, restart the dashboard, and verify ordinary health.
+3. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
+4. Observe the next separately authorized dispatch for composer cleanup behavior.
+5. Keep Office Leaks paused.
+6. Wait for `Business_HQ` and Rob to define a Business Worker contract before Engineering creates machinery around it.
 
 Business candidacy is not approval. Do not create a profile, title, ID, room, registry row, route, schedule, activation, or assignment by analogy with Maintenance.
 
@@ -194,4 +200,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. Maintenance registration, route revision 1, and the zero-authority canary are user-reported complete; activation is not authorized. PR #21 is validated but unmerged. Office Leaks is paused. Business is the likely next Worker-owning department, pending an explicit Business-owned contract and Rob authorization.
+Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The Maintenance Worker is active and live with no work assigned. PR #21 passed static Engineering review but remains unmerged and therefore is not production-complete. Office Leaks is paused. Business is the likely next Worker-owning department, pending an explicit Business-owned contract and Rob authorization.
