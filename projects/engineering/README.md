@@ -32,7 +32,7 @@ Current canonical Worker titles and IDs are:
 - `Engineering_Worker` / `engineering_worker`
 - `Maintenance_Worker` / `maintenance_worker`
 
-No Business Worker title or ID is canonical yet. `Business_HQ` is only the likely next owner after Rob's shift toward an AI systems business for solo developers and small teams.
+No Business, Finance, Wellness, or Office Leaks Worker title or ID is canonical. `Business_HQ`, `Finance_HQ`, and `Wellness_HQ` do not request Workers at present. Office Leaks remains paused.
 
 `Maintenance_HQ` owns the shared textual standard. `Engineering_HQ` owns implementation of titles and stable IDs in Engineering-controlled code, browser routing, runtime configuration, route mappings, tests, and bounded active-state migrations.
 
@@ -57,6 +57,28 @@ A LifeOS Worker is a specialized ChatGPT room operating beneath one Department H
 - The Worker courier does not wake `Chief_of_Staff_HQ` under the current contract.
 
 Python, browser automation, SQLite, and the dashboard provide machinery and visibility. They are not the Worker and do not replace Department HQ judgment.
+
+## Lean Worker Adoption Rule
+
+The production Worker portfolio is intentionally limited to `Engineering_Worker` and `Maintenance_Worker`.
+
+A department does not receive a Worker because a technical path exists or because another department has one. New adoption requires:
+
+- a recurring, standardized workload;
+- a measurable bottleneck or reliability problem;
+- an explicit request from the owning department;
+- a narrow task class and authority boundary;
+- shared-contract and governance review;
+- one canonical profile, stable ID, exact title, result path, review procedure, route, canary, and separate activation decision.
+
+Current owner decisions:
+
+- `Business_HQ`: continue bounded one-off research assignments; reconsider only a narrow Market Evidence Worker after standardized research creates a measurable bottleneck.
+- `Finance_HQ`: no Worker requested at present.
+- `Wellness_HQ`: no Worker requested at present.
+- `Office_Leaks_HQ`: business and Worker rollout paused.
+
+These decisions close the initial expansion phase. They do not prohibit later reconsideration after the trigger exists.
 
 ## Activation and Readiness Boundary
 
@@ -105,6 +127,7 @@ PR #21, `Clear proven stale Worker composer residue`, was squash-merged to `main
 - PR #20: guarded Worker registration and canary targeting for the sole routed Worker awaiting verification.
 - PR #21: evidence-backed stale composer-residue cleanup with unrelated-text preservation and no prior-send retry.
 - Maintenance Worker registration, exact route revision 1, successful canary, route availability, and active deployment are user-reported complete.
+- Initial Worker expansion review: closed with Engineering and Maintenance active, and Business, Finance, and Wellness declining rollout for now.
 
 Key recent merge commits:
 
@@ -134,11 +157,11 @@ Key recent merge commits:
 - Deployment state: active and live
 - Assigned work: none
 
-### Business Worker Candidate
+### Deferred Department Workers
 
-- Likely owner: `Business_HQ`
-- Strategic focus: AI systems services for solo developers and small teams
-- Profile, procedures, stable ID, exact title, room, registry, route, canary, activation, schedule, and assignment: not defined or authorized
+- Business, Finance, and Wellness: no current Worker request.
+- No title, ID, profile, room, registry row, route, canary, activation, schedule, or assignment is authorized.
+- Reconsideration belongs to the owning department after a recurring standardized bottleneck is demonstrated.
 
 ### Office Leaks
 
@@ -158,17 +181,18 @@ Key recent merge commits:
 
 Engineering maintains its own project subtree during authorized maintenance and implementation work. Shared global files, another department's canonical files, the Advisory Index, and cross-department governance changes require the appropriate owner or explicit coordinated authorization.
 
-Maintenance-owned Worker artifacts remain owned by `Maintenance_HQ`; Engineering owns only the routing and runtime machinery around them. Business owns any future Business Worker purpose and authority.
+Maintenance-owned Worker artifacts remain owned by `Maintenance_HQ`; Engineering owns only the routing and runtime machinery around them. Business, Finance, and Wellness retain authority over any future Worker purpose and adoption decision.
 
 ## Current Decision Boundary
 
 1. Pull current `main`, restart the dashboard, and verify ordinary health after PR #21.
 2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-3. Observe the next separately authorized dispatch for composer cleanup behavior.
-4. Keep Office Leaks paused.
-5. Wait for `Business_HQ` and Rob to define a Business Worker contract before Engineering creates machinery around it.
+3. Define any repository-audit assignment separately with exact scope, authorization, result path, and `IMMEDIATE_HQ` review before dispatch.
+4. Observe the next separately authorized dispatch for composer cleanup and full-chain reliability evidence.
+5. Keep the Worker portfolio lean until an owning department demonstrates a recurring standardized bottleneck and explicitly requests evaluation.
+6. Keep Office Leaks paused.
 
-Business candidacy is not approval. Do not create a profile, title, ID, room, registry row, route, schedule, activation, or assignment by analogy with Maintenance.
+The completed rollout does not authorize new profiles, titles, IDs, rooms, registry rows, routes, schedules, activations, or assignments by analogy.
 
 Future Engineering work must come from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -203,4 +227,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The Maintenance Worker is active and live with no work assigned. PR #21 is merged to `main`; local pull, dashboard restart, and ordinary health confirmation remain. Office Leaks is paused. Business is the likely next Worker-owning department, pending an explicit Business-owned contract and Rob authorization.
+Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The initial Worker expansion phase is closed with a lean portfolio of `Engineering_Worker` and `Maintenance_Worker`. The Maintenance Worker is active and live with no assignment. Business, Finance, and Wellness do not request Workers at present. PR #21 is merged to `main`; local pull, dashboard restart, and ordinary health confirmation remain. Office Leaks is paused. A future repository-audit task requires separate exact authorization before it becomes a Maintenance assignment.
