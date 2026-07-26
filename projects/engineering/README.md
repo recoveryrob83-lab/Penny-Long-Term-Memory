@@ -93,7 +93,7 @@ Current merged behavior:
 
 Draft PR #21 adds evidence-backed stale-residue cleanup. Static Engineering review on 2026-07-26 found no blocking code defect. The branch recognizes only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line with valid JSON and nonempty `wrapper_id` and `run_id`, requires both IDs in one submitted user turn before cleanup, verifies the composer is empty after clearing, preserves malformed, unrelated, and unproven text, and does not retry the prior send.
 
-The branch is 7 commits ahead of and 6 documentation commits behind the `main` revision inspected during review. GitHub reports no workflow runs or status checks on the head. The code is not production-complete until PR #21 is separately merged, deployed, and observed during a later authorized dispatch.
+The branch has diverged from `main` through later documentation-only commits. GitHub reports no workflow runs or status checks on the head. The code is not production-complete until PR #21 is separately merged, deployed, and observed during a later authorized dispatch.
 
 ## Completed Technical State
 
