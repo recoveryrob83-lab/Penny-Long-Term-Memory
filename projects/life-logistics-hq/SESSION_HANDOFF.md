@@ -1,14 +1,14 @@
 # Maintenance_HQ Session Handoff
 
-Updated: 2026-07-25
+Updated: 2026-07-26
 Project: Maintenance_HQ
-Purpose: Project-specific handoff for global GitHub maintenance, boot integrity, shared governance, shared execution contracts, audits, migrations, source boundaries, publication mirrors, and system reconciliation.
+Purpose: Project-specific handoff for global GitHub maintenance, boot integrity, shared governance, shared execution contracts, audits, migrations, source boundaries, publication mirrors, system reconciliation, and the active but currently unassigned Maintenance Worker.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: `Maintenance_HQ`
-- Current Phase: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Prerequisites Merged / Governance Approved / Waiting on Engineering Registration and Readiness Evidence
+- Current Phase: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Active and Live / No Work Assigned
 - Sensitivity Level: Moderate
 - Canonical Filesystem Path: `projects/life-logistics-hq/`
 - GitHub Rule: Keep GitHub abstract, current, organized, auditable, and free of detailed private records.
@@ -52,17 +52,17 @@ Maintenance protects the LifeOS operating system through global GitHub coherence
 - `coordination/WORKER_EXECUTION_CONTRACT.md` is the universal Worker authority ceiling and profile convention.
 - `memory/STARTUP_BOOT.md` is the single canonical HQ and Worker entry point.
 - New Worker profiles live at `projects/<department>/workers/<profile>.md` and are created only for a real authorized Worker.
-- The current production Worker title is `Engineering_Worker`; future Worker titles follow `<Department_Name>_Worker`.
+- The active production Worker titles are `Engineering_Worker` and `Maintenance_Worker`; future Worker titles follow `<Department_Name>_Worker` only after a real owner-approved rollout.
 - `workers/penny-raw-capture/` and `workers/penny-inventory/` remain grandfathered compatibility pilots.
 - Desktop department automation and the Automation Command Center remain Engineering-owned implementation machinery.
 - Package F Wave 0B completed destination resolution, the persisted shared safety pause, one conservative global send budget, and read-only activation-prerequisite reporting.
-- Wave 0B created no non-Engineering Worker, route, permission, schedule, dispatch authority, durable-write authority, or rollout approval.
+- The activation-prerequisite report remains technical evidence only and always reports `activation_authorized: false`; explicit activation is a separate authority event.
 - Fully unattended Windows production use remains unapproved unless current Engineering evidence and Rob's authorization establish otherwise.
 - `Engineering_HQ Daily Sync` remains paused by deliberate operating choice.
 - The hourly `Chief_of_Staff_HQ` advisory watcher remains an active read-only pilot. Its destination test passed, and `ADV-20260723-052` is closed.
 - The former Virtual Assistant Business subtree remains archived at `archive/projects/virtual-assistant-business/`; active Office Leaks authority remains at `projects/office-leaks-consulting/`.
 
-## July 23-25 Reconciliation
+## July 23-26 Reconciliation
 
 Completed outcomes:
 
@@ -74,25 +74,29 @@ Completed outcomes:
 - generated and published the stable global handbook plus eight intended-room handbook mirrors through the Drive-backed Project Sources workflow;
 - verified the current project context shows canonical underscore instructions, retrieves the global and room handbooks, and contains no numbered competing global handbook;
 - closed the system-level publication-reconciliation wrapper;
-- completed a read-only Maintenance governance review of Wave 0B and approved bounded preparation of a read-only `Maintenance_Worker` without activating it;
-- repaired the secondary Sync drift across shared and Maintenance continuity;
+- completed a read-only Maintenance governance review of Wave 0B and approved bounded preparation of the read-only `Maintenance_Worker`;
+- repaired secondary Sync drift across shared and Maintenance continuity;
 - completed a later read-only Engineering, Maintenance, and global comparison that found no authority drift but identified stale Engineering continuity;
 - updated Maintenance continuity to recognize the Engineering branch and avoid duplicate profile creation;
 - detected during read-back that Engineering had merged the Maintenance Worker prerequisites to `main` while Maintenance verification was in progress;
 - identified two scope distinctions in the merged prerequisites and held rollout pending explicit acceptance;
 - received Rob's explicit approval of the reporting-only immutable result artifact and final HQ review procedure ID and path;
-- cleared the Maintenance governance hold without activating or dispatching the Worker.
+- cleared the Maintenance governance hold;
+- recorded Engineering's registered `maintenance_worker` route revision 1, successful zero-authority canary, return to Engineering, and route availability `available`;
+- recorded Rob's confirmation that the Maintenance Worker is active and live with no work assigned.
 
 No Engineering code, selectors, databases, registries, runtime state, tests, schedules, automation configuration, or prompt-runtime surfaces were changed during Maintenance reconciliation.
 
-## Maintenance Worker Prerequisites on Main
+## Maintenance Worker Canonical State
+
+Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
 
 Rob and `Maintenance_HQ` approved bounded preparation of:
 
 - Worker title: `Maintenance_Worker`
 - Stable Worker ID: `maintenance_worker`
 - Owning department: `Maintenance_HQ`
-- Initial verification mode: `IMMEDIATE_HQ`
+- Initial real-work verification mode: `IMMEDIATE_HQ`
 - Initial task scope: read-only audits, Sync, drift detection, pointer checks, ownership checks, naming checks, source-boundary checks, advisory-index checks, and handbook-source checks
 
 Rob explicitly authorized `Engineering_HQ` to prepare the Maintenance-owned profile and procedures as a bounded coordinated repair while Maintenance was occupied with reconciliation. That authorization was temporary implementation authority and did not transfer ownership of the files, Worker, procedures, judgment, holds, verification, retirement, or future Maintenance state.
@@ -103,9 +107,18 @@ The following Maintenance-owned prerequisites exist on `main`:
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
 - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
 
-Maintenance did not create or edit those files during reconciliation.
+Rob reports the following live runtime state:
 
-## Governance Approval and Rollout Boundary
+- one registered `maintenance_worker` row;
+- exact title `Maintenance_Worker`;
+- exact route revision 1;
+- successful zero-authority canary;
+- successful return to Engineering;
+- route availability `available`;
+- active and live deployment;
+- no work assigned.
+
+## Governance Approval and Assignment Boundary
 
 The merged profile and procedures are structurally coherent with the canonical Worker architecture and preserve read-only access to authoritative source records. They prohibit maintenance repair, authoritative source edits, external writes, route mutation, self-modification, unattended execution, and cross-department authority.
 
@@ -121,16 +134,15 @@ On 2026-07-25, Rob and `Maintenance_HQ` explicitly accepted:
    - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` is the final authoritative Maintenance HQ review procedure.
    - The earlier `maintenance_hq_worker_review.md` path was a rollout placeholder and must not be created as a competing copy.
 
-The Maintenance governance hold is cleared.
+The governance hold, technical registration, route canary, and activation stages are complete.
 
-Current rollout boundary:
+Current boundary:
 
-- Engineering may register the exact `maintenance_worker` identity and route through the approved technical mechanism;
-- Engineering may run a zero-authority route canary and produce a current fail-closed activation-prerequisite report;
-- the readiness report must remain read-only and state `activation_authorized: false`;
-- a registration, successful canary, or `READY_FOR_AUTHORITY_REVIEW` state is evidence only;
-- no real Worker dispatch, schedule, HQ wake, activation, source-record write, repair authority, connector authority, external-system authority, spending, unattended execution, or cross-department authority is approved by this acceptance alone;
-- the first real pilot requires a separately bounded task and `IMMEDIATE_HQ` verification.
+- the Worker is active and live but idle;
+- no real assignment, run, recurring schedule, unattended execution, broader connector authority, source-record write or repair authority, spending, or cross-department authority has been created;
+- the readiness report remains read-only and states `activation_authorized: false` because it is not the activation ledger;
+- Rob's explicit activation is the separate authority event;
+- the first real assignment requires a separately bounded task, authorization source, required sources and scopes, one immutable result path, and `IMMEDIATE_HQ` verification.
 
 Ownership of the profile, procedures, authority, holds, verification, and retirement remains with `Maintenance_HQ`.
 
@@ -185,7 +197,7 @@ The Wave 0B activation-prerequisite report:
 - always reports `activation_authorized: false`;
 - treats `READY_FOR_AUTHORITY_REVIEW` as technical evidence only.
 
-Owning-department authority, Maintenance shared-governance review, Engineering registration and testing, and Rob approval where required remain separate gates.
+Rob's explicit activation remains separate from the readiness report. Activation does not create an assignment.
 
 Grandfathered compatibility pilots:
 
@@ -225,9 +237,9 @@ Read a source board only when the index or Rob routes Maintenance to a specific 
 - Preserve source boundaries across GitHub, Drive, Project Sources, Trello, Todoist, Calendar, Gmail, the dashboard, and automation logs.
 - Keep the global handbook role-neutral and each room handbook explicitly scoped, noncanonical, and replaceable only through meaningful stable-title refresh.
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
-- Treat technical activation readiness as evidence rather than authority.
+- Treat technical activation readiness as evidence rather than authority; preserve explicit activation as a separate human authority event.
 - Preserve the reporting-only result-artifact exception and the accepted HQ review procedure destination.
-- Do not create competing Maintenance Worker profile or procedure copies.
+- Do not create competing Maintenance Worker profile, procedure, route, activation, or assignment copies.
 - Route department-local profile corrections to the owning Department HQ.
 - Preserve the two root pilots as grandfathered compatibility packages until separately migrated, retired, or relocated.
 - Keep guarded GitHub sync within its clean-and-strictly-behind boundary.
@@ -238,17 +250,15 @@ Read a source board only when the index or Rob routes Maintenance to a specific 
 
 ## Immediate Next Actions
 
-1. Let `Engineering_HQ` register the exact `maintenance_worker` identity and route under the approved technical mechanism.
-2. Require a zero-authority route canary before availability.
-3. Require a current read-only, fail-closed activation-prerequisite report that states `activation_authorized: false`.
-4. Review the registration, canary, and readiness evidence in `Maintenance_HQ` before any real pilot dispatch.
-5. Treat a passing report as evidence only. The first real pilot still requires a separately bounded task and `IMMEDIATE_HQ` verification.
-6. Use Role Drift Check when work begins moving into the wrong HQ.
+1. Keep the active `Maintenance_Worker` idle until an authorized source defines one exact bounded assignment.
+2. When a first assignment exists, validate the task class, authorization source, revision, sources, read scope, immutable result path, and `IMMEDIATE_HQ` verification before dispatch.
+3. Review the immutable result and actual work through `maintenance_hq_worker_review_receipt` before any source owner closes or consumes the work.
+4. Use Role Drift Check when work begins moving into the wrong HQ.
 
 ## Notes for Next Penny
 
 This chat is `Maintenance_HQ`. Protect the operating system, not every department's workload.
 
-The chat is booted and synchronized. The shared publication wrapper and Wave 0B implementation are closed. The Maintenance Worker profile and two procedures are on `main`. Rob and Maintenance accepted the reporting-only result-artifact exception and the final `maintenance_hq_worker_review_receipt` ID and path. The governance hold is cleared, but no real dispatch or activation is authorized yet. The rollout is waiting on Engineering registration, zero-authority route evidence, and a current activation-prerequisite report.
+The chat is booted and synchronized. The shared publication wrapper and Wave 0B implementation are closed. The Maintenance Worker profile and two procedures are on `main`. Rob and Maintenance accepted the reporting-only result-artifact exception and the final `maintenance_hq_worker_review_receipt` ID and path. The Worker is registered, route-verified, active, and live. No work has been assigned.
 
 LifeOS has one canonical HQ and Worker entry point, one shared execution protocol, one universal Worker contract, and one canonical naming source. New Worker profiles are department-owned and live under department subtrees. The root Raw Capture and Inventory packages are grandfathered compatibility pilots only. Maintenance owns shared contracts, boot coherence, naming and profile conventions, audits, publication-mirror discipline, and reconciliation. Engineering owns routing and runtime implementation. Departments own Worker authority and profiles. `Chief_of_Staff_HQ` coordinates Rob-authorized execution. Rob decides.

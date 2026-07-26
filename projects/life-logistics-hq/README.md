@@ -1,6 +1,6 @@
 # Maintenance_HQ
 
-Updated: 2026-07-25
+Updated: 2026-07-26
 Purpose: Durable project folder for `Maintenance_HQ`, the global GitHub maintenance, governance, audit, publication-mirror, and reconciliation department for Rob's LifeOS.
 
 ## Role
@@ -43,15 +43,15 @@ Current canonical room names are:
 - `Chief_of_Staff_HQ`
 - `Wellness_HQ`
 
-The current production Worker title is `Engineering_Worker`. Future Worker titles follow `<Department_Name>_Worker`.
+The active production Worker titles are `Engineering_Worker` and `Maintenance_Worker`. Future Worker titles follow `<Department_Name>_Worker` only after their owning department and Rob authorize a real profile and rollout.
 
 The current Drive-backed handbook library contains one role-neutral global operations handbook and one explicitly intended-room handbook for each of the eight top-level rooms. These are noncanonical Project Source mirrors. GitHub remains authoritative. Replace a handbook only after meaningful source drift and avoid duplicate or numbered competing copies.
 
 The naming-repair report is stored in Google Drive at `Life Organization/Chief Engineering Penny/LIFEOS_NAMING_REPAIR_FINAL_REPORT.md`.
 
-Engineering completed the separately authorized canonical runtime-title rollover, courier verifier repair, direct exact-URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel within Engineering-owned surfaces. Technical completion did not create cross-department Worker authority.
+Engineering completed the separately authorized canonical runtime-title rollover, courier verifier repair, direct exact-URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel within Engineering-owned surfaces. Technical completion alone did not create cross-department Worker authority.
 
-Rob and `Maintenance_HQ` approved bounded preparation of a read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and procedures through a coordinated repair while Maintenance was reconciling shared state.
+Rob and `Maintenance_HQ` approved bounded preparation of the read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and procedures through a coordinated repair while Maintenance was reconciling shared state.
 
 The authorized branch merged these Maintenance-owned prerequisites to `main`:
 
@@ -61,7 +61,19 @@ The authorized branch merged these Maintenance-owned prerequisites to `main`:
 
 Maintenance did not create or edit those three files during reconciliation.
 
-## Maintenance Worker Approval and Rollout Boundary
+## Maintenance Worker Current State
+
+Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
+
+Rob reports:
+
+- one registered `maintenance_worker` runtime row;
+- exact title `Maintenance_Worker`;
+- route revision `1`;
+- a successful zero-authority canary and return to Engineering;
+- route availability `available`;
+- active and live deployment;
+- no work assigned.
 
 On 2026-07-25, Rob and `Maintenance_HQ` explicitly accepted:
 
@@ -70,9 +82,11 @@ On 2026-07-25, Rob and `Maintenance_HQ` explicitly accepted:
 
 The reporting exception authorizes only one immutable machine-readable Worker result artifact under the exact current-run path and approved result-submission procedure. It does not authorize edits to shared rules, source records, handoffs, maps, indexes, profiles, procedures, open loops, status files, runtime state, routes, schedules, or external systems.
 
-The governance-review hold is cleared. The next permitted technical stage is Engineering registration, exact-route preparation, zero-authority route testing, and a current fail-closed activation-prerequisite report.
+Activation is complete and separate from assignment authority. It does not create a task, recurring schedule, unattended execution, broader connector authority, spending, cross-department authority, or source-record repair authority.
 
-None of those technical steps activates or dispatches the Worker. A passing report remains evidence only and must continue to report `activation_authorized: false`. The first real pilot remains separately bounded, manually dispatched, read-only with respect to authoritative source records, and subject to `IMMEDIATE_HQ` verification.
+The activation-readiness report continues to state `activation_authorized: false` because it is a read-only technical prerequisite report rather than an activation ledger. Rob's explicit activation is the separate authority event.
+
+The first real assignment remains separately bounded, manually authorized, read-only with respect to authoritative source records, and subject to `IMMEDIATE_HQ` verification.
 
 Ownership of the profile, procedures, authority, holds, verification, and retirement remains with `Maintenance_HQ`.
 
@@ -124,4 +138,4 @@ A fresh `Maintenance_HQ` chat should begin at `memory/STARTUP_BOOT.md`, complete
 
 ## Operating Rule
 
-Protect the operating system without becoming the owner of every room. Store detailed working records in Drive or the proper operational source system. No meaningful change means no write.
+Protect the operating system without becoming the owner of every room. Keep the active `Maintenance_Worker` idle until one exact assignment is separately authorized. Store detailed working records in Drive or the proper operational source system. No meaningful change means no write.
