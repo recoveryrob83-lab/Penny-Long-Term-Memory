@@ -17,7 +17,6 @@ from lifeos_dashboard.worker_runtime import (
     WorkerRuntimeError,
 )
 
-
 RUN_ID = "RUN-ADV-20260726-053-R1"
 ORIGINAL_WRAPPER_ID = "WAKE-ADV-20260726-053-R1"
 REPAIR_WRAPPER_ID = "REPAIR-ADV-20260726-053-R1-A2"
