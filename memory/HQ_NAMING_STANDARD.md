@@ -1,6 +1,6 @@
 # LifeOS Naming Standard
 
-Updated: 2026-07-23
+Updated: 2026-07-27
 Owner: Maintenance_HQ
 Purpose: Canonical naming source for the LifeOS system, top-level ChatGPT rooms, department headquarters, and current Worker chat titles across prompts, dashboards, automation targets, and current durable-memory references.
 
@@ -48,29 +48,30 @@ Canonical authority contract:
 
 ## Canonical Worker Naming
 
-Current canonical Worker title:
+Current canonical Worker titles:
 
 - `Engineering_Worker`
+- `Maintenance_Worker`
 
 Future Worker title convention:
 
 - `<Department_Name>_Worker`
 
-Examples:
+Examples for departments without a current Worker:
 
-- `Maintenance_Worker`
 - `Business_Worker`
 - `Office_Leaks_Worker`
 - `Finance_Worker`
 - `Chief_of_Staff_Worker`
 - `Wellness_Worker`
 
-This standard does not create, activate, register, schedule, route, or authorize any Worker. Worker activation and authority remain governed by:
+This standard does not create, activate, register, schedule, route, assign, or authorize any Worker. Worker activation and authority remain governed by:
 
 - `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
 - `coordination/WORKER_EXECUTION_CONTRACT.md`
 - the exact department-owned Worker profile;
-- the Engineering-owned routing and runtime implementation.
+- the Engineering-owned routing and runtime implementation;
+- the exact authoritative assignment when a Worker performs real work.
 
 ## Rules
 
