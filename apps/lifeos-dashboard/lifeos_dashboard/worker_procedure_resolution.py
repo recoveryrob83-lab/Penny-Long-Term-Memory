@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Mapping, cast
+from typing import cast
 
 from .department_hq_routing import department_project_root
 from .worker_advisory_pipeline import ExecutionReadyAdvisory
+from .worker_receiver import CanonicalProcedureSpec
+from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 from .worker_source_resolution import (
     front_matter,
     json_value,
@@ -16,8 +19,6 @@ from .worker_source_resolution import (
     section,
     string_tuple_value,
 )
-from .worker_receiver import CanonicalProcedureSpec
-from .worker_runtime import WorkerRegistryEntry, WorkerRuntimeError
 
 
 def _parameter_schema_from_prose(text: str) -> dict[str, str]:
