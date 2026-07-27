@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from lifeos_dashboard.worker_advisory_pipeline import (
@@ -9,6 +10,7 @@ from lifeos_dashboard.worker_receiver import (
     WorkerReceiverService,
 )
 from lifeos_dashboard.worker_receiver_resolution import resolve_receiver_assignment
+from lifeos_dashboard.worker_result_ingester import WorkerResultIngester
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry
 
 
@@ -86,3 +88,10 @@ def test_repository_audit_advisory_resolves_as_exact_rob_approved_repair() -> No
         )
         == ()
     )
+
+    report_path = repository_root / advisory.result_contract.result_path
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    ingester = WorkerResultIngester.__new__(WorkerResultIngester)
+    ingester.repository_root = repository_root
+
+    ingester._validate_report_correlation(advisory, resolution.profile, report)
