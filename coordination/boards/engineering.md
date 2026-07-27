@@ -1,12 +1,65 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-23
+Updated: 2026-07-26
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
 
-None.
+### ADV-20260726-053 — Audit and reconcile current LifeOS repository state
+
+- Date: 2026-07-26
+- From: Engineering_HQ under direct Rob authorization
+- To: Maintenance_Worker / Maintenance_HQ
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: IMMEDIATE_HQ
+- Posted Board: `coordination/boards/engineering.md`
+- Target Department and Owner: maintenance
+- Target Worker ID: maintenance_worker
+- Record Class: Rob-approved coordinated repository audit and repair
+- Task Class: coordinated_repository_repair
+- Authorization Class: BOUNDED_WRITE
+- Procedure ID: maintenance_coordinated_repository_repair
+- Procedure Version: 1
+- Procedure Checksum: SHA256:adcd0291acea657299796a6731f1b7003f83feec25a86ec6d3f59f25d7289699
+- Authorization Source: ROB
+- Approval Reference: ROB-DIRECT-COORDINATED-REPAIR-20260726
+- Parameters JSON: `{"audit_roots":["memory","coordination","projects","apps","workers"],"canonical_file_classes":["current handoffs","current status files","current open-loop ledgers","current READMEs and department identities","current maps, indexes, manifests, Boot pointers, and operating summaries"],"completion_condition":"All clearly stale current canonical records inside the authorized repair roots are repaired or explicitly held, every write is read back and evidenced, and one immutable result artifact is submitted for IMMEDIATE_HQ review.","exclusions":["application code and tests","runtime databases and routes","archives and historical notebooks","immutable Worker results, HQ reviews, and Rob validations","Worker profiles and procedures","source advisory and Advisory Index during execution","deletes, renames, moves, external systems, spending, schedules, and public actions"],"repair_roots":["memory","coordination","projects"]}`
+- Parameters Checksum: SHA256:4adfc35b644feecf2e54acb1ab5a8040da42e49c8cf2f062c5b1b0c147c67616
+- Source References JSON: `["ROB-DIRECT-COORDINATED-REPAIR-20260726","coordination/boards/engineering.md","coordination/ADVISORY_INDEX.md","coordination/WORKER_EXECUTION_CONTRACT.md","coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md","memory/STARTUP_BOOT.md","memory/HQ_NAMING_STANDARD.md","projects/life-logistics-hq/workers/maintenance_worker.md","projects/life-logistics-hq/procedures/maintenance_coordinated_repository_repair.md","projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md","projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md"]`
+- Requested Read Scopes JSON: `["memory","coordination","projects","apps","workers"]`
+- Requested Write Scopes JSON: `["memory","coordination","projects","projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-001.json"]`
+- Requested Tools JSON: `["GitHub"]`
+- Requests New Authority: true
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: true
+- Requests Material Exception: true
+- Transport Scope Change Detected: false
+- Completion Condition: All clearly stale current canonical records inside the authorized repair roots are repaired or explicitly held, every write is read back and evidenced, and one immutable result artifact is submitted for IMMEDIATE_HQ review.
+- Result Contract ID: lifeos_worker_result
+- Result Contract Version: 1
+- Result Submission Procedure ID: maintenance_worker_result_submission
+- Result Submission Procedure Version: 1
+- Result Owning Department: maintenance
+- Result Attempt: 1
+- Result Path: projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-001.json
+- Result Create Only: true
+- Result Overwrite Allowed: false
+- Result Work Reexecution Authorized: false
+- Result Scope Expansion Authorized: false
+
+#### Authorized Outcome
+
+Perform one repository-wide coherence audit. Repair current canonical operational records under `memory`, `coordination`, and every department subtree under `projects` when later authoritative evidence clearly establishes that the current record is stale.
+
+The Worker may inspect `apps` and grandfathered `workers` content for cross-reference and drift evidence but must not modify software, tests, runtime state, or legacy pilot implementation.
+
+This is a one-run coordinated repair exception approved directly by Rob. It does not transfer ownership, create standing cross-department authority, authorize new work, or permit destructive or external actions.
+
+The Worker must follow `maintenance_coordinated_repository_repair` version 1, submit the immutable report, and stop for `Maintenance_HQ` review. The advisory remains open until source-owner verification and explicit closeout.
 
 ## Recently Acknowledged / Implemented Advisories
 
