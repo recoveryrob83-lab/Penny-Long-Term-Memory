@@ -1,4 +1,4 @@
-"""Launch the LifeOS dashboard on localhost."""
+"""Launch the LifeOS dashboard with safe Worker continuation on localhost."""
 
 from __future__ import annotations
 
@@ -30,6 +30,11 @@ def main() -> None:
         port = int(os.getenv("LIFEOS_PORT", str(DEFAULT_PORT)))
     except ValueError as error:
         raise SystemExit("LIFEOS_PORT must be an integer.") from error
+
+    # Continue already-dispatched Worker runs automatically. New advisory dispatch remains
+    # operator-controlled unless LIFEOS_WORKER_AUTO_DISPATCH_ENABLED is explicitly enabled.
+    os.environ.setdefault("LIFEOS_WORKER_ORCHESTRATOR_ENABLED", "1")
+    os.environ.setdefault("LIFEOS_WORKER_AUTO_DISPATCH_ENABLED", "0")
 
     url = f"http://{host}:{port}"
     should_open = os.getenv("LIFEOS_OPEN_BROWSER", "1").lower() not in {

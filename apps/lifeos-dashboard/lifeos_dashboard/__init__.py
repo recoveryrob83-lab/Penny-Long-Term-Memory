@@ -44,5 +44,8 @@ from . import (
     worker_github_orchestrator_runtime as _worker_github_orchestrator_runtime,
 )
 from . import (
+    worker_pipeline_reliability_runtime as _worker_pipeline_reliability_runtime,
+)
+from . import (
     worker_activation_readiness_runtime as _worker_activation_readiness_runtime,
 )
