@@ -1,6 +1,6 @@
 # Active Projects
 
-Updated: 2026-07-25
+Updated: 2026-07-27
 Purpose: High-level LifeOS project and operating-surface map.
 
 ## Operating Rule
@@ -17,11 +17,11 @@ GitHub is the map. Drive is the filing cabinet.
 |---|---|---|---|---|
 | Active | `LifeOS_HQ` | `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md` | Shared meeting room; no independent backlog | Use `Chief_of_Staff_HQ` as chair and transfer real actions to the owning department |
 | Active | `Chief_of_Staff_HQ` | `projects/main-assistant/` | Rob's primary point of contact, personal assistant, daily operations, routing, reports, and follow-through | Maintain the daily operating picture and route specialist assignments without absorbing ownership |
-| Active | `Maintenance_HQ` | `projects/life-logistics-hq/` | Global GitHub maintenance, governance, boot integrity, audits, source boundaries, publication mirrors, and reconciliation | Maintain the shared operating system, audit governance-sensitive rollout boundaries, and route department-local corrections to owners |
-| Active | `Engineering_HQ` | `projects/engineering/` | Technical architecture, dashboard, automation, validators, testing, routing runtime, and implementation | Observe ordinary post-Wave-0B operation and repair only demonstrated technical defects under bounded authority |
+| Active / Implementing | `Maintenance_HQ` | `projects/life-logistics-hq/` | Global GitHub maintenance, governance, boot integrity, audits, source boundaries, publication mirrors, and reconciliation | Complete only `ADV-20260726-053` revision 1, submit its immutable result, and stop for `IMMEDIATE_HQ` review |
+| Active | `Engineering_HQ` | `projects/engineering/` | Technical architecture, dashboard, automation, validators, testing, routing runtime, and implementation | Observe `RUN-ADV-20260726-053-R1` transport and ingestion evidence without taking ownership of the audit or modifying source lifecycle |
 | Active | `Finance_HQ` | `projects/finance-benefits/` | Finance, ledger, forecasting, benefits, affordability, and money-risk advisory | Maintain Finance-owned forecasting and support concrete money decisions |
 | Active | `Business_HQ` | `projects/business-development/` | Parent business strategy, positioning, market, offers, and portfolio decisions | Guide Office Leaks market hypotheses and preserve future portfolio capacity |
-| Active | `Office_Leaks_HQ` | `projects/office-leaks-consulting/` | Active business-unit execution, market test, outreach, offers, and delivery continuity | Observe organic signal, continue the lead-loss lane, and route concrete inquiries or delivery work |
+| Active | `Office_Leaks_HQ` | `projects/office-leaks-consulting/` | Active business-unit execution, market test, outreach, offers, and delivery continuity | Preserve current state while Rob's pause remains in effect; resume only on an explicit owning-department decision |
 | Active | `Wellness_HQ` | `projects/wellness/` | Non-clinical wellness, pacing, routines, self-care, emotional-regulation support, and recovery-support context within scope | Support sustainable wellbeing and functional capacity without absorbing medical or recovery-program logistics |
 
 ## Shared Operating Systems and Projects
@@ -49,7 +49,7 @@ GitHub is the map. Drive is the filing cabinet.
 
 `Chief_of_Staff_HQ` is the everyday operational front door and receives department reports.
 
-`Maintenance_HQ` maintains global GitHub hygiene, shared infrastructure, audits, boot integrity, publication-mirror discipline, and reconciliation.
+`Maintenance_HQ` maintains global GitHub hygiene, shared infrastructure, audits, boot integrity, publication-mirror discipline, and reconciliation. Its current cross-department write authority is limited to the exact one-run exception in `ADV-20260726-053` revision 1.
 
 The LifeOS Flow Board is an attention surface, not a replacement for Todoist, Calendar, or GitHub.
 
@@ -61,7 +61,7 @@ Desktop automation is validated across the seven department HQs. The canonical r
 
 Scheduler production reliability has live evidence, but fully unattended Windows production remains unapproved without current Engineering evidence and explicit Rob authorization. `Engineering_HQ Daily Sync` remains paused by deliberate choice.
 
-Office Leaks is publicly operating in a live organic market-test phase.
+Office Leaks remains a real business-unit domain, but its current activity is paused by Rob. Preserve its records and ownership without inventing resume work.
 
 The Engineering PennyOS humble-beginnings note is historical context only. It does not create a new project, roadmap commitment, or open loop.
 
