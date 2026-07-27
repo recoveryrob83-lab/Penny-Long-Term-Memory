@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ Open Loops
 
-Updated: 2026-07-23
+Updated: 2026-07-27
 Project: Chief_of_Staff_HQ / Daily Operations
 Purpose: Track genuine unfinished Chief of Staff work without mixing standing responsibilities, specialist work, operating watches, or completed history into the active queue.
 
@@ -31,8 +31,10 @@ These are conditions to observe, not unfinished tasks:
 - **Chat / Work boundary:** Keep regular Chat as headquarters and Work as bounded execution; re-evaluate only after meaningful product changes or demonstrated friction.
 - **Context-layer drift:** Treat chat-specific handbooks as noncanonical context mirrors. Use current-source reads, focused Sync, or full Boot when the source state or operating frame matters.
 - **Inventory scope creep:** Keep the initial inventory pilot limited to expendables and transportation access. Do not found a new department, log every use, or expand into durable possessions before the pilot proves useful.
-- **Automation boundary:** Package F Wave 0A is complete: the GitHub-only change watch and Engineering-only Worker proof chain are operational. Cross-department HQ routing remains an Engineering-owned implementation under controlled rollout and does not authorize a new Worker, new route, or unattended send.
+- **Automation boundary:** The cross-department Worker transport foundation is operational, but transport never creates task authority, source ownership, or closure authority. The current Maintenance run remains owned and verified by `Maintenance_HQ`.
+- **Current Worker report path:** Watch for the immutable result from `RUN-ADV-20260726-053-R1`; receive and synthesize the verified outcome only after `Maintenance_HQ` review rather than acting on transport or chat output alone.
 - **Watcher authority:** Treat Life OS Change Watch output as a report for synthesis and follow-through. It does not choose priorities, modify GitHub, close advisories, or convert reported work into Chief of Staff ownership.
+- **Office Leaks pause:** Preserve Rob's current pause. Do not keep Office Leaks framed as an immediate active priority or invent resume work.
 
 ## Standing Responsibilities
 
@@ -46,24 +48,26 @@ These are enduring department duties, not open loops:
 - Route each real action to one owning department and one authoritative destination.
 - Check follow-through and close stale coordination wrappers after verified completion.
 - Handle one-off daily admin and authorized light connector work.
-- Process worker intake only when authorized or requested.
+- Process Worker intake only when authorized or requested.
 - Review lightweight personal-inventory output when requested and route affordability or cash-timing questions to Finance.
-- Keep Office Leaks visible as the immediate revenue-first LifeOS priority while routing specialist judgment to `Business_HQ` and `Office_Leaks_HQ`.
+- Preserve paused project state without manufacturing urgency or commitments.
 - Preserve source-system boundaries and keep durable GitHub notes abstract.
 
 ## External Dependencies
 
 These items are owned elsewhere and are not duplicated as Chief of Staff open loops:
 
-- `Maintenance_HQ` owns future Project Settings reconciliation only when a demonstrated divergence appears, plus shared governance, boot integrity, audits, migrations, source boundaries, and global repository reconciliation.
+- `Maintenance_HQ` owns `ADV-20260726-053`, its repository audit, shared governance, boot integrity, audits, migrations, source boundaries, global repository reconciliation, result review, and hold resolution.
 - `Engineering_HQ` owns cross-department HQ routing, browser DOM transport, selectors, compatibility mappings, dashboard code, tests, technical reliability, duplicate protection, evidence return, and failure recovery.
 - `Finance_HQ` owns forecasting models, account-linked analysis, affordability, cash timing, spending analysis, and financial judgment.
-- `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, offers, outreach, delivery, and market-test judgment.
+- `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, records, and any future resume decision.
 
 Chief of Staff may track a narrow routed dependency or follow-through condition when another department must report back, but the detailed authoritative work remains with that department.
 
 ## Recently Closed or Clarified
 
+- 2026-07-27: Reconciled Chief of Staff current-state references with the open Maintenance audit without creating a Chief of Staff-owned duplicate loop.
+- 2026-07-26: The Maintenance Worker became active and live; activation remained separate from task authority.
 - 2026-07-23: Package F Wave 0A was reconciled as complete: the existing Life OS Change Watch is enabled and successful, canonical room and Worker naming is established, current files were reconciled, and the Engineering-only Worker proof chain is complete.
 - 2026-07-23: Clarified that the watcher reports meaningful GitHub changes into the existing `Chief_of_Staff_HQ` room but remains read-only and does not close or own the underlying work.
 - 2026-07-22: Narrowed the proposed inventory concept to a lightweight expendables-first pilot under Chief of Staff operations rather than creating a Finance subdepartment.
@@ -75,7 +79,7 @@ Chief of Staff may track a narrow routed dependency or follow-through condition 
 - 2026-07-18: Completed the Chief of Staff-owned Phase Two architecture repair across the local handoff, identity, README, status, open loops, notebook framing, and retained advisory-board header and notes.
 - 2026-07-18: Clarified that LifeOS HQ is a separate shared meeting room and Chief of Staff HQ is its chair, not the Hub itself.
 - 2026-07-18: Reclassified routine duties and operating watches so they no longer masquerade as active open loops.
-- 2026-07-17: Desktop department automation passed draft-mode validation across all seven department HQs.
+- 2026-07-17: Desktop department automation passed draft-mode validation across all seven Department HQs.
 - 2026-07-17: A watched live send to the legacy `Main Assistant HQ` automation destination succeeded and initiated a normal reboot.
 - 2026-07-17: The previous legacy Logistics boot path defect was corrected to `projects/life-logistics-hq`.
 - 2026-07-17: The LifeOS Dashboard became operational with GitHub, Trello, Todoist, and Google Calendar private iCal.
@@ -87,4 +91,4 @@ If a task grows into a multi-step project, requires specialist judgment, or crea
 
 ## Completion Standard
 
-`Chief_of_Staff_HQ` is working correctly when Rob has a clear next action, Penny has removed avoidable friction, department reports are synthesized without ownership drift, real assignments are routed to one owner and one authoritative destination, external actions are truthfully verified, stale coordination wrappers close cleanly, inventory tracking remains useful and lightweight, and `LifeOS_HQ` has not created extra administrative burden or duplicate truth.
+`Chief_of_Staff_HQ` is working correctly when Rob has a clear next action, Penny has removed avoidable friction, department reports are synthesized without ownership drift, real assignments are routed to one owner and one authoritative destination, external actions are truthfully verified, stale coordination wrappers close cleanly, inventory tracking remains useful and lightweight, paused projects remain paused without manufactured urgency, and `LifeOS_HQ` has not created extra administrative burden or duplicate truth.
