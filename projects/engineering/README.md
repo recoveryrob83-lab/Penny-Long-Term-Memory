@@ -115,7 +115,7 @@ Current merged behavior:
 - proves a new correlated user turn and an empty composer before confirming a send;
 - never blind-retries confirmed or uncertain submissions.
 
-PR #21, `Clear proven stale Worker composer residue`, was squash-merged to `main` as `620ef84c57cbb87123bbca30e43faffda1e71032` after the branch was refreshed against current `main` and Rob reported the focused tests, affected regressions, and Ruff green. Local pull, dashboard restart, and ordinary health confirmation remain the immediate deployment follow-through. A later separately authorized Worker run should provide natural live observation without replaying the completed Maintenance canary.
+PR #21, `Clear proven stale Worker composer residue`, was squash-merged to `main` as `620ef84c57cbb87123bbca30e43faffda1e71032` after the branch was refreshed against current `main` and Rob reported the focused tests, affected regressions, and Ruff green. Rob then confirmed ordinary post-merge dashboard health. The separately authorized Maintenance repository audit should provide the next natural live observation of composer cleanup and full-chain behavior without replaying the completed canary.
 
 ## Completed Technical State
 
@@ -126,6 +126,7 @@ PR #21, `Clear proven stale Worker composer residue`, was squash-merged to `main
 - PR #19: approved Maintenance profile, result procedure, HQ review procedure, review-path bridge, and tests.
 - PR #20: guarded Worker registration and canary targeting for the sole routed Worker awaiting verification.
 - PR #21: evidence-backed stale composer-residue cleanup with unrelated-text preservation and no prior-send retry.
+- PR #21 deployment follow-through: current `main` pulled, dashboard restarted, and ordinary health confirmed by Rob.
 - Maintenance Worker registration, exact route revision 1, successful canary, route availability, and active deployment are user-reported complete.
 - Initial Worker expansion review: closed with Engineering and Maintenance active, and Business, Finance, and Wellness declining rollout for now.
 
@@ -185,14 +186,13 @@ Maintenance-owned Worker artifacts remain owned by `Maintenance_HQ`; Engineering
 
 ## Current Decision Boundary
 
-1. Pull current `main`, restart the dashboard, and verify ordinary health after PR #21.
-2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-3. Define any repository-audit assignment separately with exact scope, authorization, result path, and `IMMEDIATE_HQ` review before dispatch.
-4. Observe the next separately authorized dispatch for composer cleanup and full-chain reliability evidence.
-5. Keep the Worker portfolio lean until an owning department demonstrates a recurring standardized bottleneck and explicitly requests evaluation.
-6. Keep Office Leaks paused.
+1. Define the Maintenance repository-audit assignment as the next full-system Worker test.
+2. Establish exact scope, authoritative sources, allowed writes, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review before dispatch.
+3. Use the authorized audit to observe composer cleanup, dispatch evidence, return-to-source behavior, result creation, ingestion, HQ review, and Rob validation where required.
+4. Keep the Worker portfolio lean until an owning department demonstrates a recurring standardized bottleneck and explicitly requests evaluation.
+5. Keep Office Leaks paused.
 
-The completed rollout does not authorize new profiles, titles, IDs, rooms, registry rows, routes, schedules, activations, or assignments by analogy.
+The completed rollout and healthy deployment do not authorize the audit's execution wrapper, task record, result path, or broad cross-department writes by themselves.
 
 Future Engineering work must come from `projects/engineering/open_loops.md`, a demonstrated defect with bounded repair authority, or a new explicit Rob instruction.
 
@@ -227,4 +227,4 @@ Use ignored local environment files or the appropriate secure source system for 
 
 ## Current Status
 
-Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The initial Worker expansion phase is closed with a lean portfolio of `Engineering_Worker` and `Maintenance_Worker`. The Maintenance Worker is active and live with no assignment. Business, Finance, and Wellness do not request Workers at present. PR #21 is merged to `main`; local pull, dashboard restart, and ordinary health confirmation remain. Office Leaks is paused. A future repository-audit task requires separate exact authorization before it becomes a Maintenance assignment.
+Active department. Packages D and E are closed. Package F Waves 0A and 0B are complete. The initial Worker expansion phase is closed with a lean portfolio of `Engineering_Worker` and `Maintenance_Worker`. The Maintenance Worker is active and live with no assignment. Business, Finance, and Wellness do not request Workers at present. PR #21 is merged and ordinary post-merge dashboard health is confirmed. Office Leaks is paused. The separately bounded Maintenance repository audit is the selected next full-system test and requires exact assignment authority before dispatch.
