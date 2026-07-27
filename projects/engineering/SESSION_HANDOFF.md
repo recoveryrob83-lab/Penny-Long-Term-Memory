@@ -2,13 +2,13 @@
 
 Updated: 2026-07-26
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the core Worker platform and initial cross-department rollout were closed with an intentionally lean production portfolio, the Maintenance Worker remained active and idle, PR #21 merged the composer-residue repair, local deployment health remained to be confirmed, and a future repository-audit assignment remained separate and unauthorized until explicitly defined.
+Purpose: Fresh-room handoff after the core Worker platform and initial cross-department rollout closed with an intentionally lean production portfolio, PR #21 deployment health was confirmed, the Maintenance Worker remained active and idle, and Rob selected a separately bounded repository audit as the next full-system Worker test.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: `Engineering_HQ`
-- Current Phase: Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Repository Audit Assignment Pending Separate Authorization / Office Leaks Paused
+- Current Phase: Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Deployment Healthy / Maintenance Repository Audit Pending Exact Assignment / Office Leaks Paused
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -126,7 +126,7 @@ The activation-readiness service remains read-only and continues to report `acti
 
 ## Composer Residue Repair
 
-Lifecycle State: MERGED TO `main` / LOCAL DEPLOYMENT HEALTH PENDING
+Lifecycle State: MERGED TO `main` / DEPLOYMENT HEALTH CONFIRMED / LIVE OBSERVATION PENDING
 
 After the successful Maintenance canary, ChatGPT restored the submitted synthetic prompt in the Maintenance composer. Rob manually deleted it. The send itself remained confirmed and the route remained valid.
 
@@ -141,7 +141,7 @@ The merged repair:
 - verifies the proven stale composer is empty before inserting a new prompt;
 - does not retry the prior send or weaken new-turn correlation and stop-on-uncertainty behavior.
 
-GitHub exposed no workflow run for the merge. Rob's local validation is the current test evidence. Pull current `main`, restart the dashboard, and confirm ordinary health before treating deployment follow-through as complete. The next separately authorized Worker dispatch should provide natural live evidence of cleanup behavior; do not rerun the completed Maintenance canary merely to manufacture evidence.
+GitHub exposed no workflow run for the merge. Rob's local validation is the current test evidence, and Rob confirmed ordinary dashboard health after pulling current `main` and restarting. The separately authorized Maintenance repository audit should now provide natural live evidence of composer cleanup and the full Worker-to-HQ chain; do not rerun the completed canary merely to manufacture evidence.
 
 ## Current Production Worker State
 
@@ -181,14 +181,14 @@ GitHub exposed no workflow run for the merge. Rob's local validation is the curr
 
 ## Next Valid Actions
 
-1. Pull current `main`, restart the dashboard, and confirm ordinary health after PR #21.
-2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-3. Define the planned repository-audit assignment separately after this closeout. Establish the exact task, authoritative sources, read scope, allowed writes, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review before dispatch.
-4. Use that or another separately authorized Worker run to observe the full Worker-to-HQ evidence chain and composer cleanup behavior without rerunning the completed canary.
+1. Define the planned Maintenance repository-audit assignment as the first real full-system test.
+2. Establish the exact task, authoritative sources, read scope, allowed write scope, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review before dispatch.
+3. Dispatch only after those fields are exact and the assignment is accepted under the Maintenance Worker contract.
+4. Observe dispatch, correlated user-turn evidence, source return, Worker result creation, deterministic ingestion, Maintenance HQ review, Rob validation where required, and composer cleanup behavior.
 5. Keep the production Worker portfolio lean until an owning department demonstrates a recurring standardized bottleneck and explicitly requests evaluation.
 6. Keep Office Leaks work paused.
 
-The repository-audit statement in this handoff is planning context, not an assignment or write authority.
+Rob has selected the repository audit as the next test, but this handoff does not itself create the execution wrapper, task record, result path, or write authority.
 
 ## Validation Standard
 
