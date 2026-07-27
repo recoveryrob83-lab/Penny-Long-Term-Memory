@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from typing import Mapping, cast
 
+from .department_hq_routing import department_project_root
 from .worker_advisory_pipeline import ExecutionReadyAdvisory
 from .worker_source_resolution import (
     front_matter,
@@ -69,9 +70,10 @@ def load_canonical_procedure(
     entry: WorkerRegistryEntry,
     advisory: ExecutionReadyAdvisory,
 ) -> tuple[CanonicalProcedureSpec, str]:
+    project_root = department_project_root(entry.owning_department)
     relative_path = (
-        f"projects/{entry.owning_department}/procedures/{advisory.procedure_id}.md"
-    )
+        project_root / "procedures" / f"{advisory.procedure_id}.md"
+    ).as_posix()
     text = read_relative(repository_root, relative_path)
     metadata = front_matter(text)
     if metadata.get("procedure_id") != advisory.procedure_id:
