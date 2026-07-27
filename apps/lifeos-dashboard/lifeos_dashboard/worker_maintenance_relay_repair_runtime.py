@@ -1,0 +1,571 @@
+"""Install bounded compatibility repairs for Maintenance result and HQ relay flows."""
+from __future__ import annotations
+
+import re
+from collections.abc import Iterable
+from dataclasses import replace
+
+from . import worker_github_orchestrator_runtime
+from .command_center_send_budget import BUDGET_RECOVERY_CONDITION
+from .worker_github_orchestrator import WorkerGitHubOrchestrator
+from .worker_result_contract import artifact_path
+from .worker_result_ingester import WorkerResultIngester
+from .worker_runtime import WorkerRuntimeError
+
+_INSTALL_FLAG = "_lifeos_maintenance_relay_repair_runtime_installed"
+_INGESTER_FLAG = "_lifeos_cross_department_result_validation_installed"
+_ORCHESTRATOR_FLAG = "_lifeos_cross_department_hq_relay_installed"
+_HEX40 = re.compile(r"^[0-9a-f]{40}$")
+_RESULT_TERMINAL_STATES = {
+    "REPORT_VALIDATED",
+    "HQ_VERIFIED",
+    "HQ_REJECTED",
+    "ROB_VALIDATION_REQUIRED",
+    "ROB_VERIFIED",
+    "ROB_REJECTED",
+    "READY_FOR_COS",
+}
+
+
+def _normalized_scope(value: object) -> str:
+    clean = str(value or "").strip().replace("\\", "/").strip("/")
+    if " (" in clean:
+        clean = clean.split(" (", 1)[0].rstrip()
+    while "//" in clean:
+        clean = clean.replace("//", "/")
+    return clean
+
+
+def _scope_allows(allowed: object, actual: object) -> bool:
+    allowed_path = _normalized_scope(allowed)
+    actual_path = _normalized_scope(actual)
+    return bool(
+        allowed_path
+        and actual_path
+        and (
+            actual_path == allowed_path
+            or actual_path.startswith(allowed_path + "/")
+        )
+    )
+
+
+def _unauthorized_scopes(
+    allowed_scopes: Iterable[object],
+    actual_scopes: Iterable[object],
+) -> list[str]:
+    allowed = tuple(allowed_scopes)
+    return sorted(
+        str(actual)
+        for actual in actual_scopes
+        if not any(_scope_allows(candidate, actual) for candidate in allowed)
+    )
+
+
+def _uncovered_scopes(
+    requested_scopes: Iterable[object],
+    actual_scopes: Iterable[object],
+) -> list[str]:
+    actual = tuple(actual_scopes)
+    return sorted(
+        str(requested)
+        for requested in requested_scopes
+        if not any(_scope_allows(requested, observed) for observed in actual)
+    )
+
+
+def _parse_evidence_reference(
+    reference: object,
+) -> tuple[str, str | None, str | None]:
+    text = str(reference or "").strip()
+    path, separator, witness = text.partition("@")
+    path = _normalized_scope(path)
+    witness = witness.strip()
+    if not separator or not path or not witness:
+        raise WorkerRuntimeError(
+            f"Evidence reference lacks path correlation: {text}"
+        )
+    if witness == "preflight:not-found":
+        return path, None, None
+    if _HEX40.fullmatch(witness):
+        return path, None, witness
+    if witness.startswith("blob:"):
+        blob_sha = witness.removeprefix("blob:")
+        if _HEX40.fullmatch(blob_sha):
+            return path, None, blob_sha
+    commit_token, marker, blob_token = witness.partition("@")
+    if (
+        marker
+        and commit_token.startswith("commit:")
+        and blob_token.startswith("blob:")
+    ):
+        commit_sha = commit_token.removeprefix("commit:")
+        blob_sha = blob_token.removeprefix("blob:")
+        if _HEX40.fullmatch(commit_sha) and _HEX40.fullmatch(blob_sha):
+            return path, commit_sha, blob_sha
+    raise WorkerRuntimeError(
+        f"Evidence reference witness is invalid: {text}"
+    )
+
+
+def _most_specific_scope(actual: object, allowed: Iterable[object]) -> str:
+    matches = [
+        _normalized_scope(candidate)
+        for candidate in allowed
+        if _scope_allows(candidate, actual)
+    ]
+    if not matches:
+        raise WorkerRuntimeError(
+            f"Scope is outside the canonical assignment: {actual}"
+        )
+    return max(matches, key=len)
+
+
+def _mapped_scopes(
+    actual_scopes: Iterable[object],
+    allowed_scopes: Iterable[object],
+) -> tuple[str, ...]:
+    allowed = tuple(allowed_scopes)
+    return tuple(
+        dict.fromkeys(
+            _most_specific_scope(actual, allowed)
+            for actual in actual_scopes
+        )
+    )
+
+
+def _verify_git_witness(
+    ingester: WorkerResultIngester,
+    *,
+    path: str,
+    reference: object,
+    commit_sha: str | None,
+    blob_sha: str | None,
+) -> None:
+    try:
+        if commit_sha is not None:
+            if ingester._git("cat-file", "-t", commit_sha) != "commit":
+                raise WorkerRuntimeError(
+                    f"Evidence witness is not a Git commit: {reference}"
+                )
+        if blob_sha is not None:
+            if ingester._git("cat-file", "-t", blob_sha) != "blob":
+                raise WorkerRuntimeError(
+                    f"Evidence witness is not a Git blob: {reference}"
+                )
+        if commit_sha is not None and blob_sha is not None:
+            observed = ingester._git(
+                "rev-parse",
+                f"{commit_sha}:{path}",
+            )
+            if observed != blob_sha:
+                raise WorkerRuntimeError(
+                    f"Evidence commit and blob do not match path: {reference}"
+                )
+    except WorkerRuntimeError as exc:
+        if "Evidence" in str(exc):
+            raise
+        raise WorkerRuntimeError(
+            f"Evidence Git object is unavailable: {reference}"
+        ) from exc
+
+
+def _install_result_validation() -> None:
+    ingester_class = WorkerResultIngester
+    if getattr(ingester_class, _INGESTER_FLAG, False):
+        return
+    original_validate = ingester_class._validate_report_correlation
+
+    def validate_report_correlation(
+        self: WorkerResultIngester,
+        advisory,
+        profile,
+        payload: dict[str, object],
+    ) -> None:
+        allowed_reads = (
+            *advisory.requested_read_scopes,
+            *advisory.requested_write_scopes,
+        )
+        actual_reads = tuple(payload.get("actual_read_scopes") or ())
+        actual_writes = tuple(payload.get("actual_write_scopes") or ())
+        unauthorized_reads = _unauthorized_scopes(
+            allowed_reads,
+            actual_reads,
+        )
+        unauthorized_writes = _unauthorized_scopes(
+            advisory.requested_write_scopes,
+            actual_writes,
+        )
+        if unauthorized_reads or unauthorized_writes:
+            details: list[str] = []
+            if unauthorized_reads:
+                details.append(
+                    "actual read scopes exceed assignment: "
+                    + ", ".join(unauthorized_reads)
+                )
+            if unauthorized_writes:
+                details.append(
+                    "actual write scopes exceed assignment: "
+                    + ", ".join(unauthorized_writes)
+                )
+            raise WorkerRuntimeError(
+                "Worker report correlation failed: "
+                + "; ".join(details)
+                + "."
+            )
+
+        allowed_evidence = (
+            *advisory.source_references,
+            *allowed_reads,
+        )
+        normalized_references: list[str] = []
+        evidence_paths: list[str] = []
+        for reference in payload.get("evidence_references") or ():
+            path, commit_sha, blob_sha = _parse_evidence_reference(reference)
+            if not any(
+                _scope_allows(allowed, path)
+                for allowed in allowed_evidence
+            ):
+                raise WorkerRuntimeError(
+                    "Worker report correlation failed: evidence reference "
+                    f"path is outside assignment: {path}."
+                )
+            evidence_paths.append(path)
+            if commit_sha is None and blob_sha is None:
+                normalized_references.append(
+                    f"{path}@preflight:not-found"
+                )
+                continue
+            _verify_git_witness(
+                self,
+                path=path,
+                reference=reference,
+                commit_sha=commit_sha,
+                blob_sha=blob_sha,
+            )
+            normalized_references.append(f"{path}@{blob_sha}")
+
+        validation_payload = dict(payload)
+        validation_payload["actual_read_scopes"] = _mapped_scopes(
+            actual_reads,
+            allowed_reads,
+        )
+        validation_payload["actual_write_scopes"] = _mapped_scopes(
+            actual_writes,
+            advisory.requested_write_scopes,
+        )
+        validation_payload["evidence_references"] = normalized_references
+        validation_advisory = replace(
+            advisory,
+            source_references=tuple(
+                dict.fromkeys(
+                    (*advisory.source_references, *evidence_paths)
+                )
+            ),
+        )
+        original_validate(
+            self,
+            validation_advisory,
+            profile,
+            validation_payload,
+        )
+
+    ingester_class._validate_report_correlation = (
+        validate_report_correlation
+    )
+    setattr(ingester_class, _INGESTER_FLAG, True)
+
+
+def _canonical_hq_review_path(row, run_id: str) -> str:
+    return artifact_path(
+        str(row["owning_department"]),
+        str(row["worker_id"]),
+        run_id,
+        "hq_review",
+        1,
+    )
+
+
+def _canonical_rob_validation_path(row, run_id: str) -> str:
+    return artifact_path(
+        str(row["owning_department"]),
+        str(row["worker_id"]),
+        run_id,
+        "rob_validation",
+        1,
+    )
+
+
+def _reserve_automatic_hq_wake_budget(
+    orchestrator: WorkerGitHubOrchestrator,
+    run_id: str,
+):
+    command_center = orchestrator.operations.command_center
+    decision = command_center.reserve_send_budget(
+        kind="hq_review_wake",
+        run_id=run_id,
+    )
+    if not decision.reserved:
+        command_center.trip_safety_pause(
+            reason=decision.reason,
+            affected_run_id=run_id,
+            trigger="send_budget",
+            recovery_condition=BUDGET_RECOVERY_CONDITION,
+        )
+        raise WorkerRuntimeError(
+            f"{decision.reason} Reset the budget explicitly while paused "
+            "before another send."
+        )
+    try:
+        command_center.append_send_budget_evidence(
+            run_id=run_id,
+            decision=decision,
+        )
+    except Exception as exc:
+        command_center.trip_safety_pause(
+            reason=(
+                "An automatic HQ review wake reserved a global send attempt, "
+                "but the reservation could not be attached to the authoritative "
+                "execution row. Nothing was sent."
+            ),
+            affected_run_id=run_id,
+            trigger="send_budget_evidence",
+            recovery_condition=BUDGET_RECOVERY_CONDITION,
+        )
+        raise WorkerRuntimeError(
+            "Automatic HQ review send-budget evidence could not be persisted "
+            "before transport."
+        ) from exc
+    return decision
+
+
+def _trip_automatic_hq_wake(
+    orchestrator: WorkerGitHubOrchestrator,
+    run_id: str,
+    reason: str,
+) -> None:
+    orchestrator.operations.command_center.trip_safety_pause(
+        reason=reason,
+        affected_run_id=run_id,
+        trigger="hq_review_orchestrator",
+    )
+
+
+def _install_orchestrator_relay() -> None:
+    orchestrator_class = WorkerGitHubOrchestrator
+    if getattr(orchestrator_class, _ORCHESTRATOR_FLAG, False):
+        return
+    worker_github_orchestrator_runtime._hq_review_path = (
+        _canonical_hq_review_path
+    )
+    guarded_send_hq_wake = orchestrator_class._send_hq_wake
+
+    def ingest_result_if_present(
+        self: WorkerGitHubOrchestrator,
+        advisory,
+    ) -> None:
+        contract = advisory.result_contract
+        if contract is None:
+            return
+        row = self._row(advisory.run_id)
+        if row is None:
+            return
+        state = str(row["result_state"] or "")
+        if state in _RESULT_TERMINAL_STATES:
+            return
+        if state == "REPORT_REJECTED":
+            if str(row["repair_state"] or "") != "REPORT_REPAIR_PENDING":
+                return
+            wake = self.operations.result_repair.repair_wake(
+                advisory.run_id
+            )
+            if wake is None:
+                return
+            candidate_path = wake.corrected_report_path
+        else:
+            candidate_path = contract.result_path
+        if not self._artifact_exists(candidate_path):
+            return
+        payload = self.operations.ingest_result(advisory.run_id)
+        receipt = payload.get("receipt") or {}
+        self._event(
+            "result_ingestion",
+            "succeeded",
+            "Worker result reached "
+            f"{receipt.get('report_state') or receipt.get('result_state')}.",
+            run_id=advisory.run_id,
+            advisory_id=advisory.advisory_id,
+        )
+
+    def ingest_hq_review_if_present(
+        self: WorkerGitHubOrchestrator,
+        run_id: str,
+        advisory_id: str,
+    ) -> None:
+        row = self._row(run_id)
+        if (
+            row is None
+            or str(row["result_state"] or "") != "REPORT_VALIDATED"
+        ):
+            return
+        if str(row["hq_review_state"] or ""):
+            return
+        review_path = _canonical_hq_review_path(row, run_id)
+        if not self._artifact_exists(review_path):
+            return
+        payload = self.operations.ingest_hq_review(run_id)
+        receipt = payload.get("receipt") or {}
+        self._event(
+            "hq_review_ingestion",
+            "succeeded",
+            "HQ review reached "
+            f"{receipt.get('result_state') or receipt.get('review_state')}.",
+            run_id=run_id,
+            advisory_id=advisory_id,
+        )
+
+    def ingest_rob_validation_if_present(
+        self: WorkerGitHubOrchestrator,
+        run_id: str,
+        advisory_id: str,
+    ) -> None:
+        row = self._row(run_id)
+        if row is None or not bool(row["requires_rob_validation"]):
+            return
+        if str(row["rob_validation_state"] or ""):
+            return
+        validation_path = _canonical_rob_validation_path(row, run_id)
+        if not self._artifact_exists(validation_path):
+            return
+        payload = self.operations.ingest_rob_validation(run_id)
+        receipt = payload.get("receipt") or {}
+        self._event(
+            "rob_validation_ingestion",
+            "succeeded",
+            "Rob validation reached "
+            f"{receipt.get('result_state') or receipt.get('validation_state')}.",
+            run_id=run_id,
+            advisory_id=advisory_id,
+        )
+
+    def send_hq_wake(
+        self: WorkerGitHubOrchestrator,
+        run_id: str,
+        advisory_id: str,
+    ) -> None:
+        row = self._row(run_id)
+        if (
+            row is None
+            or str(row["result_state"] or "") != "REPORT_VALIDATED"
+        ):
+            return
+        review_path = _canonical_hq_review_path(row, run_id)
+        if self._artifact_exists(review_path):
+            guarded_send_hq_wake(self, run_id, advisory_id)
+            return
+        if str(row["hq_wake_state"] or ""):
+            return
+        if str(row["hq_review_state"] or ""):
+            return
+        if self.operations.command_center.paused:
+            return
+        run_lock = self.operations.command_center._run_lock
+        if run_lock.locked():
+            return
+        claimed = (
+            "hq_wake_claimed_at" in row.keys()
+            and row["hq_wake_claimed_at"] is not None
+        )
+        if not claimed:
+            _reserve_automatic_hq_wake_budget(self, run_id)
+        try:
+            guarded_send_hq_wake(self, run_id, advisory_id)
+        except Exception:
+            _trip_automatic_hq_wake(
+                self,
+                run_id,
+                "Automatic owning-HQ wake failed or became uncertain after "
+                "a send attempt was reserved or previously claimed. Manual "
+                "review is required before retry.",
+            )
+            raise
+        current = self._row(run_id)
+        if current is None:
+            _trip_automatic_hq_wake(
+                self,
+                run_id,
+                "Automatic owning-HQ wake lost its authoritative execution "
+                "row after transport. Automatic retry is prohibited.",
+            )
+            raise WorkerRuntimeError(
+                "Automatic owning-HQ wake lost its execution row."
+            )
+        current_review_path = _canonical_hq_review_path(
+            current,
+            run_id,
+        )
+        durable_outcome = bool(
+            str(current["hq_wake_state"] or "")
+            or str(current["hq_review_state"] or "")
+            or self._artifact_exists(current_review_path)
+        )
+        if not durable_outcome:
+            _trip_automatic_hq_wake(
+                self,
+                run_id,
+                "Automatic owning-HQ wake consumed or inherited a send claim "
+                "without durable wake or review evidence. Automatic retry is "
+                "prohibited.",
+            )
+            raise WorkerRuntimeError(
+                "Automatic owning-HQ wake produced no durable outcome."
+            )
+        if (
+            str(current["hq_wake_state"] or "") == "HQ_WAKE_SUBMITTED"
+            and not bool(current["hq_wake_returned_to_source"])
+        ):
+            _trip_automatic_hq_wake(
+                self,
+                run_id,
+                "Automatic owning-HQ wake did not verify return to the "
+                "source chat. Automatic retry is prohibited.",
+            )
+            raise WorkerRuntimeError(
+                "Automatic owning-HQ wake did not verify return to source."
+            )
+
+    orchestrator_class._ingest_result_if_present = ingest_result_if_present
+    orchestrator_class._ingest_hq_review_if_present = (
+        ingest_hq_review_if_present
+    )
+    orchestrator_class._ingest_rob_validation_if_present = (
+        ingest_rob_validation_if_present
+    )
+    orchestrator_class._send_hq_wake = send_hq_wake
+    setattr(orchestrator_class, _ORCHESTRATOR_FLAG, True)
+
+
+def install_worker_maintenance_relay_repair_runtime() -> bool:
+    """Install the bounded cross-department result and HQ relay repairs once."""
+
+    if getattr(WorkerResultIngester, _INSTALL_FLAG, False):
+        return False
+    _install_result_validation()
+    _install_orchestrator_relay()
+    setattr(WorkerResultIngester, _INSTALL_FLAG, True)
+    return True
+
+
+install_worker_maintenance_relay_repair_runtime()
+
+
+__all__ = [
+    "_canonical_hq_review_path",
+    "_canonical_rob_validation_path",
+    "_normalized_scope",
+    "_parse_evidence_reference",
+    "_reserve_automatic_hq_wake_budget",
+    "_scope_allows",
+    "_unauthorized_scopes",
+    "_uncovered_scopes",
+    "install_worker_maintenance_relay_repair_runtime",
+]

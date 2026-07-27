@@ -19,7 +19,9 @@
     "actual_action_attempted": "Read the exact authorized sources, answered the bounded questions, and created this report artifact.",
     "controlled_outcome": "IMPLEMENT",
     "completion_state": "completed",
-    "evidence_references": ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md@sha256:example"],
+    "evidence_references": [
+      "projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md@blob:0123456789abcdef0123456789abcdef01234567"
+    ],
     "actual_read_scopes": ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],
     "actual_write_scopes": ["projects/engineering/worker-results/engineering_worker/RUN-ADV-EXAMPLE-R1/report-001.json"],
     "actual_tools": ["GitHub"],
