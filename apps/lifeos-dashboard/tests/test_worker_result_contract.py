@@ -91,7 +91,12 @@ def test_submission_contract_rejects_wrong_path_or_broader_flags() -> None:
 def test_all_canonical_examples_validate_with_exact_json_types() -> None:
     examples = load_artifact_examples()
 
-    for artifact_kind in ("worker_report", "rejection", "hq_review", "rob_validation"):
+    for artifact_kind in (
+        "worker_report",
+        "rejection",
+        "hq_review",
+        "rob_validation",
+    ):
         payload = examples[artifact_kind]
         assert validate_artifact(artifact_kind, payload) is payload
         assert artifact_checksum(payload).startswith("sha256:")
