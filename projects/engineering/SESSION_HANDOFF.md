@@ -2,13 +2,13 @@
 
 Updated: 2026-07-26
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the Maintenance Worker became active and live without an assignment, PR #21 merged the composer-residue repair to `main`, local deployment health remained to be confirmed, Office Leaks stayed paused, and Business remained the likely next Worker candidate.
+Purpose: Fresh-room handoff after the core Worker platform and initial cross-department rollout were closed with an intentionally lean production portfolio, the Maintenance Worker remained active and idle, PR #21 merged the composer-residue repair, local deployment health remained to be confirmed, and a future repository-audit assignment remained separate and unauthorized until explicitly defined.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: `Engineering_HQ`
-- Current Phase: Active / Packages D and E Closed / Package F Waves 0A and 0B Complete / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Office Leaks Paused / Business Worker Candidate Waiting
+- Current Phase: Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Repository Audit Assignment Pending Separate Authorization / Office Leaks Paused
 - Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, local Edge CDP bridge, and the GitHub-only Life OS Change Watch
 - Sensitivity Level: Moderate
 - GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
@@ -78,6 +78,25 @@ Completed slices:
 
 Rob confirmed the post-merge dashboard smoke passed.
 
+### Initial Department Worker Expansion
+
+Lifecycle State: CLOSED / LEAN PORTFOLIO ADOPTED
+Closed: 2026-07-26
+
+The production Worker portfolio remains intentionally limited to:
+
+- `Engineering_Worker` / `engineering_worker`
+- `Maintenance_Worker` / `maintenance_worker`
+
+Owner decisions:
+
+- `Business_HQ` does not request a Worker. Research continues through bounded one-off assignments. Reconsider only a narrow Market Evidence Worker after recurring standardized research creates a measurable bottleneck.
+- `Finance_HQ` does not request a Worker at present.
+- `Wellness_HQ` does not request a Worker at present.
+- `Office_Leaks_HQ` remains paused.
+
+No Business, Finance, Wellness, or Office Leaks Worker profile, title, stable ID, room, registry row, route, canary, activation, schedule, or assignment is authorized. Further adoption requires a demonstrated recurring standardized bottleneck and a new explicit request from the owning department.
+
 ## Maintenance Worker Rollout
 
 Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
@@ -101,7 +120,7 @@ Rob reports the following live local state:
 - the Worker is active and live;
 - no work has been assigned.
 
-Activation is complete and is separate from assignment authority. It does not create a task, schedule, unattended execution, broader connector permission, source-record repair authority, spending, or cross-department authority. A first real Maintenance assignment requires one separately exact bounded task, sources, read scope, immutable result path, authorization source, and `IMMEDIATE_HQ` review.
+Activation is complete and is separate from assignment authority. It does not create a task, schedule, unattended execution, broader connector permission, source-record repair authority, spending, or cross-department authority. A first real Maintenance assignment requires one separately exact bounded task, sources, read scope, allowed write scope, immutable result path, authorization source, and `IMMEDIATE_HQ` review.
 
 The activation-readiness service remains read-only and continues to report `activation_authorized: false`. Rob's explicit activation is a separate authority event and does not turn the readiness report into a deployment ledger.
 
@@ -148,11 +167,11 @@ GitHub exposed no workflow run for the merge. Rob's local validation is the curr
 - Deployment state: active and live
 - First real assignment: none
 
-### Business Worker Candidate
+### Deferred Department Workers
 
-- Likely owning department: `Business_HQ`
-- Strategic context: Rob is embracing an AI systems business serving solo developers and small teams.
-- Profile, procedures, stable Worker ID, exact chat title, room, registry row, route, canary, activation, schedule, and assignment: not defined or authorized.
+- Business, Finance, and Wellness have declined Worker rollout for now.
+- Reconsideration belongs to the owning department after a recurring standardized bottleneck is demonstrated.
+- No canonical Worker artifacts or runtime state should be created by analogy.
 
 ### Office Leaks
 
@@ -164,11 +183,12 @@ GitHub exposed no workflow run for the merge. Rob's local validation is the curr
 
 1. Pull current `main`, restart the dashboard, and confirm ordinary health after PR #21.
 2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-3. Observe the next separately authorized Worker dispatch for composer cleanup behavior without rerunning the completed canary.
-4. Keep Office Leaks work paused.
-5. Wait for `Business_HQ` and Rob to define the Business Worker purpose, authority, profile, procedures, review path, and first bounded pilot before Engineering prepares registration or routing changes.
+3. Define the planned repository-audit assignment separately after this closeout. Establish the exact task, authoritative sources, read scope, allowed writes, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review before dispatch.
+4. Use that or another separately authorized Worker run to observe the full Worker-to-HQ evidence chain and composer cleanup behavior without rerunning the completed canary.
+5. Keep the production Worker portfolio lean until an owning department demonstrates a recurring standardized bottleneck and explicitly requests evaluation.
+6. Keep Office Leaks work paused.
 
-Business Worker candidacy is not authorization. Do not manufacture a profile, title, ID, route, schedule, or assignment by analogy with Maintenance.
+The repository-audit statement in this handoff is planning context, not an assignment or write authority.
 
 ## Validation Standard
 
@@ -205,6 +225,7 @@ Open Engineering advisories: None.
 - Work unavailable to HQ inspection requires explicit Rob validation.
 - Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source work.
 - The Worker courier does not wake `Chief_of_Staff_HQ` under the current contract.
+- The current production portfolio is `Engineering_Worker` and `Maintenance_Worker` only.
 - New Workers, connectors, recurring tasks, spending, cross-department authority, broader durable-write authority, public actions, or real Maintenance assignments require separate approval.
 
 ## Boundary
