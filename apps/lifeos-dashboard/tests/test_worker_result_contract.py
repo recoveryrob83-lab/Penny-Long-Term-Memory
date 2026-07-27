@@ -36,6 +36,37 @@ def test_result_paths_are_deterministic_and_zero_padded() -> None:
         "hq_review",
         12,
     ).endswith("/hq-review-012.json")
+    assert artifact_path(
+        "maintenance",
+        "maintenance_worker",
+        "RUN-ADV-MAINTENANCE-R1",
+        "worker_report",
+        1,
+    ) == (
+        "projects/life-logistics-hq/worker-results/maintenance_worker/"
+        "RUN-ADV-MAINTENANCE-R1/report-001.json"
+    )
+
+
+def test_submission_contract_uses_owning_department_procedure() -> None:
+    engineering = build_result_submission_contract(
+        "engineering", "engineering_worker", "RUN-ADV-TEST-R1"
+    )
+    maintenance = build_result_submission_contract(
+        "maintenance", "maintenance_worker", "RUN-ADV-MAINTENANCE-R1"
+    )
+
+    assert (
+        engineering.submission_procedure_id
+        == "engineering_worker_result_submission"
+    )
+    assert (
+        maintenance.submission_procedure_id
+        == "maintenance_worker_result_submission"
+    )
+    assert maintenance.result_path.startswith(
+        "projects/life-logistics-hq/worker-results/maintenance_worker/"
+    )
 
 
 def test_submission_contract_rejects_wrong_path_or_broader_flags() -> None:
