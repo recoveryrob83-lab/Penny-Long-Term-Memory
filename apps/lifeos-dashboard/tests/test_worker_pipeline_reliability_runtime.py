@@ -46,51 +46,20 @@ def _maintenance_advisory() -> ExecutionReadyAdvisory:
     )
 
 
-def test_scope_matching_accepts_descendants_and_read_only_annotations() -> None:
-    assert reliability._scope_allows("memory", "memory/HQ_NAMING_STANDARD.md") is True
-    assert reliability._scope_allows("apps", "apps (read-only inspection)") is True
-    assert reliability._scope_allows("memory", "coordination/ADVISORY_INDEX.md") is False
-
-
-def test_evidence_parser_accepts_blob_and_commit_blob_witnesses() -> None:
-    commit_sha = "a" * 40
-    blob_sha = "b" * 40
-
-    assert reliability._parse_evidence_reference(
-        f"memory/file.md@commit:{commit_sha}@blob:{blob_sha}"
-    ) == ("memory/file.md", commit_sha, blob_sha, False)
-    assert reliability._parse_evidence_reference(
-        f"memory/file.md@blob:{blob_sha}"
-    ) == ("memory/file.md", None, blob_sha, False)
-    assert reliability._parse_evidence_reference(
-        "projects/result.json@preflight:not-found"
-    ) == ("projects/result.json", None, None, True)
-
-
-def test_maintenance_report_with_root_scopes_and_pinned_evidence_validates() -> None:
-    advisory = _maintenance_advisory()
-    contract = advisory.result_contract
-    assert contract is not None
-    commit_sha = "a" * 40
-    blob_sha = "b" * 40
-    ingester = WorkerResultIngester.__new__(WorkerResultIngester)
-
-    def fake_git(*arguments: str) -> str:
-        if arguments[:2] == ("cat-file", "-t"):
-            return "commit" if arguments[2] == commit_sha else "blob"
-        if arguments[0] == "rev-parse":
-            return blob_sha
-        raise AssertionError(arguments)
-
-    ingester._git = fake_git  # type: ignore[method-assign]
-    profile = WorkerRegistryEntry(
+def _maintenance_profile() -> WorkerRegistryEntry:
+    return WorkerRegistryEntry(
         worker_id="maintenance_worker",
         chat_title="Maintenance_Worker",
         owning_department="maintenance",
         profile_path="projects/life-logistics-hq/workers/maintenance_worker.md",
         profile_version=1,
     )
-    payload = {
+
+
+def _report_payload(advisory: ExecutionReadyAdvisory) -> dict[str, object]:
+    contract = advisory.result_contract
+    assert contract is not None
+    return {
         "attempt": 1,
         "wrapper_id": "WAKE-ADV-TEST-R1",
         "run_id": "RUN-ADV-TEST-R1",
@@ -120,12 +89,56 @@ def test_maintenance_report_with_root_scopes_and_pinned_evidence_validates() -> 
             "GitHub",
             "local non-mutating JSON schema and checksum validation",
         ],
-        "evidence_references": [
-            f"memory/HQ_NAMING_STANDARD.md@commit:{commit_sha}@blob:{blob_sha}",
-        ],
+        "evidence_references": [],
     }
 
-    reliability._validate_report_correlation(ingester, advisory, profile, payload)
+
+def test_scope_matching_accepts_descendants_and_read_only_annotations() -> None:
+    assert reliability._scope_allows("memory", "memory/HQ_NAMING_STANDARD.md") is True
+    assert reliability._scope_allows("apps", "apps (read-only inspection)") is True
+    assert reliability._scope_allows("memory", "coordination/ADVISORY_INDEX.md") is False
+
+
+def test_evidence_parser_accepts_blob_and_commit_blob_witnesses() -> None:
+    commit_sha = "a" * 40
+    blob_sha = "b" * 40
+
+    assert reliability._parse_evidence_reference(
+        f"memory/file.md@commit:{commit_sha}@blob:{blob_sha}"
+    ) == ("memory/file.md", commit_sha, blob_sha, False)
+    assert reliability._parse_evidence_reference(
+        f"memory/file.md@blob:{blob_sha}"
+    ) == ("memory/file.md", None, blob_sha, False)
+    assert reliability._parse_evidence_reference(
+        "projects/result.json@preflight:not-found"
+    ) == ("projects/result.json", None, None, True)
+
+
+def test_maintenance_report_with_root_scopes_and_pinned_evidence_validates() -> None:
+    advisory = _maintenance_advisory()
+    commit_sha = "a" * 40
+    blob_sha = "b" * 40
+    ingester = WorkerResultIngester.__new__(WorkerResultIngester)
+
+    def fake_git(*arguments: str) -> str:
+        if arguments[:2] == ("cat-file", "-t"):
+            return "commit" if arguments[2] == commit_sha else "blob"
+        if arguments[0] == "rev-parse":
+            return blob_sha
+        raise AssertionError(arguments)
+
+    ingester._git = fake_git  # type: ignore[method-assign]
+    payload = _report_payload(advisory)
+    payload["evidence_references"] = [
+        f"memory/HQ_NAMING_STANDARD.md@commit:{commit_sha}@blob:{blob_sha}",
+    ]
+
+    reliability._validate_report_correlation(
+        ingester,
+        advisory,
+        _maintenance_profile(),
+        payload,
+    )
 
 
 def test_out_of_scope_write_still_fails_closed() -> None:
@@ -134,38 +147,16 @@ def test_out_of_scope_write_still_fails_closed() -> None:
     assert contract is not None
     ingester = WorkerResultIngester.__new__(WorkerResultIngester)
     ingester._git = lambda *arguments: "blob"  # type: ignore[method-assign]
-    profile = WorkerRegistryEntry(
-        worker_id="maintenance_worker",
-        chat_title="Maintenance_Worker",
-        owning_department="maintenance",
-        profile_path="projects/life-logistics-hq/workers/maintenance_worker.md",
-        profile_version=1,
-    )
-    payload = {
-        "attempt": 1,
-        "wrapper_id": "WAKE-ADV-TEST-R1",
-        "run_id": "RUN-ADV-TEST-R1",
-        "worker_id": "maintenance_worker",
-        "profile_version": 1,
-        "owning_department": "maintenance",
-        "task_id": "ADV-TEST",
-        "task_revision": 1,
-        "procedure_id": "maintenance_coordinated_repository_repair",
-        "procedure_version": 1,
-        "authorization_source": "ROB",
-        "verification_mode": "IMMEDIATE_HQ",
-        "controlled_outcome": "REPORT_AND_HOLD",
-        "completion_state": "partial",
-        "verification_state": "pending",
-        "failure_reason": "A bounded hold remains.",
-        "actual_read_scopes": ["memory"],
-        "actual_write_scopes": ["apps/unsafe.py", contract.result_path],
-        "actual_tools": ["GitHub"],
-        "evidence_references": [],
-    }
+    payload = _report_payload(advisory)
+    payload["actual_write_scopes"] = ["apps/unsafe.py", contract.result_path]
 
     with pytest.raises(WorkerRuntimeError, match="actual write scopes exceed assignment"):
-        reliability._validate_report_correlation(ingester, advisory, profile, payload)
+        reliability._validate_report_correlation(
+            ingester,
+            advisory,
+            _maintenance_profile(),
+            payload,
+        )
 
 
 def test_maintenance_artifact_paths_use_canonical_project_root() -> None:
@@ -252,22 +243,20 @@ def test_automatic_hq_wake_uses_guarded_budgeted_cli(monkeypatch, tmp_path: Path
         _run_lock=threading.Lock(),
         trip_safety_pause=lambda **kwargs: (_ for _ in ()).throw(AssertionError(kwargs)),
     )
-    orchestrator = WorkerResultRepairCoordinator.__new__(WorkerResultRepairCoordinator)
-    del orchestrator
-    worker_orchestrator = reliability.WorkerGitHubOrchestrator.__new__(
+    orchestrator = reliability.WorkerGitHubOrchestrator.__new__(
         reliability.WorkerGitHubOrchestrator
     )
-    worker_orchestrator.operations = SimpleNamespace(
+    orchestrator.operations = SimpleNamespace(
         command_center=command_center,
         cdp_endpoint="http://127.0.0.1:9222",
     )
-    worker_orchestrator.app_root = tmp_path
-    worker_orchestrator.repository_root = tmp_path.parent
-    worker_orchestrator.database_path = tmp_path / "command-center.sqlite3"
-    worker_orchestrator.timeout_seconds = 300
-    worker_orchestrator._artifact_exists = lambda path: False
-    worker_orchestrator._ingest_hq_review_if_present = lambda run_id, advisory_id: None
-    worker_orchestrator._event = (
+    orchestrator.app_root = tmp_path
+    orchestrator.repository_root = tmp_path.parent
+    orchestrator.database_path = tmp_path / "command-center.sqlite3"
+    orchestrator.timeout_seconds = 300
+    orchestrator._artifact_exists = lambda path: False
+    orchestrator._ingest_hq_review_if_present = lambda run_id, advisory_id: None
+    orchestrator._event = (
         lambda action, status, detail, **kwargs: events.append((action, status))
     )
 
@@ -276,7 +265,7 @@ def test_automatic_hq_wake_uses_guarded_budgeted_cli(monkeypatch, tmp_path: Path
         current["hq_wake_state"] = state["hq_wake_state"]
         return current
 
-    worker_orchestrator._row = current_row
+    orchestrator._row = current_row
     monkeypatch.setattr(reliability, "_ensure_hq_wake_claim_column", lambda item: None)
     monkeypatch.setattr(reliability, "_claim_hq_wake", lambda item, item_row: True)
 
@@ -287,10 +276,10 @@ def test_automatic_hq_wake_uses_guarded_budgeted_cli(monkeypatch, tmp_path: Path
 
     monkeypatch.setattr(reliability.subprocess, "run", fake_run)
 
-    reliability._send_hq_wake(worker_orchestrator, "RUN-ADV-TEST-R1", "ADV-TEST")
+    reliability._send_hq_wake(orchestrator, "RUN-ADV-TEST-R1", "ADV-TEST")
 
     assert commands
-    assert commands[0][1].endswith("automation/run_worker_hq_review_wake.py")
+    assert Path(commands[0][1]).name == "run_worker_hq_review_wake.py"
     assert commands[0][-2:] == ["--confirm-send", "HQ_REVIEW_SEND"]
     assert events[-1] == ("hq_review_wake", "succeeded")
 
