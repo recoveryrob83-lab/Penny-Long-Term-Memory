@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from types import SimpleNamespace
 
 import pytest
@@ -24,6 +25,20 @@ from lifeos_dashboard.worker_runtime import WorkerRuntimeError
 COMMIT_SHA = "0123456789abcdef0123456789abcdef01234567"
 BLOB_SHA = "89abcdef0123456789abcdef0123456789abcdef"
 RUN_ID = "RUN-ADV-20260726-053-R1"
+
+
+@dataclass(frozen=True)
+class _AdvisoryFixture:
+    result_contract: object
+    requested_read_scopes: tuple[str, ...]
+    requested_write_scopes: tuple[str, ...]
+    requested_tools: tuple[str, ...]
+    source_references: tuple[str, ...]
+    target_worker_id: str
+    _envelope: object
+
+    def envelope(self):
+        return self._envelope
 
 
 def test_scope_containment_accepts_descendants_and_annotations() -> None:
@@ -112,6 +127,8 @@ def _correlation_fixture():
     ingester = object.__new__(WorkerResultIngester)
 
     def git_object_type(*arguments: str) -> str:
+        if arguments[0] == "rev-parse":
+            return BLOB_SHA
         return "commit" if arguments[-1] == COMMIT_SHA else "blob"
 
     ingester._git = git_object_type
@@ -130,7 +147,7 @@ def _correlation_fixture():
         authorization_source="ROB",
         verification_mode="IMMEDIATE_HQ",
     )
-    advisory = SimpleNamespace(
+    advisory = _AdvisoryFixture(
         result_contract=SimpleNamespace(
             attempt=1,
             result_path=result_path,
@@ -151,7 +168,7 @@ def _correlation_fixture():
         requested_tools=("GitHub",),
         source_references=("memory/HQ_NAMING_STANDARD.md",),
         target_worker_id="maintenance_worker",
-        envelope=lambda: envelope,
+        _envelope=envelope,
     )
     profile = SimpleNamespace(
         profile_version=1,
