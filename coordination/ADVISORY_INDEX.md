@@ -1,11 +1,11 @@
 # LifeOS Advisory Index
 
-Updated: 2026-07-23
+Updated: 2026-07-26
 Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
-None.
+- ADV-20260726-053 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: maintenance — Run one Rob-approved coordinated repository coherence audit and repair
 
 ## Recently Closed Advisories
 
