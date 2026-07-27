@@ -32,6 +32,14 @@ def test_repository_audit_advisory_resolves_as_exact_rob_approved_repair() -> No
     assert advisory.authorization_source == "ROB"
     assert advisory.verification_mode == "IMMEDIATE_HQ"
     assert advisory.result_contract is not None
+    assert (
+        advisory.result_contract.submission_procedure_id
+        == "maintenance_worker_result_submission"
+    )
+    assert advisory.result_contract.result_path == (
+        "projects/life-logistics-hq/worker-results/maintenance_worker/"
+        "RUN-ADV-20260726-053-R1/report-001.json"
+    )
 
     entry = WorkerRegistryEntry(
         worker_id="maintenance_worker",
