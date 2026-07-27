@@ -1,0 +1,24 @@
+{
+  "artifact_type": "rejection",
+  "attempt": 1,
+  "escalation_required": false,
+  "next_report_attempt": 2,
+  "rejected_report_checksum": "sha256:4c29e15ec8eca2100dc413137ee2be8690e74d7d2fff6ed25e06a3e9d876902a",
+  "rejected_report_path": "projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-001.json",
+  "run_id": "RUN-ADV-20260726-053-R1",
+  "schema_id": "lifeos_worker_result_rejection",
+  "schema_version": 1,
+  "scope_expansion_authorized": false,
+  "validation_errors": [
+    {
+      "code": "CORRELATION_MISMATCH",
+      "expected": "schema-valid, assignment-correlated immutable Worker report",
+      "field": "report",
+      "message": "Worker report correlation failed: actual read scopes exceed assignment: apps (read-only schema, examples, and search-index evidence), apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-examples.json, apps/lifeos-dashboard/lifeos_dashboard/data/worker-result-report.schema.json, coordination/ADVISORY_INDEX.md, coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md, coordination/WORKER_EXECUTION_CONTRACT.md, coordination/boards/engineering.md, memory/01_SESSION_HANDOFF.md, memory/04_ACTIVE_PROJECTS.md, memory/05_OPEN_LOOPS.md, memory/HQ_NAMING_STANDARD.md, memory/STARTUP_BOOT.md, projects/engineering/README.md, projects/engineering/SESSION_HANDOFF.md, projects/engineering/open_loops.md, projects/engineering/status.md, projects/life-logistics-hq/DEPARTMENT_IDENTITY.md, projects/life-logistics-hq/README.md, projects/life-logistics-hq/SESSION_HANDOFF.md, projects/life-logistics-hq/open_loops.md, projects/life-logistics-hq/procedures/maintenance_coordinated_repository_repair.md, projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md, projects/life-logistics-hq/status.md, projects/life-logistics-hq/workers/maintenance_worker.md, projects/main-assistant/SESSION_HANDOFF.md, projects/main-assistant/open_loops.md, projects/main-assistant/status.md, workers (read-only search-index evidence); actual write scopes exceed assignment: memory/01_SESSION_HANDOFF.md, memory/04_ACTIVE_PROJECTS.md, memory/HQ_NAMING_STANDARD.md, projects/engineering/README.md, projects/engineering/open_loops.md, projects/engineering/status.md, projects/life-logistics-hq/README.md, projects/life-logistics-hq/open_loops.md, projects/life-logistics-hq/status.md, projects/main-assistant/open_loops.md, projects/main-assistant/status.md; actual tools exceed assignment: local non-mutating JSON schema and checksum validation; evidence reference witness is invalid: coordination/boards/engineering.md@blob:2139d0e9d42a54ea3c6d4c2e6a4edc80c96599c9; evidence reference witness is invalid: coordination/ADVISORY_INDEX.md@blob:460600b575f217c3f532ae100903e8d25452c8c8; evidence reference witness is invalid: projects/life-logistics-hq/workers/maintenance_worker.md@blob:200840e28d8b4397d80f0108cb1f5e3064a40ba3; evidence reference witness is invalid: projects/life-logistics-hq/procedures/maintenance_coordinated_repository_repair.md@blob:50e0a09364a063db2ded464ae9315ba479310b66; evidence reference witness is invalid: projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md@blob:56cddd40b3a825511a0a30f2ad3d1b10ece655b6; evidence reference path is outside assignment: memory/HQ_NAMING_STANDARD.md@commit:9d105070713c97e3137d357171e904b7ff021123; evidence reference path is outside assignment: projects/engineering/open_loops.md@commit:b414854441fbfb198c4dff910be8c92da0d2fa00; evidence reference path is outside assignment: projects/life-logistics-hq/status.md@commit:23a95213c79738618c052eeeabc9bccb8047fa54; evidence reference path is outside assignment: projects/life-logistics-hq/open_loops.md@commit:f3e6a5f36729c4c4dc40cc994624e93870f3f113; evidence reference path is outside assignment: projects/engineering/status.md@commit:b17bcf7e3bff47b2f62210b1774fe32b3ae45a41; evidence reference path is outside assignment: projects/life-logistics-hq/README.md@commit:bf763b257cac90063c47466c2806c7c86fbd7dfa; evidence reference path is outside assignment: projects/engineering/README.md@commit:0cf409d35c96809b512297d615ca27edb3fd3f6c; evidence reference path is outside assignment: memory/04_ACTIVE_PROJECTS.md@commit:0ee5e88e3c604d9df155431ac962a783cae78aa2; evidence reference path is outside assignment: projects/main-assistant/status.md@commit:620899d12305a054bd605485efa1756c4ce5988b; evidence reference path is outside assignment: memory/01_SESSION_HANDOFF.md@commit:55c0aa8812a22560906fab576c35bacaf56a65e9; evidence reference path is outside assignment: projects/main-assistant/open_loops.md@commit:b003bffc2cdf9d231ca899975b059e06e0721115.",
+      "observed_summary": "<object fields 30>",
+      "observed_type": "object"
+    }
+  ],
+  "work_reexecution_authorized": false,
+  "worker_id": "maintenance_worker"
+}
