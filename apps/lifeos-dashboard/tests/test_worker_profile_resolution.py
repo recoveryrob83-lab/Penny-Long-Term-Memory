@@ -1,6 +1,9 @@
 from pathlib import Path
 
-from lifeos_dashboard.worker_advisory_pipeline import ExecutionReadyAdvisory, build_wake_job
+from lifeos_dashboard.worker_advisory_pipeline import (
+    ExecutionReadyAdvisory,
+    build_wake_job,
+)
 from lifeos_dashboard.worker_profile_resolution import load_worker_authority_profile
 from lifeos_dashboard.worker_report import WORKER_REPORT_PREFIX
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry
