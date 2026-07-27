@@ -7,7 +7,9 @@ from types import SimpleNamespace
 import pytest
 
 from lifeos_dashboard import worker_report_repair_dispatch as dispatch_module
-from lifeos_dashboard.worker_report_repair_dispatch import WorkerReportRepairDispatchService
+from lifeos_dashboard.worker_report_repair_dispatch import (
+    WorkerReportRepairDispatchService,
+)
 from lifeos_dashboard.worker_result_repair import WorkerReportRepairWake
 from lifeos_dashboard.worker_runtime import (
     WorkerRegistryEntry,
@@ -17,6 +19,8 @@ from lifeos_dashboard.worker_runtime import (
 
 
 RUN_ID = "RUN-ADV-20260726-053-R1"
+ORIGINAL_WRAPPER_ID = "WAKE-ADV-20260726-053-R1"
+REPAIR_WRAPPER_ID = "REPAIR-ADV-20260726-053-R1-A2"
 
 
 class _Decision:
@@ -33,11 +37,21 @@ class _CommandCenter:
         self.evidence: list[str] = []
         self.pauses: list[dict[str, object]] = []
 
-    def reserve_send_budget(self, *, kind: str, run_id: str) -> _Decision:
+    def reserve_send_budget(
+        self,
+        *,
+        kind: str,
+        run_id: str,
+    ) -> _Decision:
         self.reservations.append((kind, run_id))
         return _Decision()
 
-    def append_send_budget_evidence(self, *, run_id: str, decision: _Decision) -> None:
+    def append_send_budget_evidence(
+        self,
+        *,
+        run_id: str,
+        decision: _Decision,
+    ) -> None:
         self.evidence.append(run_id)
 
     def trip_safety_pause(self, **kwargs: object) -> None:
@@ -50,16 +64,28 @@ class _Runtime:
             worker_id="maintenance_worker",
             chat_title="Maintenance_Worker",
             owning_department="maintenance",
-            profile_path="projects/life-logistics-hq/workers/maintenance_worker.md",
+            profile_path=(
+                "projects/life-logistics-hq/workers/maintenance_worker.md"
+            ),
             profile_version=1,
-            conversation_url="https://chatgpt.com/c/maintenance-worker-test",
+            conversation_url=(
+                "https://chatgpt.com/c/maintenance-worker-test"
+            ),
             route_revision=1,
         )
         self.store = SimpleNamespace(
-            route_state=lambda worker_id: WorkerRouteState(worker_id, "available")
+            route_state=lambda worker_id: WorkerRouteState(
+                worker_id,
+                "available",
+            )
         )
 
-    def worker(self, worker_id: str, *, require_enabled: bool = False):
+    def worker(
+        self,
+        worker_id: str,
+        *,
+        require_enabled: bool = False,
+    ):
         assert worker_id == "maintenance_worker"
         assert require_enabled is True
         return self.entry
@@ -67,7 +93,7 @@ class _Runtime:
 
 def _wake() -> WorkerReportRepairWake:
     return WorkerReportRepairWake(
-        wrapper_id="REPAIR-ADV-20260726-053-R1-A2",
+        wrapper_id=REPAIR_WRAPPER_ID,
         run_id=RUN_ID,
         worker_id="maintenance_worker",
         task_id="ADV-20260726-053",
@@ -86,12 +112,15 @@ def _wake() -> WorkerReportRepairWake:
             "projects/life-logistics-hq/worker-results/maintenance_worker/"
             f"{RUN_ID}/report-002.json"
         ),
-        instruction="Correct only the report artifact. Do not repeat the underlying work.",
+        instruction=(
+            "Correct only the report artifact. Do not repeat the underlying work."
+        ),
     )
 
 
 def _operations(tmp_path):
     advisory = SimpleNamespace(
+        wrapper_id=ORIGINAL_WRAPPER_ID,
         run_id=RUN_ID,
         result_contract=SimpleNamespace(attempt=1),
         procedure_id="maintenance_coordinated_repository_repair",
@@ -103,7 +132,9 @@ def _operations(tmp_path):
     return SimpleNamespace(
         command_center=command_center,
         pipeline=SimpleNamespace(discover=lambda: (advisory,)),
-        result_repair=SimpleNamespace(repair_wake=lambda run_id: _wake()),
+        result_repair=SimpleNamespace(
+            repair_wake=lambda run_id: _wake()
+        ),
         worker_center=SimpleNamespace(runtime=_Runtime()),
     )
 
@@ -127,23 +158,39 @@ def _database(tmp_path):
             """
             INSERT INTO execution_history(
                 id, run_id, mode, prompt_type, result_state, repair_state
-            ) VALUES(1, ?, 'send', 'worker', 'REPORT_REJECTED', 'REPORT_REPAIR_PENDING')
+            ) VALUES(
+                1, ?, 'send', 'worker',
+                'REPORT_REJECTED', 'REPORT_REPAIR_PENDING'
+            )
             """,
             (RUN_ID,),
         )
     return path
 
 
-def test_report_repair_dispatch_records_one_separate_submission(monkeypatch, tmp_path) -> None:
+def test_report_repair_dispatch_records_one_separate_submission(
+    monkeypatch,
+    tmp_path,
+) -> None:
     operations = _operations(tmp_path)
     database = _database(tmp_path)
     service = WorkerReportRepairDispatchService(operations, database)
     calls: list[str] = []
 
-    def fake_dispatch(job, entry, app_root, *, trigger, timeout_seconds):
+    def fake_dispatch(
+        job,
+        entry,
+        app_root,
+        *,
+        trigger,
+        timeout_seconds,
+    ):
         calls.append(job.envelope.wrapper_id)
         assert job.envelope.run_id == RUN_ID
         assert job.instruction.startswith("Correct only")
+        assert ORIGINAL_WRAPPER_ID in job.instruction
+        assert REPAIR_WRAPPER_ID in job.instruction
+        assert "canonical approved tools" in job.instruction
         assert entry.worker_id == "maintenance_worker"
         assert trigger == "manual"
         return (
@@ -160,36 +207,50 @@ def test_report_repair_dispatch_records_one_separate_submission(monkeypatch, tmp
             ),
         )
 
-    monkeypatch.setattr(dispatch_module, "run_worker_browser_dispatch", fake_dispatch)
+    monkeypatch.setattr(
+        dispatch_module,
+        "run_worker_browser_dispatch",
+        fake_dispatch,
+    )
 
     receipt = service.dispatch(RUN_ID)
 
     assert receipt.status == "submitted"
-    assert receipt.wrapper_id == "REPAIR-ADV-20260726-053-R1-A2"
-    assert calls == ["REPAIR-ADV-20260726-053-R1-A2"]
-    assert operations.command_center.reservations == [("worker_report_repair", RUN_ID)]
+    assert receipt.wrapper_id == REPAIR_WRAPPER_ID
+    assert calls == [REPAIR_WRAPPER_ID]
+    assert operations.command_center.reservations == [
+        ("worker_dispatch", RUN_ID)
+    ]
     assert operations.command_center.evidence == [RUN_ID]
     assert operations.command_center.pauses == []
     status = service.status(RUN_ID)
-    assert status["repair_dispatch_state"] == "REPAIR_DISPATCH_SUBMITTED"
-    assert status["repair_dispatch_user_turn_id"] == "conversation-turn-repair-1"
+    assert status["repair_dispatch_state"] == (
+        "REPAIR_DISPATCH_SUBMITTED"
+    )
+    assert status["repair_dispatch_user_turn_id"] == (
+        "conversation-turn-repair-1"
+    )
     assert status["repair_dispatch_returned_to_source"] is True
 
     with pytest.raises(WorkerRuntimeError, match="already submitted"):
         service.dispatch(RUN_ID)
-    assert calls == ["REPAIR-ADV-20260726-053-R1-A2"]
+    assert calls == [REPAIR_WRAPPER_ID]
 
 
-def test_report_repair_envelope_preserves_run_authority_and_uses_new_wrapper(tmp_path) -> None:
+def test_report_repair_envelope_preserves_authority_with_new_wrapper(
+    tmp_path,
+) -> None:
     operations = _operations(tmp_path)
     database = _database(tmp_path)
     service = WorkerReportRepairDispatchService(operations, database)
     advisory = operations.pipeline.discover()[0]
     envelope = service._repair_envelope(advisory, _wake())
 
-    assert envelope.wrapper_id == "REPAIR-ADV-20260726-053-R1-A2"
+    assert envelope.wrapper_id == REPAIR_WRAPPER_ID
     assert envelope.run_id == RUN_ID
     assert envelope.task_id == "ADV-20260726-053"
     assert envelope.task_revision == 1
-    assert envelope.procedure_id == "maintenance_coordinated_repository_repair"
+    assert envelope.procedure_id == (
+        "maintenance_coordinated_repository_repair"
+    )
     assert envelope.authorization_source == "ROB"
