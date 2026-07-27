@@ -1,6 +1,6 @@
 # System Session Handoff
 
-Updated: 2026-07-25
+Updated: 2026-07-27
 Project: LifeOS / Maintenance_HQ / Penny Long-Term Memory
 Purpose: System-level baton pass for `LifeOS_HQ`, `Chief_of_Staff_HQ`, `Maintenance_HQ`, and explicit cross-department coordination. This file is not a mirror of department backlogs, live advisories, runtime state, or the full Worker contract.
 
@@ -25,7 +25,9 @@ LifeOS is operational with:
 - Workers as narrow operational executors owned by one department;
 - `Chief_of_Staff_HQ` as Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, Hub chair, routing desk, reporting desk, and follow-through coordinator;
 - `Maintenance_HQ` as global GitHub maintainer, boot owner, shared-contract owner, governance auditor, migration owner, publication-mirror steward, and reconciliation authority;
-- `Engineering_HQ` as technical architecture, routing-registry, transport, receiver-state, dashboard, automation, and implementation owner.
+- `Engineering_HQ` as technical architecture, routing-registry, transport, receiver-state, dashboard, automation, and implementation owner;
+- two current production Workers: `Engineering_Worker` and `Maintenance_Worker`;
+- one active Rob-approved Maintenance assignment: `ADV-20260726-053` revision 1 / `RUN-ADV-20260726-053-R1`, pending immutable result submission and `IMMEDIATE_HQ` review.
 
 GitHub remains abstract. Detailed financial, medical, business, personal, credential, customer, and operational records stay in their natural source systems.
 
@@ -89,21 +91,23 @@ Short form:
 
 > The Hub is the table. `Chief_of_Staff_HQ` coordinates. Departments judge and own. Workers execute. `Maintenance_HQ` protects the contracts. `Engineering_HQ` builds the machinery. Rob decides.
 
-## July 23–25 Naming and Publication Reconciliation
-
-Rob authorized a repository-wide naming-only coordinated repair on 2026-07-23.
+## July 23-27 Naming, Publication, and Worker Reconciliation
 
 Completed outcomes:
 
 - current system spelling is `LifeOS`;
 - current top-level room titles use exact underscore names;
-- the current Worker title is `Engineering_Worker`;
-- future Worker titles follow `<Department_Name>_Worker`;
-- all seven Department HQ boot file sets were aligned and verified;
+- current production Worker titles are `Engineering_Worker` and `Maintenance_Worker`;
+- future Worker titles follow `<Department_Name>_Worker` only after owner-approved rollout;
+- all seven Department HQ boot file sets were aligned and verified during the 2026-07-23 naming repair;
 - stable filesystem paths, historical evidence, immutable Worker artifacts, receipts, checksums, IDs, URLs, and accurate quotations were preserved;
-- Engineering-owned executable and runtime surfaces were initially left untouched, then Engineering completed the separately authorized canonical runtime-title rollover, direct URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel;
+- Engineering completed the separately authorized canonical runtime-title rollover, direct URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel;
 - `ADV-20260723-052` closed after the read-only watcher reported in the existing `Chief_of_Staff_HQ` conversation without creating a new chat or triggering work;
-- the shared ChatGPT Project publication reconciliation closed on 2026-07-25 after current project context showed canonical underscore instructions, retrieved the stable global handbook, exposed the eight intended-room handbooks, and showed no numbered competing global handbook copy.
+- the shared ChatGPT Project publication reconciliation closed on 2026-07-25 after current project context showed canonical underscore instructions, retrieved the stable global handbook, exposed the eight intended-room handbooks, and showed no numbered competing global handbook copy;
+- the production Worker portfolio remained intentionally lean after Business, Finance, and Wellness declined current Worker rollout and Office Leaks remained paused;
+- `Maintenance_Worker` was registered, route-verified, activated by Rob, and remained idle until the exact first assignment was authorized;
+- Engineering posted `ADV-20260726-053` revision 1 under direct Rob authority for one coordinated repository audit and repair;
+- `Maintenance_Worker` accepted only that exact revision and run, with one-run cross-department current-text authority and `IMMEDIATE_HQ` verification.
 
 Project Source handbooks remain generated, noncanonical context mirrors. The global handbook is role-neutral. Each room handbook carries an explicit intended-room statement and grants no authority merely because it is visible to another room.
 
@@ -123,6 +127,8 @@ The canonical architecture established on 2026-07-19 remains active:
 Package D, Package E, Package F Wave 0A, and Package F Wave 0B Engineering implementation are complete. Their validated machinery does not create cross-department adoption authority, new Workers, or automatic advisory closure.
 
 The Wave 0B activation-prerequisite report is read-only and always reports `activation_authorized: false`. Technical readiness remains separate from owning-department authority, Maintenance shared-governance review, and Rob approval where the Worker contract requires it.
+
+The current Maintenance run is authorized only by `ADV-20260726-053` revision 1 and approval reference `ROB-DIRECT-COORDINATED-REPAIR-20260726`. It creates no recurring schedule, unattended execution, new connector, spending, public action, destructive authority, standing cross-department authority, or future assignment.
 
 ## Department Inspection Evidence
 
@@ -193,6 +199,10 @@ Canonical SOP:
 
 `coordination/ADVISORY_INDEX.md` is the live source of truth for open advisory routing. Do not cache a static advisory list in this handoff.
 
+Current routed work at this handoff:
+
+- `ADV-20260726-053` — OPEN — source board `coordination/boards/engineering.md` — target `maintenance_worker` / `Maintenance_HQ` — verification `IMMEDIATE_HQ`.
+
 Department Event Inbox remains frozen as historical context unless Rob explicitly reactivates it.
 
 `LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and `coordination/boards/main-assistant.md` as the retained source-board path. Department-originated advisories remain on their source department boards.
@@ -229,11 +239,12 @@ Consolidated or dormant domains remain preserved rather than deleted.
 
 ## Best Next System Actions
 
-1. Continue ordinary role-routed boot observation and inspect only demonstrated defects.
-2. Let Department HQs create or change Worker profiles only under their own authority and the canonical Worker contract.
-3. Keep Wave 0B technical readiness separate from owning-department authority, Maintenance governance review, and Rob approval.
-4. Observe the two grandfathered pilots under compatibility rules and migrate or retire them only through separate owner review and authorization.
-5. Preserve one stable global handbook and one explicitly intended-room handbook per room without numbered competing copies or authority drift.
+1. Complete only `ADV-20260726-053` revision 1 within its exact authority, create the immutable result, and stop for `Maintenance_HQ` review.
+2. Keep the source advisory and Advisory Index unchanged during Worker execution.
+3. Let Department HQs create or change Worker profiles only under their own authority and the canonical Worker contract.
+4. Keep technical readiness separate from owning-department authority, Maintenance governance review, and Rob approval.
+5. Preserve the two grandfathered pilots under compatibility rules and migrate or retire them only through separate owner review and authorization.
+6. Preserve one stable global handbook and one explicitly intended-room handbook per room without numbered competing copies or authority drift.
 
 ## Guiding Principle
 
