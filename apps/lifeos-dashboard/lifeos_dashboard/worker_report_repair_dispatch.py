@@ -145,6 +145,17 @@ class WorkerReportRepairDispatchService:
             verification_mode=advisory.verification_mode,
         )
 
+    @staticmethod
+    def _repair_instruction(advisory, wake: WorkerReportRepairWake) -> str:
+        return (
+            wake.instruction
+            + " The repair transport wrapper is only a courier marker. In report-002.json, "
+            + f"preserve the original canonical report wrapper_id `{advisory.wrapper_id}` rather "
+            + f"than the repair transport wrapper `{wake.wrapper_id}`. Preserve only canonical "
+            + "approved tools in actual_tools; local non-mutating validation is evidence, not a "
+            + "separate tool grant."
+        )
+
     def _entry(self, wake: WorkerReportRepairWake) -> WorkerRegistryEntry:
         runtime = self.operations.worker_center.runtime
         entry = runtime.worker(wake.worker_id, require_enabled=True)
@@ -199,7 +210,7 @@ class WorkerReportRepairDispatchService:
     def _reserve_budget(self, run_id: str) -> None:
         command_center = self.operations.command_center
         decision = command_center.reserve_send_budget(
-            kind="worker_report_repair",
+            kind="worker_dispatch",
             run_id=run_id,
         )
         if not decision.reserved:
@@ -325,7 +336,7 @@ class WorkerReportRepairDispatchService:
             envelope = self._repair_envelope(advisory, wake)
             job = WorkerCommandJob(
                 envelope=envelope,
-                instruction=wake.instruction,
+                instruction=self._repair_instruction(advisory, wake),
                 mode="send",
                 confirm_send=True,
             )
