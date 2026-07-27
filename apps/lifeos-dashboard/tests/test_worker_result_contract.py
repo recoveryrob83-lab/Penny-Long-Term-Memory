@@ -122,6 +122,10 @@ def test_worker_report_rejects_string_profile_version_and_unknown_fields() -> No
 
 
 def _board(*, result_path: str, authorization_class: str = "BOUNDED_WRITE") -> str:
+    parameters_json = (
+        '{"targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],'
+        '"verification_questions":["Is Slice 3 bounded?"]}'
+    )
     return f"""### ADV-TEST — Validate the immutable result outbox
 
 - Lifecycle State: OPEN
@@ -135,8 +139,7 @@ def _board(*, result_path: str, authorization_class: str = "BOUNDED_WRITE") -> s
 - Procedure ID: engineering_worker_result_outbox_validation
 - Procedure Version: 1
 - Authorization Source: ENGINEERING_HQ_PACKAGE_E_SLICE3_VALIDATION
-- Parameters JSON: {{"targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],
-  "verification_questions":["Is Slice 3 bounded?"]}}
+- Parameters JSON: {parameters_json}
 - Source References JSON: ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]
 - Requested Read Scopes JSON: ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]
 - Requested Write Scopes JSON: ["{result_path}"]
