@@ -1,6 +1,6 @@
 # Maintenance_HQ
 
-Updated: 2026-07-26
+Updated: 2026-07-27
 Purpose: Durable project folder for `Maintenance_HQ`, the global GitHub maintenance, governance, audit, publication-mirror, and reconciliation department for Rob's LifeOS.
 
 ## Role
@@ -25,7 +25,7 @@ It is the official successor to the former Logistics role. The department name c
 - Enforce source boundaries across GitHub, Drive, Project Sources, Trello, Todoist, Calendar, Gmail, and the dashboard.
 - Reconcile the Drive Chief's Manual, canonical Project Instructions, Project Sources, and GitHub implementation.
 - Preserve one owner and one authoritative record for each durable item.
-- Route department-local drift to the owning department rather than silently taking over its files.
+- Route department-local drift to the owning department rather than silently taking over its files unless Rob grants an exact coordinated-repair exception.
 - Keep GitHub abstract, organized, current, durable, and auditable.
 
 ## Current Continuity
@@ -51,7 +51,7 @@ The naming-repair report is stored in Google Drive at `Life Organization/Chief E
 
 Engineering completed the separately authorized canonical runtime-title rollover, courier verifier repair, direct exact-URL routing, guarded route capture, browser bridge recovery, and Package F Wave 0B safety kernel within Engineering-owned surfaces. Technical completion alone did not create cross-department Worker authority.
 
-Rob and `Maintenance_HQ` approved bounded preparation of the read-only `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the department-owned profile and procedures through a coordinated repair while Maintenance was reconciling shared state.
+Rob and `Maintenance_HQ` approved the active `Maintenance_Worker` with stable ID `maintenance_worker`. Rob separately authorized `Engineering_HQ` to prepare the original department-owned profile and procedures through a coordinated repair while Maintenance was reconciling shared state.
 
 The authorized branch merged these Maintenance-owned prerequisites to `main`:
 
@@ -59,11 +59,11 @@ The authorized branch merged these Maintenance-owned prerequisites to `main`:
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
 - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
 
-Maintenance did not create or edit those three files during reconciliation.
+Maintenance did not create or edit those three files during their rollout reconciliation.
 
 ## Maintenance Worker Current State
 
-Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
+Lifecycle State: ACTIVE / LIVE / IMPLEMENTING
 
 Rob reports:
 
@@ -72,23 +72,28 @@ Rob reports:
 - route revision `1`;
 - a successful zero-authority canary and return to Engineering;
 - route availability `available`;
-- active and live deployment;
-- no work assigned.
+- active and live deployment.
+
+Current assignment:
+
+- Advisory `ADV-20260726-053`, revision `1`
+- Run `RUN-ADV-20260726-053-R1`
+- Procedure `maintenance_coordinated_repository_repair` version `1`
+- Authorization source `ROB`
+- Approval reference `ROB-DIRECT-COORDINATED-REPAIR-20260726`
+- Verification mode `IMMEDIATE_HQ`
+- Immutable result path `projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-001.json`
 
 On 2026-07-25, Rob and `Maintenance_HQ` explicitly accepted:
 
-- the narrow create-only GitHub result-artifact authority at `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only exception to the original no-GitHub-writes approval;
+- the narrow create-only GitHub result-artifact authority at `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only standing exception;
 - final procedure ID `maintenance_hq_worker_review_receipt` at `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` as the authoritative Maintenance HQ review procedure.
 
-The reporting exception authorizes only one immutable machine-readable Worker result artifact under the exact current-run path and approved result-submission procedure. It does not authorize edits to shared rules, source records, handoffs, maps, indexes, profiles, procedures, open loops, status files, runtime state, routes, schedules, or external systems.
+On 2026-07-26, Rob separately authorized the one-run `coordinated_repository_repair` exception carried by `ADV-20260726-053` revision 1. It permits bounded current canonical text repairs under `memory`, `coordination`, and `projects` only within the exact advisory, profile, and procedure boundaries.
 
-Activation is complete and separate from assignment authority. It does not create a task, recurring schedule, unattended execution, broader connector authority, spending, cross-department authority, or source-record repair authority.
+The one-run exception does not authorize application code or tests, runtime databases or routes, profiles or procedures, the source advisory, the Advisory Index, archives, historical notebooks, immutable evidence, deletes, renames, moves, external systems, spending, schedules, public actions, or continuing cross-department authority.
 
-The activation-readiness report continues to state `activation_authorized: false` because it is a read-only technical prerequisite report rather than an activation ledger. Rob's explicit activation is the separate authority event.
-
-The first real assignment remains separately bounded, manually authorized, read-only with respect to authoritative source records, and subject to `IMMEDIATE_HQ` verification.
-
-Ownership of the profile, procedures, authority, holds, verification, and retirement remains with `Maintenance_HQ`.
+Activation remains separate from assignment authority. The current run must submit one immutable result and stop for `Maintenance_HQ` review. Ownership of the profile, procedures, authority, holds, verification, and retirement remains with `Maintenance_HQ`.
 
 ## Chief_of_Staff_HQ Relationship
 
@@ -108,7 +113,7 @@ Rob may explicitly authorize Engineering to perform a bounded coordinated repair
 
 Each specialist department owns routine maintenance of its own subtree, strategy, judgment, status, open loops, notebook records, local procedures, source advisory text, and Worker profiles.
 
-Maintenance may detect and document department-local drift. Corrections are routed to the owner unless Rob explicitly authorizes coordinated repair.
+Maintenance may detect and document department-local drift. Corrections are routed to the owner unless Rob explicitly authorizes a coordinated repair. The current audit is one such one-run exception and creates no standing authority.
 
 ## Canonical Project Path
 
@@ -138,4 +143,4 @@ A fresh `Maintenance_HQ` chat should begin at `memory/STARTUP_BOOT.md`, complete
 
 ## Operating Rule
 
-Protect the operating system without becoming the owner of every room. Keep the active `Maintenance_Worker` idle until one exact assignment is separately authorized. Store detailed working records in Drive or the proper operational source system. No meaningful change means no write.
+Protect the operating system without becoming the owner of every room. Complete only the exact current assignment, submit its immutable result, and stop for `IMMEDIATE_HQ` review. Store detailed working records in Drive or the proper operational source system. No meaningful change means no write.
