@@ -5,8 +5,8 @@ from lifeos_dashboard.worker_advisory_pipeline import (
     parse_execution_ready_advisory,
 )
 from lifeos_dashboard.worker_receiver import (
-    WorkerReceiverService,
     checksum_parameters,
+    WorkerReceiverService,
 )
 from lifeos_dashboard.worker_receiver_resolution import resolve_receiver_assignment
 from lifeos_dashboard.worker_runtime import WorkerRegistryEntry
