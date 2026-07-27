@@ -1,8 +1,8 @@
 # Maintenance_HQ Status
 
-Updated: 2026-07-26
+Updated: 2026-07-27
 Project: Maintenance_HQ
-Status: Active / Operational / Booted and Synchronized / Shared Reconciliation Current / Maintenance Worker Active and Live / No Work Assigned
+Status: Active / Operational / Shared Reconciliation Current / Maintenance Worker Active / ADV-20260726-053 Implementing / IMMEDIATE_HQ Review Pending
 
 ## Current Mission
 
@@ -36,13 +36,27 @@ Protect the LifeOS operating system through global GitHub integrity, universal b
 
 ## Maintenance Worker Current State
 
-Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
+Lifecycle State: ACTIVE / LIVE / IMPLEMENTING
+Priority: NORMAL
+
+Current assignment:
+
+- Advisory: `ADV-20260726-053`, revision `1`
+- Run ID: `RUN-ADV-20260726-053-R1`
+- Task class: `coordinated_repository_repair`
+- Procedure: `maintenance_coordinated_repository_repair` version `1`
+- Authorization source: `ROB`
+- Approval reference: `ROB-DIRECT-COORDINATED-REPAIR-20260726`
+- Verification mode: `IMMEDIATE_HQ`
+- Result path: `projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-001.json`
+- Completion boundary: submit one immutable result and stop for `Maintenance_HQ` review; do not close the source advisory.
 
 The following Maintenance-owned prerequisites exist on `main`:
 
 - `projects/life-logistics-hq/workers/maintenance_worker.md`
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
 - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
+- `projects/life-logistics-hq/procedures/maintenance_coordinated_repository_repair.md`
 
 Rob reports:
 
@@ -52,31 +66,24 @@ Rob reports:
 - successful zero-authority browser round trip;
 - successful return to Engineering;
 - route availability `available`;
-- deployment state active and live;
-- no work assigned.
+- deployment state active and live.
 
-Rob authorized `Engineering_HQ` to prepare the prerequisite files as a bounded coordinated repair while Maintenance was occupied with reconciliation. Temporary implementation authority did not transfer ownership or rollout authority to Engineering.
+Rob authorized `Engineering_HQ` to prepare the original prerequisite files as a bounded coordinated repair while Maintenance was occupied with reconciliation. Temporary implementation authority did not transfer ownership or rollout authority to Engineering.
 
-Activation is complete and separate from assignment authority. It does not create a task, recurring schedule, unattended execution, source-record write or repair authority, new connector authority, spending, or cross-department authority. The first real assignment requires one separately exact bounded task, authorization source, source references, permitted scopes, immutable result path, and `IMMEDIATE_HQ` verification.
+Activation is complete and separate from assignment authority. The current assignment is authorized only by the exact canonical advisory and one-run Rob-approved exception. It creates no recurring schedule, unattended execution, new connector authority, spending, permanent cross-department authority, or standing source-record repair authority.
 
 ## Governance Approval
 
 On 2026-07-25, Rob and `Maintenance_HQ` explicitly approved:
 
-1. The narrow create-only immutable GitHub result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only exception to the original no-GitHub-writes approval.
+1. The narrow create-only immutable GitHub result artifact under `projects/life-logistics-hq/worker-results/maintenance_worker/<run_id>/report-<attempt>.json` as a reporting-only standing exception.
 2. Procedure ID `maintenance_hq_worker_review_receipt` and path `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` as the final authoritative Maintenance HQ review procedure.
 
-The reporting-only exception does not authorize repair or edits to authoritative source records. It permits only the exact immutable result artifact created under `maintenance_worker_result_submission` version 1 and the approved current-run path.
+On 2026-07-26, Rob separately approved the one-run `coordinated_repository_repair` exception carried by `ADV-20260726-053` revision 1. That exception permits bounded current canonical text repairs under `memory`, `coordination`, and `projects`, subject to the advisory's exact exclusions, fetch-before-edit discipline, read-back evidence, immutable result submission, and `IMMEDIATE_HQ` review.
 
-The governance hold, registration, route canary, and activation stages are complete. The following remain unapproved until separately authorized:
+The one-run exception does not authorize application code or tests, runtime databases or routes, profiles or procedures, the source advisory, the Advisory Index, archives, historical notebooks, immutable evidence, deletes, renames, moves, external systems, spending, schedules, or public actions.
 
-- a real Worker assignment or dispatch;
-- recurring schedules or unattended execution;
-- source-record writes or maintenance repair;
-- new connectors or external-system authority;
-- spending or cross-department authority.
-
-Every readiness report must continue to state `activation_authorized: false`. That report is technical evidence only and is not the activation source of truth. The initial real assignment remains manually authorized, bounded, read-only with respect to authoritative source records, and subject to `IMMEDIATE_HQ` verification.
+Every readiness report must continue to state `activation_authorized: false`. That report is technical evidence only and is not the activation source of truth.
 
 ## 2026-07-23-26 Completed Maintenance
 
@@ -98,10 +105,11 @@ Every readiness report must continue to state `activation_authorized: false`. Th
 - Completed a read-only Engineering, Maintenance, and global drift comparison.
 - Detected the Maintenance Worker prerequisite merge during verification and updated only Maintenance-owned continuity without modifying the profile or procedures.
 - Recorded Rob's explicit acceptance of the reporting-only result artifact and the final HQ review procedure destination, clearing the Maintenance governance hold.
-- Reconciled Maintenance continuity after Rob confirmed the Worker was active and live with no assignment.
+- Reconciled Maintenance continuity after Rob confirmed the Worker was active and live.
 
 ## Active Maintenance Priorities
 
+- Complete only `ADV-20260726-053` revision 1 within its exact one-run boundaries, submit the immutable result, and stop for `IMMEDIATE_HQ` review.
 - Keep global boot files, shared contracts, handoffs, project maps, system loops, operating rules, naming standards, and source pointers internally consistent.
 - Protect `LifeOS_HQ`, `Chief_of_Staff_HQ`, `Maintenance_HQ`, `Engineering_HQ`, specialist Department HQ, and Worker authority boundaries.
 - Preserve exact canonical names in current text while retaining legitimate historical evidence and stable filesystem paths.
@@ -109,12 +117,9 @@ Every readiness report must continue to state `activation_authorized: false`. Th
 - Preserve one owner and one authoritative record for each durable item.
 - Preserve source-system authority across GitHub, Drive, Project Sources, Trello, Todoist, Calendar, Gmail, the dashboard, and automation logs.
 - Keep the global handbook role-neutral and each room handbook explicitly scoped, noncanonical, and refreshable only through meaningful stable-title replacement.
-- Audit the canonical Worker contract, profile location, root-pilot compatibility status, and Maintenance/Engineering/department ownership split.
 - Keep department profiles limited to stable identity and authority; keep deployment and runtime state in Engineering-owned systems.
-- Preserve the reporting-only result-artifact boundary and final approved HQ review procedure destination.
-- Keep the active Maintenance Worker idle until one separately authorized assignment exists, then review its evidence through the approved `IMMEDIATE_HQ` path.
-- Do not create competing Maintenance Worker profile, procedure, route, activation, or assignment files.
-- Route newly demonstrated department-local drift to the owning Department HQ rather than silently repairing it without authority.
+- Preserve the immutable result-artifact boundary and final approved HQ review procedure destination.
+- Do not create competing Maintenance Worker profile, procedure, route, activation, assignment, result, or review files.
 - Keep desktop automation and guarded GitHub sync safety gates intact.
 - Preserve the unattended-automation production boundary and the paused `Engineering_HQ Daily Sync` state.
 - Reconcile the Drive Chief's Manual, canonical Project Instructions, Project Sources, and GitHub implementation when meaningful changes occur.
@@ -145,4 +150,4 @@ Every readiness report must continue to state `activation_authorized: false`. Th
 
 ## Best Next Action
 
-Keep the active `Maintenance_Worker` idle until an authorized source defines one exact bounded assignment. When that occurs, require the current profile and procedures, one immutable result path, and `IMMEDIATE_HQ` review. Do not infer an assignment from activation alone.
+Finish the exact current audit, create and read back `report-001.json`, then stop for `Maintenance_HQ` review under `maintenance_hq_worker_review_receipt` version 1. Do not close `ADV-20260726-053` or infer continuing authority from this run.
