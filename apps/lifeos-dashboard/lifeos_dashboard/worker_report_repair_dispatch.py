@@ -6,7 +6,6 @@ shared send budget, and never authorizes underlying work re-execution.
 """
 from __future__ import annotations
 
-import json
 import sqlite3
 import time
 from dataclasses import asdict, dataclass
@@ -18,7 +17,11 @@ from .worker_command_center import WorkerCommandJob
 from .worker_dispatch_runtime import run_worker_browser_dispatch
 from .worker_operations import WorkerOperationsService
 from .worker_result_repair import WorkerReportRepairWake
-from .worker_runtime import ExecutionEnvelope, WorkerRegistryEntry, WorkerRuntimeError
+from .worker_runtime import (
+    ExecutionEnvelope,
+    WorkerRegistryEntry,
+    WorkerRuntimeError,
+)
 
 _REPAIR_PENDING = "REPORT_REPAIR_PENDING"
 _REPAIR_DISPATCH_SUBMITTED = "REPAIR_DISPATCH_SUBMITTED"
@@ -75,7 +78,9 @@ class WorkerReportRepairDispatchService:
         with self._connect() as connection:
             existing = {
                 str(row["name"])
-                for row in connection.execute("PRAGMA table_info(execution_history)").fetchall()
+                for row in connection.execute(
+                    "PRAGMA table_info(execution_history)"
+                ).fetchall()
             }
             for column_name, column_type in self._COLUMNS.items():
                 if column_name not in existing:
@@ -121,7 +126,9 @@ class WorkerReportRepairDispatchService:
         if wake is None:
             raise WorkerRuntimeError("No correction-only report repair wake is prepared.")
         if wake.work_reexecution_authorized or wake.scope_expansion_authorized:
-            raise WorkerRuntimeError("Prepared report repair wake contains prohibited authority.")
+            raise WorkerRuntimeError(
+                "Prepared report repair wake contains prohibited authority."
+            )
         return wake
 
     @staticmethod
@@ -269,6 +276,13 @@ class WorkerReportRepairDispatchService:
             )
         return receipt
 
+    def _trip_after_confirmed_send(self, run_id: str, reason: str) -> None:
+        self.operations.command_center.trip_safety_pause(
+            reason=reason,
+            affected_run_id=run_id,
+            trigger="worker_report_repair_transport",
+        )
+
     def dispatch(
         self,
         run_id: str,
@@ -279,7 +293,9 @@ class WorkerReportRepairDispatchService:
             raise WorkerRuntimeError("timeout_seconds must be between 60 and 900.")
         command_center = self.operations.command_center
         if command_center.paused:
-            raise WorkerRuntimeError("Automation is paused. Resume it before report repair dispatch.")
+            raise WorkerRuntimeError(
+                "Automation is paused. Resume it before report repair dispatch."
+            )
         run_lock = command_center._run_lock
         if not run_lock.acquire(blocking=False):
             raise WorkerRuntimeError("Another automation job is already running.")
@@ -313,13 +329,24 @@ class WorkerReportRepairDispatchService:
                 mode="send",
                 confirm_send=True,
             )
-            result, evidence = run_worker_browser_dispatch(
-                job,
-                entry,
-                command_center.app_root,
-                trigger="manual",
-                timeout_seconds=timeout_seconds,
-            )
+            try:
+                result, evidence = run_worker_browser_dispatch(
+                    job,
+                    entry,
+                    command_center.app_root,
+                    trigger="manual",
+                    timeout_seconds=timeout_seconds,
+                )
+            except Exception as exc:
+                self._trip_after_confirmed_send(
+                    run_id,
+                    "Correction-only Worker transport raised after a global send attempt was "
+                    "reserved. Submission state is uncertain; automatic retry is prohibited.",
+                )
+                raise WorkerRuntimeError(
+                    "Correction-only Worker transport failed after send reservation."
+                ) from exc
+
             if result.status != "succeeded":
                 pause_reason = safety_pause_reason_for_transport(
                     exit_code=result.exit_code,
@@ -329,22 +356,24 @@ class WorkerReportRepairDispatchService:
                 if pause_reason is None:
                     self._clear_claim_before_send(int(row["id"]), result.reason)
                 else:
-                    command_center.trip_safety_pause(
-                        reason=pause_reason,
-                        affected_run_id=run_id,
-                        trigger="worker_report_repair_transport",
-                    )
+                    self._trip_after_confirmed_send(run_id, pause_reason)
                 raise WorkerRuntimeError(result.reason)
 
-            receipt = self._record_success(int(row["id"]), wake, evidence)
+            try:
+                receipt = self._record_success(int(row["id"]), wake, evidence)
+            except WorkerRuntimeError:
+                self._trip_after_confirmed_send(
+                    run_id,
+                    "Correction-only Worker wake was submitted, but its separate dispatch "
+                    "evidence could not be persisted. Automatic retry is prohibited.",
+                )
+                raise
+
             if not evidence.returned_to_source:
-                command_center.trip_safety_pause(
-                    reason=(
-                        "Correction-only Worker wake was submitted, but the courier did not verify "
-                        "return to the source chat. Automatic retry is prohibited."
-                    ),
-                    affected_run_id=run_id,
-                    trigger="worker_report_repair_transport",
+                self._trip_after_confirmed_send(
+                    run_id,
+                    "Correction-only Worker wake was submitted, but the courier did not verify "
+                    "return to the source chat. Automatic retry is prohibited.",
                 )
                 raise WorkerRuntimeError(
                     "Correction-only Worker wake submitted without verified return to source."
