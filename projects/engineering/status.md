@@ -1,10 +1,10 @@
 # Engineering_HQ Status
 
-Updated: 2026-07-26
+Updated: 2026-07-27
 
 ## Current Phase
 
-Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Deployment Healthy / Office Leaks Paused / Maintenance Repository Audit Pending Separate Authorization
+Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Running ADV-20260726-053 / PR #21 Deployment Healthy / Office Leaks Paused
 
 ## Department Scope
 
@@ -46,13 +46,14 @@ Key merges:
 
 ## Maintenance Worker
 
-Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
+Lifecycle State: ACTIVE / LIVE / IMPLEMENTING
 
 Canonical files:
 
 - `projects/life-logistics-hq/workers/maintenance_worker.md`
 - `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`
 - `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`
+- `projects/life-logistics-hq/procedures/maintenance_coordinated_repository_repair.md`
 
 Rob reports:
 
@@ -62,14 +63,22 @@ Rob reports:
 - successful zero-authority browser round trip;
 - successful return to Engineering;
 - route availability `available`;
-- Worker deployment state active and live;
-- no work assigned.
+- Worker deployment state active and live.
 
-Activation is complete and is recorded separately from assignment authority. It does not create a task, schedule, unattended execution, broader connector permission, source-record repair authority, spending, or cross-department authority. The first real assignment still requires one separately exact bounded task, required source references and scopes, authorization source, immutable result path, and `IMMEDIATE_HQ` verification.
+Current assignment:
+
+- `ADV-20260726-053`, revision `1`
+- Run `RUN-ADV-20260726-053-R1`
+- Procedure `maintenance_coordinated_repository_repair` version `1`
+- Authorization source `ROB`
+- Verification mode `IMMEDIATE_HQ`
+- Exact result path `projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-001.json`
+
+Activation remains separate from assignment authority. This run is authorized only by its exact advisory and Rob-approved one-run exception. It creates no schedule, unattended execution, broader connector permission, spending, permanent cross-department authority, or standing source-record repair authority.
 
 ## Composer Residue Repair
 
-Lifecycle State: MERGED TO `main` / DEPLOYMENT HEALTH CONFIRMED / LIVE OBSERVATION PENDING
+Lifecycle State: MERGED TO `main` / DEPLOYMENT HEALTH CONFIRMED / CURRENT LIVE OBSERVATION
 
 During the Maintenance canary, ChatGPT restored the already-submitted prompt in the Worker composer after transport had confirmed the user turn and returned to Engineering. Rob manually removed it.
 
@@ -83,7 +92,7 @@ The merged repair:
 - verifies the proven stale composer is empty before inserting the next prompt;
 - does not retry the prior send or weaken the existing correlated-turn and stop-on-uncertainty gates.
 
-No GitHub workflow runs were attached to the merge. Rob's local validation is the current test evidence, and Rob confirmed ordinary post-merge dashboard health on 2026-07-26. Live composer-cleanup and full-chain evidence should come from the separately authorized Maintenance repository audit rather than rerunning the completed canary.
+No GitHub workflow runs were attached to the merge. Rob's local validation is the current test evidence, and Rob confirmed ordinary post-merge dashboard health on 2026-07-26. `RUN-ADV-20260726-053-R1` is the current natural live observation of composer cleanup and the full Worker-to-HQ chain; do not rerun the completed canary.
 
 ## Worker Portfolio
 
@@ -102,7 +111,8 @@ No GitHub workflow runs were attached to the merge. Rob's local validation is th
 - Profile and procedures: on `main`
 - Registry, route revision 1, canary, return to Engineering, and availability `available`: user-reported complete
 - Deployment state: active and live
-- Assigned work: none
+- Assigned work: `ADV-20260726-053` revision 1 / `RUN-ADV-20260726-053-R1`
+- Review state: pending immutable result ingestion and `Maintenance_HQ` review
 
 ### Deferred Department Workers
 
@@ -119,15 +129,19 @@ No GitHub workflow runs were attached to the merge. Rob's local validation is th
 
 ## Current Work
 
-1. Define the Maintenance repository-audit assignment separately, including exact scope, authoritative sources, allowed writes, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review.
-2. Dispatch only after the assignment is exact and approved.
-3. Use that run to observe the full Worker-to-HQ evidence chain and composer cleanup behavior without rerunning the completed canary.
+1. Observe the exact authorized Maintenance run through immutable result creation, deterministic ingestion, and `Maintenance_HQ` review without changing the source advisory or Advisory Index.
+2. Preserve the current transport, duplicate-suppression, shared-pause, send-budget, and composer-residue safeguards during observation.
+3. Repair only demonstrated Engineering defects under separate bounded authority; the current Maintenance run does not authorize Engineering implementation.
 4. Keep the production Worker portfolio lean unless an owning department demonstrates a recurring standardized bottleneck and requests evaluation.
 5. Keep Office Leaks paused.
 
 ## Advisory State
 
-Open Engineering advisories: None.
+Open Engineering source-board advisory:
+
+- `ADV-20260726-053` revision 1, target `maintenance_worker`, lifecycle `OPEN`, verification `IMMEDIATE_HQ`.
+
+The Worker must not change the advisory or Advisory Index during execution. Source-owner lifecycle action remains pending after the required Maintenance review.
 
 `ADV-20260718-042`, `ADV-20260719-044`, and `ADV-20260723-052` are closed and must not be recreated as active work.
 
@@ -146,8 +160,8 @@ Open Engineering advisories: None.
 - Courier, dashboard, ingester, watcher, HQ receipt, and Rob receipt do not close source work automatically.
 - The Worker courier does not wake `Chief_of_Staff_HQ` under the current contract.
 - The current production Worker portfolio is `Engineering_Worker` plus `Maintenance_Worker`; additional Workers require a demonstrated bottleneck, owner request, shared-contract review, and separate authorization.
-- Recurring tasks, connectors, spending, public actions, broader authority, and real Maintenance assignments require separate owner review and authorization.
+- Recurring tasks, connectors, spending, public actions, broader authority, and future Maintenance assignments require separate owner review and authorization.
 
 ## Boundary
 
-`Engineering_HQ` owns the machinery. Rob decides. Department HQs own their Workers and judgment. `Maintenance_HQ` owns shared governance. Source owners close their own records.
+`Engineering_HQ` owns the machinery. Rob decides. Department HQs own their Workers and judgment. `Maintenance_HQ` owns shared governance and the current audit. Source owners close their own records.
