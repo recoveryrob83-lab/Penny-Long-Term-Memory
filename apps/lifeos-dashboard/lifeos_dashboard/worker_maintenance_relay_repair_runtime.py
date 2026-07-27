@@ -196,20 +196,17 @@ def _install_result_validation() -> None:
             actual_writes,
         )
         if unauthorized_reads or unauthorized_writes:
-            details = [
-                *(
+            details: list[str] = []
+            if unauthorized_reads:
+                details.append(
                     "actual read scopes exceed assignment: "
-                    + ", ".join(unauthorized_reads),
+                    + ", ".join(unauthorized_reads)
                 )
-                if unauthorized_reads
-                else (),
-                *(
+            if unauthorized_writes:
+                details.append(
                     "actual write scopes exceed assignment: "
-                    + ", ".join(unauthorized_writes),
+                    + ", ".join(unauthorized_writes)
                 )
-                if unauthorized_writes
-                else (),
-            ]
             raise WorkerRuntimeError(
                 "Worker report correlation failed: "
                 + "; ".join(details)
