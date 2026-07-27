@@ -4,7 +4,7 @@ Updated: 2026-07-26
 
 ## Current Phase
 
-Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Merged / Local Deployment Health Pending / Office Leaks Paused / Repository Audit Assignment Pending Separate Authorization
+Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Deployment Healthy / Office Leaks Paused / Maintenance Repository Audit Pending Separate Authorization
 
 ## Department Scope
 
@@ -69,7 +69,7 @@ Activation is complete and is recorded separately from assignment authority. It 
 
 ## Composer Residue Repair
 
-Lifecycle State: MERGED TO `main` / LOCAL DEPLOYMENT HEALTH PENDING
+Lifecycle State: MERGED TO `main` / DEPLOYMENT HEALTH CONFIRMED / LIVE OBSERVATION PENDING
 
 During the Maintenance canary, ChatGPT restored the already-submitted prompt in the Worker composer after transport had confirmed the user turn and returned to Engineering. Rob manually removed it.
 
@@ -83,7 +83,7 @@ The merged repair:
 - verifies the proven stale composer is empty before inserting the next prompt;
 - does not retry the prior send or weaken the existing correlated-turn and stop-on-uncertainty gates.
 
-No GitHub workflow runs were attached to the merge. Rob's local validation is the current test evidence. The next deployment step is to pull `main`, restart the dashboard, and confirm ordinary health. Live composer-cleanup evidence should come from a later separately authorized Worker dispatch rather than rerunning the completed Maintenance canary.
+No GitHub workflow runs were attached to the merge. Rob's local validation is the current test evidence, and Rob confirmed ordinary post-merge dashboard health on 2026-07-26. Live composer-cleanup and full-chain evidence should come from the separately authorized Maintenance repository audit rather than rerunning the completed canary.
 
 ## Worker Portfolio
 
@@ -119,12 +119,11 @@ No GitHub workflow runs were attached to the merge. Rob's local validation is th
 
 ## Current Work
 
-1. Pull current `main`, restart the dashboard, and confirm ordinary health after PR #21.
-2. Keep the active Maintenance Worker idle until a separately authorized first assignment exists.
-3. Define the future repository-audit assignment separately, including exact scope, authorization source, allowed writes, immutable result path, and `IMMEDIATE_HQ` review. This closeout does not assign it.
-4. Use that or another separately authorized Worker dispatch to observe the full execution chain and composer cleanup behavior without rerunning the completed canary.
-5. Keep the production Worker portfolio lean unless an owning department demonstrates a recurring standardized bottleneck and requests evaluation.
-6. Keep Office Leaks paused.
+1. Define the Maintenance repository-audit assignment separately, including exact scope, authoritative sources, allowed writes, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review.
+2. Dispatch only after the assignment is exact and approved.
+3. Use that run to observe the full Worker-to-HQ evidence chain and composer cleanup behavior without rerunning the completed canary.
+4. Keep the production Worker portfolio lean unless an owning department demonstrates a recurring standardized bottleneck and requests evaluation.
+5. Keep Office Leaks paused.
 
 ## Advisory State
 
