@@ -43,7 +43,7 @@ def test_real_profile_keeps_shared_sources_read_only() -> None:
         REPOSITORY_ROOT, entry(), advisory()
     )
 
-    assert "Engineering HQ" in labels
+    assert "Engineering_HQ" in labels
     assert "memory" in profile.read_scope_prefixes
     assert "coordination" in profile.read_scope_prefixes
     assert "projects/engineering" in profile.write_scope_prefixes
