@@ -11,15 +11,15 @@ required_verification_mode: IMMEDIATE_HQ
 
 # Maintenance Worker Result Submission Procedure
 
-Updated: 2026-07-25
-Owner: Maintenance HQ
-Status: Active / Canonical / Maintenance pilot only
+Updated: 2026-07-26
+Owner: Maintenance_HQ
+Status: Active / Canonical
 
 ## Purpose
 
 Define the one canonical method by which `maintenance_worker` creates an immutable, machine-readable result artifact for an already-authorized run.
 
-This procedure supplies reporting mechanics only. It does not create task authority, broaden task scope, authorize repair, change advisory lifecycle, or replace `Maintenance_HQ` review.
+This procedure supplies reporting mechanics only. It does not create task authority, broaden task scope, authorize an unapproved repair, change advisory lifecycle, or replace `Maintenance_HQ` review.
 
 ## Entry Conditions
 
@@ -42,6 +42,8 @@ The Worker may use this procedure only when the canonical assignment supplies al
 - `GitHub` inside `Requested Tools JSON`;
 - an authorization class permitting the exact reporting write;
 - `Verification Mode: IMMEDIATE_HQ`.
+
+The underlying task may be read-only or may contain separately Rob-approved bounded writes. This result procedure authorizes only the immutable report artifact and never enlarges the underlying task.
 
 If any field is missing, malformed, conflicting, stale, or outside the Worker profile, return `REPORT_AND_HOLD`. Do not improvise a path, attempt, schema, or authority.
 
@@ -71,9 +73,9 @@ The Worker must preserve JSON types exactly. Versions, revisions, and attempts a
 
 ## Allowed Action
 
-After completing, holding, or elevating the authorized read-only assignment, the Worker may create exactly one new report artifact at the exact path and attempt authorized by the assignment.
+After completing, partially completing, holding, or elevating the authorized assignment, the Worker may create exactly one new report artifact at the exact path and attempt authorized by the assignment.
 
-The Worker may use GitHub create-file behavior only. It must confirm that the exact target does not already exist before creation.
+The Worker may use GitHub create-file behavior only for the result artifact. It must confirm that the exact target does not already exist before creation.
 
 The report may truthfully state one controlled outcome:
 
@@ -85,29 +87,30 @@ The report is evidence pending deterministic ingestion and `Maintenance_HQ` revi
 
 ## Prohibited Actions
 
-The Worker must not:
+This result procedure does not authorize the Worker to:
 
 - overwrite, edit, rename, move, or delete an existing result artifact;
 - create a different attempt number than the one authorized;
-- create files outside the exact current-run result folder;
-- modify an advisory, Advisory Index, shared contract, status, open loops, handoff, profile, procedure, implementation file, publication artifact, route, runtime database, or another evidence artifact;
-- repeat or broaden the underlying audit because report creation failed;
+- create a result file outside the exact current-run result folder;
+- repeat or broaden the underlying work because report creation failed;
 - claim HQ or Rob verification;
 - close the source advisory or system loop;
 - place the machine report only in chat instead of the exact GitHub result path.
+
+Any source-record writes must already be authorized by the Worker profile, task procedure, approval reference, and requested write scopes. They are not authorized by this reporting procedure.
 
 ## Existing-File Behavior
 
 If the exact result path already exists, do not overwrite it. Return `REPORT_AND_HOLD` in chat with the path conflict and wait for a separately authorized correction attempt.
 
-A later report-repair wake may authorize a new immutable attempt such as `report-002.json`. That correction authority permits report repair only and never authorizes audit re-execution or scope expansion.
+A later report-repair wake may authorize a new immutable attempt such as `report-002.json`. That correction authority permits report repair only and never authorizes task re-execution or scope expansion.
 
 ## Evidence
 
 The Worker report must preserve the exact fields required by the canonical schema, including:
 
 - envelope and assignment identity;
-- profile, procedure, authorization, and verification metadata;
+- profile, procedure, authorization, approval, and verification metadata;
 - requested and actual actions;
 - controlled outcome and completion state;
 - exact evidence and source references;
@@ -130,11 +133,11 @@ Result submission is complete only when:
 2. no earlier artifact was overwritten;
 3. read-back confirms the stored content;
 4. commit, blob, path, and checksum evidence are preserved;
-5. no maintenance repair, task re-execution, or scope expansion occurred;
+5. no task re-execution or scope expansion occurred during report creation;
 6. `Maintenance_HQ` review remains pending.
 
-## Ownership and Rollout
+## Ownership
 
-This procedure is owned by `Maintenance_HQ` and applies only to the initial bounded `Maintenance_Worker` pilot approved by Rob after the Package F Wave 0B governance review.
+This procedure is owned by `Maintenance_HQ`.
 
-It does not alter the shared Worker contract, activate the Worker, register a route, grant maintenance-write authority, or authorize adoption by another department.
+It does not alter the shared Worker contract, activate the Worker, register a route, grant task authority, authorize adoption by another department, or create standing cross-department write authority.
