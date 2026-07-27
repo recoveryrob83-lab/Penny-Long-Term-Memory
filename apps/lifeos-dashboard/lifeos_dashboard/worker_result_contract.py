@@ -6,15 +6,23 @@ import re
 from dataclasses import asdict, dataclass
 from hashlib import sha256
 from importlib.resources import files
-from pathlib import PurePosixPath
 from typing import Literal
 
+from .department_hq_routing import department_project_root
 from .worker_runtime import WorkerRuntimeError
 
 RESULT_CONTRACT_ID = "lifeos_worker_result"
 RESULT_CONTRACT_VERSION = 1
 RESULT_SUBMISSION_PROCEDURE_ID = "engineering_worker_result_submission"
 RESULT_SUBMISSION_PROCEDURE_VERSION = 1
+
+_RESULT_SUBMISSION_PROCEDURES: dict[str, tuple[str, int]] = {
+    "engineering": (
+        RESULT_SUBMISSION_PROCEDURE_ID,
+        RESULT_SUBMISSION_PROCEDURE_VERSION,
+    ),
+    "maintenance": ("maintenance_worker_result_submission", 1),
+}
 
 ArtifactKind = Literal["worker_report", "rejection", "hq_review", "rob_validation"]
 
@@ -66,11 +74,16 @@ class ResultSubmissionContract:
             raise WorkerResultContractError("Result Contract ID is unsupported.")
         if self.contract_version != RESULT_CONTRACT_VERSION:
             raise WorkerResultContractError("Result Contract Version is unsupported.")
-        if self.submission_procedure_id != RESULT_SUBMISSION_PROCEDURE_ID:
-            raise WorkerResultContractError("Result submission procedure ID is unsupported.")
-        if self.submission_procedure_version != RESULT_SUBMISSION_PROCEDURE_VERSION:
-            raise WorkerResultContractError("Result submission procedure version is unsupported.")
-        _require_identifier(self.owning_department, "owning_department")
+        department = _require_identifier(self.owning_department, "owning_department")
+        procedure_id, procedure_version = _result_submission_procedure(department)
+        if self.submission_procedure_id != procedure_id:
+            raise WorkerResultContractError(
+                "Result submission procedure ID is unsupported for the owning department."
+            )
+        if self.submission_procedure_version != procedure_version:
+            raise WorkerResultContractError(
+                "Result submission procedure version is unsupported for the owning department."
+            )
         _require_identifier(self.worker_id, "worker_id")
         _require_run_id(self.run_id)
         if isinstance(self.attempt, bool) or self.attempt < 1:
@@ -84,7 +97,7 @@ class ResultSubmissionContract:
         if self.scope_expansion_authorized is not False:
             raise WorkerResultContractError("Report submission cannot authorize scope expansion.")
         expected = artifact_path(
-            self.owning_department,
+            department,
             self.worker_id,
             self.run_id,
             "worker_report",
@@ -106,6 +119,15 @@ def _require_identifier(value: str, field_name: str) -> str:
             f"{field_name} must be a lowercase underscore-separated identifier."
         )
     return clean
+
+
+def _result_submission_procedure(owning_department: str) -> tuple[str, int]:
+    try:
+        return _RESULT_SUBMISSION_PROCEDURES[owning_department]
+    except KeyError as exc:
+        raise WorkerResultContractError(
+            f"No result submission procedure is registered for {owning_department!r}."
+        ) from exc
 
 
 def _require_run_id(value: str) -> str:
@@ -131,8 +153,14 @@ def artifact_path(
         raise WorkerResultContractError(f"Unsupported artifact kind: {artifact_kind}")
     if isinstance(attempt, bool) or not isinstance(attempt, int) or attempt < 1:
         raise WorkerResultContractError("Artifact attempt must be a positive integer.")
+    try:
+        project_root = department_project_root(department)
+    except WorkerRuntimeError as exc:
+        raise WorkerResultContractError(
+            f"No canonical project root is registered for {department!r}."
+        ) from exc
     filename = f"{_ARTIFACT_PREFIXES[artifact_kind]}-{attempt:03d}.json"
-    return str(PurePosixPath("projects") / department / "worker-results" / worker / run / filename)
+    return str(project_root / "worker-results" / worker / run / filename)
 
 
 def build_result_submission_contract(
@@ -144,8 +172,10 @@ def build_result_submission_contract(
 ) -> ResultSubmissionContract:
     """Build the exact create-only report contract for one run and attempt."""
 
+    department = _require_identifier(owning_department, "owning_department")
+    procedure_id, procedure_version = _result_submission_procedure(department)
     result_path = artifact_path(
-        owning_department,
+        department,
         worker_id,
         run_id,
         "worker_report",
@@ -154,9 +184,9 @@ def build_result_submission_contract(
     return ResultSubmissionContract(
         contract_id=RESULT_CONTRACT_ID,
         contract_version=RESULT_CONTRACT_VERSION,
-        submission_procedure_id=RESULT_SUBMISSION_PROCEDURE_ID,
-        submission_procedure_version=RESULT_SUBMISSION_PROCEDURE_VERSION,
-        owning_department=owning_department,
+        submission_procedure_id=procedure_id,
+        submission_procedure_version=procedure_version,
+        owning_department=department,
         worker_id=worker_id,
         run_id=run_id,
         attempt=attempt,
@@ -204,7 +234,9 @@ def load_artifact_examples() -> dict[str, dict[str, object]]:
 
     path = files("lifeos_dashboard").joinpath("data", "worker-result-examples.json")
     payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict) or not all(isinstance(value, dict) for value in payload.values()):
+    if not isinstance(payload, dict) or not all(
+        isinstance(value, dict) for value in payload.values()
+    ):
         raise WorkerResultContractError("Worker result examples have the wrong shape.")
     return payload
 
@@ -263,7 +295,9 @@ def _validate_node(
     expected_type = schema.get("type")
     if expected_type is not None:
         allowed = [expected_type] if isinstance(expected_type, str) else expected_type
-        if not isinstance(allowed, list) or not all(isinstance(item, str) for item in allowed):
+        if not isinstance(allowed, list) or not all(
+            isinstance(item, str) for item in allowed
+        ):
             errors.append(f"{path}: schema type declaration is invalid")
             return
         if not any(_matches_type(value, item) for item in allowed):
@@ -299,7 +333,9 @@ def _validate_node(
         if isinstance(minimum, int) and len(value) < minimum:
             errors.append(f"{path}: expected at least {minimum} items")
         if schema.get("uniqueItems") is True:
-            fingerprints = [json.dumps(item, sort_keys=True, ensure_ascii=False) for item in value]
+            fingerprints = [
+                json.dumps(item, sort_keys=True, ensure_ascii=False) for item in value
+            ]
             if len(fingerprints) != len(set(fingerprints)):
                 errors.append(f"{path}: duplicate items are prohibited")
         item_schema = schema.get("items")

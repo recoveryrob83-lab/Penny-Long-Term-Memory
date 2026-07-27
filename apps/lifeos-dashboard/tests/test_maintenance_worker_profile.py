@@ -13,7 +13,7 @@ def _advisory(
     return ExecutionReadyAdvisory(
         advisory_id="ADV-MAINTENANCE-WORKER-PROFILE-TEST",
         title="Maintenance Worker profile test",
-        board_path="coordination/boards/maintenance.md",
+        board_path="coordination/boards/engineering.md",
         target_department="maintenance",
         target_worker_id="maintenance_worker",
         advisory_revision=1,
@@ -58,31 +58,46 @@ def test_maintenance_profile_loads_explicit_receiver_contract() -> None:
     assert profile.allowed_task_classes == (
         "read_only_verification",
         "read_only_governance_audit",
+        "coordinated_repository_repair",
     )
     assert profile.calling_source_task_classes["MAINTENANCE_HQ"] == (
         "read_only_verification",
         "read_only_governance_audit",
     )
-    assert profile.read_scope_prefixes == ("memory", "coordination", "projects")
-    assert profile.write_scope_prefixes == (
-        "projects/life-logistics-hq/worker-results/maintenance_worker",
+    assert profile.calling_source_task_classes["ROB"] == (
+        "read_only_verification",
+        "read_only_governance_audit",
+        "coordinated_repository_repair",
     )
+    assert profile.read_scope_prefixes == (
+        "memory",
+        "coordination",
+        "projects",
+        "apps",
+        "workers",
+    )
+    assert profile.write_scope_prefixes == ("memory", "coordination", "projects")
     assert profile.approved_tools == ("GitHub",)
     assert profile.allowed_verification_modes == ("IMMEDIATE_HQ",)
-    assert "maintenance_write" in profile.prohibited_task_classes
+    assert "implementation" in profile.prohibited_task_classes
+    assert "coordinated_repository_repair" not in profile.prohibited_task_classes
     assert labels == ("maintenance", "logistics", "Maintenance_HQ")
 
 
-def test_maintenance_profile_authorizes_rob_for_same_bounded_task_classes() -> None:
+def test_maintenance_profile_authorizes_rob_for_coordinated_repair_only() -> None:
     repository_root = Path(__file__).resolve().parents[3]
 
     profile, _ = load_worker_authority_profile(
         repository_root,
         _entry(),
-        _advisory(authorization_source="ROB"),
+        _advisory(
+            task_class="coordinated_repository_repair",
+            authorization_source="ROB",
+        ),
     )
 
-    assert profile.calling_source_task_classes["ROB"] == (
-        "read_only_verification",
-        "read_only_governance_audit",
-    )
+    assert "coordinated_repository_repair" in profile.allowed_task_classes
+    assert "coordinated_repository_repair" in profile.calling_source_task_classes["ROB"]
+    assert "coordinated_repository_repair" not in profile.calling_source_task_classes[
+        "MAINTENANCE_HQ"
+    ]
