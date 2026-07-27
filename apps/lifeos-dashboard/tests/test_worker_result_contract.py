@@ -135,7 +135,8 @@ def _board(*, result_path: str, authorization_class: str = "BOUNDED_WRITE") -> s
 - Procedure ID: engineering_worker_result_outbox_validation
 - Procedure Version: 1
 - Authorization Source: ENGINEERING_HQ_PACKAGE_E_SLICE3_VALIDATION
-- Parameters JSON: {{"targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],"verification_questions":["Is Slice 3 bounded?"]}}
+- Parameters JSON: {{"targets":["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"],
+  "verification_questions":["Is Slice 3 bounded?"]}}
 - Source References JSON: ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]
 - Requested Read Scopes JSON: ["projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md"]
 - Requested Write Scopes JSON: ["{result_path}"]
