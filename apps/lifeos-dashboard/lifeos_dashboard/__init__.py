@@ -47,5 +47,8 @@ from . import (
     worker_maintenance_relay_repair_runtime as _worker_maintenance_relay_repair_runtime,
 )
 from . import (
+    worker_report_repair_live_recovery_runtime as _worker_report_repair_live_recovery_runtime,
+)
+from . import (
     worker_activation_readiness_runtime as _worker_activation_readiness_runtime,
 )
