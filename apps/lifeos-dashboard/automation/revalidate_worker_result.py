@@ -35,6 +35,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     app_root = Path(__file__).resolve().parents[1]
     load_dotenv(app_root / ".env", override=False)
+    os.environ["LIFEOS_WORKER_ORCHESTRATOR_ENABLED"] = "0"
     repository_root = _resolved_path(
         args.repository_root,
         "LIFEOS_REPOSITORY_ROOT",
