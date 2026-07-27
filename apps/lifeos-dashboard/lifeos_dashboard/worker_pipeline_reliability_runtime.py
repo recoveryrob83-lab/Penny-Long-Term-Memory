@@ -5,7 +5,6 @@ import os
 import re
 import subprocess
 import sys
-from pathlib import Path
 
 from . import worker_operations
 from .worker_github_orchestrator import WorkerGitHubOrchestrator
@@ -128,9 +127,13 @@ def _validate_report_correlation(
         and item.casefold() not in _INTERNAL_VALIDATION_ACTIVITIES
     )
     if unauthorized_reads:
-        errors.append("actual read scopes exceed assignment: " + ", ".join(unauthorized_reads))
+        errors.append(
+            "actual read scopes exceed assignment: " + ", ".join(unauthorized_reads)
+        )
     if unauthorized_writes:
-        errors.append("actual write scopes exceed assignment: " + ", ".join(unauthorized_writes))
+        errors.append(
+            "actual write scopes exceed assignment: " + ", ".join(unauthorized_writes)
+        )
     if unauthorized_tools:
         errors.append("actual tools exceed assignment: " + ", ".join(unauthorized_tools))
     if contract.result_path not in actual_writes:
@@ -143,7 +146,10 @@ def _validate_report_correlation(
             if not any(_scope_allows(requested, actual) for actual in actual_reads)
         )
         if missing_reads:
-            errors.append("implemented report omits requested read scopes: " + ", ".join(missing_reads))
+            errors.append(
+                "implemented report omits requested read scopes: "
+                + ", ".join(missing_reads)
+            )
         if payload.get("completion_state") != "completed":
             errors.append("IMPLEMENT requires completion_state completed")
         if payload.get("verification_state") != "pending":
@@ -192,7 +198,9 @@ def _validate_report_correlation(
                     errors.append(f"evidence commit witness is not a Git commit: {text}")
                     continue
                 if self._git("rev-parse", f"{commit_sha}:{path}") != blob_sha:
-                    errors.append(f"evidence commit and blob do not resolve together: {text}")
+                    errors.append(
+                        f"evidence commit and blob do not resolve together: {text}"
+                    )
         except WorkerRuntimeError:
             errors.append(f"evidence Git witness is unavailable: {text}")
 
@@ -203,21 +211,30 @@ def _validate_report_correlation(
             if not any(_scope_allows(source, path) for path in evidence_paths)
         )
         if missing_evidence:
-            errors.append("implemented report omits source evidence: " + ", ".join(missing_evidence))
+            errors.append(
+                "implemented report omits source evidence: "
+                + ", ".join(missing_evidence)
+            )
     if errors:
-        raise WorkerRuntimeError("Worker report correlation failed: " + "; ".join(errors) + ".")
+        raise WorkerRuntimeError(
+            "Worker report correlation failed: " + "; ".join(errors) + "."
+        )
 
 
 def _revalidate_rejected(self: WorkerResultRepairCoordinator, advisory):
     row = self._row(advisory.run_id)
     if str(row["result_state"] or "") != "REPORT_REJECTED":
-        raise WorkerRuntimeError("Same-artifact revalidation requires a REPORT_REJECTED result.")
+        raise WorkerRuntimeError(
+            "Same-artifact revalidation requires a REPORT_REJECTED result."
+        )
     contract = advisory.result_contract
     if contract is None:
         raise WorkerRuntimeError("Canonical assignment has no Worker result contract.")
     rejected_attempt = int(row["report_attempt"] or 0)
     if rejected_attempt != contract.attempt:
-        raise WorkerRuntimeError("Rejected report attempt does not match the canonical assignment.")
+        raise WorkerRuntimeError(
+            "Rejected report attempt does not match the canonical assignment."
+        )
     next_path = artifact_path(
         contract.owning_department,
         advisory.target_worker_id,
@@ -256,7 +273,9 @@ def _matching_advisory(service, run_id: str):
             f"No OPEN execution-ready Worker result assignment matches {clean_run_id}."
         )
     if len(matches) > 1:
-        raise WorkerRuntimeError(f"Worker result assignment {clean_run_id} is ambiguous.")
+        raise WorkerRuntimeError(
+            f"Worker result assignment {clean_run_id} is ambiguous."
+        )
     return matches[0]
 
 
@@ -364,7 +383,8 @@ def _send_hq_wake(
         row = self._row(run_id)
         if row is None or str(row["result_state"] or "") != "REPORT_VALIDATED":
             return
-        if self._artifact_exists(_canonical_artifact_path(row, run_id, "hq_review")):
+        pending_review_path = _canonical_artifact_path(row, run_id, "hq_review")
+        if self._artifact_exists(pending_review_path):
             self._ingest_hq_review_if_present(run_id, advisory_id)
             return
         if str(row["hq_wake_state"] or "") or str(row["hq_review_state"] or ""):
@@ -418,7 +438,10 @@ def _send_hq_wake(
             self._event(
                 "hq_review_wake",
                 "held",
-                "HQ wake transport timed out after the atomic claim; automatic retry is suppressed.",
+                (
+                    "HQ wake transport timed out after the atomic claim; "
+                    "automatic retry is suppressed."
+                ),
                 run_id=run_id,
                 advisory_id=advisory_id,
             )
@@ -464,7 +487,10 @@ def _install_orchestrator_repairs() -> None:
     original_status = orchestrator_class.status
 
     def dispatch_new(self, advisories) -> None:
-        if not _truthy_environment("LIFEOS_WORKER_AUTO_DISPATCH_ENABLED", default=False):
+        if not _truthy_environment(
+            "LIFEOS_WORKER_AUTO_DISPATCH_ENABLED",
+            default=False,
+        ):
             return
         original_dispatch_new(self, advisories)
 
