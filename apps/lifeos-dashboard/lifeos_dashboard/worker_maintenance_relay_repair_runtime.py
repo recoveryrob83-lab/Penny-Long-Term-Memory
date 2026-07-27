@@ -1,13 +1,9 @@
-"""Repair cross-department Worker result validation and owning-HQ relay behavior.
-
-This runtime layer keeps GitHub artifacts immutable while aligning broad path scopes,
-Git evidence references, canonical department project roots, correction-attempt
-recognition, and automatic HQ wakes with existing safety controls.
-"""
+"""Install bounded compatibility repairs for Maintenance result and HQ relay flows."""
 from __future__ import annotations
 
 import re
 from collections.abc import Iterable
+from dataclasses import replace
 
 from . import worker_github_orchestrator_runtime
 from .command_center_send_budget import BUDGET_RECOVERY_CONDITION
@@ -111,9 +107,36 @@ def _parse_evidence_reference(
     )
 
 
+def _most_specific_scope(actual: object, allowed: Iterable[object]) -> str:
+    matches = [
+        _normalized_scope(candidate)
+        for candidate in allowed
+        if _scope_allows(candidate, actual)
+    ]
+    if not matches:
+        raise WorkerRuntimeError(
+            f"Scope is outside the canonical assignment: {actual}"
+        )
+    return max(matches, key=len)
+
+
+def _mapped_scopes(
+    actual_scopes: Iterable[object],
+    allowed_scopes: Iterable[object],
+) -> tuple[str, ...]:
+    allowed = tuple(allowed_scopes)
+    return tuple(
+        dict.fromkeys(
+            _most_specific_scope(actual, allowed)
+            for actual in actual_scopes
+        )
+    )
+
+
 def _verify_git_witness(
     ingester: WorkerResultIngester,
     *,
+    path: str,
     reference: object,
     commit_sha: str | None,
     blob_sha: str | None,
@@ -129,8 +152,17 @@ def _verify_git_witness(
                 raise WorkerRuntimeError(
                     f"Evidence witness is not a Git blob: {reference}"
                 )
+        if commit_sha is not None and blob_sha is not None:
+            observed = ingester._git(
+                "rev-parse",
+                f"{commit_sha}:{path}",
+            )
+            if observed != blob_sha:
+                raise WorkerRuntimeError(
+                    f"Evidence commit and blob do not match path: {reference}"
+                )
     except WorkerRuntimeError as exc:
-        if "is not a Git" in str(exc):
+        if "Evidence" in str(exc):
             raise
         raise WorkerRuntimeError(
             f"Evidence Git object is unavailable: {reference}"
@@ -141,6 +173,7 @@ def _install_result_validation() -> None:
     ingester_class = WorkerResultIngester
     if getattr(ingester_class, _INGESTER_FLAG, False):
         return
+    original_validate = ingester_class._validate_report_correlation
 
     def validate_report_correlation(
         self: WorkerResultIngester,
@@ -148,44 +181,12 @@ def _install_result_validation() -> None:
         profile,
         payload: dict[str, object],
     ) -> None:
-        contract = advisory.result_contract
-        if contract is None:
-            raise WorkerRuntimeError(
-                "Canonical assignment has no Worker result contract."
-            )
-
-        errors: list[str] = []
-        for field_name, expected in self._expected_identity(advisory).items():
-            if payload.get(field_name) != expected:
-                errors.append(
-                    f"report {field_name} does not match the canonical assignment"
-                )
-
-        expected_profile = {
-            "profile_version": profile.profile_version,
-            "owning_department": profile.owning_department,
-            "attempt": contract.attempt,
-        }
-        for field_name, expected in expected_profile.items():
-            if payload.get(field_name) != expected:
-                errors.append(
-                    f"report {field_name} does not match canonical Worker state"
-                )
-        if profile.worker_id != advisory.target_worker_id:
-            errors.append(
-                "registered Worker does not match the canonical assignment"
-            )
-
-        actual_reads = tuple(payload.get("actual_read_scopes") or ())
-        actual_writes = tuple(payload.get("actual_write_scopes") or ())
-        actual_tools = {
-            str(item) for item in payload.get("actual_tools") or ()
-        }
         allowed_reads = (
             *advisory.requested_read_scopes,
             *advisory.requested_write_scopes,
         )
-
+        actual_reads = tuple(payload.get("actual_read_scopes") or ())
+        actual_writes = tuple(payload.get("actual_write_scopes") or ())
         unauthorized_reads = _unauthorized_scopes(
             allowed_reads,
             actual_reads,
@@ -194,119 +195,82 @@ def _install_result_validation() -> None:
             advisory.requested_write_scopes,
             actual_writes,
         )
-        unauthorized_tools = sorted(
-            actual_tools - set(advisory.requested_tools)
-        )
-        if unauthorized_reads:
-            errors.append(
-                "actual read scopes exceed assignment: "
-                + ", ".join(unauthorized_reads)
-            )
-        if unauthorized_writes:
-            errors.append(
-                "actual write scopes exceed assignment: "
-                + ", ".join(unauthorized_writes)
-            )
-        if unauthorized_tools:
-            errors.append(
-                "actual tools exceed assignment: "
-                + ", ".join(unauthorized_tools)
-            )
-        if contract.result_path not in actual_writes:
-            errors.append(
-                "actual write scopes do not include the exact report path"
-            )
-
-        if payload.get("controlled_outcome") == "IMPLEMENT":
-            missing_reads = _uncovered_scopes(
-                advisory.requested_read_scopes,
-                actual_reads,
-            )
-            if missing_reads:
-                errors.append(
-                    "implemented report omits requested read scopes: "
-                    + ", ".join(missing_reads)
+        if unauthorized_reads or unauthorized_writes:
+            details = [
+                *(
+                    "actual read scopes exceed assignment: "
+                    + ", ".join(unauthorized_reads),
                 )
-            if payload.get("completion_state") != "completed":
-                errors.append(
-                    "IMPLEMENT requires completion_state completed"
+                if unauthorized_reads
+                else (),
+                *(
+                    "actual write scopes exceed assignment: "
+                    + ", ".join(unauthorized_writes),
                 )
-            if payload.get("verification_state") != "pending":
-                errors.append(
-                    "IMPLEMENT requires pending Department HQ verification"
-                )
-            if payload.get("failure_reason") is not None:
-                errors.append(
-                    "IMPLEMENT report cannot contain a failure reason"
-                )
-        if (
-            payload.get("controlled_outcome") == "REPORT_AND_HOLD"
-            and not payload.get("failure_reason")
-        ):
-            errors.append(
-                "REPORT_AND_HOLD requires a failure reason"
-            )
-
-        evidence_paths: set[str] = set()
-        allowed_evidence_paths = (
-            *advisory.source_references,
-            *advisory.requested_read_scopes,
-            *advisory.requested_write_scopes,
-        )
-        for reference in payload.get("evidence_references") or ():
-            try:
-                path, commit_sha, blob_sha = _parse_evidence_reference(
-                    reference
-                )
-            except WorkerRuntimeError as exc:
-                errors.append(str(exc))
-                continue
-            evidence_paths.add(path)
-            if not any(
-                _scope_allows(allowed, path)
-                for allowed in allowed_evidence_paths
-            ):
-                errors.append(
-                    f"evidence reference path is outside assignment: {path}"
-                )
-                continue
-            if commit_sha is None and blob_sha is None:
-                if path != _normalized_scope(contract.result_path):
-                    errors.append(
-                        "preflight:not-found is allowed only for the report path"
-                    )
-                continue
-            try:
-                _verify_git_witness(
-                    self,
-                    reference=reference,
-                    commit_sha=commit_sha,
-                    blob_sha=blob_sha,
-                )
-            except WorkerRuntimeError as exc:
-                errors.append(str(exc))
-
-        if payload.get("controlled_outcome") == "IMPLEMENT":
-            missing_evidence = sorted(
-                str(source)
-                for source in advisory.source_references
-                if not any(
-                    _scope_allows(source, evidence_path)
-                    for evidence_path in evidence_paths
-                )
-            )
-            if missing_evidence:
-                errors.append(
-                    "implemented report omits source evidence: "
-                    + ", ".join(missing_evidence)
-                )
-
-        if errors:
+                if unauthorized_writes
+                else (),
+            ]
             raise WorkerRuntimeError(
                 "Worker report correlation failed: "
-                + "; ".join(errors)
+                + "; ".join(details)
                 + "."
             )
+
+        allowed_evidence = (
+            *advisory.source_references,
+            *allowed_reads,
+        )
+        normalized_references: list[str] = []
+        evidence_paths: list[str] = []
+        for reference in payload.get("evidence_references") or ():
+            path, commit_sha, blob_sha = _parse_evidence_reference(reference)
+            if not any(
+                _scope_allows(allowed, path)
+                for allowed in allowed_evidence
+            ):
+                raise WorkerRuntimeError(
+                    "Worker report correlation failed: evidence reference "
+                    f"path is outside assignment: {path}."
+                )
+            evidence_paths.append(path)
+            if commit_sha is None and blob_sha is None:
+                normalized_references.append(
+                    f"{path}@preflight:not-found"
+                )
+                continue
+            _verify_git_witness(
+                self,
+                path=path,
+                reference=reference,
+                commit_sha=commit_sha,
+                blob_sha=blob_sha,
+            )
+            normalized_references.append(f"{path}@{blob_sha}")
+
+        validation_payload = dict(payload)
+        validation_payload["actual_read_scopes"] = _mapped_scopes(
+            actual_reads,
+            allowed_reads,
+        )
+        validation_payload["actual_write_scopes"] = _mapped_scopes(
+            actual_writes,
+            advisory.requested_write_scopes,
+        )
+        validation_payload["evidence_references"] = normalized_references
+        validation_advisory = replace(
+            advisory,
+            source_references=tuple(
+                dict.fromkeys(
+                    (*advisory.source_references, *evidence_paths)
+                )
+            ),
+        )
+        original_validate(
+            self,
+            validation_advisory,
+            profile,
+            validation_payload,
+        )
 
     ingester_class._validate_report_correlation = (
         validate_report_correlation
@@ -393,7 +357,6 @@ def _install_orchestrator_relay() -> None:
     orchestrator_class = WorkerGitHubOrchestrator
     if getattr(orchestrator_class, _ORCHESTRATOR_FLAG, False):
         return
-
     worker_github_orchestrator_runtime._hq_review_path = (
         _canonical_hq_review_path
     )
@@ -412,7 +375,6 @@ def _install_orchestrator_relay() -> None:
         state = str(row["result_state"] or "")
         if state in _RESULT_TERMINAL_STATES:
             return
-
         if state == "REPORT_REJECTED":
             if str(row["repair_state"] or "") != "REPORT_REPAIR_PENDING":
                 return
@@ -424,7 +386,6 @@ def _install_orchestrator_relay() -> None:
             candidate_path = wake.corrected_report_path
         else:
             candidate_path = contract.result_path
-
         if not self._artifact_exists(candidate_path):
             return
         payload = self.operations.ingest_result(advisory.run_id)
@@ -513,14 +474,12 @@ def _install_orchestrator_relay() -> None:
         run_lock = self.operations.command_center._run_lock
         if run_lock.locked():
             return
-
         claimed = (
             "hq_wake_claimed_at" in row.keys()
             and row["hq_wake_claimed_at"] is not None
         )
         if not claimed:
             _reserve_automatic_hq_wake_budget(self, run_id)
-
         try:
             guarded_send_hq_wake(self, run_id, advisory_id)
         except Exception:
@@ -532,7 +491,6 @@ def _install_orchestrator_relay() -> None:
                 "review is required before retry.",
             )
             raise
-
         current = self._row(run_id)
         if current is None:
             _trip_automatic_hq_wake(
@@ -544,7 +502,6 @@ def _install_orchestrator_relay() -> None:
             raise WorkerRuntimeError(
                 "Automatic owning-HQ wake lost its execution row."
             )
-
         current_review_path = _canonical_hq_review_path(
             current,
             run_id,
@@ -565,7 +522,6 @@ def _install_orchestrator_relay() -> None:
             raise WorkerRuntimeError(
                 "Automatic owning-HQ wake produced no durable outcome."
             )
-
         if (
             str(current["hq_wake_state"] or "") == "HQ_WAKE_SUBMITTED"
             and not bool(current["hq_wake_returned_to_source"])
@@ -580,9 +536,7 @@ def _install_orchestrator_relay() -> None:
                 "Automatic owning-HQ wake did not verify return to source."
             )
 
-    orchestrator_class._ingest_result_if_present = (
-        ingest_result_if_present
-    )
+    orchestrator_class._ingest_result_if_present = ingest_result_if_present
     orchestrator_class._ingest_hq_review_if_present = (
         ingest_hq_review_if_present
     )
