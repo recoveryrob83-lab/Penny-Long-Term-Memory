@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import threading
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
+import lifeos_dashboard as package
 from lifeos_dashboard import worker_hq_review_resume_runtime as resume
 from lifeos_dashboard.worker_result_contract import artifact_checksum
 from lifeos_dashboard.worker_runtime import WorkerRuntimeError
@@ -364,3 +367,75 @@ def test_runtime_source_uses_existing_budget_lock_and_same_row() -> None:
     assert "CREATE TABLE" not in source
     assert "artifact_path(" in source
     assert "Authorized Later Review Path" in source
+
+
+def test_resume_cycle_requires_current_successful_git_sync() -> None:
+    succeeded = SimpleNamespace(
+        occurred_at=101.0,
+        action="git_sync",
+        status="succeeded",
+        detail="Git repository is current.",
+    )
+    skipped = SimpleNamespace(
+        occurred_at=102.0,
+        action="git_sync",
+        status="succeeded",
+        detail="Local repository has uncommitted changes; Git sync was skipped.",
+    )
+
+    orchestrator = SimpleNamespace(
+        _last_cycle_started_at=100.0,
+        _events=[succeeded],
+    )
+    assert package._successful_git_sync_for_cycle(orchestrator) is True
+
+    orchestrator._events = [succeeded, skipped]
+    assert package._successful_git_sync_for_cycle(orchestrator) is False
+
+
+def test_resume_cycle_scans_existing_run_without_worker_discovery(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[str, str]] = []
+    row = {
+        "result_state": "REPORT_REPAIR_PENDING",
+        "hq_review_state": "REPAIR_REQUIRED",
+    }
+    orchestrator = SimpleNamespace(
+        operations=SimpleNamespace(
+            command_center=SimpleNamespace(paused=False),
+            hq_review=object(),
+        ),
+        _last_error=None,
+        _cycle_lock=threading.Lock(),
+        _row=lambda run_id: row,
+        _event=lambda *args, **kwargs: None,
+        status=lambda: {"direct_resume": True},
+    )
+
+    monkeypatch.setattr(
+        package,
+        "_base_orchestrator_run_once",
+        lambda self: {"base_cycle": True},
+    )
+    monkeypatch.setattr(
+        package,
+        "_successful_git_sync_for_cycle",
+        lambda self: True,
+    )
+    monkeypatch.setattr(resume, "_ensure_resume_columns", lambda service: None)
+    monkeypatch.setattr(
+        resume,
+        "_send_resume_wake",
+        lambda self, run_id, advisory_id: calls.append(("wake", run_id)),
+    )
+    monkeypatch.setattr(
+        resume,
+        "_ingest_resume_if_present",
+        lambda self, run_id, advisory_id: calls.append(("ingest", run_id)),
+    )
+
+    result = package._composed_orchestrator_run_once(orchestrator)
+
+    assert result == {"direct_resume": True}
+    assert calls == [("wake", RUN_ID), ("ingest", RUN_ID)]
