@@ -128,15 +128,18 @@ def _composed_orchestrator_run_once(self) -> dict[str, object]:
         return status
     if not _successful_git_sync_for_cycle(self):
         return status
+
+    hq_review = getattr(self.operations, "hq_review", None)
+    if hq_review is None:
+        return status
+
     if not self._cycle_lock.acquire(blocking=False):
         return self.status()
 
     run_id = _worker_hq_review_resume_runtime._EXPECTED_RUN_ID
     advisory_id = _worker_hq_review_resume_runtime._ADVISORY_ID
     try:
-        _worker_hq_review_resume_runtime._ensure_resume_columns(
-            self.operations.hq_review
-        )
+        _worker_hq_review_resume_runtime._ensure_resume_columns(hq_review)
         row = self._row(run_id)
         if row is None:
             return self.status()
