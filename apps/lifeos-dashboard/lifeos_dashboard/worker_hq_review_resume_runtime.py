@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -959,7 +960,7 @@ def _send_resume_wake(
             "--worker-chat-title",
             wake.hq_chat_title,
             "--project-title",
-            str(__import__("os").getenv("LIFEOS_CHATGPT_PROJECT_TITLE", "LifeOS")),
+            os.getenv("LIFEOS_CHATGPT_PROJECT_TITLE", "LifeOS"),
             "--text",
             wake.instruction,
             "--request-marker",
@@ -977,7 +978,7 @@ def _send_resume_wake(
         completed = subprocess.run(
             command,
             cwd=orchestrator.app_root,
-            env=__import__("os").environ.copy(),
+            env=os.environ.copy(),
             capture_output=True,
             text=True,
             timeout=orchestrator.timeout_seconds + 30,
