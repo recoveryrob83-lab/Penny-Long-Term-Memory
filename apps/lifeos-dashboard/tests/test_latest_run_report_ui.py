@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 STATIC_ROOT = Path(__file__).resolve().parents[1] / "lifeos_dashboard" / "static"
 TABS_PATH = STATIC_ROOT / "tabs.js"
 REPORT_PATH = STATIC_ROOT / "latest-run-report.js"
