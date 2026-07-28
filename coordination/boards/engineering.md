@@ -1,10 +1,70 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-26
+Updated: 2026-07-28
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
+
+### ADV-20260728-054 — Correct the Maintenance HQ review path for bounded-write Worker repairs
+
+- Date: 2026-07-28
+- From: Engineering_HQ under direct Rob authorization
+- To: Maintenance_HQ
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: SOURCE_OWNER_REVIEW
+- Posted Board: `coordination/boards/engineering.md`
+- Current Target Department and Owner: maintenance
+- Deferred Dependent Owner: engineering
+- Record Class: Maintenance-owned procedure correction with blocked Engineering runtime dependency
+- Authorization Class: BOUNDED_WRITE
+- Authorization Source: ROB
+- Approval Reference: ROB-DIRECT-MAINTENANCE-HQ-REVIEW-V2-20260728
+- Requests New Authority: true
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: false
+- Requests Material Exception: true
+- Transport Scope Change Detected: false
+- Execution-Ready Worker Task: false
+- Current Phase: PHASE_1_MAINTENANCE_PROCEDURE_CORRECTION
+- Engineering Runtime Phase: BLOCKED / NOT AUTHORIZED FOR IMPLEMENTATION IN REVISION 1
+- Related Advisory: `ADV-20260726-053`
+- Related Run: `RUN-ADV-20260726-053-R1`
+- Existing Worker Report: `projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-002.json`
+- Existing HQ Review: `projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/hq-review-001.json`
+- Requested Read Scopes JSON: `["coordination/boards/engineering.md","coordination/ADVISORY_INDEX.md","projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md","projects/life-logistics-hq/procedures/maintenance_coordinated_repository_repair.md","projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/report-002.json","projects/life-logistics-hq/worker-results/maintenance_worker/RUN-ADV-20260726-053-R1/hq-review-001.json","apps/lifeos-dashboard/lifeos_dashboard/data/worker-hq-review.schema.json","apps/lifeos-dashboard/lifeos_dashboard/worker_hq_review.py","apps/lifeos-dashboard/lifeos_dashboard/worker_hq_review_runtime.py"]`
+- Requested Write Scopes JSON: `["projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md"]`
+- Requested Tools JSON: `["GitHub"]`
+- Current-Phase Completion Condition: Maintenance HQ publishes procedure version 2, reads it back, and reports exact commit and checksum evidence to Engineering HQ. The procedure must support independent verification of explicitly authorized bounded-write Worker repairs without weakening integrity, authority, evidence, immutability, or ownership controls.
+- Advisory Closure Condition: Remain open until the Maintenance procedure correction is source-verified, a separately authorized Engineering runtime phase supports a later immutable review attempt, and `ADV-20260726-053` reaches a valid terminal review outcome.
+
+#### Authorized Maintenance Outcome
+
+Maintenance HQ may update only its owned procedure at `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md` and increment the procedure version.
+
+Procedure version 2 must:
+
+1. permit `VERIFIED` when report integrity is valid, authority compliance is compliant, the assignment explicitly authorized bounded writes, actual writes stayed within that authority, and Maintenance HQ independently verifies the work and decisive evidence;
+2. preserve the stricter read-only verification path for read-only assignments;
+3. define a create-once later HQ review attempt path such as `hq-review-002.json` without overwriting, renaming, moving, deleting, or contradicting `hq-review-001.json`;
+4. require exact correlation to the same run, Worker, validated report, advisory, procedure version, commit, blob, and checksum evidence;
+5. prohibit Worker re-execution, report overwrite, scope expansion, advisory closure, Chief of Staff wake, Rob validation, runtime mutation, or creation of a competing ledger;
+6. distinguish a procedural applicability defect from a defect in the Worker report or completed repair work;
+7. state the evidence and conditions required for `ready_for_consumption: true`.
+
+Maintenance HQ must fetch the current procedure before editing, preserve unrelated content, create the smallest useful correction, commit it, read it back, calculate or report its canonical checksum, and route the exact publication evidence back to Engineering HQ.
+
+#### Explicit Holds
+
+- Do not rerun `maintenance_worker`.
+- Do not modify `report-001.json`, `report-002.json`, `hq-review-001.json`, `rejection-001.json`, or the current runtime row.
+- Do not close or revise `ADV-20260726-053` during Phase 1.
+- Do not edit application code, tests, schemas, runtime databases, browser routes, send-budget state, or automation in Phase 1.
+- Engineering must not begin runtime implementation until Maintenance publishes procedure version 2 and Engineering creates a separately bounded authorization under a material revision of this advisory.
+- Chief of Staff is not an owner or closeout authority for this correction.
 
 ### ADV-20260726-053 — Audit and reconcile current LifeOS repository state
 
