@@ -504,10 +504,19 @@ def _resume_wake_from_row(
     instruction = (
         f"{marker}\n\n"
         f"Authorized later Maintenance HQ review for existing run "
-        f"`{authorization.run_id}`. Follow `{authorization.procedure_path}` version "
-        f"{authorization.procedure_version}. Inspect validated report "
-        f"`{authorization.report_path}` and preserve earlier review "
-        f"`{authorization.prior_review_path}`. Create exactly one immutable "
+        f"`{authorization.run_id}` under `{authorization.advisory_id}` revision "
+        f"{authorization.advisory_revision}. Follow `{authorization.procedure_path}` "
+        f"version {authorization.procedure_version}, checksum "
+        f"`{authorization.procedure_checksum}`, commit "
+        f"`{authorization.procedure_commit_sha}`, blob "
+        f"`{authorization.procedure_blob_sha}`. Inspect validated report "
+        f"`{authorization.report_path}`, checksum `{authorization.report_checksum}`, "
+        f"commit `{authorization.report_commit_sha}`, blob "
+        f"`{authorization.report_blob_sha}`. Preserve earlier review "
+        f"`{authorization.prior_review_path}`, checksum "
+        f"`{authorization.prior_review_checksum}`, commit "
+        f"`{authorization.prior_review_commit_sha}`, blob "
+        f"`{authorization.prior_review_blob_sha}`. Create exactly one immutable "
         f"attempt-{authorization.attempt} receipt at `{authorization.review_path}`. "
         "Do not rerun, replace immutable evidence, broaden scope, change runtime "
         "state, close advisories, wake Chief of Staff, or perform Rob validation."
@@ -921,6 +930,7 @@ def _send_resume_wake(
         )
         if not decision.reserved:
             _release_pretransport_claim(service, int(row["id"]), claimed_at)
+            claimed_at = None
             command_center.trip_safety_pause(
                 reason=decision.reason,
                 affected_run_id=run_id,
@@ -1083,16 +1093,12 @@ def _install_orchestrator() -> None:
         advisory_id: str,
     ) -> None:
         row = self._row(run_id)
-        if (
-            run_id == _EXPECTED_RUN_ID
-            and row is not None
-            and (
-                str(row["result_state"] or "") == _REPAIR_PENDING
-                or str(row["hq_review_resume_review_path"] or "")
-            )
-        ):
-            _ingest_resume_if_present(self, run_id, advisory_id)
-            return
+        if run_id == _EXPECTED_RUN_ID and row is not None:
+            if str(row["hq_review_resume_review_path"] or ""):
+                return
+            if str(row["result_state"] or "") == _REPAIR_PENDING:
+                _ingest_resume_if_present(self, run_id, advisory_id)
+                return
         original_ingest(self, run_id, advisory_id)
 
     orchestrator_class._send_hq_wake = send_hq_wake
