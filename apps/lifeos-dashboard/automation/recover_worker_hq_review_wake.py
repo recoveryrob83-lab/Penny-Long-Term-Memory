@@ -197,7 +197,6 @@ def main(argv: list[str] | None = None) -> int:
             raise WorkerRuntimeError("Another automation job is already running.")
         try:
             released = _release_pre_submit_claim(database_path, args.run_id)
-            command_center.set_paused(False)
             budget = _reserve_budget(command_center, args.run_id)
             command = [
                 sys.executable,
@@ -252,6 +251,10 @@ def main(argv: list[str] | None = None) -> int:
                     affected_run_id=args.run_id,
                     trigger="hq_review_recovery",
                 )
+                raise WorkerRuntimeError(
+                    "Recovered HQ wake did not verify return to its source conversation."
+                )
+            command_center.set_paused(False)
         finally:
             run_lock.release()
     except (OSError, sqlite3.Error, subprocess.TimeoutExpired, WorkerRuntimeError, ValueError) as exc:
