@@ -98,7 +98,7 @@ Maintenance HQ must fetch the current procedure before editing, preserve unrelat
 - Requests Cross-Department Authority: true
 - Requests Material Exception: true
 - Transport Scope Change Detected: false
-- Completion Condition: All clearly stale current canonical records inside the authorized repair roots were repaired or explicitly held, every write was read back and evidenced, and one immutable result artifact was submitted for IMMEDIATE_HQ review.
+- Completion Condition: All clearly stale current canonical records inside the authorized repair roots are repaired or explicitly held, every write is read back and evidenced, and one immutable result artifact is submitted for IMMEDIATE_HQ review.
 - Result Contract ID: lifeos_worker_result
 - Result Contract Version: 1
 - Result Submission Procedure ID: maintenance_worker_result_submission
