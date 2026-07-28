@@ -257,7 +257,13 @@ def main(argv: list[str] | None = None) -> int:
             command_center.set_paused(False)
         finally:
             run_lock.release()
-    except (OSError, sqlite3.Error, subprocess.TimeoutExpired, WorkerRuntimeError, ValueError) as exc:
+    except (
+        OSError,
+        sqlite3.Error,
+        subprocess.TimeoutExpired,
+        WorkerRuntimeError,
+        ValueError,
+    ) as exc:
         print(f"STOPPED: {exc}", file=sys.stderr)
         print(f"Repository: {repository_root}", file=sys.stderr)
         print(f"Database: {database_path}", file=sys.stderr)
