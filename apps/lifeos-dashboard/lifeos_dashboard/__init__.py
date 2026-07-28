@@ -1,6 +1,8 @@
 """LifeOS dashboard package."""
 # ruff: noqa: E402, F401, I001
 
+import sqlite3 as _sqlite3
+import subprocess as _subprocess
 from functools import wraps as _wraps
 
 __all__ = ["__version__"]
@@ -46,6 +48,7 @@ from . import (
     worker_github_orchestrator_runtime as _worker_github_orchestrator_runtime,
 )
 from .worker_github_orchestrator import WorkerGitHubOrchestrator as _WorkerGitHubOrchestrator
+from .worker_runtime import WorkerRuntimeError as _WorkerRuntimeError
 from . import (
     worker_maintenance_relay_repair_runtime as _worker_maintenance_relay_repair_runtime,
 )
@@ -98,3 +101,79 @@ from . import (
 from . import (
     worker_activation_readiness_runtime as _worker_activation_readiness_runtime,
 )
+
+_base_orchestrator_run_once = _WorkerGitHubOrchestrator.run_once
+
+
+def _successful_git_sync_for_cycle(self) -> bool:
+    """Require a successful non-skipped sync from the cycle that just completed."""
+
+    started_at = self._last_cycle_started_at
+    if started_at is None:
+        return False
+    for event in reversed(self._events):
+        if event.occurred_at < started_at:
+            break
+        if event.action == "git_sync":
+            return event.status == "succeeded" and "skipped" not in event.detail
+    return False
+
+
+@_wraps(_base_orchestrator_run_once)
+def _composed_orchestrator_run_once(self) -> dict[str, object]:
+    """Advance an authorized existing-run review independently of Worker discovery."""
+
+    status = _base_orchestrator_run_once(self)
+    if self.operations.command_center.paused or self._last_error:
+        return status
+    if not _successful_git_sync_for_cycle(self):
+        return status
+    if not self._cycle_lock.acquire(blocking=False):
+        return self.status()
+
+    run_id = _worker_hq_review_resume_runtime._EXPECTED_RUN_ID
+    advisory_id = _worker_hq_review_resume_runtime._ADVISORY_ID
+    try:
+        _worker_hq_review_resume_runtime._ensure_resume_columns(
+            self.operations.hq_review
+        )
+        row = self._row(run_id)
+        if row is None:
+            return self.status()
+        if (
+            str(row["result_state"] or "")
+            == _worker_hq_review_resume_runtime._REPAIR_PENDING
+            and str(row["hq_review_state"] or "")
+            == _worker_hq_review_resume_runtime._REPAIR_REQUIRED
+        ):
+            _worker_hq_review_resume_runtime._send_resume_wake(
+                self,
+                run_id,
+                advisory_id,
+            )
+            _worker_hq_review_resume_runtime._ingest_resume_if_present(
+                self,
+                run_id,
+                advisory_id,
+            )
+    except (
+        OSError,
+        ValueError,
+        _sqlite3.Error,
+        _subprocess.TimeoutExpired,
+        _WorkerRuntimeError,
+    ) as exc:
+        self._last_error = str(exc)
+        self._event(
+            "hq_review_resume_cycle",
+            "stopped",
+            str(exc),
+            run_id=run_id,
+            advisory_id=advisory_id,
+        )
+    finally:
+        self._cycle_lock.release()
+    return self.status()
+
+
+_WorkerGitHubOrchestrator.run_once = _composed_orchestrator_run_once
