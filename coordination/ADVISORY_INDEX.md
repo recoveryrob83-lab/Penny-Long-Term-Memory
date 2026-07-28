@@ -1,10 +1,11 @@
 # LifeOS Advisory Index
 
-Updated: 2026-07-26
+Updated: 2026-07-28
 Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
+- ADV-20260728-054 — OPEN — Posted Board: `coordination/boards/engineering.md` — Current Target Department: maintenance — Publish Maintenance HQ Worker review procedure v2 for authorized bounded-write verification; Engineering runtime phase remains blocked
 - ADV-20260726-053 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: maintenance — Run one Rob-approved coordinated repository coherence audit and repair
 
 ## Recently Closed Advisories
@@ -28,7 +29,7 @@ The entries below preserve the names and wording used when they were created or 
 
 ## Index Rules
 
-- `coordination/ADVISORY_INDEX.md` is the sole active advisory routing dashboard.
+- `coordination/ADVISORY_INDEX.md` is the sole active routing dashboard.
 - Full current advisory text lives on the source department board under `coordination/boards/`.
 - `LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and `coordination/boards/main-assistant.md` as the retained source-board path.
 - A material advisory change increments `advisory_revision`.
