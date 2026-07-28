@@ -5,7 +5,7 @@ Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
-- ADV-20260728-054 — OPEN — Posted Board: `coordination/boards/engineering.md` — Current Target Department: maintenance — Publish Maintenance HQ Worker review procedure v2 for authorized bounded-write verification; Engineering runtime phase remains blocked
+- ADV-20260728-054 — OPEN — Posted Board: `coordination/boards/engineering.md` — Current Target Department: engineering — Enable one guarded later Maintenance HQ review attempt for RUN-ADV-20260726-053-R1
 - ADV-20260726-053 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: maintenance — Run one Rob-approved coordinated repository coherence audit and repair
 
 ## Recently Closed Advisories
