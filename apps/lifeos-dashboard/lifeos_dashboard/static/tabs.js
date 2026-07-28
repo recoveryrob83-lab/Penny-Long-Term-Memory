@@ -73,6 +73,13 @@ const ensureAutomationLogsSurface = () => {
     script.defer = true;
     document.head.appendChild(script);
   }
+
+  if (!document.querySelector('script[src="/static/latest-run-report.js"]')) {
+    const script = document.createElement("script");
+    script.src = "/static/latest-run-report.js";
+    script.defer = true;
+    document.head.appendChild(script);
+  }
 };
 
 ensureAutomationLogsSurface();
