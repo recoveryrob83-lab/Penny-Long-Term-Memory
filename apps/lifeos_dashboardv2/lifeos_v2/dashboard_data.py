@@ -5,6 +5,20 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 
+def overview_from_connectors(results: list[dict]) -> dict:
+    """Project read-only records into Overview panels without merging sources."""
+    now = datetime.now(UTC).isoformat(); by_source = {item["source_system"]: item for item in results}
+    labels = {"todoist": "Todoist", "calendar": "Calendar", "trello": "Trello", "drive": "Google Drive"}
+    sources = [{"name": "LifeOS server", "state": "healthy", "detail": "Local API available", "last_success": now}]
+    for key, label in labels.items():
+        item = by_source[key]; sources.append({"name": label, "state": item["status"], "detail": item.get("error") or item.get("recovery_hint") or "Live read-only data", "last_success": item.get("last_success_at")})
+    tasks, calendar, trello, drive = by_source["todoist"]["records"], [x for x in by_source["calendar"]["records"] if x.get("state") != "cancelled"], by_source["trello"]["records"], by_source["drive"]["records"]
+    event = next((x for x in calendar if x.get("start_at")), {"title": "No upcoming calendar event", "start_at": "", "source_url": ""})
+    lane = lambda name: [x for x in trello if x.get("source_container_name", "").lower() == name]
+    now_card = next(iter(lane("now")), {"title": "No current Trello card", "summary": "", "source_url": ""})
+    return {"generated_at": now, "fixture_backed": False, "sources": sources, "today": {"date": "Today", "next_event": {"title": event["title"], "time": event.get("start_at", ""), "location": event.get("source_container_name", ""), "url": event.get("source_url", "")}, "tasks": [{"title": x["title"], "priority": "P" + str(x.get("extra", {}).get("priority") or ""), "due": x.get("due_at") or "No due time", "url": x.get("source_url", "")} for x in tasks]}, "flow": {"now": {"title": now_card["title"], "detail": now_card.get("summary", ""), "url": now_card.get("source_url", "")}, "next": [{"title": x["title"], "url": x.get("source_url", "")} for x in lane("next")], "waiting": [{"title": x["title"], "url": x.get("source_url", "")} for x in lane("waiting")]}, "attention": [{"count": len(tasks), "label": "Todoist commitments", "detail": "Todoist remains authoritative."}, {"count": len(trello), "label": "Trello flow", "detail": "Possibilities and attention flow, not commitments."}], "shortcuts": [{"title": x["title"], "detail": x.get("extra", {}).get("type", "Curated shortcut"), "url": x.get("source_url", "")} for x in drive], "github": overview_model()["github"], "connector_results": results}
+
+
 def overview_model() -> dict:
     now = datetime.now(UTC).isoformat()
     return {
