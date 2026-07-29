@@ -1,0 +1,21 @@
+{
+  "repository": "recoveryrob83-lab/Penny-Long-Term-Memory",
+  "advisory_index_path": "coordination/ADVISORY_INDEX.md",
+  "board_root": "coordination/boards",
+  "department_roots": {
+    "engineering": "projects/engineering",
+    "maintenance": "projects/life-logistics-hq",
+    "chief_of_staff": "projects/main-assistant",
+    "wellness": "projects/wellness",
+    "business": "projects/business-development",
+    "office_leaks": "projects/office-leaks-consulting",
+    "finance": "projects/finance-benefits"
+  },
+  "route_labels": ["engineering", "maintenance", "chief_of_staff", "wellness", "business", "office_leaks", "finance"],
+  "timezone": "America/Chicago",
+  "poll_interval_seconds": 60,
+  "global_pause_state": false,
+  "logging_level": "INFO",
+  "persistence_path": ".lifeos-v2/runtime.json",
+  "runtime_github_credential_env": "GITHUB_TOKEN"
+}

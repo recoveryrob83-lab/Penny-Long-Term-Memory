@@ -1,0 +1,107 @@
+"""Small local API for the future dashboard and extension."""
+from __future__ import annotations
+
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Callable
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, HttpUrl
+
+from .contracts import CommandState, Route
+from .reader import AdvisoryReader
+from .runtime import CourierService, RuntimeStore
+
+
+class RouteInput(BaseModel):
+    route_name: str
+    target: str
+    chatgpt_url: HttpUrl
+    health: str = "AVAILABLE"
+
+
+class TelemetryInput(BaseModel):
+    note: str = ""
+
+
+def create_app(root: Path, persistence_path: Path, index_path: str = "coordination/ADVISORY_INDEX.md") -> FastAPI:
+    reader = AdvisoryReader(root, index_path, "https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory/blob/main")
+    service = CourierService(RuntimeStore(persistence_path))
+    app = FastAPI(title="LifeOS V2 Courier", version="0.1.0")
+
+    def snapshot() -> tuple[list, dict[str, str]]:
+        advisories, errors = reader.read()
+        service.reconcile(advisories)
+        return advisories, errors
+
+    @app.get("/health")
+    def health() -> dict:
+        return {"status": "ok", "paused": service.paused}
+
+    @app.get("/status")
+    def status() -> dict:
+        advisories, errors = snapshot()
+        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands())}
+
+    @app.get("/advisories")
+    def advisories() -> dict:
+        items, errors = snapshot()
+        return {"items": [item.to_dict() for item in items], "parse_errors": errors}
+
+    @app.get("/advisories/{advisory_id}")
+    def advisory(advisory_id: str) -> dict:
+        items, _ = snapshot()
+        found = next((item for item in items if item.advisory_id == advisory_id), None)
+        if not found:
+            raise HTTPException(404, "Advisory not found")
+        return found.to_dict()
+
+    @app.get("/routes")
+    def routes() -> dict:
+        return {"items": service.routes()}
+
+    @app.post("/routes", status_code=201)
+    def routes_create(payload: RouteInput) -> dict:
+        route = Route(payload.route_name, payload.target, str(payload.chatgpt_url), datetime.now(UTC).isoformat(), health=payload.health)
+        return service.register_route(route)
+
+    @app.delete("/routes/{route_name}", status_code=204)
+    def routes_delete(route_name: str) -> None:
+        if not service.delete_route(route_name):
+            raise HTTPException(404, "Route not found")
+
+    @app.get("/commands")
+    def commands() -> dict:
+        return {"items": service.commands()}
+
+    @app.get("/commands/{command_id}")
+    def command(command_id: str) -> dict:
+        found = next((item for item in service.commands() if item["command_id"] == command_id), None)
+        if not found:
+            raise HTTPException(404, "Command not found")
+        return found
+
+    def telemetry(state: CommandState) -> Callable:
+        def handler(command_id: str, payload: TelemetryInput) -> dict:
+            changed = service.update_telemetry(command_id, state, payload.note)
+            if not changed:
+                raise HTTPException(404, "Command not found")
+            return changed
+        return handler
+
+    app.post("/commands/{command_id}/ack")(telemetry(CommandState.DELIVERED))
+    app.post("/commands/{command_id}/fail")(telemetry(CommandState.FAILED))
+    app.post("/commands/{command_id}/uncertain")(telemetry(CommandState.UNCERTAIN))
+
+    @app.post("/system/pause")
+    def pause() -> dict:
+        service.pause()
+        return {"paused": True}
+
+    @app.post("/system/resume")
+    def resume() -> dict:
+        service.resume()
+        snapshot()
+        return {"paused": False}
+
+    return app
