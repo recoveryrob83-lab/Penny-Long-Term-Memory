@@ -9,11 +9,14 @@ async function probe(local) {
   try {
     let result;
     try { result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'}); }
-    catch (_) { await chrome.scripting.executeScript({target:{tabId:tab.id}, files:['content.js']}); result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'}); }
+    catch (_) {
+      try { await chrome.scripting.executeScript({target:{tabId:tab.id}, files:['content.js']}); result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'}); }
+      catch (error) { return {ready:false, reason:`Content-script recovery failed: ${String(error?.message || 'unknown browser error')}`}; }
+    }
     const ready = result?.url === local.routeUrl && result.content_script && result.composer_ready && result.composer_empty && result.send_control;
     await reportReadiness(local, result || {});
     return {ready, tab, reason:ready ? 'Exact tab is ready.' : 'Composer or control is not ready.'};
-  } catch (_) { await reportReadiness(local); return {ready:false, reason:'Content script is unavailable; reload the exact chat tab.'}; }
+  } catch (error) { await reportReadiness(local); return {ready:false, reason:`Content script is unavailable: ${String(error?.message || 'unknown browser error')}`}; }
 }
 async function poll() {
   const local = await state(); await heartbeat(); if (local.emergencyStop || !local.routeName || !local.routeUrl) return {ok:false, reason:'Route or emergency-stop state blocks dispatch.'};
