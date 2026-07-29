@@ -1,6 +1,7 @@
 """Read-only dashboard models. Live connectors remain deliberately opt-in."""
 from __future__ import annotations
 
+import os
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -9,7 +10,8 @@ def overview_from_connectors(results: list[dict]) -> dict:
     """Project read-only records into Overview panels without merging sources."""
     now = datetime.now(UTC).isoformat(); by_source = {item["source_system"]: item for item in results}
     labels = {"todoist": "Todoist", "calendar": "Calendar", "trello": "Trello", "drive": "Google Drive"}
-    sources = [{"name": "LifeOS server", "state": "healthy", "detail": "Local API available", "last_success": now}]
+    github_detail = "Configured local paths readable; GitHub token not set" if not os.getenv("GITHUB_TOKEN") else "Configured local paths readable; GitHub API token has not been verified"
+    sources = [{"name": "LifeOS server", "state": "healthy", "detail": "Local API available", "last_success": now}, {"name": "GitHub", "state": "partial", "detail": github_detail, "last_success": now}]
     for key, label in labels.items():
         item = by_source[key]; sources.append({"name": label, "state": item["status"], "detail": item.get("error") or item.get("recovery_hint") or "Live read-only data", "last_success": item.get("last_success_at")})
     tasks, calendar, trello, drive = by_source["todoist"]["records"], [x for x in by_source["calendar"]["records"] if x.get("state") != "cancelled"], by_source["trello"]["records"], by_source["drive"]["records"]

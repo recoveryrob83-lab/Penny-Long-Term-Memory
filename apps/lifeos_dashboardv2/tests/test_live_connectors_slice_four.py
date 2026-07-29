@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from lifeos_v2.connectors import CalendarConnector, ConnectorManager, TodoistConnector, TrelloConnector
+from lifeos_v2.dashboard_data import overview_from_connectors, overview_model
 
 
 def test_todoist_preserves_priority_and_isolates_bad_record(monkeypatch):
@@ -46,3 +47,13 @@ def test_missing_credentials_and_cache_are_honest(monkeypatch):
     config = Path(__file__).parents[1] / "config"; manager = ConnectorManager(config)
     first = manager.refresh_all()
     assert all(x.status == "configuration_required" for x in first)
+
+
+def test_github_source_status_is_present_in_fixture_and_live_connector_modes(monkeypatch):
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    assert any(item["name"] == "GitHub" for item in overview_model()["sources"])
+    results = [{"source_system": name, "status": "ok", "last_success_at": "2026-07-29T12:00:00+00:00", "records": [], "error": None, "recovery_hint": ""} for name in ("todoist", "calendar", "trello", "drive")]
+    live = overview_from_connectors(results)
+    github = next(item for item in live["sources"] if item["name"] == "GitHub")
+    assert github["state"] == "partial"
+    assert github["detail"] == "Configured local paths readable; GitHub token not set"
