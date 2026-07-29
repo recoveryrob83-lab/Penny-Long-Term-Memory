@@ -1,69 +1,49 @@
 # Engineering_HQ Open Loops
 
-Updated: 2026-07-27
+Updated: 2026-07-28
 
 ## Open
 
 | Status | Priority | Item | Next Action | Notes |
 |---|---|---|---|---|
-| Active | High | Department ownership architecture and dashboard inspection | Observe corrected role-routed boots and inspect demonstrated identity, ownership, handbook, or source-board defects before closing the remaining system wrapper | ADV-20260719-044 is closed. Department Inspection remains locally validated at 414 normalized records, zero findings, and zero warnings. All room handbooks are published through Project Sources as noncanonical mirrors. Remaining work is ordinary post-repair observation under `NOTE-20260717-014-department-ownership-and-dashboard-inspection.md` |
-| Active | Normal | Browser and Worker transport maintenance | Use only separately authorized Worker runs for transport evidence and repair demonstrated defects without weakening fail-closed safeguards | Canonical title rollover, direct URL routing, guarded registration and route capture, browser reconnect, owning-HQ resolution, shared safety pause, global send budget, activation readiness, pending-route canary targeting, and evidence-backed composer-residue cleanup are merged. Rob confirmed ordinary post-PR #21 deployment health on 2026-07-26. Never blind-retry confirmed or uncertain submissions |
-| Open | Normal | Dashboard auto-refresh | Add a configurable in-page auto-refresh control only if ordinary use still demonstrates value | Reuse the existing refresh path, prevent overlaps, show last and next refresh state, and preserve guarded Git sync |
-| Open | Normal | Four-source dashboard observation | Confirm ordinary refresh, independent source health, cached degraded operation, and accepted scan paths remain useful in real use | Do not intentionally destroy valid credentials merely to demonstrate failure mode |
-| Open | Normal | Penny Inventory Worker pilot | Begin with 2–3 real sale items and verify one-row-per-item writes, stable image references, uncertainty labels, and final Sheet read-back | Grandfathered compatibility package remains at `workers/penny-inventory/`; evaluate it under the canonical Worker contract without treating its path as the model for new Workers |
-| Open | Normal | Penny Raw Capture Worker pilot | Observe real append, canonical-target, timestamp, and verification behavior | Grandfathered compatibility package remains at `workers/penny-raw-capture/`; operational reliability still needs live use |
-| Open | Normal | Reliable Connector Execution Layer | Turn the design note into an implementation packet outline only when Rob authorizes the next build package | Align future design with immutable evidence, HQ verification, signed consumption, bounded retries, one authoritative operational ledger, direct registered routes, persisted safety pause, shared send budget, and contract-derived activation readiness. Do not reopen Package E implicitly |
-| Open | Normal | Connector health and retry policy | Define read and write health states, bounded retry rules, stop and backoff triggers, and degraded-mode fallback when a concrete implementation package is authorized | Use dashboard caches, guarded Git sync, browser safety gates, Worker duplicate suppression, route holds, one-shot HQ wake claims, persisted shared-pause triggers, shared send-budget holds, activation-readiness holds, and verified connector read-back as evidence patterns |
-| Active | Normal | Worker reliability evidence | Observe `RUN-ADV-20260726-053-R1` through immutable result submission and `Maintenance_HQ` review without modifying the source advisory or Advisory Index | Rob-authorized `ADV-20260726-053` revision 1 dispatched the first real Maintenance full-system exercise under `IMMEDIATE_HQ`. Engineering owns transport and ingestion evidence; Maintenance owns the audit, result, hold resolution, and HQ verification. Do not rerun or broaden the work |
-| Paused | Normal | Office Leaks delivery architecture and Worker rollout | Keep paused while Rob pauses the Office Leaks business; do not prepare an Office Leaks Worker, route, schedule, or implementation package | Preserve existing Office Leaks records without converting them into active AI-systems-business truth. Any future resume belongs to `Office_Leaks_HQ` and requires an explicit decision |
-| Open | Normal | Cost-bearing technical choices | Route hosting, subscriptions, paid APIs, tools, backend workers, queues, or paperwork overlap to `Finance_HQ` | Finance owns money and paperwork |
-| Open | Normal | Software repository strategy | Keep LifeOS as the runtime mirror and use separate repositories for educational and future standalone projects | Revisit dashboard extraction only if implementation expands materially |
-| Open | Low | Worker registration startup-state polish | Later clarify that canonical profile discovery is repository-based and independent of ChatGPT bridge readiness, and ensure the panel never remains on stale `Loading profiles` text after a failed or delayed first refresh | Nonblocking UI issue observed during PR #20 validation. Do not couple profile discovery to browser availability or expand Worker authority while improving messaging and retry behavior |
-| Paused | Low | Optional Python canonical source resolver | Do not implement unless operational evidence demonstrates a concrete reliability, security, or scale gap outside existing deterministic parsing | Python may provide defense in depth but is not the Worker and must not become the owner or interpreter of department judgment |
-| Paused | Low | Canonical prompt transport verification | Do not resume the general composer investigation without demonstrated failure | Preserve validated marker, hydration, exact-destination, strict new-turn witness, direct-route, route-revision, one-tab, persisted-pause, send-budget, activation-readiness, and evidence-backed stale-residue cleanup paths. Full-text equality and broad focus or timeout experiments remain out of scope |
-| Paused | Low | Engineering_HQ Daily Sync | Keep paused until Rob explicitly resumes it | Scheduler production reliability is live-validated. This unattended task remains paused by deliberate operating choice, not an unresolved technical gate |
+| Active | High | LifeOS Version Two overall architecture | Review and refine the working `Version Two Safeguards` and `LifeOS Version Two System Design` documents with Rob until the process is simple, coherent, and complete | Simplification is the primary objective. No implementation is authorized yet |
+| Open | High | Browser Plugin Design | Produce the component design after the overall process is settled | The plugin is a narrow courier: registered routes, composer protection, prompt delivery, basic telemetry, three command-local attempts, no response-body extraction, and no policy ownership |
+| Open | High | LifeOS V2 Server Design | Produce the component design after the overall process is settled | The server mediates among GitHub, browser plugin, and dashboard; watches advisories and outcomes; tracks simple delivery state; does not recreate V1 evidence bureaucracy |
+| Open | High | LifeOS V2 Dashboard Design | Produce the component design after the overall process is settled | The dashboard must clearly answer what is happening, what is blocked, and who acts next, with simple human recovery controls |
+| Waiting | High | Promote approved V2 design set to GitHub | Wait until Rob approves the overall and component design documents | Promote only settled architecture and implementation contracts, not exploratory discussion |
+| Waiting | High | Codex Penny comprehensive implementation prompt | Prepare one repository-scale deliverables prompt after the approved designs are canonical | Target implementation location: `apps/lifeos_dashboardv2`; thinking first, implementation second |
+| Waiting | Normal | Archive and retire V1 dashboard architecture | Define the exact archive treatment during the approved migration design | Preserve current code and Git history. Do not delete or rewrite historical evidence. Do not carry legacy complexity forward merely for compatibility |
+| Paused | Normal | V1 Worker runtime and ADV-053/ADV-054 repair path | Take no further Engineering action unless Rob explicitly reopens V1 cleanup | The incident demonstrated both useful safeguards and excessive brittleness. The latest apparent failure was stale Maintenance chat context, not another runtime defect |
+| Paused | Normal | Office Leaks delivery architecture and Worker rollout | Keep paused while Rob pauses the Office Leaks business | Any future resume belongs to `Office_Leaks_HQ` and requires an explicit decision |
+| Open | Normal | Cost-bearing technical choices | Route hosting, paid APIs, subscriptions, extension distribution, or other spending decisions to `Finance_HQ` when concrete choices arise | Finance owns money and paperwork |
 
 ## Waiting / Deferred
 
 | Status | Item | Owner / Trigger | Notes |
 |---|---|---|---|
-| Deferred | Additional department Worker adoption | An owning department identifies a recurring, standardized, measurable bottleneck and explicitly requests Worker evaluation | `Business_HQ`, `Finance_HQ`, and `Wellness_HQ` do not request Workers at present. Business will reconsider only if standardized market-evidence research becomes a measurable bottleneck. No profile, title, ID, room, registry row, route, canary, activation, schedule, or assignment should be created by analogy |
-| Deferred | Human-readable Worker envelope summary | Rob authorizes a future usability enhancement after demonstrated need | Package E closeout explicitly deferred this display-only enhancement. JSON remains authoritative; no safety or authority dependency may be placed on a separate display copy |
-| Waiting | Gmail dashboard adapter | First client, multiple active leads, repeated manual inbox checking, or demonstrated risk of missing a client message | Current Gmail use does not justify another adapter |
-| Waiting | General Drive dashboard adapter | Recurring client folders, proposals, deliverables, approvals, or working documents needing dashboard shortcuts | The bounded scheduler Sheet mirror is separate and implemented; general Drive browsing remains deferred |
-| Waiting | Desktop window or service packaging | Sustained dashboard usefulness and a clear unattended-runtime requirement | Preferred direction remains a thin desktop shell or Windows service around the same local application |
-| Waiting | Deferred prompt-launcher improvements | Concrete operational need | The old classroom launcher remains secondary. Worker Operations carries the active execution surface |
+| Deferred | High-risk workflow controls | A concrete destructive, financial, external, or security-sensitive workflow demonstrates need | Stronger approval, evidence, review, and strict idempotency should be opt-in by workflow rather than shape the normal path |
+| Deferred | Additional department Workers | A demonstrated recurring bottleneck and explicit owner request | V2 design should not assume every department requires a Worker or separate execution room |
+| Deferred | Multi-provider browser support | The ChatGPT browser plugin works reliably and a second real provider creates a concrete need | Do not build decorative provider-neutral abstractions before a second provider exists |
+| Deferred | Productization architecture | Personal LifeOS V2 proves reliability and value | Do not burden the first implementation with multi-user tenancy, billing, cloud orchestration, or generalized workflow-builder requirements |
+| Deferred | General connector dashboard adapters | Repeated real use demonstrates a concrete need | Keep V2 scope focused on the advisory handoff loop first |
 
-## Done / Recently Closed
+## Recently Closed / Superseded
 
-| Closed Date | Item | Notes |
+| Date | Item | Notes |
 |---|---|---|
-| 2026-07-26 | PR #21 post-merge deployment health | Rob confirmed current `main` was pulled, the dashboard was restarted, and ordinary health was good. Deployment follow-through for the composer-residue repair is complete; later live behavior belongs to the separately authorized Maintenance audit and the existing reliability-evidence loop |
-| 2026-07-26 | Lean Worker rollout phase | The production Worker portfolio remains intentionally limited to `Engineering_Worker` and `Maintenance_Worker`. `Business_HQ`, `Finance_HQ`, and `Wellness_HQ` independently declined Worker rollout for now. Further adoption requires an owner-requested evaluation after a recurring standardized workload creates a measurable bottleneck; empty department slots are not implementation work |
-| 2026-07-26 | Worker composer residue repair | PR #21 was refreshed against current `main` and squash-merged as `620ef84c57cbb87123bbca30e43faffda1e71032` after Rob reported the focused tests, affected regressions, and Ruff green. The repair clears only a canonical LifeOS wrapper whose `wrapper_id` and `run_id` are proven together in one submitted user turn, preserves unrelated, malformed, and unproven drafts, and never retries a prior send |
-| 2026-07-26 | Maintenance Worker activation and live deployment | Rob confirmed the `maintenance_worker` is active and live in the system. Activation is separate from assignment authority, schedules, unattended execution, broader permissions, or source-record repair authority |
-| 2026-07-26 | Maintenance Worker registration, route linkage, and zero-authority canary | PR #20 was squash-merged as `e91783dd9705df4a090eae2b4414adead6dafcf4`. Rob then reported one `maintenance_worker` registry row, exact route revision 1, a successful zero-authority browser round trip, return to Engineering, and route promotion to `available` |
-| 2026-07-25 | Maintenance Worker GitHub rollout prerequisites | PR #19 squash-merged as `28a7a4fc40317d043dbe9983747475f85d37742a` after Rob reported the focused pytest, affected regression, and Ruff gates passed. The approved read-only profile, immutable result procedure, Maintenance HQ review receipt procedure, canonical review-path bridge, activation-readiness coverage, and explicit receiver contract are on `main` |
-| 2026-07-25 | Package F Wave 0B post-merge dashboard smoke | Rob confirmed `/api/health` and Worker Operations reported ready; the Engineering Worker was available; the browser bridge was active; the execution gate was active; and no review was pending |
-| 2026-07-25 | Package F Wave 0B Slice 4: contract-derived activation gate | PR #18 merged as `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5` after Rob's repository-native focused pytest, affected regression, and Ruff gates passed |
-| 2026-07-25 | Package F Wave 0B controlled cross-department safety kernel | Slices 1–4 are complete. Engineering supplied exact owning-HQ destination resolution, persisted shared safety-pause triggers, one conservative global send budget, and a read-only contract-derived activation prerequisite report |
-| 2026-07-25 | Package F Wave 0B Slice 3: conservative global send budget | PR #17 squash-merged as `e1d297f1a2517490b3fb2a37298689c6db25bfb0` after Rob's focused pytest, affected regressions, and Ruff passed |
-| 2026-07-24 | Package F Wave 0B Slice 2: automatic shared safety-pause triggers | PR #16 squash-merged as `3bf20ca231b3b5fbb1c315b24881e46939b3b508` after the regression and Ruff gates passed |
-| 2026-07-24 | Package F Wave 0B Slice 1: cross-department owning-HQ destination resolution | PR #15 squash-merged as `83c309f651de0354982fcd6cbb68f9cf3251d6a3` after repository-native validation passed |
-| 2026-07-23 | Package F Wave 0A foundation | Reconciled complete after the existing Life OS Change Watch ran successfully in `Chief_of_Staff_HQ` and Package E plus direct routing proved the Engineering-only Worker-to-HQ-to-watcher chain |
-| 2026-07-23 | Package E: Worker Dispatch, Result Outbox, HQ Verification, and CoS Consumption | Closed after the Engineering-only pilot proved dispatch, immutable reports, deterministic ingestion, report repair, owning-HQ review, Rob validation, watcher reporting, and duplicate suppression |
-| 2026-07-20 | Package D: Operations-Procedure and Worker-Runtime Implementation | Closed after Slices 1–7, synthetic transport evidence, Engineering Worker profile and procedure, and the live pilot completed with same-row receiver acceptance and verified HQ review |
+| 2026-07-28 | LifeOS V2 planning foundation | Created the Drive working documents `Version Two Safeguards` and `LifeOS Version Two System Design` under `Life Organization/Chief Engineering Penny` |
+| 2026-07-28 | Incremental V1 rescue strategy | Superseded by Rob's decision to simplify the entire advisory execution system and build V2 under `apps/lifeos_dashboardv2` |
+| 2026-07-28 | Universal send-budget direction | Rejected for V2. Use a maximum of three attempts local to one delivery command, with no blind retry after uncertainty |
+| 2026-07-28 | Mandatory routine HQ review and immutable review-attempt chains | Rejected for the normal V2 path. Ordinary Git history and department advisory updates are sufficient for routine internal work |
 
 ## Boundary
 
-- Package D, Package E, Package F Wave 0A, Package F Wave 0B, the initial cross-department Worker rollout phase, and PR #21 deployment follow-through are complete. Do not recreate completed work as active loops.
-- The production portfolio is intentionally lean: `Engineering_Worker` and `Maintenance_Worker` only.
-- `Business_HQ`, `Finance_HQ`, and `Wellness_HQ` do not request Workers at present. Reconsideration requires a demonstrated recurring standardized bottleneck plus an explicit owner request.
-- The Maintenance Worker is active and executing only `ADV-20260726-053` revision 1 under the exact Rob-approved coordinated-repair exception. The assignment creates no standing schedule, unattended authority, broader permission, or ongoing cross-department ownership.
-- The activation-readiness service remains read-only and always reports `activation_authorized: false`; Rob's explicit activation is a separate authority event rather than a validator output.
-- PR #21 is merged and ordinary post-merge deployment health is confirmed. Later live composer evidence belongs to the current Maintenance audit rather than a replayed canary.
-- The current repository audit is assigned only through `ADV-20260726-053` revision 1 and `RUN-ADV-20260726-053-R1`; it must stop after immutable result submission for `IMMEDIATE_HQ` review.
-- Office Leaks is paused. Do not redirect its records or proposed Worker into the new AI systems business.
-- The persisted shared safety pause is the only circuit-breaker state. Do not create duplicate pause truth, automatically resume it, or erase uncertain-send evidence because time elapsed.
-- The shared send budget is one manually reset epoch. Do not create another ledger, refill it through time, or couple Reset to Resume.
-- Additional Workers, recurring tasks, connectors, spending, public actions, and shared governance changes require their proper owners and separate authority.
+- V2 design is active; implementation is not yet authorized.
+- The current V1 system remains historical and operational evidence until explicitly archived. Do not continue patching it by inertia.
+- One advisory and one owner are the default.
+- Multi-department dependencies return to Rob through Chief of Staff.
+- The browser plugin transports; it does not judge.
+- The server coordinates; it does not create authority.
+- The dashboard explains; it does not become a competing source of truth.
+- GitHub remains durable truth and ordinary audit history.
+- Rob decides.
