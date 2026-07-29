@@ -20,13 +20,14 @@ Each mission:
 8. stops and reports after the slice acceptance gate;
 9. waits for Engineering review and Rob's explicit resume decision before beginning another slice.
 
-Do not interpret the existence of all three mission files as permission to execute all three in one run.
+Do not interpret the existence of multiple mission files as permission to execute more than one slice in one run.
 
 ## Mission Order
 
 1. `MISSION-01-server-and-contracts.md`
 2. `MISSION-02-dashboard.md`
 3. `MISSION-03-browser-extension.md`
+4. `MISSION-04-live-read-connectors.md`
 
 ## Canonical Design Inputs
 
