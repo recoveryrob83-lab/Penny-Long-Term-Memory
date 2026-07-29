@@ -44,7 +44,9 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     reader = AdvisoryReader(root, index_path, "https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory/blob/main")
     service = CourierService(RuntimeStore(persistence_path))
     from .connectors import ConnectorManager
+    from .github_status import GitHubStatusVerifier
     connector_manager = ConnectorManager(Path(__file__).parent.parent / "config")
+    github_verifier = GitHubStatusVerifier()
     app = FastAPI(title="LifeOS V2 Courier", version="0.1.0")
     dashboard_root = Path(__file__).parent / "dashboard"
     app.mount("/static", StaticFiles(directory=dashboard_root), name="static")
@@ -75,7 +77,7 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
         configured = any(os.getenv(key) for key in ("TODOIST_API_TOKEN", "TRELLO_API_KEY", "GOOGLE_REFRESH_TOKEN"))
         fixture_mode = os.getenv("LIFEOS_FIXTURE_MODE", "auto").lower()
         if fixture_mode == "true" or (fixture_mode == "auto" and not configured): return overview_model()
-        return overview_from_connectors([item.to_dict() for item in connector_manager.refresh_all(force)])
+        return overview_from_connectors([item.to_dict() for item in connector_manager.refresh_all(force)], github_verifier.verify())
 
     @app.get("/dashboard/inspector")
     def inspector() -> dict:

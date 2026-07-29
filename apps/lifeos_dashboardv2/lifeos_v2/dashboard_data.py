@@ -6,12 +6,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 
-def overview_from_connectors(results: list[dict]) -> dict:
+def overview_from_connectors(results: list[dict], github_status: dict | None = None) -> dict:
     """Project read-only records into Overview panels without merging sources."""
     now = datetime.now(UTC).isoformat(); by_source = {item["source_system"]: item for item in results}
     labels = {"todoist": "Todoist", "calendar": "Calendar", "trello": "Trello", "drive": "Google Drive"}
-    github_detail = "Configured local paths readable; GitHub token not set" if not os.getenv("GITHUB_TOKEN") else "Configured local paths readable; GitHub API token has not been verified"
-    sources = [{"name": "LifeOS server", "state": "healthy", "detail": "Local API available", "last_success": now}, {"name": "GitHub", "state": "partial", "detail": github_detail, "last_success": now}]
+    github_status = github_status or {"state": "partial", "detail": "Configured local paths readable; GitHub token not set", "last_success": None}
+    sources = [{"name": "LifeOS server", "state": "healthy", "detail": "Local API available", "last_success": now}, {"name": "GitHub", "state": github_status["state"], "detail": github_status["detail"], "last_success": github_status.get("last_success")}]
     for key, label in labels.items():
         item = by_source[key]; sources.append({"name": label, "state": item["status"], "detail": item.get("error") or item.get("recovery_hint") or "Live read-only data", "last_success": item.get("last_success_at")})
     tasks, calendar, trello, drive = by_source["todoist"]["records"], [x for x in by_source["calendar"]["records"] if x.get("state") != "cancelled"], by_source["trello"]["records"], by_source["drive"]["records"]

@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import os
 import json
+import urllib.error
 from pathlib import Path
 
 from lifeos_v2.connectors import CalendarConnector, ConnectorManager, TodoistConnector, TrelloConnector
 from lifeos_v2.dashboard_data import overview_from_connectors, overview_model
+from lifeos_v2.github_status import GitHubStatusVerifier
 
 
 def test_todoist_preserves_priority_and_isolates_bad_record(monkeypatch):
@@ -57,3 +59,30 @@ def test_github_source_status_is_present_in_fixture_and_live_connector_modes(mon
     github = next(item for item in live["sources"] if item["name"] == "GitHub")
     assert github["state"] == "partial"
     assert github["detail"] == "Configured local paths readable; GitHub token not set"
+
+
+def test_github_verifier_without_token_keeps_local_partial_status(monkeypatch):
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    assert GitHubStatusVerifier().verify()["state"] == "partial"
+
+
+def test_github_verifier_reports_success_only_after_metadata_get(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token"); monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
+    calls = []
+    verifier = GitHubStatusVerifier(lambda url, headers: calls.append((url, headers)) or {"id": 1})
+    result = verifier.verify()
+    assert result["state"] == "ok" and result["last_success"] and calls[0][0] == "https://api.github.com/repos/owner/repo"
+    assert calls[0][1]["Authorization"] == "Bearer test-token"
+
+
+def test_github_verifier_reports_authentication_failure(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token"); monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
+    def reject(*_): raise urllib.error.HTTPError("https://api.github.com", 401, "Unauthorized", {}, None)
+    assert GitHubStatusVerifier(reject).verify()["state"] == "authentication_required"
+
+
+def test_github_verifier_keeps_local_partial_status_on_network_failure(monkeypatch):
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token"); monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
+    def fail(*_): raise OSError("network unavailable")
+    result = GitHubStatusVerifier(fail).verify()
+    assert result["state"] == "partial" and "local paths readable" in result["detail"]
