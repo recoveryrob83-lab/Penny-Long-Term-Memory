@@ -30,6 +30,16 @@ class HeartbeatInput(BaseModel):
     version: str = ""
 
 
+class ReadinessInput(BaseModel):
+    route_name: str
+    url: str = ""
+    content_script: bool = False
+    composer_ready: bool = False
+    composer_empty: bool = False
+    send_ready: bool = False
+    test_armed: bool = False
+
+
 def create_app(root: Path, persistence_path: Path, index_path: str = "coordination/ADVISORY_INDEX.md") -> FastAPI:
     reader = AdvisoryReader(root, index_path, "https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory/blob/main")
     service = CourierService(RuntimeStore(persistence_path))
@@ -53,7 +63,7 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     @app.get("/status")
     def status() -> dict:
         advisories, errors = snapshot()
-        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {})}
+        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {}), "tab_readiness": service.readiness()}
 
     @app.get("/dashboard/overview")
     def overview() -> dict:
@@ -119,6 +129,10 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     @app.post("/extension/heartbeat")
     def heartbeat(payload: HeartbeatInput) -> dict:
         return service.heartbeat(payload.version)
+
+    @app.post("/extension/readiness")
+    def readiness(payload: ReadinessInput) -> dict:
+        return service.report_readiness(**payload.model_dump())
 
     def telemetry(state: CommandState) -> Callable:
         def handler(command_id: str, payload: TelemetryInput) -> dict:

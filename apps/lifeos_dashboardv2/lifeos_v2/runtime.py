@@ -28,6 +28,7 @@ class RuntimeStore:
         self.data: dict[str, Any] = {"paused": False, "routes": {}, "commands": {}, "events": [], "extension": {"connected": False, "last_heartbeat_at": None}}
         if path.exists():
             self.data.update(json.loads(path.read_text(encoding="utf-8")))
+        self.data.setdefault("tab_readiness", {})
 
     def save(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -68,14 +69,31 @@ class CourierService:
     def commands(self) -> list[dict[str, Any]]:
         return list(self.store.data["commands"].values())
 
+    def readiness(self) -> dict[str, Any]:
+        return self.store.data["tab_readiness"]
+
+    def report_readiness(self, route_name: str, url: str, content_script: bool, composer_ready: bool, composer_empty: bool, send_ready: bool, test_armed: bool) -> dict[str, Any]:
+        route = self.store.data["routes"].get(route_name)
+        exact_url = bool(route and route["chatgpt_url"] == url)
+        ready = exact_url and content_script and composer_ready and composer_empty and send_ready
+        record = {"route_name": route_name, "url": url, "exact_url": exact_url, "content_script": content_script, "composer_ready": composer_ready, "composer_empty": composer_empty, "send_ready": send_ready, "test_armed": test_armed, "state": "READY" if ready else "NOT_READY", "verified_at": now()}
+        self.store.data["tab_readiness"][route_name] = record
+        self.store.event(f"tab readiness {route_name} {record['state']}")
+        self.store.save()
+        return record
+
+    def _route_dispatch_allowed(self, route_name: str) -> bool:
+        readiness = self.store.data["tab_readiness"].get(route_name, {})
+        return readiness.get("state") == "READY" and (not route_name.startswith("slice_three_test") or readiness.get("test_armed") is True)
+
     def eligible_command(self, route_name: str) -> dict[str, Any] | None:
-        if self.paused:
+        if self.paused or not self._route_dispatch_allowed(route_name):
             return None
         return next((c for c in self.commands() if c["route_name"] == route_name and c["state"] == CommandState.PENDING and c.get("attempts", 0) < 3), None)
 
     def begin_attempt(self, command_id: str) -> dict[str, Any] | None:
         command = self.store.data["commands"].get(command_id)
-        if not command or self.paused or command["state"] != CommandState.PENDING or command.get("attempts", 0) >= 3:
+        if not command or self.paused or not self._route_dispatch_allowed(command["route_name"]) or command["state"] != CommandState.PENDING or command.get("attempts", 0) >= 3:
             return None
         command.update({"state": CommandState.DISPATCHING, "attempts": command.get("attempts", 0) + 1, "last_attempt_at": now(), "updated_at": now()})
         self.store.event(f"dispatch attempt {command_id}")
