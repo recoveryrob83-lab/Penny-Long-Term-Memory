@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Callable
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, HttpUrl
 
 from .contracts import CommandState, Route
@@ -28,6 +30,12 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     reader = AdvisoryReader(root, index_path, "https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory/blob/main")
     service = CourierService(RuntimeStore(persistence_path))
     app = FastAPI(title="LifeOS V2 Courier", version="0.1.0")
+    dashboard_root = Path(__file__).parent / "dashboard"
+    app.mount("/static", StaticFiles(directory=dashboard_root), name="static")
+
+    @app.get("/", include_in_schema=False)
+    def dashboard() -> FileResponse:
+        return FileResponse(dashboard_root / "index.html")
 
     def snapshot() -> tuple[list, dict[str, str]]:
         advisories, errors = reader.read()
@@ -41,7 +49,19 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     @app.get("/status")
     def status() -> dict:
         advisories, errors = snapshot()
-        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands())}
+        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", [])}
+
+    @app.get("/dashboard/overview")
+    def overview() -> dict:
+        """Read-only fixture model until configured live connectors are enabled."""
+        from .dashboard_data import overview_model
+        return overview_model()
+
+    @app.get("/dashboard/inspector")
+    def inspector() -> dict:
+        """Bounded configured-path read model; it never writes source records."""
+        from .dashboard_data import inspector_model
+        return inspector_model(root)
 
     @app.get("/advisories")
     def advisories() -> dict:

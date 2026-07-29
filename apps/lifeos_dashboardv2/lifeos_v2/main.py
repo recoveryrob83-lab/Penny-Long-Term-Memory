@@ -4,7 +4,8 @@ import uvicorn
 
 from .api import create_app
 
-root = Path(os.environ.get("LIFEOS_V2_REPOSITORY_ROOT", Path.cwd())).resolve()
+default_root = Path(__file__).resolve().parents[3]
+root = Path(os.environ.get("LIFEOS_V2_REPOSITORY_ROOT", default_root)).resolve()
 state = Path(os.environ.get("LIFEOS_V2_PERSISTENCE_PATH", root / ".lifeos-v2/runtime.json"))
 app = create_app(root, state)
 

@@ -1,0 +1,40 @@
+const $ = (s) => document.querySelector(s);
+let overview, inspector, automation, refreshing = false;
+const esc = (v = "") => String(v).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const link = (title, url, detail = "") => `<article class="item"><a href="${esc(url)}" target="_blank" rel="noreferrer"><strong>${esc(title)}</strong></a>${detail ? `<p class="meta">${esc(detail)}</p>` : ""}</article>`;
+const announce = (message) => { $("#live").textContent = message; };
+
+function tabs() {
+  const buttons = [...document.querySelectorAll('[role=tab]')];
+  const activate = (name) => { buttons.forEach((b) => { const on = b.dataset.tab === name; b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1; $("#" + b.dataset.tab).hidden = !on; }); localStorage.setItem("lifeos-v2-tab", name); announce(`${name} section selected`); };
+  buttons.forEach((button, index) => { button.onclick = () => activate(button.dataset.tab); button.onkeydown = (event) => { if (!['ArrowLeft','ArrowRight'].includes(event.key)) return; event.preventDefault(); const next = (index + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length; buttons[next].focus(); activate(buttons[next].dataset.tab); }; });
+  activate(buttons.some((b) => b.dataset.tab === localStorage.getItem("lifeos-v2-tab")) ? localStorage.getItem("lifeos-v2-tab") : "overview");
+}
+
+function renderOverview(data) {
+  overview = data; $("#refresh-time").textContent = `Last refresh ${new Date(data.generated_at).toLocaleTimeString()}`; $("#overall-state").textContent = data.fixture_backed ? "Fixture-backed" : "Live";
+  $("#source-strip").innerHTML = data.sources.map((s) => `<div class="source ${esc(s.state)}"><strong>${esc(s.name)}</strong><span>${esc(s.state)} · ${esc(s.detail)}</span></div>`).join("");
+  $("#today-date").textContent = data.today.date; $("#next-event").innerHTML = link(data.today.next_event.title, data.today.next_event.url, `${data.today.next_event.time} · ${data.today.next_event.location}`); $("#task-list").innerHTML = data.today.tasks.map((x) => link(x.title, x.url, `${x.priority} · ${x.due}`)).join("");
+  $("#flow-now").innerHTML = link(data.flow.now.title, data.flow.now.url, data.flow.now.detail); $("#flow-next").innerHTML = data.flow.next.map((x) => link(x.title, x.url)).join(""); $("#flow-waiting").innerHTML = data.flow.waiting.map((x) => link(x.title, x.url)).join("");
+  $("#attention").innerHTML = data.attention.map((x) => `<div class="signal"><strong>${esc(x.count)}</strong><b>${esc(x.label)}</b><p class="meta">${esc(x.detail)}</p></div>`).join(""); $("#shortcuts").innerHTML = data.shortcuts.map((x) => link(x.title, x.url, x.detail)).join("");
+  $("#github").innerHTML = ["open_advisories","open_loops","activity"].flatMap((key) => data.github[key]).map((x) => link(x.title, x.url, x.detail)).join("");
+}
+
+function options(name) { return [...new Set(inspector.records.map((r) => r[name]))].sort().map((x) => `<option value="${esc(x)}">${esc(x)}</option>`).join(""); }
+function renderInspector() {
+  ["department","category","record_type","state","priority"].forEach((name) => { const select = $(`[name=${name}]`); if (select.options.length === 1) select.insertAdjacentHTML("beforeend", options(name)); });
+  const form = new FormData($("#filters")); const search = (form.get("search") || "").toLowerCase(); const visible = inspector.records.filter((r) => ["department","category","record_type","state","priority"].every((key) => !form.get(key) || r[key] === form.get(key))).filter((r) => !form.get("warnings") || r.warnings.length).filter((r) => !search || JSON.stringify(r).toLowerCase().includes(search));
+  $("#summary").innerHTML = [["Normalized records", inspector.records.length],["Findings", inspector.records.filter((r)=>r.category==="Findings").length],["With warnings", inspector.records.filter((r)=>r.warnings.length).length],["Visible now", visible.length]].map(([a,b])=>`<div class="summary"><span>${a}</span><strong>${b}</strong></div>`).join("");
+  $("#records").innerHTML = visible.length ? visible.map((r) => `<article class="surface record"><p class="eyebrow">${esc(r.department)} · ${esc(r.category)}</p><h3>${esc(r.title)}</h3><div class="badges"><span class="badge state">${esc(r.state)}</span><span class="badge priority">${esc(r.priority)}</span><span class="badge">${esc(r.record_type)}</span></div><p class="meta">${esc(r.summary)}</p><p class="meta">Authority: ${esc(r.authority)} · Confidence: ${esc(r.confidence)}</p>${r.warnings.map((w)=>`<p class="meta">Warning: ${esc(w)}</p>`).join("")}<p class="meta">${esc(r.source_path)}</p><a href="${esc(r.source_url)}" target="_blank" rel="noreferrer">Open canonical source</a><details><summary>Inspect source record</summary><pre>${esc(r.raw)}</pre></details></article>`).join("") : `<p class="muted">No configured records match these filters.</p>`;
+}
+
+function renderAutomation(status, routes, commands) {
+  automation = {status, routes, commands}; $("#pause").textContent = status.paused ? "Resume dispatch" : "Pause dispatch"; $("#automation-summary").innerHTML = [["Server", "Healthy"],["Routes", routes.items.length],["Commands", commands.items.length],["Needs recovery", commands.items.filter((c)=>["FAILED","UNCERTAIN","BLOCKED_ROUTE"].includes(c.state)).length]].map(([a,b])=>`<div class="summary"><span>${a}</span><strong>${esc(b)}</strong></div>`).join("");
+  $("#routes").innerHTML = routes.items.length ? routes.items.map((r)=>link(`${r.route_name} → ${r.target}`,r.chatgpt_url,`${r.health} · registered ${r.registered_at}`)).join("") : `<p class="muted">No routes registered. Register one from the future extension.</p>`;
+  $("#commands").innerHTML = commands.items.length ? commands.items.map((c) => `<article class="item"><strong>${esc(c.command_id)} <span class="badge ${esc(c.state)}">${esc(c.state)}</span></strong><p class="meta">${esc(c.target)} · ${esc(c.wake_payload)}</p>${c.blocker ? `<p class="meta">Recovery: ${esc(c.blocker)}</p>` : ""}${c.state === "FAILED" ? `<button data-retry="${esc(c.command_id)}">Retry pre-send failure</button>` : ""}${c.state === "UNCERTAIN" ? `<p class="meta">Uncertain delivery cannot be replayed automatically.</p>` : ""}</article>`).join("") : `<p class="muted">No dispatch-ready commands.</p>`;
+  $("#events").innerHTML = (status.events || []).slice().reverse().map((e)=>`<article class="item"><strong>${esc(e.message)}</strong><p class="meta">${esc(e.at)}</p></article>`).join("") || `<p class="muted">No courier history yet.</p>`;
+  document.querySelectorAll("[data-retry]").forEach((b) => b.onclick = () => announce("Retry is available only after Mission 03 confirms a clear pre-send failure."));
+}
+
+async function load() { if (refreshing) return; refreshing = true; $("#refresh").disabled = true; $("#refresh").textContent = "Refreshing…"; try { const [o,i,s,r,c] = await Promise.all([fetch("/dashboard/overview"),fetch("/dashboard/inspector"),fetch("/status"),fetch("/routes"),fetch("/commands")]); renderOverview(await o.json()); inspector = await i.json(); renderInspector(); const status = await s.json(); status.events = (await fetch("/status").then(x=>x.json())).events || []; renderAutomation(status, await r.json(), await c.json()); $("#foot-state").textContent = "Read models refreshed"; announce("Dashboard refreshed"); } catch (error) { $("#foot-state").textContent = "Partial refresh failure — unaffected panels remain available"; announce("Refresh failed for one or more sources"); } finally { refreshing = false; $("#refresh").disabled = false; $("#refresh").textContent = "Refresh view"; } }
+document.addEventListener("DOMContentLoaded", () => { tabs(); $("#refresh").onclick = load; $("#filters").oninput = renderInspector; $("#filters").onreset = () => setTimeout(renderInspector); $("#pause").onclick = async () => { await fetch(automation.status.paused ? "/system/resume" : "/system/pause", {method:"POST"}); load(); }; load(); });
