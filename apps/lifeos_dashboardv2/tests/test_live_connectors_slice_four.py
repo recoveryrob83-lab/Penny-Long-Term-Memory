@@ -5,7 +5,7 @@ import json
 import urllib.error
 from pathlib import Path
 
-from lifeos_v2.connectors import CalendarConnector, ConnectorManager, TodoistConnector, TrelloConnector
+from lifeos_v2.connectors import CalendarConnector, ConnectorManager, RefreshResult, TodoistConnector, TrelloConnector
 from lifeos_v2.dashboard_data import overview_from_connectors, overview_model
 from lifeos_v2.github_status import GitHubStatusVerifier
 
@@ -32,9 +32,33 @@ def test_todoist_current_v1_response_paginates_and_builds_missing_url(monkeypatc
 
 
 def test_calendar_requires_credentials_without_attempting_live_access(monkeypatch):
-    monkeypatch.delenv("GOOGLE_CLIENT_ID", raising=False); monkeypatch.delenv("GOOGLE_CLIENT_SECRET", raising=False); monkeypatch.delenv("GOOGLE_REFRESH_TOKEN", raising=False)
+    monkeypatch.delenv("GOOGLE_CALENDAR_ICAL_URL", raising=False); monkeypatch.delenv("GOOGLE_CLIENT_ID", raising=False); monkeypatch.delenv("GOOGLE_CLIENT_SECRET", raising=False); monkeypatch.delenv("GOOGLE_REFRESH_TOKEN", raising=False)
     result = CalendarConnector({"calendars": [{"id": "primary", "name": "Primary"}]}).refresh()
     assert result.status == "configuration_required" and result.records == []
+
+
+def test_calendar_ical_feed_normalizes_timed_all_day_cancelled_and_recurring_events(monkeypatch):
+    monkeypatch.setenv("GOOGLE_CALENDAR_ICAL_URL", "https://private.example/calendar.ics")
+    monkeypatch.setenv("OVERVIEW_PAST_DAYS", "1"); monkeypatch.setenv("OVERVIEW_FUTURE_DAYS", "14")
+    feed = (Path(__file__).parent / "fixtures" / "calendar" / "private_feed.ics").read_text()
+    result = CalendarConnector({"calendars": [{"id": "primary", "name": "Primary"}]}, ical_transport=lambda _url: feed).refresh()
+    records = {item["source_id"]: item for item in result.records}
+    assert result.status == "ok" and records["timed-event"]["start_at"].endswith("+00:00")
+    assert records["all-day-event"]["start_at"] == "2026-07-30" and records["all-day-event"]["extra"]["all_day"]
+    assert records["cancelled-event"]["state"] == "cancelled" and records["recurring-event"]["extra"]["recurrence"] == "FREQ=WEEKLY;COUNT=2"
+    assert records["broken-event"]["source_error"] and all("private.example" not in str(item) for item in result.records)
+
+
+def test_calendar_ical_temporary_failure_keeps_manager_cache_stale(monkeypatch):
+    monkeypatch.setenv("GOOGLE_CALENDAR_ICAL_URL", "https://private.example/calendar.ics")
+    def fail(_url): raise OSError("temporary failure")
+    connector = CalendarConnector({"calendars": [{"id": "primary", "name": "Primary"}]}, ical_transport=fail)
+    manager = ConnectorManager(Path(__file__).parents[1] / "config")
+    manager.connectors = [connector]
+    cached = RefreshResult("calendar", "ok", "2026-07-29T12:00:00+00:00", "2026-07-29T12:00:00+00:00", [{"source_id": "safe-last-known"}])
+    manager.cache["calendar"] = cached
+    result = manager.refresh_all(force=True)[0]
+    assert result.status == "stale" and result.records == cached.records and "private.example" not in str(result)
 
 
 def test_trello_keeps_flow_distinct_from_commitments(monkeypatch):

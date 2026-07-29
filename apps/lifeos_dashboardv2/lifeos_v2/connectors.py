@@ -7,7 +7,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import asdict, dataclass, field
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -84,9 +84,60 @@ class TodoistConnector(Connector):
 
 class CalendarConnector(Connector):
     name, credentials = "calendar", ("GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN")
+    def __init__(self, config: dict[str, Any], transport=None, ical_transport=None):
+        super().__init__(config, transport); self.ical_transport = ical_transport or self._get_ical
+    def configured(self) -> bool: return bool(os.getenv("GOOGLE_CALENDAR_ICAL_URL")) or super().configured()
+    @staticmethod
+    def _get_ical(url: str) -> str:
+        request = urllib.request.Request(url, headers={"Accept": "text/calendar"}, method="GET")
+        with urllib.request.urlopen(request, timeout=12) as response: return response.read().decode("utf-8")
+    @staticmethod
+    def _ical_events(feed: str, calendar: dict[str, Any], fetched_at: str) -> list[dict[str, Any]]:
+        if "BEGIN:VCALENDAR" not in feed: raise ValueError("not an iCalendar feed")
+        lines = []
+        for line in feed.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+            if line.startswith((" ", "\t")) and lines: lines[-1] += line[1:]
+            else: lines.append(line)
+        events, current = [], None
+        past = date.today() - timedelta(days=int(os.getenv("OVERVIEW_PAST_DAYS", "1"))); future = date.today() + timedelta(days=int(os.getenv("OVERVIEW_FUTURE_DAYS", "14")))
+        for line in lines:
+            if line == "BEGIN:VEVENT": current = {}
+            elif line == "END:VEVENT" and current is not None:
+                try:
+                    uid = current.get("UID", "")
+                    if not uid: raise ValueError("UID is required")
+                    start, all_day = CalendarConnector._ical_time(current.get("DTSTART", ""))
+                    end, _ = CalendarConnector._ical_time(current.get("DTEND", "")) if current.get("DTEND") else ("", all_day)
+                    event_date = date.fromisoformat(start[:10])
+                    if past <= event_date <= future:
+                        source_id = uid + (":" + current["RECURRENCE-ID"] if current.get("RECURRENCE-ID") else "")
+                        events.append(NormalizedRecord("calendar", source_id, calendar["id"], calendar["name"], current.get("SUMMARY", ""), CalendarConnector._ical_text(current.get("DESCRIPTION", "")), current.get("STATUS", "confirmed").lower(), "", start, "", "", fetched_at, extra={"all_day": all_day, "end": end, "recurrence": current.get("RRULE", ""), "recurrence_id": current.get("RECURRENCE-ID", "")}).to_dict())
+                except Exception as bad: events.append(NormalizedRecord("calendar", str(current.get("UID", "unknown")), calendar["id"], calendar["name"], source_error="Malformed iCalendar event: " + type(bad).__name__, fetched_at=fetched_at).to_dict())
+                current = None
+            elif current is not None and ":" in line:
+                key, value = line.split(":", 1); current[key.split(";", 1)[0]] = value
+        return events
+    @staticmethod
+    def _ical_time(value: str) -> tuple[str, bool]:
+        if len(value) == 8 and value.isdigit(): return f"{value[:4]}-{value[4:6]}-{value[6:8]}", True
+        normalized = value.rstrip("Z")
+        for form in ("%Y%m%dT%H%M%S", "%Y%m%dT%H%M"):
+            try: return datetime.strptime(normalized, form).isoformat() + ("+00:00" if value.endswith("Z") else ""), False
+            except ValueError: pass
+        raise ValueError("invalid iCalendar timestamp")
+    @staticmethod
+    def _ical_text(value: str) -> str: return value.replace("\\n", "\n").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
     def refresh(self) -> RefreshResult:
         now = stamp()
-        if not self.configured(): return RefreshResult(self.name, "configuration_required", now, self.last_success, [], "Google Calendar OAuth is not configured.", "Set read-only OAuth credentials outside the repository.")
+        ical_url = os.getenv("GOOGLE_CALENDAR_ICAL_URL")
+        if ical_url:
+            try:
+                calendar = next((item for item in self.config["calendars"] if item.get("enabled", True)), self.config["calendars"][0])
+                records = self._ical_events(self.ical_transport(ical_url), calendar, now)
+                self.last_success = now; return RefreshResult(self.name, "ok", now, now, records)
+            except Exception as error:
+                status, hint = self.describe_error(error); return RefreshResult(self.name, status, now, self.last_success, [], "Calendar iCal refresh failed.", hint)
+        if not self.configured(): return RefreshResult(self.name, "configuration_required", now, self.last_success, [], "Calendar iCal URL or OAuth credentials are not configured.", "Set GOOGLE_CALENDAR_ICAL_URL or read-only OAuth credentials outside the repository.")
         # Refresh-token exchange deliberately uses POST only to the OAuth token issuer; all Calendar data calls are GET.
         try:
             token_request = urllib.request.Request("https://oauth2.googleapis.com/token", data=urllib.parse.urlencode({"client_id": os.environ["GOOGLE_CLIENT_ID"], "client_secret": os.environ["GOOGLE_CLIENT_SECRET"], "refresh_token": os.environ["GOOGLE_REFRESH_TOKEN"], "grant_type": "refresh_token"}).encode(), method="POST")
