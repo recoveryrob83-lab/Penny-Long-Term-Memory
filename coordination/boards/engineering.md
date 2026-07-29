@@ -1,6 +1,6 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-28
+Updated: 2026-07-29
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
@@ -8,12 +8,20 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ### ADV-20260728-054 — Correct the Maintenance HQ review path for bounded-write Worker repairs
 
+- Advisory Revision: 2
+- Source Department: engineering
+- Target Department: engineering
+- Task Summary: Correct the Maintenance HQ review path for bounded-write Worker repairs.
+- Authorized Scope: Perform only the Engineering runtime enablement and verification explicitly authorized in this advisory; preserve all holds and do not execute the deferred Maintenance review.
+- Lifecycle State: OPEN
+- Outcome:
+- Blocker:
+- Updated At: 2026-07-29T14:48:00-05:00
+
 - Date: 2026-07-28
 - From: Engineering_HQ under direct Rob authorization
 - To: Engineering_HQ
-- Lifecycle State: OPEN
 - Priority: NORMAL
-- Advisory Revision: 2
 - Verification Mode: SOURCE_OWNER_REVIEW
 - Posted Board: `coordination/boards/engineering.md`
 - Current Target Department and Owner: engineering
