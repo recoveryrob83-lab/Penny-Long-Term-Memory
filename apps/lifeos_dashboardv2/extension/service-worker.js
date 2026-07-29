@@ -7,7 +7,9 @@ async function probe(local) {
   const tabs = await chrome.tabs.query({url:`${new URL(local.routeUrl).origin}/*`}); const tab = tabs.find((item) => item.url === local.routeUrl);
   if (!tab?.id) { await reportReadiness(local); return {ready:false, reason:'Registered tab is not open at its exact URL.'}; }
   try {
-    const result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'});
+    let result;
+    try { result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'}); }
+    catch (_) { await chrome.scripting.executeScript({target:{tabId:tab.id}, files:['content.js']}); result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'}); }
     const ready = result?.url === local.routeUrl && result.content_script && result.composer_ready && result.composer_empty && result.send_control;
     await reportReadiness(local, result || {});
     return {ready, tab, reason:ready ? 'Exact tab is ready.' : 'Composer or control is not ready.'};

@@ -56,10 +56,10 @@ def test_extension_keeps_scope_narrow_and_protects_composer() -> None:
     manifest = (root / "manifest.json").read_text(encoding="utf-8")
     content = (root / "content.js").read_text(encoding="utf-8")
     worker = (root / "service-worker.js").read_text(encoding="utf-8")
-    assert "https://chatgpt.com/*" in manifest and "<all_urls>" not in manifest
+    assert "https://chatgpt.com/*" in manifest and "scripting" in manifest and "<all_urls>" not in manifest
     assert "Composer contains unrelated text; preserved." in content
     assert "data-message-author-role=\"user\"" in content
     assert "assistant" not in content.lower()
     assert "/uncertain" in worker and "emergencyStop" in worker and "/begin" in worker
-    assert "preflight" in worker and "/extension/readiness" in worker and "testArmed" in worker and "Registered tab is not open" in worker
+    assert "preflight" in worker and "/extension/readiness" in worker and "testArmed" in worker and "Registered tab is not open" in worker and "executeScript" in worker
     assert "VOICE_EMPTY" in content and "voiceSelectors" in content
