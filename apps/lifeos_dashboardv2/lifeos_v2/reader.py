@@ -9,6 +9,8 @@ from .contracts import Advisory, AdvisoryState
 _INDEX = re.compile(r"^-\s+(ADV-[\w-]+).*?`(?P<path>coordination/boards/[^`]+\.md)`", re.M)
 _HEADING = re.compile(r"^#{2,4}\s+(?P<id>ADV-[\w-]+)\s+[—-]+\s*(?P<summary>.+)$", re.M)
 _FIELD = re.compile(r"^-\s+(?P<name>[^:]+):\s*(?P<value>.*)$", re.M)
+# Accept canonical em dashes and the legacy mojibake sequence in historical fixtures.
+_HEADING = re.compile(r"^#{2,4}\s+(?P<id>ADV-[\w-]+)\s+(?:[-\u2014]|\u00e2\u20ac\u201d)+\s*(?P<summary>.+)$", re.M)
 
 
 class AdvisoryParseError(ValueError):
