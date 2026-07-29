@@ -62,3 +62,4 @@ def test_extension_keeps_scope_narrow_and_protects_composer() -> None:
     assert "assistant" not in content.lower()
     assert "/uncertain" in worker and "emergencyStop" in worker and "/begin" in worker
     assert "preflight" in worker and "/extension/readiness" in worker and "testArmed" in worker
+    assert "VOICE_EMPTY" in content and "voiceSelectors" in content

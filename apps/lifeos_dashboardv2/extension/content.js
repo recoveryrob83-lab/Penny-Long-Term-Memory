@@ -1,14 +1,16 @@
 const selectors = ['#prompt-textarea', 'textarea[data-id="root"]', '[contenteditable="true"][role="textbox"]'];
 const sendSelectors = ['button[data-testid="send-button"]', 'button[aria-label="Send prompt"]'];
+const voiceSelectors = ['button[data-testid*="voice"]', 'button[aria-label*="voice" i]'];
 const normal = (text) => String(text || '').replace(/\r\n/g, '\n').trim();
 function composer() { return selectors.map((s) => document.querySelector(s)).find(Boolean); }
 function sendControl() { return sendSelectors.map((s) => document.querySelector(s)).find(Boolean); }
+function voiceControl() { return voiceSelectors.map((s) => document.querySelector(s)).find(Boolean); }
 function sendButton() { const node = sendControl(); return node && !node.disabled ? node : null; }
 function getText(node) { return normal(node?.value ?? node?.innerText); }
 function setText(node, text) { if ('value' in node) { node.focus(); node.value = text; node.dispatchEvent(new Event('input', {bubbles: true})); } else { node.focus(); document.execCommand('insertText', false, text); node.dispatchEvent(new InputEvent('input', {bubbles: true, inputType: 'insertText', data: text})); } }
 function userMessageExists(text) { return [...document.querySelectorAll('[data-message-author-role="user"]')].some((node) => normal(node.innerText) === normal(text)); }
 chrome.runtime.onMessage.addListener((message, _sender, reply) => {
-  if (message.type === 'preflight') { const node = composer(); return reply({url:location.href, content_script:true, composer_ready:!!node, composer_empty:!getText(node), send_control:!!sendControl()}), true; }
+  if (message.type === 'preflight') { const node = composer(); const empty = !getText(node); return reply({url:location.href, content_script:true, composer_ready:!!node, composer_empty:empty, send_control:!!sendControl() || (empty && !!voiceControl()), control_mode:sendControl() ? 'SEND' : (voiceControl() ? 'VOICE_EMPTY' : 'MISSING')}), true; }
   if (message.type === 'dispatch') {
     const node = composer(); if (!node) return reply({kind:'failed', note:'Composer unavailable before send.'}), true;
     if (getText(node)) return reply({kind:'failed', note:'Composer contains unrelated text; preserved.'}), true;
