@@ -2,13 +2,13 @@ const server = 'http://127.0.0.1:8765';
 const call = async (path, options = {}) => { const r = await fetch(server + path, {headers:{'content-type':'application/json'}, ...options}); if (!r.ok) throw new Error(`${r.status}`); return r.json(); };
 const state = () => chrome.storage.local.get({emergencyStop:false, routeName:'', routeUrl:'', testArmed:false});
 async function heartbeat() { try { await call('/extension/heartbeat', {method:'POST', body:JSON.stringify({version:chrome.runtime.getManifest().version})}); } catch (_) {} }
-async function reportReadiness(local, details = {}) { try { return await call('/extension/readiness', {method:'POST', body:JSON.stringify({route_name:local.routeName, url:details.url || '', content_script:!!details.content_script, composer_ready:!!details.composer_ready, composer_empty:!!details.composer_empty, send_ready:!!details.send_ready, test_armed:!!local.testArmed})}); } catch (_) { return null; } }
+async function reportReadiness(local, details = {}) { try { return await call('/extension/readiness', {method:'POST', body:JSON.stringify({route_name:local.routeName, url:details.url || '', content_script:!!details.content_script, composer_ready:!!details.composer_ready, composer_empty:!!details.composer_empty, send_control:!!details.send_control, test_armed:!!local.testArmed})}); } catch (_) { return null; } }
 async function probe(local) {
   const tabs = await chrome.tabs.query({url:local.routeUrl}); const tab = tabs[0];
   if (!tab?.id) { await reportReadiness(local); return {ready:false}; }
   try {
     const result = await chrome.tabs.sendMessage(tab.id, {type:'preflight'});
-    const ready = result?.url === local.routeUrl && result.content_script && result.composer_ready && result.composer_empty && result.send_ready;
+    const ready = result?.url === local.routeUrl && result.content_script && result.composer_ready && result.composer_empty && result.send_control;
     await reportReadiness(local, result || {});
     return {ready, tab};
   } catch (_) { await reportReadiness(local); return {ready:false}; }

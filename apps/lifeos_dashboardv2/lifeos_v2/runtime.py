@@ -72,11 +72,11 @@ class CourierService:
     def readiness(self) -> dict[str, Any]:
         return self.store.data["tab_readiness"]
 
-    def report_readiness(self, route_name: str, url: str, content_script: bool, composer_ready: bool, composer_empty: bool, send_ready: bool, test_armed: bool) -> dict[str, Any]:
+    def report_readiness(self, route_name: str, url: str, content_script: bool, composer_ready: bool, composer_empty: bool, send_control: bool, test_armed: bool) -> dict[str, Any]:
         route = self.store.data["routes"].get(route_name)
         exact_url = bool(route and route["chatgpt_url"] == url)
-        ready = exact_url and content_script and composer_ready and composer_empty and send_ready
-        record = {"route_name": route_name, "url": url, "exact_url": exact_url, "content_script": content_script, "composer_ready": composer_ready, "composer_empty": composer_empty, "send_ready": send_ready, "test_armed": test_armed, "state": "READY" if ready else "NOT_READY", "verified_at": now()}
+        ready = exact_url and content_script and composer_ready and composer_empty and send_control
+        record = {"route_name": route_name, "url": url, "exact_url": exact_url, "content_script": content_script, "composer_ready": composer_ready, "composer_empty": composer_empty, "send_control": send_control, "test_armed": test_armed, "state": "READY" if ready else "NOT_READY", "verified_at": now()}
         self.store.data["tab_readiness"][route_name] = record
         self.store.event(f"tab readiness {route_name} {record['state']}")
         self.store.save()

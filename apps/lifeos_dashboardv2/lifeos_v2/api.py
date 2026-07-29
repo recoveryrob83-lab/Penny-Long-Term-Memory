@@ -36,7 +36,7 @@ class ReadinessInput(BaseModel):
     content_script: bool = False
     composer_ready: bool = False
     composer_empty: bool = False
-    send_ready: bool = False
+    send_control: bool = False
     test_armed: bool = False
 
 

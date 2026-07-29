@@ -29,7 +29,7 @@ def test_extension_api_pause_and_heartbeat(tmp_path: Path) -> None:
     client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
     client.post("/routes", json={"route_name":"engineering", "target":"engineering", "chatgpt_url":"https://chatgpt.com/c/test"})
     client.get("/advisories")
-    client.post("/extension/readiness", json={"route_name":"engineering", "url":"https://chatgpt.com/c/test", "content_script":True, "composer_ready":True, "composer_empty":True, "send_ready":True})
+    client.post("/extension/readiness", json={"route_name":"engineering", "url":"https://chatgpt.com/c/test", "content_script":True, "composer_ready":True, "composer_empty":True, "send_control":True})
     assert client.get("/extension/commands/engineering").json()["command"]["command_id"] == "ADV-301-r1"
     assert client.post("/extension/heartbeat", json={"version":"0.1.0"}).json()["connected"] is True
     client.post("/system/pause")
