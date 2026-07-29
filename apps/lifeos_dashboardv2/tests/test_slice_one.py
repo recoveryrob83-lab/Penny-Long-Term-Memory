@@ -19,16 +19,17 @@ def write_source(root: Path, records: list[dict[str, str]]) -> None:
     root.joinpath("coordination/ADVISORY_INDEX.md").write_text(index, encoding="utf-8")
     sections = []
     for r in records:
-        sections.append(f"""### {r['id']} — {r.get('summary', 'Fixture work')}
+        sections.append(f"""### {r['id']} — {r.get('heading_summary', 'Fixture work')}
 
-- Source Department: Chief_of_Staff_HQ
-- Target Department: {r.get('target', 'engineering')}
 - Advisory Revision: {r.get('revision', '1')}
-- Scope: {r.get('scope', 'Read the fixture only')}
+- Source Department: {r.get('source', 'chief_of_staff')}
+- Target Department: {r.get('target', 'engineering')}
+- Task Summary: {r.get('task_summary', 'Fixture work')}
+- Authorized Scope: {r.get('scope', 'Read the fixture only')}
 - Lifecycle State: {r.get('state', 'OPEN')}
 - Outcome: {r.get('outcome', '')}
 - Blocker: {r.get('blocker', '')}
-- Updated At: 2026-07-29T12:00:00+00:00
+- Updated At: {r.get('updated_at', '2026-07-29T12:00:00+00:00')}
 """)
     board.write_text("\n".join(sections), encoding="utf-8")
 
@@ -45,7 +46,36 @@ def test_valid_parsing_and_malformed_isolation(tmp_path: Path) -> None:
     write_source(tmp_path, [{"id": "ADV-100"}, {"id": "ADV-101", "scope": ""}])
     found, errors = advisories(tmp_path)
     assert [a.command_id for a in found] == ["ADV-100-r1"]
+    assert found[0].task_summary == "Fixture work"
     assert "ADV-101" in errors
+
+
+def test_exact_envelope_fields_are_required(tmp_path: Path) -> None:
+    write_source(tmp_path, [{"id": "ADV-100"}])
+    board = tmp_path / "coordination/boards/engineering.md"
+    board.write_text(board.read_text(encoding="utf-8").replace("- Authorized Scope:", "- Scope:"), encoding="utf-8")
+    found, errors = advisories(tmp_path)
+    assert found == []
+    assert "authorized scope" in errors["ADV-100"]
+
+
+def test_route_identifiers_and_timestamp_are_validated(tmp_path: Path) -> None:
+    write_source(tmp_path, [
+        {"id": "ADV-100", "target": "Engineering_HQ"},
+        {"id": "ADV-101", "updated_at": "2026-07-29"},
+    ])
+    found, errors = advisories(tmp_path)
+    assert found == []
+    assert "lowercase snake_case" in errors["ADV-100"]
+    assert "timezone offset" in errors["ADV-101"]
+
+
+def test_present_empty_outcome_and_blocker_are_valid(tmp_path: Path) -> None:
+    write_source(tmp_path, [{"id": "ADV-100", "outcome": "", "blocker": ""}])
+    found, errors = advisories(tmp_path)
+    assert errors == {}
+    assert found[0].outcome == ""
+    assert found[0].blocker == ""
 
 
 def test_idempotency_revision_and_route_blocker(tmp_path: Path) -> None:
