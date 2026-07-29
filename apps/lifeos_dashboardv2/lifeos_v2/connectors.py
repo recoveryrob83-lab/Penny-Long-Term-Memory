@@ -63,12 +63,20 @@ class TodoistConnector(Connector):
         records = []
         try:
             for project in self.config["projects"]:
-                url = "https://api.todoist.com/rest/v1/tasks?" + urllib.parse.urlencode({"project_id": project["id"]})
-                for item in self.transport(url, {"Authorization": "Bearer " + os.environ["TODOIST_API_TOKEN"]}):
-                    try:
-                        if not item.get("content"): raise ValueError("task content is required")
-                        due = item.get("due") or {}; records.append(NormalizedRecord("todoist", str(item["id"]), str(project["id"]), project["name"], item.get("content", ""), item.get("description", ""), "active", due.get("datetime") or due.get("date", ""), "", iso(item.get("updated_at")), item.get("url", ""), now, extra={"priority": item.get("priority"), "labels": item.get("labels", []), "section_id": item.get("section_id") or "", "parent_id": item.get("parent_id") or "", "recurrence": due.get("string") or "", "deadline": (item.get("deadline") or {}).get("date", "")}).to_dict())
-                    except Exception as bad: records.append(NormalizedRecord("todoist", str(item.get("id", "unknown")), str(project["id"]), project["name"], source_error="Malformed Todoist task: " + type(bad).__name__, fetched_at=now).to_dict())
+                cursor = ""
+                while True:
+                    query = {"project_id": project["id"]}
+                    if cursor: query["cursor"] = cursor
+                    url = "https://api.todoist.com/api/v1/tasks?" + urllib.parse.urlencode(query)
+                    page = self.transport(url, {"Authorization": "Bearer " + os.environ["TODOIST_API_TOKEN"]})
+                    for item in page.get("results", []):
+                        try:
+                            if not item.get("content"): raise ValueError("task content is required")
+                            task_id = str(item["id"]); due = item.get("due") or {}; source_url = item.get("url") or f"https://app.todoist.com/app/task/{task_id}"
+                            records.append(NormalizedRecord("todoist", task_id, str(project["id"]), project["name"], item.get("content", ""), item.get("description", ""), "active", due.get("datetime") or due.get("date", ""), "", iso(item.get("updated_at")), source_url, now, extra={"priority": item.get("priority"), "labels": item.get("labels", []), "section_id": item.get("section_id") or "", "parent_id": item.get("parent_id") or "", "recurrence": due.get("string") or "", "deadline": (item.get("deadline") or {}).get("date", "")}).to_dict())
+                        except Exception as bad: records.append(NormalizedRecord("todoist", str(item.get("id", "unknown")), str(project["id"]), project["name"], source_error="Malformed Todoist task: " + type(bad).__name__, fetched_at=now).to_dict())
+                    cursor = page.get("next_cursor") or ""
+                    if not cursor: break
             self.last_success = now; return RefreshResult(self.name, "ok", now, now, records)
         except Exception as error:
             status, hint = self.describe_error(error); return RefreshResult(self.name, status, now, self.last_success, records, "Todoist refresh failed.", hint)
