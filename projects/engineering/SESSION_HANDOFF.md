@@ -1,233 +1,159 @@
 # Engineering_HQ Session Handoff
 
-Updated: 2026-07-26
+Updated: 2026-07-28
 Project: Engineering_HQ
-Purpose: Fresh-room handoff after the core Worker platform and initial cross-department rollout closed with an intentionally lean production portfolio, PR #21 deployment health was confirmed, the Maintenance Worker remained active and idle, and Rob selected a separately bounded repository audit as the next full-system Worker test.
+Purpose: Fresh-room handoff after Rob paused further repair of the current Worker orchestration system and redirected Engineering toward a deliberately simpler LifeOS Version Two.
 
 ## Metadata
 
 - Project Owner: Rob
 - Primary Chat: `Engineering_HQ`
-- Current Phase: Active / Core Worker Platform Complete / Lean Worker Portfolio / Maintenance Worker Active and Idle / PR #21 Deployment Healthy / Maintenance Repository Audit Pending Exact Assignment / Office Leaks Paused
-- Primary Systems: GitHub, local LifeOS Dashboard, SQLite Command Center runtime state, ChatGPT Department and Worker rooms, Engineering advisory board, Advisory Index, local Edge CDP bridge, and the GitHub-only Life OS Change Watch
+- Current Phase: Active / LifeOS V2 Design / Simplification First / No Implementation Authorized
+- Primary Systems: Google Drive working design documents, GitHub durable architecture and history, future `apps/lifeos_dashboardv2`, browser plugin, local LifeOS server, and dashboard
 - Sensitivity Level: Moderate
-- GitHub Rule: Never store secrets, credentials, tokens, API keys, private account details, medical details, private user data, private ChatGPT conversation URLs, or sensitive implementation details in LifeOS memory files or Worker result artifacts.
 
 ## Boot Instructions
 
-1. Follow `memory/STARTUP_BOOT.md` and its universal-kernel plus role-routed rules.
+1. Follow `memory/STARTUP_BOOT.md` and the universal kernel.
 2. Read this handoff.
 3. Read `projects/engineering/DEPARTMENT_IDENTITY.md`.
 4. Read `projects/engineering/README.md`, `status.md`, and `open_loops.md`.
 5. Treat `projects/engineering/open_loops.md` as authoritative for unfinished Engineering work.
-6. Read `memory/HQ_NAMING_STANDARD.md` before touching title-bearing code, runtime state, prompt launchers, route mappings, or tests.
-7. Read `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md` when Worker dispatch, immutable result ingestion, HQ review, Rob validation, consumption, or browser courier behavior is in scope.
-8. Read `coordination/WORKER_EXECUTION_CONTRACT.md` and `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` when Worker authority, reporting, verification, activation prerequisites, or execution behavior is in scope.
-9. Read the exact owning department's Worker profile and review procedure before linking, validating, or dispatching that Worker.
-10. Perform a separate read-only Sync before any implementation write.
-11. Keep connector, database, browser, and dashboard work small, explicit, fail-closed, and verifiable.
+6. Perform a separate read-only Sync before any GitHub implementation write.
+7. Do not resume V1 patching, Worker-runtime repair, advisory review machinery, or transport debugging without a new explicit Rob decision.
 
-## Handbook Context
+## Current Decision
 
-The Engineering handbook is available through Project Sources as a noncanonical context mirror. It may restore ordinary room identity and stable boundaries without a full Boot, but it does not replace GitHub or authorize writes. Fetch live canonical files before consequential actions, runtime claims, route changes, or package decisions.
+Rob concluded that the current LifeOS Worker and review architecture has become too brittle and over-engineered for a personal operating system. The accumulated send budgets, reset epochs, immutable review attempts, procedure gates, evidence ledgers, parallel lifecycle states, and layered runtime wrappers created excessive operator burden and too many failure points.
 
-## Department Role
+The current system is to be retired as legacy and preserved in GitHub history. It is not to be incrementally rescued into Version Two.
 
-`Engineering_HQ` owns technical architecture, software planning, repository strategy, automation design, APIs and connectors, data models, testing, debugging, implementation sequencing, build-readiness, and truthful verification.
+LifeOS Version Two will be designed with simplification as the primary objective.
 
-Engineering owns technical Worker infrastructure: exact routing, transport, logging, duplicate suppression, immutable result ingestion, report repair, verification mechanics, runtime evidence, activation-prerequisite reporting, tests, and reliability safeguards.
+## Version Two Trust Model
 
-Engineering does not own shared Worker governance, another department's Worker purpose or authority, source-owner lifecycle, business strategy, or domain judgment.
+Rob authorizes. Chief of Staff routes. The owning department executes. GitHub records. The dashboard shows. The browser plugin transports.
 
-Route AI systems business strategy to `Business_HQ`, paused Office Leaks matters to `Office_Leaks_HQ`, cost-bearing choices to `Finance_HQ`, ordinary coordination to `Chief_of_Staff_HQ`, shared governance and memory hygiene to `Maintenance_HQ`, and wellbeing judgment to `Wellness_HQ`.
+Rob remains part of the operating model and may enter any department chat directly to inspect, correct, or complete work. The system should optimize for convenience, visibility, and easy recovery rather than attempting to prevent every possible human-correctable error.
 
-## Completed Architecture
+Primary design rule:
 
-### Package D
+> Automate the handoff, not the judgment.
 
-Lifecycle State: CLOSED
+## Version Two Core Flow
 
-Established Worker registry, route, browser transport, semantic receiver, duplicate suppression, verification mechanics, and bounded pilot foundations.
+1. Rob tells Chief of Staff what needs to happen.
+2. Chief of Staff creates or updates one advisory with one owning department.
+3. The server detects the actionable advisory.
+4. The browser plugin delivers one concise prompt to the registered department chat.
+5. The department reads GitHub, performs the work, and updates the same advisory.
+6. The server detects `COMPLETED`, `BLOCKED`, or `NEEDS_ROB`.
+7. The browser plugin notifies Chief of Staff.
+8. Chief of Staff reports to Rob, closes the work, or returns a dependency to Rob.
 
-### Package E
+Multi-department work does not cascade automatically. It returns to Rob through Chief of Staff.
 
-Lifecycle State: CLOSED
-Closed: 2026-07-23
-Canonical closeout: `projects/engineering/PACKAGE_E_IMPLEMENTATION_PACKET.md`
+## Version Two Components
 
-Proved the Engineering-only chain for dispatch, immutable result evidence, deterministic ingestion, report repair, owning-HQ review, Rob validation when required, consumption readiness, watcher reporting, and duplicate suppression.
+### Browser plugin
 
-### Package F Wave 0A
+A narrow courier inside the browser. It registers routes, protects user text, inserts prompts, sends when authorized, reports basic transport state, and stops after three command-local attempts. It does not interpret advisories, read assistant response bodies, decide task success, or own workflow state.
 
-Lifecycle State: COMPLETE
-Completed: 2026-07-23
+### LifeOS server
 
-Established canonical room and Worker naming, exact registered Worker URL routing, route revisions, guarded route capture, zero-authority canary behavior, and browser-bridge recovery.
+The intermediary between GitHub, the browser plugin, and the dashboard. It watches advisories, creates delivery commands, tracks delivery state and up to three local attempts, watches advisory outcomes, and produces Chief of Staff notifications.
 
-### Package F Wave 0B
+### Dashboard
 
-Lifecycle State: COMPLETE
-Completed: 2026-07-25
+Rob's forward-facing information and control center. It should clearly answer:
 
-Completed slices:
+- What is happening?
+- What is blocked?
+- Who acts next?
 
-- PR #15, merge `83c309f651de0354982fcd6cbb68f9cf3251d6a3`: cross-department owning-HQ destination resolution.
-- PR #16, merge `3bf20ca231b3b5fbb1c315b24881e46939b3b508`: persisted shared safety-pause triggers.
-- PR #17, merge `e1d297f1a2517490b3fb2a37298689c6db25bfb0`: conservative global send budget.
-- PR #18, merge `4a00c4908cfd71a2b2ebfe41c084b68a5d2907e5`: read-only contract-derived activation gate.
+It should expose simple pause, retry, mark-delivered, cancel, open-advisory, and open-chat controls without requiring Rob to inspect hidden runtime fields.
 
-Rob confirmed the post-merge dashboard smoke passed.
+### GitHub
 
-### Initial Department Worker Expansion
+The durable operational truth and normal audit trail. One advisory carries the task, owner, scope, lifecycle state, outcome, blocker, and useful evidence links. Ordinary Git commits, diffs, and pull requests are sufficient for normal work.
 
-Lifecycle State: CLOSED / LEAN PORTFOLIO ADOPTED
-Closed: 2026-07-26
+## Simplified Safeguards
 
-The production Worker portfolio remains intentionally limited to:
+Retain:
 
-- `Engineering_Worker` / `engineering_worker`
-- `Maintenance_Worker` / `maintenance_worker`
+- one authoritative advisory;
+- one owner;
+- registered browser routes;
+- composer protection;
+- one command ID;
+- a maximum of three command-local attempts;
+- no blind resend after uncertainty;
+- simple work, delivery, and route states;
+- normal Git history;
+- tiered safeguards for genuinely consequential work;
+- global pause;
+- direct human override.
 
-Owner decisions:
+Remove from the normal path:
 
-- `Business_HQ` does not request a Worker. Research continues through bounded one-off assignments. Reconsider only a narrow Market Evidence Worker after recurring standardized research creates a measurable bottleneck.
-- `Finance_HQ` does not request a Worker at present.
-- `Wellness_HQ` does not request a Worker at present.
-- `Office_Leaks_HQ` remains paused.
+- universal send budgets and reset epochs;
+- mandatory independent HQ review;
+- immutable review-attempt chains;
+- routine procedure-version gates;
+- default blob SHA and checksum verification;
+- separate evidence expectation and observation ledgers;
+- automatic cross-department routing;
+- multiple parallel business lifecycle state machines.
 
-No Business, Finance, Wellness, or Office Leaks Worker profile, title, stable ID, room, registry row, route, canary, activation, schedule, or assignment is authorized. Further adoption requires a demonstrated recurring standardized bottleneck and a new explicit request from the owning department.
+## Working Design Documents
 
-## Maintenance Worker Rollout
+The current noncanonical working documents are in Google Drive under `Life Organization/Chief Engineering Penny`:
 
-Lifecycle State: ACTIVE / LIVE / NO ASSIGNMENTS
+- `Version Two Safeguards`
+- `LifeOS Version Two System Design`
 
-Canonical GitHub work:
+These documents are the current planning sources. They are not yet canonical GitHub implementation contracts.
 
-- PR #19 merged as `28a7a4fc40317d043dbe9983747475f85d37742a`.
-- PR #20 merged as `e91783dd9705df4a090eae2b4414adead6dafcf4`.
-- Profile: `projects/life-logistics-hq/workers/maintenance_worker.md`.
-- Result procedure: `projects/life-logistics-hq/procedures/maintenance_worker_result_submission.md`.
-- HQ review procedure: `projects/life-logistics-hq/procedures/maintenance_hq_worker_review_receipt.md`.
+Next design documents to produce:
 
-Rob reports the following live local state:
+1. Browser Plugin Design
+2. LifeOS V2 Server Design
+3. LifeOS V2 Dashboard Design
 
-- one registered `maintenance_worker` row;
-- exact title `Maintenance_Worker`;
-- exact private route captured at revision 1;
-- zero-authority browser canary succeeded;
-- courier returned to Engineering;
-- route availability became `available`;
-- the Worker is active and live;
-- no work has been assigned.
+After Rob reviews and approves the complete design set, promote the approved documents into GitHub and prepare one comprehensive deliverables prompt for Codex Penny.
 
-Activation is complete and is separate from assignment authority. It does not create a task, schedule, unattended execution, broader connector permission, source-record repair authority, spending, or cross-department authority. A first real Maintenance assignment requires one separately exact bounded task, sources, read scope, allowed write scope, immutable result path, authorization source, and `IMMEDIATE_HQ` review.
+## Implementation Direction
 
-The activation-readiness service remains read-only and continues to report `activation_authorized: false`. Rob's explicit activation is a separate authority event and does not turn the readiness report into a deployment ledger.
+- New implementation location: `apps/lifeos_dashboardv2`
+- Current V1 dashboard and Worker orchestration code: preserve as archived legacy history
+- Codex Penny: repository-wide implementation, tests, refactors, and reviewable delivery
+- Engineering HQ: architecture, boundaries, acceptance criteria, protected behavior, and implementation prompt
+- Rob: final architecture authority and real-browser acceptance testing
 
-## Composer Residue Repair
+The intention is to do the thinking first and implementation second. Codex should build the approved system coherently in one bounded implementation effort rather than receive a chain of reactive patches.
 
-Lifecycle State: MERGED TO `main` / DEPLOYMENT HEALTH CONFIRMED / LIVE OBSERVATION PENDING
+## Current V1 Incident Context
 
-After the successful Maintenance canary, ChatGPT restored the submitted synthetic prompt in the Maintenance composer. Rob manually deleted it. The send itself remained confirmed and the route remained valid.
+The Maintenance Worker run `RUN-ADV-20260726-053-R1` and related ADV-053/ADV-054 repair history demonstrated both useful safeguards and the brittleness of the present architecture. The latest apparent runtime failure was actually stale Maintenance chat context after the wake succeeded. Do not continue adding V1 runtime patches from this handoff.
 
-PR #21, `Clear proven stale Worker composer residue`, was refreshed against current `main` and squash-merged as `620ef84c57cbb87123bbca30e43faffda1e71032` after Rob reported the focused tests, affected regressions, and Ruff green.
-
-The merged repair:
-
-- parses only a canonical `LIFEOS_EXECUTION_WRAPPER=` first line containing valid JSON and nonempty `wrapper_id` and `run_id`;
-- clears an older LifeOS composer draft only when both identifiers are proven together in one submitted user turn in the same Worker conversation;
-- reuses the current run-linked draft;
-- preserves unrelated, malformed, and unproven text;
-- verifies the proven stale composer is empty before inserting a new prompt;
-- does not retry the prior send or weaken new-turn correlation and stop-on-uncertainty behavior.
-
-GitHub exposed no workflow run for the merge. Rob's local validation is the current test evidence, and Rob confirmed ordinary dashboard health after pulling current `main` and restarting. The separately authorized Maintenance repository audit should now provide natural live evidence of composer cleanup and the full Worker-to-HQ chain; do not rerun the completed canary merely to manufacture evidence.
-
-## Current Production Worker State
-
-### Engineering Worker
-
-- Worker ID: `engineering_worker`
-- Exact chat title: `Engineering_Worker`
-- Deployment state: `enabled`
-- Route revision: `1`
-- Route availability: `available`
-- One authoritative registry row exists.
-- Private exact URL remains only in ignored local SQLite state.
-
-### Maintenance Worker
-
-- Worker ID: `maintenance_worker`
-- Exact chat title: `Maintenance_Worker`
-- Canonical profile and procedures: present on `main`
-- Registry and route linkage: user-reported complete
-- Route revision: user-reported `1`
-- Route availability: user-reported `available`
-- Zero-authority canary: user-reported successful
-- Deployment state: active and live
-- First real assignment: none
-
-### Deferred Department Workers
-
-- Business, Finance, and Wellness have declined Worker rollout for now.
-- Reconsideration belongs to the owning department after a recurring standardized bottleneck is demonstrated.
-- No canonical Worker artifacts or runtime state should be created by analogy.
-
-### Office Leaks
-
-- Business state: paused by Rob.
-- Office Leaks Worker rollout: paused.
-- Existing Office Leaks files remain owned by `Office_Leaks_HQ` and must not become competing truth for the AI systems business.
+Preserve the incident and its Git history as design evidence. Any remaining V1 advisory lifecycle cleanup belongs to a separate explicit Rob decision and must not distract from V2 design.
 
 ## Next Valid Actions
 
-1. Define the planned Maintenance repository-audit assignment as the first real full-system test.
-2. Establish the exact task, authoritative sources, read scope, allowed write scope, exclusions, authorization source, immutable result path, completion condition, and `IMMEDIATE_HQ` review before dispatch.
-3. Dispatch only after those fields are exact and the assignment is accepted under the Maintenance Worker contract.
-4. Observe dispatch, correlated user-turn evidence, source return, Worker result creation, deterministic ingestion, Maintenance HQ review, Rob validation where required, and composer cleanup behavior.
-5. Keep the production Worker portfolio lean until an owning department demonstrates a recurring standardized bottleneck and explicitly requests evaluation.
-6. Keep Office Leaks work paused.
+1. Boot and Sync in the fresh Engineering HQ chat.
+2. Review the two Drive working documents.
+3. Discuss and refine the complete V2 process until Rob is satisfied.
+4. Produce the browser plugin, server, and dashboard design documents.
+5. Reconcile the design set for consistency and simplicity.
+6. Promote only approved design decisions into GitHub.
+7. Prepare one comprehensive Codex Penny implementation prompt for `apps/lifeos_dashboardv2`.
 
-Rob has selected the repository audit as the next test, but this handoff does not itself create the execution wrapper, task record, result path, or write authority.
+## Success Standard
 
-## Validation Standard
+A normal advisory travels from Chief of Staff to the owning department and back without Rob copying prompts, resetting machinery, interpreting hidden runtime conditions, or reading implementation details.
 
-- Fetch current files before editing.
-- Use current SHAs or equivalent concurrency guards.
-- Preserve unrelated content and historical evidence.
-- Prefer the smallest useful change.
-- Read back every significant write.
-- Do not claim route availability, a canary pass, dispatch, external action, or verification without current evidence or explicit Rob report.
-- No meaningful change means no write.
-
-## Advisory State
-
-Open Engineering advisories: None.
-
-`ADV-20260718-042`, `ADV-20260719-044`, and `ADV-20260723-052` are closed and must not be recreated as active work.
-
-## Production Boundary
-
-- Browser automation acts only on exact canonical URLs.
-- Registered exact Worker URLs, not sidebar visibility, are authoritative route locators.
-- Each stable Worker ID has one authoritative registry row.
-- Route changes increment the route revision and remain held until a zero-authority canary passes.
-- The persisted shared safety pause is the only circuit-breaker state and requires explicit human resume.
-- The send budget is one manually reset epoch shared by Worker and owning-HQ wake attempts; elapsed time never refills it.
-- Reset does not Resume, erase evidence, or authorize a send.
-- The activation validator reports prerequisites only and always sets `activation_authorized: false`; explicit human activation is separate.
-- `READY_FOR_AUTHORITY_REVIEW` is not activation approval or assignment authority.
-- Confirmed or uncertain submissions are not retried blindly.
-- PR #21 permits only proven stale LifeOS residue to be cleared; unrelated composer text remains protected.
-- Immutable Git evidence outranks stale local transport state.
-- Worker reports remain evidence until deterministic ingestion.
-- `IMMEDIATE_HQ` work never auto-verifies.
-- Work unavailable to HQ inspection requires explicit Rob validation.
-- Courier, ingester, dashboard, watcher, HQ receipt, and Rob receipt do not auto-close source work.
-- The Worker courier does not wake `Chief_of_Staff_HQ` under the current contract.
-- The current production portfolio is `Engineering_Worker` and `Maintenance_Worker` only.
-- New Workers, connectors, recurring tasks, spending, cross-department authority, broader durable-write authority, public actions, or real Maintenance assignments require separate approval.
+When something fails, the system presents one understandable blocker and one clear recovery action.
 
 ## Boundary
 
-Rob decides. Department HQs own their Workers and judgment. `Maintenance_HQ` owns shared governance. `Engineering_HQ` owns the machinery. Source owners close their own records.
+Rob decides. Engineering owns the machinery and technical architecture. Chief of Staff coordinates. Departments own their work and judgment. Version Two must reduce Rob's operational burden rather than merely pass more tests.
