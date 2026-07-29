@@ -26,6 +26,10 @@ class TelemetryInput(BaseModel):
     note: str = ""
 
 
+class HeartbeatInput(BaseModel):
+    version: str = ""
+
+
 def create_app(root: Path, persistence_path: Path, index_path: str = "coordination/ADVISORY_INDEX.md") -> FastAPI:
     reader = AdvisoryReader(root, index_path, "https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory/blob/main")
     service = CourierService(RuntimeStore(persistence_path))
@@ -49,7 +53,7 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     @app.get("/status")
     def status() -> dict:
         advisories, errors = snapshot()
-        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", [])}
+        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {})}
 
     @app.get("/dashboard/overview")
     def overview() -> dict:
@@ -100,6 +104,21 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
         if not found:
             raise HTTPException(404, "Command not found")
         return found
+
+    @app.get("/extension/commands/{route_name}")
+    def extension_command(route_name: str) -> dict:
+        return {"paused": service.paused, "command": service.eligible_command(route_name)}
+
+    @app.post("/commands/{command_id}/begin")
+    def begin(command_id: str) -> dict:
+        command = service.begin_attempt(command_id)
+        if not command:
+            raise HTTPException(409, "Command is not eligible for dispatch")
+        return command
+
+    @app.post("/extension/heartbeat")
+    def heartbeat(payload: HeartbeatInput) -> dict:
+        return service.heartbeat(payload.version)
 
     def telemetry(state: CommandState) -> Callable:
         def handler(command_id: str, payload: TelemetryInput) -> dict:

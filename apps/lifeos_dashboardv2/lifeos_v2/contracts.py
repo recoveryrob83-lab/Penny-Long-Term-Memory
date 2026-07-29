@@ -17,6 +17,7 @@ class AdvisoryState(StrEnum):
 
 class CommandState(StrEnum):
     PENDING = "PENDING"
+    DISPATCHING = "DISPATCHING"
     DELIVERED = "DELIVERED"
     FAILED = "FAILED"
     UNCERTAIN = "UNCERTAIN"
@@ -79,6 +80,9 @@ class DeliveryCommand:
     updated_at: str
     blocker: str = ""
     telemetry_note: str = ""
+    attempts: int = 0
+    max_attempts: int = 3
+    last_attempt_at: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)

@@ -25,7 +25,7 @@ def now() -> str:
 class RuntimeStore:
     def __init__(self, path: Path) -> None:
         self.path = path
-        self.data: dict[str, Any] = {"paused": False, "routes": {}, "commands": {}, "events": []}
+        self.data: dict[str, Any] = {"paused": False, "routes": {}, "commands": {}, "events": [], "extension": {"connected": False, "last_heartbeat_at": None}}
         if path.exists():
             self.data.update(json.loads(path.read_text(encoding="utf-8")))
 
@@ -67,6 +67,20 @@ class CourierService:
 
     def commands(self) -> list[dict[str, Any]]:
         return list(self.store.data["commands"].values())
+
+    def eligible_command(self, route_name: str) -> dict[str, Any] | None:
+        if self.paused:
+            return None
+        return next((c for c in self.commands() if c["route_name"] == route_name and c["state"] == CommandState.PENDING and c.get("attempts", 0) < 3), None)
+
+    def begin_attempt(self, command_id: str) -> dict[str, Any] | None:
+        command = self.store.data["commands"].get(command_id)
+        if not command or self.paused or command["state"] != CommandState.PENDING or command.get("attempts", 0) >= 3:
+            return None
+        command.update({"state": CommandState.DISPATCHING, "attempts": command.get("attempts", 0) + 1, "last_attempt_at": now(), "updated_at": now()})
+        self.store.event(f"dispatch attempt {command_id}")
+        self.store.save()
+        return command
 
     def reconcile(self, advisories: list[Advisory]) -> list[dict[str, Any]]:
         current = {a.advisory_id: a for a in advisories}
@@ -110,10 +124,17 @@ class CourierService:
         command = self.store.data["commands"].get(command_id)
         if not command:
             return None
+        if state == CommandState.FAILED and command.get("attempts", 0) < 3:
+            state = CommandState.PENDING
         command.update({"state": state, "telemetry_note": redact(note), "updated_at": now()})
         self.store.event(f"telemetry {command_id} {state}")
         self.store.save()
         return command
+
+    def heartbeat(self, version: str = "") -> dict[str, Any]:
+        self.store.data["extension"] = {"connected": True, "last_heartbeat_at": now(), "version": version}
+        self.store.save()
+        return self.store.data["extension"]
 
     def pause(self) -> None:
         self.store.data["paused"] = True
