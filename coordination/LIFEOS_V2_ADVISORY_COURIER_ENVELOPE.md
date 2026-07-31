@@ -20,9 +20,11 @@ Primary rule:
 
 ## Canonical Envelope
 
-Every dispatch-eligible advisory must contain these exact Markdown list fields inside its advisory section:
+Every dispatch-eligible advisory must contain one exact level-four subsection named `V2 Courier Envelope` inside its authoritative advisory section:
 
 ```markdown
+#### V2 Courier Envelope
+
 - Advisory Revision: 1
 - Source Department: chief_of_staff
 - Target Department: engineering
@@ -33,6 +35,8 @@ Every dispatch-eligible advisory must contain these exact Markdown list fields i
 - Blocker:
 - Updated At: 2026-07-29T11:52:00-05:00
 ```
+
+The subsection ends at the next level-four heading or the end of the advisory section. Fields elsewhere in the advisory are authority or operational metadata and must not be interpreted as transport-envelope fields.
 
 ## Required Fields
 
@@ -101,8 +105,11 @@ Adding or correcting the envelope without changing the underlying work does not 
 
 The V2 parser must:
 
+- locate exactly one `#### V2 Courier Envelope` subsection inside the indexed advisory section;
+- parse canonical fields only within that subsection;
+- ignore legacy, authority, lifecycle, revision, and operational fields elsewhere in the advisory;
 - require the exact canonical field names;
-- reject missing, duplicate, or empty required routing fields;
+- reject missing, duplicate, or empty required routing fields inside the envelope;
 - require present `Outcome` and `Blocker` fields even when empty;
 - validate revision, lifecycle state, route identifiers, and timestamp shape;
 - isolate malformed advisories without blocking valid advisories;
