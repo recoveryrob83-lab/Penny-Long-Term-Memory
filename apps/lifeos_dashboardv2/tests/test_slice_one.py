@@ -21,6 +21,12 @@ def write_source(root: Path, records: list[dict[str, str]]) -> None:
     for r in records:
         sections.append(f"""### {r['id']} — {r.get('heading_summary', 'Fixture work')}
 
+- Advisory Revision: 99
+- Lifecycle State: OPEN
+- Priority: NORMAL
+
+#### V2 Courier Envelope
+
 - Advisory Revision: {r.get('revision', '1')}
 - Source Department: {r.get('source', 'chief_of_staff')}
 - Target Department: {r.get('target', 'engineering')}
@@ -30,6 +36,10 @@ def write_source(root: Path, records: list[dict[str, str]]) -> None:
 - Outcome: {r.get('outcome', '')}
 - Blocker: {r.get('blocker', '')}
 - Updated At: {r.get('updated_at', '2026-07-29T12:00:00+00:00')}
+
+#### Authorized Outcome
+
+Legacy advisory details remain outside the transport envelope.
 """)
     board.write_text("\n".join(sections), encoding="utf-8")
 
@@ -48,6 +58,23 @@ def test_valid_parsing_and_malformed_isolation(tmp_path: Path) -> None:
     assert [a.command_id for a in found] == ["ADV-100-r1"]
     assert found[0].task_summary == "Fixture work"
     assert "ADV-101" in errors
+
+
+def test_parser_ignores_legacy_fields_outside_named_envelope(tmp_path: Path) -> None:
+    write_source(tmp_path, [{"id": "ADV-100", "revision": "2", "state": "IN_PROGRESS"}])
+    found, errors = advisories(tmp_path)
+    assert errors == {}
+    assert found[0].revision == 2
+    assert found[0].state.value == "IN_PROGRESS"
+
+
+def test_named_envelope_subsection_is_required(tmp_path: Path) -> None:
+    write_source(tmp_path, [{"id": "ADV-100"}])
+    board = tmp_path / "coordination/boards/engineering.md"
+    board.write_text(board.read_text(encoding="utf-8").replace("#### V2 Courier Envelope", "#### Transport Data"), encoding="utf-8")
+    found, errors = advisories(tmp_path)
+    assert found == []
+    assert "subsection not found" in errors["ADV-100"]
 
 
 def test_exact_envelope_fields_are_required(tmp_path: Path) -> None:
