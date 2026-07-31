@@ -36,6 +36,36 @@ def test_extension_api_pause_and_heartbeat(tmp_path: Path) -> None:
     assert client.get("/extension/commands/engineering").json()["command"] is None
 
 
+def test_ready_production_route_claims_an_eligible_command_once_without_test_arm(tmp_path: Path, monkeypatch) -> None:
+    """The production extension path must claim, not stop at an unarmed test gate."""
+    write_source(tmp_path, [{"id": "ADV-303"}])
+    calls: list[str] = []
+    original_begin_attempt = CourierService.begin_attempt
+
+    def record_begin_attempt(service: CourierService, command_id: str):
+        calls.append(command_id)
+        return original_begin_attempt(service, command_id)
+
+    monkeypatch.setattr(CourierService, "begin_attempt", record_begin_attempt)
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client.post("/routes", json={"route_name":"engineering", "target":"engineering", "chatgpt_url":"https://chatgpt.com/c/test"})
+    client.get("/advisories")
+    ready = client.post("/extension/readiness", json={"route_name":"engineering", "url":"https://chatgpt.com/c/test", "content_script":True, "composer_ready":True, "composer_empty":True, "send_control":True, "test_armed":False})
+    assert ready.json()["state"] == "READY"
+    command = client.get("/extension/commands/engineering").json()["command"]
+    assert command["command_id"] == "ADV-303-r1" and command["state"] == CommandState.PENDING
+
+    claimed = client.post(f"/commands/{command['command_id']}/begin")
+
+    assert claimed.status_code == 200
+    assert calls == ["ADV-303-r1"]
+    assert claimed.json()["state"] == CommandState.DISPATCHING
+    assert claimed.json()["attempts"] == 1
+    assert client.post(f"/commands/{command['command_id']}/begin").status_code == 409
+    stored = client.get(f"/commands/{command['command_id']}").json()
+    assert stored["state"] == CommandState.DISPATCHING and stored["attempts"] == 1
+
+
 def test_exact_tab_readiness_and_test_arm_gate_dispatch(tmp_path: Path) -> None:
     write_source(tmp_path, [{"id": "ADV-302", "target": "slice_three_test"}])
     service = CourierService(RuntimeStore(tmp_path / "state.json"))
@@ -63,3 +93,5 @@ def test_extension_keeps_scope_narrow_and_protects_composer() -> None:
     assert "/uncertain" in worker and "emergencyStop" in worker and "/begin" in worker
     assert "preflight" in worker and "/extension/readiness" in worker and "testArmed" in worker and "Registered tab is not open" in worker and "executeScript" in worker and "pageDispatch" in worker
     assert "VOICE_EMPTY" in content and "voiceSelectors" in content
+    assert "requiresTestArm(local.routeName) && !local.testArmed" in worker
+    assert worker.count("/commands/${encodeURIComponent(command.command_id)}/begin") == 1

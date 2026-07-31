@@ -2,6 +2,7 @@ const server = 'http://127.0.0.1:8765';
 const call = async (path, options = {}) => { const r = await fetch(server + path, {headers:{'content-type':'application/json'}, ...options}); if (!r.ok) throw new Error(`${r.status}`); return r.json(); };
 const state = () => chrome.storage.local.get({emergencyStop:false, routeName:'', routeUrl:'', testArmed:false});
 const normal = (text) => String(text || '').replace(/\r\n/g, '\n').trim();
+const requiresTestArm = (routeName) => routeName.startsWith('slice_three_test');
 async function heartbeat() { try { await call('/extension/heartbeat', {method:'POST', body:JSON.stringify({version:chrome.runtime.getManifest().version})}); } catch (_) {} }
 async function reportReadiness(local, details = {}) { try { return await call('/extension/readiness', {method:'POST', body:JSON.stringify({route_name:local.routeName, url:details.url || '', content_script:!!details.content_script, composer_ready:!!details.composer_ready, composer_empty:!!details.composer_empty, send_control:!!details.send_control, test_armed:!!local.testArmed})}); } catch (_) { return null; } }
 function pageProbe() {
@@ -42,7 +43,7 @@ async function pageDispatch(wake, routeUrl) {
 }
 async function poll() {
   const local = await state(); await heartbeat(); if (local.emergencyStop || !local.routeName || !local.routeUrl) return {ok:false, reason:'Route or emergency-stop state blocks dispatch.'};
-  const probeResult = await probe(local); if (!probeResult.ready || !local.testArmed) return {ok:probeResult.ready, reason:probeResult.ready ? 'Exact tab ready; test arm remains off.' : probeResult.reason};
+  const probeResult = await probe(local); if (!probeResult.ready || (requiresTestArm(local.routeName) && !local.testArmed)) return {ok:probeResult.ready, reason:probeResult.ready ? 'Exact tab ready; test arm remains off.' : probeResult.reason};
   let payload; try { payload = await call(`/extension/commands/${encodeURIComponent(local.routeName)}`); } catch (_) { return {ok:false, reason:'Local server is unavailable.'}; }
   const command = payload.command; if (payload.paused || !command) return {ok:true, reason:'No dispatch-eligible command.'};
   let begun; try { begun = await call(`/commands/${encodeURIComponent(command.command_id)}/begin`, {method:'POST'}); } catch (_) { return {ok:false, reason:'Server refused dispatch.'}; }
