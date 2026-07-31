@@ -1,22 +1,12 @@
 # Engineering Advisory Board
 
-Updated: 2026-07-29
+Updated: 2026-07-31
 Project: Engineering HQ
 Purpose: Canonical cross-department advisories originating from Engineering HQ.
 
 ## Open Advisories
 
 ### ADV-20260728-054 — Correct the Maintenance HQ review path for bounded-write Worker repairs
-
-- Advisory Revision: 2
-- Source Department: engineering
-- Target Department: engineering
-- Task Summary: Correct the Maintenance HQ review path for bounded-write Worker repairs.
-- Authorized Scope: Perform only the Engineering runtime enablement and verification explicitly authorized in this advisory; preserve all holds and do not execute the deferred Maintenance review.
-- Lifecycle State: OPEN
-- Outcome:
-- Blocker:
-- Updated At: 2026-07-29T14:48:00-05:00
 
 - Date: 2026-07-28
 - From: Engineering_HQ under direct Rob authorization
@@ -62,6 +52,18 @@ Purpose: Canonical cross-department advisories originating from Engineering HQ.
 - Requested Tools JSON: `["GitHub"]`
 - Current-Phase Completion Condition: Engineering publishes and tests a guarded same-row runtime extension that verifies the exact revision-2 authorization, procedure v2 evidence, validated report evidence, and earlier immutable review evidence; permits exactly attempt 2 at the authorized create-once path; can submit at most one pointer-only Maintenance HQ review-resume wake through the existing courier and send budget; ingests only the exactly correlated immutable attempt-2 receipt; preserves earlier artifacts and evidence; and advances runtime only according to the accepted receipt.
 - Advisory Closure Condition: Remain open until the runtime phase is source-verified, Maintenance HQ creates and Engineering ingests the authorized attempt-2 receipt, `ADV-20260726-053` reaches a valid terminal review outcome, and Engineering performs explicit source-owner closeout.
+
+#### V2 Courier Envelope
+
+- Advisory Revision: 2
+- Source Department: engineering
+- Target Department: engineering
+- Task Summary: Correct the Maintenance HQ review path for bounded-write Worker repairs.
+- Authorized Scope: Perform only the Engineering runtime enablement and verification explicitly authorized in this advisory; preserve all holds and do not execute the deferred Maintenance review.
+- Lifecycle State: OPEN
+- Outcome:
+- Blocker:
+- Updated At: 2026-07-31T14:24:00-05:00
 
 #### Authorized Engineering Outcome
 
@@ -124,7 +126,7 @@ The runtime extension must:
 - Requests Cross-Department Authority: true
 - Requests Material Exception: true
 - Transport Scope Change Detected: false
-- Completion Condition: All clearly stale current canonical records inside the authorized repair roots are repaired or explicitly held, every write is read back and evidenced, and one immutable result artifact is submitted for IMMEDIATE_HQ review.
+- Completion Condition: All clearly stale current canonical operational records inside the authorized repair roots are repaired or explicitly held, every write is read back and evidenced, and one immutable result artifact is submitted for IMMEDIATE_HQ review.
 - Result Contract ID: lifeos_worker_result
 - Result Contract Version: 1
 - Result Submission Procedure ID: maintenance_worker_result_submission
