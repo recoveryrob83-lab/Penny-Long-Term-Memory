@@ -11,6 +11,8 @@ _INDEX = re.compile(r"^-\s+(ADV-[\w-]+).*?`(?P<path>coordination/boards/[^`]+\.m
 _FIELD = re.compile(r"^-\s+(?P<name>[^:]+):\s*(?P<value>.*)$", re.M)
 # Accept canonical em dashes and the legacy mojibake sequence in historical fixtures.
 _HEADING = re.compile(r"^#{2,4}\s+(?P<id>ADV-[\w-]+)\s+(?:[-\u2014]|\u00e2\u20ac\u201d)+\s*(?P<summary>.+)$", re.M)
+_ENVELOPE_HEADING = re.compile(r"^####\s+V2 Courier Envelope\s*$", re.M | re.I)
+_SUBHEADING = re.compile(r"^####\s+.+$", re.M)
 _ROUTE_ID = re.compile(r"^[a-z][a-z0-9_]*$")
 
 _CANONICAL_FIELDS = {
@@ -44,6 +46,15 @@ def _parse_timestamp(value: str, advisory_id: str) -> str:
     return value
 
 
+def _envelope_body(advisory_body: str, advisory_id: str) -> str:
+    heading = _ENVELOPE_HEADING.search(advisory_body)
+    if not heading:
+        raise AdvisoryParseError(f"{advisory_id}: V2 Courier Envelope subsection not found")
+    following = advisory_body[heading.end():]
+    next_subheading = _SUBHEADING.search(following)
+    return following[: next_subheading.start()] if next_subheading else following
+
+
 def parse_advisory_document(text: str, advisory_id: str, source_path: str, source_url: str) -> Advisory:
     match = next((m for m in _HEADING.finditer(text) if m.group("id") == advisory_id), None)
     if not match:
@@ -51,7 +62,8 @@ def parse_advisory_document(text: str, advisory_id: str, source_path: str, sourc
 
     following = text[match.end():]
     next_heading = _HEADING.search(following)
-    body = following[: next_heading.start()] if next_heading else following
+    advisory_body = following[: next_heading.start()] if next_heading else following
+    body = _envelope_body(advisory_body, advisory_id)
 
     collected: dict[str, list[str]] = {}
     for field_match in _FIELD.finditer(body):
