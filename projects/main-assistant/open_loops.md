@@ -1,8 +1,8 @@
 # Chief_of_Staff_HQ Open Loops
 
-Updated: 2026-07-27
+Updated: 2026-08-01
 Project: Chief_of_Staff_HQ / Daily Operations
-Purpose: Track genuine unfinished Chief of Staff work without mixing standing responsibilities, specialist work, operating watches, or completed history into the active queue.
+Purpose: Track genuine unfinished Chief of Staff work without mixing standing responsibilities, specialist implementation, operating watches, or completed history into the active queue.
 
 ## Active Open Loops
 
@@ -13,28 +13,34 @@ Purpose: Track genuine unfinished Chief of Staff work without mixing standing re
 
 ## Waiting Items
 
-None.
+| Status | Priority | Dependency | Owner | Chief of Staff Follow-Through | Completion Condition |
+|---|---|---|---|---|---|
+| Waiting | High | Publish and verify the advisory-level quarantine repair on `origin/main` | Engineering_HQ | After Engineering reports publication, read the current GitHub file or commit and verify the live V2 source status against that durable code | GitHub `main` contains the quarantine implementation and the restarted runtime reports `REMOTE_GITHUB`, `CURRENT`, a non-null verified SHA, the valid advisory set, and the bounded quarantine map |
 
-Do not create waiting placeholders merely because Chief of Staff has a standing capability that Rob may request later. Raw Capture Worker processing, itinerary building, connector actions, job-search follow-up, and other on-demand work begin when Rob actually requests, authorizes, or establishes a real follow-through condition.
+This waiting record is a narrow follow-through dependency. It does not transfer implementation ownership to Chief of Staff or authorize Chief of Staff to edit Engineering code.
 
 ## Current Operating Watches
 
-These are conditions to observe, not unfinished tasks:
+These are conditions to observe, not unfinished Chief of Staff tasks:
 
 - **Chief of Staff overload:** Watch for coordination, report intake, or follow-through silently becoming ownership of specialist work.
 - **Hub ownership drift:** `LifeOS_HQ` is a meeting room. Watch for it becoming a department, backlog owner, or competing source of truth.
-- **Assignment drift:** When the Hub produces a real action, verify that it has one owner, one authoritative destination, a next action or review trigger, and a completion condition.
+- **Assignment drift:** When the Hub produces a real action, verify one owner, one authoritative destination, a next action or review trigger, and a completion condition.
 - **Source duplication:** Watch for the same work appearing in Trello, Todoist, GitHub, Calendar, Drive, or department files as competing detailed truth.
 - **Flow Board overload:** Preserve one card maximum in Now and three maximum in Next.
 - **Connector isolation:** Keep the account-linked financial connector out of `Chief_of_Staff_HQ`, `LifeOS_HQ`, and multi-connector operational chats.
 - **Connector truthfulness:** Do not claim a read, write, send, schedule, application, or external action succeeded without current tool evidence.
-- **Chat / Work boundary:** Keep regular Chat as headquarters and Work as bounded execution; re-evaluate only after meaningful product changes or demonstrated friction.
-- **Context-layer drift:** Treat chat-specific handbooks as noncanonical context mirrors. Use current-source reads, focused Sync, or full Boot when the source state or operating frame matters.
-- **Inventory scope creep:** Keep the initial inventory pilot limited to expendables and transportation access. Do not found a new department, log every use, or expand into durable possessions before the pilot proves useful.
-- **Automation boundary:** The cross-department Worker transport foundation is operational, but transport never creates task authority, source ownership, or closure authority. The current Maintenance run remains owned and verified by `Maintenance_HQ`.
-- **Current Worker report path:** Watch for the immutable result from `RUN-ADV-20260726-053-R1`; receive and synthesize the verified outcome only after `Maintenance_HQ` review rather than acting on transport or chat output alone.
-- **Watcher authority:** Treat Life OS Change Watch output as a report for synthesis and follow-through. It does not choose priorities, modify GitHub, close advisories, or convert reported work into Chief of Staff ownership.
-- **Office Leaks pause:** Preserve Rob's current pause. Do not keep Office Leaks framed as an immediate active priority or invent resume work.
+- **Context-layer drift:** Treat chat-specific handbooks as noncanonical context mirrors. Use current-source reads, focused Sync, or full Boot when source state or authority matters.
+- **Inventory scope creep:** Keep the initial inventory pilot limited to expendables and transportation access.
+- **Courier authority boundary:** Transport never creates task authority, source ownership, lifecycle authority, or permission to retry.
+- **Uncertain transport:** Revision 1 of `ADV-20260801-055` remains immutable `UNCERTAIN` evidence. Never reset, requeue, delete, retry, or relabel an uncertain command without explicit authority and evidence.
+- **Remote-source integrity:** Production should read commit-pinned GitHub snapshots and fail closed on source-integrity failures rather than silently using the local checkout.
+- **Advisory quarantine:** `ADV-20260726-053` remains visible but non-dispatchable because it lacks a V2 Courier Envelope. Quarantine creates no command and does not authorize Chief of Staff to rewrite the Maintenance-owned source.
+- **Courier tab resource use:** Rob's PC cannot comfortably keep two active ChatGPT windows open. The owned courier tab may be closed when idle and created or reused for bounded nighttime automation.
+- **Active-composer protection:** Automation must never overwrite or navigate away from a chat whose composer contains text.
+- **Command history growth:** Keep uncertain and active evidence prominent, display newest first, and move older terminal records into bounded history without deleting required evidence or changing dispatch order.
+- **Readiness telemetry noise:** Repeated identical `NOT_READY` events should eventually be deduplicated or rate-limited by Engineering, but this is not a Chief of Staff implementation task.
+- **Office Leaks pause:** Preserve Rob's current pause unless he explicitly resumes it.
 
 ## Standing Responsibilities
 
@@ -49,41 +55,33 @@ These are enduring department duties, not open loops:
 - Check follow-through and close stale coordination wrappers after verified completion.
 - Handle one-off daily admin and authorized light connector work.
 - Process Worker intake only when authorized or requested.
-- Review lightweight personal-inventory output when requested and route affordability or cash-timing questions to Finance.
-- Preserve paused project state without manufacturing urgency or commitments.
 - Preserve source-system boundaries and keep durable GitHub notes abstract.
+- Read the current Advisory Index before making freshness-sensitive advisory claims.
+- Use the V2 dashboard as visibility and diagnostics rather than competing source truth.
 
 ## External Dependencies
 
-These items are owned elsewhere and are not duplicated as Chief of Staff open loops:
+These items are owned elsewhere and are not duplicated as Chief of Staff implementation loops:
 
-- `Maintenance_HQ` owns `ADV-20260726-053`, its repository audit, shared governance, boot integrity, audits, migrations, source boundaries, global repository reconciliation, result review, and hold resolution.
-- `Engineering_HQ` owns cross-department HQ routing, browser DOM transport, selectors, compatibility mappings, dashboard code, tests, technical reliability, duplicate protection, evidence return, and failure recovery.
-- `Finance_HQ` owns forecasting models, account-linked analysis, affordability, cash timing, spending analysis, and financial judgment.
+- `Engineering_HQ` owns V2 courier and source code, publication of the quarantine repair, command-history ordering and retention, courier-tab reuse or closure, readiness-event deduplication, tests, and technical evidence.
+- `Maintenance_HQ` owns `ADV-20260726-053`, its source text, repository audit, shared governance, and any resolution of the missing V2 Courier Envelope.
+- `Engineering_HQ` owns `ADV-20260728-054` and any authorized next action arising from it.
+- `Finance_HQ` owns forecasting, account-linked analysis, affordability, cash timing, spending analysis, and financial judgment.
 - `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, records, and any future resume decision.
 
-Chief of Staff may track a narrow routed dependency or follow-through condition when another department must report back, but the detailed authoritative work remains with that department.
+Chief of Staff may track a narrow routed dependency or follow-through condition when another department must report back, but detailed authoritative work remains with that department.
 
 ## Recently Closed or Clarified
 
+- 2026-08-01: `ADV-20260801-055` revision 2 was delivered to the existing Maintenance HQ conversation, visibly acknowledged, and closed by Rob's authority. Revision 1 remains preserved as terminal `UNCERTAIN` evidence.
+- 2026-08-01: The V2 courier proved multi-route discovery, exact-route navigation, readiness-gated atomic begin, hardened composer delivery, and server-side `DELIVERED` acknowledgement.
+- 2026-08-01: Read-only canonical GitHub advisory ingestion was validated locally. The source resolved one commit SHA, read the index and boards at that SHA, preserved existing commands, accepted valid advisories, and quarantined the legacy advisory lacking a V2 envelope.
+- 2026-08-01: Clarified that new advisories should be discovered directly from GitHub without requiring Rob to pull the local repository. Manual pulls remain for installing code changes, not normal advisory ingestion.
+- 2026-08-01: Clarified daytime and nighttime courier-tab operation around Rob's PC memory constraint.
 - 2026-07-27: Reconciled Chief of Staff current-state references with the open Maintenance audit without creating a Chief of Staff-owned duplicate loop.
-- 2026-07-26: The Maintenance Worker became active and live; activation remained separate from task authority.
-- 2026-07-23: Package F Wave 0A was reconciled as complete: the existing Life OS Change Watch is enabled and successful, canonical room and Worker naming is established, current files were reconciled, and the Engineering-only Worker proof chain is complete.
-- 2026-07-23: Clarified that the watcher reports meaningful GitHub changes into the existing `Chief_of_Staff_HQ` room but remains read-only and does not close or own the underlying work.
-- 2026-07-22: Narrowed the proposed inventory concept to a lightweight expendables-first pilot under Chief of Staff operations rather than creating a Finance subdepartment.
-- 2026-07-22: Clarified the split between operational stock awareness in Chief of Staff and affordability or spending judgment in Finance.
-- 2026-07-22: Prepared the department for a replacement chat because the current conversation had become laggy; the chat-specific handbook remains a noncanonical orientation aid rather than a replacement for GitHub or current-source verification.
-- 2026-07-22: Recorded Rob's Engineering direction away from desktop-app visual automation and toward browser DOM transport.
-- 2026-07-22: Reviewed and rejected a vague remote Crescent Solutions role after the available copy strongly suggested opaque performance-based sales rather than stable salaried support work.
-- 2026-07-18: Removed the stale implication that deployed Project Settings reconciliation remained pending; the deployed copy matches the canonical Project Instructions and future reconciliation opens only on demonstrated drift.
-- 2026-07-18: Completed the Chief of Staff-owned Phase Two architecture repair across the local handoff, identity, README, status, open loops, notebook framing, and retained advisory-board header and notes.
-- 2026-07-18: Clarified that LifeOS HQ is a separate shared meeting room and Chief of Staff HQ is its chair, not the Hub itself.
-- 2026-07-18: Reclassified routine duties and operating watches so they no longer masquerade as active open loops.
-- 2026-07-17: Desktop department automation passed draft-mode validation across all seven Department HQs.
-- 2026-07-17: A watched live send to the legacy `Main Assistant HQ` automation destination succeeded and initiated a normal reboot.
-- 2026-07-17: The previous legacy Logistics boot path defect was corrected to `projects/life-logistics-hq`.
-- 2026-07-17: The LifeOS Dashboard became operational with GitHub, Trello, Todoist, and Google Calendar private iCal.
-- 2026-07-17: ADV-20260717-040, ADV-20260716-039, ADV-20260716-038, and ADV-20260716-037 were closed.
+- 2026-07-23: Package F Wave 0A was reconciled as complete, including the Engineering-only Worker proof chain and the enabled read-only change watcher.
+- 2026-07-22: Narrowed personal inventory to a lightweight expendables-first pilot under Chief of Staff operations.
+- 2026-07-18: Completed the Chief of Staff-owned Phase Two architecture repair and clarified that LifeOS HQ is the shared meeting room rather than the department itself.
 
 ## Standing Routing Rule
 
@@ -91,4 +89,4 @@ If a task grows into a multi-step project, requires specialist judgment, or crea
 
 ## Completion Standard
 
-`Chief_of_Staff_HQ` is working correctly when Rob has a clear next action, Penny has removed avoidable friction, department reports are synthesized without ownership drift, real assignments are routed to one owner and one authoritative destination, external actions are truthfully verified, stale coordination wrappers close cleanly, inventory tracking remains useful and lightweight, paused projects remain paused without manufactured urgency, and `LifeOS_HQ` has not created extra administrative burden or duplicate truth.
+`Chief_of_Staff_HQ` is working correctly when Rob has a clear next action, avoidable friction is removed, department reports are synthesized without ownership drift, real assignments are routed to one owner and one authoritative destination, external actions are truthfully verified, stale coordination wrappers close cleanly, automation evidence remains trustworthy, and `LifeOS_HQ` has not created duplicate truth or administrative drag.
