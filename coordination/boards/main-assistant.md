@@ -1,11 +1,54 @@
 # Chief of Staff HQ Advisory Board
 
-Updated: 2026-07-23
+Updated: 2026-08-01
 Purpose: Canonical advisory text sourced from Chief of Staff HQ, including formal advisories arising from LifeOS HQ meetings. The retained filesystem path remains `coordination/boards/main-assistant.md`.
 
 ## Open Advisories
 
-None.
+### ADV-20260801-055 — Verify canonical multi-route courier delivery to Maintenance HQ
+
+- Date: 2026-08-01
+- From: Chief_of_Staff_HQ / LifeOS_HQ under direct Rob authorization
+- To: Maintenance_HQ
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: N/A
+- Posted Board: `coordination/boards/main-assistant.md`
+- Current Target Department and Owner: maintenance
+- Record Class: Read-only V2 courier transport test
+- Authorization Class: READ_ONLY_TEST
+- Authorization Source: ROB
+- Approval Reference: ROB-DIRECT-MAINTENANCE-COURIER-TEST-20260801
+- Requests New Authority: false
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: false
+- Requests Material Exception: false
+- Transport Scope Change Detected: false
+- Execution-Ready Worker Task: false
+- Authorized Read Scope: This advisory and its courier pointer only
+- Authorized Write Scope: none
+- Completion Condition: Maintenance HQ receives the pointer in its existing registered conversation and visibly reports receipt without performing repository work or creating another durable record.
+- Closure Condition: Rob confirms the route-switch test result and explicitly authorizes closure.
+
+#### V2 Courier Envelope
+
+- Advisory Revision: 1
+- Source Department: chief_of_staff
+- Target Department: maintenance
+- Task Summary: Verify canonical multi-route courier delivery to Maintenance HQ.
+- Authorized Scope: Read this advisory and report that the pointer arrived. Do not modify GitHub, create a Worker run, execute Maintenance work, or create any follow-on durable record.
+- Lifecycle State: OPEN
+- Outcome:
+- Blocker:
+- Updated At: 2026-08-01T09:07:00-05:00
+
+#### Authorized Maintenance HQ Response
+
+Maintenance HQ may only acknowledge that the pointer arrived in the correct existing conversation. A concise response such as `ADV-20260801-055 received in Maintenance HQ` is sufficient.
+
+This test does not authorize Boot, Sync, audit, reconciliation, maintenance, repository inspection, connector writes, Worker execution, schedule changes, or advisory closure.
 
 ## Recently Acknowledged / Implemented Advisories
 
