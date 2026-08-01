@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ Status
 
-Updated: 2026-07-27
+Updated: 2026-08-01
 Project: Chief_of_Staff_HQ / Daily Operations
 Status: Active / Operational
 
@@ -8,17 +8,15 @@ Status: Active / Operational
 
 `Chief_of_Staff_HQ` is operational as Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, executive-function support, `LifeOS_HQ` chair, routing desk, and follow-through coordinator.
 
-It handles daily planning, practical coordination, cross-department synthesis, one-off admin, authorized light connector work, Trello Inbox processing, Flow Board support, task capture and routing, advisory preparation, department-report intake, assignment routing, and downstream Worker-intake processing when authorized.
-
-`LifeOS_HQ` is a separate shared meeting room. Chief of Staff chairs it, but the Hub does not own a backlog, specialist strategy, or independent durable state.
+`LifeOS_HQ` remains a shared meeting room rather than a department, backlog owner, or independent authority.
 
 ## Current Phase
 
-Operational use, completed Phase Two role alignment, completed Worker transport foundation, active bounded Maintenance audit, and evidence-based refinement.
+Operational use with a proven LifeOS V2 cross-room courier, read-only canonical GitHub advisory ingestion, advisory-level quarantine, and bounded refinement.
 
-The friction-aware Daily Operating SOP is active through the universal boot sequence and should be tested in ordinary daily planning rather than expanded into another layer of bureaucracy.
+The friction-aware Daily Operating SOP remains active and should be evaluated through ordinary daily use rather than expanded into more process.
 
-The eight-room architecture is active:
+The eight-room architecture remains active:
 
 - one shared meeting room: `LifeOS_HQ`;
 - seven department HQs: `Chief_of_Staff_HQ`, `Maintenance_HQ`, `Engineering_HQ`, `Finance_HQ`, `Business_HQ`, `Office_Leaks_HQ`, and `Wellness_HQ`.
@@ -27,69 +25,78 @@ Departments retain their own durable GitHub ownership and drift-management respo
 
 ## Active Systems
 
-- `Chief_of_Staff_HQ` project folder: `projects/main-assistant/`
+- Chief of Staff project folder: `projects/main-assistant/`
 - Hub operating contract: `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
-- Global Daily Operating SOP: `memory/06_DAILY_OPERATING_SOP.md`
+- Daily Operating SOP: `memory/06_DAILY_OPERATING_SOP.md`
 - Trello Flow Board SOP: `coordination/TRELLO_FLOW_BOARD_SOP.md`
-- LifeOS Flow Board: https://trello.com/b/QKXdwHup/lifeos-flow-board
 - Department ownership SOP: `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
 - Open-loop ownership SOP: `coordination/OPEN_LOOP_OWNERSHIP_AND_VISIBILITY_SOP.md`
-- Idea intake and promotion SOP: `coordination/IDEA_INTAKE_AND_PROMOTION_SOP.md`
-- Chat/Work policy: `projects/life-os-infrastructure/CHAT_WORK_EXECUTION_POLICY.md`
-- LifeOS Dashboard: locally running read-mostly interface with GitHub, Trello, Todoist, and Google Calendar private iCal
-- Desktop department and Worker automation: Engineering-owned bounded transport machinery
-- Life OS Change Watch: enabled hourly GitHub-only condition watch that reports meaningful signed work changes and remains silent when nothing changed
+- Advisory Index: `coordination/ADVISORY_INDEX.md`
+- Chief of Staff source board: `coordination/boards/main-assistant.md`
+- LifeOS V2 Dashboard: local visibility, diagnostics, and bounded control
+- V2 browser courier: multi-route, exact-URL, empty-composer guarded, atomic begin, delivery proof, and terminal uncertain handling
+- V2 advisory source: read-only canonical GitHub snapshots pinned to one commit SHA
+- Trello: raw intake and visual flow
 - Todoist: Rob-facing commitments and reminders
-- Calendar: appointments and timed commitments
-- Gmail: searches, summaries, evidence, and drafts
+- Calendar: timed commitments
+- Gmail: communication evidence and drafts
 - Drive: working records and human-facing artifacts
-- Advisory dashboard: `coordination/ADVISORY_INDEX.md`
-- `Chief_of_Staff_HQ` source board: `coordination/boards/main-assistant.md`
+
+## Current Evidence
+
+- Multi-route command discovery no longer depends on route readiness being established before navigation.
+- The extension successfully created or used an owned background courier tab, navigated to the exact Maintenance HQ conversation, established readiness, and called `/begin` once.
+- Revision 1 of `ADV-20260801-055` ended as terminal `UNCERTAIN` after an unresolved post-begin transport attempt and was not retried.
+- Composer insertion, send-control selection, injected fallback execution, and bounded delivery proof were hardened.
+- Revision 2 of `ADV-20260801-055` reached `DELIVERED`, Maintenance visibly confirmed receipt, Rob authorized closure, and the advisory is closed.
+- Production advisory ingestion now targets `recoveryrob83-lab/Penny-Long-Term-Memory@main` directly rather than requiring a manual local pull.
+- The source synchronizer resolves one SHA and reads the Advisory Index and referenced boards at that same SHA.
+- Live local validation reported source state `CURRENT`, a non-null verified SHA, `ADV-20260728-054` as valid, and `ADV-20260726-053` quarantined because it lacks a V2 Courier Envelope.
+- Existing commands remained unchanged through the mixed valid and quarantined snapshot.
+- Source failure remains fail-closed; isolated advisory parse failures create no commands and do not block valid advisories.
+
+## Publication Discrepancy
+
+The live local runtime includes the advisory-level quarantine repair, but the current GitHub connector view of `main` still shows `0eeccc46df6980c62e29795e7f40c78a1d61a108` (`Read courier advisories from canonical GitHub snapshots`) as the latest code commit and does not yet show the quarantine repair commit.
+
+Until Engineering publishes and verifies that repair on `origin/main`, the local runtime is ahead of durable repository truth.
+
+This is an Engineering-owned publication and verification dependency, not a Chief of Staff implementation task.
 
 ## Current Operating Priorities
 
 - Keep daily planning limited to one major action and at most one useful support action.
-- Reduce friction through preparation before asking Rob to act.
-- Chair `LifeOS_HQ` without turning the meeting room into a department or backlog owner.
-- Receive department reports, synthesize the decision-relevant signal, and preserve department ownership.
-- Route each real assignment to one owning department and one authoritative destination.
-- Check follow-through and close stale coordination wrappers after verified completion.
-- Use Trello Inbox for fast raw capture and the LifeOS Flow Board for visual attention management.
-- Preserve one card maximum in Now and three maximum in Next.
-- Keep Todoist as the commitments and reminders system rather than duplicating every Flow Board card there.
-- Use the dashboard for quick orientation while preserving source-system authority.
-- Treat desktop automation as transport for exact authorized work, not as an autonomous agent or authority source.
-- Coordinate department perspectives without pretending they are autonomous agents.
-- Use regular Chat, especially classic desktop when connectors are needed, for substantial reasoning and connector-backed work where available.
-- Treat both Work-side Chat and Work Tasks as metered.
-- Reserve Work for bounded local-computer execution and default Work tasks to the lightest capable model unless escalation is justified.
-- Preserve the current Office Leaks pause and route any resume decision to `Office_Leaks_HQ` and Rob.
-- Process Raw Capture Worker and Inventory Worker output only when Rob authorizes or requests review.
-- Keep connector actions scoped, authorized, and verified.
-- Keep the account-linked financial connector isolated from `Chief_of_Staff_HQ` and `LifeOS_HQ`.
+- Chair `LifeOS_HQ` without turning it into a department or backlog owner.
+- Route each real assignment to one owner and one authoritative destination.
+- Use the dashboard for orientation while preserving source-system authority.
+- Treat `UNCERTAIN` as a hard stop rather than a retry invitation.
+- Preserve remote GitHub source integrity and visible advisory quarantine.
+- Keep nighttime automation bounded and compatible with Rob's PC memory limits.
+- Preserve one owned courier tab or close it when idle; avoid tab sprawl and active-composer interference.
+- Keep command history evidence while moving display toward newest-first and bounded history.
+- Preserve the current Office Leaks pause unless Rob explicitly resumes it.
+- Keep account-linked financial work isolated in Finance-only context.
 
 ## Current Dependencies
 
-- `Maintenance_HQ` owns shared governance, boot integrity, audits, migrations, source boundaries, global repository reconciliation, and the current `ADV-20260726-053` audit.
-- `Engineering_HQ` owns Worker transport, immutable result ingestion, routing runtime, browser safety, verification mechanics, and technical evidence. It does not own the Maintenance audit or source lifecycle.
+- `Engineering_HQ` owns publication of the quarantine repair, V2 source and courier code, command-history ordering and retention, owned-tab lifecycle, readiness-event deduplication, tests, and technical evidence.
+- `Maintenance_HQ` owns `ADV-20260726-053`, its source text, repository audit, shared governance, and any resolution of the missing V2 Courier Envelope.
+- `ADV-20260728-054` remains an Engineering-owned open advisory.
 - `Engineering_HQ Daily Sync` remains paused until Rob explicitly resumes it.
 - `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, records, and any future resume decision.
-- `Finance_HQ` owns forecasting models, account-linked analysis, and financial judgment. Account-linked connector work remains isolated in Finance-only chat.
+- `Finance_HQ` owns forecasting, account-linked analysis, affordability, cash timing, and financial judgment.
 
-## Current Evidence
+## Current Advisory State
 
-- The shared constitutional layer recognizes `Chief_of_Staff_HQ` as Rob's primary point of contact and `LifeOS_HQ` chair.
-- Phase Two owner-routed repairs are complete across all seven Department HQs.
-- The deployed ChatGPT Project Settings copy matches the canonical Project Instructions; no manual replacement is pending.
-- The LifeOS Dashboard is live with four verified source types: GitHub, Trello, Todoist, and Google Calendar private iCal.
-- Guarded GitHub auto-sync is limited to clean, strictly-behind fast-forward updates.
-- Windows desktop boot automation passed draft-mode validation across the seven Department HQs and recognizes `LifeOS_HQ` as an eighth exact destination.
-- Canonical room names and current Worker titles are established while historical evidence and stable paths remain preserved.
-- The Worker chain proved exact URL transport, bounded execution, immutable result ingestion, owning-HQ review, Rob validation when required, watcher consumption, and duplicate suppression.
-- `Maintenance_Worker` is active and executing `ADV-20260726-053` revision 1 under a one-run Rob-approved coordinated-repair exception; immutable result submission and `Maintenance_HQ` review remain pending.
-- The enabled Life OS Change Watch reports meaningful GitHub changes into the existing `Chief_of_Staff_HQ` conversation without creating a duplicate room or taking action on the work.
-- Trello is active as the visual flow system and the mobile Now widget targets the correct list.
-- The Advisory Index currently reports one open advisory: `ADV-20260726-053`.
+Re-read `coordination/ADVISORY_INDEX.md` before making a freshness-sensitive claim.
+
+At this status refresh:
+
+- `ADV-20260801-055` is closed;
+- `ADV-20260728-054` remains open for Engineering;
+- `ADV-20260726-053` remains open for Maintenance but is quarantined from V2 dispatch because its source text lacks a V2 Courier Envelope.
+
+Quarantine does not close, rewrite, promote, or transfer ownership of the source advisory.
 
 ## Operating Boundary
 
@@ -99,6 +106,4 @@ Use `LifeOS_HQ` for shared discussion and structured department perspectives wit
 
 Trello shows capture and current attention. Todoist holds commitments. Calendar holds time. GitHub holds durable abstract state. Drive holds working records. Gmail holds communication evidence. The dashboard displays selected state.
 
-Route project-sized or specialist judgment to the correct department. Chief of Staff owns synthesis, routing, follow-through, and authorized light connector execution, not every domain's strategy or durable state.
-
-Each department maintains its own canonical GitHub files. `Maintenance_HQ` retains shared governance, boot integrity, global GitHub hygiene, audits, source-boundary enforcement, migrations, and reconciliation. `Engineering_HQ` owns dashboard and automation implementation. The current audit does not transfer ownership to Chief of Staff.
+Route project-sized work and specialist judgment to the correct owner. Chief of Staff coordinates and verifies; it does not become the project junk drawer.
