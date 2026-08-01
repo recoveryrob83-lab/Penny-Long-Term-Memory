@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ Status
 
-Updated: 2026-07-27
+Updated: 2026-08-01
 Project: Chief_of_Staff_HQ / Daily Operations
 Status: Active / Operational
 
@@ -14,7 +14,7 @@ It handles daily planning, practical coordination, cross-department synthesis, o
 
 ## Current Phase
 
-Operational use, completed Phase Two role alignment, completed Worker transport foundation, active bounded Maintenance audit, and evidence-based refinement.
+Operational use, V2 advisory-aware routing, completed Phase Two role alignment, completed Worker transport foundation, active bounded Maintenance and Engineering follow-through, and evidence-based refinement.
 
 The friction-aware Daily Operating SOP is active through the universal boot sequence and should be tested in ordinary daily planning rather than expanded into another layer of bureaucracy.
 
@@ -30,6 +30,8 @@ Departments retain their own durable GitHub ownership and drift-management respo
 - `Chief_of_Staff_HQ` project folder: `projects/main-assistant/`
 - Hub operating contract: `coordination/LIFEOS_HUB_OPERATING_CONTRACT.md`
 - Global Daily Operating SOP: `memory/06_DAILY_OPERATING_SOP.md`
+- Shared execution protocol: `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- V2 advisory courier contract: `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
 - Trello Flow Board SOP: `coordination/TRELLO_FLOW_BOARD_SOP.md`
 - LifeOS Flow Board: https://trello.com/b/QKXdwHup/lifeos-flow-board
 - Department ownership SOP: `coordination/DEPARTMENT_FILE_OWNERSHIP_SOP.md`
@@ -54,6 +56,11 @@ Departments retain their own durable GitHub ownership and drift-management respo
 - Receive department reports, synthesize the decision-relevant signal, and preserve department ownership.
 - Route each real assignment to one owning department and one authoritative destination.
 - Check follow-through and close stale coordination wrappers after verified completion.
+- Before creating, materially revising, routing, blocking, completing, or closing a formal advisory, reread the V2 advisory courier contract.
+- Keep the full advisory authoritative on one source board and the exact `#### V2 Courier Envelope` inside that same advisory section when courier transport applies.
+- Treat the Advisory Index as the sole routing dashboard and the V2 envelope as transport metadata only.
+- Preserve the split between advisory governance lifecycle and V2 courier lifecycle; only V2 states `OPEN` and `IN_PROGRESS` are dispatch-actionable.
+- Treat malformed or missing V2 envelopes as transport quarantine, not as authority loss, automatic closure, or permission to create a replacement advisory.
 - Use Trello Inbox for fast raw capture and the LifeOS Flow Board for visual attention management.
 - Preserve one card maximum in Now and three maximum in Next.
 - Keep Todoist as the commitments and reminders system rather than duplicating every Flow Board card there.
@@ -70,8 +77,8 @@ Departments retain their own durable GitHub ownership and drift-management respo
 
 ## Current Dependencies
 
-- `Maintenance_HQ` owns shared governance, boot integrity, audits, migrations, source boundaries, global repository reconciliation, and the current `ADV-20260726-053` audit.
-- `Engineering_HQ` owns Worker transport, immutable result ingestion, routing runtime, browser safety, verification mechanics, and technical evidence. It does not own the Maintenance audit or source lifecycle.
+- `Maintenance_HQ` owns shared governance, boot integrity, audits, migrations, source boundaries, global repository reconciliation, V2 advisory-contract stewardship, and the current `ADV-20260726-053` source-owner review path.
+- `Engineering_HQ` owns Worker transport, immutable result ingestion, routing runtime, browser safety, verification mechanics, V2 parser and courier enforcement, and technical evidence. It owns `ADV-20260728-054` and does not own the Maintenance audit or source lifecycle.
 - `Engineering_HQ Daily Sync` remains paused until Rob explicitly resumes it.
 - `Business_HQ` and `Office_Leaks_HQ` own Office Leaks strategy, records, and any future resume decision.
 - `Finance_HQ` owns forecasting models, account-linked analysis, and financial judgment. Account-linked connector work remains isolated in Finance-only chat.
@@ -86,10 +93,13 @@ Departments retain their own durable GitHub ownership and drift-management respo
 - Windows desktop boot automation passed draft-mode validation across the seven Department HQs and recognizes `LifeOS_HQ` as an eighth exact destination.
 - Canonical room names and current Worker titles are established while historical evidence and stable paths remain preserved.
 - The Worker chain proved exact URL transport, bounded execution, immutable result ingestion, owning-HQ review, Rob validation when required, watcher consumption, and duplicate suppression.
-- `Maintenance_Worker` is active and executing `ADV-20260726-053` revision 1 under a one-run Rob-approved coordinated-repair exception; immutable result submission and `Maintenance_HQ` review remain pending.
+- The V2 advisory model is active: the full source-board advisory carries authority, the exact nine-field envelope carries routing metadata, and malformed advisories may be quarantined individually without blocking valid advisories.
+- `ADV-20260728-054` is open and Engineering-owned for guarded runtime enablement of one later Maintenance HQ review attempt.
+- `ADV-20260726-053` remains open and Maintenance-owned pending a valid terminal source-owner review outcome and explicit closeout.
+- `ADV-20260801-055` closed after revision 2 was delivered and visibly acknowledged; revision 1 remains preserved as immutable uncertain transport evidence.
 - The enabled Life OS Change Watch reports meaningful GitHub changes into the existing `Chief_of_Staff_HQ` conversation without creating a duplicate room or taking action on the work.
 - Trello is active as the visual flow system and the mobile Now widget targets the correct list.
-- The Advisory Index currently reports one open advisory: `ADV-20260726-053`.
+- The Advisory Index currently reports two open advisories: `ADV-20260728-054` and `ADV-20260726-053`.
 
 ## Operating Boundary
 
@@ -101,4 +111,4 @@ Trello shows capture and current attention. Todoist holds commitments. Calendar 
 
 Route project-sized or specialist judgment to the correct department. Chief of Staff owns synthesis, routing, follow-through, and authorized light connector execution, not every domain's strategy or durable state.
 
-Each department maintains its own canonical GitHub files. `Maintenance_HQ` retains shared governance, boot integrity, global GitHub hygiene, audits, source-boundary enforcement, migrations, and reconciliation. `Engineering_HQ` owns dashboard and automation implementation. The current audit does not transfer ownership to Chief of Staff.
+Each department maintains its own canonical GitHub files. `Maintenance_HQ` retains shared governance, boot integrity, global GitHub hygiene, audits, source-boundary enforcement, migrations, reconciliation, and the shared V2 advisory contract. `Engineering_HQ` owns dashboard, parser, courier, and automation implementation. Current advisory work does not transfer ownership to Chief of Staff.
