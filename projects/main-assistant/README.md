@@ -1,6 +1,6 @@
 # Chief_of_Staff_HQ
 
-Updated: 2026-07-22
+Updated: 2026-08-01
 Project: Chief_of_Staff_HQ / Daily Operations
 Purpose: Durable project folder for Rob's primary point of contact, personal-assistant headquarters, daily-operations desk, `LifeOS_HQ` chair, routing desk, and follow-through coordinator.
 
@@ -112,11 +112,11 @@ Use targeted refresh when only a current source state is needed. Use focused Syn
 
 ## Automation Transport Boundary
 
-`Engineering_HQ` owns department-chat transport architecture, browser or desktop automation, selectors, validation, recovery behavior, duplicate protection, and technical evidence.
-
-Rob has directed Engineering toward browser DOM-based transport rather than relying on brittle desktop-app visual automation. Chief of Staff should treat that as the current Engineering direction, not as completed capability, until Engineering reports end-to-end evidence covering transport, receiver validation, bounded execution, evidence return, duplicate prevention, and failure recovery.
+`Engineering_HQ` owns department-chat transport architecture, browser or desktop automation, selectors, validation, recovery behavior, duplicate protection, V2 parser and courier enforcement, and technical evidence.
 
 Chief of Staff may receive and synthesize verified Engineering reports but does not own implementation or declare transport complete from optimism alone.
+
+Transport does not create authority. A dashboard, parser, courier, Worker, or automation route may validate, quarantine, display, or transport already-authorized work, but may not invent, broaden, interpret, complete, or close the underlying authority.
 
 ## Source Systems
 
@@ -137,6 +137,12 @@ Chief of Staff may receive and synthesize verified Engineering reports but does 
 - Hub-originated formal advisories identify their source as `Chief_of_Staff_HQ / LifeOS_HQ`.
 - Canonical advisory text lives on the source board and is not duplicated into target boards or department backlogs merely for visibility.
 - `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen historical state unless Rob explicitly reactivates it.
+- Before creating, materially revising, routing, blocking, completing, or closing a formal advisory, read `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` and `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`.
+- When V2 courier transport applies, keep one exact `#### V2 Courier Envelope` inside the same authoritative advisory section with all nine required fields.
+- The full advisory governance lifecycle controls authority, ownership, judgment, verification, and closeout. The envelope lifecycle controls dispatch eligibility only.
+- Only envelope states `OPEN` and `IN_PROGRESS` are dispatch-actionable. `BLOCKED`, `NEEDS_ROB`, `COMPLETED`, and `CLOSED` suppress dispatch without independently changing advisory authority or governance state.
+- A malformed or missing envelope may quarantine transport for that advisory without invalidating the source advisory, changing ownership, resolving a hold, authorizing work, or creating a replacement record.
+- Material advisory changes increment the advisory revision and envelope revision when the envelope applies. Cosmetic edits must not create new work or wakes.
 
 ## Financial Connector Boundary
 
