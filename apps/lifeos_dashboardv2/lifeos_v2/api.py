@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 from pathlib import Path
+from threading import Lock
 from typing import Callable
 
 from fastapi import FastAPI, HTTPException
@@ -11,7 +12,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, HttpUrl
 
 from .contracts import CommandState, Route
-from .reader import AdvisoryReader
+from .advisory_source import AdvisorySource, REMOTE_GITHUB, SourceSyncError
 from .runtime import CourierService, RuntimeStore
 
 
@@ -40,9 +41,27 @@ class ReadinessInput(BaseModel):
     test_armed: bool = False
 
 
-def create_app(root: Path, persistence_path: Path, index_path: str = "coordination/ADVISORY_INDEX.md") -> FastAPI:
-    reader = AdvisoryReader(root, index_path, "https://github.com/recoveryrob83-lab/Penny-Long-Term-Memory/blob/main")
+def create_app(
+    root: Path,
+    persistence_path: Path,
+    index_path: str = "coordination/ADVISORY_INDEX.md",
+    *,
+    source_mode: str | None = None,
+    advisory_source: AdvisorySource | None = None,
+) -> FastAPI:
+    import os
+    def bounded_env_int(name: str, default: int, minimum: int, maximum: int) -> int:
+        try:
+            return max(minimum, min(maximum, int(os.getenv(name, str(default)))))
+        except ValueError:
+            return default
+
+    selected_source_mode = source_mode or os.getenv("LIFEOS_ADVISORY_SOURCE_MODE", REMOTE_GITHUB)
+    refresh_ttl = bounded_env_int("LIFEOS_ADVISORY_REFRESH_TTL_SECONDS", 20, 1, 300)
+    source = advisory_source or AdvisorySource(selected_source_mode, repository_root=root, index_path=index_path, refresh_ttl_seconds=refresh_ttl)
     service = CourierService(RuntimeStore(persistence_path))
+    service.set_source_sync(source.status)
+    source_sync_lock = Lock()
     from .connectors import ConnectorManager
     from .github_status import GitHubStatusVerifier
     connector_manager = ConnectorManager(Path(__file__).parent.parent / "config")
@@ -50,24 +69,52 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
     app = FastAPI(title="LifeOS V2 Courier", version="0.1.0")
     dashboard_root = Path(__file__).parent / "dashboard"
     app.mount("/static", StaticFiles(directory=dashboard_root), name="static")
+    refresh_interval = bounded_env_int("LIFEOS_ADVISORY_REFRESH_INTERVAL_SECONDS", 30, 10, 300)
+    periodic_task = None
+
+    @app.on_event("startup")
+    async def start_periodic_source_refresh() -> None:
+        import asyncio
+        nonlocal periodic_task
+
+        async def refresh_loop() -> None:
+            while True:
+                await asyncio.to_thread(snapshot)
+                await asyncio.sleep(refresh_interval)
+
+        periodic_task = asyncio.create_task(refresh_loop())
+
+    @app.on_event("shutdown")
+    async def stop_periodic_source_refresh() -> None:
+        if periodic_task:
+            periodic_task.cancel()
 
     @app.get("/", include_in_schema=False)
     def dashboard() -> FileResponse:
         return FileResponse(dashboard_root / "index.html")
 
     def snapshot() -> tuple[list, dict[str, str]]:
-        advisories, errors = reader.read()
-        service.reconcile(advisories)
-        return advisories, errors
+        # Serialize refresh and reconciliation so commands always reflect one
+        # complete, commit-pinned source snapshot.
+        with source_sync_lock:
+            try:
+                current = source.refresh()
+            except SourceSyncError as exc:
+                service.set_source_sync(source.status)
+                cached = source.snapshot
+                return (cached.advisories if cached else []), {"source_sync": str(exc)}
+            service.set_source_sync(source.status)
+            service.reconcile(current.advisories)
+            return current.advisories, {}
 
     @app.get("/health")
     def health() -> dict:
-        return {"status": "ok", "paused": service.paused}
+        return {"status": "ok", "paused": service.paused, "source": source.status}
 
     @app.get("/status")
     def status() -> dict:
         advisories, errors = snapshot()
-        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {}), "tab_readiness": service.readiness()}
+        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {}), "tab_readiness": service.readiness(), "source": source.status}
 
     @app.get("/dashboard/overview")
     def overview(force: bool = False) -> dict:
@@ -125,6 +172,7 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
 
     @app.get("/extension/commands/{route_name}")
     def extension_command(route_name: str) -> dict:
+        snapshot()
         return {"paused": service.paused, "command": service.discover_candidate(route_name)}
 
     @app.post("/commands/{command_id}/begin")

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 
 from lifeos_v2.api import create_app
@@ -15,13 +16,14 @@ def source(root: Path) -> None:
     (root / "memory/STARTUP_BOOT.md").write_text("# Boot\n", encoding="utf-8")
 
 
-def client(tmp_path: Path) -> TestClient:
+def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
     source(tmp_path)
-    return TestClient(create_app(tmp_path, tmp_path / "runtime.json"))
+    monkeypatch.setenv("LIFEOS_FIXTURE_MODE", "true")
+    return TestClient(create_app(tmp_path, tmp_path / "runtime.json", source_mode="LOCAL_DEVELOPMENT"))
 
 
-def test_dashboard_shell_has_only_the_three_v2_tabs_and_read_models(tmp_path: Path) -> None:
-    app = client(tmp_path)
+def test_dashboard_shell_has_only_the_three_v2_tabs_and_read_models(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    app = client(tmp_path, monkeypatch)
     body = app.get("/").text
     assert all(label in body for label in ("Overview", "Department Inspector", "Automation"))
     assert "Worker Operations" not in body and "Automation Logs" not in body
@@ -29,8 +31,8 @@ def test_dashboard_shell_has_only_the_three_v2_tabs_and_read_models(tmp_path: Pa
     assert app.get("/dashboard/inspector").json()["records"]
 
 
-def test_dashboard_models_keep_partial_errors_and_inspector_is_bounded(tmp_path: Path) -> None:
-    app = client(tmp_path)
+def test_dashboard_models_keep_partial_errors_and_inspector_is_bounded(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    app = client(tmp_path, monkeypatch)
     overview = app.get("/dashboard/overview").json()
     assert any(item["state"] == "unavailable" for item in overview["sources"])
     records = app.get("/dashboard/inspector").json()["records"]

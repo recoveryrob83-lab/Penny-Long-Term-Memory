@@ -39,6 +39,10 @@ class Advisory:
     updated_at: str
     source_path: str
     source_url: str
+    source_repository: str = ""
+    source_branch: str = ""
+    source_commit_sha: str = ""
+    source_verified_at: str = ""
 
     @property
     def command_id(self) -> str:
@@ -83,6 +87,12 @@ class DeliveryCommand:
     attempts: int = 0
     max_attempts: int = 3
     last_attempt_at: str | None = None
+    source_repository: str = ""
+    source_branch: str = ""
+    source_commit_sha: str = ""
+    source_path: str = ""
+    source_revision: int = 0
+    source_verified_at: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)

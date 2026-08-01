@@ -262,7 +262,7 @@ def test_attempt_limit_and_uncertainty_survive_restart(tmp_path: Path) -> None:
 
 def test_extension_api_pause_and_heartbeat(tmp_path: Path) -> None:
     write_source(tmp_path, [{"id": "ADV-301"}])
-    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", source_mode="LOCAL_DEVELOPMENT"))
     client.post("/routes", json={"route_name":"engineering", "target":"engineering", "chatgpt_url":"https://chatgpt.com/c/test"})
     client.get("/advisories")
     client.post("/extension/readiness", json={"route_name":"engineering", "url":"https://chatgpt.com/c/test", "content_script":True, "composer_ready":True, "composer_empty":True, "send_control":True})
@@ -283,7 +283,7 @@ def test_ready_production_route_claims_an_eligible_command_once_without_test_arm
         return original_begin_attempt(service, command_id)
 
     monkeypatch.setattr(CourierService, "begin_attempt", record_begin_attempt)
-    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", source_mode="LOCAL_DEVELOPMENT"))
     client.post("/routes", json={"route_name":"engineering", "target":"engineering", "chatgpt_url":"https://chatgpt.com/c/test"})
     client.get("/advisories")
     ready = client.post("/extension/readiness", json={"route_name":"engineering", "url":"https://chatgpt.com/c/test", "content_script":True, "composer_ready":True, "composer_empty":True, "send_control":True, "test_armed":False})
@@ -304,7 +304,7 @@ def test_ready_production_route_claims_an_eligible_command_once_without_test_arm
 
 def test_maintenance_candidate_discovery_precedes_readiness_but_begin_does_not(tmp_path: Path) -> None:
     write_source(tmp_path, [{"id":"ADV-304", "target":"maintenance"}])
-    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", source_mode="LOCAL_DEVELOPMENT"))
     client.post("/routes", json={"route_name":"maintenance", "target":"maintenance", "chatgpt_url":"https://chatgpt.com/c/maintenance"})
     client.get("/advisories")
 
@@ -319,7 +319,7 @@ def test_maintenance_candidate_discovery_precedes_readiness_but_begin_does_not(t
 
 def test_discovery_requires_available_registered_route_but_not_readiness(tmp_path: Path) -> None:
     write_source(tmp_path, [{"id":"ADV-305", "target":"maintenance"}, {"id":"ADV-306", "target":"missing"}])
-    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", source_mode="LOCAL_DEVELOPMENT"))
     client.post("/routes", json={"route_name":"maintenance", "target":"maintenance", "chatgpt_url":"https://chatgpt.com/c/maintenance", "health":"UNAVAILABLE"})
     client.get("/advisories")
     assert client.get("/extension/commands/maintenance").json()["command"] is None

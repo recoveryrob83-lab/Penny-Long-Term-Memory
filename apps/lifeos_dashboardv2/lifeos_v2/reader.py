@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 from datetime import datetime
+from collections.abc import Callable
 from pathlib import Path
 
 from .contracts import Advisory, AdvisoryState
@@ -55,7 +56,17 @@ def _envelope_body(advisory_body: str, advisory_id: str) -> str:
     return following[: next_subheading.start()] if next_subheading else following
 
 
-def parse_advisory_document(text: str, advisory_id: str, source_path: str, source_url: str) -> Advisory:
+def parse_advisory_document(
+    text: str,
+    advisory_id: str,
+    source_path: str,
+    source_url: str,
+    *,
+    source_repository: str = "",
+    source_branch: str = "",
+    source_commit_sha: str = "",
+    source_verified_at: str = "",
+) -> Advisory:
     match = next((m for m in _HEADING.finditer(text) if m.group("id") == advisory_id), None)
     if not match:
         raise AdvisoryParseError(f"{advisory_id}: heading not found")
@@ -112,7 +123,31 @@ def parse_advisory_document(text: str, advisory_id: str, source_path: str, sourc
         updated_at=updated_at,
         source_path=source_path,
         source_url=source_url,
+        source_repository=source_repository,
+        source_branch=source_branch,
+        source_commit_sha=source_commit_sha,
+        source_verified_at=source_verified_at,
     )
+
+
+def read_advisory_documents(
+    index: str,
+    read_text: Callable[[str], str],
+    source_url_for: Callable[[str], str],
+    **provenance: str,
+) -> tuple[list[Advisory], dict[str, str]]:
+    """Parse an index and boards supplied by any bounded read-only source."""
+    advisories: list[Advisory] = []
+    errors: dict[str, str] = {}
+    for item in _INDEX.finditer(index):
+        advisory_id, source_path = item.group(0).split()[1], item.group("path")
+        try:
+            advisories.append(parse_advisory_document(
+                read_text(source_path), advisory_id, source_path, source_url_for(source_path), **provenance,
+            ))
+        except (OSError, AdvisoryParseError) as exc:
+            errors[advisory_id] = str(exc)
+    return advisories, errors
 
 
 class AdvisoryReader:
@@ -121,14 +156,8 @@ class AdvisoryReader:
 
     def read(self) -> tuple[list[Advisory], dict[str, str]]:
         index = (self.root / self.index_path).read_text(encoding="utf-8")
-        advisories: list[Advisory] = []
-        errors: dict[str, str] = {}
-        for item in _INDEX.finditer(index):
-            advisory_id, source_path = item.group(0).split()[1], item.group("path")
-            try:
-                path = self.root / source_path
-                source_url = f"{self.source_url_base}/{source_path}" if self.source_url_base else source_path
-                advisories.append(parse_advisory_document(path.read_text(encoding="utf-8"), advisory_id, source_path, source_url))
-            except (OSError, AdvisoryParseError) as exc:
-                errors[advisory_id] = str(exc)
-        return advisories, errors
+        return read_advisory_documents(
+            index,
+            lambda source_path: (self.root / source_path).read_text(encoding="utf-8"),
+            lambda source_path: f"{self.source_url_base}/{source_path}" if self.source_url_base else source_path,
+        )

@@ -167,7 +167,7 @@ def test_state_and_outcome_changes_are_visible_without_cosmetic_command_change(t
 
 def test_api_validation_and_transport_endpoints(tmp_path: Path) -> None:
     write_source(tmp_path, [{"id": "ADV-100"}])
-    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", source_mode="LOCAL_DEVELOPMENT"))
     assert client.post("/routes", json={"route_name": "engineering"}).status_code == 422
     assert client.post("/routes", json={"route_name": "engineering", "target": "engineering", "chatgpt_url": "https://chatgpt.com/c/example"}).status_code == 201
     assert client.get("/advisories").json()["items"][0]["advisory_id"] == "ADV-100"

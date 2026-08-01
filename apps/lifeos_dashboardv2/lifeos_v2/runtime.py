@@ -72,6 +72,15 @@ class CourierService:
     def readiness(self) -> dict[str, Any]:
         return self.store.data["tab_readiness"]
 
+    def set_source_sync(self, status: dict[str, Any]) -> None:
+        """Persist non-secret source evidence and block dispatch while unverifiable."""
+        self.store.data["source_sync"] = dict(status)
+        self.store.save()
+
+    @property
+    def source_dispatch_allowed(self) -> bool:
+        return self.store.data.get("source_sync", {}).get("sync_state", "CURRENT") == "CURRENT"
+
     def report_readiness(self, route_name: str, url: str, content_script: bool, composer_ready: bool, composer_empty: bool, send_control: bool, test_armed: bool) -> dict[str, Any]:
         route = self.store.data["routes"].get(route_name)
         exact_url = bool(route and route["chatgpt_url"] == url)
@@ -94,13 +103,13 @@ class CourierService:
 
     def discover_candidate(self, route_name: str) -> dict[str, Any] | None:
         """Return a pending route candidate without granting dispatch authority."""
-        if self.paused or not self._route_available(route_name):
+        if self.paused or not self.source_dispatch_allowed or not self._route_available(route_name):
             return None
         return next((c for c in self.commands() if c["route_name"] == route_name and c["state"] == CommandState.PENDING and c.get("attempts", 0) < 3), None)
 
     def begin_attempt(self, command_id: str) -> dict[str, Any] | None:
         command = self.store.data["commands"].get(command_id)
-        if not command or self.paused or not self._route_dispatch_allowed(command["route_name"]) or command["state"] != CommandState.PENDING or command.get("attempts", 0) >= 3:
+        if not command or self.paused or not self.source_dispatch_allowed or not self._route_dispatch_allowed(command["route_name"]) or command["state"] != CommandState.PENDING or command.get("attempts", 0) >= 3:
             return None
         command.update({"state": CommandState.DISPATCHING, "attempts": command.get("attempts", 0) + 1, "last_attempt_at": now(), "updated_at": now()})
         self.store.event(f"dispatch attempt {command_id}")
@@ -112,6 +121,15 @@ class CourierService:
         commands = self.store.data["commands"]
         for command in commands.values():
             source = current.get(command["advisory_id"])
+            if source:
+                command.update({
+                    "source_repository": source.source_repository,
+                    "source_branch": source.source_branch,
+                    "source_commit_sha": source.source_commit_sha,
+                    "source_path": source.source_path,
+                    "source_revision": source.revision,
+                    "source_verified_at": source.source_verified_at,
+                })
             if command["state"] in {CommandState.PENDING, CommandState.BLOCKED_ROUTE} and (
                 not source or not source.actionable or source.revision != command["revision"]
             ):
@@ -141,7 +159,10 @@ class CourierService:
         else:
             state, blocker, route_name = CommandState.BLOCKED_ROUTE, f"No registered route for target '{advisory.target_department}'", advisory.target_department
         command = DeliveryCommand(advisory.command_id, advisory.advisory_id, advisory.revision, route_name,
-            advisory.target_department, f"Read and act only on advisory {advisory.advisory_id} revision {advisory.revision} at {advisory.source_url}.", state, stamp, stamp, blocker)
+            advisory.target_department, f"Read and act only on advisory {advisory.advisory_id} revision {advisory.revision} at {advisory.source_url}.", state, stamp, stamp, blocker,
+            source_repository=advisory.source_repository, source_branch=advisory.source_branch,
+            source_commit_sha=advisory.source_commit_sha, source_path=advisory.source_path,
+            source_revision=advisory.revision, source_verified_at=advisory.source_verified_at)
         commands[command.command_id] = command.to_dict()
         self.store.event(f"command created {command.command_id} state={state}")
 
