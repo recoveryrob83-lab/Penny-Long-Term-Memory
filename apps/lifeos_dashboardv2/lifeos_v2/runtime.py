@@ -83,11 +83,18 @@ class CourierService:
         return record
 
     def _route_dispatch_allowed(self, route_name: str) -> bool:
+        if not self._route_available(route_name):
+            return False
         readiness = self.store.data["tab_readiness"].get(route_name, {})
         return readiness.get("state") == "READY" and (not route_name.startswith("slice_three_test") or readiness.get("test_armed") is True)
 
-    def eligible_command(self, route_name: str) -> dict[str, Any] | None:
-        if self.paused or not self._route_dispatch_allowed(route_name):
+    def _route_available(self, route_name: str) -> bool:
+        route = self.store.data["routes"].get(route_name)
+        return bool(route and str(route.get("health", "AVAILABLE")).upper() == "AVAILABLE")
+
+    def discover_candidate(self, route_name: str) -> dict[str, Any] | None:
+        """Return a pending route candidate without granting dispatch authority."""
+        if self.paused or not self._route_available(route_name):
             return None
         return next((c for c in self.commands() if c["route_name"] == route_name and c["state"] == CommandState.PENDING and c.get("attempts", 0) < 3), None)
 

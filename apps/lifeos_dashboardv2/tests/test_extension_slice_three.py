@@ -7,7 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from lifeos_v2.api import create_app
-from lifeos_v2.contracts import CommandState, Route
+from lifeos_v2.contracts import CommandState, DeliveryCommand, Route
 from lifeos_v2.runtime import CourierService, RuntimeStore
 from test_slice_one import advisories, write_source
 
@@ -198,12 +198,12 @@ def test_attempt_limit_and_uncertainty_survive_restart(tmp_path: Path) -> None:
     service.report_readiness("engineering", "https://chatgpt.com/c/test", True, True, True, True, False)
     assert service.begin_attempt("ADV-300-r1")["attempts"] == 1
     service.update_telemetry("ADV-300-r1", CommandState.FAILED, "send absent")
-    assert service.eligible_command("engineering")
+    assert service.discover_candidate("engineering")
     assert service.begin_attempt("ADV-300-r1")["attempts"] == 2
     service.update_telemetry("ADV-300-r1", CommandState.UNCERTAIN, "post-send navigation")
     restarted = CourierService(RuntimeStore(tmp_path / "state.json"))
     assert restarted.store.data["commands"]["ADV-300-r1"]["state"] == "UNCERTAIN"
-    assert restarted.eligible_command("engineering") is None
+    assert restarted.discover_candidate("engineering") is None
 
 
 def test_extension_api_pause_and_heartbeat(tmp_path: Path) -> None:
@@ -248,6 +248,51 @@ def test_ready_production_route_claims_an_eligible_command_once_without_test_arm
     assert stored["state"] == CommandState.DISPATCHING and stored["attempts"] == 1
 
 
+def test_maintenance_candidate_discovery_precedes_readiness_but_begin_does_not(tmp_path: Path) -> None:
+    write_source(tmp_path, [{"id":"ADV-304", "target":"maintenance"}])
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client.post("/routes", json={"route_name":"maintenance", "target":"maintenance", "chatgpt_url":"https://chatgpt.com/c/maintenance"})
+    client.get("/advisories")
+
+    candidate = client.get("/extension/commands/maintenance").json()["command"]
+
+    assert candidate["command_id"] == "ADV-304-r1" and candidate["state"] == CommandState.PENDING
+    assert client.post("/commands/ADV-304-r1/begin").status_code == 409
+    client.post("/extension/readiness", json={"route_name":"maintenance", "url":"https://chatgpt.com/c/maintenance", "content_script":True, "composer_ready":True, "composer_empty":True, "send_control":True, "test_armed":False})
+    assert client.post("/commands/ADV-304-r1/begin").status_code == 200
+    assert client.post("/commands/ADV-304-r1/begin").status_code == 409
+
+
+def test_discovery_requires_available_registered_route_but_not_readiness(tmp_path: Path) -> None:
+    write_source(tmp_path, [{"id":"ADV-305", "target":"maintenance"}, {"id":"ADV-306", "target":"missing"}])
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json"))
+    client.post("/routes", json={"route_name":"maintenance", "target":"maintenance", "chatgpt_url":"https://chatgpt.com/c/maintenance", "health":"UNAVAILABLE"})
+    client.get("/advisories")
+    assert client.get("/extension/commands/maintenance").json()["command"] is None
+    assert client.get("/extension/commands/missing").json()["command"] is None
+    client.post("/system/pause")
+    assert client.get("/extension/commands/maintenance").json() == {"paused":True, "command":None}
+
+
+def test_discovery_excludes_terminal_and_exhausted_commands_without_cross_route_readiness(tmp_path: Path) -> None:
+    service = CourierService(RuntimeStore(tmp_path / "state.json"))
+    service.register_route(Route("engineering", "engineering", "https://chatgpt.com/c/engineering", "now"))
+    service.register_route(Route("maintenance", "maintenance", "https://chatgpt.com/c/maintenance", "now"))
+    service.report_readiness("engineering", "https://chatgpt.com/c/wrong", True, True, True, True, False)
+    for state in (CommandState.DELIVERED, CommandState.STALE, CommandState.UNCERTAIN, CommandState.DISPATCHING):
+        command_id = f"ADV-{state}-r1"
+        service.store.data["commands"][command_id] = DeliveryCommand(command_id, "ADV", 1, "maintenance", "maintenance", "wake", state, "now", "now").to_dict()
+        assert service.discover_candidate("maintenance") is None
+        service.store.data["commands"].clear()
+    exhausted = DeliveryCommand("ADV-exhausted-r1", "ADV", 1, "maintenance", "maintenance", "wake", CommandState.PENDING, "now", "now", attempts=3).to_dict()
+    service.store.data["commands"][exhausted["command_id"]] = exhausted
+    assert service.discover_candidate("maintenance") is None
+    service.store.data["commands"].clear()
+    pending = DeliveryCommand("ADV-pending-r1", "ADV", 1, "maintenance", "maintenance", "wake", CommandState.PENDING, "now", "now").to_dict()
+    service.store.data["commands"][pending["command_id"]] = pending
+    assert service.discover_candidate("maintenance")["command_id"] == "ADV-pending-r1"
+
+
 def test_worker_reuses_an_exact_target_tab_without_creating_or_navigating() -> None:
     target = "https://chatgpt.com/c/engineering"
     result = run_worker_scenario({
@@ -289,6 +334,23 @@ def test_worker_reuses_one_courier_tab_when_switching_routes() -> None:
     assert len(creates) == 1 and len(updates) == 1
     assert updates[0] == {"kind":"update", "tabId":50, "properties":{"url":maintenance}}
     assert len(result["tabs"]) == 1 and maintenance_ready < maintenance_begin
+
+
+def test_worker_discovers_unready_maintenance_then_navigates_and_claims_once() -> None:
+    engineering = "https://chatgpt.com/c/engineering"
+    maintenance = "https://chatgpt.com/c/maintenance"
+    result = run_worker_scenario({
+        "storage":{"courierTabId":53, "testArmed":False}, "routes":[route("engineering", engineering), route("maintenance", maintenance)],
+        "tabs":[{"id":53, "url":engineering, "active":False}],
+        "probes":{engineering:ready_tab(0, engineering)["probe"], maintenance:ready_tab(0, maintenance)["probe"]},
+        "commands":[command("ADV-maintenance", "maintenance")], "steps":[{"poll":True}],
+    })
+    command_gets = [action["path"] for action in result["actions"] if action.get("path", "").startswith("/extension/commands/")]
+    maintenance_ready = next(index for index, action in enumerate(result["actions"]) if action.get("path") == "/extension/readiness" and action["body"]["route_name"] == "maintenance")
+    maintenance_begin = next(index for index, action in enumerate(result["actions"]) if action.get("path") == "/commands/ADV-maintenance/begin")
+    assert command_gets == ["/extension/commands/engineering", "/extension/commands/maintenance"]
+    assert {"kind":"update", "tabId":53, "properties":{"url":maintenance}} in result["actions"]
+    assert maintenance_ready < maintenance_begin
 
 
 def test_worker_claims_at_most_one_server_ordered_command_per_poll_cycle() -> None:
@@ -406,13 +468,15 @@ def test_exact_tab_readiness_and_test_arm_gate_dispatch(tmp_path: Path) -> None:
     service = CourierService(RuntimeStore(tmp_path / "state.json"))
     service.register_route(Route("slice_three_test", "slice_three_test", "https://chatgpt.com/c/test", "now"))
     service.reconcile(advisories(tmp_path)[0])
-    assert service.eligible_command("slice_three_test") is None
+    assert service.discover_candidate("slice_three_test")["command_id"] == "ADV-302-r1"
     not_ready = service.report_readiness("slice_three_test", "https://chatgpt.com/c/wrong", True, True, True, True, True)
-    assert not_ready["state"] == "NOT_READY" and service.eligible_command("slice_three_test") is None
+    assert not_ready["state"] == "NOT_READY" and service.discover_candidate("slice_three_test")["command_id"] == "ADV-302-r1"
+    assert service.begin_attempt("ADV-302-r1") is None
     ready_unarmed = service.report_readiness("slice_three_test", "https://chatgpt.com/c/test", True, True, True, True, False)
-    assert ready_unarmed["state"] == "READY" and service.eligible_command("slice_three_test") is None
+    assert ready_unarmed["state"] == "READY" and service.discover_candidate("slice_three_test")["command_id"] == "ADV-302-r1"
+    assert service.begin_attempt("ADV-302-r1") is None
     service.report_readiness("slice_three_test", "https://chatgpt.com/c/test", True, True, True, True, True)
-    assert service.eligible_command("slice_three_test")["command_id"] == "ADV-302-r1"
+    assert service.discover_candidate("slice_three_test")["command_id"] == "ADV-302-r1"
     assert service.begin_attempt("ADV-302-r1")["attempts"] == 1
 
 

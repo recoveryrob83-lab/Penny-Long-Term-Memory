@@ -125,7 +125,7 @@ def create_app(root: Path, persistence_path: Path, index_path: str = "coordinati
 
     @app.get("/extension/commands/{route_name}")
     def extension_command(route_name: str) -> dict:
-        return {"paused": service.paused, "command": service.eligible_command(route_name)}
+        return {"paused": service.paused, "command": service.discover_candidate(route_name)}
 
     @app.post("/commands/{command_id}/begin")
     def begin(command_id: str) -> dict:
