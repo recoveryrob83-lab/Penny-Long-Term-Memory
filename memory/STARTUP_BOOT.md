@@ -1,6 +1,6 @@
 # Startup Boot
 
-Updated: 2026-07-19
+Updated: 2026-08-01
 Project: LifeOS / Maintenance_HQ / Penny Long-Term Memory
 Purpose: Canonical startup and routing procedure for fresh Penny chats, `LifeOS_HQ`, Department HQs, projects, and Workers.
 
@@ -457,6 +457,12 @@ Cross-project advisories live in:
 
 The Advisory Index is the sole active advisory routing dashboard. Department boards contain canonical advisory text.
 
+When any HQ creates, materially revises, routes, blocks, completes, or closes a formal advisory, it must first read:
+
+- `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
+
+This is a conditional advisory-authoring and lifecycle-change read, not part of every ordinary HQ boot. The canonical contract defines the one exact machine-readable `#### V2 Courier Envelope` that remains inside the same authoritative source-board advisory section. Link or route readers to that contract; do not copy its full template into department files, target boards, handoffs, or READMEs.
+
 `coordination/DEPARTMENT_EVENT_INBOX.md` is frozen as a historical synchronization register. Do not update it for normal routing unless Rob explicitly reactivates it.
 
 Todoist is Rob's personal task system and should not be used for department synchronization reminders unless Rob explicitly requests that.
@@ -474,17 +480,20 @@ Read a source department board only when the Advisory Index points to a relevant
 
 Routine advisory reporting belongs to `Chief_of_Staff_HQ`, not every specialist department. Specialists should not include advisory summaries in routine reports unless asked or routed.
 
-When a department creates an advisory for another department:
+When a department creates or materially changes an advisory for another department:
 
-1. create or update the advisory on the source department board;
-2. update `coordination/ADVISORY_INDEX.md` with the advisory ID, lifecycle state, board path, target, priority, revision, and verification mode when applicable;
-3. do not duplicate the advisory as an open loop in each target department unless each department truly owns a separate action.
+1. read `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`;
+2. create or update the full advisory on the source department board and keep the exact V2 envelope inside that same authoritative advisory section when courier transport applies;
+3. update `coordination/ADVISORY_INDEX.md` with the advisory ID, governance lifecycle state, board path, target, priority, revision, and verification mode when applicable;
+4. do not duplicate the advisory as an open loop in each target department unless each department truly owns a separate action.
 
 When `LifeOS_HQ` produces a formal advisory, `Chief_of_Staff_HQ` is the source department and uses `coordination/boards/main-assistant.md` as the retained source-board path.
 
 For multi-target advisories, do not mark the advisory `IMPLEMENTED`, `SOURCE_VERIFIED`, or `CLOSED` until all required targets have reported handled state, unless separate per-target state is recorded.
 
 The same advisory remains authoritative through hold, elevation, decision, resume, verification, and closure.
+
+A malformed or missing V2 envelope may be quarantined from courier dispatch without changing the advisory's underlying authority, ownership, governance lifecycle, or source-board record. The source owner corrects the same advisory under normal authorization rather than creating a replacement record.
 
 ## Project Routing Map
 
