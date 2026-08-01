@@ -5,6 +5,7 @@
 - Lifecycle State: ACTIVE
 - Priority: HIGH
 - Approved: 2026-07-29
+- Updated: 2026-08-01
 - Authority: Rob-approved coordinated Maintenance and Engineering repair
 - Implementation Target: `apps/lifeos_dashboardv2`
 
@@ -17,6 +18,8 @@ The envelope does not replace the full advisory. The full source-board section r
 Primary rule:
 
 > The advisory carries authority. The envelope carries routing metadata. The courier transports without interpreting judgment.
+
+Any HQ creating, materially revising, routing, blocking, completing, or closing an advisory must read this contract before changing the source-board advisory or Advisory Index. This is a conditional authoring and lifecycle-change requirement, not a reason to copy the template into every department file.
 
 ## Canonical Envelope
 
@@ -47,12 +50,27 @@ All nine envelope fields are required, including `Outcome` and `Blocker` when th
 - `Target Department`: one canonical route identifier for the current owner or receiver.
 - `Task Summary`: concise human-readable summary of the wake purpose.
 - `Authorized Scope`: concise transport-facing scope statement. It points to, but does not replace, the full authority and boundaries in the advisory.
-- `Lifecycle State`: one canonical V2 advisory state.
+- `Lifecycle State`: one canonical V2 courier transport state. It is not the broader advisory governance lifecycle recorded in the authoritative prose.
 - `Outcome`: current outcome text or an intentionally empty value.
 - `Blocker`: current blocker text or an intentionally empty value.
 - `Updated At`: ISO 8601 timestamp with timezone offset.
 
 The advisory ID remains in the advisory heading and Advisory Index. The source path and source URL are derived from the Advisory Index and source-board location.
+
+## Governance Lifecycle and V2 Transport Lifecycle
+
+The full authoritative advisory may use the broader governance lifecycle defined by `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`. That governance lifecycle controls authority, ownership, judgment, verification, completion, and closeout.
+
+The envelope uses only the smaller V2 transport lifecycle below. Its state controls courier dispatch eligibility and does not replace or rewrite the governance lifecycle.
+
+The source owner maintains both layers when both apply:
+
+- the full advisory records the authoritative operating state and all authority-bearing details;
+- the envelope records the transport condition using the exact canonical V2 fields;
+- the parser and courier do not infer governance state from prose or use transport state to create authority;
+- malformed or missing envelope data may quarantine that advisory from courier dispatch without altering the underlying advisory, its owner, its authority, or its lifecycle history.
+
+A quarantined advisory remains authoritative on its source board. Its source owner may correct the envelope under normal authorization in the same advisory section. Quarantine must not create a replacement advisory, competing ledger, automatic lifecycle mutation, or silent closeout.
 
 ## Canonical States
 
@@ -64,6 +82,8 @@ The advisory ID remains in the advisory heading and Advisory Index. The source p
 - `CLOSED`
 
 Only `OPEN` and `IN_PROGRESS` are dispatch-actionable.
+
+`BLOCKED`, `NEEDS_ROB`, `COMPLETED`, and `CLOSED` suppress new courier dispatch. They do not independently resolve a hold, grant Rob approval, verify completion, or close the authoritative advisory.
 
 ## Canonical Route Identifiers
 
@@ -115,7 +135,8 @@ The V2 parser must:
 - isolate malformed advisories without blocking valid advisories;
 - derive advisory ID from the heading and index;
 - derive source path and URL from the index;
-- never infer authority from prose or legacy aliases.
+- never infer authority from prose or legacy aliases;
+- quarantine malformed advisory transport without mutating the authoritative advisory or making a governance decision.
 
 Historical closed advisories are not required to be backfilled. Active advisories become dispatch-eligible only after their source owner adds a valid envelope.
 
