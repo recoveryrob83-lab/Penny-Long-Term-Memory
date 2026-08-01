@@ -104,7 +104,7 @@ def create_app(
                 cached = source.snapshot
                 return (cached.advisories if cached else []), {"source_sync": str(exc)}
             service.set_source_sync(source.status)
-            service.reconcile(current.advisories)
+            service.reconcile(current.advisories, set(current.quarantined_advisories))
             return current.advisories, {}
 
     @app.get("/health")
@@ -114,7 +114,7 @@ def create_app(
     @app.get("/status")
     def status() -> dict:
         advisories, errors = snapshot()
-        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {}), "tab_readiness": service.readiness(), "source": source.status}
+        return {"paused": service.paused, "advisory_count": len(advisories), "parse_errors": errors, "advisory_parse_errors": source.status["advisory_parse_errors"], "quarantined_advisory_count": source.status["quarantined_advisory_count"], "command_count": len(service.commands()), "events": service.store.data.get("events", []), "extension": service.store.data.get("extension", {}), "tab_readiness": service.readiness(), "source": source.status}
 
     @app.get("/dashboard/overview")
     def overview(force: bool = False) -> dict:
@@ -135,7 +135,7 @@ def create_app(
     @app.get("/advisories")
     def advisories() -> dict:
         items, errors = snapshot()
-        return {"items": [item.to_dict() for item in items], "parse_errors": errors}
+        return {"items": [item.to_dict() for item in items], "parse_errors": errors, "advisory_parse_errors": source.status["advisory_parse_errors"], "quarantined_advisory_count": source.status["quarantined_advisory_count"]}
 
     @app.get("/advisories/{advisory_id}")
     def advisory(advisory_id: str) -> dict:
