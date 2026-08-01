@@ -1,6 +1,6 @@
 # Business_HQ
 
-Updated: 2026-07-18
+Updated: 2026-08-01
 
 ## Purpose
 
@@ -12,69 +12,145 @@ This department turns promoted ideas and evidence into clear business strategy b
 
 Active parent-strategy department.
 
-`Office_Leaks_HQ` is the active revenue-first business unit and is publicly launched in a live organic market test.
+Primary active opportunity:
 
-Immediate Business priorities:
+- **AI workflow systems:** Active Validation.
 
-- Interpret Office Leaks market signal at the parent and portfolio level without absorbing execution.
-- Strengthen positioning, trust, offer strategy, customer selection, and go-to-market direction.
-- Separate the introductory offer from the eventual profitable service ladder.
-- Preserve capacity for future businesses under `Business_HQ`.
-- Keep PennyOS / Penny Platform paused, not abandoned, until Rob reactivates it or Office Leaks generates useful productization evidence.
+Paused portfolio assets:
+
+- **Office Leaks:** Paused, not retired. `Office_Leaks_HQ` still owns its business-unit files and execution continuity.
+- **PennyOS / Penny Platform:** Paused, not abandoned.
+
+Canonical active plan:
+
+- `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
 
 ## Current Strategic Frame
 
-Office Leaks should not compete as a generic low-cost virtual assistant service.
+The active business opportunity helps paid AI users turn scattered chats, subscriptions, prompts, files, and tools into reliable, recoverable working systems.
 
-The stronger frame is trust-based systems consulting for small local service businesses with real office, follow-up, documentation, and workflow leaks.
+The core market problem is broader than prompting:
 
-Current commercial hypothesis:
+- long projects lose context;
+- premium usage is wasted repeating information and retrying failed work;
+- outputs drift, hallucinate, or remain unverified;
+- prompt collections are brittle and disconnected;
+- multi-model stacks become confusing;
+- source material and authority are scattered;
+- customers spend too much time managing AI and too little time finishing work.
 
-- Businesses lose money through weak follow-up, scattered information, unclear ownership, and inconsistent office habits.
-- Small bounded cleanup offers can create near-term income and market learning.
-- Trust, clarity, adoption, and follow-through matter as much as the tool or tracker delivered.
-- The tool is not the product; the habit is the product.
+Working brand-level promise:
 
-PennyOS remains a longer-term execution and coordination platform concept. Its prior competitor, positioning, unit-economics, and validation research is preserved but paused.
+> Less prompting. More producing.
 
-## Role
+The business should sell systems knowledge, diagnosis, implementation, and reliable operating methods rather than another generic course, prompt pack, or unnecessary software layer.
 
-`Business_HQ` is the specialist department for parent business strategy and commercial continuity.
+## Initial Market
 
-Use `Business_HQ` for:
+Best first customers are paid AI users with recurring valuable deliverables, especially:
 
-- Business ideas and opportunity sorting after capture.
-- Market selection and customer-value judgment.
-- Product or service strategy.
-- Branding, positioning, and messaging.
-- Market research and customer discovery.
-- Offer strategy and monetization.
-- Go-to-market planning.
-- Portfolio strategy across current and future businesses.
-- Future Penny product and business concept planning.
-- Portfolio-level guidance and evaluation for `Office_Leaks_HQ`.
-- Coordination with `Office_Leaks_HQ`, `Engineering_HQ`, `Finance_HQ`, `Chief_of_Staff_HQ`, and `Maintenance_HQ` within their respective boundaries.
+- creators and newsletter operators;
+- independent consultants and freelancers;
+- coaches, educators, writers, and boutique marketers;
+- technical indie builders and AI power users;
+- small knowledge-work teams.
 
-## Not This Department
+## Offer Strategy
 
-- Office Leaks offers, outreach, live market tests, delivery, customer-facing operations, and execution continuity: `Office_Leaks_HQ`.
-- Technical implementation, architecture, automation, tooling, and testing: `Engineering_HQ`.
-- Personal finance, benefits, budget, bills, pricing feasibility, or financial execution: `Finance_HQ`.
-- Daily one-off scheduling, report routing, follow-through, or quick admin: `Chief_of_Staff_HQ`.
-- Global GitHub maintenance, shared governance, boot integrity, repository-wide audits, or reconciliation: `Maintenance_HQ`.
-- Independent authority or backlog for `LifeOS_HQ`: none; `LifeOS_HQ` is the shared meeting room.
+The working service ladder is:
+
+1. helpful diagnostic content and education;
+2. paid AI Workflow Audit;
+3. done-with-you AI System Installation Sprint;
+4. productized templates, systems packs, workshops, lessons, community, or subscriptions after repeated service evidence;
+5. software only after customer work proves an unmet problem that existing tools cannot solve cleanly.
+
+Concrete pricing belongs with `Finance_HQ` once hypotheses become actionable.
+
+## Differentiation
+
+Business_HQ should preserve five differentiators:
+
+- systems before tools;
+- durable context and source-of-truth architecture;
+- multi-model routing;
+- verification, recovery, and failure containment;
+- budget-aware productivity and subscription value.
+
+Do not promise perfect reliability, elimination of hallucinations, or unlimited usage.
+
+## Distribution
+
+Preferred acquisition is helpful participation and proof rather than spam:
+
+- answer real questions in Reddit and official platform communities;
+- publish YouTube, LinkedIn, and X teardowns, case studies, and diagrams;
+- use useful profiles and a website as the bridge to paid work;
+- build trust through clear examples and measurable outcomes;
+- explore reciprocal partnerships and affiliates with complementary educators, builders, and niche workflow providers.
+
+## Worker Position
+
+Business_HQ does not currently require a dedicated standing Worker.
+
+Use bounded one-off research assignments. Reconsider a narrow Market Evidence Worker only after repeated standardized work creates a measurable bottleneck and has stable inputs, outputs, completion tests, and one authoritative destination.
+
+## Portfolio Boundary
+
+`Business_HQ` owns:
+
+- parent strategy;
+- portfolio allocation;
+- market selection;
+- customer-value judgment;
+- major positioning and offer strategy;
+- validation design;
+- monetization strategy;
+- Business-owned durable state.
+
+`Office_Leaks_HQ` owns:
+
+- Office Leaks handoff, identity, README, status, open loops, offers, outreach, delivery, and customer-facing execution.
+
+The parent pause decision is routed through `ADV-20260801-056`. Business_HQ does not silently edit Office Leaks-owned files.
+
+## Coordination Boundaries
+
+- Technical implementation, architecture, automation, tooling, and tests: `Engineering_HQ`.
+- Pricing feasibility, budget, costs, taxes, benefits, and financial execution: `Finance_HQ`.
+- Daily coordination, reminders, scheduling, reports, and follow-through: `Chief_of_Staff_HQ`.
+- Shared governance, Boot integrity, audits, and repository-wide reconciliation: `Maintenance_HQ`.
+- Cross-department discussion: `LifeOS_HQ`, which owns no independent backlog.
+
+## V2 Advisory Workflow
+
+Before creating, materially revising, routing, blocking, completing, or closing a formal advisory, read:
+
+- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
+
+Business-sourced formal advisories use:
+
+- source board: `coordination/boards/business.md`;
+- sole routing dashboard: `coordination/ADVISORY_INDEX.md`.
+
+When courier transport applies, the exact `#### V2 Courier Envelope` and all nine required fields remain inside the same authoritative advisory section. The full advisory controls authority and governance. The envelope controls transport eligibility only.
+
+Do not copy the envelope template into this README, target boards, open loops, handoffs, or the Advisory Index. Do not use Department Event Inbox, Todoist, or GitHub Issues as advisory-state systems.
 
 ## Source Systems
 
-- GitHub: abstract project state, boot files, open loops, advisory board pointers, and role clarity.
-- Drive: working strategy docs, research notes, generated docs, spreadsheets, and business artifacts.
-- Todoist: Rob-facing tasks, reminders, follow-ups, and project actions.
-- Calendar: meetings, deadlines, and scheduled work.
+- GitHub: abstract strategy, plans, decisions, status, open loops, advisories, and source pointers.
+- Drive: detailed market research, working documents, drafts, deliverables, and customer-facing artifacts.
+- Trello: raw ideas and candidate work before promotion.
+- Todoist: Rob-facing commitments and reminders.
+- Calendar: timed commitments.
 - Gmail: communication evidence.
-- Contacts: people or organization lookup when needed.
-- RPR or user-mediated files: structured working records when connector reliability matters.
-- Advisory Index: sole active advisory routing dashboard.
-- Department Event Inbox: frozen historical record unless Rob explicitly reactivates it.
+- Dashboard: visibility, diagnostics, and bounded transport, not authority.
+
+Detailed research record:
+
+- `Target Customers for AI Workflow System Design Services` in Google Drive.
 
 ## Current Working Records
 
@@ -83,41 +159,24 @@ Retained Business Drive folder path:
 - Life Organization > Chief Business HQ
 - Under that: Business Development
 
-`Chief Business HQ` is the current Drive folder label retained for path accuracy. It is not the official current department name, and no Drive rename is authorized by this GitHub repair.
-
-Business parent-strategy records should live under that retained Business folder path until separately changed. Detailed Office Leaks execution records belong in the Office Leaks working area or RPR artifacts, with GitHub holding only abstract state and pointers.
+`Chief Business HQ` is retained only as the actual Drive folder label. It is not the official department name, and no Drive rename is authorized here.
 
 Preserved Business records include:
 
-- `Business Competitor Matrix` with `Competitors` and `Positioning Matrix` tabs.
-- `Business Development Costs` with `Cost Estimates` and `Unit Economics` tabs.
-- `Business_Model_Design.xlsx` under the Business Development / Strategy working area.
-
-## Advisory Workflow
-
-When `Business_HQ` creates an advisory for another department:
-
-1. Update `coordination/boards/business.md`.
-2. Update `coordination/ADVISORY_INDEX.md`.
-3. Name the target department in both places.
-4. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reactivates it.
-5. Do not use Todoist for department synchronization unless Rob explicitly asks.
-
-Office Leaks-sourced advisories use `coordination/boards/office-leaks.md` plus the Advisory Index.
-
-## Ownership Boundary
-
-`Business_HQ` maintains its own durable project state. `Chief_of_Staff_HQ` may receive reports, route assignments, and check follow-through without owning Business strategy. `Maintenance_HQ` protects shared governance and global GitHub integrity without owning Business's routine records. `Office_Leaks_HQ` owns the detailed Office Leaks execution backlog and operating state.
+- `Target Customers for AI Workflow System Design Services`;
+- `Business Competitor Matrix`;
+- `Business Development Costs`;
+- `Business_Model_Design.xlsx`.
 
 ## Privacy Rule
 
-Keep GitHub abstract.
-
-Use Drive, Calendar, Gmail, Todoist, or RPR for operational details when appropriate.
+Keep GitHub abstract. Customer details, private financial information, credentials, detailed research notes, and working deliverables belong in their natural private systems.
 
 ## Boot Files
 
 - `projects/business-development/SESSION_HANDOFF.md`
 - `projects/business-development/DEPARTMENT_IDENTITY.md`
+- `projects/business-development/README.md`
 - `projects/business-development/status.md`
 - `projects/business-development/open_loops.md`
+- `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
