@@ -32,8 +32,13 @@ The entries below preserve the names and wording used when they were created or 
 
 - `coordination/ADVISORY_INDEX.md` is the sole active routing dashboard.
 - Full current advisory text lives on the source department board under `coordination/boards/`.
+- Before creating, materially revising, routing, blocking, completing, or closing an advisory, read `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`.
+- When V2 courier transport applies, the exact machine-readable `#### V2 Courier Envelope` and all nine required fields remain inside the same authoritative source-board advisory section. Do not copy the template into this index, target boards, handoffs, READMEs, or department open loops.
+- The lifecycle shown in this index is the broader advisory governance lifecycle defined by `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`. The envelope's smaller lifecycle controls courier dispatch eligibility only.
+- A malformed or missing envelope may quarantine courier transport without changing the advisory's authority, ownership, governance lifecycle, source-board record, or closeout condition.
+- The dashboard, parser, and courier validate and transport; they do not create, broaden, interpret, complete, or close authority.
 - `LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and `coordination/boards/main-assistant.md` as the retained source-board path.
-- A material advisory change increments `advisory_revision`.
+- A material advisory change increments `advisory_revision` and the envelope revision when the envelope applies.
 - Lifecycle and priority remain separate fields.
 - `N/A` in Verification Mode means the advisory is a read-only observation or routing test rather than an execution-ready Worker task.
 - Closed advisory rows may retain historical names, identifiers, and exact outcomes.
