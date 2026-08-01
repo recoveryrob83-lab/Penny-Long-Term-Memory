@@ -1,104 +1,197 @@
 # Business_HQ Status
 
-Updated: 2026-07-18
+Updated: 2026-08-01
 
 ## Current Phase
 
-Active / Parent Strategy and Portfolio Guidance
+Active / AI Workflow Systems Validation and Portfolio Guidance
 
 ## Summary
 
 `Business_HQ` is the parent strategy department for Rob's business portfolio.
 
-`Office_Leaks_HQ` is the active revenue-first business-unit department. It is publicly launched in a live organic market test and owns its offers, outreach, market testing, delivery, and customer-facing operations.
+Current portfolio state:
 
-PennyOS / Penny Platform is paused, not abandoned. It remains a longer-term platform concept and potential future productization path that may benefit from Office Leaks service-market evidence.
+- **AI workflow systems:** Primary active business opportunity in Active Validation.
+- **Office Leaks:** Paused, not retired. Assets and business-unit state remain preserved under `Office_Leaks_HQ`.
+- **PennyOS / Penny Platform:** Paused, not abandoned.
 
-## Immediate Commercial State
+Canonical plan:
 
-Current parent-level strategic state includes:
+- `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
 
-- Office Leaks is publicly operating and gathering organic market signal.
-- A low-friction introductory offer remains under strategic pressure test.
-- The working first-task price hypothesis of $20 is not final pricing and requires `Finance_HQ` review before being treated as durable.
-- A stronger messaging direction centers on costly follow-up failures and lost leads rather than broad generic task help.
-- The trust problem remains unresolved at the parent-strategy level and must be addressed through specificity, proof, transparent process, bounded scope, credible samples, or another defensible trust mechanism.
-- `Business_HQ` should interpret market signal, customer fit, offer logic, and portfolio implications without managing Office Leaks content cadence, outreach activity, delivery, or customer operations.
+Business_HQ will not maintain two simultaneous active business execution tracks. The immediate strategic priority is validating the AI workflow systems opportunity while preserving Office Leaks and PennyOS for explicit future review.
 
-Detailed copy, launch metrics, outreach records, inquiries, customer evidence, and execution artifacts belong in `Office_Leaks_HQ` or Drive/RPR. GitHub stores only abstract strategic state.
+## Active Business Opportunity
 
-## Current Operating Rule
+The AI workflow systems business helps paid AI users create reliable, recoverable workflows around ChatGPT, Claude, Gemini, coding agents, notebooks, Drive, GitHub, and other tools.
 
-Keep GitHub abstract and non-sensitive.
+The commercial opening is the gap between paying for AI and operating it as a repeatable system.
 
-Use Drive for working records, Todoist for Rob-facing actions, Calendar for meetings and deadlines, Gmail for communication evidence, Contacts for lookup, and RPR for structured records when reliability matters.
+Common paid-user pain includes:
 
-Use the Advisory Index as the sole active advisory dashboard. Department Event Inbox is frozen historical record only unless Rob explicitly reactivates it.
+- lost context across long projects;
+- repeated prompting and wasted premium usage;
+- hallucinations, drift, rework, and unreliable outputs;
+- brittle prompt packs and disconnected tutorials;
+- confusion about models, surfaces, and tools;
+- scattered source material and competing truth;
+- high daily friction and low finished output.
 
-Do not use Todoist for department synchronization unless Rob explicitly asks.
+Working promise:
+
+> Less prompting. More producing.
+
+## Current Customer Hypothesis
+
+The strongest first customer is a paid AI user with recurring valuable deliverables and clear economic or practical upside from better throughput.
+
+Initial segments under comparison:
+
+- solo creators and newsletter operators;
+- independent consultants and freelancers;
+- coaches, educators, writers, and boutique marketers;
+- technical indie builders and AI power users;
+- small knowledge-work teams.
+
+The business should not initially target casual consumers, every small business, or large enterprise departments.
+
+## Current Offer Hypothesis
+
+Working ladder:
+
+1. helpful public diagnostic content;
+2. paid AI Workflow Audit;
+3. done-with-you AI System Installation Sprint;
+4. productized templates, lessons, workshops, systems packs, community, or subscription after repeated evidence;
+5. software only if customer work validates an unmet problem that existing tools cannot solve cleanly.
+
+Concrete pricing, costs, and affordability require `Finance_HQ` review.
+
+## Current Positioning
+
+The business is not another prompt shop, generic AI course, automation agency, or software bundle.
+
+Differentiation centers on:
+
+- systems before tools;
+- durable context and source-of-truth architecture;
+- multi-model routing;
+- bounded task design;
+- verification, recovery, and failure containment;
+- budget-aware use of paid subscriptions;
+- practical handoff that leaves the customer more self-sufficient.
+
+LifeOS is internal proof that source boundaries, durable memory, roles, handoffs, bounded execution, verification, and recovery improve long-running AI work. Public proof must be translated into understandable examples without exposing private LifeOS details.
+
+## Current Distribution Direction
+
+Preferred go-to-market is helpful participation rather than spam:
+
+- answer real questions in Reddit and official communities;
+- publish YouTube, LinkedIn, and X diagnostics, teardowns, and case studies;
+- build profile and website pathways to paid help;
+- use proof, specificity, and measurable outcomes;
+- treat adjacent educators, specialized workflow-pack sellers, consultants, and tool builders as possible partners, affiliates, or referral sources when complementary.
+
+No public launch, partnership outreach, affiliate agreement, or paid promotion is authorized merely by recording this direction.
+
+## Current Validation State
+
+Completed strategic evidence:
+
+- deep market research on paid AI users, use cases, pain, competition, pricing signals, growth, communities, and service ladders;
+- detailed research exported to Google Drive as `Target Customers for AI Workflow System Design Services`;
+- early positioning and messaging developed;
+- adjacent premium systems products identified as willingness-to-pay evidence;
+- founder-market fit judged materially stronger than Office Leaks;
+- standing Business Worker declined pending recurring standardized workload.
+
+Not yet validated:
+
+- which initial segment pays fastest;
+- the exact first recurring workflow;
+- willingness to pay for the audit;
+- installation delivery effort and measurable outcomes;
+- repeat, referral, retention, or productization evidence;
+- final business name and public category language.
 
 ## Current Focus
 
-- Guide Office Leaks parent strategy without absorbing Office Leaks execution continuity.
-- Interpret the live organic market test at the market, offer, and portfolio level.
-- Pressure-test the introductory offer before major expansion.
-- Decide whether the entry offer is a general cleanup task, a lead-leak diagnostic, or a narrowly defined bridge between the two.
-- Define the first target customer segment and avoid positioning toward all small businesses at once.
-- Build a trust mechanism that answers why a stranger should choose Rob.
-- Separate the introductory offer from the eventual profitable service ladder.
-- Define major positioning versus generic virtual assistants or generic consultants.
-- Clarify Rob's strengths, constraints, credibility assets, and positioning.
-- Evaluate the lead-loss thesis and other Office Leaks market hypotheses without owning detailed content production or outreach execution.
-- Coordinate with `Finance_HQ` before treating pricing, startup costs, revenue assumptions, taxes, benefits interactions, or tool costs as final.
-- Coordinate with `Engineering_HQ` on delivery architecture, templates, adoption verification, and human-system playbook elements when concrete.
-- Maintain Business-owned files locally; route global GitHub maintenance, shared governance, boot integrity, or repository-wide reconciliation to `Maintenance_HQ`.
-- Preserve PennyOS / Penny Platform as paused, not the current execution priority.
+- define the smallest clear initial customer and workflow;
+- shape the first AI Workflow Audit;
+- define success and failure thresholds for customer discovery and paid pilots;
+- collect exact customer language;
+- build proof without exposing private LifeOS details;
+- design a focused content and community participation strategy;
+- clarify the category and positioning without drifting into generic AI consulting;
+- coordinate with `Finance_HQ` when pricing becomes concrete;
+- coordinate with `Engineering_HQ` only when implementation tooling or technical feasibility becomes concrete;
+- preserve Office Leaks and PennyOS as paused assets without keeping their former work active.
 
-## Current Working Hypotheses
+## Office Leaks Pause
 
-- Rob should not compete as a generic low-cost virtual assistant.
-- Stronger positioning is Office Leaks Consulting: practical systems consulting for local service businesses with real workflow leaks.
-- A concrete costly problem, such as a lost lead caused by failed follow-up, creates stronger attention than a broad list of administrative tasks.
-- The $20 offer may work as a trust-building entry point, but price alone does not answer why the buyer should trust the service.
-- The economic buyer, internal champion, users, and beneficiaries should not be collapsed into one generic customer.
-- Trust, rapport, a visible Aha Moment, adoption verification, and relational follow-up matter as much as the mechanical workflow map.
-- The tool is not the product; the habit is the product.
-- Service work can generate income and market learning for later productized services.
+The parent portfolio decision is:
+
+- Office Leaks is paused, not retired.
+- No new Office Leaks outreach, content cadence, customer delivery, offer expansion, spending, or public action should be initiated while paused unless Rob explicitly authorizes an exception.
+- Existing assets, research, customer evidence, working records, and business-unit identity remain preserved.
+- `Office_Leaks_HQ` retains ownership of its subtree and must align its own current records through the routed advisory.
+
+Formal route:
+
+- `ADV-20260801-056`
+- Source board: `coordination/boards/business.md`
+- Target: `office_leaks`
+
+## PennyOS Pause
+
+PennyOS / Penny Platform remains paused, not abandoned.
+
+Resume only when Rob explicitly reactivates platform work or validated AI workflow systems service evidence creates a concrete product opportunity.
+
+## Worker Position
+
+No dedicated standing Business_HQ Worker is requested.
+
+Use bounded one-off research assignments. Reconsider a narrow Market Evidence Worker only after repeated standardized workload creates a measurable bottleneck with stable inputs, outputs, authority, and completion tests.
+
+## Advisory State
+
+Business_HQ has one open Business-sourced advisory:
+
+- `ADV-20260801-056` — Route the Office Leaks portfolio pause and align Office Leaks-owned canonical state.
+
+Before any advisory lifecycle change, read:
+
+- `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`
+- `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
+
+The full advisory carries authority and governance lifecycle. The V2 envelope carries transport metadata only.
+
+## Current Operating Rules
+
+- Keep GitHub abstract and non-sensitive.
+- Use Drive for detailed research and working records.
+- Use Trello for raw ideas before promotion.
+- Use the Advisory Index as the sole active advisory routing dashboard.
+- Do not use Department Event Inbox, Todoist, or GitHub Issues as advisory-state systems.
+- Keep lifecycle and priority separate.
+- No meaningful change means no write.
+- Do not promise elimination of hallucinations, limits, drift, or model failure.
+- Re-verify current platform facts before public claims.
 
 ## Source and Project References
 
 - Parent department: `projects/business-development/`
-- Business-unit department: `projects/office-leaks-consulting/`
-- Archived predecessor context: `archive/projects/virtual-assistant-business/`
-- Office Leaks advisory board: `coordination/boards/office-leaks.md`
-- Engineering delivery architecture: `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
-- Finance working-record pointer: `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
-
-Retained Business Drive folder path:
-
-- Life Organization > Chief Business HQ
-- Under that: Business Development
-
-`Chief Business HQ` is retained here only as the actual Drive folder label. It is not the current official department name, and this GitHub repair does not authorize a Drive rename.
-
-## Coordination Notes
-
-- `Office_Leaks_HQ` owns detailed service plans, marketing materials, offers, outreach, live market tests, proposals, customer research, sample packets, delivery, and lead/proposal/client workflow.
-- `Business_HQ` may guide, evaluate, and make portfolio-level decisions about Office Leaks without copying its execution backlog.
-- `Chief_of_Staff_HQ` handles one-off scheduling and daily coordination, receives reports, routes assignments, and checks follow-through without owning Business strategy or records.
-- `Engineering_HQ` handles delivery architecture, templates, implementation, automation, and workflow tooling when concrete.
-- `Finance_HQ` owns pricing feasibility, budget impact, income and expense tracking, taxes, benefits interaction, and financial risk once money becomes concrete.
-- `Maintenance_HQ` handles global GitHub maintenance, shared governance, boot integrity, audits, source-boundary enforcement, and reconciliation. `Business_HQ` maintains its own routine durable state.
-- `LifeOS_HQ` is the shared meeting room and has no independent authority or backlog.
-
-## Advisory Status
-
-No open advisories are currently directed to `Business_HQ`.
-
-The Advisory Index may contain open advisories for other departments. Future `Business_HQ` advisories should update the Business advisory board and central Advisory Index only. Future Office Leaks-sourced advisories should update the Office Leaks board and central Advisory Index.
-
-Do not update Department Event Inbox unless Rob explicitly reactivates it.
+- Active plan: `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
+- Paused Office Leaks business unit: `projects/office-leaks-consulting/`
+- Paused PennyOS predecessor context: `archive/projects/virtual-assistant-business/` and retained Business records
+- Business advisory board: `coordination/boards/business.md`
+- Advisory Index: `coordination/ADVISORY_INDEX.md`
+- V2 contract: `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
+- Detailed market research: Google Drive document `Target Customers for AI Workflow System Design Services`
 
 ## Boundary
 
-`Business_HQ` is one of the seven department HQs in the one-Hub-plus-seven-departments architecture. It defines parent business direction and maintains Business-owned durable state. It does not own technical implementation, finance execution, daily coordination, global GitHub maintenance, or Office Leaks business-unit execution continuity. `LifeOS_HQ` is the shared meeting room, not a department.
+`Business_HQ` owns parent strategy and portfolio state. It does not own Office Leaks execution files, technical implementation, financial execution, daily coordination, shared governance, or a separate LifeOS_HQ backlog.
