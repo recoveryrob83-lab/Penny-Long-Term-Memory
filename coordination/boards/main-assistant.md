@@ -5,58 +5,34 @@ Purpose: Canonical advisory text sourced from Chief of Staff HQ, including forma
 
 ## Open Advisories
 
+No open Chief of Staff HQ advisories.
+
+## Recently Acknowledged / Implemented Advisories
+
 ### ADV-20260801-055 — Verify canonical multi-route courier delivery to Maintenance HQ
 
 - Date: 2026-08-01
 - From: Chief_of_Staff_HQ / LifeOS_HQ under direct Rob authorization
 - To: Maintenance_HQ
-- Lifecycle State: OPEN
+- Lifecycle State: CLOSED
 - Priority: NORMAL
 - Advisory Revision: 2
 - Verification Mode: N/A
+- Acknowledged: 2026-08-01
+- Delivered: 2026-08-01
+- Closed: 2026-08-01
+- Closeout Authority: Rob
 - Posted Board: `coordination/boards/main-assistant.md`
-- Current Target Department and Owner: maintenance
+- Target Department and Owner: maintenance
 - Record Class: Read-only V2 courier transport test
-- Authorization Class: READ_ONLY_TEST
-- Authorization Source: ROB
-- Approval Reference: ROB-DIRECT-MAINTENANCE-COURIER-RETEST-20260801
-- Requests New Authority: false
-- Requests New Spending: false
-- Requests New Connector: false
-- Requests Cross-Department Authority: false
-- Requests Material Exception: false
-- Transport Scope Change Detected: false
-- Execution-Ready Worker Task: false
-- Authorized Read Scope: This advisory and its courier pointer only
-- Authorized Write Scope: none
-- Completion Condition: Maintenance HQ receives the revision-2 pointer in its existing registered conversation and visibly reports receipt without performing repository work or creating another durable record.
-- Closure Condition: Rob confirms the route-switch and composer-delivery retest result and explicitly authorizes closure.
 
-#### Revision 2 Retest Basis
+#### Outcome and Closeout
 
-Revision 1 remains immutable transport evidence in runtime state as `UNCERTAIN`, with one attempt. It must not be reset, retried, deleted, requeued, or treated as delivered.
+Revision 2 was delivered through the registered Maintenance HQ route after the multi-route discovery and composer/send-proof repairs. The existing Maintenance HQ conversation received the pointer, completed the authorized read-only receipt action, and visibly confirmed that it had read the advisory. The dashboard recorded the revision-2 command as `DELIVERED`.
 
-Revision 2 authorizes one fresh read-only courier attempt after Engineering hardened composer insertion, send-control selection, self-contained fallback execution, and bounded delivery proof. This revision does not authorize Maintenance work or any change to revision 1.
+Revision 1 remains preserved as immutable `UNCERTAIN` transport evidence with one attempt. It was not reset, retried, deleted, requeued, or reclassified as delivered.
 
-#### V2 Courier Envelope
-
-- Advisory Revision: 2
-- Source Department: chief_of_staff
-- Target Department: maintenance
-- Task Summary: Retest canonical multi-route courier delivery to Maintenance HQ after composer and send-proof hardening.
-- Authorized Scope: Read this advisory and report that the revision-2 pointer arrived. Do not modify GitHub, create a Worker run, execute Maintenance work, alter revision 1, or create any follow-on durable record.
-- Lifecycle State: OPEN
-- Outcome:
-- Blocker:
-- Updated At: 2026-08-01T10:54:00-05:00
-
-#### Authorized Maintenance HQ Response
-
-Maintenance HQ may only acknowledge that the revision-2 pointer arrived in the correct existing conversation. A concise response such as `ADV-20260801-055 revision 2 received in Maintenance HQ` is sufficient.
-
-This test does not authorize Boot, Sync, audit, reconciliation, maintenance, repository inspection, connector writes, Worker execution, schedule changes, revision-1 state changes, or advisory closure.
-
-## Recently Acknowledged / Implemented Advisories
+Rob confirmed the successful revision-2 result and explicitly authorized closure on 2026-08-01. No Maintenance repository work, Worker run, follow-on durable record, authority expansion, connector write, schedule change, or duplicate advisory was authorized or created by this transport test.
 
 ### ADV-20260718-042 — Move automated prompt verification from composer transport to receiving Workers
 
