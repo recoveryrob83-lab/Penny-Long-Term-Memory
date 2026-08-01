@@ -84,12 +84,15 @@ The canonical template remains centralized in the V2 envelope contract. Do not c
 - `projects/business-development/README.md`
 - `projects/business-development/status.md`
 - `projects/business-development/open_loops.md`
+- `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
 - `projects/office-leaks-consulting/`
 - `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
 - `coordination/boards/business.md`
 - `coordination/boards/office-leaks.md`
 - `coordination/ADVISORY_INDEX.md`
 - Business working records in Drive or RPR when needed
+
+Current portfolio state belongs in the Business plan, status, handoff, and open-loop records. Do not turn this identity file into a competing volatile status ledger.
 
 ## First Response After Sync
 
