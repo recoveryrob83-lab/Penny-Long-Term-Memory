@@ -1,6 +1,6 @@
 # LifeOS Execution and Communication Protocol
 
-Updated: 2026-07-19
+Updated: 2026-08-01
 Owner: Maintenance_HQ
 Status: Active / Canonical
 Purpose: Define how Rob, `LifeOS_HQ`, `Chief_of_Staff_HQ`, Department HQs, Workers, advisories, scheduled procedures, dashboards, and automation communicate, authorize, execute, verify, report, and close work.
@@ -107,9 +107,15 @@ Formal advisory text lives on the source department board. Routing state lives i
 
 `LifeOS_HQ` formal advisories use `Chief_of_Staff_HQ` as the source department and the retained board path `coordination/boards/main-assistant.md`.
 
-## 7. Lifecycle and Priority
+The exact machine-readable `#### V2 Courier Envelope` remains inside the same authoritative advisory section. Any HQ creating, materially revising, routing, blocking, completing, or closing an advisory must first read `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md` and preserve its required fields and transport semantics. Do not copy the full template into department files, handoffs, READMEs, or target boards.
 
-Canonical advisory lifecycle states:
+The full advisory carries authority, scope, ownership, evidence, and closeout conditions. The V2 envelope carries transport metadata only. The dashboard, parser, and courier may validate, quarantine, display, or transport an advisory, but they do not create, broaden, interpret, complete, or close its authority.
+
+## 7. Governance Lifecycle, V2 Transport Lifecycle, and Priority
+
+### Advisory governance lifecycle
+
+The broader governance lifecycle belongs to the full authoritative advisory and controls ownership, authorization, judgment, verification, and closeout:
 
 - `OPEN`
 - `ACKNOWLEDGED`
@@ -122,6 +128,23 @@ Canonical advisory lifecycle states:
 - `SOURCE_VERIFIED`
 - `CLOSED`
 
+These governance states remain meaningful even when the V2 courier is not used. They must not be inferred from parser state or silently replaced by transport vocabulary.
+
+### V2 courier transport lifecycle
+
+The `Lifecycle State` inside `#### V2 Courier Envelope` controls courier dispatch eligibility only and uses the smaller canonical set defined by `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`:
+
+- `OPEN`
+- `IN_PROGRESS`
+- `BLOCKED`
+- `NEEDS_ROB`
+- `COMPLETED`
+- `CLOSED`
+
+Only transport states `OPEN` and `IN_PROGRESS` are dispatch-actionable. `BLOCKED`, `NEEDS_ROB`, `COMPLETED`, and `CLOSED` suppress new courier dispatch without independently changing the advisory's authority, owner, governance lifecycle, verification requirement, or closure condition.
+
+The source owner maintains both layers when both apply. The governance state records the authoritative operating condition. The envelope state records the corresponding transport condition without asking the parser or courier to interpret governance prose. A malformed or missing envelope may be quarantined from courier dispatch while the underlying advisory remains the authoritative record.
+
 Canonical priority values:
 
 - `LOW`
@@ -131,7 +154,7 @@ Canonical priority values:
 
 Lifecycle state and priority are separate fields. Never use urgency as lifecycle or lifecycle as priority.
 
-A material advisory change increments `advisory_revision`.
+A material advisory change increments `advisory_revision` and the V2 envelope's `Advisory Revision` when the envelope applies.
 
 Receivers preserve `last_processed_revision`.
 
@@ -180,6 +203,8 @@ Use for sensitive, destructive, public-facing, expensive, unusual, high-conseque
 ## 10. Wake Eligibility and Suppression
 
 A material authoritative revision is wake-eligible, not automatically wake-producing.
+
+The governance-level defaults below describe who should be notified or review next. They do not replace the V2 transport lifecycle. A V2 courier reads only the canonical envelope and may dispatch only `OPEN` or `IN_PROGRESS` transport states.
 
 Default routing:
 
