@@ -5,7 +5,6 @@ Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
-- ADV-20260801-055 — OPEN — Revision: 2 — Posted Board: `coordination/boards/main-assistant.md` — Current Target Department: maintenance — Retest canonical multi-route courier delivery after composer and send-proof hardening
 - ADV-20260728-054 — OPEN — Posted Board: `coordination/boards/engineering.md` — Current Target Department: engineering — Enable one guarded later Maintenance HQ review attempt for RUN-ADV-20260726-053-R1
 - ADV-20260726-053 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: maintenance — Run one Rob-approved coordinated repository coherence audit and repair
 
@@ -15,6 +14,7 @@ The entries below preserve the names and wording used when they were created or 
 
 | Advisory ID | Lifecycle | Priority | Revision | Verification Mode | Source | Target | Source Board | Closed | Summary |
 |---|---|---|---:|---|---|---|---|---|---|
+| ADV-20260801-055 | CLOSED | NORMAL | 2 | N/A | Chief_of_Staff_HQ / LifeOS_HQ | Maintenance_HQ | `coordination/boards/main-assistant.md` | 2026-08-01 | Revision 2 was delivered to the existing Maintenance HQ conversation and visibly acknowledged; revision 1 remains preserved as UNCERTAIN transport evidence |
 | ADV-20260723-052 | CLOSED | NORMAL | 2 | N/A | Engineering_HQ | Chief_of_Staff_HQ | `coordination/boards/engineering.md` | 2026-07-23 | Hourly watcher destination test passed in the existing Chief of Staff HQ conversation; Rob confirmed the result and authorized closure |
 | ADV-20260718-042 | CLOSED | HIGH | 1 | IMMEDIATE_HQ | Chief_of_Staff_HQ / LifeOS_HQ | Engineering_HQ | `coordination/boards/main-assistant.md` | 2026-07-23 | Receiver-side semantic validation was built, tested, source-verified, and approved by Rob for slow rollout |
 | ADV-20260723-051 | CLOSED | HIGH | 1 | IMMEDIATE_HQ | Engineering HQ | Engineering HQ | `coordination/boards/engineering.md` | 2026-07-23 | Verify owning-HQ wake, receipt ingestion, and duplicate suppression |
