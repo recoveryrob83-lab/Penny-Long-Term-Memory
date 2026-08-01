@@ -1,87 +1,99 @@
 # Engineering_HQ Status
 
-Updated: 2026-07-28
+Updated: 2026-08-01
 
 ## Current Phase
 
-Active / LifeOS Version Two Design / Simplification First / No Implementation Authorized
+Active / LifeOS V2 Operational Core / Bounded Reliability Refinement
 
 ## Department Scope
 
-`Engineering_HQ` owns technical architecture, software planning, repository strategy, automation design, testing, debugging, implementation sequencing, build-readiness, and truthful verification.
+`Engineering_HQ` owns LifeOS technical architecture, implementation, repository strategy, browser automation, server and API behavior, dashboard behavior, advisory parsing, route handling, command reconciliation, source synchronization, tests, diagnostics, and truthful technical evidence.
 
-Engineering does not own another department's judgment, shared governance, source-owner lifecycle, business strategy, or Rob's final decisions.
+Engineering does not own another department's source records, advisory lifecycle, shared governance, business strategy, specialist judgment, or Rob's final decisions.
 
-## Current Direction
+## Current Operational State
 
-Rob has paused further incremental repair of the current LifeOS Worker orchestration system. The V1 system will be preserved as legacy history and later archived rather than carried forward through compatibility layers.
+The V2 outbound courier is operational and has completed a successful cross-room production proof to Maintenance HQ.
 
-Version Two will be designed around a simple operating loop:
+Verified behavior includes:
 
-1. Chief of Staff issues or updates one advisory.
-2. The server detects the advisory and resolves one owner.
-3. A browser plugin delivers the prompt to the registered department chat.
-4. The department performs the work and updates the same advisory.
-5. The server detects the outcome and notifies Chief of Staff.
-6. Chief of Staff reports to Rob or returns a cross-department dependency to Rob.
+- canonical multi-route registration;
+- production dispatch without the test arm;
+- test-route arm preservation;
+- command discovery before route readiness;
+- exact-route navigation in an owned background tab;
+- empty-composer protection;
+- readiness-gated atomic `/begin`;
+- hardened composer insertion and send-control selection;
+- bounded proof of a newly rendered exact user message;
+- terminal `UNCERTAIN` handling without blind resend;
+- successful `DELIVERED` acknowledgement.
 
-## Version Two Components
+`ADV-20260801-055-r1` remains immutable `UNCERTAIN` evidence. Revision 2 reached `DELIVERED`, Maintenance confirmed receipt, Rob authorized closure, and the advisory is closed.
 
-- Browser plugin: narrow transport, route registration, composer protection, one send effect, basic telemetry, three command-local attempts.
-- Server: intermediary among GitHub, plugin, and dashboard; advisory watcher; delivery tracker; outcome watcher; Chief of Staff notifier.
-- Dashboard: Rob-facing information and control center showing what is happening, what is blocked, and who acts next.
-- GitHub: one authoritative advisory plus normal commit, diff, and pull-request history.
+## Canonical GitHub Source State
 
-## Safeguard Posture
+The core read-only canonical GitHub synchronizer is implemented on `main` at:
 
-Retain only safeguards that prevent likely failures Rob cannot easily inspect or correct manually.
+- `0eeccc46df6980c62e29795e7f40c78a1d61a108`
 
-Default safeguards:
+Production defaults to `REMOTE_GITHUB` and reads `recoveryrob83-lab/Penny-Long-Term-Memory@main` through commit-pinned snapshots.
 
-- one advisory;
-- one owner;
-- registered routes;
-- composer protection;
-- command-local duplicate suppression;
-- no more than three attempts;
-- no blind resend after uncertainty;
-- simple work, delivery, and route states;
-- global pause;
-- visible recovery actions;
-- direct human override.
+The synchronizer resolves one SHA, fetches the Advisory Index and all referenced open-advisory boards at that SHA, caches unchanged snapshots, exposes source health and provenance, and never mutates Rob's working tree.
 
-Universal send budgets, reset epochs, mandatory HQ review, immutable review chains, default checksums, separate evidence ledgers, automatic cross-department routing, and multiple parallel lifecycle state machines are not part of the normal V2 path.
+The first live remote run exposed `ADV-20260726-053` as a legacy advisory without a V2 Courier Envelope.
 
-## Working Design Sources
+A local repair successfully separates fatal snapshot-integrity failure from advisory-level quarantine. Local validation reported:
 
-Google Drive folder: `Life Organization/Chief Engineering Penny`
+- `sync_state: CURRENT`;
+- a non-null verified SHA;
+- `ADV-20260728-054` valid;
+- `ADV-20260726-053` quarantined;
+- existing command IDs unchanged.
 
-- `Version Two Safeguards`
-- `LifeOS Version Two System Design`
+Current GitHub `main` still contains the earlier fatal whole-snapshot behavior. The quarantine repair remains local-only until committed, pushed, and read back.
 
-These are working planning documents and are not yet canonical implementation contracts.
+## Current Test Evidence
 
-## Planned Design Sequence
+Reported validation:
 
-1. Refine the overall V2 process.
-2. Produce Browser Plugin Design.
-3. Produce LifeOS V2 Server Design.
-4. Produce LifeOS V2 Dashboard Design.
-5. Reconcile the documents for consistency and simplicity.
-6. Promote approved designs into GitHub.
-7. Prepare one comprehensive Codex Penny deliverables prompt.
-8. Implement under `apps/lifeos_dashboardv2`.
+- discovery/readiness focused tests: 21 passed;
+- hardened extension tests: 28 passed;
+- remote-source focused tests: 53 passed;
+- quarantine-focused source/courier/API/dashboard tests: 60 passed;
+- latest full V2 suite: 70 passed with two reported live-connector failures involving a calendar fixture window and ambient credentials.
 
-## V1 Boundary
+Those two failures should be treated as reported known failures, not automatically unrelated, unless reproduced against the relevant parent when classification matters.
 
-The current dashboard and Worker orchestration code remain legacy production history. The ADV-053/ADV-054 incident is preserved as design evidence. Do not continue V1 runtime patching, review-attempt repair, send-budget work, or procedural expansion without a separate explicit Rob decision.
+## Current Resource Constraint
+
+Rob's PC cannot comfortably keep two active ChatGPT windows open during normal work.
+
+The courier-owned tab may be closed while automation is idle. Nighttime automation may create or reuse one background tab. Engineering must prevent tab sprawl and preserve non-empty composers.
+
+## Current Priorities
+
+1. Publish and verify the local advisory-quarantine repair on `origin/main`.
+2. Restart the server and confirm `REMOTE_GITHUB`, `CURRENT`, a verified SHA, a valid advisory set, and bounded quarantine reporting from durable code.
+3. Sort command display newest first without coupling UI order to dispatch order.
+4. Add bounded terminal-command history or retention while preserving active and uncertain evidence.
+5. Decide and test courier-tab reuse versus post-delivery closure around Rob's memory constraint.
+6. Deduplicate or rate-limit repeated identical readiness events.
+7. Continue return-path or nighttime-automation work only under explicit bounded scope.
+
+## Current Boundaries
+
+- Do not rewrite `ADV-20260726-053` merely to satisfy V2 parsing. Maintenance owns that source record.
+- Do not reset or retry `UNCERTAIN` commands without explicit authority and evidence.
+- Do not let dashboard sorting determine dispatch selection.
+- Do not mutate the local Git working tree during production source reads.
+- Do not silently fall back from remote source mode to local files.
+- Do not edit another department's canonical files without explicit coordinated authority.
+- Preserve V1 under `apps/lifeos-dashboard/` as legacy evidence rather than carrying its complexity into V2.
 
 ## Definition of Success
 
-A normal advisory travels from Chief of Staff to the owning department and back without Rob copying prompts, resetting state, interpreting hidden runtime conditions, or reading implementation details.
+A valid advisory committed to canonical GitHub becomes discoverable without a manual pull, reaches exactly one registered department chat, preserves user text, produces truthful delivery state, and leaves one understandable blocker and recovery action when anything fails.
 
-A failure produces one understandable blocker and one clear recovery action.
-
-## Boundary
-
-Rob decides. Engineering owns the machinery. Chief of Staff coordinates. Departments own their work and judgment. Simplicity is the primary V2 architectural constraint.
+Rob decides. Engineering owns the machinery. Chief of Staff coordinates. Departments own their work and source records.
