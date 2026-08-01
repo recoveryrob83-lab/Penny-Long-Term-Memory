@@ -5,6 +5,7 @@ Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
+- ADV-20260801-056 — OPEN — Priority: NORMAL — Revision: 1 — Verification Mode: ROUTINE_BATCH — Posted Board: `coordination/boards/business.md` — Current Target Department: office_leaks — Pause Office Leaks and align its canonical business-unit state
 - ADV-20260728-054 — OPEN — Posted Board: `coordination/boards/engineering.md` — Current Target Department: engineering — Enable one guarded later Maintenance HQ review attempt for RUN-ADV-20260726-053-R1
 - ADV-20260726-053 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: maintenance — Run one Rob-approved coordinated repository coherence audit and repair
 
