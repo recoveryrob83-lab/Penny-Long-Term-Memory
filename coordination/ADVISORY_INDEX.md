@@ -1,10 +1,11 @@
 # LifeOS Advisory Index
 
-Updated: 2026-07-28
+Updated: 2026-08-01
 Purpose: Sole active routing dashboard for formal LifeOS advisories.
 
 ## Open Advisories
 
+- ADV-20260801-055 — OPEN — Posted Board: `coordination/boards/main-assistant.md` — Current Target Department: maintenance — Verify canonical multi-route courier delivery to Maintenance HQ
 - ADV-20260728-054 — OPEN — Posted Board: `coordination/boards/engineering.md` — Current Target Department: engineering — Enable one guarded later Maintenance HQ review attempt for RUN-ADV-20260726-053-R1
 - ADV-20260726-053 — OPEN — Posted Board: `coordination/boards/engineering.md` — Target Department: maintenance — Run one Rob-approved coordinated repository coherence audit and repair
 
