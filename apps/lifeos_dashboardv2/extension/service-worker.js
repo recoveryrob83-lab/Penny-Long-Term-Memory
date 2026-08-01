@@ -72,19 +72,30 @@ async function selectEligibleRoute(routes) {
 }
 
 async function pageDispatch(wake, routeUrl) {
+  const normalize = (text) => String(text || '').replace(/\r\n/g, '\n').trim();
+  const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
   const findComposer = () => ['#prompt-textarea', 'textarea[data-id="root"]', '[contenteditable="true"][role="textbox"]'].map((selector)=>document.querySelector(selector)).find(Boolean);
-  const findSend = () => ['button[data-testid="send-button"]', 'button[data-testid*="send" i]', 'button[aria-label="Send prompt"]', 'button[aria-label="Send message"]', 'button[aria-label*="Send" i]'].map((selector)=>document.querySelector(selector)).find((node)=>node && !node.disabled);
-  const read = (node) => normal(node?.value ?? node?.innerText);
-  const node = findComposer(); if (!node) return {kind:'failed', note:'Composer unavailable before send.'};
+  const visible = (node) => !!node && !node.disabled && node.getAttribute('aria-hidden') !== 'true' && node.getClientRects().length > 0;
+  const read = (node) => normalize(node?.value ?? node?.innerText);
+  const sameContext = (button, node) => { const composerForm = node.closest?.('form'); const buttonForm = button.closest?.('form'); return !composerForm || !buttonForm || composerForm === buttonForm; };
+  const findSend = (node) => ['button[data-testid="send-button"]', 'button[aria-label="Send prompt"]', 'button[aria-label="Send message"]'].flatMap((selector)=>[...document.querySelectorAll(selector)]).find((button)=>visible(button) && sameContext(button, node)) || null;
+  const eventFor = (text) => typeof InputEvent === 'function' ? new InputEvent('input', {bubbles:true, inputType:'insertText', data:text}) : new Event('input', {bubbles:true});
+  const insert = (node, text) => { if ('value' in node) { const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(node), 'value'); if (descriptor?.set) descriptor.set.call(node, text); else node.value = text; node.focus(); node.dispatchEvent(eventFor(text)); } else { node.focus(); document.execCommand('insertText', false, text); node.dispatchEvent(eventFor(text)); } };
+  const messages = () => [...document.querySelectorAll('[data-message-author-role="user"]')];
+  const newExpected = (baseline) => messages().some((item)=>!baseline.has(item) && normalize(item.innerText) === normalize(wake));
+  const node = findComposer(); if (!node) return {kind:'failed', note:'Composer unavailable.'};
   if (read(node)) return {kind:'failed', note:'Composer contains unrelated text; preserved.'};
   if (location.href !== routeUrl) return {kind:'failed', note:'Route changed before send.'};
-  if ('value' in node) { node.focus(); node.value = wake; node.dispatchEvent(new Event('input', {bubbles:true})); } else { node.focus(); document.execCommand('insertText', false, wake); node.dispatchEvent(new InputEvent('input', {bubbles:true, inputType:'insertText', data:wake})); }
-  if (read(node) !== normal(wake)) return {kind:'failed', note:'Composer insertion verification failed.'};
-  await delay(150);
-  const button = findSend(); if (!button) return {kind:'failed', note:'Send control unavailable before send.'};
-  button.click(); await delay(1200);
-  const delivered = [...document.querySelectorAll('[data-message-author-role="user"]')].some((item)=>normal(item.innerText) === normal(wake));
-  return delivered ? {kind:'delivered'} : {kind:'uncertain', note:'Send may have occurred but expected user message was not proven.'};
+  insert(node, wake);
+  let button = null;
+  for (let attempt = 0; attempt < 20; attempt += 1) { if (read(node) !== normalize(wake)) return {kind:'failed', note:'Insertion rejected.'}; button = findSend(node); if (button) break; await sleep(100); }
+  if (read(node) !== normalize(wake)) return {kind:'failed', note:'Insertion rejected.'};
+  if (!button) return {kind:'failed', note:'Send control unavailable.'};
+  if (location.href !== routeUrl) return {kind:'failed', note:'Route changed before send.'};
+  const baseline = new Set(messages());
+  button.click();
+  for (let attempt = 0; attempt < 30; attempt += 1) { if (newExpected(baseline)) return {kind:'delivered', note:'Expected user message proven.'}; await sleep(250); }
+  return {kind:'uncertain', note:'Click attempted but user-message proof absent.'};
 }
 
 async function poll() {

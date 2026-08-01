@@ -150,6 +150,44 @@ vm.runInContext(`${source}\nglobalThis.__popupTest = {render};`, context, {filen
 """
 
 
+_DISPATCH_HARNESS = r"""
+const fs = require('fs');
+const vm = require('vm');
+const scenario = JSON.parse(fs.readFileSync(0, 'utf8'));
+let ticks = 0; let clickTick = null; let clicks = 0; let listener = null;
+const messages = (scenario.baseline || []).map((text) => ({innerText:text}));
+const composer = {value:'', innerText:'', disabled:false, focus:() => {}, getAttribute:() => null, getClientRects:() => [{}], closest:() => null, dispatchEvent:(event) => { if (event.type === 'input' && scenario.accepted === false) button.forceUnavailable = true; if (event.type === 'input' && scenario.rejectText === true) composer.value = ''; }};
+const button = {forceUnavailable:false, get disabled() { return this.forceUnavailable || scenario.validSend === false || ticks < (scenario.sendAfterTicks || 0); }, getAttribute:(name) => name === 'data-testid' ? 'send-button' : null, getClientRects:() => button.disabled ? [] : [{}], closest:() => null, click:() => { clicks += 1; clickTick = ticks; }};
+const unrelated = {get disabled() { return false; }, getAttribute:(name) => name === 'aria-label' ? 'Send attachment' : null, getClientRects:() => [{}], closest:() => null, click:() => { throw new Error('Unrelated control clicked'); }};
+const document = {
+  querySelector:(selector) => ['#prompt-textarea', 'textarea[data-id="root"]', '[contenteditable="true"][role="textbox"]'].includes(selector) ? composer : null,
+  querySelectorAll:(selector) => {
+    if (selector === '[data-message-author-role="user"]') return messages;
+    if (['button[data-testid="send-button"]', 'button[aria-label="Send prompt"]', 'button[aria-label="Send message"]'].includes(selector)) return scenario.validSend === false ? [] : [button];
+    if (selector.includes('send')) return [unrelated];
+    return [];
+  },
+  execCommand:(_command, _ui, text) => { composer.innerText = text; return true; },
+};
+const setTimeout = (resolve) => { ticks += 1; if (clickTick !== null && ticks - clickTick >= (scenario.deliveryAfterTicks ?? Number.MAX_SAFE_INTEGER) && !messages.some((node) => node.__new)) { messages.push({innerText:scenario.wake, __new:true}); } resolve(); return ticks; };
+const event = (type, options = {}) => ({type, ...options});
+const chrome = {
+  runtime:{onMessage:{addListener:(handler) => { listener = handler; }}, getManifest:() => ({version:'test'}), onStartup:{addListener:() => {}}, onInstalled:{addListener:() => {}}},
+  tabs:{onRemoved:{addListener:() => {}}, query:async () => [], get:async () => null, sendMessage:async () => { throw new Error('not used'); }, create:async () => null, update:async () => null},
+  alarms:{create:() => {}, onAlarm:{addListener:() => {}}}, storage:{local:{get:async (defaults) => defaults, remove:async () => {}}}, scripting:{executeScript:async () => []},
+};
+const context = {chrome, document, location:{href:scenario.routeUrl}, URL, Event:function(type, options) { return event(type, options); }, InputEvent:function(type, options) { return event(type, options); }, setTimeout, clearTimeout:() => {}, console};
+vm.createContext(context);
+const source = fs.readFileSync(process.argv[1], 'utf8');
+if (process.argv[2] === 'fallback') vm.runInContext(`${source}\nglobalThis.__dispatchTest = pageDispatch;`, context, {filename:process.argv[1]});
+else vm.runInContext(source, context, {filename:process.argv[1]});
+(async () => {
+  const result = process.argv[2] === 'fallback' ? await context.__dispatchTest(scenario.wake, scenario.routeUrl) : await new Promise((resolve) => listener({type:'dispatch', wake:scenario.wake, routeUrl:scenario.routeUrl}, null, resolve));
+  process.stdout.write(JSON.stringify({result, clicks, messages:messages.map((node) => node.innerText), ticks}));
+})().catch((error) => { console.error(error.stack || error); process.exit(1); });
+"""
+
+
 def _node_binary() -> str | None:
     bundled = Path.home() / ".cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe"
     found = shutil.which("node")
@@ -178,6 +216,16 @@ def run_popup_scenario(scenario: dict) -> dict:
     return json.loads(result.stdout)
 
 
+def run_dispatch_scenario(scenario: dict, mode: str = "content") -> dict:
+    node = _node_binary()
+    if not node:
+        pytest.skip("Node.js is required to execute the courier dispatch regression harness.")
+    source = Path(__file__).parents[1] / "extension" / ("service-worker.js" if mode == "fallback" else "content.js")
+    result = subprocess.run([node, "-e", _DISPATCH_HARNESS, str(source), mode], input=json.dumps(scenario), text=True, capture_output=True, timeout=15)
+    assert result.returncode == 0, result.stderr
+    return json.loads(result.stdout)
+
+
 def command(command_id: str, route_name: str) -> dict:
     return {"command_id":command_id, "route_name":route_name, "state":"PENDING", "attempts":0, "wake_payload":"Read the advisory."}
 
@@ -188,6 +236,12 @@ def route(route_name: str, url: str, health: str = "AVAILABLE") -> dict:
 
 def ready_tab(tab_id: int, url: str) -> dict:
     return {"id":tab_id, "url":url, "active":False, "probe":{"url":url, "content_script":True, "composer_ready":True, "composer_empty":True, "send_control":True}}
+
+
+def dispatch_case(**overrides) -> dict:
+    scenario = {"routeUrl":"https://chatgpt.com/c/maintenance", "wake":"Read the advisory.", "deliveryAfterTicks":1}
+    scenario.update(overrides)
+    return scenario
 
 
 def test_attempt_limit_and_uncertainty_survive_restart(tmp_path: Path) -> None:
@@ -291,6 +345,47 @@ def test_discovery_excludes_terminal_and_exhausted_commands_without_cross_route_
     pending = DeliveryCommand("ADV-pending-r1", "ADV", 1, "maintenance", "maintenance", "wake", CommandState.PENDING, "now", "now").to_dict()
     service.store.data["commands"][pending["command_id"]] = pending
     assert service.discover_candidate("maintenance")["command_id"] == "ADV-pending-r1"
+
+
+def test_dispatch_uses_controlled_insertion_and_ignores_broad_unrelated_controls() -> None:
+    result = run_dispatch_scenario(dispatch_case())
+    assert result["result"] == {"kind":"delivered", "note":"Expected user message proven."} and result["clicks"] == 1
+
+
+def test_dispatch_fails_before_click_when_editor_does_not_accept_input() -> None:
+    result = run_dispatch_scenario(dispatch_case(accepted=False))
+    assert result["result"] == {"kind":"failed", "note":"Send control unavailable."} and result["clicks"] == 0
+
+
+def test_dispatch_reports_rejected_insertion_before_click() -> None:
+    result = run_dispatch_scenario(dispatch_case(rejectText=True))
+    assert result["result"] == {"kind":"failed", "note":"Insertion rejected."} and result["clicks"] == 0
+
+
+def test_dispatch_waits_for_a_delayed_send_control_and_delivery_proof() -> None:
+    result = run_dispatch_scenario(dispatch_case(sendAfterTicks=3, deliveryAfterTicks=8))
+    assert result["result"]["kind"] == "delivered" and result["clicks"] == 1 and result["ticks"] > 5
+
+
+def test_dispatch_requires_a_new_matching_user_message_after_click() -> None:
+    baseline_only = run_dispatch_scenario(dispatch_case(baseline=["Read the advisory."], deliveryAfterTicks=None))
+    delivered = run_dispatch_scenario(dispatch_case(baseline=["Read the advisory."], deliveryAfterTicks=6))
+    assert baseline_only["result"] == {"kind":"uncertain", "note":"Click attempted but user-message proof absent."} and baseline_only["clicks"] == 1
+    assert delivered["result"] == {"kind":"delivered", "note":"Expected user message proven."} and delivered["clicks"] == 1
+
+
+def test_dispatch_without_a_valid_send_control_is_preclick_failure() -> None:
+    result = run_dispatch_scenario(dispatch_case(validSend=False))
+    assert result["result"] == {"kind":"failed", "note":"Send control unavailable."} and result["clicks"] == 0
+
+
+def test_injected_fallback_is_self_contained_and_matches_content_safety_gates() -> None:
+    unavailable = dispatch_case(validSend=False)
+    content = run_dispatch_scenario(unavailable)
+    fallback = run_dispatch_scenario(unavailable, mode="fallback")
+    delivered = run_dispatch_scenario(dispatch_case(deliveryAfterTicks=7), mode="fallback")
+    assert fallback["result"] == content["result"] == {"kind":"failed", "note":"Send control unavailable."}
+    assert delivered["result"]["kind"] == "delivered" and delivered["clicks"] == 1
 
 
 def test_worker_reuses_an_exact_target_tab_without_creating_or_navigating() -> None:
