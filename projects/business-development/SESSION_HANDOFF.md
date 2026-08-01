@@ -1,6 +1,6 @@
 # Business_HQ Session Handoff
 
-Updated: 2026-07-18
+Updated: 2026-08-01
 Project: Business_HQ
 Purpose: Project-specific handoff for `Business_HQ` chats.
 
@@ -8,191 +8,205 @@ Purpose: Project-specific handoff for `Business_HQ` chats.
 
 `Business_HQ` owns parent business strategy, opportunity design, market selection, positioning, validation, market research, portfolio choices, offer strategy, customer-value judgment, commercial priorities, and business-model planning across Rob's current and future businesses.
 
-`Business_HQ` defines what should be built and why at the parent and portfolio level. `Office_Leaks_HQ` owns Office Leaks business-unit execution continuity, offers, outreach, market testing, delivery, and customer-facing operations. `Engineering_HQ` owns technical architecture and implementation. `Finance_HQ` owns concrete pricing feasibility, budgets, benefits, income tracking, taxes, cost-bearing choices, and financial risk. `Chief_of_Staff_HQ` coordinates daily operations, receives reports, routes assignments, and follows through without owning Business strategy or records. `Maintenance_HQ` owns global GitHub maintenance and governance without owning `Business_HQ`'s routine durable state.
+`Business_HQ` defines what should be built and why at the parent and portfolio level. A business-unit HQ owns its own execution continuity. `Engineering_HQ` owns technical architecture and implementation. `Finance_HQ` owns concrete pricing feasibility, budgets, benefits, income tracking, taxes, cost-bearing choices, and financial risk. `Chief_of_Staff_HQ` coordinates daily operations, receives reports, routes assignments, and follows through without owning Business strategy or records. `Maintenance_HQ` owns global GitHub maintenance and governance without owning `Business_HQ`'s routine durable state.
 
 ## Boot Instructions
 
 When Rob opens or refreshes `Business_HQ`:
 
-1. Read the global boot files from `memory/STARTUP_BOOT.md`.
-2. Read this project handoff.
-3. Read `projects/business-development/DEPARTMENT_IDENTITY.md`.
-4. Read local status, open-loop, or README files as routed by the canonical boot sequence.
-5. Keep GitHub abstract and use Drive or RPR for detailed working records.
-6. Route Office Leaks execution continuity to `projects/office-leaks-consulting/`.
-7. Route technical implementation to `Engineering_HQ`.
-8. Route concrete financial decisions, pricing feasibility, income, expenses, taxes, or cost-bearing choices to `Finance_HQ`.
-9. Route daily coordination, reminders, scheduling, and one-off execution to `Chief_of_Staff_HQ` when needed.
-10. Maintain Business-owned files locally; route global GitHub maintenance, shared governance, or repository-wide reconciliation to `Maintenance_HQ`.
+1. Follow the canonical boot sequence in `memory/STARTUP_BOOT.md`.
+2. Read `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md` after the universal kernel.
+3. Read this handoff.
+4. Read `projects/business-development/DEPARTMENT_IDENTITY.md`.
+5. Read `projects/business-development/README.md`.
+6. Read `projects/business-development/status.md`.
+7. Read `projects/business-development/open_loops.md`.
+8. Read explicitly routed dependencies only.
+9. Keep GitHub abstract and use Drive or another natural working system for detailed research, customer evidence, financial records, and deliverables.
 
-## Current Project Status
+Before creating, materially revising, routing, blocking, completing, or closing a formal advisory, read:
 
-`Business_HQ` is active as the parent strategy department.
+- `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`
 
-`Office_Leaks_HQ` is the active revenue-first business unit and is publicly launched in a live organic market test.
+## Current Portfolio Decision
 
-PennyOS / Penny Platform work is paused for now, not abandoned. It remains a longer-term platform concept and potential future productization path.
+Rob promoted the AI workflow systems opportunity into the primary active Business_HQ validation track on 2026-08-01.
 
-The immediate Business objective is to guide Office Leaks at the parent-strategy level by evaluating market signal, target selection, positioning, trust, offer strategy, service-ladder logic, and portfolio implications while `Office_Leaks_HQ` owns the live test and customer-facing execution.
+Canonical plan:
 
-`Business_HQ` owns parent strategy, portfolio strategy, market selection, major positioning, major business-model decisions, offer strategy, commercial priorities, and Business-owned durable records.
+- `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
 
-Office Leaks business-unit execution and detailed project records belong in:
+Portfolio state:
 
-- `projects/office-leaks-consulting/`
+- **AI workflow systems:** Active Validation / primary Business opportunity.
+- **Office Leaks:** Paused, not retired. Preserve all assets and business-unit state. `Office_Leaks_HQ` remains the owner of its files and must acknowledge the parent pause through the routed Business advisory.
+- **PennyOS / Penny Platform:** Paused, not abandoned.
 
-Archived predecessor context remains at:
+Business_HQ should not run Office Leaks and the AI workflow systems opportunity as two simultaneous active execution tracks.
 
-- `archive/projects/virtual-assistant-business/`
+## Active Business Thesis
+
+The new business helps paid AI users build reliable, recoverable working systems around ChatGPT, Claude, Gemini, coding agents, notebooks, Drive, GitHub, and other tools.
+
+The problem is not simply weak prompting. The customer loses value through:
+
+- context loss on long projects;
+- repeated explanations and wasted premium usage;
+- hallucinations, drift, bad work, and unverified outputs;
+- brittle prompt collections;
+- multi-model and tool confusion;
+- scattered sources and competing truth;
+- too much AI operation and too little finished production.
+
+Working promise:
+
+> Less prompting. More producing.
+
+Supporting strategy:
+
+- stop losing context on long projects;
+- create more value from existing subscriptions;
+- reduce hallucinations, rework, and unreliable output without promising elimination;
+- lower friction across life, business, creative, and technical work;
+- teach systems knowledge rather than selling another pile of disconnected prompts or tools.
+
+## Initial Customer and Offer Direction
+
+Best initial customers are paid AI users with recurring valuable deliverables, especially:
+
+- solo creators;
+- independent consultants and freelancers;
+- coaches, educators, writers, and boutique marketers;
+- technical indie builders and power users;
+- small knowledge-work teams.
+
+Working offer ladder:
+
+1. Helpful diagnostic content and public education.
+2. Paid AI Workflow Audit.
+3. Done-with-you AI System Installation Sprint.
+4. Productized templates, lessons, systems packs, workshops, community, or subscriptions only after repeated service evidence.
+5. Software only if validated customer work proves a problem that existing tools cannot cleanly solve.
+
+Concrete pricing requires Finance_HQ review and market evidence.
+
+## Distribution and Partnership Direction
+
+Preferred acquisition is helpful participation rather than spam:
+
+- answer real workflow questions in Reddit and platform communities;
+- publish useful YouTube, LinkedIn, and X teardowns and case studies;
+- create profile-to-website bridges rather than intrusive direct marketing;
+- build trust through proof, specificity, and real systems examples.
+
+Adjacent educators, specialized workflow-pack sellers, tool builders, and niche consultants may be complementary partners, affiliates, and referral sources rather than enemies. No outreach or affiliate commitment is authorized merely by recording this hypothesis.
+
+## Worker Decision
+
+Business_HQ does not request a dedicated standing Worker at this time.
+
+Use bounded one-off research assignments. Reconsider a narrow Market Evidence Worker only when:
+
+- the same research task recurs repeatedly;
+- inputs, sources, output format, and completion tests are stable;
+- little strategic discretion is required;
+- one authoritative destination exists;
+- Business_HQ has become a measurable execution bottleneck.
 
 ## Parent / Business-Unit Boundary
 
 `Business_HQ` keeps:
 
-- Parent strategy context.
-- Cross-business routing rules.
-- High-level business priorities.
-- Portfolio decisions.
-- Market selection and customer-value judgment.
-- Major positioning, offer-strategy, and business-model decisions.
-- Business-sourced advisory creation and consumption state.
-- Pointers to business-unit projects and Drive/RPR artifacts.
+- parent strategy and portfolio decisions;
+- market selection and customer-value judgment;
+- major positioning and offer strategy;
+- validation hypotheses and review conditions;
+- Business-owned open loops and status;
+- formal Business-sourced advisories;
+- pointers to business-unit and working records.
 
-`Office_Leaks_HQ` keeps:
+A business-unit HQ keeps:
 
-- Business-unit execution continuity.
-- Detailed Office Leaks service plans.
-- Marketing and content execution.
-- Offers, packages, and live market tests.
-- Outreach and customer-facing operations.
-- Proposal templates and delivery artifacts.
-- Portfolio and sample packets.
-- Customer research and inquiry evidence.
-- Day-to-day operating system.
-- Lead, proposal, delivery, client, and follow-up workflow details.
-- Boot and sync surface for Office Leaks specialist chats.
+- execution continuity;
+- detailed offers, outreach, content, delivery, and customer-facing work;
+- local status, handoff, open loops, and business-unit procedures;
+- operational evidence and artifacts.
 
-`Business_HQ` may guide, evaluate, or make portfolio-level decisions about Office Leaks without duplicating `Office_Leaks_HQ`'s execution backlog or detailed operating state.
+For Office Leaks specifically, `Office_Leaks_HQ` owns `projects/office-leaks-consulting/`. Business_HQ may pause or reactivate the portfolio allocation but must route the decision instead of silently rewriting Office Leaks-owned files.
 
 ## Coordination Boundaries
 
-- `Finance_HQ` owns pricing feasibility, income tracking, expense tracking, startup costs, tool decisions, tax considerations, subscription or tool justification, budget impact, benefits interactions, and financial risk once money becomes concrete.
-- `Chief_of_Staff_HQ` owns one-off admin, reminders, scheduling, daily coordination, report receipt, assignment routing, and follow-through when routed.
-- `Engineering_HQ` owns delivery architecture, workflow templates, technical implementation, and automation or tooling when concrete.
-- `Maintenance_HQ` owns global GitHub maintenance, shared governance, boot integrity, repository-wide hygiene, audits, source-boundary enforcement, and reconciliation. `Business_HQ` maintains its own project subtree.
-- `LifeOS_HQ` is the shared meeting room. It has no independent department authority or backlog.
+- `Finance_HQ` owns pricing feasibility, budgets, costs, income tracking, taxes, benefits interactions, and financial risk once money becomes concrete.
+- `Engineering_HQ` owns implementation tooling, architecture, automation, software, and technical feasibility when concrete.
+- `Chief_of_Staff_HQ` owns daily coordination, reminders, scheduling, report receipt, assignment routing, and follow-through when routed.
+- `Maintenance_HQ` owns shared governance, Boot integrity, repository-wide audits, source-boundary enforcement, and reconciliation.
+- `LifeOS_HQ` is the shared meeting room and owns no backlog.
 
-## Office Leaks Key References
+## V2 Advisory Procedure
 
-`Office_Leaks_HQ`:
+The authoritative model is source board plus Advisory Index plus the centralized V2 envelope contract when courier transport applies.
 
-- `projects/office-leaks-consulting/`
+When `Business_HQ` creates or changes a formal advisory:
 
-Boot and sync:
+1. Read `coordination/LIFEOS_EXECUTION_AND_COMMUNICATION_PROTOCOL.md`.
+2. Read `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`.
+3. Create or update the full advisory in `coordination/boards/business.md`.
+4. Keep exactly one `#### V2 Courier Envelope` inside the same authoritative advisory section when courier transport applies.
+5. Preserve all nine required envelope fields, including blank `Outcome` and `Blocker` values.
+6. Use canonical lowercase snake_case route identifiers.
+7. Maintain the broader governance lifecycle in the full advisory and the smaller courier transport lifecycle in the envelope.
+8. Increment the advisory revision only for a material change.
+9. Update `coordination/ADVISORY_INDEX.md` with governance lifecycle, priority, revision, verification mode, source board, and target.
+10. Do not copy the template into handoffs, READMEs, target boards, open loops, or the index.
+11. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reactivates it.
+12. Do not use Todoist or GitHub Issues as advisory-state systems.
 
-- `projects/office-leaks-consulting/BOOT_SYNC.md`
-- `projects/office-leaks-consulting/SYNC_CHECKLIST.md`
+A malformed envelope may quarantine courier transport while the underlying source-board advisory remains authoritative. Repair the same advisory; do not create a duplicate replacement.
 
-Advisory board:
+## Current Formal Advisory
 
-- `coordination/boards/office-leaks.md`
+Business_HQ has routed the Office Leaks portfolio pause to `Office_Leaks_HQ` through:
 
-Archived worker context:
+- `ADV-20260801-056`
+- Source board: `coordination/boards/business.md`
+- Routing dashboard: `coordination/ADVISORY_INDEX.md`
 
-- `archive/projects/virtual-assistant-business/`
-
-Operating philosophy historical source:
-
-- `archive/projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
-
-Engineering delivery architecture:
-
-- `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`
-- Related Drive doc: `Engineering Delivery Architecture Specification - HVAC Office Cleanup`
-
-Finance working-record pointer:
-
-- `projects/finance-benefits/OFFICE_LEAKS_FINANCE_POINTERS.md`
-
-## Advisory Procedure
-
-Use the simplified advisory routing model.
-
-When `Business_HQ` creates an advisory intended for another department:
-
-1. Create or update the advisory on `coordination/boards/business.md`.
-2. Update `coordination/ADVISORY_INDEX.md` as the sole active advisory routing dashboard.
-3. Name the target department in both the source-board advisory and the Advisory Index entry.
-4. Do not update `coordination/DEPARTMENT_EVENT_INBOX.md` unless Rob explicitly reactivates it.
-5. Do not use Todoist for department synchronization unless Rob explicitly asks.
-6. Keep advisory text abstract and non-sensitive.
-
-When `Office_Leaks_HQ` creates an advisory as the source department, use:
-
-- `coordination/boards/office-leaks.md`
-- `coordination/ADVISORY_INDEX.md`
-
-For multi-target advisories, track targets in the Advisory Index entry and source-board advisory text. Do not mark implemented until all required targets have reported handled status to Rob, unless separate per-target acknowledgements are recorded.
-
-## Active Work
-
-- Guide Office Leaks from the parent-strategy level without absorbing business-unit execution.
-- Interpret the live organic market test at the portfolio level while `Office_Leaks_HQ` owns the test itself.
-- Preserve capacity for future businesses under `Business_HQ`.
-- Define major positioning versus generic virtual assistants or generic consultants.
-- Clarify Rob's strengths, weaknesses, constraints, credibility assets, and positioning.
-- Identify target customer segments and local-service-business market gaps.
-- Guide initial offer strategy and service-ladder logic.
-- Evaluate the lead-loss thesis and other market hypotheses without owning detailed content production.
-- Coordinate with `Finance_HQ` on pricing, startup costs, income tracking, expenses, taxes, and sustainable rate assumptions when concrete.
-- Coordinate with `Engineering_HQ` on delivery architecture, templates, adoption verification, and human-system playbook elements when concrete.
-- Maintain Business-owned files locally and route only genuine shared-system issues to `Maintenance_HQ`.
-- Preserve PennyOS / Penny Platform as paused, not the current execution priority.
+The advisory authorizes Office_Leaks_HQ to align its own current handoff, README, status, and open loops with the pause while preserving assets and avoiding new outreach, delivery, public action, spending, deletion, or redesign.
 
 ## Source Systems
 
-- GitHub: abstract `Business_HQ` state, handoff, open loops, status, role clarity, advisory board pointers, and routing notes.
-- `projects/office-leaks-consulting/`: active Office Leaks business-unit HQ.
-- `archive/projects/virtual-assistant-business/`: archived context for the former VA worker project.
-- Google Drive: working records, strategy docs, generated docs, research notes, and business artifacts.
-- Todoist: Rob-facing tasks only.
-- Calendar: meetings, deadlines, and scheduled business work.
-- Gmail and Contacts: communications and people lookup when needed.
-- RPR or user-mediated files: reliable path for structured records when connector writes are blocked or reliability matters.
+- GitHub: abstract Business strategy, plan, handoff, status, open loops, formal advisories, and durable decisions.
+- Google Drive: detailed research, working strategy documents, drafts, deliverables, and customer-facing artifacts.
+- Trello: raw business ideas, candidate work, experiments, and possibilities before promotion.
+- Todoist: Rob-facing commitments and reminders.
+- Calendar: timed commitments.
+- Gmail: communication evidence.
 - Business advisory board: `coordination/boards/business.md`.
-- Office Leaks advisory board: `coordination/boards/office-leaks.md`.
-- Advisory Index: sole active advisory routing dashboard.
-- Department Event Inbox: frozen historical synchronization, read, and ingestion register only.
+- Advisory Index: `coordination/ADVISORY_INDEX.md`.
 
-## Connector / Safety Notes
+Detailed market research record:
 
-- Prefer small, verifiable updates.
-- Verify connector writes when possible.
-- Use abstract GitHub notes.
-- Stop when blocks repeat.
-- Use RPR when reliability matters more than automation.
-- Start a fresh chat if connector state appears degraded.
-- Do not repeatedly retry writes that trigger safety blocks.
+- Google Drive document: `Target Customers for AI Workflow System Design Services`
+- URL: https://docs.google.com/document/d/1vv-9ItdIPeflxrlE3tvwP0E6uEZDUAkdv3GMBQw1j30/edit
 
-## Privacy Guardrails
+## Privacy and Safety
 
-GitHub may store department scope, abstract open loops, routing notes, and non-sensitive status summaries.
-
-Operational details belong in the proper working system.
+- Keep private customer, financial, credential, and identifying details out of GitHub.
+- Never promise elimination of model failures, hallucinations, limits, or drift.
+- Re-verify platform pricing, features, policies, and limits before public use.
+- Prefer small, verifiable writes.
+- Stop when connector blocks repeat.
+- Never claim a connector or external action succeeded without current evidence.
 
 ## Decision Log
 
-The dated entries below preserve the role names used at the time. They are historical evidence and do not define the current architecture.
-
-- 2026-07-09: Office Leaks Consulting elevated from former VA worker project to active business-unit HQ under Chief Business HQ. New active folder: `projects/office-leaks-consulting/`.
-- 2026-07-08: Office Leaks Consulting became the likely service-business systems consulting lane inside the Virtual Assistant Business worker project. Life Logistics synced Engineering human-system delivery architecture and Finance working-record pointers.
-- 2026-07-07: Virtual Assistant Business became the immediate revenue-first Business HQ priority; PennyOS/Penny Platform work paused, not abandoned.
-- 2026-07-06: Adopted simplified advisory routing: source board plus Advisory Index only.
-- Department Event Inbox is frozen historical record only unless Rob explicitly reactivates it.
-- Todoist is not the department synchronization register.
+- 2026-08-01: Rob promoted AI workflow systems into the primary active Business_HQ validation track; Office Leaks paused without retirement; PennyOS remained paused.
+- 2026-08-01: Business_HQ adopted the centralized V2 advisory courier-envelope contract.
+- 2026-08-01: Business_HQ declined a dedicated standing Worker pending demonstrated recurring standardized workload.
+- 2026-07-09: Office Leaks Consulting was elevated into an active business-unit HQ.
+- 2026-07-07: Virtual Assistant Business became the immediate revenue-first priority; PennyOS paused.
+- 2026-07-06: The prior simplified advisory routing model was adopted. It is now superseded by the V2 envelope contract for courier-eligible active advisories.
 
 ## Notes for Next Penny
 
-This chat is `Business_HQ` when booted directly. It should not absorb Chief of Staff, Finance, Engineering, Maintenance, or Office Leaks execution work. It should turn promoted ideas and evidence into clear parent business strategy, route detailed Office Leaks execution into `Office_Leaks_HQ`, hand build-ready requirements to `Engineering_HQ`, route concrete pricing and money decisions to `Finance_HQ`, report through `Chief_of_Staff_HQ` when coordination is needed, and maintain its own durable Business state.
-
-For future `Business_HQ` advisories, update the Business advisory board and central Advisory Index only. Do not update Department Event Inbox unless Rob explicitly reactivates it.
+This chat is `Business_HQ` when booted directly. Lead with the AI workflow systems validation plan, preserve Office Leaks and PennyOS as paused assets, keep strategy separate from execution, use the canonical V2 advisory contract for formal routing, and do not create a standing Business Worker without repeated evidence that a narrow execution role is needed.
