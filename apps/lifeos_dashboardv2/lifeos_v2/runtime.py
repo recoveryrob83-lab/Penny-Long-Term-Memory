@@ -116,8 +116,9 @@ class CourierService:
         self.store.save()
         return command
 
-    def reconcile(self, advisories: list[Advisory]) -> list[dict[str, Any]]:
+    def reconcile(self, advisories: list[Advisory], quarantined_advisory_ids: set[str] | None = None) -> list[dict[str, Any]]:
         current = {a.advisory_id: a for a in advisories}
+        quarantined = quarantined_advisory_ids or set()
         commands = self.store.data["commands"]
         for command in commands.values():
             source = current.get(command["advisory_id"])
@@ -131,7 +132,7 @@ class CourierService:
                     "source_verified_at": source.source_verified_at,
                 })
             if command["state"] in {CommandState.PENDING, CommandState.BLOCKED_ROUTE} and (
-                not source or not source.actionable or source.revision != command["revision"]
+                (not source and command["advisory_id"] not in quarantined) or (source and (not source.actionable or source.revision != command["revision"]))
             ):
                 command["state"], command["updated_at"] = CommandState.STALE, now()
                 self.store.event(f"stale command suppressed {command['command_id']}")

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -7,6 +8,7 @@ from fastapi.testclient import TestClient
 
 from lifeos_v2.advisory_source import AdvisorySource, REMOTE_GITHUB, SourceSyncError
 from lifeos_v2.api import create_app
+from lifeos_v2.runtime import RuntimeStore
 
 
 def documents(advisory_id: str = "ADV-REMOTE", revision: int = 1, state: str = "OPEN") -> dict[str, str]:
@@ -27,6 +29,19 @@ def documents(advisory_id: str = "ADV-REMOTE", revision: int = 1, state: str = "
 - Blocker:
 - Updated At: 2026-08-01T12:00:00+00:00
 """,
+    }
+
+
+def mixed_documents(*, legacy_valid: bool = False, include_legacy: bool = True) -> dict[str, str]:
+    path = "coordination/boards/engineering.md"
+    valid = documents("ADV-VALID")[path]
+    legacy = documents("ADV-20260726-053")[path] if legacy_valid else "### ADV-20260726-053 — Legacy advisory\n\n- Lifecycle State: OPEN\n"
+    index_lines = [f"- ADV-VALID — OPEN — Posted Board: `{path}`"]
+    if include_legacy:
+        index_lines.append(f"- ADV-20260726-053 — OPEN — Posted Board: `{path}`")
+    return {
+        "coordination/ADVISORY_INDEX.md": "# Index\n\n## Open Advisories\n\n" + "\n".join(index_lines) + "\n",
+        path: valid + "\n" + legacy,
     }
 
 
@@ -165,3 +180,101 @@ def test_status_exposes_verified_remote_commit_and_no_git_worktree_operation() -
     implementation = Path(__file__).parents[1] / "lifeos_v2" / "advisory_source.py"
     text = implementation.read_text(encoding="utf-8")
     assert all(operation not in text for operation in ("git pull", "git fetch", "git checkout", "git reset", "git merge"))
+
+
+def test_legacy_advisory_is_quarantined_without_blocking_a_verified_snapshot(tmp_path: Path) -> None:
+    fake = FakeGitHub({"sha-mixed": mixed_documents()}, "sha-mixed")
+    source = remote_source(fake)
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", advisory_source=source))
+    client.post("/routes", json={"route_name": "engineering", "target": "engineering", "chatgpt_url": "https://chatgpt.com/c/remote"})
+
+    advisories = client.get("/advisories").json()
+    status = client.get("/status").json()
+
+    assert [item["advisory_id"] for item in advisories["items"]] == ["ADV-VALID"]
+    assert advisories["quarantined_advisory_count"] == 1
+    quarantine = advisories["advisory_parse_errors"]["ADV-20260726-053"]
+    assert quarantine["source_path"] == "coordination/boards/engineering.md"
+    assert "V2 Courier Envelope" in quarantine["message"]
+    assert status["source"]["sync_state"] == "CURRENT"
+    assert status["source"]["current_verified_commit_sha"] == "sha-mixed"
+    assert status["source"]["last_successful_sync_at"]
+    assert [command["command_id"] for command in client.get("/commands").json()["items"]] == ["ADV-VALID-r1"]
+
+
+def test_quarantine_does_not_stale_an_existing_command_for_that_advisory(tmp_path: Path) -> None:
+    path = "coordination/boards/engineering.md"
+    initial = documents("ADV-20260726-053")
+    fake = FakeGitHub({"sha-valid": initial, "sha-legacy": mixed_documents()}, "sha-valid")
+    source = remote_source(fake)
+    client = TestClient(create_app(tmp_path, tmp_path / "state.json", advisory_source=source))
+    client.post("/routes", json={"route_name": "engineering", "target": "engineering", "chatgpt_url": "https://chatgpt.com/c/remote"})
+    client.get("/advisories")
+    before = client.get("/commands/ADV-20260726-053-r1").json()
+    fake.head = "sha-legacy"
+    client.get("/advisories")
+    after = client.get("/commands/ADV-20260726-053-r1").json()
+
+    assert before["state"] == after["state"] == "PENDING"
+    assert after["source_path"] == path
+    assert "ADV-20260726-053" in client.get("/status").json()["advisory_parse_errors"]
+
+
+def test_corrected_or_removed_advisory_leaves_quarantine_at_a_new_sha() -> None:
+    fake = FakeGitHub({
+        "sha-legacy": mixed_documents(),
+        "sha-fixed": mixed_documents(legacy_valid=True),
+        "sha-removed": mixed_documents(include_legacy=False),
+    }, "sha-legacy")
+    source = remote_source(fake)
+    assert "ADV-20260726-053" in source.refresh().quarantined_advisories
+    fake.head = "sha-fixed"
+    fixed = source.refresh()
+    assert not fixed.quarantined_advisories and {item.advisory_id for item in fixed.advisories} == {"ADV-VALID", "ADV-20260726-053"}
+    fake.head = "sha-removed"
+    removed = source.refresh()
+    assert not removed.quarantined_advisories and [item.advisory_id for item in removed.advisories] == ["ADV-VALID"]
+
+
+def test_unchanged_sha_reuses_quarantine_map_and_local_mode_matches_remote(tmp_path: Path) -> None:
+    fake = FakeGitHub({"sha-legacy": mixed_documents()}, "sha-legacy")
+    remote = remote_source(fake)
+    first = remote.refresh(force=True)
+    assert remote.refresh(force=True) is first and len(fake.fetch_log) == 2
+    for path, text in mixed_documents().items():
+        target = tmp_path / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")
+    local = AdvisorySource("LOCAL_DEVELOPMENT", repository_root=tmp_path)
+    snapshot = local.refresh()
+    assert [item.advisory_id for item in snapshot.advisories] == ["ADV-VALID"]
+    assert "ADV-20260726-053" in snapshot.quarantined_advisories
+
+
+@pytest.mark.parametrize("index", [
+    "# Index\n\n## Open Advisories\n\n- ADV-DUP — OPEN — Posted Board: `coordination/boards/a.md`\n- ADV-DUP — OPEN — Posted Board: `coordination/boards/b.md`\n",
+    "# Index\n\n## Open Advisories\n\n- ADV-BROKEN — OPEN\n",
+])
+def test_duplicate_or_malformed_open_references_fail_closed(index: str) -> None:
+    fake = FakeGitHub({"sha-invalid": {"coordination/ADVISORY_INDEX.md": index}}, "sha-invalid")
+    with pytest.raises(SourceSyncError):
+        remote_source(fake).refresh()
+
+
+def test_live_existing_command_ids_remain_untouched_by_a_mixed_snapshot(tmp_path: Path) -> None:
+    persistence = tmp_path / "state.json"
+    store = RuntimeStore(persistence)
+    store.data["commands"] = {
+        "ADV-20260728-054-r2": {"command_id": "ADV-20260728-054-r2", "advisory_id": "ADV-20260728-054", "revision": 2, "route_name": "engineering", "target": "engineering", "wake_payload": "prior", "state": "DELIVERED", "created_at": "before", "updated_at": "before"},
+        "ADV-20260801-055-r1": {"command_id": "ADV-20260801-055-r1", "advisory_id": "ADV-20260801-055", "revision": 1, "route_name": "maintenance", "target": "maintenance", "wake_payload": "prior", "state": "UNCERTAIN", "created_at": "before", "updated_at": "before"},
+        "ADV-20260801-055-r2": {"command_id": "ADV-20260801-055-r2", "advisory_id": "ADV-20260801-055", "revision": 2, "route_name": "maintenance", "target": "maintenance", "wake_payload": "prior", "state": "DELIVERED", "created_at": "before", "updated_at": "before"},
+    }
+    store.save()
+    before = deepcopy(store.data["commands"])
+    fake = FakeGitHub({"sha-mixed": mixed_documents()}, "sha-mixed")
+    client = TestClient(create_app(tmp_path, persistence, advisory_source=remote_source(fake)))
+
+    client.get("/advisories")
+
+    after = {item["command_id"]: item for item in client.get("/commands").json()["items"] if item["command_id"] in before}
+    assert after == before

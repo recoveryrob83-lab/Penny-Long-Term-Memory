@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from datetime import datetime
 from collections.abc import Callable
 from pathlib import Path
@@ -31,6 +32,35 @@ _CANONICAL_FIELDS = {
 
 class AdvisoryParseError(ValueError):
     pass
+
+
+class AdvisoryStructureError(ValueError):
+    """The index cannot identify advisory documents unambiguously."""
+
+
+@dataclass(frozen=True)
+class AdvisoryReference:
+    advisory_id: str
+    source_path: str
+
+
+def parse_index_references(index: str) -> list[AdvisoryReference]:
+    """Return only unambiguous advisory-to-board mappings from an index section."""
+    references: list[AdvisoryReference] = []
+    seen_ids: set[str] = set()
+    for line in index.splitlines():
+        if not line.lstrip().startswith("- ADV-"):
+            continue
+        match = _INDEX.match(line)
+        paths = re.findall(r"`(coordination/boards/[^`]+\.md)`", line)
+        if not match or len(paths) != 1:
+            raise AdvisoryStructureError("Advisory Index contains a malformed or ambiguous open advisory reference")
+        advisory_id = match.group(1)
+        if advisory_id in seen_ids:
+            raise AdvisoryStructureError(f"Advisory Index contains duplicate advisory ID {advisory_id}")
+        seen_ids.add(advisory_id)
+        references.append(AdvisoryReference(advisory_id, paths[0]))
+    return references
 
 
 def _clean(value: str) -> str:
@@ -67,9 +97,12 @@ def parse_advisory_document(
     source_commit_sha: str = "",
     source_verified_at: str = "",
 ) -> Advisory:
-    match = next((m for m in _HEADING.finditer(text) if m.group("id") == advisory_id), None)
-    if not match:
+    matches = [match for match in _HEADING.finditer(text) if match.group("id") == advisory_id]
+    if not matches:
         raise AdvisoryParseError(f"{advisory_id}: heading not found")
+    if len(matches) > 1:
+        raise AdvisoryStructureError(f"{advisory_id}: source board has ambiguous duplicate advisory headings")
+    match = matches[0]
 
     following = text[match.end():]
     next_heading = _HEADING.search(following)
@@ -134,13 +167,14 @@ def read_advisory_documents(
     index: str,
     read_text: Callable[[str], str],
     source_url_for: Callable[[str], str],
+    references: list[AdvisoryReference] | None = None,
     **provenance: str,
 ) -> tuple[list[Advisory], dict[str, str]]:
     """Parse an index and boards supplied by any bounded read-only source."""
     advisories: list[Advisory] = []
     errors: dict[str, str] = {}
-    for item in _INDEX.finditer(index):
-        advisory_id, source_path = item.group(0).split()[1], item.group("path")
+    for reference in references or parse_index_references(index):
+        advisory_id, source_path = reference.advisory_id, reference.source_path
         try:
             advisories.append(parse_advisory_document(
                 read_text(source_path), advisory_id, source_path, source_url_for(source_path), **provenance,

@@ -18,14 +18,13 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 from .contracts import Advisory
-from .reader import AdvisoryReader, read_advisory_documents
+from .reader import AdvisoryReader, AdvisoryReference, AdvisoryStructureError, parse_index_references, read_advisory_documents
 
 REMOTE_GITHUB = "REMOTE_GITHUB"
 LOCAL_DEVELOPMENT = "LOCAL_DEVELOPMENT"
 CANONICAL_REPOSITORY = "recoveryrob83-lab/Penny-Long-Term-Memory"
 CANONICAL_BRANCH = "main"
 _OPEN_SECTION = re.compile(r"^##\s+Open Advisories\s*$", re.M | re.I)
-_INDEX_LINE = re.compile(r"^-\s+ADV-[\w-]+.*?`coordination/boards/[^`]+\.md`", re.M)
 
 
 class SourceSyncError(RuntimeError):
@@ -43,6 +42,7 @@ def _bounded(message: str, limit: int = 240) -> str:
 @dataclass(frozen=True)
 class AdvisorySnapshot:
     advisories: list[Advisory]
+    quarantined_advisories: dict[str, dict[str, str]]
     repository: str
     branch: str
     commit_sha: str
@@ -140,13 +140,14 @@ class AdvisorySource:
         self._github = github or GitHubContentsClient(repository)
         self._ttl, self._clock, self._last_attempt = refresh_ttl_seconds, clock, float("-inf")
         self._snapshot: AdvisorySnapshot | None = None
-        self._status: dict[str, str | None] = {
+        self._status: dict[str, Any] = {
             "source_mode": mode, "repository": repository, "branch": branch, "last_checked_at": None,
             "last_successful_sync_at": None, "current_verified_commit_sha": None, "sync_state": "CHECKING", "error": "",
+            "quarantined_advisory_count": 0, "advisory_parse_errors": {},
         }
 
     @property
-    def status(self) -> dict[str, str | None]:
+    def status(self) -> dict[str, Any]:
         return dict(self._status)
 
     @property
@@ -169,43 +170,64 @@ class AdvisorySource:
             "last_successful_sync_at": snapshot.verified_at,
             "current_verified_commit_sha": snapshot.commit_sha,
             "sync_state": "CURRENT", "error": "",
+            "quarantined_advisory_count": len(snapshot.quarantined_advisories),
+            "advisory_parse_errors": snapshot.quarantined_advisories,
         })
         return snapshot
 
     def _read_local(self) -> AdvisorySnapshot:
         assert self._local_reader is not None
-        advisories, errors = self._local_reader.read()
-        if errors:
-            raise SourceSyncError("local development snapshot parse failed: " + "; ".join(sorted(errors.values())))
-        verified_at = _timestamp()
-        return AdvisorySnapshot(advisories, "local-development", "local", "local-development", verified_at)
+        try:
+            index = (self._local_reader.root / self.index_path).read_text(encoding="utf-8")
+            open_index, references = self._open_advisory_references(index)
+            documents = {path: (self._local_reader.root / path).read_text(encoding="utf-8") for path in {reference.source_path for reference in references}}
+        except (OSError, AdvisoryStructureError) as exc:
+            raise SourceSyncError(str(exc)) from exc
+        return self._parse_verified_documents(open_index, references, documents, "local-development", "local", "local-development")
 
     def _read_remote(self) -> AdvisorySnapshot:
         commit_sha = self._github.resolve_commit(self.branch)
         if self._snapshot and self._snapshot.commit_sha == commit_sha:
             return self._snapshot
         index = self._github.fetch_text(self.index_path, commit_sha)
+        try:
+            open_index, references = self._open_advisory_references(index)
+        except AdvisoryStructureError as exc:
+            raise SourceSyncError(str(exc)) from exc
+        documents = {path: self._github.fetch_text(path, commit_sha) for path in {reference.source_path for reference in references}}
+        return self._parse_verified_documents(open_index, references, documents, self.repository, self.branch, commit_sha)
+
+    @staticmethod
+    def _open_advisory_references(index: str) -> tuple[str, list[AdvisoryReference]]:
         open_heading = _OPEN_SECTION.search(index)
         if not open_heading:
-            raise SourceSyncError("GitHub Advisory Index is malformed: Open Advisories section is missing")
+            raise AdvisoryStructureError("Advisory Index is malformed: Open Advisories section is missing")
         following = index[open_heading.end():]
         next_section = re.search(r"^##\s+", following, re.M)
         open_section = following[:next_section.start()] if next_section else following
-        open_lines = [line for line in open_section.splitlines() if line.lstrip().startswith("- ADV-")]
-        if any(not _INDEX_LINE.match(line) for line in open_lines):
-            raise SourceSyncError("GitHub Advisory Index contains a malformed open advisory reference")
-        paths = sorted({re.search(r"`(coordination/boards/[^`]+\.md)`", line).group(1) for line in open_lines})
-        documents = {path: self._github.fetch_text(path, commit_sha) for path in paths}
+        open_index = "# Advisory Index\n\n## Open Advisories\n" + open_section
+        return open_index, parse_index_references(open_index)
+
+    def _parse_verified_documents(
+        self,
+        index: str,
+        references: list[AdvisoryReference],
+        documents: dict[str, str],
+        repository: str,
+        branch: str,
+        commit_sha: str,
+    ) -> AdvisorySnapshot:
         verified_at = _timestamp()
         advisories, errors = read_advisory_documents(
-            "# Advisory Index\n\n## Open Advisories\n" + open_section,
+            index,
             documents.__getitem__,
-            lambda path: f"https://github.com/{self.repository}/blob/{commit_sha}/{path}",
-            source_repository=self.repository,
-            source_branch=self.branch,
+            lambda path: f"https://github.com/{repository}/blob/{commit_sha}/{path}" if repository != "local-development" else path,
+            references,
+            source_repository=repository,
+            source_branch=branch,
             source_commit_sha=commit_sha,
             source_verified_at=verified_at,
         )
-        if errors:
-            raise SourceSyncError("GitHub snapshot parse failed: " + "; ".join(f"{key}: {value}" for key, value in sorted(errors.items())))
-        return AdvisorySnapshot(advisories, self.repository, self.branch, commit_sha, verified_at)
+        paths = {reference.advisory_id: reference.source_path for reference in references}
+        quarantined = {advisory_id: {"source_path": paths[advisory_id], "message": _bounded(message)} for advisory_id, message in errors.items()}
+        return AdvisorySnapshot(advisories, quarantined, repository, branch, commit_sha, verified_at)
