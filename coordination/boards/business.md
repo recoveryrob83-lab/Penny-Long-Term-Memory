@@ -1,11 +1,90 @@
-# Chief Business HQ Advisory Board
+# Business_HQ Advisory Board
 
-Updated: 2026-07-08
-Purpose: Advisories from Chief Business HQ to other Penny departments.
+Updated: 2026-08-01
+Purpose: Canonical advisory text sourced from Business_HQ to other LifeOS departments.
 
 ## Open Advisories
 
-None.
+### ADV-20260801-056 — Pause Office Leaks and align its canonical business-unit state
+
+- Date: 2026-08-01
+- From: Business_HQ under direct Rob authorization
+- To: Office_Leaks_HQ
+- Lifecycle State: OPEN
+- Priority: NORMAL
+- Advisory Revision: 1
+- Verification Mode: ROUTINE_BATCH
+- Posted Board: `coordination/boards/business.md`
+- Target Department and Owner: office_leaks
+- Record Class: Parent portfolio decision and business-unit state-alignment request
+- Authorization Source: ROB
+- Approval Reference: ROB-DIRECT-OFFICE-LEAKS-PAUSE-20260801
+- Requests New Authority: false
+- Requests New Spending: false
+- Requests New Connector: false
+- Requests Cross-Department Authority: false
+- Requests Material Exception: false
+- Related Business Plan: `projects/business-development/AI_WORKFLOW_SYSTEMS_BUSINESS_PLAN.md`
+- Completion Condition: Office_Leaks_HQ updates its own current handoff, README, status, and open loops to reflect Paused state; preserves existing assets and historical evidence; records a clear resume trigger; reports the exact changed paths and verification evidence; and does not initiate new outreach, delivery, content cadence, spending, public action, deletion, or redesign under this advisory.
+- Advisory Closure Condition: Business_HQ verifies the Office Leaks-owned current records are aligned with the parent portfolio decision and then performs explicit source-owner closeout.
+
+#### V2 Courier Envelope
+
+- Advisory Revision: 1
+- Source Department: business
+- Target Department: office_leaks
+- Task Summary: Align Office Leaks-owned canonical files with the Rob-approved portfolio pause.
+- Authorized Scope: Update only the current Office Leaks handoff, README, status, and open loops as needed to record Paused state, preserved assets, and a clear resume trigger; do not perform outreach, delivery, public action, spending, deletion, redesign, or cross-department edits.
+- Lifecycle State: OPEN
+- Outcome:
+- Blocker:
+- Updated At: 2026-08-01T14:37:00-05:00
+
+#### Decision and Context
+
+Rob selected the AI workflow systems opportunity as the primary active Business_HQ validation track because it offers stronger founder fit, worldwide reach, work-from-home delivery, content and consulting potential, and a larger scalable market.
+
+Office Leaks is not retired, rejected, deleted, or stripped of ownership. It is intentionally paused so Rob is not maintaining two active business execution tracks at once.
+
+PennyOS / Penny Platform is also paused and remains outside this advisory's scope.
+
+#### Authorized Office Leaks Outcome
+
+Office_Leaks_HQ should:
+
+1. preserve `Office_Leaks_HQ` identity and ownership of `projects/office-leaks-consulting/`;
+2. change current business-unit lifecycle language from active execution or live market test to `Paused`;
+3. state clearly that Office Leaks is not retired or rejected;
+4. preserve existing offers, research, content, customer evidence, delivery architecture, working records, historical milestones, and source pointers;
+5. move active execution loops into Paused state where appropriate instead of falsely closing completed work or deleting history;
+6. record a clear resume trigger, such as direct Rob reactivation or a later deliberate Business_HQ portfolio review;
+7. retain lifecycle and priority as separate fields;
+8. report exact paths changed and read-back verification to Business_HQ or Rob.
+
+#### Explicit Holds
+
+- Do not change the Office Leaks mission, philosophy, or brand merely because the business is paused.
+- Do not delete, archive, rename, or relocate the Office Leaks subtree or working records.
+- Do not launch new outreach, content cadence, offers, customer delivery, paid promotion, spending, public messaging, or external communication.
+- Do not create a replacement business unit, duplicate backlog, new Worker, or new software project.
+- Do not edit Business_HQ, Finance_HQ, Engineering_HQ, Chief_of_Staff_HQ, Maintenance_HQ, or shared governance files.
+- Do not interpret this pause as authority to retire Office Leaks permanently.
+
+#### Verification and Closeout
+
+Verification mode is `ROUTINE_BATCH` because this is a bounded internal state-alignment task with no destructive, public, financial, or customer-facing action.
+
+Office_Leaks_HQ should return:
+
+- controlled outcome;
+- exact files changed;
+- summary of lifecycle changes;
+- preserved assets and boundaries;
+- resume trigger;
+- read-back verification;
+- any blocker requiring Business_HQ or Rob judgment.
+
+The advisory remains authoritative through acknowledgement, implementation, verification, and closure. Do not create a duplicate advisory if the courier is quarantined or delivery is uncertain.
 
 ## Acknowledged / Implemented Advisories
 
@@ -32,7 +111,7 @@ None.
 
 #### Summary
 
-Business has made a major strategic and cultural turn for Office Leaks Consulting. The project is no longer merely a generic Virtual Assistant Business concept. It is emerging as a practical, trust-based systems consulting business for small local service businesses.
+Business made a major strategic and cultural turn for Office Leaks Consulting. The project was no longer merely a generic Virtual Assistant Business concept. It emerged as a practical, trust-based systems consulting business for small local service businesses.
 
 The foundational philosophy is:
 
@@ -51,9 +130,9 @@ Other core lines:
 
 #### Strategic Shift
 
-The content audience is likely office workers first, owner second. The owner remains the likely economic buyer, but discovery may often begin with the person living the office pain: office manager, dispatcher, receptionist / CSR, bookkeeper, owner's spouse, family member running the office, or other office staff.
+The content audience was likely office workers first, owner second. The owner remained the likely economic buyer, but discovery could begin with the person living the office pain: office manager, dispatcher, receptionist or CSR, bookkeeper, owner's spouse, family member running the office, or other office staff.
 
-These internal champions may introduce Office Leaks to the owner after seeing content that creates an Aha Moment.
+These internal champions could introduce Office Leaks to the owner after seeing content that created an Aha Moment.
 
 #### Operating Model
 
@@ -72,50 +151,38 @@ Office Leaks should operate through a Trust Loop:
 11. New relationships form.
 12. The loop begins again.
 
-This is not only marketing. It should influence sales, delivery, follow-up, referrals, hiring, leadership, internal operations, and Life OS support.
+This is not only marketing. It should influence sales, delivery, follow-up, referrals, hiring, leadership, internal operations, and LifeOS support if Office Leaks resumes.
 
 #### Department Ingestion
 
 ##### Chief of Finance Penny
 
-Finance read and ingested the source note on 2026-07-08. Finance will incorporate the Office Leaks operating philosophy into future financial guidance.
-
-Finance should consider pricing for the Office Leak Audit and one-leak cleanup sprints; whether follow-up checks become recurring revenue or relationship-maintenance touchpoints; early cost scenarios for tools, website, transportation, and branded materials; future contractor / employee planning; and whether pricing should reflect trust-building, bite-sized offers rather than broad transformation promises.
+Finance read and ingested the source note on 2026-07-08 and retained the related financial guidance context.
 
 ##### Chief Engineering Penny
 
 Engineering read the source note and incorporated the human-system insights into Engineering-owned delivery architecture on 2026-07-08.
 
-Engineering outputs created/updated:
+Engineering outputs created or updated:
 
-- Created `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`.
-- Updated `projects/engineering/notebook/README.md`.
-- Updated `projects/engineering/NOTEBOOK.md`.
-- Updated the Drive working document `Engineering Delivery Architecture Specification - HVAC Office Cleanup` with a Human-System Delivery Layer addendum.
-
-Engineering has incorporated internal champion identification, staff interview / rapport flow, Aha Moment verification, adoption verification through demonstration, habit-first design before software/tool selection, relational follow-up loop, stop conditions when decision ownership or staff trust is missing, and distinction between economic buyer, internal champion, users, and beneficiaries.
+- `projects/engineering/notebook/NOTE-20260708-006-office-leaks-human-system-delivery-layer.md`;
+- `projects/engineering/notebook/README.md`;
+- `projects/engineering/NOTEBOOK.md`;
+- Drive working document `Engineering Delivery Architecture Specification - HVAC Office Cleanup`.
 
 ##### Main Assistant Penny
 
-Main Assistant Penny read and ingested this advisory on 2026-07-08.
-
-Main Assistant should preserve that Office Leaks is now best understood as service-business systems consulting, not generic VA work; Rob's natural strengths include connectedness, relational trust-building, plainspoken field presence, and systems thinking; office workers are likely a primary content audience and implementation partner; and owner, champion, users, and beneficiaries should not be collapsed into one generic customer.
+Main Assistant read and ingested the Office Leaks service-business systems framing and Rob's relevant strengths.
 
 ##### Life Logistics HQ
 
-Life Logistics HQ read the source note and ingested the logistics implications on 2026-07-08.
-
-Life Logistics should keep Office Leaks Consulting visible as an active income-stream candidate with possible near-term real-world logistics.
-
-Life Logistics should be prepared to support scheduling discovery visits, transportation planning, follow-up reminders, organizing business documents and Drive/GitHub artifacts, tracking outreach loops, and helping Rob turn business plans into calendar/task actions when authorized.
+Life Logistics read and ingested the logistics implications for scheduling, transportation, reminders, documents, outreach loops, and authorized calendar or task support.
 
 #### Source-of-Truth Note
 
 Read:
 
 `projects/virtual-assistant-business/notebook/NOTE-20260708-003-office-leaks-operating-philosophy.md`
-
-This note summarizes the full breakthrough across positioning, audience, delivery, follow-up, referrals, company philosophy, and leadership philosophy.
 
 ### ADV-20260707-025 — Engineering delivery playbook needed for bite-sized local service office cleanup offers
 
@@ -128,42 +195,40 @@ This note summarizes the full breakthrough across positioning, audience, deliver
 - Target Department: Chief Engineering Penny
 - Acknowledged: 2026-07-07
 
-Engineering ingested this advisory on 2026-07-07. Initial idea capture was added to the Engineering notebook as `NOTE-20260707-002 — VA Business Delivery Architecture Watchlist`. Engineering will treat this as service-delivery architecture first, not software-product implementation.
+Engineering ingested the advisory as service-delivery architecture rather than software-product implementation.
 
 ### ADV-20260707-024 — Business HQ state maintenance needed for VA Business project
 
 - Status: Implemented
 - Board: `coordination/boards/business.md`
 
-Life Logistics HQ refreshed Business HQ parent state so Business HQ now treats Virtual Assistant Business as the active revenue-first sub-project and PennyOS / Penny Platform as paused, not abandoned.
+Life Logistics HQ refreshed the then-current Business HQ parent state.
 
 ### ADV-20260707-022 — Finance awareness needed for Virtual Assistant income stream
 
 - Status: Acknowledged / Ingested by Finance
 - Board: `coordination/boards/business.md`
 
-Finance has ingested the VA Business income-stream context and is prepared to support pricing, income tracking, expenses, tax planning, and financial decision-making when concrete.
+Finance ingested the income-stream context and remained prepared to support pricing, income tracking, expenses, taxes, and financial decisions when concrete.
 
 ### ADV-20260707-021 — Virtual Assistant business project setup needed
 
 - Status: Implemented
 - Board: `coordination/boards/business.md`
 
-Life Logistics HQ created `projects/virtual-assistant-business/` as a Business HQ sub-project scaffold and updated the Active Projects, Open Loops, and Advisory Index files.
+Life Logistics HQ created the former `projects/virtual-assistant-business/` scaffold and updated the then-current shared maps.
 
 ### ADV-20260704-001 — Business HQ research, Drive architecture, and reboot-state update needed
 
 - Status: Acknowledged
 - Board: `coordination/boards/business.md`
 
-Chief Business HQ business-development state was consumed by Life Logistics HQ on 2026-07-04. Canonical Drive path remained under Chief Business HQ > Business Development.
-
 ### ADV-20260704-002 — Drive connector reliability is a major Penny product risk
 
 - Status: Acknowledged
 - Board: `coordination/boards/business.md`
 
-Engineering HQ ingested this advisory and created Reliable Connector Execution Layer as the first concrete engineering research track.
+Engineering ingested the advisory and created the Reliable Connector Execution Layer research track.
 
 ### ADV-20260703-004 — Frequent logistics updates needed for Penny platform research
 
@@ -179,3 +244,20 @@ Engineering HQ ingested this advisory and created Reliable Connector Execution L
 
 - Status: Acknowledged
 - Board: `coordination/boards/business.md`
+
+## Board Rules
+
+- Read `coordination/ADVISORY_INDEX.md` before advisory lifecycle work.
+- Before creating, materially revising, routing, blocking, completing, or closing an advisory, read `coordination/LIFEOS_V2_ADVISORY_COURIER_ENVELOPE.md`.
+- Keep full authoritative advisory text on this source board and routing state in the Advisory Index.
+- When V2 courier transport applies, keep exactly one `#### V2 Courier Envelope` with all nine required fields inside the same advisory section.
+- The full advisory controls authority and governance lifecycle. The envelope controls courier dispatch eligibility only.
+- Do not copy the envelope template into board rules, target boards, handoffs, READMEs, open loops, or the Advisory Index.
+- Do not duplicate advisory text into target boards or department open loops merely for visibility.
+- Use canonical governance lifecycle states and keep priority separate.
+- Increment advisory revision only for a material change.
+- Do not mark an advisory `IMPLEMENTED`, `SOURCE_VERIFIED`, or `CLOSED` without current evidence and source-owner review.
+- A malformed envelope may quarantine transport without changing the underlying advisory or authorizing a duplicate replacement.
+- Do not use Department Event Inbox, Todoist, or GitHub Issues as advisory-state systems.
+- Keep every open advisory in enough detail to act and preserve a bounded recent completed working set.
+- Git history preserves older detailed text removed through deliberate future compaction.
